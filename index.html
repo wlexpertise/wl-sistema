@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WL Sistema</title>
+<meta name="theme-color" content="#0B5A60">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="WL Sistema">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#0B5A60; --teal-2:#0d474c; --turq:#13A3B5; --verde:#28B260;
+    --bg:#F5F8F8; --card:#FFFFFF; --txt:#1A2E2E; --txt-2:#5B6B6B; --borda:#E3ECEC;
+    --erro:#C8463D; --alerta:#D99A1E;
+    --font:"Montserrat","Segoe UI",system-ui,sans-serif;
+    --raio:16px; --sombra:0 1px 2px rgba(11,90,96,.06),0 8px 24px rgba(11,90,96,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+  button{font-family:inherit;cursor:pointer;border:0}
+  input{font-family:inherit}
+  .oculto{display:none!important}
+
+  /* ---------- Tela de carregamento / login ---------- */
+  .tela-cheia{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:max(32px,env(safe-area-inset-top)) 24px max(32px,env(safe-area-inset-bottom));
+    background:linear-gradient(150deg,var(--teal) 0%,var(--teal-2) 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+  .tela-cheia::after{content:"";position:absolute;width:520px;height:520px;right:-180px;bottom:-200px;
+    background:url(icon-512.png) center/contain no-repeat;opacity:.06;pointer-events:none}
+  .tela-cheia img.logo{width:min(240px,64vw);margin-bottom:28px}
+  .tela-cheia h1{font-size:1.5rem;font-weight:700;letter-spacing:-.01em}
+  .tela-cheia p{color:rgba(255,255,255,.75);font-size:.95rem;line-height:1.55;max-width:340px;margin:10px auto 32px}
+  .btn-ms{display:inline-flex;align-items:center;gap:12px;background:#fff;color:var(--txt);font-weight:600;font-size:1rem;
+    padding:15px 24px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18);transition:transform .15s}
+  .btn-ms:active{transform:scale(.98)}
+  .btn-ms svg{width:20px;height:20px}
+  .rodape-login{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));font-size:.75rem;color:rgba(255,255,255,.5)}
+  .spinner{width:34px;height:34px;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:gira .8s linear infinite}
+  @keyframes gira{to{transform:rotate(360deg)}}
+
+  /* ---------- App ---------- */
+  header.topo{position:sticky;top:0;z-index:10;background:var(--teal);color:#fff;
+    padding:calc(env(safe-area-inset-top) + 12px) 20px 12px;display:flex;align-items:center;gap:12px}
+  header.topo img{height:26px}
+  header.topo .esp{flex:1}
+  .chip-sync{display:flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;background:rgba(255,255,255,.12);
+    padding:6px 10px;border-radius:999px;white-space:nowrap}
+  .chip-sync i{width:7px;height:7px;border-radius:50%;background:var(--verde)}
+  .chip-sync.sincronizando i{background:var(--turq);animation:pulsa 1s infinite}
+  .chip-sync.erro i{background:var(--erro)}
+  @keyframes pulsa{50%{opacity:.3}}
+  .avatar{cursor:pointer;width:36px;height:36px;border-radius:50%;background:var(--turq);color:#fff;font-weight:700;font-size:.85rem;
+    display:grid;place-items:center;position:relative}
+  .menu{position:absolute;top:44px;right:0;background:#fff;color:var(--txt);border-radius:12px;box-shadow:var(--sombra);
+    min-width:230px;padding:8px;text-align:left;font-weight:500}
+  .menu .quem{padding:10px 12px;border-bottom:1px solid var(--borda);margin-bottom:6px}
+  .menu .quem b{display:block;font-size:.9rem}
+  .menu .quem small{color:var(--txt-2);font-size:.75rem;word-break:break-all}
+  .menu button{width:100%;text-align:left;background:none;padding:10px 12px;border-radius:8px;font-size:.88rem;color:var(--txt)}
+  .menu button:hover{background:var(--bg)}
+
+  main{max-width:960px;margin:0 auto;padding:24px 16px calc(32px + env(safe-area-inset-bottom))}
+  .boas-vindas{margin:4px 4px 20px}
+  .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--turq)}
+  .boas-vindas h2{font-size:1.45rem;font-weight:700;margin-top:4px;color:var(--teal)}
+  .grade{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+  .grade>*{min-width:0}
+  @media(min-width:820px){.grade{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);align-items:start}}
+
+  .card{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);padding:20px}
+  .card h3{font-size:1rem;font-weight:700;color:var(--teal);display:flex;align-items:center;gap:8px}
+  .card h3::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--verde)}
+  .card .sub{font-size:.82rem;color:var(--txt-2);margin:4px 0 16px;line-height:1.5}
+
+  .check{list-style:none;display:grid;gap:2px}
+  .check li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--borda)}
+  .check li:first-child{border-top:0}
+  .st{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.72rem;font-weight:800;color:#fff;background:var(--borda);margin-top:1px}
+  .st.ok{background:var(--verde)} .st.falha{background:var(--erro)} .st.aviso{background:var(--alerta)}
+  .st.carregando{background:var(--turq);animation:pulsa 1s infinite}
+  .check b{font-size:.88rem;font-weight:600;display:block}
+  .check small{font-size:.78rem;color:var(--txt-2);line-height:1.45;display:block;margin-top:2px;word-break:break-word}
+
+  .form{display:flex;gap:8px;margin-bottom:14px}
+  .form input{flex:1;min-width:0;border:1.5px solid var(--borda);border-radius:12px;padding:13px 14px;font-size:.95rem;color:var(--txt);background:var(--bg);outline:none}
+  .form input:focus{border-color:var(--turq);background:#fff}
+  .btn{background:var(--turq);color:#fff;font-weight:600;font-size:.9rem;padding:0 18px;border-radius:12px;min-height:46px}
+  .btn:disabled{opacity:.5}
+  .btn.sec{background:var(--bg);color:var(--teal);border:1.5px solid var(--borda)}
+  .lista{list-style:none;display:grid;gap:8px;max-height:420px;overflow:auto}
+  .lista li{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:12px 14px;animation:entra .25s ease}
+  .lista li.novo{box-shadow:inset 3px 0 0 var(--verde)}
+  @keyframes entra{from{opacity:0;transform:translateY(-4px)}}
+  .lista .txt{flex:1;min-width:0}
+  .lista .txt p{font-size:.92rem;line-height:1.45;word-break:break-word}
+  .lista .txt small{font-size:.74rem;color:var(--txt-2)}
+  .lista button{background:none;color:var(--txt-2);font-size:1.1rem;line-height:1;padding:4px 6px;border-radius:6px}
+  .lista button:hover{color:var(--erro);background:#fff}
+  .vazio{text-align:center;color:var(--txt-2);font-size:.85rem;padding:24px 8px}
+  .rodape-card{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--borda);font-size:.76rem;color:var(--txt-2)}
+  .rodape-card .btn{min-height:36px;font-size:.8rem;padding:0 14px}
+
+  .dica{margin-top:16px;background:linear-gradient(135deg,rgba(19,163,181,.08),rgba(40,178,96,.08));border:1px solid rgba(19,163,181,.25);
+    border-radius:var(--raio);padding:16px 18px;font-size:.84rem;line-height:1.6;color:var(--txt)}
+  .dica b{color:var(--teal)}
+  .dica ol{margin:6px 0 0 18px}
+
+  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;
+    background:var(--txt);color:#fff;padding:12px 18px;border-radius:12px;font-size:.85rem;font-weight:500;box-shadow:0 10px 30px rgba(0,0,0,.2);
+    transition:all .25s;z-index:50;max-width:calc(100% - 32px);display:flex;gap:10px;align-items:center}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  .toast i{width:8px;height:8px;border-radius:50%;background:var(--verde);flex:none}
+  .toast.erro i{background:var(--erro)}
+  @media(max-width:480px){header.topo{padding-left:16px;padding-right:16px;gap:8px} header.topo img{height:20px} .chip-sync span{display:none} .chip-sync{padding:9px}}
+  body{overflow-x:hidden}
+  #btnInstalar{background:rgba(255,255,255,.14);color:#fff;font-size:.75rem;font-weight:600;padding:7px 12px;border-radius:999px}
+</style>
+</head>
+<body>
+
+<!-- Carregando -->
+<section id="telaCarregando" class="tela-cheia">
+  <img class="logo" src="logo-branca.png" alt="WL Expertise">
+  <div class="spinner"></div>
+</section>
+
+<!-- Login -->
+<section id="telaLogin" class="tela-cheia oculto">
+  <img class="logo" src="logo-branca.png" alt="WL Expertise">
+  <h1>Sistema de Gestão</h1>
+  <p>Acesse com a conta Microsoft autorizada pela WL Expertise.</p>
+  <button class="btn-ms" id="btnEntrar">
+    <svg viewBox="0 0 21 21" aria-hidden="true"><rect x="1" y="1" width="9" height="9" fill="#F25022"/><rect x="11" y="1" width="9" height="9" fill="#7FBA00"/><rect x="1" y="11" width="9" height="9" fill="#00A4EF"/><rect x="11" y="11" width="9" height="9" fill="#FFB900"/></svg>
+    Entrar com conta Microsoft
+  </button>
+  <div class="rodape-login">WL Expertise · Inteligência financeira e de processos</div>
+</section>
+
+<!-- App -->
+<section id="telaApp" class="oculto">
+  <header class="topo">
+    <img src="logo-branca.png" alt="WL Expertise">
+    <div class="esp"></div>
+    <button id="btnInstalar" class="oculto">Instalar app</button>
+    <div class="chip-sync" id="chipSync"><i></i><span>Sincronizado</span></div>
+    <div class="avatar" id="avatar" role="button" tabindex="0" aria-label="Conta">
+      <span id="iniciais">WL</span>
+      <div class="menu oculto" id="menu">
+        <div class="quem"><b id="menuNome">—</b><small id="menuEmail">—</small></div>
+        <button id="btnSair">Sair do sistema</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="boas-vindas">
+      <div class="eyebrow">Prova de conceito</div>
+      <h2 id="ola">Olá!</h2>
+    </div>
+
+    <div class="grade">
+      <div class="card">
+        <h3>Diagnóstico da conexão</h3>
+        <p class="sub">Confere, passo a passo, se o sistema consegue falar com o seu OneDrive.</p>
+        <ul class="check" id="checklist"></ul>
+      </div>
+
+      <div class="card">
+        <h3>Teste do banco de dados</h3>
+        <p class="sub">Cada registro é gravado em <b>WL-Sistema/dados/teste-conexao.json</b>. Abra o sistema em outro aparelho e veja os registros aparecerem.</p>
+        <form class="form" id="form">
+          <input id="entrada" maxlength="200" placeholder="Escreva algo para gravar no OneDrive…" autocomplete="off">
+          <button class="btn" id="btnGravar" type="submit">Gravar</button>
+        </form>
+        <ul class="lista" id="lista"></ul>
+        <div class="rodape-card">
+          <span id="infoSync">Aguardando primeira leitura…</span>
+          <button class="btn sec" id="btnSync" type="button">Sincronizar agora</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dica">
+      <b>Como validar a prova de conceito</b>
+      <ol>
+        <li>Grave um registro aqui e confirme que o arquivo apareceu na pasta <b>dados</b> do OneDrive.</li>
+        <li>Abra o sistema no celular (mesmo login) e confira se o registro está lá.</li>
+        <li>Grave pelo celular e observe o computador atualizar sozinho em até 30 segundos.</li>
+        <li>No celular, use “Adicionar à tela inicial” para testar o modo app.</li>
+      </ol>
+    </div>
+  </main>
+</section>
+
+<div class="toast" id="toast"><i></i><span id="toastTxt"></span></div>
+
+<script type="module">
+import { PublicClientApplication, InteractionRequiredAuthError }
+  from "https://cdn.jsdelivr.net/npm/@azure/msal-browser@4.30.0/+esm";
+
+/* ================== CONFIGURAÇÃO ================== */
+const CONFIG = {
+  clientId: "1128b187-6d8b-4162-bb67-001a2c558263",
+  authority: "https://login.microsoftonline.com/consumers",
+  urlProducao: "https://wlexpertise.github.io/wl-sistema/",
+  pasta: "WL-Sistema",
+  subpastas: ["dados", "modelos", "clientes", "acervo"],
+  arquivoTeste: "dados/teste-conexao.json",
+  escopos: ["User.Read", "Files.ReadWrite.All"],
+  intervaloSync: 30000
+};
+const GRAPH = "https://graph.microsoft.com/v1.0";
+
+// Live Server abre em 127.0.0.1, mas a Azure só conhece "localhost"
+if (location.hostname === "127.0.0.1") location.replace(location.href.replace("127.0.0.1", "localhost"));
+const ehLocal = location.hostname === "localhost";
+const redirectUri = ehLocal ? location.origin : CONFIG.urlProducao;
+
+/* ================== UTILITÁRIOS ================== */
+const $ = id => document.getElementById(id);
+const mostrar = tela => ["telaCarregando","telaLogin","telaApp"].forEach(t => $(t).classList.toggle("oculto", t !== tela));
+const hora = d => new Date(d).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+const dataHora = d => new Date(d).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+let toastTimer;
+function toast(msg, erro = false) {
+  $("toastTxt").textContent = msg;
+  $("toast").classList.toggle("erro", erro);
+  $("toast").classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $("toast").classList.remove("on"), 3500);
+}
+function chip(estado, texto) {
+  const c = $("chipSync");
+  c.className = "chip-sync " + (estado || "");
+  c.querySelector("span").textContent = texto;
+}
+
+/* ================== AUTENTICAÇÃO ================== */
+const msal = new PublicClientApplication({
+  auth: { clientId: CONFIG.clientId, authority: CONFIG.authority, redirectUri, postLogoutRedirectUri: redirectUri },
+  cache: { cacheLocation: "localStorage" }
+});
+let conta = null;
+
+async function token() {
+  try {
+    const r = await msal.acquireTokenSilent({ scopes: CONFIG.escopos, account: conta });
+    return r.accessToken;
+  } catch (e) {
+    if (e instanceof InteractionRequiredAuthError) {
+      await msal.acquireTokenRedirect({ scopes: CONFIG.escopos, account: conta });
+    }
+    throw e;
+  }
+}
+
+/* ================== GRAPH (OneDrive) ================== */
+class ErroGraph extends Error { constructor(status, msg) { super(msg); this.status = status; } }
+
+async function graph(caminho, opcoes = {}) {
+  const t = await token();
+  const r = await fetch(GRAPH + caminho, {
+    ...opcoes,
+    headers: { Authorization: "Bearer " + t, ...(opcoes.headers || {}) }
+  });
+  if (!r.ok) {
+    let msg = r.statusText;
+    try { msg = (await r.json()).error?.message || msg; } catch {}
+    throw new ErroGraph(r.status, msg);
+  }
+  return r;
+}
+const caminhoArquivo = rel => `/me/drive/root:/${CONFIG.pasta}/${rel}`;
+
+// Lê metadados (inclui eTag = "versão" do arquivo). Retorna null se não existir.
+async function lerMeta(rel) {
+  try { return await (await graph(caminhoArquivo(rel))).json(); }
+  catch (e) { if (e.status === 404) return null; throw e; }
+}
+// Lê metadados + conteúdo JSON
+async function lerJSON(rel) {
+  const meta = await lerMeta(rel);
+  if (!meta) return { meta: null, dados: null };
+  let dados;
+  try {
+    const url = meta["@microsoft.graph.downloadUrl"];
+    dados = await (await fetch(url, { cache: "no-store" })).json();
+  } catch {
+    dados = await (await graph(caminhoArquivo(rel) + ":/content", { cache: "no-store" })).json();
+  }
+  return { meta, dados };
+}
+// Grava JSON. Com eTag: só grava se ninguém alterou antes (senão 412).
+async function gravarJSON(rel, dados, eTag) {
+  const extra = eTag ? "" : "?@microsoft.graph.conflictBehavior=fail";
+  const headers = { "Content-Type": "application/json" };
+  if (eTag) headers["If-Match"] = eTag;
+  const r = await graph(caminhoArquivo(rel) + ":/content" + extra, {
+    method: "PUT", headers, body: JSON.stringify(dados, null, 2)
+  });
+  return r.json();
+}
+
+/* Padrão de gravação segura: ler → alterar → gravar com a versão lida.
+   Se outra pessoa salvou no meio do caminho, relê e reaplica (até 4 vezes). */
+async function salvarComSeguranca(rel, alterar, inicial) {
+  for (let tentativa = 1; tentativa <= 4; tentativa++) {
+    const { meta, dados } = await lerJSON(rel);
+    const novo = structuredClone(dados || inicial);
+    alterar(novo);
+    novo.atualizadoEm = new Date().toISOString();
+    novo.atualizadoPor = conta.name || conta.username;
+    try {
+      const metaNova = await gravarJSON(rel, novo, meta?.eTag);
+      return { meta: metaNova, dados: novo, tentativas: tentativa };
+    } catch (e) {
+      if (e.status === 412 || e.status === 409) continue; // conflito: tenta de novo com a versão mais nova
+      throw e;
+    }
+  }
+  throw new Error("Não foi possível gravar após várias tentativas. Tente novamente.");
+}
+
+/* ================== DIAGNÓSTICO ================== */
+const passos = {};
+function passo(id, titulo) {
+  const li = document.createElement("li");
+  li.innerHTML = `<span class="st carregando">·</span><div><b></b><small>Verificando…</small></div>`;
+  li.querySelector("b").textContent = titulo;
+  $("checklist").appendChild(li);
+  passos[id] = li;
+}
+function marcar(id, estado, texto) {
+  const li = passos[id];
+  const st = li.querySelector(".st");
+  st.className = "st " + estado;
+  st.textContent = { ok: "✓", falha: "!", aviso: "!" }[estado] || "·";
+  li.querySelector("small").textContent = texto;
+}
+
+async function diagnosticar() {
+  $("checklist").innerHTML = "";
+  passo("login", "Login Microsoft");
+  passo("drive", "OneDrive");
+  passo("pasta", `Pasta ${CONFIG.pasta}`);
+  passo("subpastas", "Subpastas do sistema");
+  passo("banco", "Leitura e gravação de dados");
+
+  marcar("login", "ok", conta.username);
+
+  try {
+    const d = await (await graph("/me/drive?$select=quota,driveType")).json();
+    const gb = b => (b / 1024 ** 3).toLocaleString("pt-BR", { maximumFractionDigits: 1 });
+    const total = d.quota?.total || 0;
+    marcar("drive", total > 100 * 1024 **3 ? "ok" : "aviso",
+      `${gb(d.quota?.used || 0)} GB usados de ${gb(total)} GB` + (total > 100 * 1024 ** 3 ? "" : " — o 1 TB do plano Família não parece ativo nesta conta"));
+  } catch (e) { marcar("drive", "falha", "Sem acesso ao OneDrive: " + e.message); }
+
+  try {
+    const r = await (await graph(`/me/drive/root:/${CONFIG.pasta}:/children?$select=name,folder&$top=200`)).json();
+    marcar("pasta", "ok", "Encontrada na raiz do OneDrive");
+    const existentes = r.value.filter(i => i.folder).map(i => i.name.toLowerCase());
+    const faltando = CONFIG.subpastas.filter(s => !existentes.includes(s));
+    if (faltando.length) marcar("subpastas", "aviso", "Faltando: " + faltando.join(", "));
+    else marcar("subpastas", "ok", CONFIG.subpastas.join(" · "));
+  } catch (e) {
+    marcar("pasta", "falha", e.status === 404 ? `Crie a pasta "${CONFIG.pasta}" na raiz do OneDrive` : e.message);
+    marcar("subpastas", "falha", "Depende da pasta principal");
+  }
+}
+
+/* ================== BANCO DE TESTE ================== */
+const INICIAL = { versao: 1, registros: [] };
+let estado = { eTag: null, dados: INICIAL };
+let idsConhecidos = new Set();
+
+function render(destacarNovos = false) {
+  const regs = [...(estado.dados?.registros || [])].sort((a, b) => b.criadoEm.localeCompare(a.criadoEm));
+  const ul = $("lista");
+  ul.innerHTML = "";
+  if (!regs.length) {
+    ul.innerHTML = `<li class="vazio" style="background:none;display:block">Nenhum registro ainda. Grave o primeiro acima.</li>`;
+  }
+  for (const r of regs) {
+    const li = document.createElement("li");
+    if (destacarNovos && !idsConhecidos.has(r.id)) li.classList.add("novo");
+    li.innerHTML = `<div class="txt"><p></p><small></small></div><button title="Excluir" aria-label="Excluir">×</button>`;
+    li.querySelector("p").textContent = r.texto;
+    li.querySelector("small").textContent = `${r.autor} · ${dataHora(r.criadoEm)}`;
+    li.querySelector("button").onclick = () => excluir(r.id);
+    ul.appendChild(li);
+  }
+  idsConhecidos = new Set(regs.map(r => r.id));
+}
+
+function atualizarInfo() {
+  const d = estado.dados;
+  $("infoSync").textContent = d?.atualizadoEm
+    ? `Última alteração por ${d.atualizadoPor} às ${hora(d.atualizadoEm)} · verificado às ${hora(Date.now())}`
+    : `Arquivo ainda não criado · verificado às ${hora(Date.now())}`;
+}
+
+async function carregarBanco() {
+  chip("sincronizando", "Lendo…");
+  const { meta, dados } = await lerJSON(CONFIG.arquivoTeste);
+  estado = { eTag: meta?.eTag || null, dados: dados || INICIAL };
+  render();
+  atualizarInfo();
+  chip("", "Sincronizado");
+  marcar("banco", "ok", meta ? "Arquivo lido com sucesso — grave um registro para testar a escrita" : "Pronto — o arquivo será criado no primeiro registro");
+}
+
+// Verificação leve: só compara a versão (eTag); baixa o conteúdo se mudou
+let verificando = false;
+async function verificarMudancas(manual = false) {
+  if (verificando) return;
+  verificando = true;
+  try {
+    chip("sincronizando", "Verificando…");
+    const meta = await lerMeta(CONFIG.arquivoTeste);
+    if (meta && meta.eTag !== estado.eTag) {
+      const { meta: m, dados } = await lerJSON(CONFIG.arquivoTeste);
+      const quem = dados?.atualizadoPor;
+      estado = { eTag: m.eTag, dados };
+      render(true);
+      if (quem && quem !== (conta.name || conta.username)) toast(`Dados atualizados por ${quem}`);
+      else if (manual) toast("Dados atualizados");
+    } else if (manual) toast("Tudo em dia — nenhuma alteração");
+    atualizarInfo();
+    chip("", "Sincronizado");
+  } catch (e) {
+    chip("erro", "Sem conexão");
+    if (manual) toast("Falha ao sincronizar: " + e.message, true);
+  } finally { verificando = false; }
+}
+
+async function gravar(texto) {
+  $("btnGravar").disabled = true;
+  chip("sincronizando", "Gravando…");
+  try {
+    const reg = { id: crypto.randomUUID(), texto, autor: conta.name || conta.username, criadoEm: new Date().toISOString() };
+    const r = await salvarComSeguranca(CONFIG.arquivoTeste, d => d.registros.push(reg), INICIAL);
+    estado = { eTag: r.meta.eTag, dados: r.dados };
+    render(true);
+    atualizarInfo();
+    chip("", "Sincronizado");
+    marcar("banco", "ok", "Leitura e gravação funcionando no OneDrive");
+    toast(r.tentativas > 1 ? "Gravado (houve edição simultânea, mesclado sem perdas)" : "Gravado no OneDrive");
+  } catch (e) {
+    chip("erro", "Erro");
+    marcar("banco", "falha", "Falha ao gravar: " + e.message);
+    toast("Erro ao gravar: " + e.message, true);
+  } finally { $("btnGravar").disabled = false; }
+}
+
+async function excluir(id) {
+  chip("sincronizando", "Gravando…");
+  try {
+    const r = await salvarComSeguranca(CONFIG.arquivoTeste, d => { d.registros = d.registros.filter(x => x.id !== id); }, INICIAL);
+    estado = { eTag: r.meta.eTag, dados: r.dados };
+    render(); atualizarInfo(); chip("", "Sincronizado");
+  } catch (e) { chip("erro", "Erro"); toast("Erro ao excluir: " + e.message, true); }
+}
+
+/* ================== INÍCIO ================== */
+async function abrirApp() {
+  const nome = conta.name || conta.username;
+  $("ola").textContent = `Olá, ${nome.split(" ")[0]}!`;
+  $("menuNome").textContent = nome;
+  $("menuEmail").textContent = conta.username;
+  $("iniciais").textContent = nome.split(/\s+/).map(p => p[0]).slice(0, 2).join("").toUpperCase();
+  mostrar("telaApp");
+
+  await diagnosticar();
+  try { await carregarBanco(); }
+  catch (e) { marcar("banco", "falha", e.message); chip("erro", "Erro"); }
+
+  setInterval(() => { if (document.visibilityState === "visible") verificarMudancas(); }, CONFIG.intervaloSync);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") verificarMudancas(); });
+}
+
+$("btnEntrar").onclick = () => msal.loginRedirect({ scopes: CONFIG.escopos, prompt: "select_account" });
+$("btnSair").onclick = e => { e.stopPropagation(); msal.logoutRedirect({ account: conta }); };
+$("avatar").onclick = () => $("menu").classList.toggle("oculto");
+document.addEventListener("click", e => { if (!$("avatar").contains(e.target)) $("menu").classList.add("oculto"); });
+$("btnSync").onclick = () => verificarMudancas(true);
+$("form").onsubmit = e => {
+  e.preventDefault();
+  const t = $("entrada").value.trim();
+  if (!t) return;
+  $("entrada").value = "";
+  gravar(t);
+};
+
+// Instalação como app (Android/desktop)
+let promptInstalar;
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); promptInstalar = e; $("btnInstalar").classList.remove("oculto"); });
+$("btnInstalar").onclick = async () => { promptInstalar?.prompt(); await promptInstalar?.userChoice; $("btnInstalar").classList.add("oculto"); };
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+
+(async () => {
+  try {
+    await msal.initialize();
+    const resp = await msal.handleRedirectPromise();
+    conta = resp?.account || msal.getAllAccounts()[0] || null;
+    if (conta) { msal.setActiveAccount(conta); await abrirApp(); }
+    else mostrar("telaLogin");
+  } catch (e) {
+    console.error(e);
+    mostrar("telaLogin");
+    toast("Erro no login: " + (e.errorMessage || e.message), true);
+  }
+})();
+</script>
+</body>
+</html>
