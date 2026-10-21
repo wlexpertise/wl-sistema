@@ -21,15 +21,17 @@
     --erro:#C8463D; --alerta:#D99A1E;
     --font:"Montserrat","Segoe UI",system-ui,sans-serif;
     --raio:16px; --sombra:0 1px 2px rgba(11,90,96,.06),0 8px 24px rgba(11,90,96,.06);
+    --nav-h:64px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
-  body{font-family:var(--font);background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
-  button{font-family:inherit;cursor:pointer;border:0}
+  body{font-family:var(--font);background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
   input{font-family:inherit}
+  svg{flex:none}
   .oculto{display:none!important}
 
-  /* ---------- Tela de carregamento / login ---------- */
+  /* ---------- Carregando / login ---------- */
   .tela-cheia{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
     padding:max(32px,env(safe-area-inset-top)) 24px max(32px,env(safe-area-inset-bottom));
     background:linear-gradient(150deg,var(--teal) 0%,var(--teal-2) 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
@@ -46,11 +48,18 @@
   .spinner{width:34px;height:34px;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:gira .8s linear infinite}
   @keyframes gira{to{transform:rotate(360deg)}}
 
-  /* ---------- App ---------- */
-  header.topo{position:sticky;top:0;z-index:10;background:var(--teal);color:#fff;
-    padding:calc(env(safe-area-inset-top) + 12px) 20px 12px;display:flex;align-items:center;gap:12px}
+  /* ---------- Topo + navegação ---------- */
+  header.topo{position:sticky;top:0;z-index:20;background:var(--teal);color:#fff;
+    padding:calc(env(safe-area-inset-top) + 12px) 24px 12px;display:flex;align-items:center;gap:12px}
   header.topo img{height:26px}
   header.topo .esp{flex:1}
+  .nav-topo{display:flex;gap:4px;margin-left:24px}
+  .nav-topo button{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:10px;font-size:.85rem;font-weight:600;color:rgba(255,255,255,.72)}
+  .nav-topo button:hover{background:rgba(255,255,255,.08);color:#fff}
+  .nav-topo button.ativo{background:rgba(255,255,255,.14);color:#fff}
+  .nav-topo button.breve{opacity:.45}
+  .nav-topo svg,.nav-base svg{width:18px;height:18px}
+  .nav-base{display:none}
   .chip-sync{display:flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;background:rgba(255,255,255,.12);
     padding:6px 10px;border-radius:999px;white-space:nowrap}
   .chip-sync i{width:7px;height:7px;border-radius:50%;background:var(--verde)}
@@ -59,27 +68,116 @@
   @keyframes pulsa{50%{opacity:.3}}
   .avatar{cursor:pointer;width:36px;height:36px;border-radius:50%;background:var(--turq);color:#fff;font-weight:700;font-size:.85rem;
     display:grid;place-items:center;position:relative}
-  .menu{position:absolute;top:44px;right:0;background:#fff;color:var(--txt);border-radius:12px;box-shadow:var(--sombra);
+  .menu{position:absolute;top:44px;right:0;background:#fff;color:var(--txt);border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.18);
     min-width:230px;padding:8px;text-align:left;font-weight:500}
   .menu .quem{padding:10px 12px;border-bottom:1px solid var(--borda);margin-bottom:6px}
   .menu .quem b{display:block;font-size:.9rem}
   .menu .quem small{color:var(--txt-2);font-size:.75rem;word-break:break-all}
-  .menu button{width:100%;text-align:left;background:none;padding:10px 12px;border-radius:8px;font-size:.88rem;color:var(--txt)}
+  .menu button{width:100%;text-align:left;padding:10px 12px;border-radius:8px;font-size:.88rem;color:var(--txt)}
   .menu button:hover{background:var(--bg)}
+  #btnInstalar{background:rgba(255,255,255,.14);color:#fff;font-size:.75rem;font-weight:600;padding:7px 12px;border-radius:999px}
 
-  main{max-width:960px;margin:0 auto;padding:24px 16px calc(32px + env(safe-area-inset-bottom))}
-  .boas-vindas{margin:4px 4px 20px}
+  @media(max-width:860px){
+    .nav-topo{display:none}
+    .nav-base{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--borda);
+      padding:6px 8px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -6px 24px rgba(11,90,96,.06)}
+    .nav-base button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;font-size:.66rem;font-weight:600;color:var(--txt-2);border-radius:10px}
+    .nav-base button.ativo{color:var(--teal)}
+    .nav-base button.ativo svg{color:var(--turq)}
+    .nav-base button.breve{opacity:.4}
+    main{padding-bottom:calc(var(--nav-h) + 28px + env(safe-area-inset-bottom))!important}
+  }
+  @media(max-width:480px){header.topo{padding-left:16px;padding-right:16px;gap:8px} header.topo img{height:20px} .chip-sync span{display:none} .chip-sync{padding:9px}}
+
+  main{max-width:1040px;margin:0 auto;padding:28px 16px 40px}
+  .cab-pagina{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 4px 20px}
   .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--turq)}
-  .boas-vindas h2{font-size:1.45rem;font-weight:700;margin-top:4px;color:var(--teal)}
+  .cab-pagina h2{font-size:1.5rem;font-weight:700;margin-top:4px;color:var(--teal);letter-spacing:-.01em}
+  .cab-pagina p{font-size:.86rem;color:var(--txt-2);margin-top:4px}
+
+  /* ---------- Biblioteca ---------- */
+  .resumo{display:flex;gap:8px;flex-wrap:wrap}
+  .resumo span{font-size:.75rem;font-weight:600;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid var(--borda);color:var(--txt-2)}
+  .resumo span b{color:var(--teal)}
+  .resumo span.pend b{color:var(--alerta)}
+  .filtros{padding:4px 0 12px;margin-bottom:6px}
+  .busca{position:relative}
+  .busca svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--txt-2)}
+  .busca input{width:100%;border:1.5px solid var(--borda);border-radius:12px;padding:13px 14px 13px 42px;font-size:.95rem;color:var(--txt);background:#fff;outline:none}
+  .busca input:focus{border-color:var(--turq)}
+  .chips{display:flex;gap:6px;margin-top:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+  .chips::-webkit-scrollbar{display:none}
+  .chips button{flex:none;font-size:.78rem;font-weight:600;padding:7px 13px;border-radius:999px;border:1.5px solid var(--borda);background:#fff;color:var(--txt-2)}
+  .chips button.ativo{background:var(--teal);border-color:var(--teal);color:#fff}
+
+  .secao{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);margin-bottom:14px;overflow:hidden}
+  .secao-cab{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
+  .secao-num{flex:none;width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--turq),var(--teal));color:#fff;
+    display:grid;place-items:center;font-weight:800;font-size:.85rem}
+  .secao-tit{flex:1;min-width:0}
+  .secao-tit h3{font-size:.98rem;font-weight:700;color:var(--teal)}
+  .secao-tit p{font-size:.78rem;color:var(--txt-2);margin-top:2px;line-height:1.4}
+  .secao-cont{font-size:.72rem;font-weight:700;color:var(--txt-2);background:var(--bg);padding:5px 9px;border-radius:999px;white-space:nowrap}
+  .secao-cont .p{color:var(--alerta)}
+  .seta{width:20px;height:20px;color:var(--txt-2);transition:transform .2s}
+  .secao.fechada .seta{transform:rotate(-90deg)}
+  .secao.fechada .itens,.secao.fechada .secao-rod{display:none}
+
+  .itens{list-style:none;border-top:1px solid var(--borda)}
+  .mat{display:flex;align-items:center;gap:14px;padding:14px 18px;border-top:1px solid var(--borda)}
+  .mat:first-child{border-top:0}
+  .tipo{flex:none;width:42px;height:48px;border-radius:8px;display:grid;place-items:center;font-size:.62rem;font-weight:800;letter-spacing:.04em;color:#fff;position:relative}
+  .tipo::after{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 10px 10px 0;border-color:transparent var(--card) rgba(255,255,255,.35) transparent}
+  .t-pdf{background:#C8463D} .t-xlsx,.t-xls,.t-csv{background:#1E7B4A} .t-docx,.t-doc{background:#2B5797} .t-pptx,.t-ppt{background:#C55A11}
+  .t-outro{background:var(--txt-2)}
+  .mat.pendente .tipo{background:transparent!important;color:var(--txt-2);border:1.5px dashed #C9D6D6}
+  .mat.pendente .tipo::after{display:none}
+  .info{flex:1;min-width:0}
+  .info b{font-size:.9rem;font-weight:600;display:block;line-height:1.35}
+  .info p{font-size:.78rem;color:var(--txt-2);line-height:1.45;margin-top:2px}
+  .linha-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+  .tag{font-size:.66rem;font-weight:700;padding:3px 8px;border-radius:6px;background:rgba(19,163,181,.1);color:#0E7F8D}
+  .tag.geral{background:var(--bg);color:var(--txt-2)}
+  .tag.pend{background:rgba(217,154,30,.14);color:#9A6A0C}
+  .meta{font-size:.7rem;color:var(--txt-2)}
+  .acoes{display:flex;gap:6px;flex:none}
+  .acao{display:flex;align-items:center;gap:6px;height:38px;padding:0 12px;border-radius:10px;font-size:.78rem;font-weight:600;
+    border:1.5px solid var(--borda);color:var(--teal);background:#fff;transition:background .15s}
+  .acao:hover{background:var(--bg)}
+  .acao.prim{background:var(--turq);border-color:var(--turq);color:#fff}
+  .acao.prim:hover{background:#0f93a3}
+  .acao.enviar{border-style:dashed;border-color:#C9D6D6;color:var(--txt-2)}
+  .acao.enviar:hover{border-color:var(--turq);color:var(--turq)}
+  .acao svg{width:16px;height:16px}
+  .acao:disabled{opacity:.5;cursor:wait}
+  .secao-rod{padding:10px 18px 14px;border-top:1px solid var(--borda)}
+  .secao-rod button{font-size:.78rem;font-weight:600;color:var(--turq);display:flex;align-items:center;gap:6px;padding:6px 0}
+  .secao-rod svg{width:16px;height:16px}
+  .vazio-busca{text-align:center;padding:48px 16px;color:var(--txt-2);font-size:.9rem}
+  .aviso-erro{background:#fff;border:1px solid rgba(200,70,61,.3);border-left:4px solid var(--erro);border-radius:12px;padding:14px 16px;font-size:.85rem;margin-bottom:14px;line-height:1.5}
+  .esqueleto{height:74px;border-radius:var(--raio);background:linear-gradient(90deg,#eaf0f0 25%,#f3f7f7 50%,#eaf0f0 75%);background-size:200% 100%;animation:brilho 1.2s infinite;margin-bottom:14px}
+  @keyframes brilho{to{background-position:-200% 0}}
+  .btn-ico{display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--teal);background:#fff;border:1.5px solid var(--borda);padding:9px 14px;border-radius:10px}
+  .btn-ico svg{width:16px;height:16px}
+
+  @media(max-width:640px){
+    .mat{padding:12px 14px;gap:12px;align-items:flex-start}
+    .tipo{width:36px;height:42px;font-size:.56rem}
+    .acoes{flex-direction:column}
+    .acao{width:40px;height:36px;padding:0;justify-content:center}
+    .acao span{display:none}
+    .secao-cab{padding:14px}
+    .secao-tit p{display:none}
+  }
+
+  /* ---------- Sistema (diagnóstico) ---------- */
   .grade{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
   .grade>*{min-width:0}
   @media(min-width:820px){.grade{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);align-items:start}}
-
   .card{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);padding:20px}
   .card h3{font-size:1rem;font-weight:700;color:var(--teal);display:flex;align-items:center;gap:8px}
   .card h3::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--verde)}
   .card .sub{font-size:.82rem;color:var(--txt-2);margin:4px 0 16px;line-height:1.5}
-
   .check{list-style:none;display:grid;gap:2px}
   .check li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--borda)}
   .check li:first-child{border-top:0}
@@ -88,51 +186,55 @@
   .st.carregando{background:var(--turq);animation:pulsa 1s infinite}
   .check b{font-size:.88rem;font-weight:600;display:block}
   .check small{font-size:.78rem;color:var(--txt-2);line-height:1.45;display:block;margin-top:2px;word-break:break-word}
-
   .form{display:flex;gap:8px;margin-bottom:14px}
   .form input{flex:1;min-width:0;border:1.5px solid var(--borda);border-radius:12px;padding:13px 14px;font-size:.95rem;color:var(--txt);background:var(--bg);outline:none}
   .form input:focus{border-color:var(--turq);background:#fff}
   .btn{background:var(--turq);color:#fff;font-weight:600;font-size:.9rem;padding:0 18px;border-radius:12px;min-height:46px}
   .btn:disabled{opacity:.5}
   .btn.sec{background:var(--bg);color:var(--teal);border:1.5px solid var(--borda)}
-  .lista{list-style:none;display:grid;gap:8px;max-height:420px;overflow:auto}
-  .lista li{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:12px 14px;animation:entra .25s ease}
+  .lista{list-style:none;display:grid;gap:8px;max-height:360px;overflow:auto}
+  .lista li{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:12px 14px}
   .lista li.novo{box-shadow:inset 3px 0 0 var(--verde)}
-  @keyframes entra{from{opacity:0;transform:translateY(-4px)}}
   .lista .txt{flex:1;min-width:0}
   .lista .txt p{font-size:.92rem;line-height:1.45;word-break:break-word}
   .lista .txt small{font-size:.74rem;color:var(--txt-2)}
-  .lista button{background:none;color:var(--txt-2);font-size:1.1rem;line-height:1;padding:4px 6px;border-radius:6px}
+  .lista button{color:var(--txt-2);font-size:1.1rem;line-height:1;padding:4px 6px;border-radius:6px}
   .lista button:hover{color:var(--erro);background:#fff}
   .vazio{text-align:center;color:var(--txt-2);font-size:.85rem;padding:24px 8px}
   .rodape-card{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--borda);font-size:.76rem;color:var(--txt-2)}
   .rodape-card .btn{min-height:36px;font-size:.8rem;padding:0 14px}
 
-  .dica{margin-top:16px;background:linear-gradient(135deg,rgba(19,163,181,.08),rgba(40,178,96,.08));border:1px solid rgba(19,163,181,.25);
-    border-radius:var(--raio);padding:16px 18px;font-size:.84rem;line-height:1.6;color:var(--txt)}
-  .dica b{color:var(--teal)}
-  .dica ol{margin:6px 0 0 18px}
-
-  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;
+  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;pointer-events:none;
     background:var(--txt);color:#fff;padding:12px 18px;border-radius:12px;font-size:.85rem;font-weight:500;box-shadow:0 10px 30px rgba(0,0,0,.2);
     transition:all .25s;z-index:50;max-width:calc(100% - 32px);display:flex;gap:10px;align-items:center}
   .toast.on{opacity:1;transform:translate(-50%,0)}
   .toast i{width:8px;height:8px;border-radius:50%;background:var(--verde);flex:none}
   .toast.erro i{background:var(--erro)}
-  @media(max-width:480px){header.topo{padding-left:16px;padding-right:16px;gap:8px} header.topo img{height:20px} .chip-sync span{display:none} .chip-sync{padding:9px}}
-  body{overflow-x:hidden}
-  #btnInstalar{background:rgba(255,255,255,.14);color:#fff;font-size:.75rem;font-weight:600;padding:7px 12px;border-radius:999px}
+  .toast.prog i{background:var(--turq);animation:pulsa 1s infinite}
+  @media(max-width:860px){.toast{bottom:calc(var(--nav-h) + 16px + env(safe-area-inset-bottom))}}
 </style>
 </head>
 <body>
 
-<!-- Carregando -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-bib" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6.5A2.5 2.5 0 0 0 4 21.5v-2z"/><path d="M8 7h7M8 11h5"/></symbol>
+  <symbol id="i-crm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></symbol>
+  <symbol id="i-cli" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-sis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+  <symbol id="i-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-baixar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-enviar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></symbol>
+  <symbol id="i-mais" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-busca" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-atual" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></symbol>
+</svg>
+
 <section id="telaCarregando" class="tela-cheia">
   <img class="logo" src="logo-branca.png" alt="WL Expertise">
   <div class="spinner"></div>
 </section>
 
-<!-- Login -->
 <section id="telaLogin" class="tela-cheia oculto">
   <img class="logo" src="logo-branca.png" alt="WL Expertise">
   <h1>Sistema de Gestão</h1>
@@ -144,10 +246,10 @@
   <div class="rodape-login">WL Expertise · Inteligência financeira e de processos</div>
 </section>
 
-<!-- App -->
 <section id="telaApp" class="oculto">
   <header class="topo">
     <img src="logo-branca.png" alt="WL Expertise">
+    <nav class="nav-topo" id="navTopo"></nav>
     <div class="esp"></div>
     <button id="btnInstalar" class="oculto">Instalar app</button>
     <div class="chip-sync" id="chipSync"><i></i><span>Sincronizado</span></div>
@@ -161,43 +263,57 @@
   </header>
 
   <main>
-    <div class="boas-vindas">
-      <div class="eyebrow">Prova de conceito</div>
-      <h2 id="ola">Olá!</h2>
+    <!-- ============ BIBLIOTECA ============ -->
+    <div data-view="biblioteca">
+      <div class="cab-pagina">
+        <div>
+          <div class="eyebrow">Acervo WL Expertise</div>
+          <h2>Biblioteca de materiais</h2>
+          <p>Modelos, ferramentas e apresentações organizados pela jornada do cliente.</p>
+        </div>
+        <div class="resumo" id="resumo"></div>
+      </div>
+      <div class="filtros">
+        <div class="busca"><svg><use href="#i-busca"/></svg><input id="busca" type="search" placeholder="Buscar material…" autocomplete="off"></div>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div id="bibErro"></div>
+      <div id="bibLista"></div>
     </div>
 
-    <div class="grade">
-      <div class="card">
-        <h3>Diagnóstico da conexão</h3>
-        <p class="sub">Confere, passo a passo, se o sistema consegue falar com o seu OneDrive.</p>
-        <ul class="check" id="checklist"></ul>
+    <!-- ============ SISTEMA ============ -->
+    <div data-view="sistema" class="oculto">
+      <div class="cab-pagina">
+        <div>
+          <div class="eyebrow">Sistema</div>
+          <h2 id="ola">Olá!</h2>
+          <p>Diagnóstico da conexão com o OneDrive e teste de sincronização.</p>
+        </div>
       </div>
-
-      <div class="card">
-        <h3>Teste do banco de dados</h3>
-        <p class="sub">Cada registro é gravado em <b>WL-Sistema/dados/teste-conexao.json</b>. Abra o sistema em outro aparelho e veja os registros aparecerem.</p>
-        <form class="form" id="form">
-          <input id="entrada" maxlength="200" placeholder="Escreva algo para gravar no OneDrive…" autocomplete="off">
-          <button class="btn" id="btnGravar" type="submit">Gravar</button>
-        </form>
-        <ul class="lista" id="lista"></ul>
-        <div class="rodape-card">
-          <span id="infoSync">Aguardando primeira leitura…</span>
-          <button class="btn sec" id="btnSync" type="button">Sincronizar agora</button>
+      <div class="grade">
+        <div class="card">
+          <h3>Diagnóstico da conexão</h3>
+          <p class="sub">Confere, passo a passo, se o sistema consegue falar com o seu OneDrive.</p>
+          <ul class="check" id="checklist"></ul>
+        </div>
+        <div class="card">
+          <h3>Teste do banco de dados</h3>
+          <p class="sub">Cada registro é gravado em <b>WL-Sistema/dados/teste-conexao.json</b>.</p>
+          <form class="form" id="form">
+            <input id="entrada" maxlength="200" placeholder="Escreva algo para gravar no OneDrive…" autocomplete="off">
+            <button class="btn" id="btnGravar" type="submit">Gravar</button>
+          </form>
+          <ul class="lista" id="lista"></ul>
+          <div class="rodape-card">
+            <span id="infoSync">Aguardando primeira leitura…</span>
+            <button class="btn sec" id="btnSync" type="button">Sincronizar agora</button>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="dica">
-      <b>Como validar a prova de conceito</b>
-      <ol>
-        <li>Grave um registro aqui e confirme que o arquivo apareceu na pasta <b>dados</b> do OneDrive.</li>
-        <li>Abra o sistema no celular (mesmo login) e confira se o registro está lá.</li>
-        <li>Grave pelo celular e observe o computador atualizar sozinho em até 30 segundos.</li>
-        <li>No celular, use “Adicionar à tela inicial” para testar o modo app.</li>
-      </ol>
-    </div>
   </main>
+
+  <nav class="nav-base" id="navBase"></nav>
 </section>
 
 <div class="toast" id="toast"><i></i><span id="toastTxt"></span></div>
@@ -219,23 +335,44 @@ const CONFIG = {
 };
 const GRAPH = "https://graph.microsoft.com/v1.0";
 
-// Live Server abre em 127.0.0.1, mas a Azure só conhece "localhost"
+/* Catálogo da biblioteca: categorias (pastas em WL-Sistema/acervo) e materiais esperados.
+   Arquivos que estiverem nas pastas e não constarem aqui também aparecem, como "materiais avulsos". */
+const CATALOGO = {"versao": 1, "pastas": [{"num": "01", "nome": "Estratégia e Posicionamento", "pasta": "01 - Estratégia e Posicionamento", "descricao": "Uso interno: posicionamento, ICP e inteligência de mercado da WL."}, {"num": "02", "nome": "Prospecção e Vendas", "pasta": "02 - Prospecção e Vendas", "descricao": "Scripts, controle de prospecção, CRM e programa de indicação."}, {"num": "03", "nome": "Apresentações Comerciais", "pasta": "03 - Apresentações Comerciais", "descricao": "Apresentação institucional e apresentações por segmento."}, {"num": "04", "nome": "Propostas, Preços e Contratos", "pasta": "04 - Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos."}, {"num": "05", "nome": "Diagnóstico", "pasta": "05 - Diagnóstico", "descricao": "Formulários e planilhas para diagnosticar o cliente."}, {"num": "06", "nome": "Onboarding e Implantação", "pasta": "06 - Onboarding e Implantação", "descricao": "Kick-off, onboarding, acessos e ativação do cliente."}, {"num": "07", "nome": "Execução e Entregas", "pasta": "07 - Execução e Entregas", "descricao": "Cronograma, plano de ação, entregas e gestão da operação."}], "itens": [{"pasta": "01", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "frentes": ["Geral"], "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"pasta": "01", "nome": "Definição de ICP", "ext": "docx", "frentes": ["Geral"], "descricao": "Perfil de cliente ideal da WL Expertise."}, {"pasta": "01", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "frentes": ["Geral"], "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"pasta": "01", "nome": "Mapa de Posicionamento", "ext": "docx", "frentes": ["Geral"], "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"pasta": "01", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "frentes": ["Geral"], "descricao": "Levantamento das dores e metas da base de clientes."}, {"pasta": "02", "nome": "Script de Vendas (Call)", "ext": "docx", "frentes": ["Geral"], "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"pasta": "02", "nome": "Script Único", "ext": "docx", "frentes": ["Geral"], "descricao": "Script de abordagem comercial."}, {"pasta": "02", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "frentes": ["Geral"], "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"pasta": "02", "nome": "CRM para Consultorias", "ext": "xlsx", "frentes": ["Geral"], "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"pasta": "02", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "frentes": ["Geral"], "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"pasta": "02", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "frentes": ["BPO"], "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"pasta": "02", "nome": "Programa de Indicação", "ext": "pdf", "frentes": ["Geral"], "descricao": "Como estruturar um programa de indicação de clientes."}, {"pasta": "02", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "frentes": ["Geral"], "descricao": "Termo para parceiros que indicam clientes."}, {"pasta": "03", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "frentes": ["Geral"], "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"pasta": "03", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "frentes": ["Processos"], "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"pasta": "03", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"pasta": "03", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para negócios de estética."}, {"pasta": "03", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para locadoras de equipamentos."}, {"pasta": "03", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"pasta": "03", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para criadores de conteúdo."}, {"pasta": "04", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "frentes": ["Processos"], "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"pasta": "04", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"pasta": "04", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "frentes": ["BPO", "FP&A"], "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"pasta": "04", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "frentes": ["BPO", "FP&A"], "descricao": "Planos e regras de negociação para o segmento Rental."}, {"pasta": "04", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "frentes": ["Geral"], "descricao": "Modelo de proposta comercial."}, {"pasta": "04", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "frentes": ["Geral"], "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"pasta": "04", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "frentes": ["Geral"], "descricao": "Modelo de contrato de prestação de serviços."}, {"pasta": "05", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "frentes": ["Geral"], "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"pasta": "05", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "frentes": ["FP&A", "Planejamento"], "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"pasta": "05", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Questionário preliminar das rotinas financeiras."}, {"pasta": "05", "nome": "Mapa Quente da Operação", "ext": "xlsx", "frentes": ["BPO", "Processos"], "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"pasta": "05", "nome": "Ata e Briefing de Reunião", "ext": "docx", "frentes": ["Geral"], "descricao": "Modelo para registrar reuniões e briefings."}, {"pasta": "06", "nome": "Questionário de Kick-off", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"pasta": "06", "nome": "Formulário de Onboarding", "ext": "docx", "frentes": ["Geral"], "descricao": "Coleta de informações para iniciar o projeto."}, {"pasta": "06", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Plano de ativação, relação de clientes e timeline."}, {"pasta": "06", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "frentes": ["BPO"], "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"pasta": "06", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "frentes": ["Geral"], "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"pasta": "07", "nome": "Cronograma da Consultoria", "ext": "xlsx", "frentes": ["Processos"], "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"pasta": "07", "nome": "Plano de Ação Personalizado", "ext": "docx", "frentes": ["Geral"], "descricao": "Plano de ação do cliente após o diagnóstico."}, {"pasta": "07", "nome": "Materiais de Entrega", "ext": "xlsx", "frentes": ["Geral"], "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"pasta": "07", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Gestão da operação por operador, plano de ação e timeline."}]};
+const FRENTES = ["Todas", "BPO", "FP&A", "Planejamento", "Processos", "Geral"];
+
+/* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
+const MODULOS = [
+  { id: "biblioteca", nome: "Biblioteca", icone: "i-bib" },
+  { id: "crm", nome: "CRM", icone: "i-crm", breve: true },
+  { id: "clientes", nome: "Clientes", icone: "i-cli", breve: true },
+  { id: "sistema", nome: "Sistema", icone: "i-sis" }
+];
+
 if (location.hostname === "127.0.0.1") location.replace(location.href.replace("127.0.0.1", "localhost"));
 const ehLocal = location.hostname === "localhost";
 const redirectUri = ehLocal ? location.origin : CONFIG.urlProducao;
 
 /* ================== UTILITÁRIOS ================== */
 const $ = id => document.getElementById(id);
-const mostrar = tela => ["telaCarregando","telaLogin","telaApp"].forEach(t => $(t).classList.toggle("oculto", t !== tela));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const mostrar = tela => ["telaCarregando", "telaLogin", "telaApp"].forEach(t => $(t).classList.toggle("oculto", t !== tela));
 const hora = d => new Date(d).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 const dataHora = d => new Date(d).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+const data = d => new Date(d).toLocaleDateString("pt-BR");
+const tamanho = b => b < 1024 * 1024 ? `${Math.max(1, Math.round(b / 1024))} KB` : `${(b / 1024 / 1024).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} MB`;
+const semExt = n => n.replace(/\.[^.]+$/, "");
+const extDe = n => ((n.match(/\.([^.]+)$/) || [])[1] || "").toLowerCase();
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const enc = p => p.split("/").map(encodeURIComponent).join("/");
+const lerLocal = k => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } };
+const gravarLocal = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+
 let toastTimer;
-function toast(msg, erro = false) {
+function toast(msg, tipo = "", duracao = 3500) {
   $("toastTxt").textContent = msg;
-  $("toast").classList.toggle("erro", erro);
-  $("toast").classList.add("on");
+  $("toast").className = "toast on " + tipo;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => $("toast").classList.remove("on"), 3500);
+  if (duracao) toastTimer = setTimeout(() => $("toast").classList.remove("on"), duracao);
 }
 function chip(estado, texto) {
   const c = $("chipSync");
@@ -252,25 +389,18 @@ let conta = null;
 
 async function token() {
   try {
-    const r = await msal.acquireTokenSilent({ scopes: CONFIG.escopos, account: conta });
-    return r.accessToken;
+    return (await msal.acquireTokenSilent({ scopes: CONFIG.escopos, account: conta })).accessToken;
   } catch (e) {
-    if (e instanceof InteractionRequiredAuthError) {
-      await msal.acquireTokenRedirect({ scopes: CONFIG.escopos, account: conta });
-    }
+    if (e instanceof InteractionRequiredAuthError) await msal.acquireTokenRedirect({ scopes: CONFIG.escopos, account: conta });
     throw e;
   }
 }
 
 /* ================== GRAPH (OneDrive) ================== */
 class ErroGraph extends Error { constructor(status, msg) { super(msg); this.status = status; } }
-
 async function graph(caminho, opcoes = {}) {
   const t = await token();
-  const r = await fetch(GRAPH + caminho, {
-    ...opcoes,
-    headers: { Authorization: "Bearer " + t, ...(opcoes.headers || {}) }
-  });
+  const r = await fetch(GRAPH + caminho, { ...opcoes, headers: { Authorization: "Bearer " + t, ...(opcoes.headers || {}) } });
   if (!r.ok) {
     let msg = r.statusText;
     try { msg = (await r.json()).error?.message || msg; } catch {}
@@ -278,39 +408,27 @@ async function graph(caminho, opcoes = {}) {
   }
   return r;
 }
-const caminhoArquivo = rel => `/me/drive/root:/${CONFIG.pasta}/${rel}`;
+const caminho = rel => `/me/drive/root:/${enc(CONFIG.pasta + (rel ? "/" + rel : ""))}`;
 
-// Lê metadados (inclui eTag = "versão" do arquivo). Retorna null se não existir.
 async function lerMeta(rel) {
-  try { return await (await graph(caminhoArquivo(rel))).json(); }
+  try { return await (await graph(caminho(rel))).json(); }
   catch (e) { if (e.status === 404) return null; throw e; }
 }
-// Lê metadados + conteúdo JSON
 async function lerJSON(rel) {
   const meta = await lerMeta(rel);
   if (!meta) return { meta: null, dados: null };
   let dados;
-  try {
-    const url = meta["@microsoft.graph.downloadUrl"];
-    dados = await (await fetch(url, { cache: "no-store" })).json();
-  } catch {
-    dados = await (await graph(caminhoArquivo(rel) + ":/content", { cache: "no-store" })).json();
-  }
+  try { dados = await (await fetch(meta["@microsoft.graph.downloadUrl"], { cache: "no-store" })).json(); }
+  catch { dados = await (await graph(caminho(rel) + ":/content", { cache: "no-store" })).json(); }
   return { meta, dados };
 }
-// Grava JSON. Com eTag: só grava se ninguém alterou antes (senão 412).
 async function gravarJSON(rel, dados, eTag) {
-  const extra = eTag ? "" : "?@microsoft.graph.conflictBehavior=fail";
   const headers = { "Content-Type": "application/json" };
   if (eTag) headers["If-Match"] = eTag;
-  const r = await graph(caminhoArquivo(rel) + ":/content" + extra, {
-    method: "PUT", headers, body: JSON.stringify(dados, null, 2)
-  });
+  const r = await graph(caminho(rel) + ":/content" + (eTag ? "" : "?@microsoft.graph.conflictBehavior=fail"),
+    { method: "PUT", headers, body: JSON.stringify(dados, null, 2) });
   return r.json();
 }
-
-/* Padrão de gravação segura: ler → alterar → gravar com a versão lida.
-   Se outra pessoa salvou no meio do caminho, relê e reaplica (até 4 vezes). */
 async function salvarComSeguranca(rel, alterar, inicial) {
   for (let tentativa = 1; tentativa <= 4; tentativa++) {
     const { meta, dados } = await lerJSON(rel);
@@ -318,18 +436,267 @@ async function salvarComSeguranca(rel, alterar, inicial) {
     alterar(novo);
     novo.atualizadoEm = new Date().toISOString();
     novo.atualizadoPor = conta.name || conta.username;
-    try {
-      const metaNova = await gravarJSON(rel, novo, meta?.eTag);
-      return { meta: metaNova, dados: novo, tentativas: tentativa };
-    } catch (e) {
-      if (e.status === 412 || e.status === 409) continue; // conflito: tenta de novo com a versão mais nova
-      throw e;
-    }
+    try { return { meta: await gravarJSON(rel, novo, meta?.eTag), dados: novo, tentativas: tentativa }; }
+    catch (e) { if (e.status === 412 || e.status === 409) continue; throw e; }
   }
   throw new Error("Não foi possível gravar após várias tentativas. Tente novamente.");
 }
+async function criarPasta(relPai, nome) {
+  try {
+    await graph(caminho(relPai) + ":/children", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: nome, folder: {}, "@microsoft.graph.conflictBehavior": "fail" })
+    });
+  } catch (e) { if (e.status !== 409) throw e; }
+}
+// Envio de arquivo: direto até 4 MB; acima disso, em partes (sessão de upload)
+async function enviarArquivo(rel, arquivo, conflito, progresso = () => {}) {
+  if (arquivo.size <= 4 * 1024 * 1024) {
+    const r = await graph(caminho(rel) + ":/content?@microsoft.graph.conflictBehavior=" + conflito,
+      { method: "PUT", headers: { "Content-Type": arquivo.type || "application/octet-stream" }, body: arquivo });
+    progresso(1);
+    return r.json();
+  }
+  const sessao = await (await graph(caminho(rel) + ":/createUploadSession", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ item: { "@microsoft.graph.conflictBehavior": conflito } })
+  })).json();
+  const PARTE = 320 * 1024 * 16; // 5 MB (múltiplo de 320 KB, exigência da Microsoft)
+  let inicio = 0, resp;
+  while (inicio < arquivo.size) {
+    const fim = Math.min(inicio + PARTE, arquivo.size);
+    resp = await fetch(sessao.uploadUrl, { method: "PUT", headers: { "Content-Range": `bytes ${inicio}-${fim - 1}/${arquivo.size}` }, body: arquivo.slice(inicio, fim) });
+    if (!resp.ok) throw new Error(`Falha no envio (${resp.status})`);
+    inicio = fim;
+    progresso(inicio / arquivo.size);
+  }
+  return resp.json();
+}
 
-/* ================== DIAGNÓSTICO ================== */
+/* ================== NAVEGAÇÃO ================== */
+let viewAtual = null;
+function montarNav() {
+  const html = MODULOS.map(m => `<button data-ir="${m.id}" class="${m.breve ? "breve" : ""}" title="${m.breve ? "Em breve" : m.nome}">
+    <svg><use href="#${m.icone}"/></svg><span>${m.nome}</span></button>`).join("");
+  $("navTopo").innerHTML = html;
+  $("navBase").innerHTML = html;
+  document.querySelectorAll("[data-ir]").forEach(b => b.onclick = () => {
+    const m = MODULOS.find(x => x.id === b.dataset.ir);
+    if (m.breve) return toast(`${m.nome}: módulo previsto para as próximas fases`);
+    location.hash = m.id;
+  });
+}
+function irPara(id) {
+  if (!MODULOS.some(m => m.id === id && !m.breve)) id = "biblioteca";
+  viewAtual = id;
+  document.querySelectorAll("[data-view]").forEach(v => v.classList.toggle("oculto", v.dataset.view !== id));
+  document.querySelectorAll("[data-ir]").forEach(b => b.classList.toggle("ativo", b.dataset.ir === id));
+  scrollTo(0, 0);
+  if (id === "sistema") abrirSistema();
+}
+addEventListener("hashchange", () => irPara(location.hash.slice(1)));
+
+/* ================== BIBLIOTECA ================== */
+const BIB_CACHE = "wl.biblioteca.v1";
+const bib = { arquivos: {}, carregado: false, carregando: false, pastasOk: false, fechadas: new Set(lerLocal("wl.bib.fechadas") || []) };
+const filtro = { busca: "", frente: "Todas" };
+const pastaRel = p => `acervo/${p.pasta}`;
+
+async function garantirEstrutura() {
+  if (bib.pastasOk) return;
+  let existentes;
+  try {
+    existentes = (await (await graph(caminho("acervo") + ":/children?$select=name,folder&$top=500")).json()).value;
+  } catch (e) {
+    if (e.status !== 404) throw e;
+    await criarPasta("", "acervo");
+    existentes = [];
+  }
+  const nomes = new Set(existentes.filter(i => i.folder).map(i => i.name));
+  for (const p of CATALOGO.pastas) if (!nomes.has(p.pasta)) await criarPasta("acervo", p.pasta);
+  bib.pastasOk = true;
+}
+
+async function carregarBiblioteca(manual = false) {
+  if (bib.carregando) return;
+  bib.carregando = true;
+  chip("sincronizando", "Atualizando…");
+  try {
+    await garantirEstrutura();
+    const sel = "$select=id,name,size,file,webUrl,lastModifiedDateTime,lastModifiedBy&$top=500";
+    const listas = await Promise.all(CATALOGO.pastas.map(async p => {
+      const j = await (await graph(caminho(pastaRel(p)) + ":/children?" + sel)).json();
+      return [p.num, j.value.filter(i => i.file)];
+    }));
+    bib.arquivos = Object.fromEntries(listas);
+    bib.carregado = true;
+    gravarLocal(BIB_CACHE, { arquivos: bib.arquivos, em: Date.now() });
+    $("bibErro").innerHTML = "";
+    renderBiblioteca();
+    chip("", "Sincronizado");
+    if (manual) toast("Biblioteca atualizada");
+  } catch (e) {
+    chip("erro", "Erro");
+    $("bibErro").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler a biblioteca.</b><br>${esc(e.message)}</div>`;
+    if (!bib.carregado) renderBiblioteca();
+  } finally { bib.carregando = false; }
+}
+
+// Junta o catálogo com os arquivos reais de cada pasta
+function montarItens(p) {
+  const arquivos = [...(bib.arquivos[p.num] || [])];
+  const itens = CATALOGO.itens.filter(i => i.pasta === p.num).map(i => {
+    const k = arquivos.findIndex(a => norm(semExt(a.name)) === norm(i.nome));
+    const arquivo = k >= 0 ? arquivos.splice(k, 1)[0] : null;
+    return { ...i, arquivo };
+  });
+  for (const a of arquivos) itens.push({ pasta: p.num, nome: semExt(a.name), ext: extDe(a.name), frentes: ["Geral"], descricao: "Material avulso adicionado ao acervo.", arquivo: a, avulso: true });
+  return itens;
+}
+function passaFiltro(i) {
+  if (filtro.frente !== "Todas" && !i.frentes.includes(filtro.frente)) return false;
+  if (!filtro.busca) return true;
+  const alvo = norm([i.nome, i.descricao, i.frentes.join(" "), i.ext].join(" "));
+  return norm(filtro.busca).split(" ").every(t => alvo.includes(t));
+}
+
+function htmlItem(i) {
+  const ext = i.arquivo ? extDe(i.arquivo.name) : i.ext;
+  const classeTipo = ["pdf", "xlsx", "xls", "csv", "docx", "doc", "pptx", "ppt"].includes(ext) ? "t-" + ext : "t-outro";
+  const rotulo = { xlsx: "XLS", docx: "DOC", pptx: "PPT" }[ext] || ext.toUpperCase().slice(0, 4) || "ARQ";
+  const tags = i.frentes.map(f => `<span class="tag ${f === "Geral" ? "geral" : ""}">${esc(f)}</span>`).join("");
+  const id = encodeURIComponent(i.pasta + "|" + i.nome);
+  if (!i.arquivo) {
+    return `<li class="mat pendente">
+      <span class="tipo ${classeTipo}">${rotulo}</span>
+      <div class="info"><b>${esc(i.nome)}</b><p>${esc(i.descricao)}</p>
+        <div class="linha-meta"><span class="tag pend">Pendente de envio</span>${tags}</div></div>
+      <div class="acoes"><button class="acao enviar" data-enviar="${id}" title="Enviar arquivo"><svg><use href="#i-enviar"/></svg><span>Enviar</span></button></div>
+    </li>`;
+  }
+  const a = i.arquivo;
+  return `<li class="mat">
+    <span class="tipo ${classeTipo}">${rotulo}</span>
+    <div class="info"><b>${esc(i.nome)}</b><p>${esc(i.descricao)}</p>
+      <div class="linha-meta">${tags}<span class="meta">${tamanho(a.size)} · atualizado em ${data(a.lastModifiedDateTime)}</span></div></div>
+    <div class="acoes">
+      <button class="acao" data-abrir="${a.id}" title="Abrir no navegador"><svg><use href="#i-abrir"/></svg><span>Abrir</span></button>
+      <button class="acao prim" data-baixar="${a.id}" title="Baixar"><svg><use href="#i-baixar"/></svg><span>Baixar</span></button>
+    </div>
+  </li>`;
+}
+
+function renderBiblioteca() {
+  if (!bib.carregado) {
+    $("bibLista").innerHTML = CATALOGO.pastas.map(() => `<div class="esqueleto"></div>`).join("");
+    $("resumo").innerHTML = "";
+    return;
+  }
+  let total = 0, disp = 0, visiveis = 0;
+  const filtrando = filtro.busca || filtro.frente !== "Todas";
+  const secoes = CATALOGO.pastas.map(p => {
+    const itens = montarItens(p);
+    total += itens.length;
+    const d = itens.filter(i => i.arquivo).length;
+    disp += d;
+    const vis = itens.filter(passaFiltro);
+    visiveis += vis.length;
+    if (filtrando && !vis.length) return "";
+    const fechada = !filtrando && bib.fechadas.has(p.num);
+    const pend = itens.length - d;
+    return `<section class="secao ${fechada ? "fechada" : ""}" data-secao="${p.num}">
+      <div class="secao-cab" data-alternar="${p.num}">
+        <span class="secao-num">${p.num}</span>
+        <div class="secao-tit"><h3>${esc(p.nome)}</h3><p>${esc(p.descricao)}</p></div>
+        <span class="secao-cont">${d}/${itens.length}${pend ? ` · <span class="p">${pend} pend.</span>` : ""}</span>
+        <svg class="seta"><use href="#i-seta"/></svg>
+      </div>
+      <ul class="itens">${vis.map(htmlItem).join("")}</ul>
+      <div class="secao-rod"><button data-adicionar="${p.num}"><svg><use href="#i-mais"/></svg>Adicionar material nesta categoria</button></div>
+    </section>`;
+  }).join("");
+  $("resumo").innerHTML = `<span><b>${total}</b> materiais</span><span><b>${disp}</b> disponíveis</span>${total - disp ? `<span class="pend"><b>${total - disp}</b> pendentes</span>` : ""}
+    <button class="btn-ico" id="btnAtualizarBib"><svg><use href="#i-atual"/></svg>Atualizar</button>`;
+  $("btnAtualizarBib").onclick = () => carregarBiblioteca(true);
+  $("bibLista").innerHTML = visiveis ? secoes : `<div class="vazio-busca">Nenhum material encontrado para esse filtro.</div>`;
+}
+
+function montarFiltros() {
+  $("chips").innerHTML = FRENTES.map(f => `<button data-frente="${esc(f)}" class="${f === filtro.frente ? "ativo" : ""}">${esc(f)}</button>`).join("");
+  $("chips").onclick = e => {
+    const b = e.target.closest("[data-frente]");
+    if (!b) return;
+    filtro.frente = b.dataset.frente;
+    $("chips").querySelectorAll("button").forEach(x => x.classList.toggle("ativo", x === b));
+    renderBiblioteca();
+  };
+  let t;
+  $("busca").oninput = e => { clearTimeout(t); t = setTimeout(() => { filtro.busca = e.target.value.trim(); renderBiblioteca(); }, 150); };
+}
+
+function acharArquivo(id) {
+  for (const lista of Object.values(bib.arquivos)) { const a = lista.find(x => x.id === id); if (a) return a; }
+}
+function escolherArquivo(accept) {
+  return new Promise(resolve => {
+    const inp = document.createElement("input");
+    inp.type = "file";
+    if (accept) inp.accept = accept;
+    inp.onchange = () => resolve(inp.files[0] || null);
+    inp.click();
+  });
+}
+async function enviarParaBiblioteca(pasta, arquivo, nomeDestino) {
+  const p = CATALOGO.pastas.find(x => x.num === pasta);
+  const nome = nomeDestino ? `${nomeDestino}.${extDe(arquivo.name)}` : arquivo.name;
+  chip("sincronizando", "Enviando…");
+  toast(`Enviando "${nome}"…`, "prog", 0);
+  try {
+    await enviarArquivo(`${pastaRel(p)}/${nome}`, arquivo, nomeDestino ? "replace" : "rename",
+      f => toast(`Enviando "${nome}"… ${Math.round(f * 100)}%`, "prog", 0));
+    toast(`"${nome}" adicionado à biblioteca`);
+    await carregarBiblioteca();
+  } catch (e) {
+    chip("erro", "Erro");
+    toast("Falha no envio: " + e.message, "erro", 6000);
+  }
+}
+
+$("bibLista").onclick = async e => {
+  const el = e.target.closest("[data-alternar],[data-abrir],[data-baixar],[data-enviar],[data-adicionar]");
+  if (!el) return;
+  const d = el.dataset;
+  if (d.alternar) {
+    if (filtro.busca || filtro.frente !== "Todas") return;
+    bib.fechadas.has(d.alternar) ? bib.fechadas.delete(d.alternar) : bib.fechadas.add(d.alternar);
+    gravarLocal("wl.bib.fechadas", [...bib.fechadas]);
+    el.closest(".secao").classList.toggle("fechada");
+  } else if (d.abrir) {
+    const a = acharArquivo(d.abrir);
+    if (a) window.open(a.webUrl, "_blank", "noopener");
+  } else if (d.baixar) {
+    el.disabled = true;
+    try {
+      const m = await (await graph(`/me/drive/items/${d.baixar}`)).json();
+      const link = document.createElement("a");
+      link.href = m["@microsoft.graph.downloadUrl"];
+      link.download = m.name;
+      document.body.appendChild(link); link.click(); link.remove();
+      toast(`Baixando "${m.name}"`);
+    } catch (err) { toast("Falha ao baixar: " + err.message, "erro"); }
+    finally { el.disabled = false; }
+  } else if (d.enviar) {
+    const [pasta, nome] = decodeURIComponent(d.enviar).split("|");
+    const item = CATALOGO.itens.find(i => i.pasta === pasta && i.nome === nome);
+    const arq = await escolherArquivo("." + item.ext + (item.ext === "docx" ? ",.doc" : item.ext === "pptx" ? ",.ppt" : item.ext === "xlsx" ? ",.xls" : ""));
+    if (arq) enviarParaBiblioteca(pasta, arq, nome);
+  } else if (d.adicionar) {
+    const arq = await escolherArquivo();
+    if (arq) enviarParaBiblioteca(d.adicionar, arq, null);
+  }
+};
+
+/* ================== SISTEMA: DIAGNÓSTICO ================== */
 const passos = {};
 function passo(id, titulo) {
   const li = document.createElement("li");
@@ -345,7 +712,6 @@ function marcar(id, estado, texto) {
   st.textContent = { ok: "✓", falha: "!", aviso: "!" }[estado] || "·";
   li.querySelector("small").textContent = texto;
 }
-
 async function diagnosticar() {
   $("checklist").innerHTML = "";
   passo("login", "Login Microsoft");
@@ -353,154 +719,119 @@ async function diagnosticar() {
   passo("pasta", `Pasta ${CONFIG.pasta}`);
   passo("subpastas", "Subpastas do sistema");
   passo("banco", "Leitura e gravação de dados");
-
   marcar("login", "ok", conta.username);
-
   try {
     const d = await (await graph("/me/drive?$select=quota,driveType")).json();
     const gb = b => (b / 1024 ** 3).toLocaleString("pt-BR", { maximumFractionDigits: 1 });
-    const total = d.quota?.total || 0;
-    marcar("drive", total > 100 * 1024 **3 ? "ok" : "aviso",
-      `${gb(d.quota?.used || 0)} GB usados de ${gb(total)} GB` + (total > 100 * 1024 ** 3 ? "" : " — o 1 TB do plano Família não parece ativo nesta conta"));
+    const total = d.quota?.total || 0, grande = total > 100 * 1024 ** 3;
+    marcar("drive", grande ? "ok" : "aviso", `${gb(d.quota?.used || 0)} GB usados de ${gb(total)} GB` + (grande ? "" : " — o 1 TB do plano Família não parece ativo nesta conta"));
   } catch (e) { marcar("drive", "falha", "Sem acesso ao OneDrive: " + e.message); }
-
   try {
-    const r = await (await graph(`/me/drive/root:/${CONFIG.pasta}:/children?$select=name,folder&$top=200`)).json();
+    const r = await (await graph(caminho("") + ":/children?$select=name,folder&$top=200")).json();
     marcar("pasta", "ok", "Encontrada na raiz do OneDrive");
     const existentes = r.value.filter(i => i.folder).map(i => i.name.toLowerCase());
     const faltando = CONFIG.subpastas.filter(s => !existentes.includes(s));
-    if (faltando.length) marcar("subpastas", "aviso", "Faltando: " + faltando.join(", "));
-    else marcar("subpastas", "ok", CONFIG.subpastas.join(" · "));
+    faltando.length ? marcar("subpastas", "aviso", "Faltando: " + faltando.join(", ")) : marcar("subpastas", "ok", CONFIG.subpastas.join(" · "));
   } catch (e) {
     marcar("pasta", "falha", e.status === 404 ? `Crie a pasta "${CONFIG.pasta}" na raiz do OneDrive` : e.message);
     marcar("subpastas", "falha", "Depende da pasta principal");
   }
 }
 
-/* ================== BANCO DE TESTE ================== */
 const INICIAL = { versao: 1, registros: [] };
-let estado = { eTag: null, dados: INICIAL };
-let idsConhecidos = new Set();
-
-function render(destacarNovos = false) {
+let estado = { eTag: null, dados: INICIAL }, idsConhecidos = new Set(), sistemaAberto = false;
+function renderTeste(destacar = false) {
   const regs = [...(estado.dados?.registros || [])].sort((a, b) => b.criadoEm.localeCompare(a.criadoEm));
-  const ul = $("lista");
-  ul.innerHTML = "";
-  if (!regs.length) {
-    ul.innerHTML = `<li class="vazio" style="background:none;display:block">Nenhum registro ainda. Grave o primeiro acima.</li>`;
-  }
+  $("lista").innerHTML = regs.length ? "" : `<li class="vazio" style="background:none;display:block">Nenhum registro ainda.</li>`;
   for (const r of regs) {
     const li = document.createElement("li");
-    if (destacarNovos && !idsConhecidos.has(r.id)) li.classList.add("novo");
-    li.innerHTML = `<div class="txt"><p></p><small></small></div><button title="Excluir" aria-label="Excluir">×</button>`;
+    if (destacar && !idsConhecidos.has(r.id)) li.classList.add("novo");
+    li.innerHTML = `<div class="txt"><p></p><small></small></div><button title="Excluir">×</button>`;
     li.querySelector("p").textContent = r.texto;
     li.querySelector("small").textContent = `${r.autor} · ${dataHora(r.criadoEm)}`;
-    li.querySelector("button").onclick = () => excluir(r.id);
-    ul.appendChild(li);
+    li.querySelector("button").onclick = () => excluirTeste(r.id);
+    $("lista").appendChild(li);
   }
   idsConhecidos = new Set(regs.map(r => r.id));
-}
-
-function atualizarInfo() {
   const d = estado.dados;
-  $("infoSync").textContent = d?.atualizadoEm
-    ? `Última alteração por ${d.atualizadoPor} às ${hora(d.atualizadoEm)} · verificado às ${hora(Date.now())}`
-    : `Arquivo ainda não criado · verificado às ${hora(Date.now())}`;
+  $("infoSync").textContent = d?.atualizadoEm ? `Última alteração por ${d.atualizadoPor} às ${hora(d.atualizadoEm)} · verificado às ${hora(Date.now())}` : `Arquivo ainda não criado`;
 }
-
-async function carregarBanco() {
-  chip("sincronizando", "Lendo…");
-  const { meta, dados } = await lerJSON(CONFIG.arquivoTeste);
-  estado = { eTag: meta?.eTag || null, dados: dados || INICIAL };
-  render();
-  atualizarInfo();
-  chip("", "Sincronizado");
-  marcar("banco", "ok", meta ? "Arquivo lido com sucesso — grave um registro para testar a escrita" : "Pronto — o arquivo será criado no primeiro registro");
-}
-
-// Verificação leve: só compara a versão (eTag); baixa o conteúdo se mudou
-let verificando = false;
-async function verificarMudancas(manual = false) {
-  if (verificando) return;
-  verificando = true;
+async function abrirSistema() {
+  if (sistemaAberto) return verificarTeste();
+  sistemaAberto = true;
+  await diagnosticar();
   try {
-    chip("sincronizando", "Verificando…");
+    const { meta, dados } = await lerJSON(CONFIG.arquivoTeste);
+    estado = { eTag: meta?.eTag || null, dados: dados || INICIAL };
+    renderTeste();
+    marcar("banco", "ok", meta ? "Arquivo de teste lido com sucesso" : "Pronto — o arquivo será criado no primeiro registro");
+  } catch (e) { marcar("banco", "falha", e.message); }
+}
+async function verificarTeste(manual = false) {
+  try {
     const meta = await lerMeta(CONFIG.arquivoTeste);
     if (meta && meta.eTag !== estado.eTag) {
-      const { meta: m, dados } = await lerJSON(CONFIG.arquivoTeste);
-      const quem = dados?.atualizadoPor;
-      estado = { eTag: m.eTag, dados };
-      render(true);
-      if (quem && quem !== (conta.name || conta.username)) toast(`Dados atualizados por ${quem}`);
-      else if (manual) toast("Dados atualizados");
+      const r = await lerJSON(CONFIG.arquivoTeste);
+      estado = { eTag: r.meta.eTag, dados: r.dados };
+      renderTeste(true);
+      if (r.dados?.atualizadoPor && r.dados.atualizadoPor !== (conta.name || conta.username)) toast(`Dados atualizados por ${r.dados.atualizadoPor}`);
     } else if (manual) toast("Tudo em dia — nenhuma alteração");
-    atualizarInfo();
-    chip("", "Sincronizado");
-  } catch (e) {
-    chip("erro", "Sem conexão");
-    if (manual) toast("Falha ao sincronizar: " + e.message, true);
-  } finally { verificando = false; }
+  } catch (e) { if (manual) toast("Falha ao sincronizar: " + e.message, "erro"); }
 }
-
-async function gravar(texto) {
+async function alterarTeste(fn, msg) {
   $("btnGravar").disabled = true;
-  chip("sincronizando", "Gravando…");
   try {
-    const reg = { id: crypto.randomUUID(), texto, autor: conta.name || conta.username, criadoEm: new Date().toISOString() };
-    const r = await salvarComSeguranca(CONFIG.arquivoTeste, d => d.registros.push(reg), INICIAL);
+    const r = await salvarComSeguranca(CONFIG.arquivoTeste, fn, INICIAL);
     estado = { eTag: r.meta.eTag, dados: r.dados };
-    render(true);
-    atualizarInfo();
-    chip("", "Sincronizado");
+    renderTeste(true);
     marcar("banco", "ok", "Leitura e gravação funcionando no OneDrive");
-    toast(r.tentativas > 1 ? "Gravado (houve edição simultânea, mesclado sem perdas)" : "Gravado no OneDrive");
-  } catch (e) {
-    chip("erro", "Erro");
-    marcar("banco", "falha", "Falha ao gravar: " + e.message);
-    toast("Erro ao gravar: " + e.message, true);
-  } finally { $("btnGravar").disabled = false; }
+    if (msg) toast(r.tentativas > 1 ? "Gravado (edição simultânea mesclada sem perdas)" : msg);
+  } catch (e) { toast("Erro ao gravar: " + e.message, "erro"); }
+  finally { $("btnGravar").disabled = false; }
 }
-
-async function excluir(id) {
-  chip("sincronizando", "Gravando…");
-  try {
-    const r = await salvarComSeguranca(CONFIG.arquivoTeste, d => { d.registros = d.registros.filter(x => x.id !== id); }, INICIAL);
-    estado = { eTag: r.meta.eTag, dados: r.dados };
-    render(); atualizarInfo(); chip("", "Sincronizado");
-  } catch (e) { chip("erro", "Erro"); toast("Erro ao excluir: " + e.message, true); }
-}
+const excluirTeste = id => alterarTeste(d => { d.registros = d.registros.filter(x => x.id !== id); });
+$("form").onsubmit = e => {
+  e.preventDefault();
+  const t = $("entrada").value.trim();
+  if (!t) return;
+  $("entrada").value = "";
+  alterarTeste(d => d.registros.push({ id: crypto.randomUUID(), texto: t, autor: conta.name || conta.username, criadoEm: new Date().toISOString() }), "Gravado no OneDrive");
+};
+$("btnSync").onclick = () => verificarTeste(true);
 
 /* ================== INÍCIO ================== */
+function sincronizarVisivel() {
+  if (document.visibilityState !== "visible") return;
+  if (viewAtual === "biblioteca") carregarBiblioteca();
+  else if (viewAtual === "sistema") verificarTeste();
+}
 async function abrirApp() {
   const nome = conta.name || conta.username;
   $("ola").textContent = `Olá, ${nome.split(" ")[0]}!`;
   $("menuNome").textContent = nome;
   $("menuEmail").textContent = conta.username;
   $("iniciais").textContent = nome.split(/\s+/).map(p => p[0]).slice(0, 2).join("").toUpperCase();
+  montarNav();
+  montarFiltros();
+  const cache = lerLocal(BIB_CACHE);
+  if (cache?.arquivos) { bib.arquivos = cache.arquivos; bib.carregado = true; }
+  renderBiblioteca();
   mostrar("telaApp");
-
-  await diagnosticar();
-  try { await carregarBanco(); }
-  catch (e) { marcar("banco", "falha", e.message); chip("erro", "Erro"); }
-
-  setInterval(() => { if (document.visibilityState === "visible") verificarMudancas(); }, CONFIG.intervaloSync);
-  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") verificarMudancas(); });
+  irPara(location.hash.slice(1) || "biblioteca");
+  carregarBiblioteca();
+  setInterval(sincronizarVisivel, CONFIG.intervaloSync * 2);
+  document.addEventListener("visibilitychange", sincronizarVisivel);
 }
 
 $("btnEntrar").onclick = () => msal.loginRedirect({ scopes: CONFIG.escopos, prompt: "select_account" });
-$("btnSair").onclick = e => { e.stopPropagation(); msal.logoutRedirect({ account: conta }); };
+$("btnSair").onclick = e => {
+  e.stopPropagation();
+  try { localStorage.removeItem(BIB_CACHE); } catch {}
+  msal.logoutRedirect({ account: conta });
+};
 $("avatar").onclick = () => $("menu").classList.toggle("oculto");
 document.addEventListener("click", e => { if (!$("avatar").contains(e.target)) $("menu").classList.add("oculto"); });
-$("btnSync").onclick = () => verificarMudancas(true);
-$("form").onsubmit = e => {
-  e.preventDefault();
-  const t = $("entrada").value.trim();
-  if (!t) return;
-  $("entrada").value = "";
-  gravar(t);
-};
 
-// Instalação como app (Android/desktop)
 let promptInstalar;
 addEventListener("beforeinstallprompt", e => { e.preventDefault(); promptInstalar = e; $("btnInstalar").classList.remove("oculto"); });
 $("btnInstalar").onclick = async () => { promptInstalar?.prompt(); await promptInstalar?.userChoice; $("btnInstalar").classList.add("oculto"); };
@@ -516,7 +847,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
   } catch (e) {
     console.error(e);
     mostrar("telaLogin");
-    toast("Erro no login: " + (e.errorMessage || e.message), true);
+    toast("Erro no login: " + (e.errorMessage || e.message), "erro");
   }
 })();
 </script>
