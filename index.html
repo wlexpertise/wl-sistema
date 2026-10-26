@@ -90,6 +90,7 @@
   @media(max-width:480px){header.topo{padding-left:16px;padding-right:16px;gap:8px} header.topo img{height:20px} .chip-sync span{display:none} .chip-sync{padding:9px}}
 
   main{max-width:1040px;margin:0 auto;padding:28px 16px 40px}
+  main.largo{max-width:1360px}
   .cab-pagina{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 4px 20px}
   .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--turq)}
   .cab-pagina h2{font-size:1.5rem;font-weight:700;margin-top:4px;color:var(--teal);letter-spacing:-.01em}
@@ -232,6 +233,180 @@
     .cab-pagina h2{font-size:1.3rem}
   }
 
+  /* ---------- CRM ---------- */
+  .abas{display:flex;gap:4px;background:#fff;border:1px solid var(--borda);border-radius:12px;padding:4px;width:max-content;max-width:100%;overflow-x:auto}
+  .abas button{padding:8px 16px;border-radius:9px;font-size:.84rem;font-weight:600;color:var(--txt-2);white-space:nowrap}
+  .abas button.ativo{background:var(--teal);color:#fff}
+  .barra-crm{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+  .barra-crm .dir{display:flex;gap:8px;flex-wrap:wrap}
+  .btn-p{display:flex;align-items:center;gap:6px;background:var(--turq);color:#fff;font-size:.82rem;font-weight:700;padding:10px 16px;border-radius:10px}
+  .btn-p:hover{background:#0f93a3}
+  .btn-p svg,.btn-s svg{width:16px;height:16px}
+  .btn-s{display:flex;align-items:center;gap:6px;background:#fff;color:var(--teal);border:1.5px solid var(--borda);font-size:.82rem;font-weight:600;padding:9px 14px;border-radius:10px}
+  .btn-s:hover{background:var(--bg)}
+  .btn-p:disabled,.btn-s:disabled{opacity:.5;cursor:wait}
+
+  .grade-painel{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+  @media(min-width:960px){.grade-painel{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}}
+  .bloco{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);overflow:hidden}
+  .bloco-cab{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px 12px}
+  .bloco-cab h3{font-size:.95rem;font-weight:700;color:var(--teal)}
+  .bloco-cab small{font-size:.74rem;color:var(--txt-2)}
+  .bloco-cab a,.bloco-cab button.lnk{font-size:.76rem;font-weight:700;color:var(--turq);cursor:pointer}
+  .seg{display:flex;background:var(--bg);border-radius:8px;padding:3px}
+  .seg button{font-size:.72rem;font-weight:700;padding:5px 10px;border-radius:6px;color:var(--txt-2)}
+  .seg button.ativo{background:#fff;color:var(--teal);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+  .tiles{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--borda);border-top:1px solid var(--borda)}
+  .tile{background:#fff;padding:14px 8px;text-align:center}
+  .tile b{display:block;font-size:1.5rem;font-weight:800;color:var(--teal);line-height:1.1}
+  .tile span{display:block;font-size:.68rem;font-weight:600;color:var(--txt-2);margin-top:4px}
+  .tile i{font-style:normal;font-size:.62rem;font-weight:800;color:var(--turq);letter-spacing:.06em}
+  .tile.forte b{color:var(--verde)}
+  @media(max-width:640px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+  .lista-acoes{list-style:none}
+  .lista-acoes li{display:flex;align-items:center;gap:12px;padding:12px 18px;border-top:1px solid var(--borda);cursor:pointer}
+  .lista-acoes li:hover{background:var(--bg)}
+  .lista-acoes .q{flex:1;min-width:0}
+  .lista-acoes .q b{display:block;font-size:.86rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lista-acoes .q span{display:block;font-size:.76rem;color:var(--txt-2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .quando{flex:none;font-size:.7rem;font-weight:700;padding:4px 8px;border-radius:6px;background:var(--bg);color:var(--txt-2)}
+  .quando.atraso{background:rgba(200,70,61,.1);color:var(--erro)}
+  .quando.hoje{background:rgba(19,163,181,.12);color:#0E7F8D}
+  .vazio-bloco{padding:22px 18px 26px;font-size:.84rem;color:var(--txt-2);text-align:center;border-top:1px solid var(--borda)}
+
+  .mini-funil{padding:4px 18px 16px;display:grid;gap:8px}
+  .mf-linha{display:grid;grid-template-columns:130px minmax(0,1fr) 34px;gap:10px;align-items:center;font-size:.78rem;cursor:pointer}
+  .mf-linha span:first-child{font-weight:600;color:var(--txt)}
+  .mf-barra{height:10px;background:var(--bg);border-radius:6px;overflow:hidden}
+  .mf-barra i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--turq),var(--teal))}
+  .mf-linha b{text-align:right;color:var(--teal)}
+  .mf-total{display:flex;justify-content:space-between;font-size:.76rem;color:var(--txt-2);padding:10px 18px 14px;border-top:1px solid var(--borda)}
+  .mf-total b{color:var(--teal)}
+
+  .chip-fit{display:inline-grid;place-items:center;min-width:22px;height:20px;padding:0 5px;border-radius:6px;font-size:.66rem;font-weight:800;color:#fff;background:var(--txt-2)}
+  .fit-A{background:var(--verde)} .fit-B{background:var(--turq)} .fit-C{background:#9AA9A9}
+  .chip-p{font-size:.64rem;font-weight:800;padding:3px 6px;border-radius:6px;background:var(--bg);color:var(--teal)}
+  .chip-etapa{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;padding:4px 9px;border-radius:999px;background:var(--bg);color:var(--teal);white-space:nowrap}
+  .chip-etapa i{width:7px;height:7px;border-radius:50%;background:var(--cor,var(--turq))}
+
+  /* funil kanban */
+  .kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;align-items:flex-start;scroll-snap-type:x proximity}
+  .coluna{flex:0 0 260px;background:#EBF1F1;border-radius:14px;padding:10px;scroll-snap-align:start;max-height:calc(100vh - 230px);display:flex;flex-direction:column}
+  .coluna.sobre{outline:2px dashed var(--turq);outline-offset:-2px}
+  .col-cab{display:flex;align-items:center;gap:8px;padding:4px 6px 10px}
+  .col-cab i{width:9px;height:9px;border-radius:50%;background:var(--cor)}
+  .col-cab b{font-size:.82rem;color:var(--teal);flex:1}
+  .col-cab span{font-size:.7rem;font-weight:700;color:var(--txt-2);background:#fff;padding:2px 8px;border-radius:999px}
+  .col-valor{font-size:.7rem;color:var(--txt-2);padding:0 6px 8px}
+  .col-cards{display:grid;gap:8px;overflow-y:auto;min-height:40px;padding:2px}
+  .card-lead{background:#fff;border-radius:10px;padding:11px 12px;box-shadow:0 1px 2px rgba(11,90,96,.08);cursor:pointer;border:1px solid transparent}
+  .card-lead:hover{border-color:var(--turq)}
+  .card-lead.arrastando{opacity:.4}
+  .card-lead b{display:block;font-size:.84rem;font-weight:600;line-height:1.3}
+  .card-lead small{display:block;font-size:.72rem;color:var(--txt-2);margin-top:3px}
+  .card-lead .rodape{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+  .card-lead .acao-prox{font-size:.68rem;color:var(--txt-2);margin-left:auto}
+  .card-lead .acao-prox.atraso{color:var(--erro);font-weight:700}
+  .mais-col{font-size:.74rem;font-weight:700;color:var(--turq);padding:8px;text-align:center}
+
+  /* lista de leads */
+  .filtros-crm{display:grid;grid-template-columns:minmax(200px,2fr) repeat(5,minmax(0,1fr));gap:8px;margin-bottom:12px}
+  .filtros-crm input,.filtros-crm select,.campo input,.campo select,.campo textarea{width:100%;border:1.5px solid var(--borda);border-radius:10px;padding:10px 12px;font-size:.85rem;font-family:inherit;color:var(--txt);background:#fff;outline:none}
+  .filtros-crm input:focus,.filtros-crm select:focus,.campo input:focus,.campo select:focus,.campo textarea:focus{border-color:var(--turq)}
+  @media(max-width:900px){.filtros-crm{grid-template-columns:repeat(2,minmax(0,1fr))}.filtros-crm .fbusca{grid-column:1/-1}}
+  .conta-filtro{font-size:.78rem;color:var(--txt-2);margin:0 4px 10px;display:flex;justify-content:space-between;gap:10px}
+  .conta-filtro button{font-size:.76rem;font-weight:700;color:var(--turq)}
+  .tabela{width:100%;border-collapse:collapse;font-size:.82rem}
+  .tabela th{text-align:left;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-2);padding:12px 14px;background:#FAFCFC;border-bottom:1px solid var(--borda);white-space:nowrap;cursor:pointer;user-select:none}
+  .tabela td{padding:11px 14px;border-bottom:1px solid var(--borda);vertical-align:middle}
+  .tabela tr.lin{cursor:pointer}
+  .tabela tr.lin:hover td{background:var(--bg)}
+  .tabela td b{font-weight:600;display:block}
+  .tabela td small{color:var(--txt-2);font-size:.74rem}
+  .cards-leads{display:none;list-style:none}
+  .cards-leads li{padding:12px 14px;border-top:1px solid var(--borda);cursor:pointer}
+  .cards-leads li:first-child{border-top:0}
+  .cards-leads .l1{display:flex;align-items:flex-start;gap:8px}
+  .cards-leads .l1 b{flex:1;font-size:.88rem;font-weight:600;line-height:1.3}
+  .cards-leads small{display:block;font-size:.74rem;color:var(--txt-2);margin-top:3px}
+  .cards-leads .l3{display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap}
+  @media(max-width:760px){.tabela{display:none}.cards-leads{display:block}}
+  .carregar-mais{display:block;width:100%;padding:14px;font-size:.82rem;font-weight:700;color:var(--turq);border-top:1px solid var(--borda)}
+
+  /* ficha do lead (gaveta) */
+  .gaveta{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--bg);z-index:45;box-shadow:-20px 0 60px rgba(6,30,33,.25);
+    display:flex;flex-direction:column;animation:entraLado .22s ease}
+  @keyframes entraLado{from{transform:translateX(40px);opacity:0}}
+  .g-cab{background:var(--teal);color:#fff;padding:calc(env(safe-area-inset-top) + 16px) 18px 16px}
+  .g-topo{display:flex;align-items:flex-start;gap:10px}
+  .g-topo h2{flex:1;font-size:1.15rem;font-weight:700;line-height:1.3}
+  .g-fechar{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.12);color:#fff;font-size:1.2rem;flex:none}
+  .g-sub{font-size:.8rem;color:rgba(255,255,255,.75);margin-top:4px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .g-sub .chip-p{background:rgba(255,255,255,.15);color:#fff}
+  .g-contatos{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .g-contatos a{display:flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;color:#fff;background:rgba(255,255,255,.14);padding:7px 10px;border-radius:8px;text-decoration:none}
+  .g-contatos a:hover{background:rgba(255,255,255,.22)}
+  .g-contatos svg{width:14px;height:14px}
+  .g-corpo{flex:1;overflow-y:auto;padding:14px 14px calc(30px + env(safe-area-inset-bottom));display:grid;gap:12px;align-content:start}
+  .g-sec{background:#fff;border:1px solid var(--borda);border-radius:14px;padding:14px}
+  .g-sec>h4{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--turq);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+  .etapas-sel{display:flex;gap:6px;flex-wrap:wrap}
+  .etapas-sel button{font-size:.72rem;font-weight:700;padding:6px 10px;border-radius:999px;border:1.5px solid var(--borda);color:var(--txt-2);background:#fff}
+  .etapas-sel button.ativo{background:var(--cor);border-color:var(--cor);color:#fff}
+  .botoes-int{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .botoes-int button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px;border-radius:10px;border:1.5px solid var(--borda);font-size:.68rem;font-weight:600;color:var(--txt);line-height:1.2;text-align:center}
+  .botoes-int button i{font-style:normal;font-size:.7rem;font-weight:800;color:var(--turq)}
+  .botoes-int button.sel{border-color:var(--turq);background:rgba(19,163,181,.08)}
+  @media(max-width:420px){.botoes-int{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .campo{display:grid;gap:4px}
+  .campo label{font-size:.7rem;font-weight:700;color:var(--txt-2)}
+  .campo textarea{resize:vertical;min-height:70px}
+  .linha2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .form-int{display:grid;gap:8px;margin-top:10px}
+  .form-int .rod{display:flex;justify-content:flex-end;gap:8px}
+  .prox-atual{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:.84rem}
+  .prox-atual b{flex:1;font-weight:600}
+  .prox-atual button{font-size:.72rem;font-weight:700;color:var(--verde)}
+  .dados-grid{display:grid;gap:10px}
+  details.g-sec summary{cursor:pointer;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--turq);list-style:none;display:flex;justify-content:space-between}
+  details.g-sec summary::-webkit-details-marker{display:none}
+  details.g-sec[open] summary{margin-bottom:12px}
+  .info-lead{display:grid;gap:8px;font-size:.8rem;line-height:1.5}
+  .info-lead div b{display:block;font-size:.68rem;color:var(--txt-2);font-weight:700}
+  .info-lead a{color:var(--turq);word-break:break-all}
+  .timeline{list-style:none;display:grid;gap:0}
+  .timeline li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--borda);font-size:.8rem}
+  .timeline li:first-child{border-top:0;padding-top:0}
+  .tl-ico{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-size:.64rem;font-weight:800;background:var(--bg);color:var(--teal)}
+  .tl-ico.sis{background:transparent;color:var(--txt-2);border:1px dashed var(--borda)}
+  .timeline .t{flex:1;min-width:0}
+  .timeline .t b{font-weight:600}
+  .timeline .t p{color:var(--txt);margin-top:2px;white-space:pre-wrap;word-break:break-word}
+  .timeline .t small{display:block;color:var(--txt-2);font-size:.7rem;margin-top:2px}
+  .perigo{font-size:.76rem;font-weight:600;color:var(--erro);justify-self:start;padding:4px 2px}
+
+  /* modal */
+  .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:46;background:#fff;border-radius:18px;width:min(560px,calc(100vw - 24px));max-height:calc(100vh - 40px);overflow:auto;
+    box-shadow:0 30px 80px rgba(0,0,0,.3);animation:surge .2s}
+  .modal-cab{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 6px}
+  .modal-cab h3{font-size:1.05rem;color:var(--teal)}
+  .modal-corpo{padding:10px 20px 20px;display:grid;gap:12px;font-size:.86rem;line-height:1.55}
+  .modal-rod{display:flex;justify-content:flex-end;gap:8px;padding:0 20px 20px}
+  .resumo-imp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .resumo-imp div{background:var(--bg);border-radius:10px;padding:12px;text-align:center}
+  .resumo-imp b{display:block;font-size:1.4rem;color:var(--teal)}
+  .resumo-imp span{font-size:.72rem;color:var(--txt-2);font-weight:600}
+  .colunas-ok{display:flex;flex-wrap:wrap;gap:6px}
+  .colunas-ok span{font-size:.7rem;font-weight:600;padding:4px 8px;border-radius:6px;background:rgba(40,178,96,.12);color:#1D7F45}
+  .colunas-ok span.ign{background:var(--bg);color:var(--txt-2)}
+  .zona-arq{border:2px dashed var(--borda);border-radius:14px;padding:26px;text-align:center;color:var(--txt-2);cursor:pointer}
+  .zona-arq:hover{border-color:var(--turq);color:var(--turq)}
+  .zona-arq b{display:block;color:var(--teal);margin-bottom:4px}
+  @media(max-width:860px){.gaveta{width:100vw}}
+  @media(max-width:520px){#formProx{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}#formProx button{grid-column:1/-1}.g-corpo{padding-left:10px;padding-right:10px}}
+
   /* ---------- Sistema (diagnóstico) ---------- */
   .grade{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
   .grade>*{min-width:0}
@@ -346,6 +521,30 @@
       <div id="bibConteudo"></div>
     </div>
 
+    <!-- ============ CRM ============ -->
+    <div data-view="crm" class="oculto">
+      <div class="cab-pagina">
+        <div>
+          <div class="eyebrow">Comercial</div>
+          <h2>CRM</h2>
+          <p id="crmDesc">Do primeiro contato ao fechamento.</p>
+        </div>
+      </div>
+      <div class="barra-crm">
+        <nav class="abas" id="crmAbas">
+          <button data-aba="painel">Painel</button>
+          <button data-aba="funil">Funil</button>
+          <button data-aba="leads">Leads</button>
+        </nav>
+        <div class="dir">
+          <button class="btn-s" id="btnImportar"><svg><use href="#i-enviar"/></svg>Importar planilha</button>
+          <button class="btn-p" id="btnNovoLead"><svg><use href="#i-mais"/></svg>Novo lead</button>
+        </div>
+      </div>
+      <div id="crmAvisos"></div>
+      <div id="crmConteudo"></div>
+    </div>
+
     <!-- ============ SISTEMA ============ -->
     <div data-view="sistema" class="oculto">
       <div class="cab-pagina">
@@ -407,7 +606,7 @@ const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial"
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
 const MODULOS = [
   { id: "biblioteca", nome: "Biblioteca", icone: "i-bib" },
-  { id: "crm", nome: "CRM", icone: "i-crm", breve: true },
+  { id: "crm", nome: "CRM", icone: "i-crm" },
   { id: "clientes", nome: "Clientes", icone: "i-cli", breve: true },
   { id: "sistema", nome: "Sistema", icone: "i-sis" }
 ];
@@ -567,13 +766,16 @@ function irPara(hash) {
   let id = partes[0];
   if (!MODULOS.some(m => m.id === id && !m.breve)) id = "biblioteca";
   viewAtual = id;
-  rota = id === "biblioteca" ? partes.slice(1) : [];
+  rota = partes.slice(1);
   fecharMenus();
+  if (id !== "crm") fecharFicha();
   document.querySelectorAll("[data-view]").forEach(v => v.classList.toggle("oculto", v.dataset.view !== id));
   document.querySelectorAll("[data-ir]").forEach(b => b.classList.toggle("ativo", b.dataset.ir === id));
   scrollTo(0, 0);
   if (id === "biblioteca") { $("busca").value = ""; filtroBusca = ""; renderBiblioteca(); }
   if (id === "sistema") abrirSistema();
+  document.querySelector("main").classList.toggle("largo", id === "crm");
+  if (id === "crm") { renderCRM(); if (!crm.carregado) carregarCRM(); else verificarCRM(); }
 }
 addEventListener("hashchange", () => irPara(location.hash.slice(1)));
 const linkBib = (area, sub) => "#" + ["biblioteca", area, sub].filter(Boolean).join("/");
@@ -933,6 +1135,708 @@ async function migrar() {
   }
 }
 
+/* ================== CRM ================== */
+/* Funil da WL: segue o script de vendas (contato → conexão → diagnóstico → proposta → fechamento) */
+const ETAPAS = [
+  { id: "abordar",     nome: "A abordar",        prob: 0.05, cor: "#9AA9A9" },
+  { id: "contato",     nome: "Em contato",       prob: 0.10, cor: "#7FB8C0" },
+  { id: "agendado",    nome: "Reunião agendada", prob: 0.25, cor: "#13A3B5" },
+  { id: "diagnostico", nome: "Diagnóstico",      prob: 0.40, cor: "#0E8C9C" },
+  { id: "proposta",    nome: "Proposta enviada", prob: 0.50, cor: "#0B6F78" },
+  { id: "negociacao",  nome: "Negociação",       prob: 0.70, cor: "#0B5A60" },
+  { id: "ganho",       nome: "Ganho",            prob: 1.00, cor: "#28B260" },
+  { id: "perdido",     nome: "Perdido",          prob: 0.00, cor: "#C8463D" }
+];
+const ORDEM_ETAPA = Object.fromEntries(ETAPAS.map((e, k) => [e.id, k]));
+const etapaDe = id => ETAPAS.find(e => e.id === id) || ETAPAS[0];
+/* Interações: mesmas siglas da Tabela de Trabalho (X, AT, AG, E, F, V). "avanca" move o lead no funil. */
+const INTERACOES = [
+  { id: "nao_atendeu", nome: "Não atendeu",       sigla: "X",  ligacao: true, avanca: "contato" },
+  { id: "atendeu",     nome: "Atendeu",           sigla: "AT", ligacao: true, avanca: "contato" },
+  { id: "mensagem",    nome: "Mensagem enviada",  sigla: "MSG", avanca: "contato" },
+  { id: "agendou",     nome: "Agendou reunião",   sigla: "AG", avanca: "agendado", pedeData: true },
+  { id: "diagnostico", nome: "Diagnóstico feito", sigla: "E",  avanca: "diagnostico" },
+  { id: "proposta",    nome: "Proposta enviada",  sigla: "F",  avanca: "proposta" },
+  { id: "venda",       nome: "Venda fechada",     sigla: "V",  avanca: "ganho" },
+  { id: "nota",        nome: "Anotação",          sigla: "NT" }
+];
+const interacaoDe = id => INTERACOES.find(i => i.id === id);
+const MOTIVOS_PERDA = ["Sem interesse", "Sem fit / fora do ICP", "Sem orçamento", "Fechou com concorrente", "Não conseguimos contato", "Empresa encerrada", "Momento errado (retomar depois)", "Outro"];
+const RESPONSAVEIS = ["Washington", "Luciene"];
+const FRENTES_CRM = ["BPO Financeiro", "FP&A", "Planejamento Financeiro", "Consultoria de Processos"];
+const ARQ_CRM = "dados/crm/leads.json";
+const CRM_CACHE = "wl.crm.v1";
+
+const crm = { eTag: null, dados: null, carregado: false, aba: "painel", balancoTodos: false, limite: 50,
+  filtro: { busca: "", etapa: "", fit: "", prioridade: "", uf: "", segmento: "" }, ordem: { campo: "prioridade", asc: true } };
+const leads = () => crm.dados?.leads || [];
+const leadPorId = id => leads().find(l => l.id === id);
+const meuNome = () => (conta?.name || conta?.username || "").split(" ")[0];
+const hojeISO = () => { const d = new Date(); return new Date(d - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
+const moeda = v => (v || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+const soDigitos = s => String(s || "").replace(/\D/g, "");
+
+/* ---- Leitura e gravação (OneDrive: WL-Sistema/dados/crm/leads.json) ---- */
+async function carregarCRM(silencioso = false) {
+  try {
+    if (!silencioso) chip("sincronizando", "Lendo CRM…");
+    const { meta, dados } = await lerJSON(ARQ_CRM);
+    crm.eTag = meta?.eTag || null;
+    crm.dados = dados || { versao: 1, seq: 0, leads: [] };
+    crm.carregado = true;
+    gravarLocal(CRM_CACHE, { eTag: crm.eTag, dados: crm.dados });
+    crm.erro = null;
+    chip("", "Sincronizado");
+  } catch (e) { crm.erro = e.message; chip("erro", "Erro"); }
+  if (viewAtual === "crm") renderCRM();
+}
+async function verificarCRM() {
+  try {
+    const meta = await lerMeta(ARQ_CRM);
+    if (meta && meta.eTag !== crm.eTag) {
+      const antes = crm.dados?.atualizadoPor;
+      await carregarCRM(true);
+      const quem = crm.dados?.atualizadoPor;
+      if (quem && quem !== (conta.name || conta.username)) toast(`CRM atualizado por ${quem}`);
+      if (abertoId && leadPorId(abertoId)) renderFicha(abertoId);
+    }
+  } catch {}
+}
+/* Aplica a alteração localmente e grava. Se outra pessoa salvou antes, relê e reaplica (sem perder nada). */
+async function salvarCRM(alterar, msg) {
+  chip("sincronizando", "Salvando…");
+  const nome = conta.name || conta.username;
+  const aplicar = base => {
+    const novo = structuredClone(base || { versao: 1, seq: 0, leads: [] });
+    alterar(novo);
+    novo.atualizadoEm = new Date().toISOString();
+    novo.atualizadoPor = nome;
+    return novo;
+  };
+  let novo = aplicar(crm.dados), eTag = crm.eTag;
+  crm.dados = novo;
+  if (viewAtual === "crm") renderCRM();
+  if (abertoId) renderFicha(abertoId);
+  for (let t = 1; t <= 4; t++) {
+    try {
+      if (!eTag) await criarPasta("dados", "crm");
+      const meta = await gravarJSON(ARQ_CRM, novo, eTag);
+      crm.eTag = meta.eTag;
+      gravarLocal(CRM_CACHE, { eTag: crm.eTag, dados: crm.dados });
+      chip("", "Sincronizado");
+      if (msg) toast(msg);
+      return true;
+    } catch (e) {
+      if (e.status !== 412 && e.status !== 409) { chip("erro", "Erro"); toast("Não foi possível salvar: " + e.message, "erro", 6000); await carregarCRM(true); return false; }
+      const atual = await lerJSON(ARQ_CRM);
+      eTag = atual.meta?.eTag || null;
+      novo = aplicar(atual.dados);
+      crm.dados = novo;
+    }
+  }
+  toast("Não foi possível salvar após várias tentativas", "erro");
+  return false;
+}
+const alterarLead = (id, fn, msg) => salvarCRM(d => { const l = d.leads.find(x => x.id === id); if (l) { fn(l, d); l.atualizadoEm = new Date().toISOString(); } }, msg);
+function registrar(l, tipo, texto, extra = {}) {
+  l.historico = l.historico || [];
+  l.historico.unshift({ id: crypto.randomUUID(), em: new Date().toISOString(), por: meuNome(), tipo, texto: texto || "", ...extra });
+}
+function moverEtapa(l, para, motivo) {
+  if (l.etapa === para) return;
+  registrar(l, "etapa", motivo ? `Motivo: ${motivo}` : "", { de: l.etapa, para });
+  l.etapa = para;
+  if (para === "perdido") l.motivoPerda = motivo || "";
+  if (para === "ganho") l.ganhoEm = new Date().toISOString();
+}
+function novoId(d) { d.seq = (d.seq || d.leads.length) + 1; return "L-" + String(d.seq).padStart(4, "0"); }
+
+/* ---- Indicadores ---- */
+function ultimaInteracao(l) { return (l.historico || []).find(h => h.tipo !== "etapa"); }
+function statusAcao(l) {
+  const d = l.proximaAcao?.data;
+  if (!d) return "";
+  const dia = d.slice(0, 10), hoje = hojeISO();
+  return dia < hoje ? "atraso" : dia === hoje ? "hoje" : "futuro";
+}
+function rotuloData(d) {
+  if (!d) return "";
+  const dia = d.slice(0, 10), hoje = hojeISO();
+  const amanha = new Date(Date.now() + 864e5); const am = new Date(amanha - amanha.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  const hr = d.length > 10 ? " " + d.slice(11, 16) : "";
+  if (dia === hoje) return "Hoje" + hr;
+  if (dia === am) return "Amanhã" + hr;
+  const [a, m, dd] = dia.split("-");
+  return `${dd}/${m}` + (a !== hoje.slice(0, 4) ? `/${a.slice(2)}` : "") + hr;
+}
+function balanco(todos) {
+  const hoje = hojeISO(), eu = meuNome();
+  const c = Object.fromEntries(INTERACOES.map(i => [i.id, 0]));
+  for (const l of leads()) for (const h of l.historico || []) {
+    if (!h.em || new Date(h.em).toLocaleDateString("sv-SE") !== hoje) continue;
+    if (!todos && h.por !== eu) continue;
+    if (c[h.tipo] !== undefined) c[h.tipo]++;
+  }
+  return c;
+}
+
+/* ---- Navegação interna do CRM ---- */
+let abertoId = null;
+function renderCRM() {
+  const [aba, extra] = rota;
+  crm.aba = ["painel", "funil", "leads"].includes(aba) ? aba : "painel";
+  $("crmAbas").querySelectorAll("button").forEach(b => b.classList.toggle("ativo", b.dataset.aba === crm.aba));
+  $("crmAvisos").innerHTML = crm.erro ? `<div class="aviso-erro"><b>Não foi possível ler o CRM.</b><br>${esc(crm.erro)}</div>` : "";
+  if (!crm.carregado) { $("crmConteudo").innerHTML = `<div class="esqueleto"></div>`; return; }
+  const n = leads().length;
+  $("crmDesc").textContent = n ? `${n} leads na base · do primeiro contato ao fechamento.` : "Do primeiro contato ao fechamento.";
+  if (!n) return renderVazioCRM();
+  if (crm.aba === "painel") renderPainel();
+  else if (crm.aba === "funil") renderFunil();
+  else renderLeads();
+}
+$("crmAbas").onclick = e => { const b = e.target.closest("[data-aba]"); if (b) location.hash = "crm/" + b.dataset.aba; };
+const abrirLead = id => { abertoId = id; renderFicha(id); };
+
+function renderVazioCRM() {
+  $("crmConteudo").innerHTML = `<div class="bloco"><div class="vazio-etapa"><b>O CRM ainda está vazio</b>
+    Importe sua planilha de leads ou cadastre o primeiro lead manualmente.<br><br>
+    <button class="btn-p" style="margin:0 auto" data-crm="importar"><svg><use href="#i-enviar"/></svg>Importar planilha de leads</button></div></div>`;
+}
+
+/* ---- Painel ---- */
+function renderPainel() {
+  const b = balanco(crm.balancoTodos);
+  const lig = b.nao_atendeu + b.atendeu;
+  const tiles = [["Ligações", lig, ""], ["Não atendeu", b.nao_atendeu, "X"], ["Atendeu", b.atendeu, "AT"], ["Agendou", b.agendou, "AG"],
+    ["Diagnóstico", b.diagnostico, "E"], ["Proposta", b.proposta, "F"], ["Venda", b.venda, "V"]];
+  const abertos = leads().filter(l => !["ganho", "perdido"].includes(l.etapa));
+  const acoes = abertos.filter(l => l.proximaAcao?.data && statusAcao(l) !== "futuro").sort((x, y) => x.proximaAcao.data.localeCompare(y.proximaAcao.data));
+  const proximas = abertos.filter(l => statusAcao(l) === "futuro").sort((x, y) => x.proximaAcao.data.localeCompare(y.proximaAcao.data)).slice(0, 6);
+  const fila = leads().filter(l => l.etapa === "abordar" && !l.proximaAcao?.data).sort(ordenarPrioridade).slice(0, 8);
+  const itemAcao = l => `<li data-lead="${l.id}"><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span>
+    <div class="q"><b>${esc(l.empresa)}</b><span>${esc(l.proximaAcao.texto || "Próxima ação")} · ${esc(etapaDe(l.etapa).nome)}</span></div>
+    <span class="quando ${statusAcao(l)}">${statusAcao(l) === "atraso" ? "Atrasada · " : ""}${rotuloData(l.proximaAcao.data)}</span></li>`;
+  const porEtapa = ETAPAS.map(e => ({ e, n: leads().filter(l => l.etapa === e.id).length }));
+  const max = Math.max(1, ...porEtapa.map(x => x.n));
+  const ponderado = abertos.reduce((s, l) => s + (l.valor || 0) * etapaDe(l.etapa).prob, 0);
+  const emNegocio = abertos.filter(l => ORDEM_ETAPA[l.etapa] >= ORDEM_ETAPA.diagnostico).reduce((s, l) => s + (l.valor || 0), 0);
+
+  $("crmConteudo").innerHTML = `
+  <section class="bloco" style="margin-bottom:16px">
+    <div class="bloco-cab"><div><h3>Balanço do dia</h3><small>Mesmas siglas da Tabela de Trabalho · contado automaticamente pelas interações registradas</small></div>
+      <div class="seg"><button data-bal="eu" class="${crm.balancoTodos ? "" : "ativo"}">Eu</button><button data-bal="todos" class="${crm.balancoTodos ? "ativo" : ""}">Equipe</button></div></div>
+    <div class="tiles">${tiles.map(([n, v, s], k) => `<div class="tile ${k >= 3 && v ? "forte" : ""}"><i>${s || "&nbsp;"}</i><b>${v}</b><span>${n}</span></div>`).join("")}</div>
+  </section>
+  <div class="grade-painel">
+    <div style="display:grid;gap:16px;align-content:start">
+      <section class="bloco"><div class="bloco-cab"><div><h3>Ações para hoje</h3><small>Atrasadas e marcadas para hoje</small></div></div>
+        ${acoes.length ? `<ul class="lista-acoes">${acoes.map(itemAcao).join("")}</ul>` : `<div class="vazio-bloco">Nenhuma ação pendente para hoje.</div>`}</section>
+      <section class="bloco"><div class="bloco-cab"><div><h3>Fila de prospecção</h3><small>Próximos a abordar · Prioridade e Fit</small></div><a data-crm="fila">Ver todos</a></div>
+        ${fila.length ? `<ul class="lista-acoes">${fila.map(l => `<li data-lead="${l.id}"><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span>
+          <div class="q"><b>${esc(l.empresa)}</b><span>${esc(l.segmento || "")} · ${esc(l.cidade || "")}/${esc(l.uf || "")}</span></div>
+          <span class="chip-p">${esc((l.prioridade || "").split(" ")[0])}</span></li>`).join("")}</ul>` : `<div class="vazio-bloco">Todos os leads já foram abordados.</div>`}</section>
+    </div>
+    <div style="display:grid;gap:16px;align-content:start">
+      <section class="bloco"><div class="bloco-cab"><div><h3>Funil</h3><small>Leads por etapa</small></div><a data-crm="funil">Abrir funil</a></div>
+        <div class="mini-funil">${porEtapa.map(({ e, n }) => `<div class="mf-linha" data-etapa="${e.id}"><span>${e.nome}</span>
+          <div class="mf-barra"><i style="width:${n ? Math.max(4, n / max * 100) : 0}%;background:${e.cor}"></i></div><b>${n}</b></div>`).join("")}</div>
+        <div class="mf-total"><span>Em negociação (diagnóstico em diante)</span><b>${moeda(emNegocio)}</b></div>
+        <div class="mf-total" style="padding-top:0;border:0"><span>Valor ponderado pela probabilidade</span><b>${moeda(ponderado)}</b></div></section>
+      <section class="bloco"><div class="bloco-cab"><div><h3>Próximos compromissos</h3></div></div>
+        ${proximas.length ? `<ul class="lista-acoes">${proximas.map(itemAcao).join("")}</ul>` : `<div class="vazio-bloco">Nada agendado para os próximos dias.</div>`}</section>
+    </div>
+  </div>`;
+}
+function ordenarPrioridade(a, b) {
+  return (a.prioridade || "P9").localeCompare(b.prioridade || "P9") || (a.fit || "Z").localeCompare(b.fit || "Z") || a.empresa.localeCompare(b.empresa);
+}
+
+/* ---- Funil (kanban) ---- */
+function renderFunil() {
+  const LIM = 40;
+  $("crmConteudo").innerHTML = `<div class="kanban">${ETAPAS.map(e => {
+    const ls = leads().filter(l => l.etapa === e.id).sort((a, b) => (a.proximaAcao?.data || "9").localeCompare(b.proximaAcao?.data || "9") || ordenarPrioridade(a, b));
+    const valor = ls.reduce((s, l) => s + (l.valor || 0), 0);
+    return `<section class="coluna" data-col="${e.id}" style="--cor:${e.cor}">
+      <div class="col-cab"><i></i><b>${e.nome}</b><span>${ls.length}</span></div>
+      ${valor ? `<div class="col-valor">${moeda(valor)}</div>` : ""}
+      <div class="col-cards">${ls.slice(0, LIM).map(cardLead).join("")}
+        ${ls.length > LIM ? `<button class="mais-col" data-etapa="${e.id}">+ ${ls.length - LIM} na lista de leads</button>` : ""}</div>
+    </section>`;
+  }).join("")}</div>`;
+  ativarArraste();
+}
+function cardLead(l) {
+  const st = statusAcao(l);
+  return `<article class="card-lead" draggable="true" data-lead="${l.id}">
+    <b>${esc(l.empresa)}</b><small>${esc(l.segmento || "")}${l.cidade ? " · " + esc(l.cidade) : ""}</small>
+    <div class="rodape"><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span>${l.prioridade ? `<span class="chip-p">${esc(l.prioridade.split(" ")[0])}</span>` : ""}
+      ${l.valor ? `<span class="chip-p">${moeda(l.valor)}</span>` : ""}
+      ${l.proximaAcao?.data ? `<span class="acao-prox ${st === "atraso" ? "atraso" : ""}">${rotuloData(l.proximaAcao.data)}</span>` : ""}</div>
+  </article>`;
+}
+function ativarArraste() {
+  let arrastado = null;
+  $("crmConteudo").querySelectorAll(".card-lead").forEach(c => {
+    c.ondragstart = e => { arrastado = c.dataset.lead; c.classList.add("arrastando"); e.dataTransfer.effectAllowed = "move"; };
+    c.ondragend = () => c.classList.remove("arrastando");
+  });
+  $("crmConteudo").querySelectorAll(".coluna").forEach(col => {
+    col.ondragover = e => { e.preventDefault(); col.classList.add("sobre"); };
+    col.ondragleave = () => col.classList.remove("sobre");
+    col.ondrop = e => {
+      e.preventDefault(); col.classList.remove("sobre");
+      if (arrastado) pedirMudancaEtapa(arrastado, col.dataset.col);
+    };
+  });
+}
+async function pedirMudancaEtapa(id, para) {
+  const l = leadPorId(id);
+  if (!l || l.etapa === para) return;
+  if (para === "perdido") {
+    const motivo = await escolherMotivo(l);
+    if (motivo === null) return renderCRM();
+    return alterarLead(id, x => { moverEtapa(x, para, motivo); x.proximaAcao = null; }, `${l.empresa} → Perdido`);
+  }
+  alterarLead(id, x => moverEtapa(x, para), `${l.empresa} → ${etapaDe(para).nome}`);
+}
+
+/* ---- Lista de leads ---- */
+function leadsFiltrados() {
+  const f = crm.filtro, termos = norm(f.busca).split(" ").filter(Boolean);
+  let ls = leads().filter(l =>
+    (!f.etapa || l.etapa === f.etapa) && (!f.fit || l.fit === f.fit) && (!f.prioridade || (l.prioridade || "").startsWith(f.prioridade)) &&
+    (!f.uf || l.uf === f.uf) && (!f.segmento || norm(l.segmento || "").includes(norm(f.segmento))) &&
+    (!termos.length || termos.every(t => norm([l.empresa, l.segmento, l.cidade, l.uf, l.contato, l.observacoes, (l.telefones || []).join(" ")].join(" ")).includes(t))));
+  const { campo, asc } = crm.ordem;
+  const val = l => campo === "empresa" ? l.empresa : campo === "cidade" ? (l.cidade || "") + l.uf : campo === "etapa" ? String(ORDEM_ETAPA[l.etapa]).padStart(2, "0")
+    : campo === "acao" ? (l.proximaAcao?.data || "9999") : campo === "fit" ? (l.fit || "Z") + (l.prioridade || "") : (l.prioridade || "P9") + (l.fit || "Z");
+  ls.sort((a, b) => val(a).localeCompare(val(b)) * (asc ? 1 : -1) || a.empresa.localeCompare(b.empresa));
+  return ls;
+}
+function opcoes(lista, atual, vazio) {
+  return `<option value="">${vazio}</option>` + lista.map(v => `<option value="${esc(v[0])}" ${v[0] === atual ? "selected" : ""}>${esc(v[1])}</option>`).join("");
+}
+function renderLeads() {
+  const f = crm.filtro;
+  const ufs = [...new Set(leads().map(l => l.uf).filter(Boolean))].sort();
+  const segs = ["Clínica", "Locadora", ...new Set(leads().map(l => (l.segmento || "").split(" (")[0]).filter(Boolean))].filter((v, k, a) => a.indexOf(v) === k);
+  const ls = leadsFiltrados();
+  const algum = Object.values(f).some(Boolean);
+  const th = (c, n) => `<th data-ord="${c}">${n}${crm.ordem.campo === c ? (crm.ordem.asc ? " ↑" : " ↓") : ""}</th>`;
+  const pag = ls.slice(0, crm.limite);
+  $("crmConteudo").innerHTML = `
+  <div class="filtros-crm">
+    <input class="fbusca" id="fBusca" type="search" placeholder="Buscar empresa, cidade, contato, telefone…" value="${esc(f.busca)}">
+    <select data-f="etapa">${opcoes(ETAPAS.map(e => [e.id, e.nome]), f.etapa, "Todas as etapas")}</select>
+    <select data-f="fit">${opcoes([["A", "Fit A"], ["B", "Fit B"], ["C", "Fit C"]], f.fit, "Todos os fits")}</select>
+    <select data-f="prioridade">${opcoes([["P1", "P1"], ["P2", "P2"], ["P3", "P3"]], f.prioridade, "Prioridade")}</select>
+    <select data-f="uf">${opcoes(ufs.map(u => [u, u]), f.uf, "UF")}</select>
+    <select data-f="segmento">${opcoes(segs.map(s => [s, s]), f.segmento, "Segmento")}</select>
+  </div>
+  <div class="conta-filtro"><span>${ls.length} de ${leads().length} leads</span>${algum ? `<button data-crm="limpar">Limpar filtros</button>` : ""}</div>
+  <section class="bloco">
+    <table class="tabela"><thead><tr>${th("empresa", "Empresa")}${th("cidade", "Cidade")}${th("fit", "Fit")}${th("prioridade", "Prioridade")}${th("etapa", "Etapa")}${th("acao", "Próxima ação")}<th>Último contato</th></tr></thead>
+      <tbody>${pag.map(l => {
+        const u = ultimaInteracao(l), e = etapaDe(l.etapa);
+        return `<tr class="lin" data-lead="${l.id}"><td><b>${esc(l.empresa)}</b><small>${esc(l.segmento || "")}</small></td>
+          <td>${esc(l.cidade || "")}<small>${l.uf ? " / " + esc(l.uf) : ""}</small></td>
+          <td><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span></td>
+          <td><span class="chip-p">${esc((l.prioridade || "–").split(" ")[0])}</span></td>
+          <td><span class="chip-etapa" style="--cor:${e.cor}"><i></i>${e.nome}</span></td>
+          <td>${l.proximaAcao?.data ? `<span class="quando ${statusAcao(l)}">${rotuloData(l.proximaAcao.data)}</span>` : `<small>—</small>`}</td>
+          <td><small>${u ? `${esc(interacaoDe(u.tipo)?.nome || u.tipo)} · ${data(u.em)}` : "—"}</small></td></tr>`;
+      }).join("")}</tbody></table>
+    <ul class="cards-leads">${pag.map(l => {
+      const e = etapaDe(l.etapa);
+      return `<li data-lead="${l.id}"><div class="l1"><b>${esc(l.empresa)}</b><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span></div>
+        <small>${esc(l.segmento || "")} · ${esc(l.cidade || "")}${l.uf ? "/" + esc(l.uf) : ""}</small>
+        <div class="l3"><span class="chip-etapa" style="--cor:${e.cor}"><i></i>${e.nome}</span>${l.prioridade ? `<span class="chip-p">${esc(l.prioridade.split(" ")[0])}</span>` : ""}
+        ${l.proximaAcao?.data ? `<span class="quando ${statusAcao(l)}">${rotuloData(l.proximaAcao.data)}</span>` : ""}</div></li>`;
+    }).join("")}</ul>
+    ${!ls.length ? `<div class="vazio-bloco">Nenhum lead encontrado com esses filtros.</div>` : ""}
+    ${ls.length > crm.limite ? `<button class="carregar-mais" data-crm="mais">Mostrar mais ${Math.min(50, ls.length - crm.limite)} de ${ls.length - crm.limite} restantes</button>` : ""}
+  </section>`;
+  let t;
+  $("fBusca").oninput = e => { clearTimeout(t); t = setTimeout(() => { crm.filtro.busca = e.target.value; crm.limite = 50; renderLeads(); const i = $("fBusca"); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }, 200); };
+  $("crmConteudo").querySelectorAll("[data-f]").forEach(s => s.onchange = () => { crm.filtro[s.dataset.f] = s.value; crm.limite = 50; renderLeads(); });
+  $("crmConteudo").querySelectorAll("[data-ord]").forEach(h => h.onclick = () => {
+    crm.ordem = { campo: h.dataset.ord, asc: crm.ordem.campo === h.dataset.ord ? !crm.ordem.asc : true }; renderLeads();
+  });
+}
+
+/* Cliques gerais do CRM */
+$("crmConteudo").onclick = e => {
+  const el = e.target.closest("[data-lead],[data-crm],[data-bal],[data-etapa]");
+  if (!el) return;
+  const d = el.dataset;
+  if (d.lead) return abrirLead(d.lead);
+  if (d.bal) { crm.balancoTodos = d.bal === "todos"; return renderPainel(); }
+  if (d.etapa) { crm.filtro = { busca: "", etapa: d.etapa, fit: "", prioridade: "", uf: "", segmento: "" }; location.hash = "crm/leads"; return; }
+  if (d.crm === "funil") location.hash = "crm/funil";
+  if (d.crm === "fila") { crm.filtro = { busca: "", etapa: "abordar", fit: "", prioridade: "", uf: "", segmento: "" }; crm.ordem = { campo: "prioridade", asc: true }; location.hash = "crm/leads"; }
+  if (d.crm === "limpar") { crm.filtro = { busca: "", etapa: "", fit: "", prioridade: "", uf: "", segmento: "" }; renderLeads(); }
+  if (d.crm === "mais") { crm.limite += 50; renderLeads(); }
+  if (d.crm === "importar") abrirImportacao();
+};
+$("btnNovoLead").onclick = () => abrirNovoLead();
+$("btnImportar").onclick = () => abrirImportacao();
+
+/* ---- Ficha do lead ---- */
+function fecharFicha() { abertoId = null; document.querySelectorAll("#gaveta,#veuG").forEach(x => x.remove()); }
+function linkWhats(tel) {
+  let d = soDigitos(tel);
+  if (d.length < 10) return null;
+  if (!d.startsWith("55")) d = "55" + d;
+  return "https://wa.me/" + d;
+}
+function renderFicha(id) {
+  const l = leadPorId(id);
+  if (!l) return fecharFicha();
+  let g = $("gaveta");
+  const rolagem = g?.querySelector(".g-corpo")?.scrollTop || 0;
+  if (!g) {
+    const veu = document.createElement("div"); veu.className = "veu"; veu.id = "veuG"; veu.style.zIndex = 44; veu.onclick = fecharFicha;
+    g = document.createElement("aside"); g.className = "gaveta"; g.id = "gaveta";
+    document.body.append(veu, g);
+  }
+  const e = etapaDe(l.etapa);
+  const tels = (l.telefones || []).filter(Boolean);
+  const ig = l.instagramUrl || (l.instagram ? "https://instagram.com/" + l.instagram.replace(/^@/, "") : "");
+  g.innerHTML = `
+  <div class="g-cab">
+    <div class="g-topo"><h2>${esc(l.empresa)}</h2><button class="g-fechar" data-g="fechar" aria-label="Fechar">×</button></div>
+    <div class="g-sub"><span>${esc(l.segmento || "")}${l.cidade ? " · " + esc(l.cidade) + (l.uf ? "/" + esc(l.uf) : "") : ""}</span>
+      ${l.fit ? `<span class="chip-fit fit-${esc(l.fit)}">Fit ${esc(l.fit)}</span>` : ""}${l.prioridade ? `<span class="chip-p">${esc(l.prioridade)}</span>` : ""}<span class="chip-p">${esc(l.id)}</span></div>
+    <div class="g-contatos">
+      ${tels.map(t => `<a href="tel:${soDigitos(t)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>${esc(t)}</a>
+        ${linkWhats(t) ? `<a href="${linkWhats(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}`).join("")}
+      ${l.email ? `<a href="mailto:${esc(l.email)}">${esc(l.email)}</a>` : ""}
+      ${ig ? `<a href="${esc(ig)}" target="_blank" rel="noopener">Instagram</a>` : ""}
+      ${!tels.length && !l.email && !ig ? `<span style="font-size:.76rem;opacity:.7">Sem contato cadastrado</span>` : ""}
+    </div>
+  </div>
+  <div class="g-corpo">
+    <section class="g-sec"><h4>Etapa do funil ${l.etapa === "perdido" && l.motivoPerda ? `<span style="text-transform:none;letter-spacing:0;color:var(--erro)">${esc(l.motivoPerda)}</span>` : ""}</h4>
+      <div class="etapas-sel">${ETAPAS.map(x => `<button data-g-etapa="${x.id}" style="--cor:${x.cor}" class="${x.id === l.etapa ? "ativo" : ""}">${x.nome}</button>`).join("")}</div></section>
+
+    <section class="g-sec"><h4>Registrar interação</h4>
+      <div class="botoes-int">${INTERACOES.map(i => `<button data-g-int="${i.id}"><i>${i.sigla}</i>${i.nome}</button>`).join("")}</div>
+      <form class="form-int oculto" id="formInt">
+        <div class="campo oculto" id="campoReuniao"><label>Data e hora da reunião</label><input type="datetime-local" id="intData"></div>
+        <div class="campo"><label id="intRotulo">Observação</label><textarea id="intTexto" placeholder="O que aconteceu? (opcional)"></textarea></div>
+        <div class="linha2"><div class="campo"><label>Próxima ação</label><input id="intProx" placeholder="Ex.: ligar de novo, enviar proposta"></div>
+          <div class="campo"><label>Quando</label><input type="date" id="intProxData"></div></div>
+        <div class="rod"><button type="button" class="btn-s" data-g="cancelarInt">Cancelar</button><button class="btn-p" type="submit">Registrar</button></div>
+      </form></section>
+
+    <section class="g-sec"><h4>Próxima ação</h4>
+      ${l.proximaAcao?.data || l.proximaAcao?.texto ? `<div class="prox-atual"><span class="quando ${statusAcao(l)}">${rotuloData(l.proximaAcao.data) || "Sem data"}</span><b>${esc(l.proximaAcao.texto || "")}</b><button data-g="concluirAcao">✓ Concluir</button></div>` : ""}
+      <form class="linha2" id="formProx" style="grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) auto;align-items:end">
+        <div class="campo"><label>${l.proximaAcao ? "Alterar" : "Definir"} próxima ação</label><input id="proxTexto" value="${esc(l.proximaAcao?.texto || "")}" placeholder="O que fazer"></div>
+        <div class="campo"><label>Data</label><input type="date" id="proxData" value="${esc((l.proximaAcao?.data || "").slice(0, 10))}"></div>
+        <button class="btn-s" type="submit" style="height:42px">Salvar</button></form></section>
+
+    <section class="g-sec"><h4>Negócio</h4>
+      <form class="dados-grid" id="formNegocio">
+        <div class="linha2"><div class="campo"><label>Responsável</label><select id="negResp">${opcoes(RESPONSAVEIS.map(r => [r, r]), l.responsavel || "", "—")}</select></div>
+          <div class="campo"><label>Valor estimado (R$/mês ou projeto)</label><input id="negValor" inputmode="numeric" value="${l.valor ? l.valor : ""}" placeholder="Ex.: 3500"></div></div>
+        <div class="campo"><label>Frentes de interesse</label><div class="etapas-sel">${FRENTES_CRM.map(f => `<button type="button" data-g-frente="${esc(f)}" style="--cor:var(--turq)" class="${(l.frentes || []).includes(f) ? "ativo" : ""}">${esc(f)}</button>`).join("")}</div></div>
+        <button class="btn-s" type="submit" style="justify-self:end">Salvar negócio</button>
+      </form></section>
+
+    <details class="g-sec" ${l.criadoManual ? "open" : ""}><summary>Dados da empresa <span>editar ▾</span></summary>
+      <form class="dados-grid" id="formDados">
+        ${campoTxt("empresa", "Empresa", l.empresa)}
+        <div class="linha2">${campoTxt("segmento", "Segmento", l.segmento)}${campoTxt("contato", "Contato / responsável", l.contato)}</div>
+        <div class="linha2">${campoTxt("cidade", "Cidade", l.cidade)}${campoTxt("uf", "UF", l.uf)}</div>
+        <div class="linha2">${campoTxt("telefones", "Telefones (separe com /)", (l.telefones || []).join(" / "))}${campoTxt("email", "E-mail", l.email)}</div>
+        <div class="linha2">${campoTxt("instagram", "Instagram (@)", l.instagram)}${campoTxt("endereco", "Endereço", l.endereco)}</div>
+        <div class="linha2"><div class="campo"><label>Fit WL</label><select name="fit">${opcoes([["A", "A"], ["B", "B"], ["C", "C"]], l.fit || "", "—")}</select></div>
+          <div class="campo"><label>Prioridade</label><input name="prioridade" value="${esc(l.prioridade || "")}"></div></div>
+        <div class="campo"><label>Observações</label><textarea name="observacoes">${esc(l.observacoes || "")}</textarea></div>
+        <button class="btn-s" type="submit" style="justify-self:end">Salvar dados</button>
+      </form></details>
+
+    ${l.porqueEncaixa || l.receitaEstimada || l.fontes || l.confianca ? `<details class="g-sec"><summary>Pesquisa de prospecção <span>ver ▾</span></summary><div class="info-lead">
+      ${l.porqueEncaixa ? `<div><b>Por que encaixa</b>${esc(l.porqueEncaixa)}</div>` : ""}
+      ${l.receitaEstimada ? `<div><b>Receita estimada / evidência</b>${esc(l.receitaEstimada)}</div>` : ""}
+      ${l.confianca ? `<div><b>Confiança do dado</b>${esc(l.confianca)}</div>` : ""}
+      ${l.fontes ? `<div><b>Fontes</b>${l.fontes.split(/\s;\s|\s+(?=https?:)/).map(u => /^https?:/.test(u.trim()) ? `<a href="${esc(u.trim())}" target="_blank" rel="noopener">${esc(u.trim())}</a>` : esc(u)).join("<br>")}</div>` : ""}
+      ${l.origem ? `<div><b>Origem</b>${esc(l.origem)}</div>` : ""}
+    </div></details>` : ""}
+
+    <section class="g-sec"><h4>Histórico</h4>
+      ${(l.historico || []).length ? `<ul class="timeline">${l.historico.map(h => {
+        const i = interacaoDe(h.tipo);
+        const tit = h.tipo === "etapa" ? `Etapa: ${etapaDe(h.de).nome} → ${etapaDe(h.para).nome}` : h.tipo === "acao" ? "Próxima ação concluída" : h.tipo === "criado" ? "Lead cadastrado" : (i?.nome || h.tipo);
+        return `<li><span class="tl-ico ${i ? "" : "sis"}">${i ? i.sigla : "•"}</span><div class="t"><b>${esc(tit)}</b>${h.texto ? `<p>${esc(h.texto)}</p>` : ""}<small>${esc(h.por || "")} · ${dataHora(h.em)}</small></div></li>`;
+      }).join("")}</ul>` : `<div style="font-size:.8rem;color:var(--txt-2)">Nenhuma interação registrada ainda.</div>`}
+    </section>
+    <button class="perigo" data-g="excluir">Excluir lead</button>
+  </div>`;
+  g.querySelector(".g-corpo").scrollTop = rolagem;
+  ligarFicha(l);
+}
+function campoTxt(nome, rot, val) { return `<div class="campo"><label>${rot}</label><input name="${nome}" value="${esc(val || "")}"></div>`; }
+
+function ligarFicha(l) {
+  const g = $("gaveta");
+  let intSel = null;
+  g.onclick = async e => {
+    const el = e.target.closest("[data-g],[data-g-etapa],[data-g-int],[data-g-frente]");
+    if (!el) return;
+    const d = el.dataset;
+    if (d.g === "fechar") return fecharFicha();
+    if (d.gEtapa) return pedirMudancaEtapa(l.id, d.gEtapa);
+    if (d.gFrente) return el.classList.toggle("ativo");
+    if (d.gInt) {
+      intSel = interacaoDe(d.gInt);
+      g.querySelectorAll("[data-g-int]").forEach(b => b.classList.toggle("sel", b === el));
+      $("formInt").classList.remove("oculto");
+      $("campoReuniao").classList.toggle("oculto", !intSel.pedeData);
+      $("intRotulo").textContent = intSel.id === "nota" ? "Anotação" : "Observação";
+      if (intSel.pedeData) { $("intProx").value = "Reunião de diagnóstico"; }
+      else if (intSel.id === "nao_atendeu") { $("intProx").value = "Tentar ligar novamente"; const am = new Date(Date.now() + 864e5); $("intProxData").value = new Date(am - am.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); }
+      $("intTexto").focus();
+      return;
+    }
+    if (d.g === "cancelarInt") { $("formInt").classList.add("oculto"); g.querySelectorAll("[data-g-int]").forEach(b => b.classList.remove("sel")); intSel = null; return; }
+    if (d.g === "concluirAcao") return alterarLead(l.id, x => { registrar(x, "acao", x.proximaAcao?.texto || ""); x.proximaAcao = null; }, "Ação concluída");
+    if (d.g === "excluir") {
+      if (!confirmar(`Excluir "${l.empresa}" do CRM? Esta ação não pode ser desfeita.`)) return;
+      fecharFicha();
+      return salvarCRM(dd => { dd.leads = dd.leads.filter(x => x.id !== l.id); }, "Lead excluído");
+    }
+  };
+  $("formInt").onsubmit = e => {
+    e.preventDefault();
+    if (!intSel) return;
+    const texto = $("intTexto").value.trim(), dReun = $("intData").value, prox = $("intProx").value.trim(), proxData = $("intProxData").value;
+    if (intSel.pedeData && !dReun) { toast("Informe a data da reunião", "erro"); return $("intData").focus(); }
+    const sel = intSel;
+    alterarLead(l.id, x => {
+      registrar(x, sel.id, (sel.pedeData ? `Reunião em ${dataHora(dReun)}. ` : "") + texto);
+      if (sel.ligacao) x.tentativas = (x.tentativas || 0) + 1;
+      if (sel.avanca && ORDEM_ETAPA[sel.avanca] > ORDEM_ETAPA[x.etapa] && x.etapa !== "perdido") moverEtapa(x, sel.avanca);
+      if (sel.pedeData) x.proximaAcao = { texto: prox || "Reunião de diagnóstico", data: dReun };
+      else if (prox || proxData) x.proximaAcao = { texto: prox, data: proxData || "" };
+      else if (sel.id !== "nota") x.proximaAcao = null;
+    }, `${sel.nome} registrado`);
+  };
+  $("formProx").onsubmit = e => {
+    e.preventDefault();
+    const texto = $("proxTexto").value.trim(), dt = $("proxData").value;
+    alterarLead(l.id, x => { x.proximaAcao = texto || dt ? { texto, data: dt } : null; }, "Próxima ação salva");
+  };
+  $("formNegocio").onsubmit = e => {
+    e.preventDefault();
+    const valor = Number(soDigitos($("negValor").value)) || null, resp = $("negResp").value;
+    const frentes = [...g.querySelectorAll("[data-g-frente].ativo")].map(b => b.dataset.gFrente);
+    alterarLead(l.id, x => { x.valor = valor; x.responsavel = resp; x.frentes = frentes; }, "Negócio atualizado");
+  };
+  $("formDados").onsubmit = e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
+    alterarLead(l.id, x => {
+      Object.assign(x, { empresa: f.empresa.trim(), segmento: f.segmento.trim(), contato: f.contato.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(),
+        email: f.email.trim(), instagram: f.instagram.trim(), endereco: f.endereco.trim(), fit: f.fit, prioridade: f.prioridade.trim(), observacoes: f.observacoes,
+        telefones: f.telefones.split("/").map(t => t.trim()).filter(Boolean) });
+      delete x.criadoManual;
+    }, "Dados salvos");
+  };
+}
+function confirmar(msg) { try { return window.confirm(msg); } catch { return true; } }
+
+/* Motivo da perda (modal) */
+function abrirModal(html) {
+  fecharModal();
+  const veu = document.createElement("div"); veu.className = "veu"; veu.id = "veuM"; veu.style.zIndex = 46;
+  const m = document.createElement("div"); m.className = "modal"; m.id = "modal"; m.style.zIndex = 47; m.innerHTML = html;
+  document.body.append(veu, m);
+  return { m, veu };
+}
+function fecharModal() { document.querySelectorAll("#modal,#veuM").forEach(x => x.remove()); }
+function escolherMotivo(l) {
+  return new Promise(resolve => {
+    const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Por que ${esc(l.empresa)} foi perdido?</h3></div>
+      <div class="modal-corpo"><div class="etapas-sel">${MOTIVOS_PERDA.map(x => `<button data-mot="${esc(x)}" style="--cor:var(--erro)">${esc(x)}</button>`).join("")}</div>
+      <div class="campo"><label>Detalhe (opcional)</label><input id="motDet"></div></div>
+      <div class="modal-rod"><button class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" data-m="ok" style="background:var(--erro)">Marcar como perdido</button></div>`);
+    let mot = "";
+    const sair = v => { fecharModal(); resolve(v); };
+    veu.onclick = () => sair(null);
+    m.onclick = e => {
+      const b = e.target.closest("[data-mot],[data-m]");
+      if (!b) return;
+      if (b.dataset.mot) { mot = b.dataset.mot; m.querySelectorAll("[data-mot]").forEach(x => x.classList.toggle("ativo", x === b)); }
+      if (b.dataset.m === "cancelar") sair(null);
+      if (b.dataset.m === "ok") { if (!mot) return toast("Escolha um motivo", "erro"); const det = $("motDet").value.trim(); sair(det ? `${mot} — ${det}` : mot); }
+    };
+  });
+}
+
+/* ---- Novo lead ---- */
+function abrirNovoLead() {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo lead</h3></div>
+    <form class="modal-corpo" id="formNovo">
+      ${campoTxt("empresa", "Empresa *", "")}
+      <div class="linha2">${campoTxt("segmento", "Segmento", "")}${campoTxt("contato", "Contato / responsável", "")}</div>
+      <div class="linha2">${campoTxt("cidade", "Cidade", "")}${campoTxt("uf", "UF", "")}</div>
+      <div class="linha2">${campoTxt("telefones", "Telefone(s)", "")}${campoTxt("email", "E-mail", "")}</div>
+      <div class="linha2"><div class="campo"><label>Fit WL</label><select name="fit">${opcoes([["A", "A"], ["B", "B"], ["C", "C"]], "", "—")}</select></div>
+        <div class="campo"><label>Origem</label><select name="origem">${opcoes(["Indicação", "Prospecção ativa", "Instagram", "LinkedIn", "Site", "Evento", "Parceria", "Outro"].map(x => [x, x]), "Prospecção ativa", "—")}</select></div></div>
+      <div class="campo"><label>Observações</label><textarea name="observacoes"></textarea></div>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Cadastrar</button></div>
+    </form>`);
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  m.querySelector("[name=empresa]").focus();
+  $("formNovo").onsubmit = async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
+    let id;
+    fecharModal();
+    await salvarCRM(d => {
+      id = novoId(d);
+      const l = { id, empresa: f.empresa.trim(), segmento: f.segmento.trim(), contato: f.contato.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(),
+        telefones: f.telefones.split("/").map(t => t.trim()).filter(Boolean), email: f.email.trim(), fit: f.fit, origem: f.origem, observacoes: f.observacoes,
+        etapa: "abordar", criadoEm: new Date().toISOString(), criadoPor: meuNome(), responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", historico: [] };
+      registrar(l, "criado", f.origem ? `Origem: ${f.origem}` : "");
+      d.leads.push(l);
+    }, "Lead cadastrado");
+    if (id) abrirLead(id);
+  };
+}
+
+/* ---- Importação de planilha (.xlsx / .csv) ---- */
+const MAPA_COLUNAS = {
+  empresa: ["empresa", "nome da empresa", "razao social", "nome fantasia", "lead", "cliente", "nome"],
+  segmento: ["segmento", "nicho", "atividade", "ramo", "setor"],
+  cidade: ["cidade", "municipio"],
+  uf: ["uf", "estado"],
+  prioridade: ["prioridade"],
+  telefones: ["telefone", "telefones", "fone", "celular", "whatsapp", "contato telefone"],
+  endereco: ["endereco completo", "endereco"],
+  instagram: ["instagram", "instagram @", "perfil instagram"],
+  instagramUrl: ["link instagram"],
+  email: ["email", "e mail"],
+  contato: ["responsavel socio se publico", "responsavel", "socio", "contato", "nome do contato", "decisor"],
+  receitaEstimada: ["receita estimada evidencia", "receita estimada", "faturamento", "receita"],
+  confianca: ["confianca do dado", "confianca"],
+  fit: ["fit wl a b c", "fit wl", "fit"],
+  porqueEncaixa: ["por que encaixa", "motivo", "justificativa"],
+  fontes: ["fonte s", "fontes", "fonte"],
+  observacoes: ["observacoes", "observacao", "obs", "notas"]
+};
+const VAZIOS = /^(nao (confirmado|encontrado|publico)|n\/?a|-+|nao publico \/ nao encontrado|sem dado.*)$/;
+function limpo(v) {
+  const s = String(v ?? "").trim();
+  if (!s) return "";
+  const n = norm(s);
+  if (VAZIOS.test(n) || n.startsWith("nao encontrado") || n.startsWith("nao publico") || n === "nao confirmado") return "";
+  return s;
+}
+let xlsxPromessa;
+function carregarXLSX() {
+  if (window.XLSX) return Promise.resolve();
+  return xlsxPromessa ||= new Promise((ok, falha) => {
+    const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js";
+    s.onload = ok; s.onerror = () => { xlsxPromessa = null; falha(new Error("Não foi possível carregar o leitor de planilhas")); };
+    document.head.appendChild(s);
+  });
+}
+function abrirImportacao() {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Importar planilha de leads</h3></div>
+    <div class="modal-corpo" id="impCorpo">
+      <p>Envie um arquivo <b>.xlsx</b> ou <b>.csv</b>. O sistema reconhece as colunas pelo nome (Empresa, Segmento, Cidade, UF, Telefone, Fit…) e ignora empresas que já estão no CRM.</p>
+      <div class="zona-arq" id="zonaArq"><b>Escolher arquivo</b>Excel ou CSV</div>
+    </div>
+    <div class="modal-rod"><button class="btn-s" data-m="cancelar">Cancelar</button></div>`);
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  $("zonaArq").onclick = async () => {
+    const inp = document.createElement("input");
+    inp.type = "file"; inp.accept = ".xlsx,.xls,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv";
+    inp.onchange = () => inp.files[0] && lerPlanilha(inp.files[0]);
+    inp.click();
+  };
+}
+async function lerPlanilha(arquivo) {
+  $("impCorpo").innerHTML = `<p>Lendo <b>${esc(arquivo.name)}</b>…</p><div class="esqueleto" style="height:80px"></div>`;
+  try {
+    await carregarXLSX();
+    const wb = XLSX.read(await arquivo.arrayBuffer(), { type: "array" });
+    // Escolhe a aba com mais linhas que tenha uma coluna de empresa
+    let melhor = null;
+    for (const nomeAba of wb.SheetNames) {
+      const linhas = XLSX.utils.sheet_to_json(wb.Sheets[nomeAba], { header: 1, defval: "", raw: false });
+      for (let k = 0; k < Math.min(10, linhas.length); k++) {
+        const cab = linhas[k].map(c => norm(String(c)));
+        const iEmp = cab.findIndex(c => MAPA_COLUNAS.empresa.includes(c));
+        if (iEmp >= 0) {
+          const dados = linhas.slice(k + 1).filter(r => String(r[iEmp] || "").trim());
+          if (!melhor || dados.length > melhor.dados.length) melhor = { nomeAba, cab, cabOriginal: linhas[k], dados };
+          break;
+        }
+      }
+    }
+    if (!melhor) throw new Error("Não encontrei uma coluna \"Empresa\" na planilha.");
+    const idx = {}, usadas = new Set();
+    for (const [campo, nomes] of Object.entries(MAPA_COLUNAS)) {
+      for (const n of nomes) { const i = melhor.cab.findIndex((c, j) => c && c === n && !usadas.has(j)); if (i >= 0) { idx[campo] = i; usadas.add(i); break; } }
+    }
+    const chave = l => norm(l.empresa) + "|" + norm(l.cidade || "");
+    const existentes = new Set(leads().map(chave));
+    const novos = [], duplicados = [];
+    for (const r of melhor.dados) {
+      const v = c => idx[c] === undefined ? "" : limpo(r[idx[c]]);
+      const fitBruto = v("fit").toUpperCase().match(/\b[ABC]\b/);
+      const l = {
+        empresa: String(r[idx.empresa]).trim(), segmento: v("segmento"), cidade: v("cidade"), uf: v("uf").toUpperCase().slice(0, 2), prioridade: v("prioridade"),
+        telefones: v("telefones").split(/\s*[\/;|]\s*/).map(t => t.trim()).filter(t => soDigitos(t).length >= 8), endereco: v("endereco"),
+        instagram: v("instagram"), instagramUrl: v("instagramUrl"), email: v("email"), contato: v("contato"), receitaEstimada: v("receitaEstimada"),
+        confianca: v("confianca"), fit: fitBruto ? fitBruto[0] : "", porqueEncaixa: v("porqueEncaixa"), fontes: v("fontes"), observacoes: v("observacoes")
+      };
+      (existentes.has(chave(l)) ? duplicados : novos).push(l);
+      existentes.add(chave(l));
+    }
+    const reconhecidas = Object.keys(idx);
+    const ignoradas = melhor.cabOriginal.filter((c, j) => String(c).trim() && !usadas.has(j));
+    $("impCorpo").innerHTML = `
+      <p>Arquivo <b>${esc(arquivo.name)}</b> · aba <b>${esc(melhor.nomeAba)}</b></p>
+      <div class="resumo-imp"><div><b>${melhor.dados.length}</b><span>linhas</span></div><div><b style="color:var(--verde)">${novos.length}</b><span>novos leads</span></div><div><b>${duplicados.length}</b><span>já no CRM</span></div></div>
+      <div><div style="font-size:.74rem;font-weight:700;color:var(--txt-2);margin-bottom:6px">Colunas reconhecidas</div><div class="colunas-ok">
+        ${melhor.cabOriginal.map((c, j) => String(c).trim() ? `<span class="${usadas.has(j) ? "" : "ign"}">${esc(c)}</span>` : "").join("")}</div>
+        ${ignoradas.length ? `<div style="font-size:.72rem;color:var(--txt-2);margin-top:6px">Colunas em cinza não foram reconhecidas e serão ignoradas.</div>` : ""}</div>
+      <p style="font-size:.8rem;color:var(--txt-2)">Todos entram na etapa <b>A abordar</b>. Campos como "não confirmado" ou "não encontrado" ficam em branco.</p>`;
+    const rod = $("modal").querySelector(".modal-rod");
+    rod.innerHTML = `<button class="btn-s" data-m="cancelar">Cancelar</button>${novos.length ? `<button class="btn-p" data-m="importar">Importar ${novos.length} leads</button>` : ""}`;
+    rod.querySelector("[data-m=cancelar]").onclick = fecharModal;
+    if (novos.length) rod.querySelector("[data-m=importar]").onclick = async ev => {
+      ev.target.disabled = true;
+      const origem = `Planilha: ${arquivo.name}`, agora = new Date().toISOString();
+      const ok = await salvarCRM(d => {
+        for (const n of novos) {
+          const l = { id: novoId(d), ...n, origem, etapa: "abordar", criadoEm: agora, criadoPor: meuNome(), responsavel: "", historico: [] };
+          registrar(l, "criado", origem);
+          d.leads.push(l);
+        }
+      }, `${novos.length} leads importados`);
+      if (ok) { fecharModal(); location.hash = "crm/painel"; }
+    };
+  } catch (e) {
+    $("impCorpo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler a planilha.</b><br>${esc(e.message)}</div>
+      <div class="zona-arq" id="zonaArq"><b>Tentar outro arquivo</b></div>`;
+    $("zonaArq").onclick = () => { fecharModal(); abrirImportacao(); };
+  }
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") { if ($("modal")) fecharModal(); else if ($("gaveta")) fecharFicha(); } });
+
 /* ================== SISTEMA: DIAGNÓSTICO ================== */
 const passos = {};
 function passo(id, titulo) {
@@ -1041,6 +1945,7 @@ function sincronizarVisivel() {
   if (document.visibilityState !== "visible") return;
   if (viewAtual === "biblioteca") carregarBiblioteca();
   else if (viewAtual === "sistema") verificarTeste();
+  else if (viewAtual === "crm") verificarCRM();
 }
 async function abrirApp() {
   const nome = conta.name || conta.username;
@@ -1051,6 +1956,8 @@ async function abrirApp() {
   montarNav();
   const cache = lerLocal(BIB_CACHE);
   if (cache?.arquivos) { bib.arquivos = cache.arquivos; bib.legado = cache.legado || []; bib.carregado = true; }
+  const cacheCRM = lerLocal(CRM_CACHE);
+  if (cacheCRM?.dados) { crm.dados = cacheCRM.dados; crm.eTag = cacheCRM.eTag; crm.carregado = true; }
   mostrar("telaApp");
   irPara(location.hash.slice(1) || "biblioteca");
   carregarBiblioteca();
@@ -1061,7 +1968,7 @@ async function abrirApp() {
 $("btnEntrar").onclick = () => msal.loginRedirect({ scopes: CONFIG.escopos, prompt: "select_account" });
 $("btnSair").onclick = e => {
   e.stopPropagation();
-  try { localStorage.removeItem(BIB_CACHE); } catch {}
+  try { localStorage.removeItem(BIB_CACHE); localStorage.removeItem(CRM_CACHE); } catch {}
   msal.logoutRedirect({ account: conta });
 };
 $("avatar").onclick = e => { e.stopPropagation(); fecharMenus(); $("menu").classList.toggle("oculto"); };
