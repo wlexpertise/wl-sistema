@@ -53,7 +53,7 @@
     padding:calc(env(safe-area-inset-top) + 12px) 24px 12px;display:flex;align-items:center;gap:12px}
   header.topo img{height:26px}
   header.topo .esp{flex:1}
-  .nav-topo{display:flex;gap:4px;margin-left:24px}
+  .nav-topo{display:flex;gap:4px;margin-left:24px;position:relative}
   .nav-topo button{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:10px;font-size:.85rem;font-weight:600;color:rgba(255,255,255,.72)}
   .nav-topo button:hover{background:rgba(255,255,255,.08);color:#fff}
   .nav-topo button.ativo{background:rgba(255,255,255,.14);color:#fff}
@@ -96,34 +96,96 @@
   .cab-pagina p{font-size:.86rem;color:var(--txt-2);margin-top:4px}
 
   /* ---------- Biblioteca ---------- */
-  .resumo{display:flex;gap:8px;flex-wrap:wrap}
+  .nav-topo .tem-menu{position:relative}
+  .nav-topo .caret{width:14px;height:14px;margin-left:-2px;opacity:.8;transition:transform .2s}
+  .nav-topo .aberto .caret{transform:rotate(180deg)}
+  .mega{position:fixed;top:calc(env(safe-area-inset-top) + 66px);left:50%;transform:translateX(-50%);background:#fff;color:var(--txt);border-radius:16px;box-shadow:0 18px 50px rgba(6,40,44,.22);
+    padding:18px;width:min(1100px,calc(100vw - 32px));z-index:30;cursor:default;text-align:left}
+  .mega-topo{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 4px 14px;border-bottom:1px solid var(--borda);margin-bottom:14px}
+  .mega-topo a,.link-geral{font-size:.82rem;font-weight:700;color:var(--teal);display:flex;align-items:center;gap:8px;cursor:pointer}
+  .mega-topo small{font-size:.74rem;color:var(--txt-2);font-weight:500}
+  .mega-grade{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px 10px}
+  @media(max-width:1180px){.mega-grade{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .grupo-menu{padding:4px}
+  .grupo-menu>button{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:800;color:var(--teal);padding:6px 8px;border-radius:8px;width:100%;text-align:left;letter-spacing:.01em}
+  .grupo-menu>button:hover{background:var(--bg)}
+  .grupo-menu>button svg{width:16px;height:16px;color:var(--turq)}
+  .grupo-menu ul{list-style:none;margin:2px 0 6px}
+  .grupo-menu li button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;text-align:left;font-size:.82rem;font-weight:500;color:var(--txt);
+    padding:7px 8px 7px 32px;border-radius:8px}
+  .grupo-menu li button:hover,.grupo-menu li button.atual{background:rgba(19,163,181,.09);color:var(--teal)}
+  .grupo-menu li button.atual{font-weight:700}
+  .qt{font-size:.68rem;font-weight:700;color:var(--txt-2);background:var(--bg);padding:2px 7px;border-radius:999px;flex:none}
+  .qt.zero{opacity:.55}
+
+  .veu{position:fixed;inset:0;background:rgba(6,30,33,.45);z-index:40;animation:surge .2s}
+  .folha{position:fixed;left:0;right:0;bottom:0;z-index:41;background:#fff;border-radius:20px 20px 0 0;max-height:82vh;overflow:auto;
+    padding:8px 12px calc(20px + env(safe-area-inset-bottom));animation:sobe .25s ease}
+  .folha .alca{width:40px;height:4px;border-radius:4px;background:var(--borda);margin:4px auto 10px}
+  .folha .grupo-menu{border-top:1px solid var(--borda);padding:8px 2px}
+  .folha .grupo-menu li button{padding:11px 10px 11px 34px;font-size:.9rem}
+  .folha .grupo-menu>button{font-size:.86rem;padding:10px}
+  .folha .link-geral{padding:8px 10px 14px}
+  @keyframes surge{from{opacity:0}} @keyframes sobe{from{transform:translateY(40px);opacity:0}}
+
+  .trilha:empty{display:none}
+  .trilha{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin:0 4px 6px;font-size:.76rem;font-weight:600}
+  .trilha button{color:var(--turq);padding:2px 0}
+  .trilha button:hover{text-decoration:underline}
+  .trilha span{color:var(--txt-2)}
+  .trilha .sep{opacity:.5;margin:0 2px}
+  .resumo{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
   .resumo span{font-size:.75rem;font-weight:600;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid var(--borda);color:var(--txt-2)}
   .resumo span b{color:var(--teal)}
   .resumo span.pend b{color:var(--alerta)}
-  .filtros{padding:4px 0 12px;margin-bottom:6px}
-  .busca{position:relative}
+  .btn-ico{display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--teal);background:#fff;border:1.5px solid var(--borda);padding:8px 13px;border-radius:10px}
+  .btn-ico svg{width:16px;height:16px}
+  .busca{position:relative;margin-bottom:18px}
   .busca svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--txt-2)}
   .busca input{width:100%;border:1.5px solid var(--borda);border-radius:12px;padding:13px 14px 13px 42px;font-size:.95rem;color:var(--txt);background:#fff;outline:none}
   .busca input:focus{border-color:var(--turq)}
-  .chips{display:flex;gap:6px;margin-top:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
-  .chips::-webkit-scrollbar{display:none}
-  .chips button{flex:none;font-size:.78rem;font-weight:600;padding:7px 13px;border-radius:999px;border:1.5px solid var(--borda);background:#fff;color:var(--txt-2)}
-  .chips button.ativo{background:var(--teal);border-color:var(--teal);color:#fff}
 
-  .secao{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);margin-bottom:14px;overflow:hidden}
-  .secao-cab{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
-  .secao-num{flex:none;width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--turq),var(--teal));color:#fff;
-    display:grid;place-items:center;font-weight:800;font-size:.85rem}
-  .secao-tit{flex:1;min-width:0}
-  .secao-tit h3{font-size:.98rem;font-weight:700;color:var(--teal)}
-  .secao-tit p{font-size:.78rem;color:var(--txt-2);margin-top:2px;line-height:1.4}
-  .secao-cont{font-size:.72rem;font-weight:700;color:var(--txt-2);background:var(--bg);padding:5px 9px;border-radius:999px;white-space:nowrap}
-  .secao-cont .p{color:var(--alerta)}
-  .seta{width:20px;height:20px;color:var(--txt-2);transition:transform .2s}
-  .secao.fechada .seta{transform:rotate(-90deg)}
-  .secao.fechada .itens,.secao.fechada .secao-rod{display:none}
+  .aviso-migra{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#fff;border:1px solid rgba(217,154,30,.35);border-left:4px solid var(--alerta);
+    border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:.84rem;line-height:1.5}
+  .aviso-migra div{flex:1;min-width:220px}
+  .aviso-migra .btn{min-height:40px;font-size:.82rem}
+  .aviso-erro{background:#fff;border:1px solid rgba(200,70,61,.3);border-left:4px solid var(--erro);border-radius:12px;padding:14px 16px;font-size:.85rem;margin-bottom:14px;line-height:1.5}
 
-  .itens{list-style:none;border-top:1px solid var(--borda)}
+  /* cards de área (visão geral) */
+  .areas{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .area{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);overflow:hidden;display:flex;flex-direction:column}
+  .area-cab{display:flex;gap:14px;align-items:flex-start;padding:18px 18px 14px;cursor:pointer}
+  .area-ico{flex:none;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--turq),var(--teal));color:#fff;display:grid;place-items:center}
+  .area-ico svg{width:22px;height:22px}
+  .area-cab h3{font-size:1.02rem;font-weight:700;color:var(--teal)}
+  .area-cab p{font-size:.78rem;color:var(--txt-2);margin-top:3px;line-height:1.45}
+  .area-cab .qt{margin-top:8px;display:inline-block}
+  .subs{list-style:none;border-top:1px solid var(--borda);margin-top:auto}
+  .subs li button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:12px 18px;border-top:1px solid var(--borda);font-size:.86rem;font-weight:500}
+  .subs li:first-child button{border-top:0}
+  .subs li button:hover{background:var(--bg)}
+  .subs li button .nome{flex:1;min-width:0}
+  .subs li button svg{width:16px;height:16px;color:var(--txt-2);transform:rotate(-90deg)}
+  .subs .vaz .nome{color:var(--txt-2)}
+
+  /* página de área */
+  .etapas{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+  .etapa{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);padding:18px;text-align:left;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,transform .15s}
+  .etapa:hover{border-color:var(--turq);transform:translateY(-2px)}
+  .etapa .n{font-size:.68rem;font-weight:800;letter-spacing:.1em;color:var(--turq);text-transform:uppercase}
+  .etapa h3{font-size:.98rem;font-weight:700;color:var(--teal)}
+  .etapa p{font-size:.78rem;color:var(--txt-2);line-height:1.45;flex:1}
+  .etapa .rod{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .etapa .rod .qt.p{color:#9A6A0C;background:rgba(217,154,30,.14)}
+
+  /* lista de materiais */
+  .painel{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);overflow:hidden;margin-bottom:14px}
+  .painel-tit{padding:14px 18px;border-bottom:1px solid var(--borda);font-size:.8rem;font-weight:700;color:var(--teal);display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .itens{list-style:none}
+  .painel-tit{font-size:.9rem;background:linear-gradient(180deg,#fff,#FAFCFC)}
+  .painel-tit>span{display:flex;align-items:center;gap:10px}
+  .n-etapa{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--turq),var(--teal));color:#fff;display:grid;place-items:center;font-size:.75rem;font-weight:800}
+  .ver-etapa{font-size:.74rem;font-weight:600;color:var(--turq)}
   .mat{display:flex;align-items:center;gap:14px;padding:14px 18px;border-top:1px solid var(--borda)}
   .mat:first-child{border-top:0}
   .tipo{flex:none;width:42px;height:48px;border-radius:8px;display:grid;place-items:center;font-size:.62rem;font-weight:800;letter-spacing:.04em;color:#fff;position:relative}
@@ -137,7 +199,7 @@
   .info p{font-size:.78rem;color:var(--txt-2);line-height:1.45;margin-top:2px}
   .linha-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
   .tag{font-size:.66rem;font-weight:700;padding:3px 8px;border-radius:6px;background:rgba(19,163,181,.1);color:#0E7F8D}
-  .tag.geral{background:var(--bg);color:var(--txt-2)}
+  .tag.local{cursor:pointer}
   .tag.pend{background:rgba(217,154,30,.14);color:#9A6A0C}
   .meta{font-size:.7rem;color:var(--txt-2)}
   .acoes{display:flex;gap:6px;flex:none}
@@ -150,15 +212,14 @@
   .acao.enviar:hover{border-color:var(--turq);color:var(--turq)}
   .acao svg{width:16px;height:16px}
   .acao:disabled{opacity:.5;cursor:wait}
-  .secao-rod{padding:10px 18px 14px;border-top:1px solid var(--borda)}
-  .secao-rod button{font-size:.78rem;font-weight:600;color:var(--turq);display:flex;align-items:center;gap:6px;padding:6px 0}
-  .secao-rod svg{width:16px;height:16px}
-  .vazio-busca{text-align:center;padding:48px 16px;color:var(--txt-2);font-size:.9rem}
-  .aviso-erro{background:#fff;border:1px solid rgba(200,70,61,.3);border-left:4px solid var(--erro);border-radius:12px;padding:14px 16px;font-size:.85rem;margin-bottom:14px;line-height:1.5}
-  .esqueleto{height:74px;border-radius:var(--raio);background:linear-gradient(90deg,#eaf0f0 25%,#f3f7f7 50%,#eaf0f0 75%);background-size:200% 100%;animation:brilho 1.2s infinite;margin-bottom:14px}
+  .adicionar{display:flex;align-items:center;gap:8px;width:100%;padding:14px 18px;border-top:1px solid var(--borda);font-size:.82rem;font-weight:600;color:var(--turq)}
+  .adicionar:hover{background:var(--bg)}
+  .adicionar svg{width:16px;height:16px}
+  .vazio-etapa{padding:36px 18px;text-align:center;color:var(--txt-2);font-size:.86rem;line-height:1.6}
+  .vazio-etapa b{display:block;color:var(--teal);font-size:.95rem;margin-bottom:2px}
+  .esqueleto{height:150px;border-radius:var(--raio);background:linear-gradient(90deg,#eaf0f0 25%,#f3f7f7 50%,#eaf0f0 75%);background-size:200% 100%;animation:brilho 1.2s infinite}
   @keyframes brilho{to{background-position:-200% 0}}
-  .btn-ico{display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--teal);background:#fff;border:1.5px solid var(--borda);padding:9px 14px;border-radius:10px}
-  .btn-ico svg{width:16px;height:16px}
+  .vazio-busca{text-align:center;padding:48px 16px;color:var(--txt-2);font-size:.9rem}
 
   @media(max-width:640px){
     .mat{padding:12px 14px;gap:12px;align-items:flex-start}
@@ -166,8 +227,9 @@
     .acoes{flex-direction:column}
     .acao{width:40px;height:36px;padding:0;justify-content:center}
     .acao span{display:none}
-    .secao-cab{padding:14px}
-    .secao-tit p{display:none}
+    .areas{grid-template-columns:minmax(0,1fr)}
+    .etapas{grid-template-columns:minmax(0,1fr)}
+    .cab-pagina h2{font-size:1.3rem}
   }
 
   /* ---------- Sistema (diagnóstico) ---------- */
@@ -206,7 +268,7 @@
 
   .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;pointer-events:none;
     background:var(--txt);color:#fff;padding:12px 18px;border-radius:12px;font-size:.85rem;font-weight:500;box-shadow:0 10px 30px rgba(0,0,0,.2);
-    transition:all .25s;z-index:50;max-width:calc(100% - 32px);display:flex;gap:10px;align-items:center}
+    transition:all .25s;z-index:50;width:max-content;max-width:calc(100% - 32px);display:flex;gap:10px;align-items:center}
   .toast.on{opacity:1;transform:translate(-50%,0)}
   .toast i{width:8px;height:8px;border-radius:50%;background:var(--verde);flex:none}
   .toast.erro i{background:var(--erro)}
@@ -228,6 +290,11 @@
   <symbol id="i-busca" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
   <symbol id="i-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-atual" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></symbol>
+  <symbol id="i-a-com" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+  <symbol id="i-a-bpo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+  <symbol id="i-a-fpa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></symbol>
+  <symbol id="i-a-pla" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-a-pro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M6 9v4a3 3 0 0 0 3 3h6"/></symbol>
 </svg>
 
 <section id="telaCarregando" class="tela-cheia">
@@ -265,20 +332,18 @@
   <main>
     <!-- ============ BIBLIOTECA ============ -->
     <div data-view="biblioteca">
+      <nav class="trilha" id="trilha"></nav>
       <div class="cab-pagina">
         <div>
-          <div class="eyebrow">Acervo WL Expertise</div>
-          <h2>Biblioteca de materiais</h2>
-          <p>Modelos, ferramentas e apresentações organizados pela jornada do cliente.</p>
+          <div class="eyebrow" id="bibEyebrow">Acervo WL Expertise</div>
+          <h2 id="bibTitulo">Biblioteca de materiais</h2>
+          <p id="bibDesc">Escolha uma área para ver os materiais de cada etapa.</p>
         </div>
         <div class="resumo" id="resumo"></div>
       </div>
-      <div class="filtros">
-        <div class="busca"><svg><use href="#i-busca"/></svg><input id="busca" type="search" placeholder="Buscar material…" autocomplete="off"></div>
-        <div class="chips" id="chips"></div>
-      </div>
-      <div id="bibErro"></div>
-      <div id="bibLista"></div>
+      <div class="busca"><svg><use href="#i-busca"/></svg><input id="busca" type="search" placeholder="Buscar em toda a biblioteca…" autocomplete="off"></div>
+      <div id="bibAvisos"></div>
+      <div id="bibConteudo"></div>
     </div>
 
     <!-- ============ SISTEMA ============ -->
@@ -335,10 +400,9 @@ const CONFIG = {
 };
 const GRAPH = "https://graph.microsoft.com/v1.0";
 
-/* Catálogo da biblioteca: categorias (pastas em WL-Sistema/acervo) e materiais esperados.
-   Arquivos que estiverem nas pastas e não constarem aqui também aparecem, como "materiais avulsos". */
-const CATALOGO = {"versao": 1, "pastas": [{"num": "01", "nome": "Estratégia e Posicionamento", "pasta": "01 - Estratégia e Posicionamento", "descricao": "Uso interno: posicionamento, ICP e inteligência de mercado da WL."}, {"num": "02", "nome": "Prospecção e Vendas", "pasta": "02 - Prospecção e Vendas", "descricao": "Scripts, controle de prospecção, CRM e programa de indicação."}, {"num": "03", "nome": "Apresentações Comerciais", "pasta": "03 - Apresentações Comerciais", "descricao": "Apresentação institucional e apresentações por segmento."}, {"num": "04", "nome": "Propostas, Preços e Contratos", "pasta": "04 - Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos."}, {"num": "05", "nome": "Diagnóstico", "pasta": "05 - Diagnóstico", "descricao": "Formulários e planilhas para diagnosticar o cliente."}, {"num": "06", "nome": "Onboarding e Implantação", "pasta": "06 - Onboarding e Implantação", "descricao": "Kick-off, onboarding, acessos e ativação do cliente."}, {"num": "07", "nome": "Execução e Entregas", "pasta": "07 - Execução e Entregas", "descricao": "Cronograma, plano de ação, entregas e gestão da operação."}], "itens": [{"pasta": "01", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "frentes": ["Geral"], "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"pasta": "01", "nome": "Definição de ICP", "ext": "docx", "frentes": ["Geral"], "descricao": "Perfil de cliente ideal da WL Expertise."}, {"pasta": "01", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "frentes": ["Geral"], "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"pasta": "01", "nome": "Mapa de Posicionamento", "ext": "docx", "frentes": ["Geral"], "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"pasta": "01", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "frentes": ["Geral"], "descricao": "Levantamento das dores e metas da base de clientes."}, {"pasta": "02", "nome": "Script de Vendas (Call)", "ext": "docx", "frentes": ["Geral"], "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"pasta": "02", "nome": "Script Único", "ext": "docx", "frentes": ["Geral"], "descricao": "Script de abordagem comercial."}, {"pasta": "02", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "frentes": ["Geral"], "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"pasta": "02", "nome": "CRM para Consultorias", "ext": "xlsx", "frentes": ["Geral"], "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"pasta": "02", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "frentes": ["Geral"], "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"pasta": "02", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "frentes": ["BPO"], "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"pasta": "02", "nome": "Programa de Indicação", "ext": "pdf", "frentes": ["Geral"], "descricao": "Como estruturar um programa de indicação de clientes."}, {"pasta": "02", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "frentes": ["Geral"], "descricao": "Termo para parceiros que indicam clientes."}, {"pasta": "03", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "frentes": ["Geral"], "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"pasta": "03", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "frentes": ["Processos"], "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"pasta": "03", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"pasta": "03", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para negócios de estética."}, {"pasta": "03", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para locadoras de equipamentos."}, {"pasta": "03", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"pasta": "03", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "frentes": ["BPO", "FP&A"], "descricao": "Proposta de valor para criadores de conteúdo."}, {"pasta": "04", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "frentes": ["Processos"], "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"pasta": "04", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"pasta": "04", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "frentes": ["BPO", "FP&A"], "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"pasta": "04", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "frentes": ["BPO", "FP&A"], "descricao": "Planos e regras de negociação para o segmento Rental."}, {"pasta": "04", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "frentes": ["Geral"], "descricao": "Modelo de proposta comercial."}, {"pasta": "04", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "frentes": ["Geral"], "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"pasta": "04", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "frentes": ["Geral"], "descricao": "Modelo de contrato de prestação de serviços."}, {"pasta": "05", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "frentes": ["Geral"], "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"pasta": "05", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "frentes": ["FP&A", "Planejamento"], "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"pasta": "05", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Questionário preliminar das rotinas financeiras."}, {"pasta": "05", "nome": "Mapa Quente da Operação", "ext": "xlsx", "frentes": ["BPO", "Processos"], "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"pasta": "05", "nome": "Ata e Briefing de Reunião", "ext": "docx", "frentes": ["Geral"], "descricao": "Modelo para registrar reuniões e briefings."}, {"pasta": "06", "nome": "Questionário de Kick-off", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"pasta": "06", "nome": "Formulário de Onboarding", "ext": "docx", "frentes": ["Geral"], "descricao": "Coleta de informações para iniciar o projeto."}, {"pasta": "06", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Plano de ativação, relação de clientes e timeline."}, {"pasta": "06", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "frentes": ["BPO"], "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"pasta": "06", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "frentes": ["Geral"], "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"pasta": "07", "nome": "Cronograma da Consultoria", "ext": "xlsx", "frentes": ["Processos"], "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"pasta": "07", "nome": "Plano de Ação Personalizado", "ext": "docx", "frentes": ["Geral"], "descricao": "Plano de ação do cliente após o diagnóstico."}, {"pasta": "07", "nome": "Materiais de Entrega", "ext": "xlsx", "frentes": ["Geral"], "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"pasta": "07", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "frentes": ["BPO"], "descricao": "Gestão da operação por operador, plano de ação e timeline."}]};
-const FRENTES = ["Todas", "BPO", "FP&A", "Planejamento", "Processos", "Geral"];
+/* Catálogo da biblioteca: Áreas → Etapas (pastas em WL-Sistema/acervo/<Área>/<Etapa>) e materiais esperados.
+   Arquivos que estiverem nas pastas e não constarem aqui também aparecem. "legado" mapeia as pastas da organização anterior. */
+const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial", "descricao": "Estudo, prospecção, apresentações e fechamento.", "icone": "i-a-com", "pasta": "Comercial", "subs": [{"id": "estudo", "nome": "Materiais de Estudo", "descricao": "Posicionamento, ICP, scripts e guias de venda.", "pasta": "Materiais de Estudo"}, {"id": "prospeccao", "nome": "Ferramentas de Prospecção", "descricao": "Controle de prospecção, CRM e agenda de reuniões.", "pasta": "Ferramentas de Prospecção"}, {"id": "apresentacoes", "nome": "Apresentações Comerciais", "descricao": "Apresentação institucional e por segmento.", "pasta": "Apresentações Comerciais"}, {"id": "propostas", "nome": "Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos.", "pasta": "Propostas, Preços e Contratos"}]}, {"id": "bpo", "nome": "BPO Financeiro", "descricao": "Gestão das rotinas financeiras do cliente.", "icone": "i-a-bpo", "pasta": "BPO Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "fpa", "nome": "FP&A", "descricao": "Indicadores gerenciais e análise de desempenho.", "icone": "i-a-fpa", "pasta": "FP&A", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "planejamento", "nome": "Planejamento Financeiro", "descricao": "Orçamentos, fluxo de caixa e cenários.", "icone": "i-a-pla", "pasta": "Planejamento Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "processos", "nome": "Consultoria de Processos", "descricao": "Mapeamento e redesenho de processos.", "icone": "i-a-pro", "pasta": "Consultoria de Processos", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}], "itens": [{"area": "comercial", "sub": "estudo", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Definição de ICP", "ext": "docx", "descricao": "Perfil de cliente ideal da WL Expertise."}, {"area": "comercial", "sub": "estudo", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"area": "comercial", "sub": "estudo", "nome": "Mapa de Posicionamento", "ext": "docx", "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "descricao": "Levantamento das dores e metas da base de clientes."}, {"area": "comercial", "sub": "estudo", "nome": "Script de Vendas (Call)", "ext": "docx", "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"area": "comercial", "sub": "estudo", "nome": "Script Único", "ext": "docx", "descricao": "Script de abordagem comercial."}, {"area": "comercial", "sub": "prospeccao", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"area": "comercial", "sub": "prospeccao", "nome": "CRM para Consultorias", "ext": "xlsx", "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"area": "comercial", "sub": "prospeccao", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"area": "comercial", "sub": "estudo", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"area": "comercial", "sub": "estudo", "nome": "Programa de Indicação", "ext": "pdf", "descricao": "Como estruturar um programa de indicação de clientes."}, {"area": "comercial", "sub": "propostas", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "descricao": "Termo para parceiros que indicam clientes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "descricao": "Proposta de valor para negócios de estética."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "descricao": "Proposta de valor para locadoras de equipamentos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "descricao": "Proposta de valor para criadores de conteúdo."}, {"area": "comercial", "sub": "propostas", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"area": "comercial", "sub": "propostas", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "descricao": "Planos e regras de negociação para o segmento Rental."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "descricao": "Modelo de proposta comercial."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "descricao": "Modelo de contrato de prestação de serviços."}, {"area": "processos", "sub": "diagnostico", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"area": "fpa", "sub": "diagnostico", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"area": "bpo", "sub": "diagnostico", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "descricao": "Questionário preliminar das rotinas financeiras."}, {"area": "bpo", "sub": "execucao", "nome": "Mapa Quente da Operação", "ext": "xlsx", "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"area": "processos", "sub": "diagnostico", "nome": "Ata e Briefing de Reunião", "ext": "docx", "descricao": "Modelo para registrar reuniões e briefings."}, {"area": "bpo", "sub": "onboarding", "nome": "Questionário de Kick-off", "ext": "xlsx", "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"area": "processos", "sub": "onboarding", "nome": "Formulário de Onboarding", "ext": "docx", "descricao": "Coleta de informações para iniciar o projeto."}, {"area": "bpo", "sub": "onboarding", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "descricao": "Plano de ativação, relação de clientes e timeline."}, {"area": "bpo", "sub": "onboarding", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"area": "bpo", "sub": "onboarding", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"area": "processos", "sub": "execucao", "nome": "Cronograma da Consultoria", "ext": "xlsx", "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"area": "processos", "sub": "execucao", "nome": "Plano de Ação Personalizado", "ext": "docx", "descricao": "Plano de ação do cliente após o diagnóstico."}, {"area": "processos", "sub": "execucao", "nome": "Materiais de Entrega", "ext": "xlsx", "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"area": "bpo", "sub": "execucao", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "descricao": "Gestão da operação por operador, plano de ação e timeline."}], "legado": {"01 - Estratégia e Posicionamento": "comercial/estudo", "02 - Prospecção e Vendas": "comercial/prospeccao", "03 - Apresentações Comerciais": "comercial/apresentacoes", "04 - Propostas, Preços e Contratos": "comercial/propostas", "05 - Diagnóstico": "bpo/diagnostico", "06 - Onboarding e Implantação": "bpo/onboarding", "07 - Execução e Entregas": "bpo/execucao"}};
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
 const MODULOS = [
@@ -474,47 +538,111 @@ async function enviarArquivo(rel, arquivo, conflito, progresso = () => {}) {
 }
 
 /* ================== NAVEGAÇÃO ================== */
-let viewAtual = null;
+let viewAtual = null, rota = [];
 function montarNav() {
-  const html = MODULOS.map(m => `<button data-ir="${m.id}" class="${m.breve ? "breve" : ""}" title="${m.breve ? "Em breve" : m.nome}">
-    <svg><use href="#${m.icone}"/></svg><span>${m.nome}</span></button>`).join("");
+  const html = MODULOS.map(m => `<button data-ir="${m.id}" class="${m.breve ? "breve" : ""} ${m.id === "biblioteca" ? "tem-menu" : ""}" title="${m.breve ? "Em breve" : m.nome}">
+    <svg><use href="#${m.icone}"/></svg><span>${m.nome}</span>${m.id === "biblioteca" ? `<svg class="caret"><use href="#i-seta"/></svg>` : ""}</button>`).join("");
   $("navTopo").innerHTML = html;
-  $("navBase").innerHTML = html;
-  document.querySelectorAll("[data-ir]").forEach(b => b.onclick = () => {
-    const m = MODULOS.find(x => x.id === b.dataset.ir);
-    if (m.breve) return toast(`${m.nome}: módulo previsto para as próximas fases`);
-    location.hash = m.id;
-  });
+  $("navBase").innerHTML = html.replace(/<svg class="caret">.*?<\/svg>/g, "");
+  $("navTopo").onclick = e => {
+    const b = e.target.closest("[data-ir]");
+    if (!b || e.target.closest(".mega")) return;
+    if (b.dataset.ir === "biblioteca") { e.stopPropagation(); return alternarMega(); }
+    navegar(b.dataset.ir);
+  };
+  $("navBase").onclick = e => {
+    const b = e.target.closest("[data-ir]");
+    if (!b) return;
+    if (b.dataset.ir === "biblioteca") return abrirFolha();
+    navegar(b.dataset.ir);
+  };
 }
-function irPara(id) {
+function navegar(id) {
+  const m = MODULOS.find(x => x.id === id);
+  if (m?.breve) return toast(`${m.nome}: módulo previsto para as próximas fases`);
+  location.hash = id;
+}
+function irPara(hash) {
+  const partes = hash.split("/").filter(Boolean).map(decodeURIComponent);
+  let id = partes[0];
   if (!MODULOS.some(m => m.id === id && !m.breve)) id = "biblioteca";
   viewAtual = id;
+  rota = id === "biblioteca" ? partes.slice(1) : [];
+  fecharMenus();
   document.querySelectorAll("[data-view]").forEach(v => v.classList.toggle("oculto", v.dataset.view !== id));
   document.querySelectorAll("[data-ir]").forEach(b => b.classList.toggle("ativo", b.dataset.ir === id));
   scrollTo(0, 0);
+  if (id === "biblioteca") { $("busca").value = ""; filtroBusca = ""; renderBiblioteca(); }
   if (id === "sistema") abrirSistema();
 }
 addEventListener("hashchange", () => irPara(location.hash.slice(1)));
+const linkBib = (area, sub) => "#" + ["biblioteca", area, sub].filter(Boolean).join("/");
+
+/* ---- Menu suspenso (desktop) e folha (celular) ---- */
+function htmlMenu() {
+  const [ra, rs] = rota;
+  return CATALOGO.areas.map(a => {
+    const c = contagemArea(a);
+    return `<div class="grupo-menu">
+      <button data-link="${linkBib(a.id)}"><svg><use href="#${a.icone}"/></svg>${esc(a.nome)}</button>
+      <ul>${a.subs.map(s => {
+        const k = contagem(a.id, s.id);
+        return `<li><button data-link="${linkBib(a.id, s.id)}" class="${viewAtual === "biblioteca" && ra === a.id && rs === s.id ? "atual" : ""}">
+          <span>${esc(s.nome)}</span><span class="qt ${k.total ? "" : "zero"}">${bib.carregado ? k.total : "·"}</span></button></li>`;
+      }).join("")}</ul>
+    </div>`;
+  }).join("");
+}
+function alternarMega() {
+  const botao = $("navTopo").querySelector('[data-ir="biblioteca"]');
+  const existente = $("navTopo").querySelector(".mega");
+  if (existente) return fecharMenus();
+  fecharMenus();
+  const div = document.createElement("div");
+  div.className = "mega";
+  div.innerHTML = `<div class="mega-topo"><a data-link="#biblioteca"><svg width="16" height="16"><use href="#i-bib"/></svg>Visão geral da biblioteca</a>
+    <small>${bib.carregado ? `${totalGeral().disp} de ${totalGeral().total} materiais disponíveis` : ""}</small></div>
+    <div class="mega-grade">${htmlMenu()}</div>`;
+  $("navTopo").appendChild(div);
+  botao.classList.add("aberto");
+}
+function abrirFolha() {
+  fecharMenus();
+  const veu = document.createElement("div");
+  veu.className = "veu"; veu.id = "veu";
+  const folha = document.createElement("div");
+  folha.className = "folha"; folha.id = "folha";
+  folha.innerHTML = `<div class="alca"></div><a class="link-geral" data-link="#biblioteca"><svg width="16" height="16"><use href="#i-bib"/></svg>Visão geral da biblioteca</a>${htmlMenu()}`;
+  veu.onclick = fecharMenus;
+  document.body.append(veu, folha);
+}
+function fecharMenus() {
+  document.querySelectorAll(".mega,#veu,#folha").forEach(x => x.remove());
+  document.querySelectorAll(".aberto").forEach(x => x.classList.remove("aberto"));
+}
+document.addEventListener("click", e => {
+  const l = e.target.closest("[data-link]");
+  if (l) { e.preventDefault(); fecharMenus(); if (location.hash === l.dataset.link) irPara(l.dataset.link.slice(1)); else location.hash = l.dataset.link; return; }
+  if (!e.target.closest(".mega")) document.querySelectorAll(".mega").forEach(() => fecharMenus());
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") fecharMenus(); });
 
 /* ================== BIBLIOTECA ================== */
-const BIB_CACHE = "wl.biblioteca.v1";
-const bib = { arquivos: {}, carregado: false, carregando: false, pastasOk: false, fechadas: new Set(lerLocal("wl.bib.fechadas") || []) };
-const filtro = { busca: "", frente: "Todas" };
-const pastaRel = p => `acervo/${p.pasta}`;
+const BIB_CACHE = "wl.biblioteca.v2";
+const bib = { arquivos: {}, legado: [], carregado: false, carregando: false, idsPasta: {} };
+let filtroBusca = "";
+const areaPorId = id => CATALOGO.areas.find(a => a.id === id);
+const subPorId = (a, id) => a?.subs.find(s => s.id === id);
+const relSub = (a, s) => `acervo/${a.pasta}/${s.pasta}`;
+const chaveSub = (aid, sid) => aid + "/" + sid;
 
-async function garantirEstrutura() {
-  if (bib.pastasOk) return;
-  let existentes;
-  try {
-    existentes = (await (await graph(caminho("acervo") + ":/children?$select=name,folder&$top=500")).json()).value;
-  } catch (e) {
-    if (e.status !== 404) throw e;
-    await criarPasta("", "acervo");
-    existentes = [];
-  }
-  const nomes = new Set(existentes.filter(i => i.folder).map(i => i.name));
-  for (const p of CATALOGO.pastas) if (!nomes.has(p.pasta)) await criarPasta("acervo", p.pasta);
-  bib.pastasOk = true;
+async function listar(rel) {
+  const sel = "$select=id,name,size,file,folder,webUrl,lastModifiedDateTime&$top=500";
+  return (await (await graph(caminho(rel) + ":/children?" + sel)).json()).value;
+}
+async function garantirPastaSub(a, s) {
+  await criarPasta("acervo", a.pasta);
+  await criarPasta(`acervo/${a.pasta}`, s.pasta);
 }
 
 async function carregarBiblioteca(manual = false) {
@@ -522,118 +650,167 @@ async function carregarBiblioteca(manual = false) {
   bib.carregando = true;
   chip("sincronizando", "Atualizando…");
   try {
-    await garantirEstrutura();
-    const sel = "$select=id,name,size,file,webUrl,lastModifiedDateTime,lastModifiedBy&$top=500";
-    const listas = await Promise.all(CATALOGO.pastas.map(async p => {
-      const j = await (await graph(caminho(pastaRel(p)) + ":/children?" + sel)).json();
-      return [p.num, j.value.filter(i => i.file)];
+    let raiz;
+    try { raiz = await listar("acervo"); }
+    catch (e) { if (e.status !== 404) throw e; await criarPasta("", "acervo"); raiz = []; }
+    bib.legado = raiz.filter(i => i.folder && CATALOGO.legado[i.name]).map(i => i.name);
+    const pares = CATALOGO.areas.flatMap(a => a.subs.map(s => [a, s]));
+    const listas = await Promise.all(pares.map(async ([a, s]) => {
+      try { return [chaveSub(a.id, s.id), (await listar(relSub(a, s))).filter(i => i.file)]; }
+      catch (e) { if (e.status !== 404) throw e; await garantirPastaSub(a, s); return [chaveSub(a.id, s.id), []]; }
     }));
     bib.arquivos = Object.fromEntries(listas);
     bib.carregado = true;
-    gravarLocal(BIB_CACHE, { arquivos: bib.arquivos, em: Date.now() });
-    $("bibErro").innerHTML = "";
-    renderBiblioteca();
+    gravarLocal(BIB_CACHE, { arquivos: bib.arquivos, legado: bib.legado, em: Date.now() });
+    bib.erro = null;
     chip("", "Sincronizado");
     if (manual) toast("Biblioteca atualizada");
   } catch (e) {
     chip("erro", "Erro");
-    $("bibErro").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler a biblioteca.</b><br>${esc(e.message)}</div>`;
-    if (!bib.carregado) renderBiblioteca();
-  } finally { bib.carregando = false; }
+    bib.erro = e.message;
+  } finally {
+    bib.carregando = false;
+    if (viewAtual === "biblioteca") renderBiblioteca();
+  }
 }
 
-// Junta o catálogo com os arquivos reais de cada pasta
-function montarItens(p) {
-  const arquivos = [...(bib.arquivos[p.num] || [])];
-  const itens = CATALOGO.itens.filter(i => i.pasta === p.num).map(i => {
+// Junta o catálogo com os arquivos reais de uma etapa
+function itensDe(aid, sid) {
+  const arquivos = [...(bib.arquivos[chaveSub(aid, sid)] || [])];
+  const itens = CATALOGO.itens.filter(i => i.area === aid && i.sub === sid).map(i => {
     const k = arquivos.findIndex(a => norm(semExt(a.name)) === norm(i.nome));
-    const arquivo = k >= 0 ? arquivos.splice(k, 1)[0] : null;
-    return { ...i, arquivo };
+    return { ...i, arquivo: k >= 0 ? arquivos.splice(k, 1)[0] : null };
   });
-  for (const a of arquivos) itens.push({ pasta: p.num, nome: semExt(a.name), ext: extDe(a.name), frentes: ["Geral"], descricao: "Material avulso adicionado ao acervo.", arquivo: a, avulso: true });
+  for (const a of arquivos) itens.push({ area: aid, sub: sid, nome: semExt(a.name), ext: extDe(a.name), descricao: "Material adicionado ao acervo.", arquivo: a, avulso: true });
   return itens;
 }
-function passaFiltro(i) {
-  if (filtro.frente !== "Todas" && !i.frentes.includes(filtro.frente)) return false;
-  if (!filtro.busca) return true;
-  const alvo = norm([i.nome, i.descricao, i.frentes.join(" "), i.ext].join(" "));
-  return norm(filtro.busca).split(" ").every(t => alvo.includes(t));
+function contagem(aid, sid) {
+  const it = itensDe(aid, sid);
+  return { total: it.length, disp: it.filter(i => i.arquivo).length };
+}
+function contagemArea(a) {
+  return a.subs.reduce((t, s) => { const c = contagem(a.id, s.id); return { total: t.total + c.total, disp: t.disp + c.disp }; }, { total: 0, disp: 0 });
+}
+function totalGeral() {
+  return CATALOGO.areas.reduce((t, a) => { const c = contagemArea(a); return { total: t.total + c.total, disp: t.disp + c.disp }; }, { total: 0, disp: 0 });
 }
 
-function htmlItem(i) {
+function htmlItem(i, mostrarLocal = false) {
   const ext = i.arquivo ? extDe(i.arquivo.name) : i.ext;
   const classeTipo = ["pdf", "xlsx", "xls", "csv", "docx", "doc", "pptx", "ppt"].includes(ext) ? "t-" + ext : "t-outro";
   const rotulo = { xlsx: "XLS", docx: "DOC", pptx: "PPT" }[ext] || ext.toUpperCase().slice(0, 4) || "ARQ";
-  const tags = i.frentes.map(f => `<span class="tag ${f === "Geral" ? "geral" : ""}">${esc(f)}</span>`).join("");
-  const id = encodeURIComponent(i.pasta + "|" + i.nome);
+  const a = areaPorId(i.area), s = subPorId(a, i.sub);
+  const local = mostrarLocal ? `<span class="tag local" data-link="${linkBib(a.id, s.id)}">${esc(a.nome)} › ${esc(s.nome)}</span>` : "";
+  const id = encodeURIComponent([i.area, i.sub, i.nome].join("|"));
   if (!i.arquivo) {
     return `<li class="mat pendente">
       <span class="tipo ${classeTipo}">${rotulo}</span>
       <div class="info"><b>${esc(i.nome)}</b><p>${esc(i.descricao)}</p>
-        <div class="linha-meta"><span class="tag pend">Pendente de envio</span>${tags}</div></div>
+        <div class="linha-meta"><span class="tag pend">Pendente de envio</span>${local}</div></div>
       <div class="acoes"><button class="acao enviar" data-enviar="${id}" title="Enviar arquivo"><svg><use href="#i-enviar"/></svg><span>Enviar</span></button></div>
     </li>`;
   }
-  const a = i.arquivo;
+  const f = i.arquivo;
   return `<li class="mat">
     <span class="tipo ${classeTipo}">${rotulo}</span>
     <div class="info"><b>${esc(i.nome)}</b><p>${esc(i.descricao)}</p>
-      <div class="linha-meta">${tags}<span class="meta">${tamanho(a.size)} · atualizado em ${data(a.lastModifiedDateTime)}</span></div></div>
+      <div class="linha-meta">${local}<span class="meta">${tamanho(f.size)} · atualizado em ${data(f.lastModifiedDateTime)}</span></div></div>
     <div class="acoes">
-      <button class="acao" data-abrir="${a.id}" title="Abrir no navegador"><svg><use href="#i-abrir"/></svg><span>Abrir</span></button>
-      <button class="acao prim" data-baixar="${a.id}" title="Baixar"><svg><use href="#i-baixar"/></svg><span>Baixar</span></button>
+      <button class="acao" data-abrir="${f.id}" title="Abrir no navegador"><svg><use href="#i-abrir"/></svg><span>Abrir</span></button>
+      <button class="acao prim" data-baixar="${f.id}" title="Baixar"><svg><use href="#i-baixar"/></svg><span>Baixar</span></button>
     </div>
   </li>`;
 }
 
-function renderBiblioteca() {
-  if (!bib.carregado) {
-    $("bibLista").innerHTML = CATALOGO.pastas.map(() => `<div class="esqueleto"></div>`).join("");
-    $("resumo").innerHTML = "";
-    return;
-  }
-  let total = 0, disp = 0, visiveis = 0;
-  const filtrando = filtro.busca || filtro.frente !== "Todas";
-  const secoes = CATALOGO.pastas.map(p => {
-    const itens = montarItens(p);
-    total += itens.length;
-    const d = itens.filter(i => i.arquivo).length;
-    disp += d;
-    const vis = itens.filter(passaFiltro);
-    visiveis += vis.length;
-    if (filtrando && !vis.length) return "";
-    const fechada = !filtrando && bib.fechadas.has(p.num);
-    const pend = itens.length - d;
-    return `<section class="secao ${fechada ? "fechada" : ""}" data-secao="${p.num}">
-      <div class="secao-cab" data-alternar="${p.num}">
-        <span class="secao-num">${p.num}</span>
-        <div class="secao-tit"><h3>${esc(p.nome)}</h3><p>${esc(p.descricao)}</p></div>
-        <span class="secao-cont">${d}/${itens.length}${pend ? ` · <span class="p">${pend} pend.</span>` : ""}</span>
-        <svg class="seta"><use href="#i-seta"/></svg>
-      </div>
-      <ul class="itens">${vis.map(htmlItem).join("")}</ul>
-      <div class="secao-rod"><button data-adicionar="${p.num}"><svg><use href="#i-mais"/></svg>Adicionar material nesta categoria</button></div>
-    </section>`;
-  }).join("");
-  $("resumo").innerHTML = `<span><b>${total}</b> materiais</span><span><b>${disp}</b> disponíveis</span>${total - disp ? `<span class="pend"><b>${total - disp}</b> pendentes</span>` : ""}
-    <button class="btn-ico" id="btnAtualizarBib"><svg><use href="#i-atual"/></svg>Atualizar</button>`;
+function trilha(passos) {
+  $("trilha").innerHTML = passos.map((p, k) => k === passos.length - 1
+    ? `<span>${esc(p[0])}</span>` : `<button data-link="${p[1]}">${esc(p[0])}</button><span class="sep">›</span>`).join("");
+}
+function cabecalho(eyebrow, titulo, desc, c) {
+  $("bibEyebrow").textContent = eyebrow;
+  $("bibTitulo").textContent = titulo;
+  $("bibDesc").textContent = desc;
+  $("resumo").innerHTML = (bib.carregado && c ? `<span><b>${c.disp}</b> disponíve${c.disp === 1 ? "l" : "is"}</span>${c.total - c.disp ? `<span class="pend"><b>${c.total - c.disp}</b> pendente${c.total - c.disp === 1 ? "" : "s"}</span>` : ""}` : "")
+    + `<button class="btn-ico" id="btnAtualizarBib"><svg><use href="#i-atual"/></svg>Atualizar</button>`;
   $("btnAtualizarBib").onclick = () => carregarBiblioteca(true);
-  $("bibLista").innerHTML = visiveis ? secoes : `<div class="vazio-busca">Nenhum material encontrado para esse filtro.</div>`;
 }
 
-function montarFiltros() {
-  $("chips").innerHTML = FRENTES.map(f => `<button data-frente="${esc(f)}" class="${f === filtro.frente ? "ativo" : ""}">${esc(f)}</button>`).join("");
-  $("chips").onclick = e => {
-    const b = e.target.closest("[data-frente]");
-    if (!b) return;
-    filtro.frente = b.dataset.frente;
-    $("chips").querySelectorAll("button").forEach(x => x.classList.toggle("ativo", x === b));
-    renderBiblioteca();
-  };
+function renderBiblioteca() {
+  $("bibAvisos").innerHTML = (bib.erro ? `<div class="aviso-erro"><b>Não foi possível ler a biblioteca.</b><br>${esc(bib.erro)}</div>` : "")
+    + (bib.legado.length ? `<div class="aviso-migra"><div><b>Reorganização pendente.</b> Encontrei ${bib.legado.length} pasta(s) da organização anterior no OneDrive. Clique para mover os materiais para a nova estrutura por área.</div>
+        <button class="btn" id="btnMigrar">Reorganizar agora</button></div>` : "");
+  if ($("btnMigrar")) $("btnMigrar").onclick = migrar;
+
+  if (filtroBusca) return renderBusca();
+  const [aid, sid] = rota;
+  const a = areaPorId(aid), s = subPorId(a, sid);
+  if (a && s) return renderEtapa(a, s);
+  if (a) return renderArea(a);
+  renderInicio();
+}
+
+function renderInicio() {
+  $("trilha").innerHTML = "";
+  cabecalho("Acervo WL Expertise", "Biblioteca de materiais", "Escolha uma área para ver os materiais de cada etapa.", totalGeral());
+  if (!bib.carregado) { $("bibConteudo").innerHTML = `<div class="areas">${CATALOGO.areas.map(() => `<div class="esqueleto"></div>`).join("")}</div>`; return; }
+  $("bibConteudo").innerHTML = `<div class="areas">${CATALOGO.areas.map(a => {
+    const c = contagemArea(a);
+    return `<article class="area">
+      <div class="area-cab" data-link="${linkBib(a.id)}">
+        <span class="area-ico"><svg><use href="#${a.icone}"/></svg></span>
+        <div><h3>${esc(a.nome)}</h3><p>${esc(a.descricao)}</p><span class="qt">${c.total} ${c.total === 1 ? "material" : "materiais"}</span></div>
+      </div>
+      <ul class="subs">${a.subs.map(s => {
+        const k = contagem(a.id, s.id);
+        return `<li class="${k.total ? "" : "vaz"}"><button data-link="${linkBib(a.id, s.id)}"><span class="nome">${esc(s.nome)}</span>
+          <span class="qt ${k.total ? "" : "zero"}">${k.total}</span><svg><use href="#i-seta"/></svg></button></li>`;
+      }).join("")}</ul>
+    </article>`;
+  }).join("")}</div>`;
+}
+
+function renderArea(a) {
+  trilha([["Biblioteca", "#biblioteca"], [a.nome]]);
+  cabecalho("Área de atuação", a.nome, a.descricao, contagemArea(a));
+  if (!bib.carregado) { $("bibConteudo").innerHTML = `<div class="esqueleto"></div>`; return; }
+  $("bibConteudo").innerHTML = a.subs.map((s, k) => painelEtapa(a, s,
+    `<span><span class="n-etapa">${k + 1}</span>${esc(s.nome)}</span><button class="ver-etapa" data-link="${linkBib(a.id, s.id)}">Abrir etapa ›</button>`)).join("");
+}
+
+function painelEtapa(a, s, titulo) {
+  const itens = itensDe(a.id, s.id);
+  const corpo = itens.length
+    ? `<ul class="itens">${itens.map(i => htmlItem(i)).join("")}</ul>`
+    : `<div class="vazio-etapa"><b>Nenhum material nesta etapa ainda</b>Adicione o primeiro modelo ou ferramenta de ${esc(s.nome.toLowerCase())} em ${esc(a.nome)}.</div>`;
+  return `<section class="painel">${titulo ? `<div class="painel-tit">${titulo}</div>` : ""}${corpo}
+    <button class="adicionar" data-adicionar="${a.id}|${s.id}"><svg><use href="#i-mais"/></svg>Adicionar material em ${esc(s.nome)}</button></section>`;
+}
+
+function renderEtapa(a, s) {
+  trilha([["Biblioteca", "#biblioteca"], [a.nome, linkBib(a.id)], [s.nome]]);
+  cabecalho(a.nome, s.nome, s.descricao, contagem(a.id, s.id));
+  if (!bib.carregado) { $("bibConteudo").innerHTML = `<div class="esqueleto"></div>`; return; }
+  $("bibConteudo").innerHTML = painelEtapa(a, s);
+}
+
+function renderBusca() {
+  trilha([["Biblioteca", "#biblioteca"], ["Busca"]]);
+  cabecalho("Biblioteca", `Resultados para “${filtroBusca}”`, "Busca em todas as áreas e etapas.", null);
+  const termos = norm(filtroBusca).split(" ");
+  const achados = CATALOGO.areas.flatMap(a => a.subs.flatMap(s => itensDe(a.id, s.id).filter(i => {
+    const alvo = norm([i.nome, i.descricao, a.nome, s.nome, i.ext].join(" "));
+    return termos.every(t => alvo.includes(t));
+  })));
+  $("bibConteudo").innerHTML = achados.length
+    ? `<section class="painel"><div class="painel-tit">${achados.length} resultado${achados.length === 1 ? "" : "s"}</div><ul class="itens">${achados.map(i => htmlItem(i, true)).join("")}</ul></section>`
+    : `<div class="vazio-busca">Nenhum material encontrado.</div>`;
+}
+{
   let t;
-  $("busca").oninput = e => { clearTimeout(t); t = setTimeout(() => { filtro.busca = e.target.value.trim(); renderBiblioteca(); }, 150); };
+  $("busca").oninput = e => { clearTimeout(t); t = setTimeout(() => { filtroBusca = e.target.value.trim(); renderBiblioteca(); }, 150); };
 }
 
+/* ---- Ações nos materiais ---- */
 function acharArquivo(id) {
   for (const lista of Object.values(bib.arquivos)) { const a = lista.find(x => x.id === id); if (a) return a; }
 }
@@ -646,34 +823,29 @@ function escolherArquivo(accept) {
     inp.click();
   });
 }
-async function enviarParaBiblioteca(pasta, arquivo, nomeDestino) {
-  const p = CATALOGO.pastas.find(x => x.num === pasta);
+async function enviarParaBiblioteca(aid, sid, arquivo, nomeDestino) {
+  const a = areaPorId(aid), s = subPorId(a, sid);
   const nome = nomeDestino ? `${nomeDestino}.${extDe(arquivo.name)}` : arquivo.name;
   chip("sincronizando", "Enviando…");
   toast(`Enviando "${nome}"…`, "prog", 0);
   try {
-    await enviarArquivo(`${pastaRel(p)}/${nome}`, arquivo, nomeDestino ? "replace" : "rename",
+    await garantirPastaSub(a, s);
+    await enviarArquivo(`${relSub(a, s)}/${nome}`, arquivo, nomeDestino ? "replace" : "rename",
       f => toast(`Enviando "${nome}"… ${Math.round(f * 100)}%`, "prog", 0));
-    toast(`"${nome}" adicionado à biblioteca`);
+    toast(`"${nome}" adicionado em ${s.nome}`);
     await carregarBiblioteca();
   } catch (e) {
     chip("erro", "Erro");
     toast("Falha no envio: " + e.message, "erro", 6000);
   }
 }
-
-$("bibLista").onclick = async e => {
-  const el = e.target.closest("[data-alternar],[data-abrir],[data-baixar],[data-enviar],[data-adicionar]");
+$("bibConteudo").onclick = async e => {
+  const el = e.target.closest("[data-abrir],[data-baixar],[data-enviar],[data-adicionar]");
   if (!el) return;
   const d = el.dataset;
-  if (d.alternar) {
-    if (filtro.busca || filtro.frente !== "Todas") return;
-    bib.fechadas.has(d.alternar) ? bib.fechadas.delete(d.alternar) : bib.fechadas.add(d.alternar);
-    gravarLocal("wl.bib.fechadas", [...bib.fechadas]);
-    el.closest(".secao").classList.toggle("fechada");
-  } else if (d.abrir) {
-    const a = acharArquivo(d.abrir);
-    if (a) window.open(a.webUrl, "_blank", "noopener");
+  if (d.abrir) {
+    const f = acharArquivo(d.abrir);
+    if (f) window.open(f.webUrl, "_blank", "noopener");
   } else if (d.baixar) {
     el.disabled = true;
     try {
@@ -686,15 +858,59 @@ $("bibLista").onclick = async e => {
     } catch (err) { toast("Falha ao baixar: " + err.message, "erro"); }
     finally { el.disabled = false; }
   } else if (d.enviar) {
-    const [pasta, nome] = decodeURIComponent(d.enviar).split("|");
-    const item = CATALOGO.itens.find(i => i.pasta === pasta && i.nome === nome);
-    const arq = await escolherArquivo("." + item.ext + (item.ext === "docx" ? ",.doc" : item.ext === "pptx" ? ",.ppt" : item.ext === "xlsx" ? ",.xls" : ""));
-    if (arq) enviarParaBiblioteca(pasta, arq, nome);
+    const [aid, sid, nome] = decodeURIComponent(d.enviar).split("|");
+    const item = CATALOGO.itens.find(i => i.area === aid && i.sub === sid && i.nome === nome);
+    const extra = { docx: ",.doc", pptx: ",.ppt", xlsx: ",.xls" }[item.ext] || "";
+    const arq = await escolherArquivo("." + item.ext + extra);
+    if (arq) enviarParaBiblioteca(aid, sid, arq, nome);
   } else if (d.adicionar) {
+    const [aid, sid] = d.adicionar.split("|");
     const arq = await escolherArquivo();
-    if (arq) enviarParaBiblioteca(d.adicionar, arq, null);
+    if (arq) enviarParaBiblioteca(aid, sid, arq, null);
   }
 };
+
+/* ---- Migração da organização anterior (pastas "01 - ...") para Área/Etapa ---- */
+async function idPasta(a, s) {
+  const k = chaveSub(a.id, s.id);
+  if (!bib.idsPasta[k]) { await garantirPastaSub(a, s); bib.idsPasta[k] = (await lerMeta(relSub(a, s))).id; }
+  return bib.idsPasta[k];
+}
+async function mover(item, destinoId) {
+  const corpo = nome => JSON.stringify({ parentReference: { id: destinoId }, ...(nome ? { name: nome } : {}) });
+  const opc = nome => ({ method: "PATCH", headers: { "Content-Type": "application/json" }, body: corpo(nome) });
+  try { await graph(`/me/drive/items/${item.id}`, opc()); }
+  catch (e) {
+    if (e.status !== 409) throw e;
+    await graph(`/me/drive/items/${item.id}`, opc(`${semExt(item.name)} (anterior).${extDe(item.name)}`));
+  }
+}
+async function migrar() {
+  const botao = $("btnMigrar");
+  botao.disabled = true;
+  chip("sincronizando", "Reorganizando…");
+  let movidos = 0;
+  try {
+    for (const pasta of bib.legado) {
+      const [padA, padS] = CATALOGO.legado[pasta].split("/");
+      const arquivos = (await listar(`acervo/${pasta}`)).filter(i => i.file);
+      for (const f of arquivos) {
+        const item = CATALOGO.itens.find(i => norm(i.nome) === norm(semExt(f.name)));
+        const a = areaPorId(item ? item.area : padA), s = subPorId(a, item ? item.sub : padS);
+        toast(`Movendo "${f.name}"…`, "prog", 0);
+        await mover(f, await idPasta(a, s));
+        movidos++;
+      }
+      if (!(await listar(`acervo/${pasta}`)).length) await graph(caminho(`acervo/${pasta}`), { method: "DELETE" });
+    }
+    toast(`Reorganização concluída: ${movidos} material(is) movido(s)`);
+    await carregarBiblioteca();
+  } catch (e) {
+    chip("erro", "Erro");
+    toast("Falha ao reorganizar: " + e.message, "erro", 7000);
+    botao.disabled = false;
+  }
+}
 
 /* ================== SISTEMA: DIAGNÓSTICO ================== */
 const passos = {};
@@ -812,10 +1028,8 @@ async function abrirApp() {
   $("menuEmail").textContent = conta.username;
   $("iniciais").textContent = nome.split(/\s+/).map(p => p[0]).slice(0, 2).join("").toUpperCase();
   montarNav();
-  montarFiltros();
   const cache = lerLocal(BIB_CACHE);
-  if (cache?.arquivos) { bib.arquivos = cache.arquivos; bib.carregado = true; }
-  renderBiblioteca();
+  if (cache?.arquivos) { bib.arquivos = cache.arquivos; bib.legado = cache.legado || []; bib.carregado = true; }
   mostrar("telaApp");
   irPara(location.hash.slice(1) || "biblioteca");
   carregarBiblioteca();
@@ -829,7 +1043,7 @@ $("btnSair").onclick = e => {
   try { localStorage.removeItem(BIB_CACHE); } catch {}
   msal.logoutRedirect({ account: conta });
 };
-$("avatar").onclick = () => $("menu").classList.toggle("oculto");
+$("avatar").onclick = e => { e.stopPropagation(); fecharMenus(); $("menu").classList.toggle("oculto"); };
 document.addEventListener("click", e => { if (!$("avatar").contains(e.target)) $("menu").classList.add("oculto"); });
 
 let promptInstalar;
