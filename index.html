@@ -465,6 +465,7 @@
   <symbol id="i-busca" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
   <symbol id="i-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-trocar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></symbol>
+  <symbol id="i-editar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
   <symbol id="i-atual" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></symbol>
   <symbol id="i-a-com" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
   <symbol id="i-a-bpo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
@@ -832,7 +833,15 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") fecharMenus(
 
 /* ================== BIBLIOTECA ================== */
 const BIB_CACHE = "wl.biblioteca.v2";
-const bib = { arquivos: {}, legado: [], carregado: false, carregando: false, idsPasta: {} };
+const bib = { arquivos: {}, legado: [], carregado: false, carregando: false, idsPasta: {}, meta: { versao: 1, arquivos: {} } };
+/* Dados extras dos materiais (nome editado ligado ao catálogo, descrição) em WL-Sistema/dados/biblioteca.json, por id do arquivo */
+const ARQ_META_BIB = "dados/biblioteca.json";
+async function salvarMetaBib(alterar) {
+  const r = await salvarComSeguranca(ARQ_META_BIB, d => { d.arquivos = d.arquivos || {}; alterar(d); }, { versao: 1, arquivos: {} });
+  bib.meta = r.dados;
+}
+/* OneDrive não aceita estes caracteres em nomes de arquivo */
+const limparNome = n => String(n || "").replace(/\s*:\s*/g, " – ").replace(/[\\/:*?"<>|#%]+/g, "-").replace(/\s+/g, " ").trim().replace(/[. ]+$/, "").slice(0, 120);
 let filtroBusca = "";
 const areaPorId = id => CATALOGO.areas.find(a => a.id === id);
 const subPorId = (a, id) => a?.subs.find(s => s.id === id);
@@ -863,8 +872,9 @@ async function carregarBiblioteca(manual = false) {
       catch (e) { if (e.status !== 404) throw e; await garantirPastaSub(a, s); return [chaveSub(a.id, s.id), []]; }
     }));
     bib.arquivos = Object.fromEntries(listas);
+    try { bib.meta = (await lerJSON(ARQ_META_BIB)).dados || { versao: 1, arquivos: {} }; } catch {}
     bib.carregado = true;
-    gravarLocal(BIB_CACHE, { arquivos: bib.arquivos, legado: bib.legado, em: Date.now() });
+    gravarLocal(BIB_CACHE, { arquivos: bib.arquivos, legado: bib.legado, meta: bib.meta, em: Date.now() });
     bib.erro = null;
     chip("", "Sincronizado");
     if (manual) toast("Biblioteca atualizada");
@@ -880,11 +890,16 @@ async function carregarBiblioteca(manual = false) {
 // Junta o catálogo com os arquivos reais de uma etapa
 function itensDe(aid, sid) {
   const arquivos = [...(bib.arquivos[chaveSub(aid, sid)] || [])];
+  const meta = bib.meta?.arquivos || {};
   const itens = CATALOGO.itens.filter(i => i.area === aid && i.sub === sid).map(i => {
-    const k = arquivos.findIndex(a => norm(semExt(a.name)) === norm(i.nome));
-    return { ...i, arquivo: k >= 0 ? arquivos.splice(k, 1)[0] : null };
+    const chave = [i.area, i.sub, i.nome].join("|");
+    // 1º: arquivo ligado a este item (nome editado); 2º: arquivo com o nome padrão
+    let k = arquivos.findIndex(a => meta[a.id]?.catalogo === chave);
+    if (k < 0) k = arquivos.findIndex(a => !meta[a.id]?.catalogo && norm(semExt(a.name)) === norm(i.nome));
+    const arquivo = k >= 0 ? arquivos.splice(k, 1)[0] : null;
+    return { ...i, chave, nome: arquivo ? semExt(arquivo.name) : i.nome, descricao: (arquivo && meta[arquivo.id]?.descricao) || i.descricao, arquivo };
   });
-  for (const a of arquivos) itens.push({ area: aid, sub: sid, nome: semExt(a.name), ext: extDe(a.name), descricao: "Material adicionado ao acervo.", arquivo: a, avulso: true });
+  for (const a of arquivos) itens.push({ area: aid, sub: sid, nome: semExt(a.name), ext: extDe(a.name), descricao: meta[a.id]?.descricao || "Material adicionado ao acervo.", arquivo: a, avulso: true });
   return itens;
 }
 function contagem(aid, sid) {
@@ -919,6 +934,7 @@ function htmlItem(i, mostrarLocal = false) {
     <div class="info"><b>${esc(i.nome)}</b><p>${esc(i.descricao)}</p>
       <div class="linha-meta">${local}<span class="meta">${tamanho(f.size)} · atualizado em ${data(f.lastModifiedDateTime)}</span></div></div>
     <div class="acoes">
+      <button class="acao" data-editar="${encodeURIComponent(JSON.stringify([i.area, i.sub, f.id, i.chave || ""]))}" title="Editar nome e descrição"><svg><use href="#i-editar"/></svg><span>Editar</span></button>
       <button class="acao" data-substituir="${encodeURIComponent([i.area, i.sub, i.nome, f.id].join("|"))}" title="Substituir por uma nova versão"><svg><use href="#i-trocar"/></svg><span>Substituir</span></button>
       <button class="acao" data-abrir="${f.id}" title="Abrir no navegador"><svg><use href="#i-abrir"/></svg><span>Abrir</span></button>
       <button class="acao prim" data-baixar="${f.id}" title="Baixar"><svg><use href="#i-baixar"/></svg><span>Baixar</span></button>
@@ -1049,24 +1065,93 @@ function escolherArquivo() {
     inp.click();
   });
 }
-async function enviarParaBiblioteca(aid, sid, arquivo, nomeDestino) {
+async function enviarParaBiblioteca(aid, sid, arquivo, nomeDestino, conflito, descricao) {
   const a = areaPorId(aid), s = subPorId(a, sid);
-  const nome = nomeDestino ? `${nomeDestino}.${extDe(arquivo.name)}` : arquivo.name;
+  const nome = `${nomeDestino}.${extDe(arquivo.name)}`;
   chip("sincronizando", "Enviando…");
-  toast(`Enviando "${nome}"…`, "prog", 0);
+  toast(`Enviando "${nomeDestino}"…`, "prog", 0);
   try {
     await garantirPastaSub(a, s);
-    await enviarArquivo(`${relSub(a, s)}/${nome}`, arquivo, nomeDestino ? "replace" : "rename",
-      f => toast(`Enviando "${nome}"… ${Math.round(f * 100)}%`, "prog", 0));
-    toast(`"${nome}" adicionado em ${s.nome}`);
+    const item = await enviarArquivo(`${relSub(a, s)}/${nome}`, arquivo, conflito,
+      f => toast(`Enviando "${nomeDestino}"… ${Math.round(f * 100)}%`, "prog", 0));
+    if (descricao && item?.id) await salvarMetaBib(m => { m.arquivos[item.id] = { ...(m.arquivos[item.id] || {}), descricao }; });
+    toast(`"${nomeDestino}" adicionado em ${s.nome}`);
     await carregarBiblioteca();
+    return true;
   } catch (e) {
-    chip("erro", "Erro");
-    toast("Falha no envio: " + e.message, "erro", 6000);
+    chip(e.status === 409 ? "" : "erro", e.status === 409 ? "Sincronizado" : "Erro");
+    toast(e.status === 409 ? `Já existe um material chamado "${nomeDestino}" nesta etapa. Escolha outro nome.` : "Falha no envio: " + e.message, "erro", 6000);
+    if (e.status !== 409) await carregarBiblioteca();
+    return false;
   }
 }
+
+/* Adicionar: pergunta o nome que o material terá no sistema */
+function nomearEEnviar(aid, sid, arq, nomeSugerido = "", descSugerida = "") {
+  const s = subPorId(areaPorId(aid), sid);
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Adicionar material</h3></div>
+    <form class="modal-corpo" id="formAdd">
+      <p style="font-size:.8rem;color:var(--txt-2)">Arquivo escolhido: <b>${esc(arq.name)}</b> (${tamanho(arq.size)}) · etapa <b>${esc(s.nome)}</b></p>
+      <div class="campo"><label>Nome no sistema *</label><input id="addNome" maxlength="120" value="${esc(nomeSugerido)}" placeholder="Ex.: Modelo de Proposta – Clínicas" autocomplete="off"></div>
+      <div class="campo"><label>Descrição (opcional)</label><textarea id="addDesc" placeholder="Para que serve este material?">${esc(descSugerida)}</textarea></div>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Adicionar</button></div>
+    </form>`);
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  $("addNome").focus();
+  $("formAdd").onsubmit = async e => {
+    e.preventDefault();
+    const nome = limparNome($("addNome").value), desc = $("addDesc").value.trim();
+    if (!nome) { toast("Dê um nome ao material", "erro"); return $("addNome").focus(); }
+    fecharModal();
+    const ok = await enviarParaBiblioteca(aid, sid, arq, nome, "fail", desc);
+    if (!ok) nomearEEnviar(aid, sid, arq, nome, desc);
+  };
+}
+
+/* Editar nome e descrição de um material */
+function editarMaterial(aid, sid, f, chaveCat) {
+  const atualNome = semExt(f.name), ext = extDe(f.name);
+  const itemCat = chaveCat ? CATALOGO.itens.find(i => [i.area, i.sub, i.nome].join("|") === chaveCat) : null;
+  const descAtual = bib.meta?.arquivos?.[f.id]?.descricao || itemCat?.descricao || "";
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Editar material</h3></div>
+    <form class="modal-corpo" id="formEdit">
+      <div class="campo"><label>Nome no sistema *</label><input id="edNome" maxlength="120" value="${esc(atualNome)}" autocomplete="off"></div>
+      <div class="campo"><label>Descrição</label><textarea id="edDesc">${esc(descAtual)}</textarea></div>
+      <p style="font-size:.76rem;color:var(--txt-2)">O arquivo também é renomeado no OneDrive (continua .${esc(ext)}).${itemCat && norm(itemCat.nome) !== norm(atualNome) ? ` Nome padrão do catálogo: <b>${esc(itemCat.nome)}</b>.` : ""}</p>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Salvar</button></div>
+    </form>`);
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  const inp = $("edNome"); inp.focus(); inp.select();
+  $("formEdit").onsubmit = async e => {
+    e.preventDefault();
+    const nome = limparNome($("edNome").value), desc = $("edDesc").value.trim();
+    if (!nome) { toast("Dê um nome ao material", "erro"); return $("edNome").focus(); }
+    const btn = e.target.querySelector("[type=submit]"); btn.disabled = true;
+    chip("sincronizando", "Salvando…");
+    try {
+      if (nome !== atualNome) {
+        await graph(`/me/drive/items/${f.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: `${nome}.${ext}` }) });
+      }
+      await salvarMetaBib(mm => {
+        const reg = { ...(mm.arquivos[f.id] || {}) };
+        if (chaveCat) reg.catalogo = chaveCat;
+        if (desc && desc !== itemCat?.descricao) reg.descricao = desc; else delete reg.descricao;
+        if (Object.keys(reg).length) mm.arquivos[f.id] = reg; else delete mm.arquivos[f.id];
+      });
+      fecharModal();
+      toast("Material atualizado");
+      await carregarBiblioteca();
+    } catch (err) {
+      btn.disabled = false;
+      chip(err.status === 409 ? "" : "erro", err.status === 409 ? "Sincronizado" : "Erro");
+      toast(err.status === 409 ? `Já existe um material chamado "${nome}" nesta etapa.` : "Não foi possível salvar: " + err.message, "erro", 6000);
+    }
+  };
+}
 $("bibConteudo").onclick = async e => {
-  const el = e.target.closest("[data-abrir],[data-baixar],[data-enviar],[data-adicionar],[data-substituir]");
+  const el = e.target.closest("[data-abrir],[data-baixar],[data-enviar],[data-adicionar],[data-substituir],[data-editar]");
   if (!el) return;
   const d = el.dataset;
   if (d.abrir) {
@@ -1087,7 +1172,11 @@ $("bibConteudo").onclick = async e => {
     const [aid, sid, nome] = decodeURIComponent(d.enviar).split("|");
     const item = CATALOGO.itens.find(i => i.area === aid && i.sub === sid && i.nome === nome);
     const arq = await escolherArquivo();
-    if (arq) enviarParaBiblioteca(aid, sid, arq, nome);
+    if (arq) enviarParaBiblioteca(aid, sid, arq, nome, "replace");
+  } else if (d.editar) {
+    const [aid, sid, idArq, chaveCat] = JSON.parse(decodeURIComponent(d.editar));
+    const f = acharArquivo(idArq);
+    if (f) editarMaterial(aid, sid, f, chaveCat);
   } else if (d.substituir) {
     const [aid, sid, nome, idArq] = decodeURIComponent(d.substituir).split("|");
     const atual = acharArquivo(idArq);
@@ -1097,7 +1186,7 @@ $("bibConteudo").onclick = async e => {
   } else if (d.adicionar) {
     const [aid, sid] = d.adicionar.split("|");
     const arq = await escolherArquivo();
-    if (arq) enviarParaBiblioteca(aid, sid, arq, null);
+    if (arq) nomearEEnviar(aid, sid, arq);
   }
 };
 
@@ -1122,8 +1211,12 @@ function confirmarSubstituicao(aid, sid, nome, atual, arq) {
     chip("sincronizando", "Enviando…");
     toast(`Substituindo "${nome}"…`, "prog", 0);
     try {
-      await enviarArquivo(`${relSub(a, s)}/${destino}`, arq, "replace", f => toast(`Substituindo "${nome}"… ${Math.round(f * 100)}%`, "prog", 0));
-      if (!mesmoFormato) await graph(`/me/drive/items/${atual.id}`, { method: "DELETE" });
+      const novo = await enviarArquivo(`${relSub(a, s)}/${destino}`, arq, "replace", f => toast(`Substituindo "${nome}"… ${Math.round(f * 100)}%`, "prog", 0));
+      if (!mesmoFormato) {
+        await graph(`/me/drive/items/${atual.id}`, { method: "DELETE" });
+        const reg = bib.meta?.arquivos?.[atual.id];
+        if (reg && novo?.id) await salvarMetaBib(mm => { mm.arquivos[novo.id] = { ...(mm.arquivos[atual.id] || reg) }; delete mm.arquivos[atual.id]; });
+      }
       toast(`"${nome}" substituído`);
       await carregarBiblioteca();
     } catch (e) {
@@ -1996,7 +2089,7 @@ async function abrirApp() {
   $("iniciais").textContent = nome.split(/\s+/).map(p => p[0]).slice(0, 2).join("").toUpperCase();
   montarNav();
   const cache = lerLocal(BIB_CACHE);
-  if (cache?.arquivos) { bib.arquivos = cache.arquivos; bib.legado = cache.legado || []; bib.carregado = true; }
+  if (cache?.arquivos) { bib.arquivos = cache.arquivos; bib.legado = cache.legado || []; if (cache.meta) bib.meta = cache.meta; bib.carregado = true; }
   const cacheCRM = lerLocal(CRM_CACHE);
   if (cacheCRM?.dados) { crm.dados = cacheCRM.dados; crm.eTag = cacheCRM.eTag; crm.carregado = true; }
   mostrar("telaApp");
