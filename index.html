@@ -216,6 +216,12 @@
   .acao.enviar{border-style:dashed;border-color:#C9D6D6;color:var(--txt-2)}
   .acao.enviar:hover{border-color:var(--turq);color:var(--turq)}
   .acao svg{width:16px;height:16px}
+  .acoes .acao{width:38px;padding:0;justify-content:center;position:relative}
+  .acao.perigo-ico:hover{color:var(--erro);border-color:rgba(200,70,61,.4)}
+  [data-dica]{position:relative}
+  [data-dica]:hover::after,[data-dica]:focus-visible::after{content:attr(data-dica);position:absolute;right:calc(100% + 7px);top:50%;transform:translateY(-50%);
+    background:var(--txt);color:#fff;font-size:.7rem;font-weight:600;padding:5px 9px;border-radius:7px;white-space:nowrap;z-index:15;pointer-events:none;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+  @media(hover:none){[data-dica]:hover::after{display:none}}
   .acao:disabled{opacity:.5;cursor:wait}
   .adicionar{display:flex;align-items:center;gap:8px;width:100%;padding:14px 18px;border-top:1px solid var(--borda);font-size:.82rem;font-weight:600;color:var(--turq)}
   .adicionar:hover{background:var(--bg)}
@@ -229,8 +235,8 @@
   @media(max-width:640px){
     .mat{padding:12px 14px;gap:12px;align-items:flex-start}
     .tipo{width:36px;height:42px;font-size:.56rem}
-    .acoes{flex-direction:column}
-    .acao{width:40px;height:36px;padding:0;justify-content:center}
+    .acoes{flex-wrap:wrap;justify-content:flex-end;max-width:84px}
+    .acoes .acao{width:38px;height:36px}
     .acao span{display:none}
     .areas{grid-template-columns:minmax(0,1fr)}
     .etapas{grid-template-columns:minmax(0,1fr)}
@@ -576,6 +582,7 @@
   <symbol id="i-editar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
   <symbol id="i-atd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></symbol>
   <symbol id="i-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 18h4"/></symbol>
+  <symbol id="i-lixo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></symbol>
   <symbol id="i-atual" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></symbol>
   <symbol id="i-a-com" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
   <symbol id="i-a-bpo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
@@ -1062,7 +1069,7 @@ function htmlItem(i, mostrarLocal = false) {
       <span class="tipo ${classeTipo}">${rotulo}</span>
       <div class="info"><b>${esc(i.nome)}</b><p>${esc(i.descricao)}</p>
         <div class="linha-meta"><span class="tag pend">Pendente de envio</span>${local}</div></div>
-      <div class="acoes"><button class="acao enviar" data-enviar="${id}" title="Enviar arquivo"><svg><use href="#i-enviar"/></svg><span>Enviar</span></button></div>
+      <div class="acoes"><button class="acao enviar" data-enviar="${id}" data-dica="Enviar arquivo" aria-label="Enviar arquivo"><svg><use href="#i-enviar"/></svg></button></div>
     </li>`;
   }
   const f = i.arquivo;
@@ -1071,10 +1078,10 @@ function htmlItem(i, mostrarLocal = false) {
     <div class="info"><b>${esc(i.nome)}</b><p>${esc(i.descricao)}</p>
       <div class="linha-meta">${local}<span class="meta">${tamanho(f.size)} · atualizado em ${data(f.lastModifiedDateTime)}</span></div></div>
     <div class="acoes">
-      <button class="acao" data-editar="${encodeURIComponent(JSON.stringify([i.area, i.sub, f.id, i.chave || ""]))}" title="Editar nome e descrição"><svg><use href="#i-editar"/></svg><span>Editar</span></button>
-      <button class="acao" data-substituir="${encodeURIComponent([i.area, i.sub, i.nome, f.id].join("|"))}" title="Substituir por uma nova versão"><svg><use href="#i-trocar"/></svg><span>Substituir</span></button>
-      <button class="acao" data-abrir="${f.id}" title="Abrir no navegador"><svg><use href="#i-abrir"/></svg><span>Abrir</span></button>
-      <button class="acao prim" data-baixar="${f.id}" title="Baixar"><svg><use href="#i-baixar"/></svg><span>Baixar</span></button>
+      <button class="acao" data-editar="${encodeURIComponent(JSON.stringify([i.area, i.sub, f.id, i.chave || ""]))}" data-dica="Editar registro" aria-label="Editar registro"><svg><use href="#i-editar"/></svg></button>
+      <button class="acao" data-substituir="${encodeURIComponent([i.area, i.sub, i.nome, f.id].join("|"))}" data-dica="Substituir arquivo" aria-label="Substituir arquivo"><svg><use href="#i-trocar"/></svg></button>
+      <button class="acao" data-abrir="${f.id}" data-dica="Visualizar" aria-label="Visualizar"><svg><use href="#i-abrir"/></svg></button>
+      <button class="acao prim" data-baixar="${f.id}" data-dica="Baixar" aria-label="Baixar"><svg><use href="#i-baixar"/></svg></button>
     </div>
   </li>`;
 }
@@ -2365,6 +2372,11 @@ function renderListaDiag() {
           <small>${esc(d.id)} · ${d.status === "finalizado" ? `finalizado em ${data(d.finalizadoEm)}` : `em edição · ${p.feitas}/${p.total} respostas`} · atualizado ${dataHora(d.atualizadoEm)} por ${esc(d.atualizadoPor || "")}</small></div>
         ${mt ? `<span class="chip-etapa" style="--cor:${corNivel(mt.pct)}"><i></i>${mt.pct}% · ${mt.nivel}</span>` : ""}
         <span class="chip-etapa ${d.status}" style="--cor:${d.status === "finalizado" ? "var(--verde)" : "var(--alerta)"}"><i></i>${d.status === "finalizado" ? "Finalizado" : "Em edição"}</span>
+        <div class="acoes">
+          <button class="acao" data-dica="Editar" data-diag-acao="editar" data-diag="${d.id}"><svg><use href="#i-editar"/></svg></button>
+          <button class="acao" data-dica="Emitir PDF" data-diag-acao="pdf" data-diag="${d.id}"><svg><use href="#i-pdf"/></svg></button>
+          <button class="acao perigo-ico" data-dica="Excluir" data-diag-acao="excluir" data-diag="${d.id}"><svg><use href="#i-lixo"/></svg></button>
+        </div>
       </li>`;
     }).join("")}</ul>` : `<div class="vazio-etapa"><b>${diags().length ? "Nenhum diagnóstico com esse filtro" : "Nenhum diagnóstico ainda"}</b>${diags().length ? "" : "Clique em “Novo diagnóstico” para começar."}</div>`}</section>`;
   $("abasDiag").onclick = e => { const b = e.target.closest("[data-st]"); if (b) { filtroDiag.status = b.dataset.st; renderListaDiag(); } };
@@ -2509,7 +2521,7 @@ function abrirDiag(id) {
         ${fin ? `<div class="fin-ok">✓ Finalizado em ${data(dd.finalizadoEm)}</div>` : `<button class="btn-p" data-atd="finalizar" style="justify-content:center">Finalizar diagnóstico</button>`}
         <button class="btn-s" data-atd="pdf" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Gerar PDF</button>
         ${dd.pdf?.webUrl ? `<a class="lnk-pdf" href="${esc(dd.pdf.webUrl)}" target="_blank" rel="noopener">Último PDF salvo · ${dataHora(dd.pdf.em)}</a>` : ""}
-        ${fin ? "" : `<button class="perigo" data-atd="excluirDiag">Excluir rascunho</button>`}
+        <button class="perigo" data-atd="excluirDiag" style="justify-self:center">Excluir diagnóstico</button>
       </section>
     </aside>
   </div>`;
@@ -2721,9 +2733,31 @@ async function gerarPDFDiag(dd) {
   }
 }
 
+async function excluirDiag(d) {
+  const fin = d.status === "finalizado";
+  if (!confirmar(`Excluir o diagnóstico ${d.id} de ${d.cliente?.empresa || "cliente"}?` + (fin ? "\n\nEle já foi finalizado: o registro no histórico do CRM e o PDF salvo na pasta do cliente serão mantidos." : ""))) return;
+  if (diagAtual?.id === d.id) { diagAtual = null; diagPendente = false; clearTimeout(timerDiag); }
+  try {
+    await salvarStore(diagStore, x => { x.diagnosticos = x.diagnosticos.filter(y => y.id !== d.id); });
+    if (d.leadId && crm.carregado && leadPorId(d.leadId)) alterarLead(d.leadId, l => registrar(l, "nota", `Diagnóstico ${d.id} excluído`));
+    toast(`Diagnóstico ${d.id} excluído`);
+    if (rota[2]) location.hash = "atendimento/bpo/diagnostico"; else renderListaDiag();
+  } catch (e) { toast("Não foi possível excluir: " + e.message, "erro", 6000); }
+}
+
 /* ---- Cliques gerais do módulo ---- */
 $("atdAcoes").onclick = e => { if (e.target.closest("[data-atd=novo]")) novoDiagnostico(); };
 $("atdConteudo").addEventListener("click", async e => {
+  const ac = e.target.closest("[data-diag-acao]");
+  if (ac) {
+    e.stopPropagation();
+    const d = diags().find(x => x.id === ac.dataset.diag);
+    if (!d) return;
+    if (ac.dataset.diagAcao === "editar") location.hash = `atendimento/bpo/diagnostico/${d.id}`;
+    if (ac.dataset.diagAcao === "pdf") { ac.disabled = true; await gerarPDFDiag(structuredClone(d)); ac.disabled = false; }
+    if (ac.dataset.diagAcao === "excluir") excluirDiag(d);
+    return;
+  }
   const el = e.target.closest("[data-abrir-diag],[data-atd]");
   if (!el) return;
   if (el.dataset.abrirDiag) { location.hash = `atendimento/bpo/diagnostico/${el.dataset.abrirDiag}`; return; }
@@ -2732,13 +2766,7 @@ $("atdConteudo").addEventListener("click", async e => {
   if (a === "finalizar") { el.disabled = true; await finalizarDiag(); el.disabled = false; }
   if (a === "pdf") { el.disabled = true; await gerarPDFDiag(diagAtual); el.disabled = false; }
   if (a === "verLead") { if (!crm.carregado) await carregarCRM(true); abrirLead(diagAtual.leadId); }
-  if (a === "excluirDiag") {
-    if (!confirmar("Excluir este rascunho de diagnóstico?")) return;
-    const id = diagAtual.id; diagAtual = null; diagPendente = false; clearTimeout(timerDiag);
-    await salvarStore(diagStore, d => { d.diagnosticos = d.diagnosticos.filter(x => x.id !== id); });
-    toast("Rascunho excluído");
-    location.hash = "atendimento/bpo/diagnostico";
-  }
+  if (a === "excluirDiag") excluirDiag(diags().find(x => x.id === diagAtual.id) || diagAtual);
 });
 
 /* ================== SISTEMA: DIAGNÓSTICO ================== */
