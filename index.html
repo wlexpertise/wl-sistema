@@ -190,7 +190,7 @@
   .mat:first-child{border-top:0}
   .tipo{flex:none;width:42px;height:48px;border-radius:8px;display:grid;place-items:center;font-size:.62rem;font-weight:800;letter-spacing:.04em;color:#fff;position:relative}
   .tipo::after{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 10px 10px 0;border-color:transparent var(--card) rgba(255,255,255,.35) transparent}
-  .t-pdf{background:#C8463D} .t-xlsx,.t-xls,.t-csv{background:#1E7B4A} .t-docx,.t-doc{background:#2B5797} .t-pptx,.t-ppt{background:#C55A11}
+  .t-pdf{background:#C8463D} .t-xlsx,.t-xls,.t-csv{background:#1E7B4A} .t-docx,.t-doc{background:#2B5797} .t-pptx,.t-ppt{background:#C55A11} .t-html,.t-htm{background:#6B4FA0}
   .t-outro{background:var(--txt-2)}
   .mat.pendente .tipo{background:transparent!important;color:var(--txt-2);border:1.5px dashed #C9D6D6}
   .mat.pendente .tipo::after{display:none}
@@ -697,8 +697,8 @@ function totalGeral() {
 
 function htmlItem(i, mostrarLocal = false) {
   const ext = i.arquivo ? extDe(i.arquivo.name) : i.ext;
-  const classeTipo = ["pdf", "xlsx", "xls", "csv", "docx", "doc", "pptx", "ppt"].includes(ext) ? "t-" + ext : "t-outro";
-  const rotulo = { xlsx: "XLS", docx: "DOC", pptx: "PPT" }[ext] || ext.toUpperCase().slice(0, 4) || "ARQ";
+  const classeTipo = ["pdf", "xlsx", "xls", "csv", "docx", "doc", "pptx", "ppt", "html", "htm"].includes(ext) ? "t-" + ext : "t-outro";
+  const rotulo = { xlsx: "XLS", docx: "DOC", pptx: "PPT", html: "HTML", htm: "HTML" }[ext] || ext.toUpperCase().slice(0, 4) || "ARQ";
   const a = areaPorId(i.area), s = subPorId(a, i.sub);
   const local = mostrarLocal ? `<span class="tag local" data-link="${linkBib(a.id, s.id)}">${esc(a.nome)} › ${esc(s.nome)}</span>` : "";
   const id = encodeURIComponent([i.area, i.sub, i.nome].join("|"));
@@ -814,12 +814,34 @@ function renderBusca() {
 function acharArquivo(id) {
   for (const lista of Object.values(bib.arquivos)) { const a = lista.find(x => x.id === id); if (a) return a; }
 }
-function escolherArquivo(accept) {
+/* Formatos aceitos em todos os envios do sistema */
+const FORMATOS = {
+  pdf: "application/pdf",
+  doc: "application/msword",
+  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  xls: "application/vnd.ms-excel",
+  xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  csv: "text/csv",
+  html: "text/html",
+  htm: "text/html",
+  ppt: "application/vnd.ms-powerpoint",
+  pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+};
+const ACCEPT = [...Object.keys(FORMATOS).map(e => "." + e), ...new Set(Object.values(FORMATOS))].join(",");
+const LISTA_FORMATOS = "PDF, Word (DOCX), Excel (XLSX), CSV, HTML ou PowerPoint (PPTX)";
+function escolherArquivo() {
   return new Promise(resolve => {
     const inp = document.createElement("input");
     inp.type = "file";
-    if (accept) inp.accept = accept;
-    inp.onchange = () => resolve(inp.files[0] || null);
+    inp.accept = ACCEPT;
+    inp.onchange = () => {
+      const arq = inp.files[0] || null;
+      if (arq && !FORMATOS[extDe(arq.name)]) {
+        toast(`Formato não aceito (.${extDe(arq.name) || "?"}). Envie ${LISTA_FORMATOS}.`, "erro", 6000);
+        return resolve(null);
+      }
+      resolve(arq);
+    };
     inp.click();
   });
 }
@@ -860,8 +882,7 @@ $("bibConteudo").onclick = async e => {
   } else if (d.enviar) {
     const [aid, sid, nome] = decodeURIComponent(d.enviar).split("|");
     const item = CATALOGO.itens.find(i => i.area === aid && i.sub === sid && i.nome === nome);
-    const extra = { docx: ",.doc", pptx: ",.ppt", xlsx: ",.xls" }[item.ext] || "";
-    const arq = await escolherArquivo("." + item.ext + extra);
+    const arq = await escolherArquivo();
     if (arq) enviarParaBiblioteca(aid, sid, arq, nome);
   } else if (d.adicionar) {
     const [aid, sid] = d.adicionar.split("|");
