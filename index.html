@@ -402,6 +402,59 @@
   .timeline .t b{font-weight:600}
   .timeline .t p{color:var(--txt);margin-top:2px;white-space:pre-wrap;word-break:break-word}
   .timeline .t small{display:block;color:var(--txt-2);font-size:.7rem;margin-top:2px}
+  .lista-acoes-lead{list-style:none;display:grid;gap:2px;margin-bottom:10px}
+  .lista-acoes-lead li{display:flex;align-items:center;gap:10px;padding:9px 4px;border-top:1px solid var(--borda)}
+  .lista-acoes-lead li:first-child{border-top:0}
+  .lista-acoes-lead .q{flex:1;min-width:0}
+  .lista-acoes-lead .q b{display:block;font-size:.85rem;font-weight:600}
+  .lista-acoes-lead .q small{display:block;font-size:.7rem;color:var(--txt-2);margin-top:1px}
+  .chk-acao{flex:none;width:22px;height:22px;border-radius:7px;border:2px solid #B9C9C9;background:#fff;display:grid;place-items:center;color:#fff;font-size:.75rem;font-weight:800}
+  .chk-acao:hover{border-color:var(--verde);background:rgba(40,178,96,.12)}
+  .chk-acao.feito{background:var(--verde);border-color:var(--verde)}
+  .feitas .q b{text-decoration:line-through;color:var(--txt-2);font-weight:500}
+  .x-acao{color:var(--txt-2);font-size:1.1rem;padding:2px 6px;border-radius:6px}
+  .x-acao:hover{color:var(--erro);background:var(--bg)}
+  .form-acao{display:grid;grid-template-columns:minmax(0,1fr) 140px 100px auto;gap:6px}
+  .form-acao input{border:1.5px solid var(--borda);border-radius:10px;padding:9px 10px;font-size:.84rem;font-family:inherit;outline:none;min-width:0}
+  .form-acao input:focus{border-color:var(--turq)}
+  .form-acao .btn-p{padding:0 12px}
+  @media(max-width:520px){.form-acao{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.form-acao input:first-child{grid-column:1/-1}.form-acao .btn-p{grid-column:1/-1;justify-content:center;padding:10px}}
+  .concluidas{margin-top:10px}
+  .concluidas summary{cursor:pointer;font-size:.76rem;font-weight:700;color:var(--turq)}
+  .vazio-acoes{font-size:.8rem;color:var(--txt-2);padding:4px 0 10px}
+  .chk{display:flex;gap:8px;align-items:center;font-size:.8rem;background:var(--bg);padding:9px 10px;border-radius:10px}
+  .resumo-tent{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .resumo-tent span{font-size:.72rem;font-weight:600;color:var(--txt-2);background:var(--bg);padding:5px 9px;border-radius:999px}
+  .resumo-tent b{color:var(--teal)}
+  .lista-tent{list-style:none;max-height:260px;overflow:auto}
+  .lista-tent li{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--borda);flex-wrap:wrap}
+  .lista-tent li:first-child{border-top:0}
+  .lista-tent .n{font-size:.7rem;font-weight:800;color:var(--txt-2);width:24px}
+  .lista-tent .q{flex:1;min-width:120px}
+  .lista-tent .q b{font-size:.82rem;font-weight:600;display:block}
+  .lista-tent .q small{display:block;font-size:.72rem;color:var(--txt-2)}
+  .lista-tent .por{font-size:.68rem;color:var(--txt-2)}
+  .cal-topo{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .cal-topo b{font-size:.88rem;color:var(--teal)}
+  .cal-nav{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--borda);font-size:1.1rem;color:var(--teal)}
+  .cal-grade{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+  .cal-sem{font-size:.66rem;font-weight:700;color:var(--txt-2);text-align:center;padding:2px 0 4px}
+  .cal-dia{aspect-ratio:1/0.85;border-radius:8px;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:.78rem;color:var(--txt)}
+  .cal-dia:hover{background:#E3ECEC}
+  .cal-dia.tem{background:#fff;border:1px solid var(--borda);font-weight:700}
+  .cal-dia.hoje span{background:var(--teal);color:#fff;border-radius:6px;padding:0 5px}
+  .cal-dia.sel{outline:2px solid var(--turq)}
+  .cal-dia i{display:flex;gap:2px;height:6px}
+  .cal-dia i b,.cal-legenda b{width:6px;height:6px;border-radius:50%;display:inline-block}
+  .pt-prevista{background:var(--turq)} .pt-atrasada{background:var(--erro)} .pt-executada{background:var(--verde)}
+  .cal-legenda{display:flex;gap:12px;flex-wrap:wrap;font-size:.7rem;color:var(--txt-2);margin:10px 0 4px}
+  .cal-legenda span{display:flex;align-items:center;gap:5px}
+  .cal-lista{margin-top:10px;border-top:1px solid var(--borda);padding-top:10px;display:grid;gap:6px}
+  .cal-lista-tit{font-size:.78rem;font-weight:700;color:var(--teal)}
+  .cal-ev{display:flex;gap:10px;font-size:.8rem;padding:7px 10px;border-radius:8px;background:var(--bg);border-left:3px solid var(--turq)}
+  .cal-ev span{font-weight:700;color:var(--txt-2);min-width:38px}
+  .cal-ev p{flex:1;line-height:1.4}
+  .ev-executada{border-left-color:var(--verde)} .ev-atrasada{border-left-color:var(--erro)}
   .limbo{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#FFF8EA;border-color:rgba(217,154,30,.35)}
   .limbo b{color:#8A5E07}
   .limbo p{font-size:.8rem;margin-top:2px}
@@ -1541,6 +1594,7 @@ async function migrar() {
 /* Funil da WL: segue o script de vendas (contato → conexão → diagnóstico → proposta → fechamento) */
 const ETAPAS = [
   { id: "abordar",     nome: "A abordar",        prob: 0.05, cor: "#9AA9A9" },
+  { id: "tentativa",   nome: "Tentativa de contato", prob: 0.07, cor: "#D99A1E" },
   { id: "contato",     nome: "Em contato",       prob: 0.10, cor: "#7FB8C0" },
   { id: "agendado",    nome: "Reunião agendada", prob: 0.25, cor: "#13A3B5" },
   { id: "diagnostico", nome: "Diagnóstico feito", prob: 0.40, cor: "#0E8C9C" },
@@ -1553,9 +1607,9 @@ const ORDEM_ETAPA = Object.fromEntries(ETAPAS.map((e, k) => [e.id, k]));
 const etapaDe = id => ETAPAS.find(e => e.id === id) || ETAPAS[0];
 /* Interações: mesmas siglas da Tabela de Trabalho (X, AT, AG, E, F, V). "avanca" move o lead no funil. */
 const INTERACOES = [
-  { id: "nao_atendeu", nome: "Não atendeu",       sigla: "X",  ligacao: true, avanca: "contato" },
-  { id: "atendeu",     nome: "Atendeu",           sigla: "AT", ligacao: true, avanca: "contato" },
-  { id: "mensagem",    nome: "Mensagem enviada",  sigla: "MSG", avanca: "contato" },
+  { id: "nao_atendeu", nome: "Não atendeu",       sigla: "X",  ligacao: true, tentativa: true, avanca: "tentativa" },
+  { id: "atendeu",     nome: "Atendeu",           sigla: "AT", ligacao: true, tentativa: true, avanca: "contato" },
+  { id: "mensagem",    nome: "Mensagem enviada",  sigla: "MSG", tentativa: true, avanca: "tentativa" },
   { id: "agendou",     nome: "Agendou reunião",   sigla: "AG", avanca: "agendado", pedeData: true },
   { id: "diagnostico", nome: "Diagnóstico feito", sigla: "E",  avanca: "diagnostico" },
   { id: "proposta",    nome: "Proposta enviada",  sigla: "F",  avanca: "proposta" },
@@ -1589,6 +1643,7 @@ async function carregarCRM(silencioso = false) {
     const { meta, dados } = await lerJSON(ARQ_CRM);
     crm.eTag = meta?.eTag || null;
     crm.dados = dados || { versao: 1, seq: 0, leads: [] };
+    crm.dados.leads.forEach(normalizarLead);
     crm.carregado = true;
     gravarLocal(CRM_CACHE, { eTag: crm.eTag, dados: crm.dados });
     crm.erro = null;
@@ -1614,6 +1669,7 @@ async function salvarCRM(alterar, msg) {
   const nome = conta.name || conta.username;
   const aplicar = base => {
     const novo = structuredClone(base || { versao: 1, seq: 0, leads: [] });
+    novo.leads.forEach(normalizarLead);
     alterar(novo);
     novo.atualizadoEm = new Date().toISOString();
     novo.atualizadoPor = nome;
@@ -1655,12 +1711,43 @@ function moverEtapa(l, para, motivo) {
   if (para === "perdido") l.motivoPerda = motivo || "";
   if (para === "ganho") l.ganhoEm = new Date().toISOString();
 }
+/* Ações do lead: lista com data de conclusão (substitui a antiga "próxima ação" única) */
+function normalizarLead(l) {
+  if (l.proximaAcao !== undefined) {
+    if (l.proximaAcao && (l.proximaAcao.texto || l.proximaAcao.data)) {
+      l.acoes = l.acoes || [];
+      l.acoes.push({ id: crypto.randomUUID(), texto: l.proximaAcao.texto || "Próxima ação", data: l.proximaAcao.data || "", criadaEm: l.atualizadoEm || new Date().toISOString(), por: "" });
+    }
+    delete l.proximaAcao;
+  }
+  l.acoes = l.acoes || [];
+  return l;
+}
+const pendentes = l => (l.acoes || []).filter(a => !a.concluida).sort((a, b) => (a.data || "9999").localeCompare(b.data || "9999"));
+const concluidas = l => (l.acoes || []).filter(a => a.concluida).sort((a, b) => (b.concluidaEm || "").localeCompare(a.concluidaEm || ""));
+const proxAcao = l => pendentes(l)[0] || null;
+function novaAcao(l, texto, dt) {
+  l.acoes = l.acoes || [];
+  l.acoes.push({ id: crypto.randomUUID(), texto: texto || "Ação", data: dt || "", criadaEm: new Date().toISOString(), por: meuNome() });
+}
+function concluirAcao(l, id, obs) {
+  const a = (l.acoes || []).find(x => x.id === id);
+  if (!a || a.concluida) return;
+  a.concluida = true; a.concluidaEm = new Date().toISOString(); a.concluidaPor = meuNome();
+  registrar(l, "acao", a.texto + (obs ? ` — ${obs}` : ""), { acaoId: a.id });
+}
+const tentativasDe = l => (l.historico || []).filter(h => interacaoDe(h.tipo)?.tentativa);
 function novoId(d) { d.seq = (d.seq || d.leads.length) + 1; return "L-" + String(d.seq).padStart(4, "0"); }
 
 /* ---- Indicadores ---- */
 function ultimaInteracao(l) { return (l.historico || []).find(h => h.tipo !== "etapa"); }
+function statusData(d) {
+  if (!d) return "";
+  const dia = d.slice(0, 10), hoje = hojeISO();
+  return dia < hoje ? "atraso" : dia === hoje ? "hoje" : "futuro";
+}
 function statusAcao(l) {
-  const d = l.proximaAcao?.data;
+  const d = proxAcao(l)?.data;
   if (!d) return "";
   const dia = d.slice(0, 10), hoje = hojeISO();
   return dia < hoje ? "atraso" : dia === hoje ? "hoje" : "futuro";
@@ -1702,7 +1789,7 @@ function renderCRM() {
   else renderLeads();
 }
 $("crmAbas").onclick = e => { const b = e.target.closest("[data-aba]"); if (b) location.hash = "crm/" + b.dataset.aba; };
-const abrirLead = id => { abertoId = id; renderFicha(id); };
+const abrirLead = id => { if (abertoId !== id) { agenda.mes = null; agenda.dia = null; } abertoId = id; renderFicha(id); };
 
 function renderVazioCRM() {
   $("crmConteudo").innerHTML = `<div class="bloco"><div class="vazio-etapa"><b>O CRM ainda está vazio</b>
@@ -1719,12 +1806,14 @@ function renderPainel() {
   const abertos = ativos().filter(l => !["ganho", "perdido"].includes(l.etapa));
   const retomar = leads().filter(l => l.semInteresse?.retomarEm && l.semInteresse.retomarEm <= hojeISO()).sort((a, b) => a.semInteresse.retomarEm.localeCompare(b.semInteresse.retomarEm));
   const nSem = leads().length - ativos().length;
-  const acoes = abertos.filter(l => l.proximaAcao?.data && statusAcao(l) !== "futuro").sort((x, y) => x.proximaAcao.data.localeCompare(y.proximaAcao.data));
-  const proximas = abertos.filter(l => statusAcao(l) === "futuro").sort((x, y) => x.proximaAcao.data.localeCompare(y.proximaAcao.data)).slice(0, 6);
-  const fila = ativos().filter(l => l.etapa === "abordar" && !l.proximaAcao?.data).sort(ordenarPrioridade).slice(0, 8);
-  const itemAcao = l => `<li data-lead="${l.id}"><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span>
-    <div class="q"><b>${esc(l.empresa)}</b><span>${esc(l.proximaAcao.texto || "Próxima ação")} · ${esc(etapaDe(l.etapa).nome)}</span></div>
-    <span class="quando ${statusAcao(l)}">${statusAcao(l) === "atraso" ? "Atrasada · " : ""}${rotuloData(l.proximaAcao.data)}</span></li>`;
+  // cada ação pendente vira uma linha (um lead pode ter várias)
+  const todasAcoes = abertos.flatMap(l => pendentes(l).filter(a => a.data).map(a => ({ l, a, st: statusData(a.data) })));
+  const acoes = todasAcoes.filter(x => x.st !== "futuro").sort((x, y) => x.a.data.localeCompare(y.a.data));
+  const proximas = todasAcoes.filter(x => x.st === "futuro").sort((x, y) => x.a.data.localeCompare(y.a.data)).slice(0, 8);
+  const fila = ativos().filter(l => l.etapa === "abordar" && !proxAcao(l)?.data).sort(ordenarPrioridade).slice(0, 8);
+  const itemAcao = ({ l, a, st }) => `<li data-lead="${l.id}"><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span>
+    <div class="q"><b>${esc(l.empresa)}</b><span>${esc(a.texto || "Ação")} · ${esc(etapaDe(l.etapa).nome)}</span></div>
+    <span class="quando ${st}">${st === "atraso" ? "Atrasada · " : ""}${rotuloData(a.data)}</span></li>`;
   const porEtapa = ETAPAS.map(e => ({ e, n: ativos().filter(l => l.etapa === e.id).length }));
   const max = Math.max(1, ...porEtapa.map(x => x.n));
   const ponderado = abertos.reduce((s, l) => s + (l.valor || 0) * etapaDe(l.etapa).prob, 0);
@@ -1768,7 +1857,7 @@ function ordenarPrioridade(a, b) {
 function renderFunil() {
   const LIM = 40;
   $("crmConteudo").innerHTML = `<div class="kanban">${ETAPAS.map(e => {
-    const ls = ativos().filter(l => l.etapa === e.id).sort((a, b) => (a.proximaAcao?.data || "9").localeCompare(b.proximaAcao?.data || "9") || ordenarPrioridade(a, b));
+    const ls = ativos().filter(l => l.etapa === e.id).sort((a, b) => (proxAcao(a)?.data || "9").localeCompare(proxAcao(b)?.data || "9") || ordenarPrioridade(a, b));
     const valor = ls.reduce((s, l) => s + (l.valor || 0), 0);
     return `<section class="coluna" data-col="${e.id}" style="--cor:${e.cor}">
       <div class="col-cab"><i></i><b>${e.nome}</b><span>${ls.length}</span></div>
@@ -1785,7 +1874,8 @@ function cardLead(l) {
     <b>${esc(l.empresa)}</b><small>${esc(l.segmento || "")}${l.cidade ? " · " + esc(l.cidade) : ""}</small>
     <div class="rodape"><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span>${l.prioridade ? `<span class="chip-p">${esc(l.prioridade.split(" ")[0])}</span>` : ""}
       ${l.valor ? `<span class="chip-p">${moeda(l.valor)}</span>` : ""}
-      ${l.proximaAcao?.data ? `<span class="acao-prox ${st === "atraso" ? "atraso" : ""}">${rotuloData(l.proximaAcao.data)}</span>` : ""}</div>
+      ${tentativasDe(l).length && l.etapa === "tentativa" ? `<span class="chip-p" title="Tentativas de contato">${tentativasDe(l).length}× tent.</span>` : ""}
+      ${proxAcao(l)?.data ? `<span class="acao-prox ${st === "atraso" ? "atraso" : ""}">${rotuloData(proxAcao(l).data)}</span>` : ""}</div>
   </article>`;
 }
 function ativarArraste() {
@@ -1809,7 +1899,7 @@ async function pedirMudancaEtapa(id, para) {
   if (para === "perdido") {
     const motivo = await escolherMotivo(l);
     if (motivo === null) return renderCRM();
-    return alterarLead(id, x => { moverEtapa(x, para, motivo); x.proximaAcao = null; }, `${l.empresa} → Perdido`);
+    return alterarLead(id, x => { moverEtapa(x, para, motivo); x.acoes = (x.acoes || []).filter(a => a.concluida); }, `${l.empresa} → Perdido`);
   }
   alterarLead(id, x => moverEtapa(x, para), `${l.empresa} → ${etapaDe(para).nome}`);
 }
@@ -1824,7 +1914,7 @@ function leadsFiltrados() {
     (!termos.length || termos.every(t => norm([l.empresa, l.segmento, l.cidade, l.uf, l.contato, l.observacoes, (l.telefones || []).join(" ")].join(" ")).includes(t))));
   const { campo, asc } = crm.ordem;
   const val = l => campo === "empresa" ? l.empresa : campo === "cidade" ? (l.cidade || "") + l.uf : campo === "etapa" ? String(ORDEM_ETAPA[l.etapa]).padStart(2, "0")
-    : campo === "acao" ? (l.proximaAcao?.data || "9999") : campo === "fit" ? (l.fit || "Z") + (l.prioridade || "") : (l.prioridade || "P9") + (l.fit || "Z");
+    : campo === "acao" ? (proxAcao(l)?.data || "9999") : campo === "fit" ? (l.fit || "Z") + (l.prioridade || "") : (l.prioridade || "P9") + (l.fit || "Z");
   ls.sort((a, b) => val(a).localeCompare(val(b)) * (asc ? 1 : -1) || a.empresa.localeCompare(b.empresa));
   return ls;
 }
@@ -1860,7 +1950,7 @@ function renderLeads() {
           <td><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span></td>
           <td><span class="chip-p">${esc((l.prioridade || "–").split(" ")[0])}</span></td>
           <td><span class="chip-etapa" style="--cor:${e.cor}"><i></i>${e.nome}</span></td>
-          <td>${l.proximaAcao?.data ? `<span class="quando ${statusAcao(l)}">${rotuloData(l.proximaAcao.data)}</span>` : `<small>—</small>`}</td>
+          <td>${proxAcao(l)?.data ? `<span class="quando ${statusAcao(l)}">${rotuloData(proxAcao(l).data)}</span>${pendentes(l).length > 1 ? ` <small>+${pendentes(l).length - 1}</small>` : ""}` : `<small>—</small>`}</td>
           <td><small>${u ? `${esc(interacaoDe(u.tipo)?.nome || u.tipo)} · ${data(u.em)}` : "—"}</small></td></tr>`;
       }).join("")}</tbody></table>
     <ul class="cards-leads">${pag.map(l => {
@@ -1868,7 +1958,7 @@ function renderLeads() {
       return `<li data-lead="${l.id}" class="${l.semInteresse ? "sem-int" : ""}"><div class="l1"><b>${esc(l.empresa)}${l.semInteresse ? ` <small style="display:inline">· sem interesse</small>` : ""}</b><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span></div>
         <small>${esc(l.segmento || "")} · ${esc(l.cidade || "")}${l.uf ? "/" + esc(l.uf) : ""}</small>
         <div class="l3"><span class="chip-etapa" style="--cor:${e.cor}"><i></i>${e.nome}</span>${l.prioridade ? `<span class="chip-p">${esc(l.prioridade.split(" ")[0])}</span>` : ""}
-        ${l.proximaAcao?.data ? `<span class="quando ${statusAcao(l)}">${rotuloData(l.proximaAcao.data)}</span>` : ""}</div></li>`;
+        ${proxAcao(l)?.data ? `<span class="quando ${statusAcao(l)}">${rotuloData(proxAcao(l).data)}</span>` : ""}</div></li>`;
     }).join("")}</ul>
     ${!ls.length ? `<div class="vazio-bloco">Nenhum lead encontrado com esses filtros.</div>` : ""}
     ${ls.length > crm.limite ? `<button class="carregar-mais" data-crm="mais">Mostrar mais ${Math.min(50, ls.length - crm.limite)} de ${ls.length - crm.limite} restantes</button>` : ""}
@@ -1950,17 +2040,40 @@ function renderFicha(id) {
       <form class="form-int oculto" id="formInt">
         <div class="campo oculto" id="campoReuniao"><label>Data e hora da reunião</label><input type="datetime-local" id="intData"></div>
         <div class="campo"><label id="intRotulo">Observação</label><textarea id="intTexto" placeholder="O que aconteceu? (opcional)"></textarea></div>
-        <div class="linha2"><div class="campo"><label>Próxima ação</label><input id="intProx" placeholder="Ex.: ligar de novo, enviar proposta"></div>
+        ${proxAcao(l) ? `<label class="chk"><input type="checkbox" id="intConcluir" ${["atraso", "hoje"].includes(statusAcao(l)) ? "checked" : ""}> Concluir a ação pendente: <b>${esc(proxAcao(l).texto)}</b></label>` : ""}
+        <div class="linha2"><div class="campo"><label>Nova ação (opcional)</label><input id="intProx" placeholder="Ex.: ligar de novo, enviar proposta"></div>
           <div class="campo"><label>Quando</label><input type="date" id="intProxData"></div></div>
         <div class="rod"><button type="button" class="btn-s" data-g="cancelarInt">Cancelar</button><button class="btn-p" type="submit">Registrar</button></div>
       </form></section>
 
-    <section class="g-sec"><h4>Próxima ação</h4>
-      ${l.proximaAcao?.data || l.proximaAcao?.texto ? `<div class="prox-atual"><span class="quando ${statusAcao(l)}">${rotuloData(l.proximaAcao.data) || "Sem data"}</span><b>${esc(l.proximaAcao.texto || "")}</b><button data-g="concluirAcao">✓ Concluir</button></div>` : ""}
-      <form class="linha2" id="formProx" style="grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) auto;align-items:end">
-        <div class="campo"><label>${l.proximaAcao ? "Alterar" : "Definir"} próxima ação</label><input id="proxTexto" value="${esc(l.proximaAcao?.texto || "")}" placeholder="O que fazer"></div>
-        <div class="campo"><label>Data</label><input type="date" id="proxData" value="${esc((l.proximaAcao?.data || "").slice(0, 10))}"></div>
-        <button class="btn-s" type="submit" style="height:42px">Salvar</button></form></section>
+    <section class="g-sec"><h4>Ações <span class="tag-breve" style="text-transform:none">${pendentes(l).length} pendente${pendentes(l).length === 1 ? "" : "s"}</span></h4>
+      ${pendentes(l).length ? `<ul class="lista-acoes-lead">${pendentes(l).map(a => `<li>
+        <button class="chk-acao" data-g-concluir="${a.id}" data-dica="Concluir" aria-label="Concluir"></button>
+        <div class="q"><b>${esc(a.texto)}</b><small>${a.por ? "criada por " + esc(a.por) + " · " : ""}${data(a.criadaEm)}</small></div>
+        <span class="quando ${statusData(a.data)}">${a.data ? (statusData(a.data) === "atraso" ? "Atrasada · " : "") + rotuloData(a.data) : "Sem data"}</span>
+        <button class="x-acao" data-g-excluir-acao="${a.id}" aria-label="Excluir ação">×</button></li>`).join("")}</ul>` : `<div class="vazio-acoes">Nenhuma ação pendente.</div>`}
+      <form class="form-acao" id="formAcao">
+        <input id="acaoTexto" placeholder="Nova ação (ex.: enviar proposta)" required>
+        <input type="date" id="acaoData" title="Data para conclusão">
+        <input type="time" id="acaoHora" title="Hora (opcional)">
+        <button class="btn-p" type="submit"><svg><use href="#i-mais"/></svg><span>Adicionar</span></button>
+      </form>
+      ${concluidas(l).length ? `<details class="concluidas"><summary>${concluidas(l).length} concluída${concluidas(l).length === 1 ? "" : "s"}</summary><ul class="lista-acoes-lead feitas">${concluidas(l).map(a => `<li>
+        <span class="chk-acao feito">✓</span><div class="q"><b>${esc(a.texto)}</b><small>concluída ${dataHora(a.concluidaEm)}${a.concluidaPor ? " por " + esc(a.concluidaPor) : ""}${a.data ? " · prevista " + rotuloData(a.data) : ""}</small></div></li>`).join("")}</ul></details>` : ""}
+    </section>
+
+    <section class="g-sec"><h4>Tentativas de contato <span class="tag-breve" style="text-transform:none">${tentativasDe(l).length}</span></h4>
+      ${tentativasDe(l).length ? (() => {
+        const t = tentativasDe(l), c = id => t.filter(h => h.tipo === id).length;
+        return `<div class="resumo-tent"><span><b>${c("nao_atendeu")}</b> sem resposta</span><span><b>${c("atendeu")}</b> atendeu</span><span><b>${c("mensagem")}</b> mensagem</span></div>
+          <ul class="lista-tent">${t.map((h, k) => `<li><span class="n">${t.length - k}ª</span><span class="tl-ico">${interacaoDe(h.tipo).sigla}</span>
+            <div class="q"><b>${esc(interacaoDe(h.tipo).nome)}</b>${h.texto ? `<small>${esc(h.texto)}</small>` : ""}</div>
+            <span class="quando">${new Date(h.em).toLocaleDateString("pt-BR")} · ${new Date(h.em).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span>
+            <small class="por">${esc(h.por || "")}</small></li>`).join("")}</ul>`;
+      })() : `<div class="vazio-acoes">Nenhuma tentativa registrada. Use “Não atendeu”, “Atendeu” ou “Mensagem enviada” acima.</div>`}
+    </section>
+
+    <section class="g-sec"><h4>Agenda do cliente</h4><div id="agendaLead"></div></section>
 
     <section class="g-sec"><h4>Diagnósticos</h4>
       ${!diagStore.carregado ? `<div style="font-size:.8rem;color:var(--txt-2)">Carregando…</div>` : (() => {
@@ -2014,13 +2127,64 @@ function renderFicha(id) {
   g.querySelector(".g-corpo").scrollTop = rolagem;
   ligarFicha(l);
 }
+/* Agenda do cliente: calendário do mês com ações previstas e o que já foi executado */
+const agenda = { mes: null, dia: null };
+function eventosLead(l) {
+  const ev = [];
+  for (const a of l.acoes || []) {
+    if (!a.concluida && a.data) ev.push({ dia: a.data.slice(0, 10), hora: a.data.slice(11, 16), tipo: statusData(a.data) === "atraso" ? "atrasada" : "prevista", txt: a.texto });
+  }
+  for (const h of l.historico || []) {
+    if (["etapa", "criado"].includes(h.tipo)) continue;
+    const d = new Date(h.em), dia = new Date(d - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+    const i = interacaoDe(h.tipo);
+    const nome = h.tipo === "acao" ? "Ação concluída: " + h.texto : (i?.nome || ({ sem_interesse: "Marcado sem interesse", reativado: "Reativado", documento: "Documento gerado" }[h.tipo] || h.tipo)) + (h.texto && h.tipo !== "acao" ? " — " + h.texto : "");
+    ev.push({ dia, hora: d.toTimeString().slice(0, 5), tipo: "executada", txt: nome });
+  }
+  return ev;
+}
+function desenharAgenda(l) {
+  const alvo = $("agendaLead");
+  if (!alvo || !l) return;
+  const ev = eventosLead(l);
+  const hoje = hojeISO();
+  if (!agenda.mes) {
+    const prox = pendentes(l).find(a => a.data && a.data.slice(0, 10) >= hoje);
+    agenda.mes = (prox?.data || hoje).slice(0, 7);
+  }
+  const [ano, mes] = agenda.mes.split("-").map(Number);
+  const prim = new Date(ano, mes - 1, 1), diasMes = new Date(ano, mes, 0).getDate();
+  const desloc = (prim.getDay() + 6) % 7; // semana começa na segunda
+  const mesAnt = new Date(ano, mes - 2, 1), mesProx = new Date(ano, mes, 1);
+  const ym = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+  const nomeMes = (t => t.charAt(0).toUpperCase() + t.slice(1))(prim.toLocaleDateString("pt-BR", { month: "long", year: "numeric" }));
+  const porDia = {};
+  for (const e of ev) (porDia[e.dia] ||= []).push(e);
+  let celulas = "";
+  for (let k = 0; k < desloc; k++) celulas += `<span class="cal-vazio"></span>`;
+  for (let d = 1; d <= diasMes; d++) {
+    const iso = `${agenda.mes}-${String(d).padStart(2, "0")}`, es = porDia[iso] || [];
+    const tipos = [...new Set(es.map(e => e.tipo))];
+    celulas += `<button class="cal-dia ${iso === hoje ? "hoje" : ""} ${iso === agenda.dia ? "sel" : ""} ${es.length ? "tem" : ""}" data-cal-dia="${iso}">
+      <span>${d}</span><i>${tipos.map(t => `<b class="pt-${t}"></b>`).join("")}</i></button>`;
+  }
+  const diaSel = agenda.dia;
+  const lista = diaSel ? (porDia[diaSel] || []).sort((a, b) => a.hora.localeCompare(b.hora)) : null;
+  alvo.innerHTML = `
+    <div class="cal-topo"><button class="cal-nav" data-cal-mes="${ym(mesAnt)}" aria-label="Mês anterior">‹</button><b>${nomeMes}</b><button class="cal-nav" data-cal-mes="${ym(mesProx)}" aria-label="Próximo mês">›</button></div>
+    <div class="cal-grade">${["S", "T", "Q", "Q", "S", "S", "D"].map(x => `<span class="cal-sem">${x}</span>`).join("")}${celulas}</div>
+    <div class="cal-legenda"><span><b class="pt-prevista"></b>Prevista</span><span><b class="pt-atrasada"></b>Atrasada</span><span><b class="pt-executada"></b>Executada</span></div>
+    ${lista ? `<div class="cal-lista"><div class="cal-lista-tit">${(t => t.charAt(0).toUpperCase() + t.slice(1))(new Date(diaSel + "T12:00").toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" }))}</div>
+      ${lista.length ? lista.map(e => `<div class="cal-ev ev-${e.tipo}"><span>${e.hora && e.hora !== "00:00" ? e.hora : "—"}</span><p>${esc(e.txt)}</p></div>`).join("") : `<div class="vazio-acoes">Nada neste dia.</div>`}</div>`
+      : `<div class="vazio-acoes" style="padding-top:8px">Toque em um dia para ver os detalhes.</div>`}`;
+}
 function campoTxt(nome, rot, val) { return `<div class="campo"><label>${rot}</label><input name="${nome}" value="${esc(val || "")}"></div>`; }
 
 function ligarFicha(l) {
   const g = $("gaveta");
   let intSel = null;
   g.onclick = async e => {
-    const el = e.target.closest("[data-g],[data-g-etapa],[data-g-int],[data-g-frente],[data-g-diag]");
+    const el = e.target.closest("[data-g],[data-g-etapa],[data-g-int],[data-g-frente],[data-g-diag],[data-g-concluir],[data-g-excluir-acao],[data-cal-mes],[data-cal-dia]");
     if (!el) return;
     const d = el.dataset;
     if (d.g === "fechar") return fecharFicha();
@@ -2032,13 +2196,22 @@ function ligarFicha(l) {
       $("formInt").classList.remove("oculto");
       $("campoReuniao").classList.toggle("oculto", !intSel.pedeData);
       $("intRotulo").textContent = intSel.id === "nota" ? "Anotação" : "Observação";
+      // uma nova tentativa (ou interação) normalmente cumpre a ação de contato que estava pendente
+      if ($("intConcluir")) $("intConcluir").checked = intSel.id !== "nota" && (!!intSel.tentativa || ["atraso", "hoje"].includes(statusAcao(l)));
       if (intSel.pedeData) { $("intProx").value = "Reunião de diagnóstico"; }
-      else if (intSel.id === "nao_atendeu") { $("intProx").value = "Tentar ligar novamente"; const am = new Date(Date.now() + 864e5); $("intProxData").value = new Date(am - am.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); }
+      else if (intSel.id === "nao_atendeu" || intSel.id === "mensagem") {
+        const dias = intSel.id === "mensagem" ? 2 : 1, d = new Date(Date.now() + dias * 864e5);
+        $("intProx").value = intSel.id === "mensagem" ? "Cobrar retorno da mensagem" : "Tentar ligar novamente";
+        $("intProxData").value = new Date(d - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+      } else { $("intProx").value = ""; $("intProxData").value = ""; }
       $("intTexto").focus();
       return;
     }
     if (d.g === "cancelarInt") { $("formInt").classList.add("oculto"); g.querySelectorAll("[data-g-int]").forEach(b => b.classList.remove("sel")); intSel = null; return; }
-    if (d.g === "concluirAcao") return alterarLead(l.id, x => { registrar(x, "acao", x.proximaAcao?.texto || ""); x.proximaAcao = null; }, "Ação concluída");
+    if (d.gConcluir) return alterarLead(l.id, x => concluirAcao(x, d.gConcluir), "Ação concluída");
+    if (d.gExcluirAcao) { if (!confirmar("Excluir esta ação?")) return; return alterarLead(l.id, x => { x.acoes = (x.acoes || []).filter(a => a.id !== d.gExcluirAcao); }, "Ação excluída"); }
+    if (d.calMes) { agenda.mes = d.calMes; agenda.dia = null; return desenharAgenda(leadPorId(l.id)); }
+    if (d.calDia) { agenda.dia = d.calDia; return desenharAgenda(leadPorId(l.id)); }
     if (d.g === "semInteresse") return marcarSemInteresse(l);
     if (d.g === "novoDiag") { fecharFicha(); return novoDiagnostico(l.id); }
     if (d.gDiag) { fecharFicha(); location.hash = `atendimento/bpo/diagnostico/${d.gDiag}`; return; }
@@ -2053,22 +2226,26 @@ function ligarFicha(l) {
     e.preventDefault();
     if (!intSel) return;
     const texto = $("intTexto").value.trim(), dReun = $("intData").value, prox = $("intProx").value.trim(), proxData = $("intProxData").value;
+    const concluirPend = !!$("intConcluir")?.checked;
     if (intSel.pedeData && !dReun) { toast("Informe a data da reunião", "erro"); return $("intData").focus(); }
     const sel = intSel;
     alterarLead(l.id, x => {
       registrar(x, sel.id, (sel.pedeData ? `Reunião em ${dataHora(dReun)}. ` : "") + texto);
       if (sel.ligacao) x.tentativas = (x.tentativas || 0) + 1;
       if (sel.avanca && ORDEM_ETAPA[sel.avanca] > ORDEM_ETAPA[x.etapa] && x.etapa !== "perdido") moverEtapa(x, sel.avanca);
-      if (sel.pedeData) x.proximaAcao = { texto: prox || "Reunião de diagnóstico", data: dReun };
-      else if (prox || proxData) x.proximaAcao = { texto: prox, data: proxData || "" };
-      else if (sel.id !== "nota") x.proximaAcao = null;
+      if (concluirPend && proxAcao(x)) concluirAcao(x, proxAcao(x).id, sel.nome.toLowerCase());
+      if (sel.pedeData) novaAcao(x, prox || "Reunião de diagnóstico", dReun);
+      else if (prox || proxData) novaAcao(x, prox || "Ação", proxData);
     }, `${sel.nome} registrado`);
   };
-  $("formProx").onsubmit = e => {
+  $("formAcao").onsubmit = e => {
     e.preventDefault();
-    const texto = $("proxTexto").value.trim(), dt = $("proxData").value;
-    alterarLead(l.id, x => { x.proximaAcao = texto || dt ? { texto, data: dt } : null; }, "Próxima ação salva");
+    const texto = $("acaoTexto").value.trim(), dt = $("acaoData").value, hr = $("acaoHora").value;
+    if (!texto) return;
+    if (hr && !dt) { toast("Informe a data da ação", "erro"); return $("acaoData").focus(); }
+    alterarLead(l.id, x => novaAcao(x, texto, dt ? (hr ? `${dt}T${hr}` : dt) : ""), "Ação adicionada");
   };
+  desenharAgenda(l);
   $("formNegocio").onsubmit = e => {
     e.preventDefault();
     const valor = Number(soDigitos($("negValor").value)) || null, resp = $("negResp").value;
@@ -2117,7 +2294,7 @@ function marcarSemInteresse(l) {
       fecharModal();
       alterarLead(l.id, x => {
         x.semInteresse = { em: new Date().toISOString(), por: meuNome(), motivo, retomarEm: ret || "" };
-        x.proximaAcao = null;
+        x.acoes = (x.acoes || []).filter(a => a.concluida);
         registrar(x, "sem_interesse", motivo + (ret ? ` · retomar em ${rotuloData(ret)}` : ""));
       }, `${l.empresa} marcado como sem interesse`);
     }
@@ -2738,7 +2915,7 @@ async function finalizarDiag() {
       registrar(l, "diagnostico", texto);
       if (l.etapa === "perdido" || ORDEM_ETAPA[l.etapa] < ORDEM_ETAPA.diagnostico) moverEtapa(l, "diagnostico");
       l.frentes = [...new Set([...(l.frentes || []), "BPO Financeiro"])];
-      if (l.proximaAcao?.texto && /diagn/i.test(l.proximaAcao.texto)) l.proximaAcao = null;
+      for (const a of pendentes(l)) if (/diagn|reuni/i.test(a.texto)) concluirAcao(l, a.id, "diagnóstico realizado");
     });
   } else {
     let novoLeadId;
@@ -3479,7 +3656,7 @@ async function abrirApp() {
   const cache = lerLocal(BIB_CACHE);
   if (cache?.arquivos) { bib.arquivos = cache.arquivos; bib.legado = cache.legado || []; if (cache.meta) bib.meta = cache.meta; bib.carregado = true; }
   const cacheCRM = lerLocal(CRM_CACHE);
-  if (cacheCRM?.dados) { crm.dados = cacheCRM.dados; crm.eTag = cacheCRM.eTag; crm.carregado = true; }
+  if (cacheCRM?.dados) { crm.dados = cacheCRM.dados; crm.dados.leads.forEach(normalizarLead); crm.eTag = cacheCRM.eTag; crm.carregado = true; }
   mostrar("telaApp");
   irPara(location.hash.slice(1) || "biblioteca");
   carregarBiblioteca();
