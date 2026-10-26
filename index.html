@@ -353,9 +353,16 @@
   .carregar-mais{display:block;width:100%;padding:14px;font-size:.82rem;font-weight:700;color:var(--turq);border-top:1px solid var(--borda)}
 
   /* ficha do lead (gaveta) */
-  .gaveta{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--bg);z-index:45;box-shadow:-20px 0 60px rgba(6,30,33,.25);
-    display:flex;flex-direction:column;animation:entraLado .22s ease}
-  @keyframes entraLado{from{transform:translateX(40px);opacity:0}}
+  /* Ficha do cliente: janela central (~70% da tela); no celular ocupa a tela toda */
+  .gaveta{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(70vw,1280px);min-width:min(760px,96vw);height:min(86vh,980px);
+    background:var(--bg);z-index:45;border-radius:18px;overflow:hidden;box-shadow:0 30px 90px rgba(6,30,33,.35);
+    display:flex;flex-direction:column;animation:abreFicha .2s ease}
+  @keyframes abreFicha{from{transform:translate(-50%,-48%) scale(.98);opacity:0}}
+  @media(min-width:1000px){
+    .g-corpo{display:block!important;column-count:2;column-gap:14px;padding:16px 18px 24px!important}
+    .g-corpo>*{break-inside:avoid;margin-bottom:14px;display:block}
+    .g-corpo>.perigo,.g-corpo>div:last-child{column-span:all}
+  }
   .g-cab{background:var(--teal);color:#fff;padding:calc(env(safe-area-inset-top) + 16px) 18px 16px}
   .g-topo{display:flex;align-items:flex-start;gap:10px}
   .g-topo h2{flex:1;font-size:1.15rem;font-weight:700;line-height:1.3}
@@ -479,7 +486,7 @@
   .zona-arq{border:2px dashed var(--borda);border-radius:14px;padding:26px;text-align:center;color:var(--txt-2);cursor:pointer}
   .zona-arq:hover{border-color:var(--turq);color:var(--turq)}
   .zona-arq b{display:block;color:var(--teal);margin-bottom:4px}
-  @media(max-width:860px){.gaveta{width:100vw}}
+  @media(max-width:860px){.gaveta{top:0;left:0;transform:none;width:100vw;min-width:0;height:100%;border-radius:0;animation:none}}
   @media(max-width:520px){#formProx{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}#formProx button{grid-column:1/-1}.g-corpo{padding-left:10px;padding-right:10px}}
 
   /* ---------- Atendimento / Diagnóstico ---------- */
