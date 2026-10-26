@@ -44,12 +44,6 @@
     padding:15px 24px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18);transition:transform .15s}
   .btn-ms:active{transform:scale(.98)}
   .btn-ms svg{width:20px;height:20px}
-  .form-login{display:grid;gap:10px;width:min(340px,100%);position:relative;z-index:1}
-  .form-login input{border:0;border-radius:12px;padding:15px 16px;font-size:1rem;font-family:inherit;background:rgba(255,255,255,.96);color:var(--txt);outline:none}
-  .form-login input:focus{box-shadow:0 0 0 3px rgba(19,163,181,.6)}
-  .form-login .btn-ms{justify-content:center;margin-top:6px}
-  .form-login .btn-ms:disabled{opacity:.7}
-  .erro-login{background:rgba(200,70,61,.95);color:#fff;font-size:.84rem;padding:10px 12px;border-radius:10px;text-align:left;line-height:1.4}
   .rodape-login{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));font-size:.75rem;color:rgba(255,255,255,.5)}
   .spinner{width:34px;height:34px;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:gira .8s linear infinite}
   @keyframes gira{to{transform:rotate(360deg)}}
@@ -223,7 +217,6 @@
   .acao.enviar:hover{border-color:var(--turq);color:var(--turq)}
   .acao svg{width:16px;height:16px}
   .acoes .acao{width:38px;padding:0;justify-content:center;position:relative}
-  .acao.fav-on{color:#E0A100;border-color:rgba(224,161,0,.45);background:#FFF9E6}
   .acao.perigo-ico:hover{color:var(--erro);border-color:rgba(200,70,61,.4)}
   [data-dica]{position:relative}
   [data-dica]:hover::after,[data-dica]:focus-visible::after{content:attr(data-dica);position:absolute;right:calc(100% + 7px);top:50%;transform:translateY(-50%);
@@ -528,34 +521,6 @@
   .pdf-obs{margin:2px 0 0 20px;color:#5B6B6B;font-size:9.5px}
   .pdf-rodape{margin-top:16px;padding-top:8px;border-top:1px solid #E3ECEC;font-size:8.5px;color:#5B6B6B;text-align:center}
 
-  /* ---------- Editor de documentos ---------- */
-  .editor-tela{position:fixed;inset:0;z-index:44;background:#E9EEEE;display:flex;flex-direction:column}
-  .ed-topo{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top) + 10px) 14px 10px;background:var(--teal);color:#fff}
-  .ed-tit{flex:1;min-width:0}
-  .ed-tit small{display:block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)}
-  .ed-tit input{width:100%;background:transparent;border:0;border-bottom:1px dashed rgba(255,255,255,.35);color:#fff;font-family:inherit;font-size:1.02rem;font-weight:700;padding:2px 0;outline:none}
-  .ed-topo .status-salvo{background:rgba(255,255,255,.12);border-color:transparent;color:#fff}
-  .ed-topo .btn-s{background:rgba(255,255,255,.12);border-color:transparent;color:#fff}
-  .ed-corpo{flex:1;min-height:0}
-  .ed-corpo .tox-tinymce{border:0!important;border-radius:0!important;height:100%!important}
-  .opcoes-salvar{display:grid;gap:8px}
-  .opcoes-salvar label{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--borda);border-radius:12px;padding:12px;cursor:pointer}
-  .opcoes-salvar label:has(input:checked){border-color:var(--turq);background:rgba(19,163,181,.06)}
-  .opcoes-salvar b{display:block;font-size:.88rem}
-  .opcoes-salvar small{display:block;font-size:.76rem;color:var(--txt-2);margin-top:2px;line-height:1.4}
-  @media(max-width:640px){.ed-topo .btn-s span,.ed-topo .btn-p span,.ed-topo .status-salvo{display:none}}
-  .pdf-livre h1{color:#0B5A60;font-size:18px} .pdf-livre h2{color:#0B5A60;font-size:15px} .pdf-livre h3{color:#13A3B5;font-size:13px}
-  .pdf-livre table{border-collapse:collapse;width:100%;margin:6px 0} .pdf-livre td,.pdf-livre th{border:1px solid #bbb;padding:4px 6px;vertical-align:top}
-  .pdf-livre p{margin:0 0 6px} .pdf-livre img{max-width:100%}
-  /* ---------- Usuários ---------- */
-  .lista-usuarios{list-style:none;margin-top:6px}
-  .lista-usuarios li{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--borda);flex-wrap:wrap}
-  .lista-usuarios li.inativo{opacity:.55}
-  .avatar-u{flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--turq),var(--teal));color:#fff;font-weight:700;font-size:.8rem;display:grid;place-items:center}
-  .u-info{flex:1;min-width:200px}
-  .u-info b{font-size:.9rem;font-weight:600;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-  .u-info small{display:block;font-size:.74rem;color:var(--txt-2);margin-top:2px}
-
   /* ---------- Sistema (diagnóstico) ---------- */
   .grade{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
   .grade>*{min-width:0}
@@ -618,11 +583,6 @@
   <symbol id="i-atd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></symbol>
   <symbol id="i-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 18h4"/></symbol>
   <symbol id="i-lixo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></symbol>
-  <symbol id="i-estrela" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
-  <symbol id="i-estrela-cheia" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
-  <symbol id="i-doc-editar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h5"/><path d="M14 2v6h6M20 8v3"/><path d="M18.4 13.6a1.9 1.9 0 0 1 2.7 2.7L15.5 22H13v-2.5z"/></symbol>
-  <symbol id="i-pasta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
-  <symbol id="i-chave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3M14.5 8.5l2 2"/></symbol>
   <symbol id="i-atual" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></symbol>
   <symbol id="i-a-com" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
   <symbol id="i-a-bpo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
@@ -639,13 +599,11 @@
 <section id="telaLogin" class="tela-cheia oculto">
   <img class="logo" src="logo-branca.png" alt="WL Expertise">
   <h1>Sistema de Gestão</h1>
-  <p>Entre com o seu login e senha.</p>
-  <form class="form-login" id="formLogin" autocomplete="on">
-    <input id="loginEmail" type="email" placeholder="Login (e-mail)" autocomplete="username" required>
-    <input id="loginSenha" type="password" placeholder="Senha" autocomplete="current-password" required>
-    <div class="erro-login oculto" id="loginErro"></div>
-    <button class="btn-ms" id="btnEntrar" type="submit">Entrar</button>
-  </form>
+  <p>Acesse com a conta Microsoft autorizada pela WL Expertise.</p>
+  <button class="btn-ms" id="btnEntrar">
+    <svg viewBox="0 0 21 21" aria-hidden="true"><rect x="1" y="1" width="9" height="9" fill="#F25022"/><rect x="11" y="1" width="9" height="9" fill="#7FBA00"/><rect x="1" y="11" width="9" height="9" fill="#00A4EF"/><rect x="11" y="11" width="9" height="9" fill="#FFB900"/></svg>
+    Entrar com conta Microsoft
+  </button>
   <div class="rodape-login">WL Expertise · Inteligência financeira e de processos</div>
 </section>
 
@@ -660,7 +618,6 @@
       <span id="iniciais">WL</span>
       <div class="menu oculto" id="menu">
         <div class="quem"><b id="menuNome">—</b><small id="menuEmail">—</small></div>
-        <button id="btnSenha">Alterar minha senha</button>
         <button id="btnSair">Sair do sistema</button>
       </div>
     </div>
@@ -721,20 +678,13 @@
       <div id="atdConteudo"></div>
     </div>
 
-    <!-- ============ MEUS DOCUMENTOS ============ -->
-    <div data-view="meus" class="oculto">
-      <div class="cab-pagina"><div><div class="eyebrow">Pessoal</div><h2>Meus documentos</h2><p>Suas versões editadas e seus favoritos da Biblioteca. Só você vê esta área.</p></div></div>
-      <div class="barra-crm"><nav class="abas" id="meusAbas"><button data-aba="documentos">Meus documentos</button><button data-aba="favoritos">Favoritos</button></nav></div>
-      <div id="meusConteudo"></div>
-    </div>
-
     <!-- ============ SISTEMA ============ -->
     <div data-view="sistema" class="oculto">
       <div class="cab-pagina">
         <div>
           <div class="eyebrow">Sistema</div>
           <h2 id="ola">Olá!</h2>
-          <p>Conexão com o OneDrive e, para o administrador, o controle de usuários.</p>
+          <p>Diagnóstico da conexão com o OneDrive e teste de sincronização.</p>
         </div>
       </div>
       <div class="grade">
@@ -757,7 +707,6 @@
           </div>
         </div>
       </div>
-      <div id="painelUsuarios" style="margin-top:16px"></div>
     </div>
   </main>
 
@@ -767,18 +716,21 @@
 <div class="toast" id="toast"><i></i><span id="toastTxt"></span></div>
 
 <script type="module">
+import { PublicClientApplication, InteractionRequiredAuthError }
+  from "https://cdn.jsdelivr.net/npm/@azure/msal-browser@4.30.0/+esm";
 
 /* ================== CONFIGURAÇÃO ================== */
 const CONFIG = {
-  // Endereço do servidor (Cloudflare Worker). Troque SEU-SUBDOMINIO pelo subdomínio da sua conta Cloudflare.
-  api: "https://wl-sistema-api.SEU-SUBDOMINIO.workers.dev",
-  adminEmail: "wlexpertise@outlook.com",
+  clientId: "1128b187-6d8b-4162-bb67-001a2c558263",
+  authority: "https://login.microsoftonline.com/consumers",
+  urlProducao: "https://wlexpertise.github.io/wl-sistema/",
   pasta: "WL-Sistema",
-  subpastas: ["dados", "clientes", "acervo"],
+  subpastas: ["dados", "modelos", "clientes", "acervo"],
   arquivoTeste: "dados/teste-conexao.json",
+  escopos: ["User.Read", "Files.ReadWrite.All"],
   intervaloSync: 30000
 };
-const GRAPH = CONFIG.api + "/graph";
+const GRAPH = "https://graph.microsoft.com/v1.0";
 
 /* Catálogo da biblioteca: Áreas → Etapas (pastas em WL-Sistema/acervo/<Área>/<Etapa>) e materiais esperados.
    Arquivos que estiverem nas pastas e não constarem aqui também aparecem. "legado" mapeia as pastas da organização anterior. */
@@ -789,11 +741,13 @@ const MODULOS = [
   { id: "biblioteca", nome: "Biblioteca", icone: "i-bib", menu: true },
   { id: "crm", nome: "CRM", icone: "i-crm" },
   { id: "atendimento", nome: "Atendimento", icone: "i-atd", menu: true },
-  { id: "meus", nome: "Meus documentos", icone: "i-pasta" },
+  { id: "clientes", nome: "Clientes", icone: "i-cli", breve: true },
   { id: "sistema", nome: "Sistema", icone: "i-sis" }
 ];
 
 if (location.hostname === "127.0.0.1") location.replace(location.href.replace("127.0.0.1", "localhost"));
+const ehLocal = location.hostname === "localhost";
+const redirectUri = ehLocal ? location.origin : CONFIG.urlProducao;
 
 /* ================== UTILITÁRIOS ================== */
 const $ = id => document.getElementById(id);
@@ -823,90 +777,20 @@ function chip(estado, texto) {
   c.querySelector("span").textContent = texto;
 }
 
-/* ================== AUTENTICAÇÃO (servidor WL) ================== */
+/* ================== AUTENTICAÇÃO ================== */
+const msal = new PublicClientApplication({
+  auth: { clientId: CONFIG.clientId, authority: CONFIG.authority, redirectUri, postLogoutRedirectUri: redirectUri },
+  cache: { cacheLocation: "localStorage" }
+});
 let conta = null;
-const SESSAO = "wl.sessao.v1";
-const lerSessao = () => lerLocal(SESSAO);
-const ehAdmin = () => !!conta?.admin;
-const slugUsuario = email => String(email || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-function apiConfigurada() { return CONFIG.api && !CONFIG.api.includes("SEU-SUBDOMINIO"); }
-async function api(caminho, opcoes = {}) {
-  const s = lerSessao();
-  const r = await fetch(CONFIG.api + caminho, { ...opcoes, headers: { "Content-Type": "application/json", ...(s?.token ? { Authorization: "Bearer " + s.token } : {}), ...(opcoes.headers || {}) } });
-  const j = await r.json().catch(() => ({}));
-  if (r.status === 401 && conta && caminho !== "/auth/login") sessaoExpirada();
-  if (!r.ok) throw new ErroGraph(r.status, j.erro || r.statusText);
-  return j;
-}
+
 async function token() {
-  const s = lerSessao();
-  if (!s?.token) { sessaoExpirada(); throw new ErroGraph(401, "Sessão expirada"); }
-  return s.token;
-}
-let expirando = false;
-function sessaoExpirada() {
-  if (expirando) return;
-  expirando = true;
-  try { localStorage.removeItem(SESSAO); } catch {}
-  toast("Sua sessão expirou. Entre novamente.", "erro", 5000);
-  setTimeout(() => location.reload(), 1200);
-}
-function sair() {
-  try { [SESSAO, BIB_CACHE, CRM_CACHE].forEach(k => localStorage.removeItem(k)); } catch {}
-  location.hash = "";
-  location.reload();
-}
-$("formLogin").onsubmit = async e => {
-  e.preventDefault();
-  const email = $("loginEmail").value.trim(), senha = $("loginSenha").value;
-  if (!apiConfigurada()) return mostrarErroLogin("O endereço do servidor ainda não foi configurado no sistema (CONFIG.api).");
-  const b = $("btnEntrar"); b.disabled = true; b.textContent = "Entrando…";
   try {
-    const r = await api("/auth/login", { method: "POST", body: JSON.stringify({ email, senha }) });
-    gravarLocal(SESSAO, { token: r.token });
-    conta = { name: r.usuario.nome, username: r.usuario.email, papel: r.usuario.papel, admin: r.admin, trocarSenha: r.usuario.trocarSenha };
-    $("loginSenha").value = "";
-    await abrirApp();
-  } catch (err) {
-    mostrarErroLogin(err.status === 0 || err.message === "Failed to fetch" ? "Não foi possível falar com o servidor. Verifique a internet." : err.message);
-  } finally { b.disabled = false; b.textContent = "Entrar"; }
-};
-function mostrarErroLogin(msg) { $("loginErro").textContent = msg; $("loginErro").classList.remove("oculto"); }
-
-/* Trocar a própria senha (obrigatório no primeiro acesso quando o administrador definiu a senha) */
-function trocarMinhaSenha(obrigatorio = false) {
-  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>${obrigatorio ? "Crie sua senha pessoal" : "Alterar minha senha"}</h3></div>
-    <form class="modal-corpo" id="formSenha">
-      ${obrigatorio ? `<p style="font-size:.84rem;color:var(--txt-2)">Este é seu primeiro acesso. Por segurança, troque a senha provisória definida pelo administrador.</p>` : ""}
-      <div class="campo"><label>Senha atual</label><input type="password" id="sAtual" autocomplete="current-password" required></div>
-      <div class="campo"><label>Nova senha</label><input type="password" id="sNova" autocomplete="new-password" required minlength="8"></div>
-      <div class="campo"><label>Repita a nova senha</label><input type="password" id="sNova2" autocomplete="new-password" required></div>
-      <p style="font-size:.74rem;color:var(--txt-2)">Mínimo de 8 caracteres, com letras e números.</p>
-      <div class="modal-rod" style="padding:0">${obrigatorio ? `<button type="button" class="btn-s" data-m="sair">Sair</button>` : `<button type="button" class="btn-s" data-m="cancelar">Cancelar</button>`}<button class="btn-p" type="submit">Salvar senha</button></div>
-    </form>`);
-  if (!obrigatorio) { veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal; }
-  else m.querySelector("[data-m=sair]").onclick = sair;
-  $("sAtual").focus();
-  $("formSenha").onsubmit = async e => {
-    e.preventDefault();
-    if ($("sNova").value !== $("sNova2").value) return toast("As novas senhas não conferem", "erro");
-    try {
-      const r = await api("/auth/senha", { method: "POST", body: JSON.stringify({ atual: $("sAtual").value, nova: $("sNova").value }) });
-      gravarLocal(SESSAO, { token: r.token });
-      conta.trocarSenha = false;
-      fecharModal();
-      toast("Senha alterada");
-    } catch (err) { toast(err.message, "erro", 5000); }
-  };
-}
-
-/* Equipe (nomes para os campos "Responsável") */
-async function carregarEquipe() {
-  try {
-    const eq = await api("/equipe");
-    const nomes = eq.map(u => u.nome.split(" ")[0]).filter((v, k, a) => a.indexOf(v) === k);
-    if (nomes.length) RESPONSAVEIS.splice(0, RESPONSAVEIS.length, ...nomes);
-  } catch {}
+    return (await msal.acquireTokenSilent({ scopes: CONFIG.escopos, account: conta })).accessToken;
+  } catch (e) {
+    if (e instanceof InteractionRequiredAuthError) await msal.acquireTokenRedirect({ scopes: CONFIG.escopos, account: conta });
+    throw e;
+  }
 }
 
 /* ================== GRAPH (OneDrive) ================== */
@@ -916,8 +800,7 @@ async function graph(caminho, opcoes = {}) {
   const r = await fetch(GRAPH + caminho, { ...opcoes, headers: { Authorization: "Bearer " + t, ...(opcoes.headers || {}) } });
   if (!r.ok) {
     let msg = r.statusText;
-    try { const j = await r.json(); msg = j.erro || j.error?.message || msg; } catch {}
-    if (r.status === 401) sessaoExpirada();
+    try { msg = (await r.json()).error?.message || msg; } catch {}
     throw new ErroGraph(r.status, msg);
   }
   return r;
@@ -1025,8 +908,7 @@ function irPara(hash) {
   document.querySelectorAll("[data-ir]").forEach(b => b.classList.toggle("ativo", b.dataset.ir === id));
   scrollTo(0, 0);
   if (id === "biblioteca") { $("busca").value = ""; filtroBusca = ""; renderBiblioteca(); }
-  if (id === "sistema") { abrirSistema(); renderUsuarios(); }
-  if (id === "meus") { renderMeus(); carregarMeus(); }
+  if (id === "sistema") abrirSistema();
   document.querySelector("main").classList.toggle("largo", id === "crm" || id === "atendimento");
   if (id === "atendimento") renderAtendimento();
   if (id === "crm") { renderCRM(); if (!crm.carregado) carregarCRM(); else verificarCRM(); }
@@ -1126,12 +1008,12 @@ async function carregarBiblioteca(manual = false) {
   try {
     let raiz;
     try { raiz = await listar("acervo"); }
-    catch (e) { if (e.status !== 404) throw e; if (ehAdmin()) await criarPasta("", "acervo"); raiz = []; }
+    catch (e) { if (e.status !== 404) throw e; await criarPasta("", "acervo"); raiz = []; }
     bib.legado = raiz.filter(i => i.folder && CATALOGO.legado[i.name]).map(i => i.name);
     const pares = CATALOGO.areas.flatMap(a => a.subs.map(s => [a, s]));
     const listas = await Promise.all(pares.map(async ([a, s]) => {
       try { return [chaveSub(a.id, s.id), (await listar(relSub(a, s))).filter(i => i.file)]; }
-      catch (e) { if (e.status !== 404) throw e; if (ehAdmin()) await garantirPastaSub(a, s); return [chaveSub(a.id, s.id), []]; }
+      catch (e) { if (e.status !== 404) throw e; await garantirPastaSub(a, s); return [chaveSub(a.id, s.id), []]; }
     }));
     bib.arquivos = Object.fromEntries(listas);
     try { bib.meta = (await lerJSON(ARQ_META_BIB)).dados || { versao: 1, arquivos: {} }; } catch {}
@@ -1186,8 +1068,8 @@ function htmlItem(i, mostrarLocal = false) {
     return `<li class="mat pendente">
       <span class="tipo ${classeTipo}">${rotulo}</span>
       <div class="info"><b>${esc(i.nome)}</b><p>${esc(i.descricao)}</p>
-        <div class="linha-meta"><span class="tag pend">${ehAdmin() ? "Pendente de envio" : "Ainda não disponível"}</span>${local}</div></div>
-      <div class="acoes">${ehAdmin() ? `<button class="acao enviar" data-enviar="${id}" data-dica="Enviar arquivo" aria-label="Enviar arquivo"><svg><use href="#i-enviar"/></svg></button>` : ""}</div>
+        <div class="linha-meta"><span class="tag pend">Pendente de envio</span>${local}</div></div>
+      <div class="acoes"><button class="acao enviar" data-enviar="${id}" data-dica="Enviar arquivo" aria-label="Enviar arquivo"><svg><use href="#i-enviar"/></svg></button></div>
     </li>`;
   }
   const f = i.arquivo;
@@ -1196,10 +1078,8 @@ function htmlItem(i, mostrarLocal = false) {
     <div class="info"><b>${esc(i.nome)}</b><p>${esc(i.descricao)}</p>
       <div class="linha-meta">${local}<span class="meta">${tamanho(f.size)} · atualizado em ${data(f.lastModifiedDateTime)}</span></div></div>
     <div class="acoes">
-      <button class="acao ${ehFavorito(f.id) ? "fav-on" : ""}" data-fav="${encodeURIComponent(JSON.stringify([i.area, i.sub, f.id, i.nome]))}" data-dica="${ehFavorito(f.id) ? "Remover dos favoritos" : "Favoritar"}" aria-label="Favoritar"><svg><use href="#${ehFavorito(f.id) ? "i-estrela-cheia" : "i-estrela"}"/></svg></button>
-      ${podeEditarDoc(f.name) ? `<button class="acao" data-editar-doc="${f.id}" data-dica="${ehAdmin() ? "Editar documento" : "Editar (criar minha versão)"}" aria-label="Editar documento"><svg><use href="#i-doc-editar"/></svg></button>` : ""}
-      ${ehAdmin() ? `<button class="acao" data-editar="${encodeURIComponent(JSON.stringify([i.area, i.sub, f.id, i.chave || ""]))}" data-dica="Editar registro" aria-label="Editar registro"><svg><use href="#i-editar"/></svg></button>
-      <button class="acao" data-substituir="${encodeURIComponent([i.area, i.sub, i.nome, f.id].join("|"))}" data-dica="Substituir arquivo" aria-label="Substituir arquivo"><svg><use href="#i-trocar"/></svg></button>` : ""}
+      <button class="acao" data-editar="${encodeURIComponent(JSON.stringify([i.area, i.sub, f.id, i.chave || ""]))}" data-dica="Editar registro" aria-label="Editar registro"><svg><use href="#i-editar"/></svg></button>
+      <button class="acao" data-substituir="${encodeURIComponent([i.area, i.sub, i.nome, f.id].join("|"))}" data-dica="Substituir arquivo" aria-label="Substituir arquivo"><svg><use href="#i-trocar"/></svg></button>
       <button class="acao" data-abrir="${f.id}" data-dica="Visualizar" aria-label="Visualizar"><svg><use href="#i-abrir"/></svg></button>
       <button class="acao prim" data-baixar="${f.id}" data-dica="Baixar" aria-label="Baixar"><svg><use href="#i-baixar"/></svg></button>
     </div>
@@ -1221,7 +1101,7 @@ function cabecalho(eyebrow, titulo, desc, c) {
 
 function renderBiblioteca() {
   $("bibAvisos").innerHTML = (bib.erro ? `<div class="aviso-erro"><b>Não foi possível ler a biblioteca.</b><br>${esc(bib.erro)}</div>` : "")
-    + (bib.legado.length && ehAdmin() ? `<div class="aviso-migra"><div><b>Reorganização pendente.</b> Encontrei ${bib.legado.length} pasta(s) da organização anterior no OneDrive. Clique para mover os materiais para a nova estrutura por área.</div>
+    + (bib.legado.length ? `<div class="aviso-migra"><div><b>Reorganização pendente.</b> Encontrei ${bib.legado.length} pasta(s) da organização anterior no OneDrive. Clique para mover os materiais para a nova estrutura por área.</div>
         <button class="btn" id="btnMigrar">Reorganizar agora</button></div>` : "");
   if ($("btnMigrar")) $("btnMigrar").onclick = migrar;
 
@@ -1265,9 +1145,9 @@ function painelEtapa(a, s, titulo) {
   const itens = itensDe(a.id, s.id);
   const corpo = itens.length
     ? `<ul class="itens">${itens.map(i => htmlItem(i)).join("")}</ul>`
-    : `<div class="vazio-etapa"><b>Nenhum material nesta etapa ainda</b>${ehAdmin() ? `Adicione o primeiro modelo ou ferramenta de ${esc(s.nome.toLowerCase())} em ${esc(a.nome)}.` : "Os materiais aparecem aqui quando o administrador adicioná-los."}</div>`;
+    : `<div class="vazio-etapa"><b>Nenhum material nesta etapa ainda</b>Adicione o primeiro modelo ou ferramenta de ${esc(s.nome.toLowerCase())} em ${esc(a.nome)}.</div>`;
   return `<section class="painel">${titulo ? `<div class="painel-tit">${titulo}</div>` : ""}${corpo}
-    ${ehAdmin() ? `<button class="adicionar" data-adicionar="${a.id}|${s.id}"><svg><use href="#i-mais"/></svg>Adicionar material em ${esc(s.nome)}</button>` : ""}</section>`;
+    <button class="adicionar" data-adicionar="${a.id}|${s.id}"><svg><use href="#i-mais"/></svg>Adicionar material em ${esc(s.nome)}</button></section>`;
 }
 
 function renderEtapa(a, s) {
@@ -1415,16 +1295,12 @@ function editarMaterial(aid, sid, f, chaveCat) {
   };
 }
 $("bibConteudo").onclick = async e => {
-  const el = e.target.closest("[data-abrir],[data-baixar],[data-enviar],[data-adicionar],[data-substituir],[data-editar],[data-fav],[data-editar-doc]");
+  const el = e.target.closest("[data-abrir],[data-baixar],[data-enviar],[data-adicionar],[data-substituir],[data-editar]");
   if (!el) return;
   const d = el.dataset;
-  if (d.fav) {
-    const [area, sub, id, nome] = JSON.parse(decodeURIComponent(d.fav));
-    return alternarFavorito({ area, sub, nome, arquivo: { id } });
-  }
-  if (d.editarDoc) { const f = acharArquivo(d.editarDoc); if (f) abrirEditor({ arquivo: f, origem: "biblioteca" }); return; }
   if (d.abrir) {
-    visualizar(d.abrir);
+    const f = acharArquivo(d.abrir);
+    if (f) window.open(f.webUrl, "_blank", "noopener");
   } else if (d.baixar) {
     el.disabled = true;
     try {
@@ -2893,470 +2769,6 @@ $("atdConteudo").addEventListener("click", async e => {
   if (a === "excluirDiag") excluirDiag(diags().find(x => x.id === diagAtual.id) || diagAtual);
 });
 
-/* ================== EDITOR DE DOCUMENTOS (Word .docx) ================== */
-const LIB = {
-  mammoth: "https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js",
-  tinymce: "https://cdn.jsdelivr.net/npm/tinymce@7.6.1/tinymce.min.js",
-  tinymcePt: "https://cdn.jsdelivr.net/npm/tinymce-i18n@26.9.28/langs7/pt_BR.js",
-  docx: "https://cdn.jsdelivr.net/npm/docx@9.0.3/build/index.iife.js",
-  html2pdf: "https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js"
-};
-const EDITAVEIS = ["docx"];
-const podeEditarDoc = nome => EDITAVEIS.includes(extDe(nome));
-
-/* Converte o HTML do editor em um .docx (títulos, negrito, itálico, cores, listas, tabelas, imagens, links) */
-function htmlParaDocx(html) {
-  const D = window.docx;
-  const dom = new DOMParser().parseFromString(`<body>${html}</body>`, "text/html");
-  const corHex = c => {
-    if (!c) return undefined;
-    c = c.trim();
-    let m = c.match(/^#([0-9a-f]{6})$/i); if (m) return m[1];
-    m = c.match(/^#([0-9a-f]{3})$/i); if (m) return m[1].split("").map(x => x + x).join("");
-    m = c.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/i);
-    if (m && (m[4] === undefined || +m[4] > 0)) return [m[1], m[2], m[3]].map(n => (+n).toString(16).padStart(2, "0")).join("");
-  };
-  const tam = fs => { if (!fs) return; let m = fs.match(/([\d.]+)pt/); if (m) return Math.round(+m[1] * 2); m = fs.match(/([\d.]+)px/); if (m) return Math.round(+m[1] * 1.5); };
-  const alinh = el => ({ center: D.AlignmentType.CENTER, right: D.AlignmentType.RIGHT, justify: D.AlignmentType.JUSTIFIED })[el.style?.textAlign || ""];
-  function imagem(img) {
-    const src = img.getAttribute("src") || "";
-    const m = src.match(/^data:image\/(png|jpe?g|gif|bmp);base64,(.+)$/i);
-    if (!m) return null;
-    let w = +img.getAttribute("width") || img.naturalWidth || 400, h = +img.getAttribute("height") || img.naturalHeight || 300;
-    if (w > 600) { h = Math.round(h * 600 / w); w = 600; }
-    return new D.ImageRun({ type: m[1].toLowerCase().replace("jpeg", "jpg"), data: Uint8Array.from(atob(m[2]), c => c.charCodeAt(0)), transformation: { width: w, height: h } });
-  }
-  function runs(no, fmt = {}) {
-    const out = [];
-    for (const n of no.childNodes) {
-      if (n.nodeType === 3) { const t = n.textContent.replace(/\s+/g, " "); if (t) out.push(new D.TextRun({ text: t, ...fmt })); continue; }
-      if (n.nodeType !== 1) continue;
-      const tag = n.tagName.toLowerCase(), st = n.style || {};
-      if (tag === "br") { out.push(new D.TextRun({ text: "", break: 1 })); continue; }
-      if (tag === "img") { const im = imagem(n); if (im) out.push(im); continue; }
-      const f = { ...fmt };
-      if (tag === "strong" || tag === "b" || /bold|[6-9]00/.test(st.fontWeight || "")) f.bold = true;
-      if (tag === "em" || tag === "i" || st.fontStyle === "italic") f.italics = true;
-      if (tag === "u" || /underline/.test(st.textDecoration || "")) f.underline = {};
-      if (["s", "strike", "del"].includes(tag) || /line-through/.test(st.textDecoration || "")) f.strike = true;
-      if (tag === "sup") f.superScript = true;
-      if (tag === "sub") f.subScript = true;
-      const c = corHex(st.color); if (c) f.color = c;
-      const bg = corHex(st.backgroundColor); if (bg) f.shading = { type: D.ShadingType.CLEAR, fill: bg, color: "auto" };
-      const sz = tam(st.fontSize); if (sz) f.size = sz;
-      if (tag === "a" && n.getAttribute("href")) { out.push(new D.ExternalHyperlink({ link: n.getAttribute("href"), children: runs(n, { ...f, style: "Hyperlink" }) })); continue; }
-      out.push(...runs(n, f));
-    }
-    return out;
-  }
-  const BLOCO = new Set(["p", "div", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "table", "blockquote", "hr", "section", "article", "header", "footer", "figure", "pre"]);
-  function blocosDe(el, fmt = {}) {
-    const res = [];
-    let buf = dom.createElement("span");
-    const flush = () => { if (buf.textContent.trim() || buf.querySelector("img")) res.push(new D.Paragraph({ children: runs(buf, fmt) })); buf = dom.createElement("span"); };
-    for (const n of [...el.childNodes]) {
-      if (n.nodeType === 1 && BLOCO.has(n.tagName.toLowerCase())) { flush(); res.push(...bloco(n, fmt)); }
-      else buf.appendChild(n.cloneNode(true));
-    }
-    flush();
-    return res;
-  }
-  function bloco(n, fmt) {
-    const tag = n.tagName.toLowerCase();
-    if (/^h[1-6]$/.test(tag)) return [new D.Paragraph({ heading: D.HeadingLevel["HEADING_" + tag[1]], alignment: alinh(n), children: runs(n) })];
-    if (tag === "p" || tag === "pre") return [new D.Paragraph({ alignment: alinh(n), children: runs(n, fmt), indent: parseFloat(n.style.paddingLeft || n.style.marginLeft) > 0 ? { left: 720 } : undefined })];
-    if (["div", "section", "article", "header", "footer", "figure"].includes(tag)) return blocosDe(n, fmt);
-    if (tag === "ul" || tag === "ol") return lista(n, 0, tag);
-    if (tag === "table") return [tabela(n), new D.Paragraph({ children: [] })];
-    if (tag === "blockquote") return [new D.Paragraph({ indent: { left: 720 }, children: runs(n, { italics: true }) })];
-    if (tag === "hr") return [new D.Paragraph({ border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: "BBBBBB", space: 1 } }, children: [] })];
-    return [new D.Paragraph({ children: runs(n, fmt) })];
-  }
-  function lista(el, nivel, tipo) {
-    const res = [];
-    for (const li of el.children) {
-      if (li.tagName.toLowerCase() !== "li") continue;
-      const copia = li.cloneNode(true);
-      copia.querySelectorAll("ul,ol").forEach(x => x.remove());
-      res.push(new D.Paragraph({ children: runs(copia), ...(tipo === "ol" ? { numbering: { reference: "numeros", level: Math.min(nivel, 8) } } : { bullet: { level: Math.min(nivel, 8) } }) }));
-      for (const sub of li.querySelectorAll(":scope > ul, :scope > ol")) res.push(...lista(sub, nivel + 1, sub.tagName.toLowerCase()));
-    }
-    return res;
-  }
-  function tabela(t) {
-    const linhas = [...t.querySelectorAll(":scope > tr, :scope > thead > tr, :scope > tbody > tr, :scope > tfoot > tr")];
-    return new D.Table({
-      width: { size: 100, type: D.WidthType.PERCENTAGE },
-      rows: linhas.map(r => new D.TableRow({ children: [...r.children].map(c => {
-        const bg = corHex(c.style.backgroundColor);
-        const filhos = blocosDe(c, c.tagName === "TH" ? { bold: true } : {});
-        return new D.TableCell({
-          columnSpan: +c.getAttribute("colspan") || 1, rowSpan: +c.getAttribute("rowspan") || 1,
-          shading: bg ? { fill: bg, type: D.ShadingType.CLEAR, color: "auto" } : undefined,
-          margins: { top: 60, bottom: 60, left: 100, right: 100 },
-          children: filhos.length ? filhos : [new D.Paragraph({ children: [] })]
-        });
-      }) }))
-    });
-  }
-  const filhos = blocosDe(dom.body);
-  const doc = new D.Document({
-    creator: "WL Expertise",
-    styles: {
-      default: {
-        document: { run: { font: "Calibri", size: 22, color: "1A2E2E" }, paragraph: { spacing: { after: 120, line: 276 } } },
-        heading1: { run: { font: "Calibri", size: 34, bold: true, color: "0B5A60" }, paragraph: { spacing: { before: 240, after: 120 } } },
-        heading2: { run: { font: "Calibri", size: 28, bold: true, color: "0B5A60" }, paragraph: { spacing: { before: 200, after: 100 } } },
-        heading3: { run: { font: "Calibri", size: 24, bold: true, color: "13A3B5" }, paragraph: { spacing: { before: 160, after: 80 } } },
-        hyperlink: { run: { color: "13A3B5", underline: { type: D.UnderlineType.SINGLE } } }
-      }
-    },
-    numbering: { config: [{ reference: "numeros", levels: Array.from({ length: 9 }, (_, l) => ({ level: l, format: D.LevelFormat.DECIMAL, text: `%${l + 1}.`, alignment: D.AlignmentType.START, style: { paragraph: { indent: { left: 720 * (l + 1), hanging: 360 } } } })) }] },
-    sections: [{ properties: { page: { margin: { top: 1134, bottom: 1134, left: 1134, right: 1134 } } }, children: filhos.length ? filhos : [new D.Paragraph({ children: [] })] }]
-  });
-  return D.Packer.toBlob(doc);
-}
-
-/* ---- Abrir o editor ---- */
-const ed = { aberto: false, origem: null, arquivo: null, nome: "", alterado: false };
-async function abrirEditor({ arquivo, origem }) {
-  // origem: "biblioteca" (documento original) ou "meus" (documento do próprio usuário)
-  if (!podeEditarDoc(arquivo.name)) return toast("A edição no sistema está disponível para documentos Word (.docx).", "erro", 5000);
-  Object.assign(ed, { aberto: true, origem, arquivo, nome: semExt(arquivo.name), alterado: false });
-  const tela = document.createElement("div");
-  tela.className = "editor-tela"; tela.id = "editorTela";
-  tela.innerHTML = `
-    <header class="ed-topo">
-      <button class="g-fechar" data-ed="fechar" aria-label="Fechar">×</button>
-      <div class="ed-tit"><small>${origem === "biblioteca" ? (ehAdmin() ? "Editando documento da Biblioteca" : "Nova versão a partir da Biblioteca") : "Meus documentos"}</small>
-        <input id="edNomeDoc" value="${esc(ed.nome)}" maxlength="120" aria-label="Nome do documento"></div>
-      <span class="status-salvo" id="edStatus">Carregando…</span>
-      <button class="btn-s" data-ed="pdf"><svg><use href="#i-pdf"/></svg><span>PDF</span></button>
-      <button class="btn-p" data-ed="salvar"><svg><use href="#i-baixar"/></svg><span>Salvar</span></button>
-    </header>
-    <div class="ed-corpo"><textarea id="edArea"></textarea></div>`;
-  document.body.appendChild(tela);
-  document.body.style.overflow = "hidden";
-  tela.onclick = e => {
-    const b = e.target.closest("[data-ed]");
-    if (!b) return;
-    if (b.dataset.ed === "fechar") fecharEditor();
-    if (b.dataset.ed === "salvar") escolherSalvamento();
-    if (b.dataset.ed === "pdf") exportarPDFEditor();
-  };
-  $("edNomeDoc").oninput = () => { ed.alterado = true; };
-  try {
-    await Promise.all([carregarScript(LIB.mammoth), carregarScript(LIB.tinymce)]);
-    await carregarScript(LIB.tinymcePt).catch(() => {});
-    const meta = await (await graph(`/me/drive/items/${arquivo.id}`)).json();
-    const buf = await (await fetch(meta["@microsoft.graph.downloadUrl"], { cache: "no-store" })).arrayBuffer();
-    const conv = await mammoth.convertToHtml({ arrayBuffer: buf }, { styleMap: ["p[style-name='Title'] => h1:fresh", "p[style-name='Subtitle'] => h2:fresh"] });
-    if (!$("editorTela")) return;
-    $("edArea").value = conv.value;
-    await tinymce.init({
-      target: $("edArea"), license_key: "gpl", language: window.tinymce?.i18n?.hasCode?.("pt_BR") ? "pt_BR" : undefined,
-      height: "100%", menubar: "edit insert format table", branding: false, promotion: false, statusbar: false, browser_spellcheck: true, contextmenu: false,
-      plugins: "lists advlist table link autolink image charmap searchreplace wordcount",
-      toolbar: "undo redo | blocks fontsize | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link image | removeformat",
-      font_size_formats: "9pt 10pt 11pt 12pt 14pt 16pt 18pt 24pt",
-      block_formats: "Parágrafo=p; Título 1=h1; Título 2=h2; Título 3=h3",
-      table_default_styles: { "border-collapse": "collapse", width: "100%" },
-      content_style: `html{background:#E9EEEE} body{font-family:Calibri,'Segoe UI',sans-serif;font-size:11pt;color:#1A2E2E;background:#fff;max-width:21cm;min-height:27cm;margin:24px auto;padding:2cm;box-sizing:border-box;box-shadow:0 2px 14px rgba(0,0,0,.12)}
-        h1{color:#0B5A60;font-size:17pt} h2{color:#0B5A60;font-size:14pt} h3{color:#13A3B5;font-size:12pt}
-        table{border-collapse:collapse;width:100%} td,th{border:1px solid #BBB;padding:5px 7px;vertical-align:top} img{max-width:100%}
-        @media(max-width:700px){body{padding:16px;margin:0;min-height:auto;box-shadow:none}}`,
-      setup: editor => { editor.on("input change undo redo", () => { ed.alterado = true; $("edStatus").textContent = "Alterações não salvas"; $("edStatus").className = "status-salvo pend"; }); }
-    });
-    $("edStatus").textContent = "Pronto para editar";
-    if (conv.messages?.some(m => m.type === "warning")) toast("Algumas formatações avançadas do Word foram simplificadas no editor", "", 5000);
-  } catch (e) {
-    $("edStatus").textContent = "Erro";
-    toast("Não foi possível abrir o editor: " + e.message, "erro", 7000);
-  }
-}
-function fecharEditor(forcar = false) {
-  if (!forcar && ed.alterado && !confirmar("Fechar sem salvar? As alterações serão perdidas.")) return;
-  try { tinymce.get("edArea")?.remove(); } catch {}
-  $("editorTela")?.remove();
-  document.body.style.overflow = "";
-  ed.aberto = false;
-}
-const htmlEditor = () => tinymce.get("edArea")?.getContent() || "";
-
-function escolherSalvamento() {
-  const nome = limparNome($("edNomeDoc").value) || ed.nome;
-  const admin = ehAdmin();
-  const opcoes = ed.origem === "biblioteca"
-    ? (admin ? [["substituir", "Substituir o original na Biblioteca", "Todos passam a ver esta versão. A versão anterior fica no histórico de versões do OneDrive."],
-                ["nova", "Salvar como nova versão", "Cria uma cópia em Meus documentos. O original não muda."]]
-             : [["nova", "Salvar em Meus documentos", "Cria a sua versão do documento. O original da Biblioteca não muda."]])
-    : [["sobrescrever", "Salvar alterações", "Atualiza este documento em Meus documentos."], ["nova", "Salvar como nova versão", "Cria outra cópia em Meus documentos."]];
-  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Salvar documento</h3></div>
-    <div class="modal-corpo">
-      <div class="campo"><label>Nome do documento</label><input id="salvNome" value="${esc(nome)}" maxlength="120"></div>
-      <div class="opcoes-salvar">${opcoes.map(([k, t, d], i) => `<label><input type="radio" name="modo" value="${k}" ${i === 0 ? "checked" : ""}><span><b>${t}</b><small>${d}</small></span></label>`).join("")}</div>
-      ${ed.origem === "biblioteca" && admin ? `<p style="font-size:.76rem;color:var(--txt-2)">Formatações avançadas do Word original (caixas coloridas, cabeçalhos, fontes especiais) podem ser simplificadas. Para mudanças de layout, edite no Word e use “Substituir arquivo”.</p>` : ""}
-    </div>
-    <div class="modal-rod"><button class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" data-m="ok">Salvar</button></div>`);
-  veu.onclick = fecharModal;
-  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
-  m.querySelector("[data-m=ok]").onclick = async ev => {
-    const modo = m.querySelector("[name=modo]:checked").value;
-    const nomeFinal = limparNome($("salvNome").value);
-    if (!nomeFinal) return toast("Dê um nome ao documento", "erro");
-    if (modo === "substituir" && !confirmar("Substituir o documento original da Biblioteca por esta versão?")) return;
-    ev.target.disabled = true;
-    const ok = await salvarDocumento(modo, nomeFinal);
-    ev.target.disabled = false;
-    if (ok) { fecharModal(); fecharEditor(true); }
-  };
-}
-async function salvarDocumento(modo, nome) {
-  $("edStatus").textContent = "Salvando…"; $("edStatus").className = "status-salvo pend";
-  try {
-    await carregarScript(LIB.docx);
-    const blob = await htmlParaDocx(htmlEditor());
-    const arq = new File([blob], nome + ".docx", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
-    if (modo === "substituir") {
-      const pai = await (await graph(`/me/drive/items/${ed.arquivo.id}?$select=id,parentReference`)).json();
-      const pasta = decodeURIComponent(pai.parentReference.path).replace(/^\/drive\/root:\/WL-Sistema\/?/, "");
-      await enviarArquivo(`${pasta}/${semExt(ed.arquivo.name)}.docx`, arq, "replace");
-      toast("Documento original atualizado");
-      carregarBiblioteca();
-    } else if (modo === "sobrescrever") {
-      await enviarArquivo(`${pastaMinha()}/${semExt(ed.arquivo.name)}.docx`, arq, "replace");
-      if (nome !== semExt(ed.arquivo.name)) await graph(`/me/drive/items/${ed.arquivo.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: nome + ".docx" }) });
-      toast("Documento salvo em Meus documentos");
-    } else {
-      await garantirPastaMinha();
-      const item = await enviarArquivo(`${pastaMinha()}/${nome}.docx`, arq, "rename");
-      const base = ed.origem === "biblioteca" ? ed.arquivo : (prefs.dados?.documentos?.[ed.arquivo.id]?.base || null);
-      await salvarPrefs(p => { p.documentos[item.id] = { base: base ? { id: base.id, nome: semExt(base.name) } : null, criadoEm: new Date().toISOString() }; });
-      toast(`Salvo em Meus documentos como "${semExt(item.name)}"`);
-    }
-    if (viewAtual === "meus") renderMeus();
-    return true;
-  } catch (e) {
-    $("edStatus").textContent = "Erro ao salvar"; $("edStatus").className = "status-salvo erro";
-    toast("Não foi possível salvar: " + e.message, "erro", 7000);
-    return false;
-  }
-}
-async function exportarPDFEditor() {
-  toast("Gerando PDF…", "prog", 0);
-  try {
-    await carregarScript(LIB.html2pdf);
-    const host = document.createElement("div");
-    host.style.cssText = "position:fixed;left:0;top:0;width:190mm;z-index:-1;pointer-events:none;background:#fff";
-    host.innerHTML = `<div class="pdf pdf-livre">${htmlEditor()}</div>`;
-    document.body.appendChild(host);
-    const nome = (limparNome($("edNomeDoc").value) || ed.nome) + ".pdf";
-    try {
-      await html2pdf().set({ margin: [12, 10, 14, 10], filename: nome, image: { type: "jpeg", quality: 0.92 }, html2canvas: { scale: 2, scrollX: 0, scrollY: 0, backgroundColor: "#fff" },
-        jsPDF: { unit: "mm", format: "a4" }, pagebreak: { mode: ["css", "legacy"], avoid: ["tr", "img", "h1", "h2", "h3"] } }).from(host.firstElementChild).save();
-    } finally { host.remove(); }
-    toast("PDF baixado");
-  } catch (e) { toast("Falha ao gerar o PDF: " + e.message, "erro", 6000); }
-}
-
-/* ================== USUÁRIOS (somente administrador) ================== */
-let usuariosCache = [];
-async function renderUsuarios() {
-  const alvo = $("painelUsuarios");
-  if (!ehAdmin()) { alvo.innerHTML = ""; return; }
-  alvo.innerHTML = `<section class="card"><h3>Usuários</h3><p class="sub">Quem pode entrar no sistema. Somente o administrador vê esta área.</p><div class="esqueleto" style="height:80px"></div></section>`;
-  try { usuariosCache = await api("/admin/usuarios"); }
-  catch (e) { alvo.innerHTML = `<div class="aviso-erro"><b>Não foi possível carregar os usuários.</b><br>${esc(e.message)}</div>`; return; }
-  alvo.innerHTML = `<section class="card">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap"><div><h3>Usuários</h3><p class="sub">Quem pode entrar no sistema. Somente o administrador vê esta área.</p></div>
-      <button class="btn-p" data-u="novo"><svg><use href="#i-mais"/></svg>Novo usuário</button></div>
-    <ul class="lista-usuarios">${usuariosCache.map(u => `<li class="${u.ativo ? "" : "inativo"}">
-      <span class="avatar-u">${esc(u.nome.split(/\s+/).map(p => p[0]).slice(0, 2).join("").toUpperCase())}</span>
-      <div class="u-info"><b>${esc(u.nome)} ${u.papel === "admin" ? `<span class="chip-p">Administrador</span>` : ""} ${u.ativo ? "" : `<span class="chip-p" style="color:var(--erro)">Desativado</span>`} ${u.trocarSenha ? `<span class="chip-p" style="color:#9A6A0C">Senha provisória</span>` : ""}</b>
-        <small>${esc(u.email)} · ${u.ultimoAcesso ? "último acesso " + dataHora(u.ultimoAcesso) : "nunca acessou"}</small></div>
-      <div class="acoes">
-        <button class="acao" data-dica="Editar" data-u="editar" data-email="${esc(u.email)}"><svg><use href="#i-editar"/></svg></button>
-        <button class="acao" data-dica="Redefinir senha" data-u="senha" data-email="${esc(u.email)}"><svg><use href="#i-chave"/></svg></button>
-        ${u.email === conta.username || u.papel === "admin" && u.email === CONFIG.adminEmail ? "" : `<button class="acao perigo-ico" data-dica="Excluir" data-u="excluir" data-email="${esc(u.email)}"><svg><use href="#i-lixo"/></svg></button>`}
-      </div></li>`).join("")}</ul></section>`;
-  alvo.onclick = e => {
-    const b = e.target.closest("[data-u]");
-    if (!b) return;
-    const u = usuariosCache.find(x => x.email === b.dataset.email);
-    if (b.dataset.u === "novo") formUsuario();
-    if (b.dataset.u === "editar") formUsuario(u);
-    if (b.dataset.u === "senha") redefinirSenha(u);
-    if (b.dataset.u === "excluir") excluirUsuario(u);
-  };
-}
-function formUsuario(u) {
-  const novo = !u, protegido = u?.email === CONFIG.adminEmail;
-  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>${novo ? "Novo usuário" : "Editar usuário"}</h3></div>
-    <form class="modal-corpo" id="formU">
-      <div class="campo"><label>Nome completo *</label><input name="nome" value="${esc(u?.nome || "")}" required></div>
-      <div class="campo"><label>Login (e-mail) *</label><input name="email" type="email" value="${esc(u?.email || "")}" ${novo ? "required" : "disabled"}></div>
-      <div class="linha2"><div class="campo"><label>Perfil</label><select name="papel" ${protegido ? "disabled" : ""}>
-          <option value="usuario" ${u?.papel !== "admin" ? "selected" : ""}>Usuário</option><option value="admin" ${u?.papel === "admin" ? "selected" : ""}>Administrador</option></select></div>
-        ${novo ? "" : `<div class="campo"><label>Situação</label><select name="ativo" ${protegido || u.email === conta.username ? "disabled" : ""}><option value="1" ${u.ativo ? "selected" : ""}>Ativo</option><option value="0" ${u.ativo ? "" : "selected"}>Desativado</option></select></div>`}</div>
-      ${novo ? `<div class="campo"><label>Senha provisória *</label><input name="senha" type="text" required minlength="8" autocomplete="off"></div>
-        <p style="font-size:.74rem;color:var(--txt-2)">No primeiro acesso, o usuário será obrigado a criar a própria senha.</p>` : ""}
-      <p style="font-size:.74rem;color:var(--txt-2)"><b>Usuário:</b> vê e baixa a Biblioteca, salva versões em Meus documentos, usa CRM e Atendimento. <b>Administrador:</b> também altera a Biblioteca e gerencia usuários.</p>
-      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">${novo ? "Criar usuário" : "Salvar"}</button></div>
-    </form>`);
-  veu.onclick = fecharModal;
-  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
-  $("formU").onsubmit = async e => {
-    e.preventDefault();
-    const f = Object.fromEntries(new FormData(e.target));
-    try {
-      if (novo) await api("/admin/usuarios", { method: "POST", body: JSON.stringify({ nome: f.nome, email: f.email, papel: f.papel, senha: f.senha }) });
-      else await api("/admin/usuarios/" + encodeURIComponent(u.email), { method: "PUT", body: JSON.stringify({ nome: f.nome, ...(f.papel ? { papel: f.papel } : {}), ...(f.ativo !== undefined ? { ativo: f.ativo === "1" } : {}) }) });
-      fecharModal();
-      toast(novo ? "Usuário criado" : "Usuário atualizado");
-      renderUsuarios(); carregarEquipe();
-    } catch (err) { toast(err.message, "erro", 5000); }
-  };
-}
-function redefinirSenha(u) {
-  const proprio = u.email === conta.username;
-  if (proprio) return trocarMinhaSenha();
-  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Redefinir senha</h3></div>
-    <form class="modal-corpo" id="formRS"><p>Nova senha provisória para <b>${esc(u.nome)}</b>. No próximo acesso, ele(a) terá de criar uma senha pessoal. As sessões abertas serão encerradas.</p>
-      <div class="campo"><label>Senha provisória</label><input name="senha" type="text" required minlength="8" autocomplete="off"></div>
-      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Redefinir</button></div></form>`);
-  veu.onclick = fecharModal;
-  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
-  $("formRS").onsubmit = async e => {
-    e.preventDefault();
-    try { await api("/admin/usuarios/" + encodeURIComponent(u.email), { method: "PUT", body: JSON.stringify({ senha: new FormData(e.target).get("senha") }) }); fecharModal(); toast("Senha redefinida"); renderUsuarios(); }
-    catch (err) { toast(err.message, "erro", 5000); }
-  };
-}
-async function excluirUsuario(u) {
-  if (!confirmar(`Excluir o usuário ${u.nome} (${u.email})? Os documentos em Meus documentos dele continuam guardados no OneDrive.`)) return;
-  try { await api("/admin/usuarios/" + encodeURIComponent(u.email), { method: "DELETE" }); toast("Usuário excluído"); renderUsuarios(); carregarEquipe(); }
-  catch (err) { toast(err.message, "erro", 5000); }
-}
-
-/* ================== PREFERÊNCIAS DO USUÁRIO (favoritos e origem dos documentos) ================== */
-let prefs = null;
-function iniciarPrefs() { prefs = criarStore(`dados/usuarios/${slugUsuario(conta.username)}.json`, { versao: 1, favoritos: [], documentos: {} }); }
-function garantirPrefs() {
-  if (prefs.carregado) return Promise.resolve();
-  return prefs.promessa ||= carregarStore(prefs).catch(() => { if (!prefs.carregado) { prefs.dados = structuredClone(prefs.inicial); prefs.carregado = true; } }).finally(() => { prefs.promessa = null; });
-}
-async function salvarPrefs(fn) { await garantirPrefs(); await salvarStore(prefs, d => { d.favoritos = d.favoritos || []; d.documentos = d.documentos || {}; fn(d); }); }
-const ehFavorito = id => !!prefs?.dados?.favoritos?.some(f => f.id === id);
-async function alternarFavorito(item) {
-  const f = item.arquivo;
-  const ja = ehFavorito(f.id);
-  try {
-    await salvarPrefs(d => {
-      if (ja) d.favoritos = d.favoritos.filter(x => x.id !== f.id);
-      else d.favoritos.push({ id: f.id, area: item.area, sub: item.sub, nome: item.nome, em: new Date().toISOString() });
-    });
-    toast(ja ? "Removido dos favoritos" : "Adicionado aos favoritos");
-  } catch (e) { toast("Não foi possível salvar: " + e.message, "erro"); }
-  if (viewAtual === "biblioteca") renderBiblioteca();
-  if (viewAtual === "meus") renderMeus();
-}
-
-/* ================== VISUALIZAR ARQUIVOS ================== */
-async function visualizar(idArquivo) {
-  const janela = window.open("about:blank", "_blank");
-  try {
-    const m = await (await graph(`/me/drive/items/${idArquivo}`)).json();
-    const ext = extDe(m.name), url = m["@microsoft.graph.downloadUrl"];
-    if (["docx", "doc", "xlsx", "xls", "pptx", "ppt"].includes(ext)) {
-      janela.location = "https://view.officeapps.live.com/op/view.aspx?src=" + encodeURIComponent(url);
-    } else if (["pdf", "html", "htm", "csv", "txt", "png", "jpg", "jpeg"].includes(ext)) {
-      const b = await (await fetch(url)).blob();
-      const tipo = { pdf: "application/pdf", html: "text/html", htm: "text/html", csv: "text/plain", txt: "text/plain", png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg" }[ext];
-      janela.location = URL.createObjectURL(new Blob([b], { type: tipo }));
-    } else { janela.close(); baixarArquivo(idArquivo); }
-  } catch (e) { janela?.close(); toast("Não foi possível abrir: " + e.message, "erro"); }
-}
-async function baixarArquivo(idArquivo) {
-  try {
-    const m = await (await graph(`/me/drive/items/${idArquivo}`)).json();
-    const link = document.createElement("a");
-    link.href = m["@microsoft.graph.downloadUrl"]; link.download = m.name;
-    document.body.appendChild(link); link.click(); link.remove();
-    toast(`Baixando "${m.name}"`);
-  } catch (e) { toast("Falha ao baixar: " + e.message, "erro"); }
-}
-
-/* ================== MEUS DOCUMENTOS ================== */
-const pastaMinha = () => `meus-documentos/${slugUsuario(conta.username)}`;
-async function garantirPastaMinha() { await criarPasta("", "meus-documentos"); await criarPasta("meus-documentos", slugUsuario(conta.username)); }
-const meus = { arquivos: [], carregado: false };
-async function carregarMeus() {
-  try {
-    await garantirPrefs();
-    try { meus.arquivos = (await listar(pastaMinha())).filter(i => i.file); }
-    catch (e) { if (e.status !== 404) throw e; meus.arquivos = []; }
-    meus.carregado = true; meus.erro = null;
-  } catch (e) { meus.erro = e.message; }
-  if (viewAtual === "meus") renderMeus();
-}
-function renderMeus() {
-  const aba = rota[0] === "favoritos" ? "favoritos" : "documentos";
-  $("meusAbas").querySelectorAll("button").forEach(b => b.classList.toggle("ativo", b.dataset.aba === aba));
-  const alvo = $("meusConteudo");
-  if (meus.erro) { alvo.innerHTML = `<div class="aviso-erro"><b>Não foi possível carregar.</b><br>${esc(meus.erro)}</div>`; return; }
-  if (!meus.carregado) { alvo.innerHTML = `<div class="esqueleto"></div>`; return; }
-  if (aba === "documentos") {
-    const docs = [...meus.arquivos].sort((a, b) => b.lastModifiedDateTime.localeCompare(a.lastModifiedDateTime));
-    alvo.innerHTML = `<section class="painel">${docs.length ? `<ul class="itens">${docs.map(f => {
-      const info = prefs.dados?.documentos?.[f.id];
-      return htmlLinhaArquivo(f, info?.base ? `Versão de “${info.base.nome}”` : "Documento pessoal", [
-        podeEditarDoc(f.name) ? ["editar-meu", "Editar documento", "i-editar"] : null, ["ver", "Visualizar", "i-abrir"], ["baixar", "Baixar", "i-baixar"], ["excluir-meu", "Excluir", "i-lixo"]]);
-    }).join("")}</ul>` : `<div class="vazio-etapa"><b>Nenhum documento ainda</b>Na Biblioteca, use “Editar” em um documento Word para criar a sua versão. Ela aparece aqui.</div>`}</section>`;
-  } else {
-    const favs = prefs.dados?.favoritos || [];
-    alvo.innerHTML = `<section class="painel">${favs.length ? `<ul class="itens">${favs.map(fv => {
-      const f = acharArquivo(fv.id);
-      const a = areaPorId(fv.area), s = subPorId(a, fv.sub);
-      if (!f) return `<li class="mat pendente"><span class="tipo t-outro">?</span><div class="info"><b>${esc(fv.nome)}</b><p>Este material não está mais disponível na Biblioteca.</p></div>
-        <div class="acoes"><button class="acao" data-dica="Remover dos favoritos" data-meus="desfav" data-id="${fv.id}"><svg><use href="#i-estrela-cheia"/></svg></button></div></li>`;
-      return htmlLinhaArquivo(f, a && s ? `${a.nome} › ${s.nome}` : "Biblioteca", [
-        ["desfav", "Remover dos favoritos", "i-estrela-cheia", "fav-on"], podeEditarDoc(f.name) ? ["editar-bib", "Editar (nova versão)", "i-editar"] : null, ["ver", "Visualizar", "i-abrir"], ["baixar", "Baixar", "i-baixar"]]);
-    }).join("")}</ul>` : `<div class="vazio-etapa"><b>Nenhum favorito ainda</b>Na Biblioteca, clique na estrela de um material para encontrá-lo rapidamente aqui.</div>`}</section>`;
-  }
-}
-function htmlLinhaArquivo(f, sub, acoes) {
-  const ext = extDe(f.name);
-  const classeTipo = ["pdf", "xlsx", "xls", "csv", "docx", "doc", "pptx", "ppt", "html", "htm"].includes(ext) ? "t-" + ext : "t-outro";
-  const rotulo = { xlsx: "XLS", docx: "DOC", pptx: "PPT", html: "HTML", htm: "HTML" }[ext] || ext.toUpperCase().slice(0, 4);
-  return `<li class="mat"><span class="tipo ${classeTipo}">${rotulo}</span>
-    <div class="info"><b>${esc(semExt(f.name))}</b><p>${esc(sub)}</p><div class="linha-meta"><span class="meta">${tamanho(f.size)} · atualizado em ${data(f.lastModifiedDateTime)}</span></div></div>
-    <div class="acoes">${acoes.filter(Boolean).map(([k, dica, ico, cls]) => `<button class="acao ${cls || ""} ${k.startsWith("excluir") ? "perigo-ico" : ""}" data-dica="${dica}" aria-label="${dica}" data-meus="${k}" data-id="${f.id}"><svg><use href="#${ico}"/></svg></button>`).join("")}</div></li>`;
-}
-$("meusAbas").onclick = e => { const b = e.target.closest("[data-aba]"); if (b) location.hash = "meus" + (b.dataset.aba === "favoritos" ? "/favoritos" : ""); };
-$("meusConteudo").onclick = async e => {
-  const b = e.target.closest("[data-meus]");
-  if (!b) return;
-  const id = b.dataset.id, acao = b.dataset.meus;
-  const f = meus.arquivos.find(x => x.id === id) || acharArquivo(id);
-  if (acao === "ver") visualizar(id);
-  if (acao === "baixar") baixarArquivo(id);
-  if (acao === "editar-meu" && f) abrirEditor({ arquivo: f, origem: "meus" });
-  if (acao === "editar-bib" && f) abrirEditor({ arquivo: f, origem: "biblioteca" });
-  if (acao === "desfav") {
-    const fv = prefs.dados.favoritos.find(x => x.id === id);
-    alternarFavorito({ arquivo: { id }, ...(fv || {}) });
-  }
-  if (acao === "excluir-meu" && f) {
-    if (!confirmar(`Excluir "${semExt(f.name)}"? Ele vai para a lixeira do OneDrive.`)) return;
-    try {
-      await graph(`/me/drive/items/${id}`, { method: "DELETE" });
-      await salvarPrefs(d => { delete d.documentos[id]; });
-      toast("Documento excluído");
-      carregarMeus();
-    } catch (err) { toast("Não foi possível excluir: " + err.message, "erro"); }
-  }
-};
-
 /* ================== SISTEMA: DIAGNÓSTICO ================== */
 const passos = {};
 function passo(id, titulo) {
@@ -3375,12 +2787,12 @@ function marcar(id, estado, texto) {
 }
 async function diagnosticar() {
   $("checklist").innerHTML = "";
-  passo("login", "Login no sistema");
+  passo("login", "Login Microsoft");
   passo("drive", "OneDrive");
   passo("pasta", `Pasta ${CONFIG.pasta}`);
   passo("subpastas", "Subpastas do sistema");
   passo("banco", "Leitura e gravação de dados");
-  marcar("login", "ok", `${conta.username} · ${ehAdmin() ? "Administrador" : "Usuário"}`);
+  marcar("login", "ok", conta.username);
   try {
     const d = await (await graph("/me/drive?$select=quota,driveType")).json();
     const gb = b => (b / 1024 ** 3).toLocaleString("pt-BR", { maximumFractionDigits: 1 });
@@ -3472,10 +2884,9 @@ async function abrirApp() {
   const nome = conta.name || conta.username;
   $("ola").textContent = `Olá, ${nome.split(" ")[0]}!`;
   $("menuNome").textContent = nome;
-  $("menuEmail").textContent = `${conta.username} · ${ehAdmin() ? "Administrador" : "Usuário"}`;
+  $("menuEmail").textContent = conta.username;
   $("iniciais").textContent = nome.split(/\s+/).map(p => p[0]).slice(0, 2).join("").toUpperCase();
   montarNav();
-  iniciarPrefs();
   const cache = lerLocal(BIB_CACHE);
   if (cache?.arquivos) { bib.arquivos = cache.arquivos; bib.legado = cache.legado || []; if (cache.meta) bib.meta = cache.meta; bib.carregado = true; }
   const cacheCRM = lerLocal(CRM_CACHE);
@@ -3483,15 +2894,16 @@ async function abrirApp() {
   mostrar("telaApp");
   irPara(location.hash.slice(1) || "biblioteca");
   carregarBiblioteca();
-  garantirPrefs().then(() => { if (viewAtual === "biblioteca") renderBiblioteca(); });
-  carregarEquipe();
-  if (conta.trocarSenha) trocarMinhaSenha(true);
   setInterval(sincronizarVisivel, CONFIG.intervaloSync * 2);
   document.addEventListener("visibilitychange", sincronizarVisivel);
 }
 
-$("btnSair").onclick = e => { e.stopPropagation(); sair(); };
-$("btnSenha").onclick = e => { e.stopPropagation(); $("menu").classList.add("oculto"); trocarMinhaSenha(); };
+$("btnEntrar").onclick = () => msal.loginRedirect({ scopes: CONFIG.escopos, prompt: "select_account" });
+$("btnSair").onclick = e => {
+  e.stopPropagation();
+  try { localStorage.removeItem(BIB_CACHE); localStorage.removeItem(CRM_CACHE); } catch {}
+  msal.logoutRedirect({ account: conta });
+};
 $("avatar").onclick = e => { e.stopPropagation(); fecharMenus(); $("menu").classList.toggle("oculto"); };
 document.addEventListener("click", e => { if (!$("avatar").contains(e.target)) $("menu").classList.add("oculto"); });
 
@@ -3501,20 +2913,16 @@ $("btnInstalar").onclick = async () => { promptInstalar?.prompt(); await promptI
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 
 (async () => {
-  const s = lerSessao();
-  if (!s?.token || !apiConfigurada()) {
-    mostrar("telaLogin");
-    if (!apiConfigurada()) mostrarErroLogin("O endereço do servidor ainda não foi configurado no sistema (CONFIG.api).");
-    return;
-  }
   try {
-    const r = await api("/auth/eu");
-    conta = { name: r.usuario.nome, username: r.usuario.email, papel: r.usuario.papel, admin: r.admin, trocarSenha: r.usuario.trocarSenha };
-    await abrirApp();
+    await msal.initialize();
+    const resp = await msal.handleRedirectPromise();
+    conta = resp?.account || msal.getAllAccounts()[0] || null;
+    if (conta) { msal.setActiveAccount(conta); await abrirApp(); }
+    else mostrar("telaLogin");
   } catch (e) {
-    if (e.status === 401) { try { localStorage.removeItem(SESSAO); } catch {} }
+    console.error(e);
     mostrar("telaLogin");
-    if (e.status !== 401) mostrarErroLogin("Não foi possível conectar ao servidor: " + e.message);
+    toast("Erro no login: " + (e.errorMessage || e.message), "erro");
   }
 })();
 </script>
