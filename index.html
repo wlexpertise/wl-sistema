@@ -579,6 +579,108 @@
   .lin-tab input:focus,.lin-tab textarea:focus{border-color:var(--turq)}
   @media(max-width:760px){.lin-tab{grid-template-columns:1fr}.lin-tab .acao{justify-self:end}.opcoes.mz{grid-template-columns:1fr}}
   .botoes-diag{display:flex;gap:8px;flex-wrap:wrap}
+  /* Propostas */
+  .linha3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  @media(max-width:600px){.linha3{grid-template-columns:1fr}}
+  .ld-ico.prop{background:rgba(19,163,181,.14);color:var(--teal);font-size:.8rem}
+  .ico-rs{font-size:.66rem;font-weight:800;color:var(--teal)}
+  .dica-campo{font-weight:500;color:var(--txt-2);text-transform:none;letter-spacing:0;font-size:.7rem}
+  .item-prop h4{display:flex;align-items:center;gap:8px}
+  .n-item{display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:var(--teal);color:#fff;font-size:.72rem}
+  .perigo-lnk{margin-left:auto;color:var(--erro)!important}
+  .preco-box{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .preco-box>div{background:var(--bg);border-radius:12px;padding:10px 12px;display:grid;gap:2px;align-content:start}
+  .preco-box small{font-size:.66rem;font-weight:700;color:var(--txt-2);text-transform:uppercase;letter-spacing:.05em}
+  .preco-box b{font-size:1.05rem;color:var(--txt)}
+  .preco-box span{font-size:.7rem;color:var(--txt-2);line-height:1.35}
+  .preco-box .sug{background:rgba(19,163,181,.1);border:1.5px solid rgba(19,163,181,.35)}
+  .preco-box .sug b{color:var(--teal);font-size:1.2rem}
+  .preco-box .final{background:#fff;border:1.5px solid var(--teal)}
+  .inp-valor{width:100%;border:0;border-bottom:2px solid var(--turq);font:inherit;font-size:1.15rem;font-weight:800;color:var(--teal);padding:2px 0;outline:none;background:transparent}
+  .preco-box .final span{font-weight:700}
+  @media(max-width:700px){.preco-box{grid-template-columns:1fr}}
+  .txt-pag{font-size:.78rem;color:var(--txt-2)}
+  .calc-det{background:var(--bg);border-radius:12px;padding:8px 12px;font-size:.78rem}
+  .calc-det summary{cursor:pointer;font-weight:700;color:var(--teal)}
+  .calc-det summary span{font-size:.64rem;font-weight:700;color:var(--txt-2);background:#fff;border-radius:999px;padding:2px 7px;margin-left:6px}
+  .calc-bloco{margin-top:10px}
+  .calc-bloco>b{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--txt-2)}
+  .calc-bloco table{width:100%;border-collapse:collapse;margin-top:4px}
+  .calc-bloco td{padding:4px 0;border-bottom:1px dashed var(--borda)}
+  .calc-bloco td:last-child{text-align:right;white-space:nowrap;font-weight:600}
+  .calc-bloco td small{color:var(--txt-2)}
+  .calc-bloco tr.fat td{color:#9A6A0C}
+  .calc-bloco tr.tot td{font-weight:800;border-bottom:0}
+  .calc-rod{margin:10px 0 6px;font-weight:700;color:var(--teal)}
+  .add-serv{justify-self:start}
+  .rs-item{display:grid;grid-template-columns:1fr auto;gap:2px 8px;padding:10px 0;border-bottom:1px solid var(--borda)}
+  .rs-nome{grid-column:1/-1}
+  .rs-nome b{display:block;font-size:.84rem}
+  .rs-nome small{font-size:.72rem;color:var(--txt-2)}
+  .rs-linha{display:contents;font-size:.78rem}
+  .rs-linha span{color:var(--txt-2)}
+  .rs-linha b{text-align:right}
+  .rs-var{grid-column:1/-1;text-align:right;font-size:.74rem;font-weight:800}
+  .rs-total{display:grid;gap:6px;margin-top:12px}
+  .rs-total div{display:flex;justify-content:space-between;align-items:baseline;background:var(--teal);color:#fff;border-radius:12px;padding:10px 12px}
+  .rs-total span{font-size:.72rem;font-weight:700;opacity:.85}
+  .rs-total b{font-size:1.1rem}
+  .botoes-status{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .botoes-status .ativo-ok{background:var(--verde);border-color:var(--verde);color:#fff}
+  .botoes-status .ativo-nao{background:var(--erro);border-color:var(--erro);color:#fff}
+  .modal.modal-largo{width:min(820px,calc(100vw - 24px))}
+  .params h5{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin:16px 0 8px}
+  .param-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+  @media(max-width:640px){.param-grid{grid-template-columns:1fr}}
+  .param-grid label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.78rem;border-bottom:1px solid var(--borda);padding:4px 0}
+  .param-inp{display:flex;align-items:center;gap:4px}
+  .param-inp input{width:84px;border:1.5px solid var(--borda);border-radius:8px;padding:5px 7px;font:inherit;font-size:.8rem;text-align:right}
+  .param-inp em{font-style:normal;font-size:.66rem;color:var(--txt-2);width:48px}
+  /* PDF da proposta */
+  .pp{width:190mm;font-family:"Montserrat","Segoe UI",sans-serif;color:#1A2E2E;font-size:10.5px;line-height:1.55;background:#fff}
+  .pp-capa{background:linear-gradient(120deg,#0B5A60 0%,#0E7C86 60%,#13A3B5 100%);color:#fff;border-radius:10px;padding:22px 24px 24px;display:grid;gap:18px}
+  .pp-capa img{height:40px}
+  .pp-capa small{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+  .pp-capa h1{font-size:24px;line-height:1.15;margin:4px 0 6px;font-weight:800}
+  .pp-capa p{font-size:11px;opacity:.95}
+  .pp-partes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 6px}
+  .pp-partes>div{border:1px solid #E3ECEC;border-radius:8px;padding:10px 12px;display:grid;gap:1px}
+  .pp-partes small{font-size:8.5px;font-weight:800;color:#13A3B5;letter-spacing:.1em;text-transform:uppercase}
+  .pp-partes b{font-size:12px;color:#0B5A60}
+  .pp-partes span{font-size:9.5px;color:#3D5252}
+  .pp-bloco{margin-top:14px}
+  .pp-tit{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:#0B5A60;border-bottom:2px solid #E3ECEC;padding-bottom:5px;margin-bottom:7px}
+  .pp-tit span{font-size:10px;color:#fff;background:#28B260;border-radius:5px;padding:1px 6px}
+  .pp p{margin:0 0 5px}
+  .pp-lista{list-style:none;display:grid;gap:3px;margin:2px 0}
+  .pp-lista li{position:relative;padding-left:14px}
+  .pp-lista li::before{content:"";position:absolute;left:2px;top:6px;width:6px;height:6px;border-radius:2px;background:#13A3B5}
+  .pp-lista.duas{grid-template-columns:1fr 1fr;column-gap:14px}
+  .pp-pontos{background:#F5F8F8;border-radius:8px;padding:8px 12px;margin-top:6px}
+  .pp-pontos small,.pp-pag small{font-size:8.5px;font-weight:800;color:#5B6B6B;letter-spacing:.08em;text-transform:uppercase}
+  .pp-serv{border:1px solid #E3ECEC;border-left:4px solid #13A3B5;border-radius:8px;padding:9px 12px;margin-bottom:8px}
+  .pp-serv-cab{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+  .pp-serv-cab b{font-size:12px;color:#0B5A60}
+  .pp-serv-cab span{font-size:9px;font-weight:800;color:#fff;background:#0B5A60;border-radius:999px;padding:2px 9px}
+  .pp-nota{font-size:9.5px;color:#5B6B6B;margin-top:4px}
+  .pp-tab{width:100%;border-collapse:collapse;font-size:10px}
+  .pp-tab th{background:#0B5A60;color:#fff;text-align:left;padding:6px 8px;font-weight:700}
+  .pp-tab td{border-bottom:1px solid #E3ECEC;padding:6px 8px}
+  .pp-tab td:last-child,.pp-tab th:last-child{text-align:right}
+  .pp-totais{display:flex;gap:10px;justify-content:flex-end;margin:10px 0}
+  .pp-totais div{background:#28B260;color:#fff;border-radius:8px;padding:8px 14px;text-align:right;min-width:150px}
+  .pp-totais small{display:block;font-size:8.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
+  .pp-totais b{font-size:15px}
+  .pp-pag{background:#F5F8F8;border-radius:8px;padding:8px 12px}
+  .pp-cases{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
+  .pp-cases div{background:#F5F8F8;border-radius:8px;padding:8px 10px;display:grid}
+  .pp-cases b{font-size:13px;color:#13A3B5}
+  .pp-cases span{font-size:9px;color:#3D5252;line-height:1.35}
+  .pp-assin{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:30px}
+  .pp-assin div{display:grid;gap:1px;font-size:9.5px}
+  .pp-assin i{display:block;border-top:1px solid #1A2E2E;margin-bottom:4px}
+  .pp-assin b{font-size:10.5px}
+  .pp-rodape{margin-top:18px;padding-top:8px;border-top:1px solid #E3ECEC;font-size:8.5px;color:#5B6B6B;text-align:center}
   .rot-botoes{display:block;font-size:.7rem;font-weight:700;color:var(--txt-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
   .tag-combo{font-size:.66rem;font-weight:800;color:#fff;background:var(--turq);padding:2px 7px;border-radius:999px;vertical-align:middle;margin-left:4px}
   .divisor-grupo{font-size:.74rem;font-weight:800;color:#fff;background:linear-gradient(90deg,var(--teal),var(--turq));padding:9px 16px;border-radius:12px;letter-spacing:.08em;text-transform:uppercase}
@@ -1121,6 +1223,7 @@ function irPara(hash) {
   rota = partes.slice(1);
   fecharMenus();
   if (diagPendente) salvarDiag();
+  if (propPendente) salvarProp();
   if (id !== "crm" && !(id === "atendimento" && $("gaveta"))) fecharFicha();
   document.querySelectorAll("[data-view]").forEach(v => v.classList.toggle("oculto", v.dataset.view !== id));
   document.querySelectorAll("[data-ir]").forEach(b => b.classList.toggle("ativo", b.dataset.ir === id));
@@ -2046,7 +2149,7 @@ function linkWhats(tel) {
   return "https://wa.me/" + d;
 }
 function renderFicha(id) {
-  for (const st of [diagStore, diagFpaStore, diagPlaStore, diagRentalStore]) if (!st.carregado && !st.carregando) {
+  for (const st of [diagStore, diagFpaStore, diagPlaStore, diagRentalStore, propStore]) if (!st.carregado && !st.carregando) {
     st.carregando = true;
     carregarStore(st).then(() => { if (abertoId) renderFicha(abertoId); }).catch(() => {}).finally(() => { st.carregando = false; });
   }
@@ -2129,6 +2232,7 @@ function renderFicha(id) {
         return (ds.length ? `<ul class="lista-cli" style="margin:0 0 10px">${ds.map(d => { const mt = maturidade(d); return `<li data-g-diag="${tipoDe(d).frente}/${d.id}"><div><b>${esc(nomeDiag(d))} · ${esc(d.id)}</b>
           <small>${d.status === "finalizado" ? "Finalizado em " + data(d.finalizadoEm) : "Em edição"}${mt ? ` · maturidade ${mt.pct}%` : ""}</small></div>
           <span class="chip-etapa" style="--cor:${d.status === "finalizado" ? "var(--verde)" : "var(--alerta)"}"><i></i>${d.status === "finalizado" ? "Finalizado" : "Em edição"}</span></li>`; }).join("")}</ul>` : "")
+          + (() => { const ps = props().filter(p => p.leadId === l.id); return ps.length ? `<small class="rot-botoes">Propostas</small><ul class="lista-cli" style="margin:0 0 10px">${ps.map(p => { const t = totaisProp(p), st = STATUS_PROP[p.status] || STATUS_PROP.rascunho; return `<li data-g-prop="${p.id}"><div><b>${esc(TIPOS_PROP[p.tipo])} · ${esc(p.id)}</b><small>${[t.mensal ? brl(t.mensal) + "/mês" : "", t.unico ? brl(t.unico) + " único" : ""].filter(Boolean).join(" + ")}</small></div><span class="chip-etapa" style="--cor:${st[1]}"><i></i>${st[0]}</span></li>`; }).join("")}</ul>` : ""; })()
           + `<small class="rot-botoes">Iniciar diagnóstico</small><div class="botoes-diag">${[["novoDiag", "BPO Financeiro"], ["novoDiagCombo", "BPO + FP&A"], ["novoDiagGestao", "Gestão Financeira"], ["novoDiagFpa", "FP&A"], ["novoDiagPla", "Planejamento"], ["novoDiagRental", "Rental"]].map(([k, r]) => `<button class="btn-s" data-g="${k}"><svg><use href="#i-atd"/></svg>${r}</button>`).join("")}</div>`;
       })()}</section>
 
@@ -2267,6 +2371,7 @@ function ligarFicha(l) {
     if (d.g === "novoDiagGestao") { fecharFicha(); return novoDiagnostico(l.id, "bpo", "gestao"); }
     if (d.g === "novoDiagPla") { fecharFicha(); return novoDiagnostico(l.id, "planejamento"); }
     if (d.g === "novoDiagRental") { fecharFicha(); return novoDiagnostico(l.id, "processos"); }
+    if (d.gProp) { fecharFicha(); location.hash = "atendimento/propostas/" + d.gProp; return; }
     if (d.gDiag) { fecharFicha(); const [fr, id] = d.gDiag.split("/"); location.hash = rotaDiag(id, TIPOS_DIAG[fr]); return; }
     if (d.g === "reativar") return alterarLead(l.id, x => { registrar(x, "reativado", x.semInteresse?.motivo ? `Estava sem interesse: ${x.semInteresse.motivo}` : ""); delete x.semInteresse; }, "Lead reativado");
     if (d.g === "excluir") {
@@ -2544,17 +2649,18 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") { if ($("mod
 /* ================== ATENDIMENTO ================== */
 const FRENTES_AT = [
   { id: "bpo", nome: "BPO Financeiro", icone: "i-a-bpo", desc: "Gestão das rotinas financeiras do cliente.",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico Preliminar de BPO Financeiro.", ativo: true },
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico Preliminar de BPO Financeiro.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true },
              { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "fpa", nome: "FP&A", icone: "i-a-fpa", desc: "Indicadores gerenciais e análise de desempenho.",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de FP&A.", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de FP&A.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "planejamento", nome: "Planejamento Financeiro", icone: "i-a-pla", desc: "Orçamentos, fluxo de caixa e cenários.",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Planejamento Financeiro.", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Planejamento Financeiro.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "processos", nome: "Consultoria de Processos", icone: "i-a-pro", desc: "Processos, sistema e treinamento para locadoras (Rental).",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Consultoria Rental.", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] }
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Consultoria Rental.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] }
 ];
 function htmlMenuAtendimento() {
-  return FRENTES_AT.map(f => `<div class="grupo-menu">
+  return `<div class="grupo-menu"><button data-link="#atendimento/propostas"><svg><use href="#i-pdf"/></svg>Comercial</button>
+    <ul><li><button data-link="#atendimento/propostas" class="${viewAtual === "atendimento" && rota[0] === "propostas" ? "atual" : ""}"><span>Todas as propostas</span></button></li></ul></div>` + FRENTES_AT.map(f => `<div class="grupo-menu">
     <button data-link="#atendimento"><svg><use href="#${f.icone}"/></svg>${esc(f.nome)}</button>
     <ul>${f.etapas.map(e => e.ativo
       ? `<li><button data-link="#atendimento/${f.id}/${e.id}" class="${viewAtual === "atendimento" && rota[0] === f.id && rota[1] === e.id ? "atual" : ""}"><span>${esc(e.nome)}</span></button></li>`
@@ -2623,11 +2729,29 @@ const DIAG_BPO = [
     { id: "contabil", tipo: "escolha", txt: "A contabilidade realiza o fechamento mensal apresentando balanço e DRE?", ops: SPN, peso: true },
     { id: "processos", tipo: "escolha", txt: "Possui os processos-chave mapeados?", ops: SPN, peso: true },
     { id: "indicadores", tipo: "escolha", txt: "A empresa tem domínio dos seus principais indicadores financeiros?", ops: SPN, peso: true } ] },
+  { secao: "Precificação · BPO Financeiro", precif: true, itens: [
+    { id: "prc_contas", tipo: "numero", txt: "Quantas contas bancárias serão conciliadas?" },
+    { id: "prc_pagar", tipo: "numero", txt: "Quantas contas são pagas por mês (número de títulos)?", dica: "Se ficar em branco, usamos os pagamentos por dia × 22." },
+    { id: "prc_receber", tipo: "numero", txt: "Quantos recebimentos acontecem por mês?", dica: "Se ficar em branco, usamos os boletos por dia × 22." },
+    { id: "prc_nf_manual", tipo: "numero", txt: "Quantas notas fiscais são emitidas manualmente por mês?" },
+    { id: "prc_nf_auto", tipo: "numero", txt: "Quantas notas fiscais saem automaticamente (integradas ao sistema) por mês?" },
+    { id: "prc_boletos", tipo: "numero", txt: "Quantos boletos a WL vai emitir por mês?" },
+    { id: "prc_adquirentes", tipo: "numero", txt: "Quantas maquininhas / adquirentes de cartão serão conciliadas?", dica: "Coloque 0 se a empresa não recebe por cartão." },
+    { id: "prc_cartoes", tipo: "numero", txt: "Quantos cartões de crédito corporativos terão a fatura conciliada?" },
+    { id: "prc_caixa", tipo: "escolha", ops: ["Sim", "Não"], txt: "Haverá conciliação de caixa físico (dinheiro)?" },
+    { id: "prc_aplic", tipo: "escolha", ops: ["Sim", "Não"], txt: "Há aplicações financeiras a conciliar?" },
+    { id: "prc_contratos", tipo: "numero", txt: "Quantos contratos recorrentes precisam de controle de faturamento?" },
+    { id: "prc_cobranca", tipo: "escolha", ops: ["Sim", "Não"], txt: "A WL fará a cobrança de clientes em atraso?" },
+    { id: "prc_atrasos", tipo: "numero", txt: "Quantos títulos em atraso por mês, em média?", se: r => r.prc_cobranca?.v === "Sim" },
+    { id: "prc_cc", tipo: "escolha", ops: ["Não", "Sim, sem rateio", "Sim, com rateio"], txt: "Os lançamentos serão classificados por centro de custo?" },
+    { id: "prc_docs", tipo: "escolha", ops: ["Digitais e organizados", "Digitais, mas desorganizados", "Em papel / dispersos"], txt: "Como chegam os documentos (notas, boletos, comprovantes)?" },
+    { id: "prc_reunioes", tipo: "escolha", ops: ["1", "2", "4 (semanal)"], txt: "Quantas reuniões de acompanhamento por mês?" } ] },
   { secao: "Autoavaliação", itens: [
     { id: "autoaval", tipo: "escala", txt: "Com base nas suas respostas, como você avalia o nível de gestão da sua empresa?", ops: ["Muito baixo", "Baixo", "Regular", "Bom", "Excelente"] } ] }
 ];
 const PERGUNTAS_BPO = DIAG_BPO.flatMap(s => s.itens);
-const PLANOS_BPO = ["Plano Básico", "Plano Intermediário", "Plano Avançado", "A definir"];
+const PLANOS_BPO = ["BPO Start", "BPO Performance", "BPO Gestão", "A definir"];
+const PLANO_ANTIGO = { "Plano Básico": "BPO Start", "Plano Intermediário": "BPO Performance", "Plano Avançado": "BPO Gestão" };
 const diagStore = criarStore("dados/atendimento/bpo-diagnosticos.json", { versao: 1, seq: 0, diagnosticos: [] });
 
 /* ---- Diagnóstico de Consultoria Rental (base: "Formulário de Diagnóstico do Cliente", adaptado para locadoras de equipamentos) ---- */
@@ -2729,7 +2853,16 @@ const DIAG_RENTAL = [
     { id: "decisor", tipo: "curto", txt: "Quem decide sobre este projeto?" },
     { id: "executor", tipo: "texto", txt: "Quem executará as ações recomendadas (responsáveis por setor)?" },
     { id: "recursos", tipo: "texto", txt: "Quais recursos, acessos ou pessoas estarão disponíveis durante o projeto?" },
-    { id: "limites", tipo: "texto", txt: "Existe alguma limitação de orçamento, equipe, tempo, tecnologia ou autoridade?" } ] }
+    { id: "limites", tipo: "texto", txt: "Existe alguma limitação de orçamento, equipe, tempo, tecnologia ou autoridade?" } ] },
+  { secao: "Precificação · Consultoria", precif: true, itens: [
+    { id: "prc_rt_intens", tipo: "escolha", ops: ["A — Remota", "B — 1x/semana × 2h", "C — 1x/semana × 3h", "D — 2x/semana × 2h", "E — 2x/semana × 3h"], txt: "Intensidade de presença da WL" },
+    { id: "prc_rt_meses", tipo: "numero", txt: "Prazo desejado para a consultoria (meses)", dica: "Deixe em branco para o sistema calcular pelo esforço." },
+    { id: "prc_rt_sistema", tipo: "escolha", ops: ["Sim", "Não"], txt: "Haverá configuração / parametrização do sistema?" },
+    { id: "prc_rt_exec", tipo: "escolha", ops: ["Não", "Pontual", "Recorrente"], txt: "Execução assistida (WL executa temporariamente quando falta responsável interno)" },
+    { id: "prc_rt_treinar", tipo: "numero", txt: "Quantas pessoas serão treinadas?" },
+    { id: "prc_rt_processo", tipo: "escolha", ops: ["Existe e funciona bem", "Existe, mas é ineficiente", "Não existe processo definido"], txt: "De forma geral, os processos dos setores do projeto:" },
+    { id: "prc_rt_gestor", tipo: "escolha", ops: ["Baixa", "Média", "Alta"], txt: "Dependência do gestor / dono para a operação andar" },
+    { id: "prc_rt_capac", tipo: "escolha", ops: ["Boa", "Parcial", "Baixa"], txt: "Capacidade interna da equipe para executar as mudanças" } ] }
 ];
 const PERGUNTAS_RENTAL = DIAG_RENTAL.flatMap(s => s.itens);
 
@@ -2775,7 +2908,8 @@ const DIAG_FPA = [
     { id: "fpa_conc", tipo: "escolha", ops: SPN, peso: true, rot: "Conciliação bancária em dia", txt: "A conciliação bancária é feita com frequência e está em dia?" },
     { ...qBPO("fluxo"), rot: "Fluxo de caixa realizado" },
     { ...qBPO("registro"), rot: "Movimentação 100% no sistema" },
-    { ...qBPO("contabil"), rot: "Balanço e DRE contábil mensais" } ] },
+    { ...qBPO("contabil"), rot: "Balanço e DRE contábil mensais" },
+    { id: "prc_fpa_dados", tipo: "escolha", ops: ["Exportação estruturada do sistema", "Planilhas organizadas", "Planilhas desorganizadas / dados brutos", "Precisam ser levantados do zero"], txt: "Como os dados financeiros vão chegar para a WL?", dica: "Pesa no preço: dados brutos exigem tratamento antes do relatório." } ] },
   { secao: "Contexto e objetivos", itens: [
     { id: "fpa_motivo", tipo: "multi", txt: "O que motivou a busca por FP&A agora?", ops: ["Falta de visibilidade do resultado", "Decisões tomadas sem números", "Vende bem, mas o caixa não acompanha", "Margens caindo", "Crescimento acelerado", "Expansão (filial, produto, mercado)", "Captação, crédito ou investidor", "Organizar governança / sociedade"] },
     { id: "fpa_decisoes", tipo: "texto", txt: "Quais decisões a empresa precisa tomar nos próximos 12 meses que dependem de números?" },
@@ -2816,7 +2950,11 @@ const DIAG_FPA = [
     { id: "fpa_entregas", tipo: "multi", txt: "Quais entregas são esperadas?", ops: ["DRE gerencial mensal", "Indicadores essenciais", "Fluxo de caixa projetado", "Orçamento anual", "Orçado × realizado", "Forecast (revisão da projeção)", "Dashboard de indicadores", "Análise de rentabilidade e precificação", "Cenários e simulações", "Acompanhamento de metas por área", "Relatório para bancos / investidores"] },
     { id: "fpa_freq", tipo: "escolha", txt: "Com que frequência a empresa quer as reuniões de resultado?", ops: ["Mensal", "Quinzenal", "Semanal", "Trimestral"] },
     { id: "fpa_formato", tipo: "escolha", txt: "Formato preferido para os resultados", ops: ["Dashboard online", "Relatório em PDF", "Apresentação em reunião", "Todos"] },
-    { id: "fpa_prazo", tipo: "curto", txt: "Para quando a empresa precisa do primeiro relatório gerencial?" } ] }
+    { id: "fpa_prazo", tipo: "curto", txt: "Para quando a empresa precisa do primeiro relatório gerencial?" } ] },
+  { secao: "Precificação · FP&A", precif: true, itens: [
+    { id: "prc_fpa_cc", tipo: "numero", txt: "Quantos centros de custo / áreas terão análise própria?", dica: "Coloque 0 se não houver divisão por centro de custo." },
+    { id: "prc_fpa_unidades", tipo: "numero", txt: "Quantas unidades de negócio ou filiais terão resultado separado?" },
+    { id: "prc_fpa_fontes", tipo: "numero", txt: "De quantas fontes vêm os dados (ERP, planilhas, bancos, outros sistemas)?" } ] }
 ];
 const SECOES_FPA = [...DIAG_FPA, SEC_AUTOAVAL];
 const PERGUNTAS_FPA = SECOES_FPA.flatMap(s => s.itens);
@@ -2882,7 +3020,11 @@ const DIAG_PLA = [
   { secao: "Expectativas do planejamento", itens: [
     { id: "pla_entregas", tipo: "multi", txt: "Quais entregas são esperadas?", ops: ["Orçamento anual", "Projeção de caixa de 12 meses", "Projeção de 2 a 3 anos", "Cenários (otimista, realista e pessimista)", "Plano de investimentos e viabilidade", "Plano de capital de giro e reserva", "Estratégia de endividamento e crédito", "Política de retirada e distribuição dos sócios", "Revisão periódica do plano"] },
     { id: "pla_revisao", tipo: "escolha", txt: "Com que frequência o plano deve ser revisado?", ops: ["Mensal", "Trimestral", "Semestral", "Anual"] },
-    { id: "pla_prazo", tipo: "curto", txt: "Para quando o planejamento precisa estar pronto?" } ] }
+    { id: "pla_prazo", tipo: "curto", txt: "Para quando o planejamento precisa estar pronto?" } ] },
+  { secao: "Precificação · Planejamento", precif: true, itens: [
+    { ...qFPA("prc_fpa_cc") }, { ...qFPA("prc_fpa_unidades") },
+    { id: "prc_pla_cenarios", tipo: "escolha", ops: ["1 (realista)", "3 (otimista, realista e pessimista)"], txt: "Quantos cenários o plano deve ter?" },
+    { id: "prc_pla_invest", tipo: "numero", txt: "Quantos projetos de investimento ou expansão serão analisados?" } ] }
 ];
 const SECOES_PLA = [...DIAG_PLA, SEC_AUTOAVAL];
 const PERGUNTAS_PLA = SECOES_PLA.flatMap(s => s.itens);
@@ -2995,10 +3137,10 @@ function sugestaoBPO(d) {
   const motivos = [];
   if (cnpjs >= 2) motivos.push(`${cnpjs} CNPJs`);
   if (v("planejamento") === "Não" && v("indicadores") !== "Sim") motivos.push("sem planejamento nem indicadores");
-  if (motivos.length) return { plano: "Plano Avançado", tier: 2, motivo: "Inclui finanças estratégicas: " + motivos.join(", ") };
-  if (bol > 0 || v("nf") === "Sim" || pag > 15) return { plano: "Plano Intermediário", tier: 1, motivo: "Inclui faturamento (boletos e NF) e relatórios gerenciais" + (pag > 15 ? `; ${pag} pagamentos/dia` : "") };
+  if (motivos.length) return { plano: "BPO Gestão", tier: 2, motivo: "Inclui finanças estratégicas: " + motivos.join(", ") };
+  if (bol > 0 || v("nf") === "Sim" || pag > 15) return { plano: "BPO Performance", tier: 1, motivo: "Inclui faturamento (boletos e NF) e relatórios gerenciais" + (pag > 15 ? `; ${pag} pagamentos/dia` : "") };
   if (!v("faturamento") && !pag && !bol) return null;
-  return { plano: "Plano Básico", tier: 0, motivo: "Volume operacional baixo, sem emissão de boletos/NF" };
+  return { plano: "BPO Start", tier: 0, motivo: "Volume operacional baixo, sem emissão de boletos/NF" };
 }
 function sugestaoPlano(d) {
   const t = tipoDe(d);
@@ -3017,13 +3159,20 @@ function sugestaoPlano(d) {
   const b = sugestaoBPO(d);
   if (!b && !f.temDados) return null;
   const tier = Math.max(b?.tier || 0, f.tier);
-  return { plano: PLANOS_INT[tier], motivo: [b ? "BPO " + b.plano.replace("Plano ", "").toLowerCase() : "", f.motivos.length ? "FP&A: " + f.motivos.join("; ") : ""].filter(Boolean).join(" · ") + "." + alerta };
+  return { plano: PLANOS_INT[tier], motivo: [b ? b.plano : "", f.motivos.length ? "FP&A: " + f.motivos.join("; ") : ""].filter(Boolean).join(" · ") + "." + alerta };
 }
 
 /* ---- Navegação do módulo ---- */
 let diagAtual = null, timerDiag = null, salvandoDiag = false, diagPendente = false;
 async function renderAtendimento() {
   const [frente, etapa, id] = rota;
+  if (frente === "propostas" || etapa === "proposta") {
+    diagAtual = null;
+    if (!propStore.carregado || !cfgStore.carregado) $("atdConteudo").innerHTML = `<div class="esqueleto"></div>`;
+    try { await garantirStoresProp(); } catch (e) { $("atdConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler as propostas.</b><br>${esc(e.message)}</div>`; return; }
+    if (viewAtual !== "atendimento") return;
+    return frente === "propostas" && etapa ? abrirProposta(etapa) : renderListaPropostas();
+  }
   if (etapa === "diagnostico" && TIPOS_DIAG[frente]) {
     TD = TIPOS_DIAG[frente];
     if (!TD.store.carregado) {
@@ -3044,7 +3193,7 @@ function cabAtd(passos, eyebrow, titulo, desc, acoes = "") {
 function renderInicioAtd() {
   diagAtual = null;
   $("atdConteudo").oninput = $("atdConteudo").onclick = $("atdConteudo").onchange = null;
-  cabAtd([], "Operação", "Atendimento", "Ferramentas de atendimento por frente de serviço.");
+  cabAtd([], "Operação", "Atendimento", "Ferramentas de atendimento por frente de serviço.", `<button class="btn-p" data-link="#atendimento/propostas"><svg><use href="#i-pdf"/></svg>Propostas</button>`);
   $("atdConteudo").innerHTML = `<div class="areas">${FRENTES_AT.map(f => `<article class="area">
     <div class="area-cab"><span class="area-ico"><svg><use href="#${f.icone}"/></svg></span><div><h3>${esc(f.nome)}</h3><p>${esc(f.desc)}</p></div></div>
     <ul class="subs">${f.etapas.map(e => e.ativo
@@ -3082,6 +3231,7 @@ function renderListaDiag() {
         <div class="acoes">
           <button class="acao" data-dica="Editar" data-diag-acao="editar" data-diag="${d.id}"><svg><use href="#i-editar"/></svg></button>
           <button class="acao" data-dica="Emitir PDF" data-diag-acao="pdf" data-diag="${d.id}"><svg><use href="#i-pdf"/></svg></button>
+          ${d.status === "finalizado" ? `<button class="acao" data-dica="Proposta" data-diag-acao="proposta" data-diag="${d.id}"><b class="ico-rs">R$</b></button>` : ""}
           <button class="acao perigo-ico" data-dica="Excluir" data-diag-acao="excluir" data-diag="${d.id}"><svg><use href="#i-lixo"/></svg></button>
         </div>
       </li>`;
@@ -3226,7 +3376,7 @@ function abrirDiag(id) {
       <section class="g-sec"><h4>${esc(nomeMatDe(dd))}</h4><div id="painelMat"></div></section>
       ${TD.frente !== "processos" ? "" : `<section class="g-sec"><h4>Prontidão para consultoria</h4><div id="painelPront"></div></section>`}
       <section class="g-sec acoes-diag">
-        ${fin ? `<div class="fin-ok">✓ Finalizado em ${data(dd.finalizadoEm)}</div>` : `<button class="btn-p" data-atd="finalizar" style="justify-content:center">Finalizar diagnóstico</button>`}
+        ${fin ? `<div class="fin-ok">✓ Finalizado em ${data(dd.finalizadoEm)}</div><button class="btn-p" data-atd="proposta" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Gerar / abrir proposta</button>` : `<button class="btn-p" data-atd="finalizar" style="justify-content:center">Finalizar e gerar proposta</button>`}
         <button class="btn-s" data-atd="pdf" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Gerar PDF</button>
         ${dd.pdf?.webUrl ? `<a class="lnk-pdf" href="${esc(dd.pdf.webUrl)}" target="_blank" rel="noopener">Último PDF salvo · ${dataHora(dd.pdf.em)}</a>` : ""}
         <button class="perigo" data-atd="excluirDiag" style="justify-self:center">Excluir diagnóstico</button>
@@ -3325,8 +3475,8 @@ function atualizarLado() {
     ${mt.grupos.length > 1 || mt.setores.length ? `<div class="setores-mat">${[...(mt.grupos.length > 1 ? mt.grupos.map(g => ({ ...g, g: 1 })) : []), ...mt.setores].map(s => `<div class="sm-lin ${s.g ? "grupo" : ""}"><span>${esc(s.rot || s.nome)}</span><div class="barra-prog"><i style="width:${s.pct ?? 0}%;background:${s.pct == null ? "transparent" : corNivel(s.pct)}"></i></div><b>${s.pct == null ? "—" : s.pct + "%"}</b></div>`).join("")}</div>` : ""}
     ${listaAt}`
     : `<p class="txt-prog">Responda as perguntas de Sim / Parcial / Não para calcular.</p>`;
-  if ($("sugPla")) { const sp = sugestaoPla(dd); $("sugPla").innerHTML = sp ? `Sugestão do sistema: <b>${esc(sp.plano)}</b> — ${esc(sp.motivo)}` : ""; }
-  if ($("sugPlano")) { const sug = sugestaoPlano(dd); $("sugPlano").innerHTML = sug ? `Sugestão do sistema: <b>${esc(sug.plano)}</b>${PRECO_PLANO[sug.plano] ? ` (R$ ${PRECO_PLANO[sug.plano].toLocaleString("pt-BR")}/mês)` : ""} — ${esc(sug.motivo)}` : ""; }
+  if ($("sugPla")) { const sp = sugestaoPla(dd); $("sugPla").innerHTML = sp ? `Sugestão do sistema: <b>${esc(sp.plano)}</b>${tabelaPlano(sp.plano) ? ` (referência ${moeda(tabelaPlano(sp.plano))})` : ""} — ${esc(sp.motivo)}` : ""; }
+  if ($("sugPlano")) { const sug = sugestaoPlano(dd); $("sugPlano").innerHTML = sug ? `Sugestão do sistema: <b>${esc(sug.plano)}</b>${tabelaPlano(sug.plano) ? ` (tabela ${moeda(tabelaPlano(sug.plano))}${sug.plano.startsWith("Planejamento") ? "" : "/mês"})` : ""} — ${esc(sug.motivo)}` : ""; }
   if ($("sugSetores")) {
     const fr = mt ? mt.setores.filter(s => s.pct !== null && s.pct < 70).sort((a, b) => a.pct - b.pct) : [];
     $("sugSetores").innerHTML = fr.length ? `Menor maturidade: ${fr.map(s => `<b>${esc(s.nome)}</b> (${s.pct}%)`).join(", ")}` : "";
@@ -3456,8 +3606,7 @@ async function finalizarDiag() {
   diagPendente = true;
   await salvarDiag();
   toast("Diagnóstico finalizado · CRM atualizado");
-  abrirDiag(dd.id);
-  oferecerPDF();
+  await irParaProposta(dd);
 }
 function oferecerPDF() {
   const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Diagnóstico finalizado ✓</h3></div>
@@ -3611,6 +3760,7 @@ $("atdConteudo").addEventListener("click", async e => {
     if (ac.dataset.diagAcao === "editar") location.hash = rotaDiag(d.id);
     if (ac.dataset.diagAcao === "pdf") { ac.disabled = true; await emitirPDF(structuredClone(d)); ac.disabled = false; }
     if (ac.dataset.diagAcao === "excluir") excluirDiag(d);
+    if (ac.dataset.diagAcao === "proposta") irParaProposta(d);
     return;
   }
   const el = e.target.closest("[data-abrir-diag],[data-atd]");
@@ -3619,9 +3769,803 @@ $("atdConteudo").addEventListener("click", async e => {
   const a = el.dataset.atd;
   if (a === "novo") novoDiagnostico();
   if (a === "finalizar") { el.disabled = true; await finalizarDiag(); el.disabled = false; }
+  if (a === "proposta") { if (diagPendente) await salvarDiag(); irParaProposta(diagAtual); }
   if (a === "pdf") { el.disabled = true; await emitirPDF(diagAtual); el.disabled = false; }
   if (a === "verLead") { if (!crm.carregado) await carregarCRM(true); abrirLead(diagAtual.leadId); }
   if (a === "excluirDiag") excluirDiag(diags().find(x => x.id === diagAtual.id) || diagAtual);
+});
+
+/* ================== PRECIFICAÇÃO ==================
+   Tempo estimado de cada operação × valor da hora técnica (R$ 300/h, Modelo Comercial WL),
+   ajustado por fatores de complexidade. Todos os parâmetros podem ser calibrados pelo administrador. */
+const TABELA_PADRAO = {
+  "BPO Start": 2600, "BPO Performance": 4500, "BPO Gestão": 6300,
+  "FP&A Start": 3500, "FP&A Performance": 5000, "FP&A Gestão": 6300,
+  "Integrado Start": 4500, "Integrado Performance": 7000, "Integrado Gestão": 9000,
+  "Planejamento Essencial": 7200, "Planejamento Estratégico": 10800, "Planejamento Contínuo": 15600,
+  "Consultoria Start": 48000, "Consultoria Performance": 72000, "Consultoria Gestão": 100000
+};
+const PARAM_PADRAO = {
+  hora: 300,
+  bpo_base: 240, bpo_pagar: 1.2, bpo_receber: 0.8, bpo_nf_manual: 4, bpo_nf_auto: 0.5, bpo_boleto: 1, bpo_conta: 30, bpo_adquirente: 60, bpo_cartao: 30,
+  bpo_caixa: 90, bpo_aplic: 20, bpo_contrato: 2, bpo_cobranca: 4, bpo_cnpj: 60, bpo_reuniao: 60, bpo_plano1: 60, bpo_plano2: 180,
+  fpa_h0: 11.5, fpa_h1: 16.5, fpa_h2: 21, fpa_integrado: 0.7, fpa_quinzenal: 1.5, fpa_semanal: 4,
+  pla_h0: 24, pla_h1: 36, pla_revisao: 4, pla_invest: 3, pla_cenarios: 6,
+  rt_setor: 40, rt_sistema: 0.2, rt_trein: 0.5, rt_plano1: 4, rt_plano2: 8
+};
+const PARAM_GRUPOS = [
+  ["Geral", [["hora", "Valor da hora técnica", "R$/h"]]],
+  ["BPO Financeiro — tempo por operação", [["bpo_base", "Rotina fixa (fechamento, relatório, agenda e organização)", "min/mês"], ["bpo_pagar", "Por conta paga", "min"], ["bpo_receber", "Por recebimento", "min"],
+    ["bpo_nf_manual", "Por nota fiscal manual", "min"], ["bpo_nf_auto", "Por nota fiscal automática", "min"], ["bpo_boleto", "Por boleto emitido", "min"],
+    ["bpo_conta", "Por conta bancária conciliada", "min/mês"], ["bpo_adquirente", "Por adquirente de cartão", "min/mês"], ["bpo_cartao", "Por cartão corporativo", "min/mês"],
+    ["bpo_caixa", "Conciliação de caixa físico", "min/mês"], ["bpo_aplic", "Aplicações financeiras", "min/mês"], ["bpo_contrato", "Por contrato recorrente", "min"],
+    ["bpo_cobranca", "Por título em cobrança", "min"], ["bpo_cnpj", "Por CNPJ adicional", "min/mês"], ["bpo_reuniao", "Por reunião", "min"],
+    ["bpo_plano1", "Entregas extras do BPO Performance", "min/mês"], ["bpo_plano2", "Entregas extras do BPO Gestão", "min/mês"]]],
+  ["CFO por assinatura (FP&A)", [["fpa_h0", "FP&A Start", "h/mês"], ["fpa_h1", "FP&A Performance", "h/mês"], ["fpa_h2", "FP&A Gestão", "h/mês"],
+    ["fpa_integrado", "Fator quando o BPO é feito pela WL", "×"], ["fpa_quinzenal", "Reuniões quinzenais (extra)", "h/mês"], ["fpa_semanal", "Reuniões semanais (extra)", "h/mês"]]],
+  ["Planejamento Financeiro", [["pla_h0", "Planejamento Essencial", "h"], ["pla_h1", "Planejamento Estratégico / Contínuo", "h"], ["pla_revisao", "Por revisão do plano", "h"],
+    ["pla_invest", "Por projeto de investimento analisado", "h"], ["pla_cenarios", "Três cenários em vez de um", "h"]]],
+  ["Consultoria de Processos", [["rt_setor", "Por setor no escopo", "h"], ["rt_sistema", "Configuração do sistema (sobre as horas dos setores)", "×"], ["rt_trein", "Por pessoa treinada", "h"],
+    ["rt_plano1", "Acompanhamento extra do Performance", "h/mês"], ["rt_plano2", "Acompanhamento extra do Gestão", "h/mês"]]]
+];
+const cfgStore = criarStore("dados/config/precificacao.json", { versao: 1, params: {}, tabela: {} });
+const P = () => ({ ...PARAM_PADRAO, ...(cfgStore.dados?.params || {}) });
+const tabelaPlano = plano => ({ ...TABELA_PADRAO, ...(cfgStore.dados?.tabela || {}) })[plano] || 0;
+
+const SERVICOS = {
+  bpo: { nome: "BPO Financeiro", planos: ["BPO Start", "BPO Performance", "BPO Gestão"], cobranca: "mensal" },
+  fpa: { nome: "CFO por assinatura (FP&A)", planos: ["FP&A Start", "FP&A Performance", "FP&A Gestão"], cobranca: "mensal" },
+  int: { nome: "BPO Financeiro + CFO por assinatura (FP&A)", planos: ["Integrado Start", "Integrado Performance", "Integrado Gestão"], cobranca: "mensal" },
+  pla: { nome: "Planejamento Financeiro", planos: ["Planejamento Essencial", "Planejamento Estratégico", "Planejamento Contínuo"], cobranca: "unico", maxParcelas: 2 },
+  rt: { nome: "Consultoria de Processos", planos: ["Consultoria Start", "Consultoria Performance", "Consultoria Gestão"], cobranca: "unico" }
+};
+const TIPOS_PROP = { bpo: "BPO Financeiro", cfo: "CFO por Assinatura (FP&A)", "bpo+cfo": "BPO Financeiro + CFO por Assinatura", planejamento: "Planejamento Financeiro", gestao: "Gestão Financeira", consultoria: "Consultoria de Processos" };
+const ITENS_TIPO = { bpo: ["bpo"], cfo: ["fpa"], "bpo+cfo": ["int"], planejamento: ["pla"], gestao: ["int", "pla"], consultoria: ["rt"] };
+const ENTREGAS = {
+  "BPO Start": ["Contas a pagar", "Contas a receber", "Conciliação bancária", "Fluxo de caixa operacional", "Organização documental", "Agenda financeira", "Fechamento mensal", "Relatório simplificado", "1 reunião mensal"],
+  "BPO Performance": ["Tudo do BPO Start", "Conciliações recorrentes", "Controle de vencimentos e recebimentos", "Acompanhamento do caixa", "Fechamento estruturado", "Análise básica das movimentações", "Relatório gerencial", "Acompanhamento de pendências", "1 reunião mensal"],
+  "BPO Gestão": ["Tudo do BPO Performance", "Acompanhamento próximo do caixa", "Fechamento aprofundado", "Relatórios gerenciais", "Análise de inconsistências", "Organização de processos financeiros", "Indicadores financeiros", "Reuniões de acompanhamento", "Apoio à gestão da rotina"],
+  "FP&A Start": ["Diagnóstico dos números", "Indicadores essenciais", "Fluxo de caixa projetado simplificado", "DRE gerencial", "Acompanhamento de receitas, custos e despesas", "Análise mensal de desvios", "Relatório gerencial", "1 reunião estratégica por mês"],
+  "FP&A Performance": ["Tudo do FP&A Start", "Orçamento", "Fluxo de caixa projetado", "Orçado × realizado", "Análise de desvios", "Indicadores (KPIs)", "Dashboard", "Plano de ação", "Apresentação executiva", "1 reunião estratégica por mês"],
+  "FP&A Gestão": ["Tudo do FP&A Performance", "Acompanhamento de metas", "Análise de tendências", "Cenários e simulações", "Revisão de premissas", "Análise de rentabilidade", "Plano de ação e follow-up", "Reuniões estratégicas", "Apoio à decisão"],
+  "Integrado Start": ["Rotina do BPO Start", "Fluxo de caixa operacional", "Fluxo de caixa projetado simplificado", "DRE gerencial básica", "Indicadores essenciais", "Relatório mensal", "Análise básica", "1 reunião mensal"],
+  "Integrado Performance": ["Rotina do BPO Performance", "FP&A Performance", "Orçamento", "DRE gerencial", "Fluxo de caixa projetado", "Orçado × realizado", "Indicadores (KPIs) e dashboard", "Análise de desvios", "Plano de ação", "Reunião executiva mensal", "Apoio à decisão"],
+  "Integrado Gestão": ["Rotina do BPO Gestão", "FP&A Gestão", "Gestão próxima do caixa", "Planejamento e revisão de premissas", "Rentabilidade", "Cenários e simulações", "Indicadores e dashboard", "Orçado × realizado", "Planos de ação e follow-up", "Reuniões de gestão", "Apoio à decisão"],
+  "Planejamento Essencial": ["Orçamento anual (receitas, custos, despesas e investimentos)", "Fluxo de caixa projetado de 12 meses", "Premissas documentadas", "Reunião de apresentação do plano"],
+  "Planejamento Estratégico": ["Tudo do Planejamento Essencial", "Projeção de resultado e caixa de 2 a 3 anos", "Cenários otimista, realista e pessimista", "Análise de viabilidade dos investimentos", "Estratégia de capital de giro, reserva e endividamento", "Política de retirada e distribuição dos sócios"],
+  "Planejamento Contínuo": ["Tudo do Planejamento Estratégico", "Revisões periódicas do plano (forecast)", "Reuniões de acompanhamento do plano", "Ajuste de premissas e metas ao longo do ano"],
+  "Consultoria Start": ["Diagnóstico inicial e gargalos prioritários", "Mapeamento dos processos críticos", "Prioridades, responsáveis e rotinas definidos", "Controles essenciais de compras e estoque", "Revisão do fluxo de manutenção, OMs e equipamentos parados", "Indicadores básicos", "Plano de ação", "Implantação dos processos prioritários", "Acompanhamento mensal"],
+  "Consultoria Performance": ["Tudo do Consultoria Start", "Redesenho dos processos de maior impacto", "Implantação assistida e padronização", "Matriz de responsabilidades", "Indicadores por área", "Fornecedores, compras emergenciais e prazos", "Estoque, inventário, movimentações e perdas", "Preventiva, corretiva, backlog e disponibilidade", "Expedição e pátio", "Reuniões quinzenais", "Treinamento da equipe"],
+  "Consultoria Gestão": ["Tudo do Consultoria Performance", "Acompanhamento semanal", "Reuniões de gestão e indicadores", "Painel gerencial", "Equipamentos indisponíveis e tempo de manutenção", "Financeiro gerencial conectado à operação", "Fluxo de caixa e despesas gerenciais", "Plano de ação contínuo", "Execução assistida recorrente", "Melhoria contínua"]
+};
+const WL = { nome: "WL Expertise", cnpj: "57.072.317/0001-50", cidade: "Belo Horizonte/MG", email: "contato@wlexpertise.com", tel: "(31) 99736-1414", site: "wlexpertise.com.br" };
+
+const nR = (r, id) => Number(r[id]?.v) || 0;
+const vR = (r, id) => r[id]?.v;
+const fx = (rot, x) => ({ rot, x });
+/* Os fatores de complexidade se somam (1 + Σ ajustes), com piso 0,7 e teto 1,8, para não se multiplicarem em cascata */
+function bloco(titulo, linhas, fatores) {
+  const base = linhas.reduce((s, l) => s + l.h, 0);
+  const fs = fatores.filter(f => f.x !== 1);
+  const mult = Math.min(1.8, Math.max(0.7, 1 + fs.reduce((s, f) => s + (f.x - 1), 0)));
+  return { titulo, linhas: linhas.filter(l => l.h > 0), fatores: fs, mult, base, horas: base * mult };
+}
+function calcBPO(d, tier) {
+  const p = P(), r = d.respostas || {}, m = x => x / 60;
+  const pagar = nR(r, "prc_pagar") || nR(r, "pagamentos") * 22, receber = nR(r, "prc_receber") || nR(r, "boletos") * 22;
+  const contas = Math.max(nR(r, "prc_contas"), 1), cnpjs = Math.max(nR(r, "cnpjs"), 1), reun = parseInt(vR(r, "prc_reunioes")) || 1;
+  const nfm = nR(r, "prc_nf_manual"), nfa = nR(r, "prc_nf_auto"), bol = nR(r, "prc_boletos"), adq = nR(r, "prc_adquirentes"), car = nR(r, "prc_cartoes"), ctr = nR(r, "prc_contratos");
+  const atr = vR(r, "prc_cobranca") === "Sim" ? (nR(r, "prc_atrasos") || 10) : 0;
+  const L = [
+    { rot: "Rotina fixa: fechamento, relatório e organização", det: "mensal", h: m(p.bpo_base) },
+    { rot: "Contas a pagar", det: `${pagar} títulos/mês`, h: m(pagar * p.bpo_pagar) },
+    { rot: "Recebimentos", det: `${receber}/mês`, h: m(receber * p.bpo_receber) },
+    { rot: "Notas fiscais manuais", det: `${nfm}/mês`, h: m(nfm * p.bpo_nf_manual) },
+    { rot: "Notas fiscais automáticas", det: `${nfa}/mês`, h: m(nfa * p.bpo_nf_auto) },
+    { rot: "Emissão de boletos", det: `${bol}/mês`, h: m(bol * p.bpo_boleto) },
+    { rot: "Conciliação bancária", det: `${contas} conta(s)`, h: m(contas * p.bpo_conta) },
+    { rot: "Conciliação de cartões (adquirentes)", det: `${adq}`, h: m(adq * p.bpo_adquirente) },
+    { rot: "Faturas de cartão corporativo", det: `${car}`, h: m(car * p.bpo_cartao) },
+    { rot: "Conciliação de caixa físico", det: "", h: vR(r, "prc_caixa") === "Sim" ? m(p.bpo_caixa) : 0 },
+    { rot: "Aplicações financeiras", det: "", h: vR(r, "prc_aplic") === "Sim" ? m(p.bpo_aplic) : 0 },
+    { rot: "Controle de contratos recorrentes", det: `${ctr}`, h: m(ctr * p.bpo_contrato) },
+    { rot: "Cobrança de clientes em atraso", det: `${atr} títulos/mês`, h: m(atr * p.bpo_cobranca) },
+    { rot: "CNPJs adicionais", det: `${cnpjs - 1}`, h: m((cnpjs - 1) * p.bpo_cnpj) },
+    { rot: "Reuniões de acompanhamento", det: `${reun}/mês`, h: m(reun * p.bpo_reuniao) },
+    { rot: "Análises e relatórios do plano", det: SERVICOS.bpo.planos[tier], h: m([0, p.bpo_plano1, p.bpo_plano2][tier] || 0) }
+  ];
+  const F = [];
+  const docs = vR(r, "prc_docs");
+  if (docs === "Digitais, mas desorganizados") F.push(fx("Documentos desorganizados", 1.1));
+  if (docs === "Em papel / dispersos") F.push(fx("Documentos em papel / dispersos", 1.25));
+  const cc = vR(r, "prc_cc");
+  if (cc === "Sim, sem rateio") F.push(fx("Classificação por centro de custo", 1.05));
+  if (cc === "Sim, com rateio") F.push(fx("Centro de custo com rateio", 1.3));
+  return bloco("BPO Financeiro (por mês)", L, F);
+}
+const FAT_FPA = { "Até R$ 50 mil": 0.85, "R$ 50 a 100 mil": 0.9, "R$ 100 a 300 mil": 1, "R$ 300 mil a 1 milhão": 1.15, "Acima de R$ 1 milhão": 1.3 };
+const DADOS_FPA = { "Exportação estruturada do sistema": 1, "Planilhas organizadas": 1.1, "Planilhas desorganizadas / dados brutos": 1.3, "Precisam ser levantados do zero": 1.5 };
+const faixaCC = (n, fs) => n <= 0 ? 1 : n <= 5 ? fs[0] : n <= 15 ? fs[1] : fs[2];
+function calcFPA(d, tier, integrado) {
+  const p = P(), r = d.respostas || {};
+  const L = [{ rot: "Análise, relatórios e reunião do plano", det: SERVICOS.fpa.planos[tier], h: [p.fpa_h0, p.fpa_h1, p.fpa_h2][tier] }];
+  const freq = vR(r, "fpa_freq");
+  if (freq === "Quinzenal") L.push({ rot: "Reuniões quinzenais", det: "", h: p.fpa_quinzenal });
+  if (freq === "Semanal") L.push({ rot: "Reuniões semanais", det: "", h: p.fpa_semanal });
+  const F = [];
+  const fat = vR(r, "faturamento");
+  if (FAT_FPA[fat]) F.push(fx(`Porte: faturamento ${fat}`, FAT_FPA[fat]));
+  if (integrado) F.push(fx("Dados já no padrão (BPO feito pela WL)", p.fpa_integrado));
+  else {
+    const dq = vR(r, "prc_fpa_dados");
+    if (DADOS_FPA[dq]) F.push(fx(`Dados: ${dq.toLowerCase()}`, DADOS_FPA[dq]));
+    else {
+      const mt = d.frente ? maturidade(d) : null, ds = mt?.setores.find(x => x.nome === "Dados e estrutura gerencial");
+      if (ds && ds.pct !== null) F.push(fx(`Qualidade dos dados (${ds.pct}%)`, ds.pct < 40 ? 1.3 : ds.pct < 70 ? 1.15 : 1));
+    }
+    const fontes = nR(r, "prc_fpa_fontes");
+    if (fontes > 2) F.push(fx(`${fontes} fontes de dados`, Math.min(1 + 0.05 * (fontes - 2), 1.3)));
+  }
+  const cc = nR(r, "prc_fpa_cc");
+  if (cc) F.push(fx(`${cc} centros de custo`, faixaCC(cc, [1.05, 1.1, 1.2])));
+  const un = nR(r, "prc_fpa_unidades") || nR(r, "cnpjs");
+  if (un > 1) F.push(fx(`${un} unidades / CNPJs`, Math.min(1 + 0.1 * (un - 1), 1.4)));
+  return bloco("CFO por assinatura · FP&A (por mês)", L, F);
+}
+const FAT_PLA = { "Até R$ 50 mil": 0.8, "R$ 50 a 100 mil": 0.9, "R$ 100 a 300 mil": 1, "R$ 300 mil a 1 milhão": 1.25, "Acima de R$ 1 milhão": 1.5 };
+const REVISOES = { Mensal: 12, Trimestral: 4, Semestral: 2, Anual: 1 };
+function calcPla(d, tier, integrado) {
+  const p = P(), r = d.respostas || {};
+  const L = [{ rot: "Construção do plano", det: SERVICOS.pla.planos[tier], h: tier ? p.pla_h1 : p.pla_h0 }];
+  if (tier === 2) { const n = REVISOES[vR(r, "pla_revisao")] || 4; L.push({ rot: "Revisões do plano no ano", det: `${n} revisões`, h: n * p.pla_revisao }); }
+  const inv = nR(r, "prc_pla_invest");
+  if (inv) L.push({ rot: "Projetos de investimento analisados", det: `${inv}`, h: inv * p.pla_invest });
+  if ((vR(r, "prc_pla_cenarios") || "").startsWith("3")) L.push({ rot: "Três cenários", det: "otimista, realista e pessimista", h: p.pla_cenarios });
+  const F = [];
+  const fat = vR(r, "faturamento");
+  if (FAT_PLA[fat]) F.push(fx(`Porte: faturamento ${fat}`, FAT_PLA[fat]));
+  const cc = nR(r, "prc_fpa_cc");
+  if (cc) F.push(fx(`${cc} centros de custo com orçamento`, faixaCC(cc, [1.1, 1.15, 1.25])));
+  const un = nR(r, "prc_fpa_unidades") || nR(r, "cnpjs");
+  if (un > 1) F.push(fx(`${un} unidades / CNPJs`, Math.min(1 + 0.1 * (un - 1), 1.4)));
+  const hz = { "2 a 3 anos": 1.1, "5 anos ou mais": 1.2 }[vR(r, "pla_horizonte")];
+  if (hz) F.push(fx(`Horizonte de ${vR(r, "pla_horizonte")}`, hz));
+  if (integrado) F.push(fx("Realizado confiável (BPO feito pela WL)", 0.9));
+  else { const mt = d.frente ? maturidade(d) : null, b = mt?.setores.find(x => x.nome === "Base financeira"); if (b && b.pct !== null && b.pct < 50) F.push(fx(`Realizado pouco confiável (${b.pct}%)`, 1.2)); }
+  return bloco("Planejamento Financeiro (projeto)", L, F);
+}
+/* [horas presenciais/mês, capacidade de horas/mês] — a capacidade define o prazo; a presença entra como deslocamento */
+const INTENS = { A: [0, 12], B: [8.7, 14], C: [13, 18], D: [17.3, 22], E: [26, 28] };
+const COLAB = { "Até 10": 0.9, "11 a 30": 1, "31 a 80": 1.1, "81 a 200": 1.2, "Acima de 200": 1.3 };
+const FROTA = { "Até 300": 0.95, "300 a 1.000": 1, "1.000 a 3.000": 1.05, "3.000 a 10.000": 1.1, "Acima de 10.000": 1.15 };
+const FAT_RT = { "Até R$ 100 mil": 0.95, "R$ 100 a 300 mil": 0.95, "R$ 300 mil a 1 milhão": 1, "R$ 1 a 3 milhões": 1.05, "Acima de R$ 3 milhões": 1.1 };
+function setoresRental(d) {
+  const r = d.respostas || {};
+  if (d.setoresRec?.length) return d.setoresRec;
+  if (r.setores_prio?.v?.length) return r.setores_prio.v;
+  const mt = d.frente === "processos" ? maturidade(d) : null;
+  const fr = mt ? mt.setores.filter(s => s.pct !== null && s.pct < 70).map(s => s.nome) : [];
+  return fr.length ? fr : ["Compras", "Almoxarifado", "Manutenção"];
+}
+const tierRental = d => { const n = setoresRental(d).length; return n <= 3 ? 0 : n === 4 ? 1 : 2; };
+function calcRental(d, tier, mesesFix) {
+  const p = P(), r = d.respostas || {}, mt = d.frente === "processos" ? maturidade(d) : null;
+  const setores = setoresRental(d);
+  const L = setores.map(st => {
+    const pct = mt?.setores.find(x => x.nome === st)?.pct;
+    const f = pct == null ? 1 : pct < 40 ? 1.2 : pct < 70 ? 1 : 0.8;
+    const peso = st === "Sistema e equipe" ? 0.6 : 1;
+    return { rot: `Setor: ${st}`, det: pct == null ? "" : `maturidade ${pct}%`, h: p.rt_setor * f * peso };
+  });
+  const hSetores = L.reduce((s, l) => s + l.h, 0);
+  if (vR(r, "prc_rt_sistema") === "Sim") L.push({ rot: "Configuração / parametrização do sistema", det: "", h: hSetores * p.rt_sistema });
+  const trein = nR(r, "prc_rt_treinar");
+  if (trein) L.push({ rot: "Treinamento da equipe", det: `${trein} pessoas`, h: trein * p.rt_trein });
+  const F = [];
+  const add = (mapa, v, rot) => { if (mapa[v] && mapa[v] !== 1) F.push(fx(`${rot}: ${v}`, mapa[v])); };
+  add(COLAB, vR(r, "colaboradores"), "Colaboradores");
+  add(FROTA, vR(r, "frota"), "Frota");
+  add(FAT_RT, vR(r, "faturamento"), "Faturamento");
+  const un = nR(r, "unidades");
+  if (un > 1) F.push(fx(`${un} unidades`, Math.min(1 + 0.15 + 0.05 * (un - 2), 1.4)));
+  add({ Sim: 0.95, Não: 1.1 }, vR(r, "adm_pop"), "Procedimentos documentados");
+  add({ "Existe e funciona bem": 0.95, "Não existe processo definido": 1.1 }, vR(r, "prc_rt_processo"), "Processos");
+  add({ Baixa: 0.95, Alta: 1.05 }, vR(r, "prc_rt_gestor"), "Dependência do gestor");
+  add({ Boa: 0.95, Baixa: 1.1 }, vR(r, "prc_rt_capac"), "Capacidade interna");
+  add({ Pontual: 1.1, Recorrente: 1.2 }, vR(r, "prc_rt_exec"), "Execução assistida");
+  const b = bloco("Consultoria de Processos (projeto)", L, F);
+  const nivel = (vR(r, "prc_rt_intens") || "B")[0];
+  const [presenca, cap] = INTENS[nivel] || INTENS.B;
+  const extraMes = [0, p.rt_plano1, p.rt_plano2][tier] || 0;
+  const meses = Math.max(1, Math.round(Number(mesesFix) || nR(r, "prc_rt_meses") || Math.min(12, Math.max(3, Math.ceil(b.horas / (cap + extraMes))))));
+  const extra = [];
+  if (presenca) extra.push({ rot: `Deslocamento e presença (nível ${nivel})`, det: `${meses} meses`, h: presenca * 0.25 * meses });
+  if (extraMes) extra.push({ rot: `Acompanhamento do ${SERVICOS.rt.planos[tier]}`, det: `${meses} meses`, h: extraMes * meses });
+  const b2 = { titulo: "Acompanhamento ao longo do projeto", linhas: extra, fatores: [], base: extra.reduce((s, l) => s + l.h, 0) };
+  b2.horas = b2.base;
+  return { blocos: [b, ...(extra.length ? [b2] : [])], meses };
+}
+/* Cálculo de um item da proposta: horas × R$/h → valor sugerido (arredondado) */
+function calcularItem(it, d) {
+  const p = P(), tier = Math.max(0, SERVICOS[it.serv].planos.indexOf(it.plano));
+  let blocos, meses;
+  if (it.serv === "bpo") blocos = [calcBPO(d, tier)];
+  else if (it.serv === "fpa") blocos = [calcFPA(d, tier, false)];
+  else if (it.serv === "int") blocos = [calcBPO(d, tier), calcFPA(d, tier, true)];
+  else if (it.serv === "pla") blocos = [calcPla(d, tier, ehGestao(d))];
+  else ({ blocos, meses } = calcRental(d, tier, it.meses));
+  const horas = blocos.reduce((s, b) => s + b.horas, 0);
+  const unico = SERVICOS[it.serv].cobranca === "unico";
+  const bruto = horas * p.hora;
+  return { blocos, horas, hora: p.hora, meses, sugerido: unico ? Math.ceil(bruto / 100) * 100 : Math.ceil(bruto / 50) * 50, tabela: tabelaPlano(it.plano), em: new Date().toISOString() };
+}
+
+/* ================== PROPOSTAS ================== */
+const propStore = criarStore("dados/comercial/propostas.json", { versao: 1, seq: 0, propostas: [] });
+const props = () => propStore.dados?.propostas || [];
+const STATUS_PROP = { rascunho: ["Em elaboração", "var(--alerta)"], emitida: ["Emitida", "var(--turq)"], aceita: ["Aceita", "var(--verde)"], recusada: ["Recusada", "var(--erro)"] };
+const brl = v => (Number(v) || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 2 });
+const lerValor = s => { const t = String(s ?? "").replace(/[^\d,.-]/g, ""); if (!t) return 0; return Number(t.includes(",") ? t.replace(/\./g, "").replace(",", ".") : t) || 0; };
+const varPct = (v, sug) => sug ? (v / sug - 1) * 100 : 0;
+const fmtPct = x => (x > 0 ? "+" : "") + x.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + "%";
+const corVar = x => Math.abs(x) < 0.05 ? "var(--txt-2)" : x > 0 ? "#1D7F45" : x < -15 ? "var(--erro)" : "var(--alerta)";
+let propAtual = null, timerProp = null, propPendente = false, salvandoProp = false;
+
+function diagDaProposta(pp) {
+  const t = TIPOS_DIAG[pp.diagFrente];
+  return (t && t.store.dados?.diagnosticos.find(x => x.id === pp.diagId)) || null;
+}
+function entregasDe(serv, plano, d) {
+  const lista = [...(ENTREGAS[plano] || [])], r = d?.respostas || {};
+  if (serv === "bpo" || serv === "int") {
+    if (nR(r, "prc_adquirentes")) lista.push(`Conciliação de cartões (${nR(r, "prc_adquirentes")} adquirente(s))`);
+    if (nR(r, "prc_cartoes")) lista.push("Conciliação das faturas de cartão corporativo");
+    if (nR(r, "prc_nf_manual") || nR(r, "prc_nf_auto")) lista.push("Emissão de notas fiscais");
+    if (nR(r, "prc_boletos")) lista.push("Emissão e baixa de boletos");
+    if (vR(r, "prc_cobranca") === "Sim") lista.push("Cobrança de clientes em atraso");
+    if ((vR(r, "prc_cc") || "").startsWith("Sim")) lista.push("Classificação por centro de custo" + (vR(r, "prc_cc") === "Sim, com rateio" ? " com rateio" : ""));
+    if (nR(r, "cnpjs") > 1) lista.push(`Operação de ${nR(r, "cnpjs")} CNPJs`);
+  }
+  if (serv === "rt") {
+    lista.unshift(`Setores no escopo: ${setoresRental(d || {}).join(", ")}`);
+    if (vR(r, "prc_rt_sistema") === "Sim") lista.push("Configuração / parametrização do sistema");
+    if (nR(r, "prc_rt_treinar")) lista.push(`Treinamento de ${nR(r, "prc_rt_treinar")} pessoas`);
+    if (vR(r, "prc_rt_exec") && vR(r, "prc_rt_exec") !== "Não") lista.push(`Execução assistida ${vR(r, "prc_rt_exec").toLowerCase()}`);
+  }
+  return lista;
+}
+function novoItem(serv, plano, d) {
+  const it = { id: crypto.randomUUID(), serv, nome: SERVICOS[serv].nome, plano: plano || SERVICOS[serv].planos[0], parcelas: 1, modalidade: "unico" };
+  it.entregas = entregasDe(serv, it.plano, d).join("\n");
+  it.calc = calcularItem(it, d || {});
+  if (serv === "rt") { it.meses = it.calc.meses; it.parcelas = it.meses; }
+  it.sugerido = it.calc.sugerido; it.valor = it.sugerido;
+  return it;
+}
+const tipoPropDe = dd => { const t = tipoDe(dd); return t.frente === "processos" ? "consultoria" : t.frente === "planejamento" ? "planejamento" : t.frente === "fpa" ? "cfo" : ehGestao(dd) ? "gestao" : ehCombo(dd) ? "bpo+cfo" : "bpo"; };
+const OBJ_PADRAO = {
+  bpo: ["Rotina financeira organizada e em dia, sem depender dos sócios", "Caixa conciliado e confiável", "Relatório mensal para decidir com segurança"],
+  fpa: ["Enxergar o resultado do mês com DRE gerencial", "Acompanhar orçado × realizado e agir nos desvios", "Indicadores para decidir antes de o problema aparecer"],
+  pla: ["Orçamento e projeção de caixa que guiem as decisões", "Antecipar meses de aperto e planejar investimentos", "Cenários para decidir com segurança"],
+  rt: ["Processos dos setores do projeto desenhados, implantados e documentados", "Sistema configurado e equipe treinada", "Indicadores para acompanhar a operação"]
+};
+function preProposta(dd) {
+  const r = dd.respostas || {}, c = dd.cliente || {}, tipo = tipoPropDe(dd);
+  const plano = PLANO_ANTIGO[dd.plano] || dd.plano;
+  const pick = (serv, pref, tier) => SERVICOS[serv].planos.includes(pref) ? pref : SERVICOS[serv].planos[Math.min(tier || 0, 2)];
+  const tBPO = sugestaoBPO(dd)?.tier || 0, tFPA = nivelFPA(dd).tier, tPLA = nivelPla(dd).tier;
+  const itens = ITENS_TIPO[tipo].map(serv => {
+    if (serv === "bpo") return novoItem("bpo", pick("bpo", plano, tBPO), dd);
+    if (serv === "fpa") return novoItem("fpa", pick("fpa", plano, tFPA), dd);
+    if (serv === "int") return novoItem("int", pick("int", plano, Math.max(tBPO, tFPA)), dd);
+    if (serv === "pla") return novoItem("pla", pick("pla", tipo === "gestao" ? dd.planoPla : plano, tPLA), dd);
+    return novoItem("rt", SERVICOS.rt.planos[tierRental(dd)], dd);
+  });
+  const mt = maturidade(dd);
+  const pontos = (mt?.atencao || []).slice(0, 8).map(a => `${a.q.rot || a.q.txt.replace(/\?$/, "")} (hoje: ${a.v.toLowerCase()})`);
+  const objetivos = [];
+  if (tipo === "consultoria") {
+    if (vR(r, "resultado")) objetivos.push(vR(r, "resultado"));
+    for (const k of dd.criterios || []) if (k.resultado) objetivos.push(`${k.resultado}${k.indicador ? ` (${k.indicador}` + (k.atual || k.meta ? `: de ${k.atual || "?"} para ${k.meta || "?"}` : "") + ")" : ""}${k.prazo ? ` em ${k.prazo}` : ""}`);
+  }
+  if (vR(r, "fpa_meta")) objetivos.push(vR(r, "fpa_meta"));
+  if (vR(r, "pla_meta")) objetivos.push(vR(r, "pla_meta"));
+  const servObj = { bpo: ["bpo"], cfo: ["fpa"], "bpo+cfo": ["bpo", "fpa"], planejamento: ["pla"], gestao: ["bpo", "fpa", "pla"], consultoria: ["rt"] }[tipo];
+  for (const s of servObj) objetivos.push(...OBJ_PADRAO[s].slice(0, servObj.length > 1 ? 2 : 3));
+  const contato = (dd.entrevistado || c.contato || "").split(" ")[0];
+  return {
+    tipo, status: "rascunho", diagId: dd.id, diagFrente: tipoDe(dd).frente, leadId: dd.leadId || null,
+    cliente: { empresa: c.empresa || "", cnpj: c.cnpj || "", contato: dd.entrevistado || c.contato || "", cargo: dd.cargo || "", email: c.email || "", telefone: c.telefone || "", cidade: c.cidade || "", uf: c.uf || "" },
+    data: hojeISO(), validade: 15, responsavel: dd.responsavel || (RESPONSAVEIS.includes(meuNome()) ? meuNome() : ""), consultorEmail: conta?.username || "",
+    apresentacao: `${contato ? contato + ", obrigado" : "Obrigado"} pelo tempo da nossa conversa. Preparamos esta proposta a partir do diagnóstico realizado${dd.dataReuniao ? " em " + data(dd.dataReuniao + "T12:00") : ""}, com o caminho que enxergamos para a ${c.empresa || "empresa"} e a forma como a WL Expertise vai conduzir esse trabalho ao seu lado.`,
+    desafio: (tipo === "consultoria" ? (dd.sinProblema || vR(r, "problema")) : dd.parecer) || "",
+    pontos: pontos.join("\n"), objetivos: [...new Set(objetivos)].join("\n"),
+    condicoes: ["O trabalho começa após o aceite desta proposta e a reunião de início (kick-off).", `Fora do escopo: contabilidade, fiscal, RH/folha e jurídico${tipo === "consultoria" ? ", além da área comercial" : ""}.`, "Demandas extraordinárias, fora do escopo descrito, são avaliadas e orçadas à parte."].join("\n"),
+    proximos: "Para seguir, basta dar o aceite nesta proposta. Em seguida agendamos a reunião de início e combinamos os acessos necessários.",
+    itens, criadoEm: new Date().toISOString(), criadoPor: meuNome()
+  };
+}
+async function garantirStoresProp() {
+  const sts = [propStore, cfgStore, ...Object.values(TIPOS_DIAG).map(t => t.store)].filter(s => !s.carregado);
+  await Promise.all(sts.map(s => carregarStore(s).catch(e => { if (s !== cfgStore) throw e; s.dados = structuredClone(s.inicial); s.carregado = true; })));
+  if (!crm.carregado) await carregarCRM(true);
+}
+async function irParaProposta(dd) {
+  try { await garantirStoresProp(); } catch (e) { return toast("Não foi possível abrir as propostas: " + e.message, "erro", 6000); }
+  const ex = props().find(p => p.diagId === dd.id && p.diagFrente === tipoDe(dd).frente && p.status !== "recusada");
+  if (ex) { location.hash = "atendimento/propostas/" + ex.id; return; }
+  const nova = preProposta(dd);
+  chip("sincronizando", "Gerando pré-proposta…");
+  try {
+    await salvarStore(propStore, d => { d.seq = (d.seq || d.propostas.length) + 1; nova.id = "PR-" + String(d.seq).padStart(4, "0"); d.propostas.push(structuredClone(nova)); });
+    chip("", "Sincronizado");
+    toast("Pré-proposta gerada a partir do diagnóstico");
+    location.hash = "atendimento/propostas/" + nova.id;
+  } catch (e) { chip("erro", "Erro"); toast("Não foi possível criar a proposta: " + e.message, "erro", 6000); }
+}
+const totaisProp = pp => {
+  let mensal = 0, unico = 0;
+  for (const it of pp.itens || []) {
+    const v = Number(it.valor) || 0;
+    if (SERVICOS[it.serv].cobranca === "mensal") mensal += v;
+    else if (it.serv === "rt" && it.modalidade === "recorrente") mensal += v / Math.max(it.meses || 1, 1);
+    else unico += v;
+  }
+  return { mensal, unico };
+};
+function pagamentoItem(it) {
+  const v = Number(it.valor) || 0;
+  if (SERVICOS[it.serv].cobranca === "mensal") return `Mensalidade de ${brl(v)}.`;
+  if (it.serv === "rt" && it.modalidade === "recorrente") return `Mensalidade de ${brl(v / it.meses)} durante ${it.meses} meses (modelo recorrente).`;
+  const n = Math.max(1, Number(it.parcelas) || 1);
+  if (n === 1) return `Valor único de ${brl(v)}, à vista.`;
+  return `Valor total de ${brl(v)}, em ${n} parcelas${it.serv === "rt" ? " mensais" : ""} de ${brl(v / n)}${it.serv === "rt" ? " durante o período da consultoria" : ""}.`;
+}
+
+/* ---- Lista ---- */
+const filtroProp = { status: "todos", busca: "" };
+const FRENTE_TIPOS = { bpo: ["bpo", "bpo+cfo", "gestao"], fpa: ["cfo", "bpo+cfo", "gestao"], planejamento: ["planejamento", "gestao"], processos: ["consultoria"] };
+function renderListaPropostas() {
+  propAtual = null;
+  $("atdConteudo").oninput = $("atdConteudo").onclick = $("atdConteudo").onchange = null;
+  const fr = rota[1] === "proposta" ? FRENTE_TIPOS[rota[0]] : null;
+  const fNome = FRENTES_AT.find(f => f.id === rota[0])?.nome;
+  cabAtd(fr ? [["Atendimento", "#atendimento"], [fNome, "#atendimento"], ["Proposta"]] : [["Atendimento", "#atendimento"], ["Propostas"]], fr ? fNome : "Comercial", fr ? "Propostas · " + fNome : "Propostas",
+    "Gere a proposta direto do diagnóstico, ajuste o que quiser e entregue o PDF ainda na reunião.",
+    `${ehAdmin() ? `<button class="btn-s" data-prop="params"><svg><use href="#i-editar"/></svg>Parâmetros de preço</button>` : ""}<button class="btn-p" data-prop="nova"><svg><use href="#i-mais"/></svg>Nova proposta</button>`);
+  const termos = norm(filtroProp.busca).split(" ").filter(Boolean);
+  const base = props().filter(p => !fr || fr.includes(p.tipo));
+  const lista = base.filter(p => filtroProp.status === "todos" || p.status === filtroProp.status)
+    .filter(p => !termos.length || termos.every(t => norm([p.cliente?.empresa, p.id, TIPOS_PROP[p.tipo]].join(" ")).includes(t)))
+    .sort((a, b) => (b.atualizadoEm || b.criadoEm || "").localeCompare(a.atualizadoEm || a.criadoEm || ""));
+  const n = st => base.filter(p => st === "todos" || p.status === st).length;
+  $("atdConteudo").innerHTML = `
+    <div class="barra-crm">
+      <nav class="abas" id="abasProp">${[["todos", "Todas"], ...Object.entries(STATUS_PROP).map(([k, v]) => [k, v[0]])].map(([k, r]) => `<button data-st="${k}" class="${filtroProp.status === k ? "ativo" : ""}">${r} (${n(k)})</button>`).join("")}</nav>
+      <input id="buscaProp" type="search" class="campo-busca" placeholder="Buscar por empresa ou número…" value="${esc(filtroProp.busca)}">
+    </div>
+    <section class="bloco">${lista.length ? `<ul class="lista-diag">${lista.map(p => {
+      const t = totaisProp(p), st = STATUS_PROP[p.status] || STATUS_PROP.rascunho;
+      return `<li data-abrir-prop="${p.id}">
+        <div class="ld-ico prop">R$</div>
+        <div class="ld-info"><b>${esc(p.cliente?.empresa || "Sem empresa")}</b>
+          <small>${esc(p.id)} · ${esc(TIPOS_PROP[p.tipo] || "")} · ${[t.mensal ? brl(t.mensal) + "/mês" : "", t.unico ? brl(t.unico) + " único" : ""].filter(Boolean).join(" + ") || "sem valor"} · ${data((p.data || hojeISO()) + "T12:00")}</small></div>
+        <span class="chip-etapa" style="--cor:${st[1]}"><i></i>${st[0]}</span>
+        <div class="acoes">
+          <button class="acao" data-dica="Abrir" data-prop-acao="abrir" data-prop-id="${p.id}"><svg><use href="#i-editar"/></svg></button>
+          <button class="acao" data-dica="Gerar PDF" data-prop-acao="pdf" data-prop-id="${p.id}"><svg><use href="#i-pdf"/></svg></button>
+          <button class="acao perigo-ico" data-dica="Excluir" data-prop-acao="excluir" data-prop-id="${p.id}"><svg><use href="#i-lixo"/></svg></button>
+        </div></li>`;
+    }).join("")}</ul>` : `<div class="vazio-etapa"><b>${props().length ? "Nenhuma proposta com esse filtro" : "Nenhuma proposta ainda"}</b>${props().length ? "" : "Finalize um diagnóstico ou clique em “Nova proposta”."}</div>`}</section>`;
+  $("abasProp").onclick = e => { const b = e.target.closest("[data-st]"); if (b) { filtroProp.status = b.dataset.st; renderListaPropostas(); } };
+  let t;
+  $("buscaProp").oninput = e => { clearTimeout(t); t = setTimeout(() => { filtroProp.busca = e.target.value; renderListaPropostas(); const i = $("buscaProp"); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }, 200); };
+}
+
+/* ---- Nova proposta: a partir de um diagnóstico ou em branco para um cliente do CRM ---- */
+function novaProposta() {
+  const ds = Object.values(TIPOS_DIAG).flatMap(t => (t.store.dados?.diagnosticos || []).map(d => ({ d, t })))
+    .sort((a, b) => (b.d.atualizadoEm || "").localeCompare(a.d.atualizadoEm || ""));
+  let tipoSel = "bpo";
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Nova proposta</h3></div>
+    <div class="modal-corpo">
+      <nav class="abas" id="abasNP"><button data-np="diag" class="ativo">A partir de um diagnóstico</button><button data-np="branco">Em branco</button></nav>
+      <div id="npDiag"><input id="buscaNP" type="search" class="campo-busca" placeholder="Buscar diagnóstico por empresa…"><ul class="lista-cli" id="listaNP"></ul></div>
+      <div id="npBranco" class="oculto">
+        <div class="campo" style="margin-bottom:10px"><label>Tipo de proposta</label><div class="opcoes" id="tipoNP">${Object.entries(TIPOS_PROP).map(([k, v]) => `<button type="button" data-tp="${k}" class="${k === tipoSel ? "ativo" : ""}">${esc(v)}</button>`).join("")}</div></div>
+        <input id="buscaLeadNP" type="search" class="campo-busca" placeholder="Cliente do CRM: digite o nome…"><ul class="lista-cli" id="listaLeadNP"></ul>
+      </div>
+    </div>`);
+  veu.onclick = fecharModal;
+  const desenhar = () => {
+    const tm = norm($("buscaNP").value).split(" ").filter(Boolean);
+    const ls = ds.filter(x => !tm.length || tm.every(t => norm([x.d.cliente?.empresa, x.d.id].join(" ")).includes(t))).slice(0, 40);
+    $("listaNP").innerHTML = ls.length ? ls.map(x => `<li data-np-diag="${x.t.frente}/${x.d.id}"><div><b>${esc(x.d.cliente?.empresa || "Sem empresa")}</b><small>${esc(nomeDiag(x.d))} · ${esc(x.d.id)} · ${x.d.status === "finalizado" ? "finalizado" : "em edição"}</small></div></li>`).join("") : `<li class="vazio-cli">Nenhum diagnóstico encontrado.</li>`;
+  };
+  const desenharLeads = () => {
+    const tm = norm($("buscaLeadNP").value).split(" ").filter(Boolean);
+    const ls = leads().filter(l => !tm.length || tm.every(t => norm([l.empresa, l.cidade, l.contato].join(" ")).includes(t))).slice(0, 30);
+    $("listaLeadNP").innerHTML = ls.map(l => `<li data-np-lead="${l.id}"><div><b>${esc(l.empresa)}</b><small>${esc(l.segmento || "")}${l.cidade ? " · " + esc(l.cidade) : ""}</small></div><span class="chip-etapa" style="--cor:${etapaDe(l.etapa).cor}"><i></i>${etapaDe(l.etapa).nome}</span></li>`).join("") || `<li class="vazio-cli">Nenhum cliente encontrado.</li>`;
+  };
+  desenhar(); desenharLeads();
+  $("buscaNP").oninput = desenhar; $("buscaLeadNP").oninput = desenharLeads;
+  m.onclick = async e => {
+    const b = e.target.closest("[data-np],[data-np-diag],[data-np-lead],[data-tp]");
+    if (!b) return;
+    if (b.dataset.np) { m.querySelectorAll("[data-np]").forEach(x => x.classList.toggle("ativo", x === b)); $("npDiag").classList.toggle("oculto", b.dataset.np !== "diag"); $("npBranco").classList.toggle("oculto", b.dataset.np !== "branco"); return; }
+    if (b.dataset.tp) { tipoSel = b.dataset.tp; m.querySelectorAll("[data-tp]").forEach(x => x.classList.toggle("ativo", x === b)); return; }
+    if (b.dataset.npDiag) { const [fr, id] = b.dataset.npDiag.split("/"); const d = TIPOS_DIAG[fr].store.dados.diagnosticos.find(x => x.id === id); fecharModal(); return irParaProposta(d); }
+    if (b.dataset.npLead) {
+      const l = leadPorId(b.dataset.npLead); fecharModal();
+      const nova = { tipo: tipoSel, status: "rascunho", diagId: null, diagFrente: null, leadId: l.id,
+        cliente: { empresa: l.empresa, cnpj: l.cnpj || "", contato: l.contato || "", cargo: "", email: l.email || "", telefone: (l.telefones || [])[0] || "", cidade: l.cidade || "", uf: l.uf || "" },
+        data: hojeISO(), validade: 15, responsavel: l.responsavel || (RESPONSAVEIS.includes(meuNome()) ? meuNome() : ""), consultorEmail: conta?.username || "",
+        apresentacao: `${l.contato ? l.contato.split(" ")[0] + ", obrigado" : "Obrigado"} pelo tempo da nossa conversa. Preparamos esta proposta com o caminho que enxergamos para a ${l.empresa} e a forma como a WL Expertise vai conduzir esse trabalho ao seu lado.`,
+        desafio: "", pontos: "", objetivos: ({ bpo: OBJ_PADRAO.bpo, cfo: OBJ_PADRAO.fpa, "bpo+cfo": [...OBJ_PADRAO.bpo.slice(0, 2), ...OBJ_PADRAO.fpa.slice(0, 2)], planejamento: OBJ_PADRAO.pla, gestao: [...OBJ_PADRAO.bpo.slice(0, 2), ...OBJ_PADRAO.fpa.slice(0, 2), ...OBJ_PADRAO.pla.slice(0, 2)], consultoria: OBJ_PADRAO.rt })[tipoSel].join("\n"),
+        condicoes: ["O trabalho começa após o aceite desta proposta e a reunião de início (kick-off).", `Fora do escopo: contabilidade, fiscal, RH/folha e jurídico${tipoSel === "consultoria" ? ", além da área comercial" : ""}.`, "Demandas extraordinárias, fora do escopo descrito, são avaliadas e orçadas à parte."].join("\n"),
+        proximos: "Para seguir, basta dar o aceite nesta proposta. Em seguida agendamos a reunião de início e combinamos os acessos necessários.",
+        itens: ITENS_TIPO[tipoSel].map(s => novoItem(s, null, {})), criadoEm: new Date().toISOString(), criadoPor: meuNome() };
+      try {
+        await salvarStore(propStore, d => { d.seq = (d.seq || d.propostas.length) + 1; nova.id = "PR-" + String(d.seq).padStart(4, "0"); d.propostas.push(structuredClone(nova)); });
+        location.hash = "atendimento/propostas/" + nova.id;
+      } catch (er) { toast("Não foi possível criar: " + er.message, "erro", 6000); }
+    }
+  };
+}
+
+/* ---- Editor da proposta ---- */
+function abrirProposta(id) {
+  const p0 = props().find(x => x.id === id);
+  if (!p0) { toast("Proposta não encontrada", "erro"); location.hash = "atendimento/propostas"; return; }
+  if (!propAtual || propAtual.id !== id || !propPendente) propAtual = structuredClone(p0);
+  const pp = propAtual, c = pp.cliente || {}, dg = diagDaProposta(pp), st = STATUS_PROP[pp.status] || STATUS_PROP.rascunho;
+  cabAtd([["Atendimento", "#atendimento"], ["Propostas", "#atendimento/propostas"], [pp.id]], `Proposta ${TIPOS_PROP[pp.tipo] || ""} · ${pp.id}`, c.empresa || "Proposta",
+    dg ? `Pré-proposta gerada a partir do ${nomeDiag(dg)} ${dg.id}. Tudo é editável e salvo automaticamente.` : "Tudo é editável e salvo automaticamente.",
+    `<span class="chip-etapa" style="--cor:${st[1]}"><i></i>${st[0]}</span><span class="status-salvo" id="statusSalvo">Salvo na nuvem</span>`);
+  const campoC = (k, rot, tipo = "text") => `<div class="campo"><label>${rot}</label><input type="${tipo}" data-pc="${k}" value="${esc(c[k] || "")}"></div>`;
+  const ta = (k, rot, rows, dica = "") => `<div class="campo"><label>${rot}${dica ? ` <span class="dica-campo">${dica}</span>` : ""}</label><textarea data-p="${k}" rows="${rows}">${esc(pp[k] || "")}</textarea></div>`;
+  $("atdConteudo").innerHTML = `
+  <div class="diag-grade">
+    <div class="diag-form">
+      <section class="g-sec"><h4>Cliente ${pp.leadId ? `<button class="lnk" data-prop="verLead">Ver no CRM ›</button>` : ""}</h4>
+        <div class="dados-grid">
+          <div class="linha2">${campoC("empresa", "Empresa")}${campoC("cnpj", "CNPJ")}</div>
+          <div class="linha2">${campoC("contato", "Contato / decisor")}${campoC("cargo", "Cargo")}</div>
+          <div class="linha2">${campoC("email", "E-mail", "email")}${campoC("telefone", "Telefone")}</div>
+          <div class="linha2">${campoC("cidade", "Cidade")}${campoC("uf", "UF")}</div>
+        </div></section>
+      <section class="g-sec"><h4>Proposta</h4>
+        <div class="dados-grid">
+          <div class="campo"><label>Tipo de proposta</label><select data-p="tipo">${Object.entries(TIPOS_PROP).map(([k, v]) => `<option value="${k}" ${k === pp.tipo ? "selected" : ""}>${esc(v)}</option>`).join("")}</select></div>
+          <div class="linha3"><div class="campo"><label>Data</label><input type="date" data-p="data" value="${esc(pp.data || "")}"></div>
+            <div class="campo"><label>Validade (dias)</label><input type="number" min="1" data-p="validade" value="${esc(pp.validade || 15)}"></div>
+            <div class="campo"><label>Consultor WL</label><select data-p="responsavel">${opcoes(RESPONSAVEIS.map(x => [x, x]), pp.responsavel || "", "—")}</select></div></div>
+        </div></section>
+      <section class="g-sec"><h4>Apresentação e contexto</h4>
+        <div class="dados-grid">
+          ${ta("apresentacao", "Apresentação", 3)}
+          ${ta("desafio", "O desafio que o cliente quer resolver", 4, dg ? "veio do diagnóstico" : "")}
+          ${ta("pontos", "Pontos identificados no diagnóstico", 4, "um por linha")}
+          ${ta("objetivos", "Onde queremos chegar", 4, "um por linha")}
+        </div></section>
+      ${(pp.itens || []).map((it, k) => htmlItemProp(it, k)).join("")}
+      <button class="btn-s add-serv" data-prop="addServ"><svg><use href="#i-mais"/></svg>Adicionar serviço</button>
+      <section class="g-sec"><h4>Condições e próximos passos</h4>
+        <div class="dados-grid">${ta("condicoes", "Condições", 4, "uma por linha")}${ta("proximos", "Próximos passos", 2)}</div></section>
+    </div>
+    <aside class="diag-lado">
+      <section class="g-sec"><h4>Resumo do investimento</h4><div id="resumoProp"></div></section>
+      <section class="g-sec acoes-diag">
+        <button class="btn-p" data-prop="pdf" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Gerar proposta em PDF</button>
+        ${pp.pdf?.webUrl ? `<a class="lnk-pdf" href="${esc(pp.pdf.webUrl)}" target="_blank" rel="noopener">Último PDF salvo · ${dataHora(pp.pdf.em)}</a>` : ""}
+        ${dg ? `<button class="btn-s" data-prop="pdfDiag" style="justify-content:center"><svg><use href="#i-pdf"/></svg>PDF do diagnóstico</button>
+          <button class="btn-s" data-prop="verDiag" style="justify-content:center">Abrir diagnóstico</button>` : ""}
+        <div class="botoes-status">
+          <button class="btn-s ${pp.status === "aceita" ? "ativo-ok" : ""}" data-prop="aceita">✓ Aceita</button>
+          <button class="btn-s ${pp.status === "recusada" ? "ativo-nao" : ""}" data-prop="recusada">Recusada</button>
+        </div>
+        <button class="perigo" data-prop="excluir" style="justify-self:center">Excluir proposta</button>
+      </section>
+    </aside>
+  </div>`;
+  atualizarResumoProp();
+  ligarProp();
+}
+function htmlItemProp(it, k) {
+  const S = SERVICOS[it.serv], unico = S.cobranca === "unico", c = it.calc || {};
+  const v = varPct(Number(it.valor) || 0, it.sugerido);
+  const parcelasOps = it.serv === "pla" ? [1, 2] : Array.from({ length: Math.max(it.meses || 1, 1) }, (_, i) => i + 1);
+  return `<section class="g-sec item-prop" id="item-${k}">
+    <h4><span class="n-item">${k + 1}</span>${esc(S.nome)}<button class="lnk perigo-lnk" data-it-acao="remover" data-it="${k}">Remover</button></h4>
+    <div class="dados-grid">
+      <div class="linha2"><div class="campo"><label>Nome do serviço na proposta</label><input data-it="${k}" data-f="nome" value="${esc(it.nome || S.nome)}"></div>
+        <div class="campo"><label>Plano</label><select data-it="${k}" data-f="plano">${S.planos.map(p => `<option value="${esc(p)}" ${p === it.plano ? "selected" : ""}>${esc(p)} · tabela ${moeda(tabelaPlano(p))}${unico ? "" : "/mês"}</option>`).join("")}</select></div></div>
+      ${it.serv === "rt" ? `<div class="linha2">
+        <div class="campo"><label>Modelo de cobrança</label><div class="opcoes" data-it="${k}" data-fop="modalidade">${[["unico", "Valor único"], ["recorrente", "Mensalidade recorrente"]].map(([m, r]) => `<button type="button" data-v="${m}" class="${(it.modalidade || "unico") === m ? "ativo" : ""}">${r}</button>`).join("")}</div></div>
+        <div class="campo"><label>Duração (meses)</label><input type="number" min="1" max="36" data-it="${k}" data-f="meses" value="${esc(it.meses || "")}"></div></div>` : ""}
+      ${unico && !(it.serv === "rt" && it.modalidade === "recorrente") ? `<div class="campo"><label>Parcelamento</label><select data-it="${k}" data-f="parcelas">${parcelasOps.map(n => `<option value="${n}" ${Number(it.parcelas) === n ? "selected" : ""}>${n === 1 ? "À vista" : n + "x"}</option>`).join("")}</select></div>` : ""}
+      <div class="preco-box">
+        <div><small>Tabela do plano</small><b>${moeda(tabelaPlano(it.plano))}</b><span>${unico ? "valor único" : "por mês"}</span></div>
+        <div class="sug"><small>Sugerido pelo cálculo</small><b>${moeda(it.sugerido)}</b><span>${c.horas ? c.horas.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " h × " + moeda(c.hora) : ""}${tabelaPlano(it.plano) ? ` · ${fmtPct(varPct(it.sugerido, tabelaPlano(it.plano)))} vs. tabela` : ""}</span></div>
+        <div class="final"><small>Valor final ${unico ? "(total)" : "(por mês)"}</small><input class="inp-valor" data-it="${k}" data-f="valor" inputmode="decimal" value="${esc(brl(it.valor))}"><span id="var-${k}" style="color:${corVar(v)}">${Math.abs(v) < 0.05 ? "igual ao sugerido" : fmtPct(v) + " vs. sugerido"}</span></div>
+      </div>
+      <p class="txt-pag" id="pag-${k}">${esc(pagamentoItem(it))}</p>
+      <details class="calc-det"><summary>Como chegamos ao valor sugerido <span>uso interno</span></summary>
+        ${(c.blocos || []).map(b => `<div class="calc-bloco"><b>${esc(b.titulo)}</b>
+          <table>${b.linhas.map(l => `<tr><td>${esc(l.rot)}${l.det ? ` <small>${esc(l.det)}</small>` : ""}</td><td>${l.h.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} h</td></tr>`).join("")}
+          ${b.fatores.map(f => `<tr class="fat"><td>${esc(f.rot)}</td><td>${fmtPct((f.x - 1) * 100)}</td></tr>`).join("")}
+          ${b.fatores.length ? `<tr class="fat"><td>Fator de complexidade (soma dos ajustes)</td><td>× ${b.mult.toLocaleString("pt-BR", { maximumFractionDigits: 2 })}</td></tr>` : ""}
+          <tr class="tot"><td>Subtotal</td><td>${b.horas.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} h</td></tr></table></div>`).join("")}
+        <div class="calc-rod">${(c.horas || 0).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} h × ${moeda(c.hora)}/h = ${brl((c.horas || 0) * (c.hora || 0))} → arredondado ${moeda(it.sugerido)}</div>
+        <button class="lnk" data-it-acao="recalcular" data-it="${k}">Recalcular com as respostas atuais do diagnóstico ›</button>
+      </details>
+      <div class="campo"><label>Entregas <span class="dica-campo">uma por linha · aparecem no PDF</span></label><textarea data-it="${k}" data-f="entregas" rows="6">${esc(it.entregas || "")}</textarea></div>
+    </div></section>`;
+}
+function atualizarResumoProp() {
+  const pp = propAtual, t = totaisProp(pp);
+  $("resumoProp").innerHTML = `${(pp.itens || []).map((it, k) => {
+    const v = varPct(Number(it.valor) || 0, it.sugerido), unico = SERVICOS[it.serv].cobranca === "unico" && it.modalidade !== "recorrente";
+    return `<div class="rs-item"><div class="rs-nome"><b>${esc(it.nome || SERVICOS[it.serv].nome)}</b><small>${esc(it.plano)}</small></div>
+      <div class="rs-linha"><span>Sugerido</span><b>${moeda(it.sugerido)}</b></div>
+      <div class="rs-linha"><span>Final</span><b>${brl(it.valor)}${unico ? "" : "/mês"}</b></div>
+      <div class="rs-var" style="color:${corVar(v)}">${Math.abs(v) < 0.05 ? "= sugerido" : fmtPct(v)}</div></div>`;
+  }).join("")}
+  <div class="rs-total">${t.mensal ? `<div><span>Total mensal</span><b>${brl(t.mensal)}</b></div>` : ""}${t.unico ? `<div><span>Total valor único</span><b>${brl(t.unico)}</b></div>` : ""}${!t.mensal && !t.unico ? `<div><span>Total</span><b>R$ 0,00</b></div>` : ""}</div>`;
+}
+function ligarProp() {
+  const raiz = $("atdConteudo"), pp = propAtual;
+  const redesenhar = () => { const y = scrollY; propPendente = true; abrirProposta(pp.id); alterouProp(); scrollTo(0, y); };
+  const recalc = (it, manterValor) => {
+    const d = diagDaProposta(pp) || {};
+    const antigoSug = it.sugerido;
+    it.calc = calcularItem(it, d);
+    if (it.serv === "rt" && !it.mesesEditado) it.meses = it.calc.meses;
+    it.sugerido = it.calc.sugerido;
+    if (!manterValor || !it.valorEditado || Number(it.valor) === antigoSug) { it.valor = it.sugerido; it.valorEditado = false; }
+  };
+  raiz.oninput = e => {
+    const t = e.target;
+    if (t.dataset.pc) { pp.cliente = { ...(pp.cliente || {}), [t.dataset.pc]: t.value }; if (t.dataset.pc === "empresa") $("atdTitulo").textContent = t.value || "Proposta"; }
+    else if (t.dataset.p && t.tagName !== "SELECT") pp[t.dataset.p] = t.value;
+    else if (t.dataset.it !== undefined && t.dataset.f) {
+      const it = pp.itens[+t.dataset.it];
+      if (t.dataset.f === "valor") {
+        it.valor = lerValor(t.value); it.valorEditado = true;
+        const v = varPct(it.valor, it.sugerido), el = $("var-" + t.dataset.it);
+        el.textContent = Math.abs(v) < 0.05 ? "igual ao sugerido" : fmtPct(v) + " vs. sugerido"; el.style.color = corVar(v);
+        $("pag-" + t.dataset.it).textContent = pagamentoItem(it);
+        atualizarResumoProp();
+      } else if (["nome", "entregas"].includes(t.dataset.f)) { it[t.dataset.f] = t.value; if (t.dataset.f === "entregas") it.entregasEditadas = true; if (t.dataset.f === "nome") atualizarResumoProp(); }
+      else return;
+    } else return;
+    alterouProp();
+  };
+  raiz.onchange = e => {
+    const t = e.target;
+    if (t.dataset.p && t.tagName === "SELECT") { pp[t.dataset.p] = t.value; if (t.dataset.p === "tipo") return redesenhar(); return alterouProp(); }
+    if (t.dataset.f === "valor") { t.value = brl(pp.itens[+t.dataset.it].valor); return; }
+    if (t.dataset.it === undefined) return;
+    const it = pp.itens[+t.dataset.it];
+    if (t.dataset.f === "plano") { it.plano = t.value; if (!it.entregasEditadas || confirmar("Trocar também as entregas pelas do novo plano?")) { it.entregas = entregasDe(it.serv, it.plano, diagDaProposta(pp) || {}).join("\n"); it.entregasEditadas = false; } recalc(it, true); return redesenhar(); }
+    if (t.dataset.f === "meses") { it.meses = Math.max(1, Math.round(Number(t.value) || 1)); it.mesesEditado = true; recalc(it, true); if (it.serv === "rt") it.parcelas = Math.min(Number(it.parcelas) || it.meses, it.meses); return redesenhar(); }
+    if (t.dataset.f === "parcelas") { it.parcelas = Number(t.value) || 1; $("pag-" + t.dataset.it).textContent = pagamentoItem(it); return alterouProp(); }
+  };
+  raiz.onclick = e => {
+    const b = e.target.closest("[data-v],[data-it-acao]");
+    if (!b) return;
+    if (b.dataset.itAcao) {
+      const k = +b.dataset.it, it = pp.itens[k];
+      if (b.dataset.itAcao === "remover") { if (!confirmar(`Remover "${it.nome}" da proposta?`)) return; pp.itens.splice(k, 1); return redesenhar(); }
+      if (b.dataset.itAcao === "recalcular") { recalc(it, true); toast(`Sugerido recalculado: ${moeda(it.sugerido)}`); return redesenhar(); }
+    }
+    const g = b.parentElement;
+    if (g?.dataset.fop === "modalidade") { const it = pp.itens[+g.dataset.it]; it.modalidade = b.dataset.v; if (it.modalidade === "unico" && !it.parcelas) it.parcelas = it.meses; return redesenhar(); }
+  };
+}
+function marcarSalvoProp(txt, classe = "") { const el = $("statusSalvo"); if (el) { el.textContent = txt; el.className = "status-salvo " + classe; } }
+function alterouProp() { propPendente = true; marcarSalvoProp("Salvando…", "pend"); clearTimeout(timerProp); timerProp = setTimeout(salvarProp, 1200); }
+async function salvarProp() {
+  clearTimeout(timerProp);
+  if (!propAtual || !propPendente) return true;
+  if (salvandoProp) { timerProp = setTimeout(salvarProp, 500); return false; }
+  salvandoProp = true; propPendente = false;
+  const copia = structuredClone(propAtual);
+  copia.atualizadoEm = propAtual.atualizadoEm = new Date().toISOString(); copia.atualizadoPor = propAtual.atualizadoPor = meuNome();
+  try {
+    await salvarStore(propStore, d => { const k = d.propostas.findIndex(x => x.id === copia.id); if (k >= 0) d.propostas[k] = copia; else d.propostas.push(copia); });
+    if (!propPendente) marcarSalvoProp(`Salvo na nuvem às ${hora(Date.now()).slice(0, 5)}`, "ok");
+    return true;
+  } catch (e) { propPendente = true; marcarSalvoProp("Erro ao salvar — tentando novamente", "erro"); timerProp = setTimeout(salvarProp, 5000); return false; }
+  finally { salvandoProp = false; }
+}
+addEventListener("beforeunload", e => { if (propPendente) { salvarProp(); e.preventDefault(); e.returnValue = ""; } });
+function adicionarServico() {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Adicionar serviço</h3></div>
+    <div class="modal-corpo"><ul class="lista-cli">${Object.entries(SERVICOS).map(([k, s]) => `<li data-add-serv="${k}"><div><b>${esc(s.nome)}</b><small>${s.cobranca === "mensal" ? "Assinatura mensal" : k === "pla" ? "Valor único, até 2x" : "Valor único parcelado ou recorrente"}</small></div></li>`).join("")}</ul></div>`);
+  veu.onclick = fecharModal;
+  m.onclick = e => {
+    const b = e.target.closest("[data-add-serv]"); if (!b) return;
+    fecharModal();
+    const d = diagDaProposta(propAtual) || {};
+    propAtual.itens.push(novoItem(b.dataset.addServ, null, d));
+    propPendente = true; abrirProposta(propAtual.id); alterouProp();
+    $("item-" + (propAtual.itens.length - 1))?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+}
+async function mudarStatusProp(status) {
+  const pp = propAtual;
+  if (pp.status === status) return;
+  pp.status = status; pp[status + "Em"] = new Date().toISOString();
+  propPendente = true; await salvarProp();
+  if (pp.leadId && leadPorId(pp.leadId)) {
+    const t = totaisProp(pp), resumo = [t.mensal ? brl(t.mensal) + "/mês" : "", t.unico ? brl(t.unico) + " único" : ""].filter(Boolean).join(" + ");
+    await alterarLead(pp.leadId, l => {
+      if (status === "aceita") { registrar(l, "venda", `Proposta ${pp.id} aceita · ${resumo}`); moverEtapa(l, "ganho"); l.valor = Math.round(t.mensal || t.unico); }
+      else if (status === "recusada") registrar(l, "nota", `Proposta ${pp.id} recusada`);
+    });
+  }
+  toast(status === "aceita" ? "Proposta aceita · cliente marcado como Ganho no CRM" : "Proposta marcada como recusada");
+  abrirProposta(pp.id);
+}
+async function excluirProposta(p) {
+  if (!confirmar(`Excluir a proposta ${p.id} de ${p.cliente?.empresa || "cliente"}?` + (p.pdf ? "\n\nO PDF salvo na pasta do cliente será mantido." : ""))) return;
+  if (propAtual?.id === p.id) { propAtual = null; propPendente = false; clearTimeout(timerProp); }
+  try {
+    await salvarStore(propStore, x => { x.propostas = x.propostas.filter(y => y.id !== p.id); });
+    toast(`Proposta ${p.id} excluída`);
+    if (rota[1]) location.hash = "atendimento/propostas"; else renderListaPropostas();
+  } catch (e) { toast("Não foi possível excluir: " + e.message, "erro", 6000); }
+}
+
+/* ---- Parâmetros de preço (administrador) ---- */
+function abrirParametros() {
+  const p = P();
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Parâmetros de preço</h3></div>
+    <div class="modal-corpo params">
+      <p class="txt-sec">O valor sugerido nas propostas é o tempo estimado de cada operação × valor da hora, ajustado pelos fatores de complexidade. Calibre os tempos com a realidade da WL. As propostas já criadas só mudam se você clicar em “Recalcular”.</p>
+      ${PARAM_GRUPOS.map(([g, ls]) => `<h5>${esc(g)}</h5><div class="param-grid">${ls.map(([k, rot, un]) => `<label><span>${esc(rot)}</span><span class="param-inp"><input type="number" step="any" data-param="${k}" value="${p[k]}"><em>${esc(un)}</em></span></label>`).join("")}</div>`).join("")}
+      <h5>Valores de tabela</h5><div class="param-grid">${Object.keys(TABELA_PADRAO).map(k => `<label><span>${esc(k)}</span><span class="param-inp"><input type="number" step="50" data-tab="${esc(k)}" value="${tabelaPlano(k)}"><em>R$</em></span></label>`).join("")}</div>
+    </div>
+    <div class="modal-rod"><button class="btn-s" data-m="padrao">Restaurar padrão</button><button class="btn-s" data-m="nao">Cancelar</button><button class="btn-p" data-m="ok">Salvar</button></div>`);
+  m.classList.add("modal-largo");
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=nao]").onclick = fecharModal;
+  m.querySelector("[data-m=padrao]").onclick = () => { m.querySelectorAll("[data-param]").forEach(i => i.value = PARAM_PADRAO[i.dataset.param]); m.querySelectorAll("[data-tab]").forEach(i => i.value = TABELA_PADRAO[i.dataset.tab]); };
+  m.querySelector("[data-m=ok]").onclick = async () => {
+    const params = {}, tabela = {};
+    m.querySelectorAll("[data-param]").forEach(i => { const v = Number(i.value); if (!isNaN(v) && v !== PARAM_PADRAO[i.dataset.param]) params[i.dataset.param] = v; });
+    m.querySelectorAll("[data-tab]").forEach(i => { const v = Number(i.value); if (!isNaN(v) && v !== TABELA_PADRAO[i.dataset.tab]) tabela[i.dataset.tab] = v; });
+    try { await salvarStore(cfgStore, d => { d.params = params; d.tabela = tabela; }); fecharModal(); toast("Parâmetros salvos"); }
+    catch (e) { toast("Não foi possível salvar: " + e.message, "erro", 6000); }
+  };
+}
+
+/* ---- PDF da proposta ---- */
+function htmlPDFProposta(pp) {
+  const c = pp.cliente || {}, t = totaisProp(pp), linhas = s => String(s || "").split("\n").map(x => x.trim()).filter(Boolean);
+  const dt = pp.data ? new Date(pp.data + "T12:00") : new Date();
+  const dataExt = dt.toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+  const validade = new Date(dt.getTime() + (Number(pp.validade) || 15) * 864e5).toLocaleDateString("pt-BR");
+  let sec = 0;
+  const tit = txt => `<div class="pp-tit"><span>${String(++sec).padStart(2, "0")}</span>${esc(txt)}</div>`;
+  const par = s => linhas(s).map(l => `<p>${esc(l)}</p>`).join("");
+  const lista = s => `<ul class="pp-lista">${linhas(s).map(l => `<li>${esc(l)}</li>`).join("")}</ul>`;
+  const consultor = pp.responsavel || "";
+  return `<div class="pp">
+    <div class="pp-capa">
+      <img src="logo-branca.png" alt="WL Expertise">
+      <div class="pp-capa-txt"><small>Proposta comercial · ${esc(pp.id)}</small><h1>${esc(TIPOS_PROP[pp.tipo] || "Proposta")}</h1>
+        <p>Preparada para <b>${esc(c.empresa || "")}</b> · ${esc(dataExt)}</p></div>
+    </div>
+    <div class="pp-partes">
+      <div><small>Cliente</small><b>${esc(c.empresa || "")}</b>
+        ${c.cnpj ? `<span>CNPJ ${esc(c.cnpj)}</span>` : ""}${c.contato ? `<span>${esc(c.contato)}${c.cargo ? " · " + esc(c.cargo) : ""}</span>` : ""}
+        ${c.email ? `<span>${esc(c.email)}</span>` : ""}${c.telefone ? `<span>${esc(c.telefone)}</span>` : ""}${c.cidade ? `<span>${esc(c.cidade)}${c.uf ? "/" + esc(c.uf) : ""}</span>` : ""}</div>
+      <div><small>Proposto por</small><b>${WL.nome}</b><span>CNPJ ${WL.cnpj}</span>${consultor ? `<span>Consultor: ${esc(consultor)}</span>` : ""}
+        <span>${WL.email} · ${WL.tel}</span><span>${WL.site} · ${WL.cidade}</span></div>
+    </div>
+    ${pp.apresentacao?.trim() ? `<div class="pp-bloco">${tit("Apresentação")}${par(pp.apresentacao)}</div>` : ""}
+    ${pp.desafio?.trim() || pp.pontos?.trim() ? `<div class="pp-bloco">${tit("O desafio")}${par(pp.desafio)}
+      ${pp.pontos?.trim() ? `<div class="pp-pontos"><small>O que identificamos no diagnóstico</small>${lista(pp.pontos)}</div>` : ""}</div>` : ""}
+    ${pp.objetivos?.trim() ? `<div class="pp-bloco">${tit("Onde queremos chegar")}${lista(pp.objetivos)}</div>` : ""}
+    <div class="pp-bloco">${tit("O que está incluído")}
+      ${(pp.itens || []).map(it => `<div class="pp-serv"><div class="pp-serv-cab"><b>${esc(it.nome || SERVICOS[it.serv].nome)}</b><span>${esc(it.plano)}</span></div>
+        <ul class="pp-lista duas">${linhas(it.entregas).map(l => `<li>${esc(l)}</li>`).join("")}</ul>
+        ${it.serv === "rt" ? `<div class="pp-nota">Duração prevista: ${it.meses} meses.</div>` : ""}</div>`).join("")}</div>
+    <div class="pp-bloco pp-invest">${tit("Investimento")}
+      <table class="pp-tab"><thead><tr><th>Serviço</th><th>Plano</th><th>Forma</th><th>Valor</th></tr></thead><tbody>
+        ${(pp.itens || []).map(it => { const men = SERVICOS[it.serv].cobranca === "mensal", rec = it.serv === "rt" && it.modalidade === "recorrente";
+          return `<tr><td>${esc(it.nome || SERVICOS[it.serv].nome)}</td><td>${esc(it.plano)}</td><td>${men ? "Mensal" : rec ? `Mensal por ${it.meses} meses` : "Valor único"}</td><td><b>${men ? brl(it.valor) + "/mês" : rec ? brl(it.valor / it.meses) + "/mês" : brl(it.valor)}</b></td></tr>`; }).join("")}
+      </tbody></table>
+      <div class="pp-totais">${t.mensal ? `<div><small>Investimento mensal</small><b>${brl(t.mensal)}</b></div>` : ""}${t.unico ? `<div><small>Investimento único</small><b>${brl(t.unico)}</b></div>` : ""}</div>
+      <div class="pp-pag"><small>Forma de pagamento</small>${(pp.itens || []).map(it => `<p><b>${esc(it.nome || SERVICOS[it.serv].nome)}:</b> ${esc(pagamentoItem(it))}</p>`).join("")}</div>
+    </div>
+    <div class="pp-bloco">${tit("Condições")}<ul class="pp-lista"><li>Proposta válida até ${validade}.</li>${linhas(pp.condicoes).map(l => `<li>${esc(l)}</li>`).join("")}</ul></div>
+    ${pp.proximos?.trim() ? `<div class="pp-bloco">${tit("Próximos passos")}${par(pp.proximos)}</div>` : ""}
+    <div class="pp-bloco">${tit("Sobre a WL Expertise")}
+      <p>A WL Expertise atua em quatro frentes que se complementam: BPO Financeiro, FP&amp;A, Planejamento Financeiro e Consultoria de Processos. Organizamos a rotina financeira, transformamos números em indicadores de gestão, planejamos o futuro com orçamento e cenários e redesenhamos processos para eliminar gargalos, sempre com método, documentação e acompanhamento próximo.</p>
+      <div class="pp-cases"><div><b>+R$ 20 mi/mês</b><span>transacionados e conciliados com precisão</span></div><div><b>+R$ 30 mil/mês</b><span>de economia em custos bancários de um cliente</span></div><div><b>+4.100</b><span>equipamentos liberados para locação em cliente do setor</span></div></div></div>
+    <div class="pp-bloco pp-aceite">${tit("Aceite")}<p>De acordo com os termos apresentados nesta proposta.</p>
+      <div class="pp-assin"><div><i></i><b>${esc(c.contato || c.empresa || "Cliente")}</b><span>${esc(c.empresa || "")}</span><span>Data: ____/____/______</span></div>
+        <div><i></i><b>${esc(consultor || WL.nome)}</b><span>${WL.nome}</span><span>Data: ____/____/______</span></div></div></div>
+    <div class="pp-rodape">${WL.nome} · BPO Financeiro, FP&amp;A, Planejamento Financeiro e Consultoria de Processos · ${WL.email} · ${WL.tel} · ${WL.site}</div>
+  </div>`;
+}
+async function gerarPDFProposta(pp) {
+  if (propPendente) await salvarProp();
+  if (!(pp.itens || []).length) return toast("Adicione pelo menos um serviço", "erro");
+  toast("Gerando a proposta em PDF…", "prog", 0);
+  try {
+    await carregarScript("https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js");
+    const host = document.createElement("div");
+    host.style.cssText = "position:fixed;left:0;top:0;width:190mm;z-index:-1;pointer-events:none;background:#fff";
+    host.innerHTML = htmlPDFProposta(pp);
+    document.body.appendChild(host);
+    await Promise.all([...host.querySelectorAll("img")].map(i => i.complete ? 0 : new Promise(ok => { i.onload = i.onerror = ok; })));
+    const empresa = limparNome(pp.cliente?.empresa || "Cliente");
+    const nomeArq = `Proposta ${TIPOS_PROP[pp.tipo] || ""} - ${empresa} - ${pp.id}.pdf`.replace(/\s+/g, " ");
+    let blob;
+    try {
+      blob = await html2pdf().set({
+        margin: [10, 10, 14, 10], filename: nomeArq, image: { type: "jpeg", quality: 0.95 },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0 }, jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        pagebreak: { mode: ["css", "legacy"], avoid: [".pp-capa", ".pp-partes", ".pp-serv", ".pp-invest", ".pp-tit", ".pp-totais", ".pp-pag", ".pp-aceite", ".pp-cases", "tr", "li", "p"] }
+      }).from(host.firstElementChild).toPdf().get("pdf").then(pdf => {
+        const tot = pdf.internal.getNumberOfPages();
+        for (let i = 1; i <= tot; i++) { pdf.setPage(i); pdf.setFontSize(8); pdf.setTextColor(120); pdf.text(`${pp.id} · página ${i} de ${tot}`, 200, 290, { align: "right" }); }
+      }).outputPdf("blob");
+    } finally { host.remove(); }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a"); a.href = url; a.download = nomeArq; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    toast("PDF baixado · salvando na pasta do cliente…", "prog", 0);
+    await criarPasta("", "clientes");
+    await criarPasta("clientes", empresa);
+    const item = await enviarArquivo(`clientes/${empresa}/${nomeArq}`, new File([blob], nomeArq, { type: "application/pdf" }), "replace");
+    const pdfInfo = { id: item.id, webUrl: item.webUrl, nome: nomeArq, em: new Date().toISOString() };
+    const t = totaisProp(pp), resumo = [t.mensal ? brl(t.mensal) + "/mês" : "", t.unico ? brl(t.unico) + " único" : ""].filter(Boolean).join(" + ");
+    await salvarStore(propStore, d => { const x = d.propostas.find(y => y.id === pp.id); if (x) { x.pdf = pdfInfo; if (x.status === "rascunho") { x.status = "emitida"; x.emitidaEm = pdfInfo.em; } } });
+    if (propAtual?.id === pp.id) { propAtual.pdf = pdfInfo; if (propAtual.status === "rascunho") { propAtual.status = "emitida"; propAtual.emitidaEm = pdfInfo.em; } }
+    if (pp.leadId && crm.carregado && leadPorId(pp.leadId)) await alterarLead(pp.leadId, l => {
+      registrar(l, "proposta", `Proposta ${pp.id} (${TIPOS_PROP[pp.tipo]}) · ${resumo}`, { link: item.webUrl });
+      if (ORDEM_ETAPA[l.etapa] < ORDEM_ETAPA.proposta || l.etapa === "perdido") moverEtapa(l, "proposta");
+      l.valor = Math.round(t.mensal || t.unico);
+      const fr = { bpo: ["BPO Financeiro"], fpa: ["FP&A"], int: ["BPO Financeiro", "FP&A"], pla: ["Planejamento Financeiro"], rt: ["Consultoria de Processos"] };
+      l.frentes = [...new Set([...(l.frentes || []), ...(pp.itens || []).flatMap(i => fr[i.serv])])];
+    });
+    toast(`Proposta salva em clientes/${empresa} · CRM atualizado`);
+    if (viewAtual === "atendimento" && rota[0] === "propostas" && rota[1] === pp.id) abrirProposta(pp.id);
+  } catch (e) { toast("Falha ao gerar o PDF: " + e.message, "erro", 7000); }
+}
+
+/* ---- Cliques do módulo de propostas ---- */
+$("atdAcoes").addEventListener("click", e => {
+  const b = e.target.closest("[data-prop]"); if (!b) return;
+  if (b.dataset.prop === "nova") novaProposta();
+  if (b.dataset.prop === "params") abrirParametros();
+});
+$("atdConteudo").addEventListener("click", async e => {
+  const ac = e.target.closest("[data-prop-acao]");
+  if (ac) {
+    e.stopPropagation();
+    const p = props().find(x => x.id === ac.dataset.propId); if (!p) return;
+    if (ac.dataset.propAcao === "abrir") location.hash = "atendimento/propostas/" + p.id;
+    if (ac.dataset.propAcao === "pdf") { ac.disabled = true; await gerarPDFProposta(structuredClone(p)); ac.disabled = false; renderListaPropostas(); }
+    if (ac.dataset.propAcao === "excluir") excluirProposta(p);
+    return;
+  }
+  const li = e.target.closest("[data-abrir-prop]");
+  if (li) { location.hash = "atendimento/propostas/" + li.dataset.abrirProp; return; }
+  const b = e.target.closest("[data-prop]"); if (!b || !propAtual) return;
+  const a = b.dataset.prop, pp = propAtual;
+  if (a === "pdf") { b.disabled = true; await gerarPDFProposta(pp); b.disabled = false; }
+  if (a === "addServ") adicionarServico();
+  if (a === "pdfDiag") { const d = diagDaProposta(pp); if (d) emitirPDF(structuredClone(d)); }
+  if (a === "verDiag") { const d = diagDaProposta(pp); if (d) location.hash = rotaDiag(d.id, tipoDe(d)); }
+  if (a === "verLead") abrirLead(pp.leadId);
+  if (a === "aceita" || a === "recusada") mudarStatusProp(a);
+  if (a === "excluir") excluirProposta(props().find(x => x.id === pp.id) || pp);
 });
 
 /* ================== EDITOR DE DOCUMENTOS (Word .docx) ================== */
