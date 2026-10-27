@@ -580,6 +580,7 @@
   @media(max-width:760px){.lin-tab{grid-template-columns:1fr}.lin-tab .acao{justify-self:end}.opcoes.mz{grid-template-columns:1fr}}
   .botoes-diag{display:flex;gap:8px;flex-wrap:wrap}
   /* Propostas */
+  .campo-lic input{max-width:220px}
   .linha3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
   @media(max-width:600px){.linha3{grid-template-columns:1fr}}
   .ld-ico.prop{background:rgba(19,163,181,.14);color:var(--teal);font-size:.8rem}
@@ -2701,53 +2702,33 @@ async function salvarStore(st, alterar) {
 
 /* ---- Diagnóstico Preliminar BPO: perguntas (base: planilha "BPO Financeiro – Diagnóstico Preliminar") ---- */
 const SPN = ["Sim", "Parcial", "Não"];
+const BANCOS = ["Itaú", "Bradesco", "Banco do Brasil", "Caixa", "Santander", "Sicoob", "Sicredi", "Inter", "Nubank", "BTG Pactual", "C6 Bank", "Outros"];
+const ERP_WL = "ContaAzul (licença pela WL)";
 const DIAG_BPO = [
   { secao: "Perfil da empresa", itens: [
     { id: "faturamento", tipo: "escolha", txt: "Qual é a média do faturamento mensal?", ops: ["Até R$ 50 mil", "R$ 50 a 100 mil", "R$ 100 a 300 mil", "R$ 300 mil a 1 milhão", "Acima de R$ 1 milhão"] },
     { id: "cnpjs", tipo: "numero", txt: "Quantos CNPJs são?" },
-    { id: "nf", tipo: "escolha", txt: "A empresa emite NF?", ops: ["Sim", "Não"] } ] },
-  { secao: "Fluxo de caixa e planejamento", itens: [
-    { id: "fluxo", tipo: "escolha", txt: "A empresa possui fluxo de caixa?", ops: SPN, peso: true },
-    { id: "fluxo_manut", tipo: "texto", txt: "Se sim, como é feita a manutenção dele?", se: r => (r.fluxo?.v || "") !== "Não" },
-    { id: "planejamento", tipo: "escolha", txt: "A empresa possui um planejamento financeiro de até 12 meses e realiza a análise mensal entre previsto e realizado?", ops: SPN, peso: true } ] },
-  { secao: "Contas a receber", itens: [
-    { id: "receber", tipo: "texto", txt: "Explique de maneira simples, como é realizado o controle do contas a receber?" },
-    { id: "credito", tipo: "texto", txt: "Como é feita a análise de crédito?" },
-    { id: "cobranca", tipo: "texto", txt: "Como é realizado o processo de cobrança?" },
-    { id: "boletos", tipo: "numero", txt: "Quantos boletos são emitidos diariamente?" } ] },
-  { secao: "Contas a pagar e bancos", itens: [
-    { id: "agendamento", tipo: "escolha", txt: "Os pagamentos são agendados em sistema próprio ou via internet banking?", ops: ["Sistema próprio / ERP", "Internet banking", "Ambos"] },
-    { id: "banco_agend", tipo: "curto", txt: "Qual banco é usado para os agendamentos?" },
-    { id: "banco_fornec", tipo: "curto", txt: "Os pagamentos a fornecedores são realizados por qual banco?" },
-    { id: "pagamentos", tipo: "numero", txt: "Quantos pagamentos são realizados diariamente?" } ] },
-  { secao: "Sistemas e controles", itens: [
-    { id: "erp", tipo: "curto", txt: "Qual é o sistema ERP da empresa?" },
-    { id: "erp_adiant", tipo: "escolha", txt: "O ERP possui opção de adiantamento?", ops: ["Sim", "Não", "Não sei"], dica: "Requisito para a operação do BPO." },
-    { id: "registro", tipo: "escolha", txt: "Todas as informações estão registradas no sistema oficial da empresa?", ops: SPN, peso: true },
-    { id: "gerencial", tipo: "escolha", txt: "A empresa possui um controle gerencial de 100% da movimentação?", ops: SPN, peso: true },
-    { id: "estoque", tipo: "escolha", txt: "É feito controle de estoque? Se pedirem hoje para valorizar o estoque, você tem as informações?", ops: [...SPN, "Não se aplica"], peso: true },
-    { id: "contabil", tipo: "escolha", txt: "A contabilidade realiza o fechamento mensal apresentando balanço e DRE?", ops: SPN, peso: true },
-    { id: "processos", tipo: "escolha", txt: "Possui os processos-chave mapeados?", ops: SPN, peso: true },
-    { id: "indicadores", tipo: "escolha", txt: "A empresa tem domínio dos seus principais indicadores financeiros?", ops: SPN, peso: true } ] },
+    { id: "quem_fin", tipo: "escolha", txt: "Quem cuida do financeiro hoje?", ops: ["Os próprios sócios", "Equipe interna", "Contabilidade", "Outro BPO"] } ] },
+  { secao: "Situação atual", itens: [
+    { id: "fluxo", tipo: "escolha", ops: SPN, peso: true, rot: "Fluxo de caixa atualizado", txt: "A empresa tem fluxo de caixa atualizado?" },
+    { id: "conciliacao", tipo: "escolha", ops: SPN, peso: true, rot: "Conciliação bancária em dia", txt: "A conciliação bancária está em dia?" },
+    { id: "contabil", tipo: "escolha", ops: SPN, peso: true, rot: "Balanço e DRE contábil mensais", txt: "A contabilidade entrega balanço e DRE todo mês?" },
+    { id: "indicadores", tipo: "escolha", ops: SPN, peso: true, soloBPO: true, rot: "Indicadores financeiros acompanhados", txt: "Os sócios acompanham indicadores financeiros (margem, resultado, caixa)?" } ] },
+  { secao: "Bancos e sistema", itens: [
+    { id: "bancos", tipo: "multi", txt: "Quais bancos a empresa usa?", ops: BANCOS, outro: "Outros" },
+    { id: "erp_uso", tipo: "escolha", txt: "Qual sistema será usado na operação?", ops: [ERP_WL, "ERP próprio do cliente"], dica: "Com o ContaAzul, a licença entra na mensalidade da proposta (valor editável)." },
+    { id: "erp", tipo: "curto", txt: "Qual é o ERP do cliente?", se: r => r.erp_uso?.v === "ERP próprio do cliente" } ] },
   { secao: "Precificação · BPO Financeiro", precif: true, itens: [
     { id: "prc_contas", tipo: "numero", txt: "Quantas contas bancárias serão conciliadas?" },
-    { id: "prc_pagar", tipo: "numero", txt: "Quantas contas são pagas por mês (número de títulos)?", dica: "Se ficar em branco, usamos os pagamentos por dia × 22." },
-    { id: "prc_receber", tipo: "numero", txt: "Quantos recebimentos acontecem por mês?", dica: "Se ficar em branco, usamos os boletos por dia × 22." },
-    { id: "prc_nf_manual", tipo: "numero", txt: "Quantas notas fiscais são emitidas manualmente por mês?" },
-    { id: "prc_nf_auto", tipo: "numero", txt: "Quantas notas fiscais saem automaticamente (integradas ao sistema) por mês?" },
+    { id: "prc_pagar", tipo: "numero", txt: "Quantos pagamentos são feitos por semana?" },
+    { id: "prc_receber", tipo: "numero", txt: "Quantos recebimentos entram por semana?" },
+    { id: "prc_nf_manual", tipo: "numero", txt: "Quantas notas fiscais a WL vai emitir por mês?" },
     { id: "prc_boletos", tipo: "numero", txt: "Quantos boletos a WL vai emitir por mês?" },
-    { id: "prc_adquirentes", tipo: "numero", txt: "Quantas maquininhas / adquirentes de cartão serão conciliadas?", dica: "Coloque 0 se a empresa não recebe por cartão." },
-    { id: "prc_cartoes", tipo: "numero", txt: "Quantos cartões de crédito corporativos terão a fatura conciliada?" },
-    { id: "prc_caixa", tipo: "escolha", ops: ["Sim", "Não"], txt: "Haverá conciliação de caixa físico (dinheiro)?" },
-    { id: "prc_aplic", tipo: "escolha", ops: ["Sim", "Não"], txt: "Há aplicações financeiras a conciliar?" },
-    { id: "prc_contratos", tipo: "numero", txt: "Quantos contratos recorrentes precisam de controle de faturamento?" },
-    { id: "prc_cobranca", tipo: "escolha", ops: ["Sim", "Não"], txt: "A WL fará a cobrança de clientes em atraso?" },
-    { id: "prc_atrasos", tipo: "numero", txt: "Quantos títulos em atraso por mês, em média?", se: r => r.prc_cobranca?.v === "Sim" },
+    { id: "prc_adquirentes", tipo: "numero", txt: "Quantas maquininhas e cartões corporativos serão conciliados?" },
+    { id: "prc_extras", tipo: "multi", txt: "Rotinas extras", ops: ["Conciliação de caixa físico", "Aplicações financeiras", "Contratos recorrentes a faturar"] },
     { id: "prc_cc", tipo: "escolha", ops: ["Não", "Sim, sem rateio", "Sim, com rateio"], txt: "Os lançamentos serão classificados por centro de custo?" },
     { id: "prc_docs", tipo: "escolha", ops: ["Digitais e organizados", "Digitais, mas desorganizados", "Em papel / dispersos"], txt: "Como chegam os documentos (notas, boletos, comprovantes)?" },
-    { id: "prc_reunioes", tipo: "escolha", ops: ["1", "2", "4 (semanal)"], txt: "Quantas reuniões de acompanhamento por mês?" } ] },
-  { secao: "Autoavaliação", itens: [
-    { id: "autoaval", tipo: "escala", txt: "Com base nas suas respostas, como você avalia o nível de gestão da sua empresa?", ops: ["Muito baixo", "Baixo", "Regular", "Bom", "Excelente"] } ] }
+    { id: "prc_reunioes", tipo: "escolha", ops: ["1", "2", "4 (semanal)"], txt: "Quantas reuniões de acompanhamento por mês?" } ] }
 ];
 const PERGUNTAS_BPO = DIAG_BPO.flatMap(s => s.itens);
 const PLANOS_BPO = ["BPO Start", "BPO Performance", "BPO Gestão", "A definir"];
@@ -2759,109 +2740,47 @@ const SETORES_RENTAL = ["Almoxarifado", "Expedição", "Compras", "Manutenção"
 const NA = [...SPN, "Não se aplica"];
 const DIAG_RENTAL = [
   { secao: "Perfil da locadora", itens: [
-    { id: "equipamentos", tipo: "multi", txt: "Quais tipos de equipamento a empresa loca?", ops: ["Equipamentos leves para construção", "Andaimes e escoramentos", "Máquinas pesadas / linha amarela", "Plataformas elevatórias", "Geradores e compressores", "Containers e módulos", "Equipamentos de limpeza", "Veículos", "Equipamentos para eventos", "Outros"] },
-    { id: "unidades", tipo: "numero", txt: "Quantas unidades / filiais a empresa possui?" },
-    { id: "frota", tipo: "escolha", txt: "Qual o tamanho aproximado da frota (itens patrimoniados)?", ops: ["Até 300", "300 a 1.000", "1.000 a 3.000", "3.000 a 10.000", "Acima de 10.000"] },
-    { id: "colaboradores", tipo: "escolha", txt: "Quantos colaboradores a empresa tem?", ops: ["Até 10", "11 a 30", "31 a 80", "81 a 200", "Acima de 200"] },
-    { id: "faturamento", tipo: "escolha", txt: "Qual é a média do faturamento mensal?", ops: ["Até R$ 100 mil", "R$ 100 a 300 mil", "R$ 300 mil a 1 milhão", "R$ 1 a 3 milhões", "Acima de R$ 3 milhões"] },
-    { id: "tempo", tipo: "escolha", txt: "Há quanto tempo a empresa está no mercado?", ops: ["Menos de 3 anos", "3 a 10 anos", "10 a 20 anos", "Mais de 20 anos"] } ] },
-  { secao: "Contexto atual", itens: [
-    { id: "momento", tipo: "texto", txt: "Descreva, em poucas linhas, o momento atual da locadora." },
-    { id: "gatilho", tipo: "texto", txt: "Qual situação, problema ou oportunidade fez a empresa buscar uma consultoria agora?" },
-    { id: "tentativas", tipo: "texto", txt: "O que já foi tentado para resolver isso? O que funcionou parcialmente e o que não funcionou?" },
-    { id: "porque", tipo: "texto", txt: "Na sua visão, por que esse problema ainda não foi resolvido?" } ] },
-  { secao: "Mapa do problema central", itens: [
+    { id: "equipamentos", tipo: "multi", txt: "Quais tipos de equipamento a empresa loca?", ops: ["Equipamentos leves para construção", "Andaimes e escoramentos", "Máquinas pesadas / linha amarela", "Plataformas elevatórias", "Geradores e compressores", "Containers e módulos", "Outros"], outro: "Outros" },
+    { id: "unidades", tipo: "numero", txt: "Quantas unidades / filiais?" },
+    { id: "frota", tipo: "escolha", txt: "Tamanho aproximado da frota (itens patrimoniados)", ops: ["Até 300", "300 a 1.000", "1.000 a 3.000", "3.000 a 10.000", "Acima de 10.000"] },
+    { id: "colaboradores", tipo: "escolha", txt: "Quantos colaboradores?", ops: ["Até 10", "11 a 30", "31 a 80", "81 a 200", "Acima de 200"] },
+    { id: "faturamento", tipo: "escolha", txt: "Faturamento médio mensal", ops: ["Até R$ 100 mil", "R$ 100 a 300 mil", "R$ 300 mil a 1 milhão", "R$ 1 a 3 milhões", "Acima de R$ 3 milhões"] } ] },
+  { secao: "Problema e objetivo", itens: [
     { id: "problema", tipo: "texto", txt: "Qual é o principal problema que precisa ser resolvido?" },
-    { id: "sintomas", tipo: "multi", txt: "Quais sintomas aparecem hoje na operação?", ops: ["Equipamento devolvido sem conferência", "Avarias não cobradas do cliente", "Equipamento parado aguardando manutenção", "Falta de peças na hora do reparo", "Divergência entre estoque físico e sistema", "Compras emergenciais / sem cotação", "Locação sem faturamento ou faturada errada", "Atraso na entrega ao cliente", "Não se sabe onde está cada equipamento", "Retrabalho e reincidência de defeitos", "Informações em planilhas paralelas", "Equipe sem padrão de trabalho"] },
-    { id: "causas", tipo: "texto", txt: "Quais causas você acredita que estão por trás desse problema?" },
-    { id: "noventa", tipo: "texto", txt: "O que acontece se nada mudar nos próximos 90 dias?" },
-    { id: "afeta", tipo: "multi", txt: "O problema afeta:", ops: ["Disponibilidade da frota", "Margem / rentabilidade", "Faturamento", "Caixa", "Experiência do cliente", "Controle patrimonial", "Produtividade da equipe", "Previsibilidade", "Crescimento"] } ] },
+    { id: "sintomas", tipo: "multi", txt: "O que aparece hoje na operação?", ops: ["Avarias não cobradas do cliente", "Equipamento parado aguardando manutenção", "Falta de peças na hora do reparo", "Estoque físico diferente do sistema", "Compras emergenciais / sem cotação", "Locação sem faturamento", "Não se sabe onde está cada equipamento", "Controles em planilhas paralelas"] },
+    { id: "resultado", tipo: "texto", txt: "O que a empresa espera ter ao final da consultoria?" },
+    { id: "setores_prio", tipo: "multi", txt: "Quais setores são prioridade?", ops: SETORES_RENTAL },
+    { id: "urgencia", tipo: "escolha", txt: "Urgência", ops: ["Alta", "Média", "Baixa"] },
+    { id: "decisor", tipo: "curto", txt: "Quem decide sobre o projeto?" } ] },
   { secao: "Almoxarifado", setor: true, itens: [
-    { id: "alm_cadastro", tipo: "escolha", ops: NA, peso: true, rot: "Cadastro padronizado de peças", txt: "Existe cadastro padronizado de peças e materiais no sistema (código, descrição, unidade, aplicação)?" },
-    { id: "alm_mov", tipo: "escolha", ops: NA, peso: true, rot: "Entradas e saídas no sistema", txt: "Todas as entradas e saídas de peças são registradas no sistema no momento em que acontecem?" },
-    { id: "alm_req", tipo: "escolha", ops: NA, peso: true, rot: "Requisição vinculada à OS", txt: "As peças só saem mediante requisição vinculada a uma ordem de serviço da manutenção?" },
-    { id: "alm_inv", tipo: "escolha", ops: NA, peso: true, rot: "Inventário periódico", txt: "É feito inventário periódico (rotativo ou geral) com acerto das divergências?" },
-    { id: "alm_min", tipo: "escolha", ops: NA, peso: true, rot: "Estoque mínimo / reposição", txt: "Existe estoque mínimo e ponto de reposição definidos para os itens críticos?" },
-    { id: "alm_layout", tipo: "escolha", ops: NA, peso: true, rot: "Layout e endereçamento", txt: "O almoxarifado tem layout organizado, com endereçamento e acesso controlado?" },
-    { id: "alm_dor", tipo: "texto", txt: "Principal dor percebida no almoxarifado" } ] },
+    { id: "alm_mov", tipo: "escolha", ops: NA, peso: true, rot: "Entradas e saídas no sistema", txt: "Entradas e saídas de peças são registradas no sistema, vinculadas à OS?" },
+    { id: "alm_inv", tipo: "escolha", ops: NA, peso: true, rot: "Inventário e estoque mínimo", txt: "Há inventário periódico e estoque mínimo para os itens críticos?" } ] },
   { secao: "Expedição", setor: true, itens: [
-    { id: "exp_saida", tipo: "escolha", ops: NA, peso: true, rot: "Checklist de saída", txt: "Os equipamentos saem com checklist de saída (estado, acessórios, horímetro, fotos) assinado?" },
-    { id: "exp_dev", tipo: "escolha", ops: NA, peso: true, rot: "Vistoria na devolução", txt: "Na devolução é feita vistoria com checklist e registro das avarias?" },
-    { id: "exp_avaria", tipo: "escolha", ops: NA, peso: true, rot: "Cobrança de avarias", txt: "As avarias e faltas identificadas na devolução são efetivamente cobradas do cliente?" },
-    { id: "exp_prog", tipo: "escolha", ops: NA, peso: true, rot: "Programação de entregas e retiradas", txt: "Existe programação de entregas e retiradas (agenda, roteiro, veículo e responsável)?" },
-    { id: "exp_status", tipo: "escolha", ops: NA, peso: true, rot: "Status do equipamento no sistema", txt: "O status de cada equipamento (locado, disponível, em manutenção) é atualizado no sistema em tempo real?" },
-    { id: "exp_fat", tipo: "escolha", ops: NA, peso: true, rot: "Movimentação aciona o faturamento", txt: "A saída e a devolução do equipamento acionam automaticamente o faturamento?" },
-    { id: "exp_mov", tipo: "numero", txt: "Quantas movimentações (entregas + retiradas) acontecem em média por dia?" },
-    { id: "exp_dor", tipo: "texto", txt: "Principal dor percebida na expedição" } ] },
+    { id: "exp_check", tipo: "escolha", ops: NA, peso: true, rot: "Checklist de saída e devolução", txt: "Saída e devolução têm checklist, com registro e cobrança das avarias?" },
+    { id: "exp_status", tipo: "escolha", ops: NA, peso: true, rot: "Status da frota no sistema", txt: "O status de cada equipamento (locado, disponível, em manutenção) está correto no sistema?" } ] },
   { secao: "Compras", setor: true, itens: [
-    { id: "cmp_req", tipo: "escolha", ops: NA, peso: true, rot: "Requisição e aprovação formais", txt: "Existe processo formal de requisição e aprovação de compras?" },
-    { id: "cmp_alcada", tipo: "escolha", ops: NA, peso: true, rot: "Alçadas de aprovação", txt: "Há alçadas de aprovação por valor ou tipo de compra?" },
-    { id: "cmp_cot", tipo: "escolha", ops: NA, peso: true, rot: "Cotações registradas", txt: "São feitas cotações com mais de um fornecedor, registradas no sistema?" },
-    { id: "cmp_forn", tipo: "escolha", ops: NA, peso: true, rot: "Cadastro e avaliação de fornecedores", txt: "Há cadastro e avaliação de fornecedores (prazo, qualidade, preço)?" },
-    { id: "cmp_plan", tipo: "escolha", ops: NA, peso: true, rot: "Compras planejadas", txt: "As compras são planejadas com base em consumo e estoque mínimo (e não emergenciais)?" },
-    { id: "cmp_receb", tipo: "escolha", ops: NA, peso: true, rot: "Conferência pedido × NF", txt: "No recebimento, a mercadoria é conferida contra o pedido de compra e a nota fiscal?" },
-    { id: "cmp_dor", tipo: "texto", txt: "Principal dor percebida em compras" } ] },
+    { id: "cmp_req", tipo: "escolha", ops: NA, peso: true, rot: "Requisição e aprovação com alçadas", txt: "Existe requisição e aprovação formal de compras, com alçadas?" },
+    { id: "cmp_cot", tipo: "escolha", ops: NA, peso: true, rot: "Cotações registradas", txt: "As compras têm cotação registrada com mais de um fornecedor?" } ] },
   { secao: "Manutenção", setor: true, itens: [
-    { id: "man_os", tipo: "escolha", ops: NA, peso: true, rot: "Ordem de serviço para toda manutenção", txt: "Toda manutenção é aberta e encerrada com ordem de serviço (OS) no sistema?" },
-    { id: "man_prev", tipo: "escolha", ops: NA, peso: true, rot: "Plano de preventiva", txt: "Existe plano de manutenção preventiva por equipamento (por horímetro ou tempo)?" },
-    { id: "man_custo", tipo: "escolha", ops: NA, peso: true, rot: "Custo de manutenção por equipamento", txt: "O custo de manutenção (peças + mão de obra) é apurado por equipamento?" },
-    { id: "man_parado", tipo: "escolha", ops: NA, peso: true, rot: "Controle de equipamento parado", txt: "Há controle do tempo de equipamento parado (aguardando manutenção ou peça)?" },
-    { id: "man_tec", tipo: "escolha", ops: NA, peso: true, rot: "Produtividade e reincidência", txt: "Existe controle de produtividade dos técnicos e de reincidência de defeitos?" },
-    { id: "man_lib", tipo: "escolha", ops: NA, peso: true, rot: "Liberação formal para locação", txt: "O equipamento só volta a ficar disponível após liberação formal (checklist) da manutenção?" },
-    { id: "man_tecnicos", tipo: "numero", txt: "Quantos técnicos trabalham na manutenção?" },
-    { id: "man_fila", tipo: "numero", txt: "Quantos equipamentos estão aguardando manutenção hoje (aproximadamente)?" },
-    { id: "man_dor", tipo: "texto", txt: "Principal dor percebida na manutenção" } ] },
+    { id: "man_os", tipo: "escolha", ops: NA, peso: true, rot: "Ordem de serviço para toda manutenção", txt: "Toda manutenção é aberta e encerrada com OS no sistema?" },
+    { id: "man_prev", tipo: "escolha", ops: NA, peso: true, rot: "Plano de preventiva", txt: "Existe plano de manutenção preventiva por equipamento?" },
+    { id: "man_custo", tipo: "escolha", ops: NA, peso: true, rot: "Custo e tempo parado por equipamento", txt: "O custo de manutenção e o tempo parado são medidos por equipamento?" } ] },
   { secao: "Financeiro", setor: true, itens: [
-    { id: "fin_fat", tipo: "escolha", ops: NA, peso: true, rot: "Faturamento sem perdas", txt: "O faturamento das locações (medições, renovações, devoluções) é feito no prazo e sem perdas?" },
-    { id: "fin_receber", tipo: "escolha", ops: NA, peso: true, rot: "Contas a receber e cobrança", txt: "Existe controle de contas a receber com régua de cobrança?" },
-    { id: "fin_pagar", tipo: "escolha", ops: NA, peso: true, rot: "Contas a pagar e conciliação", txt: "O contas a pagar é organizado, com agendamento e conciliação bancária?" },
-    { id: "fin_fluxo", tipo: "escolha", ops: NA, peso: true, rot: "Fluxo de caixa projetado", txt: "O fluxo de caixa é atualizado e projetado para as próximas semanas?" },
-    { id: "fin_rent", tipo: "escolha", ops: NA, peso: true, rot: "Rentabilidade por equipamento", txt: "A empresa conhece a rentabilidade por equipamento ou família (receita × custo)?" },
-    { id: "fin_dre", tipo: "escolha", ops: NA, peso: true, rot: "DRE gerencial mensal", txt: "Existe DRE gerencial mensal analisado pela gestão?" },
-    { id: "fin_dor", tipo: "texto", txt: "Principal dor percebida no financeiro" } ] },
+    { id: "fin_fat", tipo: "escolha", ops: NA, peso: true, rot: "Faturamento sem perdas", txt: "Tudo o que é locado é faturado no prazo, sem perdas?" },
+    { id: "fin_rent", tipo: "escolha", ops: NA, peso: true, rot: "Rentabilidade por equipamento", txt: "A empresa conhece a rentabilidade por equipamento ou família?" } ] },
   { secao: "Administrativo", setor: true, itens: [
-    { id: "adm_contrato", tipo: "escolha", ops: NA, peso: true, rot: "Contrato assinado antes da saída", txt: "Os contratos de locação são padronizados e assinados antes da saída do equipamento?" },
-    { id: "adm_credito", tipo: "escolha", ops: NA, peso: true, rot: "Cadastro e análise de crédito", txt: "Os clientes passam por cadastro completo e análise de crédito antes de locar?" },
-    { id: "adm_patrim", tipo: "escolha", ops: NA, peso: true, rot: "Controle patrimonial", txt: "Existe controle patrimonial dos ativos (nº de patrimônio, documentação, seguro, depreciação)?" },
-    { id: "adm_pop", tipo: "escolha", ops: NA, peso: true, rot: "Processos documentados (POPs)", txt: "Os processos e responsabilidades estão documentados (fluxos, POPs, manuais)?" },
-    { id: "adm_ind", tipo: "escolha", ops: NA, peso: true, rot: "Indicadores operacionais", txt: "Indicadores como taxa de utilização da frota e tempo de manutenção são acompanhados?" },
-    { id: "adm_dor", tipo: "texto", txt: "Principal dor percebida no administrativo" } ] },
-  { secao: "Sistema e equipe", setor: true, rotSetor: "Sistema e equipe", itens: [
-    { id: "sis_nome", tipo: "curto", txt: "Qual sistema de gestão a empresa utiliza?" },
-    { id: "sis_tipo", tipo: "escolha", txt: "Que tipo de sistema é?", ops: ["ERP específico para locação", "ERP genérico", "Planilhas", "Nenhum"] },
-    { id: "sis_modulos", tipo: "multi", txt: "Quais setores usam o sistema hoje?", ops: SETORES_RENTAL },
-    { id: "sis_paralelo", tipo: "escolha", ops: NA, peso: true, rot: "Operação sem planilhas paralelas", txt: "A operação roda inteira no sistema, sem controles paralelos em planilha?" },
-    { id: "sis_param", tipo: "escolha", ops: NA, peso: true, rot: "Sistema bem parametrizado", txt: "O sistema está bem configurado (cadastros, tabelas de preço, permissões, integrações entre setores)?" },
-    { id: "sis_trein", tipo: "escolha", ops: NA, peso: true, rot: "Equipe treinada no sistema", txt: "A equipe foi treinada e usa o sistema corretamente?" },
-    { id: "sis_novos", tipo: "escolha", ops: NA, peso: true, rot: "Integração de novos colaboradores", txt: "Existe treinamento estruturado para novos colaboradores?" },
-    { id: "sis_satisf", tipo: "escala", txt: "Qual o nível de satisfação com o sistema atual?", ops: ["Muito baixo", "Baixo", "Regular", "Bom", "Excelente"] } ] },
-  { secao: "Objetivo desejado", itens: [
-    { id: "resultado", tipo: "texto", txt: "Qual é o resultado principal que a empresa deseja alcançar com esta consultoria?" },
-    { id: "ideal", tipo: "texto", txt: "Qual seria o cenário ideal ao final do projeto?" },
-    { id: "prazo", tipo: "curto", txt: "Em qual prazo esse resultado precisa acontecer?" },
-    { id: "sucesso", tipo: "texto", txt: "Como vocês saberão, de forma prática, que a consultoria foi bem-sucedida?" },
-    { id: "indicadores", tipo: "multi", txt: "Quais indicadores precisam melhorar para o projeto valer a pena?", ops: ["Taxa de utilização da frota", "Disponibilidade de equipamentos", "Tempo de manutenção", "Custo de manutenção por equipamento", "Acuracidade do estoque", "Custo das compras", "Prazo de entrega ao cliente", "Avarias recuperadas", "Faturamento sem perdas", "Inadimplência", "Margem / rentabilidade", "Produtividade da equipe", "Previsibilidade de caixa"] },
-    { id: "setores_prio", tipo: "multi", txt: "Quais setores são prioridade para a empresa?", ops: SETORES_RENTAL },
-    { id: "servicos", tipo: "multi", txt: "O que a empresa espera da consultoria?", ops: ["Configuração do sistema", "Desenho e redesenho de processos", "Procedimentos (POPs) e manuais", "Treinamento da equipe", "Indicadores e painel de gestão", "Acompanhamento pós-implantação"] } ] },
-  { secao: "Urgência e prioridade", itens: [
-    { id: "agora", tipo: "texto", txt: "Por que este projeto precisa acontecer agora?" },
-    { id: "pressao", tipo: "texto", txt: "Existe alguma data, meta, troca de sistema, expansão ou pressão externa relacionada a este projeto?" },
-    { id: "emjogo", tipo: "texto", txt: "O que está em jogo se esse problema continuar aberto?" },
-    { id: "urgencia", tipo: "escolha", txt: "Nível de urgência", ops: ["Alta", "Média", "Baixa", "Ainda não há prioridade clara"] },
-    { id: "urg_sinais", tipo: "multi", txt: "Sinais de urgência", ops: ["Há prazo externo", "Há impacto financeiro imediato", "Há impacto na reputação", "Há equipe aguardando decisão", "Implantação / troca de sistema em andamento"] } ] },
-  { secao: "Capacidade de execução", itens: [
-    { id: "decisor", tipo: "curto", txt: "Quem decide sobre este projeto?" },
-    { id: "executor", tipo: "texto", txt: "Quem executará as ações recomendadas (responsáveis por setor)?" },
-    { id: "recursos", tipo: "texto", txt: "Quais recursos, acessos ou pessoas estarão disponíveis durante o projeto?" },
-    { id: "limites", tipo: "texto", txt: "Existe alguma limitação de orçamento, equipe, tempo, tecnologia ou autoridade?" } ] },
+    { id: "adm_contrato", tipo: "escolha", ops: NA, peso: true, rot: "Contrato assinado antes da saída", txt: "O contrato de locação é assinado antes da saída do equipamento?" },
+    { id: "adm_pop", tipo: "escolha", ops: NA, peso: true, rot: "Processos documentados (POPs)", txt: "Os processos estão documentados (fluxos, POPs, manuais)?" } ] },
+  { secao: "Sistema e equipe", setor: true, itens: [
+    { id: "sis_nome", tipo: "curto", txt: "Qual sistema de gestão a empresa usa?" },
+    { id: "sis_paralelo", tipo: "escolha", ops: NA, peso: true, rot: "Operação sem planilhas paralelas", txt: "A operação roda no sistema, sem controles paralelos em planilha?" },
+    { id: "sis_trein", tipo: "escolha", ops: NA, peso: true, rot: "Equipe treinada no sistema", txt: "A equipe foi treinada e usa o sistema corretamente?" } ] },
   { secao: "Precificação · Consultoria", precif: true, itens: [
     { id: "prc_rt_intens", tipo: "escolha", ops: ["A — Remota", "B — 1x/semana × 2h", "C — 1x/semana × 3h", "D — 2x/semana × 2h", "E — 2x/semana × 3h"], txt: "Intensidade de presença da WL" },
-    { id: "prc_rt_meses", tipo: "numero", txt: "Prazo desejado para a consultoria (meses)", dica: "Deixe em branco para o sistema calcular pelo esforço." },
+    { id: "prc_rt_meses", tipo: "numero", txt: "Prazo desejado (meses)", dica: "Em branco, o sistema calcula pelo esforço." },
     { id: "prc_rt_sistema", tipo: "escolha", ops: ["Sim", "Não"], txt: "Haverá configuração / parametrização do sistema?" },
     { id: "prc_rt_exec", tipo: "escolha", ops: ["Não", "Pontual", "Recorrente"], txt: "Execução assistida (WL executa temporariamente quando falta responsável interno)" },
     { id: "prc_rt_treinar", tipo: "numero", txt: "Quantas pessoas serão treinadas?" },
-    { id: "prc_rt_processo", tipo: "escolha", ops: ["Existe e funciona bem", "Existe, mas é ineficiente", "Não existe processo definido"], txt: "De forma geral, os processos dos setores do projeto:" },
-    { id: "prc_rt_gestor", tipo: "escolha", ops: ["Baixa", "Média", "Alta"], txt: "Dependência do gestor / dono para a operação andar" },
     { id: "prc_rt_capac", tipo: "escolha", ops: ["Boa", "Parcial", "Baixa"], txt: "Capacidade interna da equipe para executar as mudanças" } ] }
 ];
 const PERGUNTAS_RENTAL = DIAG_RENTAL.flatMap(s => s.itens);
@@ -2898,71 +2817,39 @@ const SUGESTAO_SETOR = {
 };
 /* ---- Diagnóstico de FP&A (criado do zero) — usado sozinho ou mesclado ao Diagnóstico BPO ---- */
 const qBPO = id => DIAG_BPO.flatMap(s => s.itens).find(q => q.id === id);
-const SEC_AUTOAVAL = DIAG_BPO[DIAG_BPO.length - 1];
+const FONTE_WL = "BPO WL Expertise";
 const DIAG_FPA = [
   /* só no FP&A avulso: no BPO + FP&A essas informações já vêm do bloco de BPO */
-  { secao: "Base financeira", soloFPA: true, setor: true, itens: [
+  { secao: "Base financeira", soloFPA: true, setor: true, rotSetor: "Base", itens: [
     qBPO("faturamento"), qBPO("cnpjs"),
-    { id: "fpa_quem", tipo: "escolha", txt: "Quem executa a rotina financeira hoje (pagar, receber, conciliar)?", ops: ["Equipe financeira interna", "BPO terceirizado", "Contabilidade", "Os próprios sócios", "Não há rotina definida"] },
-    qBPO("erp"),
-    { id: "fpa_conc", tipo: "escolha", ops: SPN, peso: true, rot: "Conciliação bancária em dia", txt: "A conciliação bancária é feita com frequência e está em dia?" },
-    { ...qBPO("fluxo"), rot: "Fluxo de caixa realizado" },
-    { ...qBPO("registro"), rot: "Movimentação 100% no sistema" },
-    { ...qBPO("contabil"), rot: "Balanço e DRE contábil mensais" },
-    { id: "prc_fpa_dados", tipo: "escolha", ops: ["Exportação estruturada do sistema", "Planilhas organizadas", "Planilhas desorganizadas / dados brutos", "Precisam ser levantados do zero"], txt: "Como os dados financeiros vão chegar para a WL?", dica: "Pesa no preço: dados brutos exigem tratamento antes do relatório." } ] },
-  { secao: "Contexto e objetivos", itens: [
-    { id: "fpa_motivo", tipo: "multi", txt: "O que motivou a busca por FP&A agora?", ops: ["Falta de visibilidade do resultado", "Decisões tomadas sem números", "Vende bem, mas o caixa não acompanha", "Margens caindo", "Crescimento acelerado", "Expansão (filial, produto, mercado)", "Captação, crédito ou investidor", "Organizar governança / sociedade"] },
-    { id: "fpa_decisoes", tipo: "texto", txt: "Quais decisões a empresa precisa tomar nos próximos 12 meses que dependem de números?" },
-    { id: "fpa_usuarios", tipo: "multi", txt: "Quem vai usar as informações gerenciais?", ops: ["Sócios", "Diretoria", "Conselho", "Gestores de área", "Bancos / investidores"] },
-    { id: "fpa_meta", tipo: "texto", txt: "Existe uma meta de resultado para o ano (faturamento, margem, lucro, caixa)? Qual?" } ] },
-  { secao: "Dados e estrutura gerencial", setor: true, rotSetor: "Dados", itens: [
-    { id: "fpa_dre", tipo: "escolha", ops: SPN, peso: true, rot: "Plano de contas / DRE gerencial", txt: "Existe plano de contas gerencial que gera uma DRE gerencial confiável?" },
-    { id: "fpa_cc", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Centros de custo / unidades", txt: "Os centros de custo ou unidades de negócio estão definidos e são usados nos lançamentos?" },
-    { id: "fpa_comp", tipo: "escolha", ops: SPN, peso: true, rot: "Competência separada do caixa", txt: "O resultado é apurado por competência, separado da visão de caixa?" },
-    { id: "fpa_dadosop", tipo: "escolha", ops: SPN, peso: true, rot: "Dados de vendas e operação acessíveis", txt: "Os dados de vendas e operação (volumes, clientes, produtos, serviços) são acessíveis e confiáveis?" },
-    { id: "fpa_fech", tipo: "escolha", txt: "Em quanto tempo os números do mês ficam prontos?", ops: ["Até o 5º dia útil", "Até o 10º dia útil", "Depois do 10º dia útil", "Não existe fechamento gerencial"] },
-    { id: "fpa_onde", tipo: "escolha", txt: "Onde ficam os relatórios gerenciais hoje?", ops: ["No ERP", "Em ferramenta de BI (Power BI etc.)", "Em planilhas", "Não existem"] } ] },
-  { secao: "Orçamento e planejamento", setor: true, rotSetor: "Orçamento", itens: [
-    { id: "fpa_orc", tipo: "escolha", ops: SPN, peso: true, rot: "Orçamento anual", txt: "Existe orçamento anual de receitas, custos, despesas e investimentos?" },
-    { id: "fpa_orcgest", tipo: "escolha", ops: SPN, peso: true, rot: "Orçamento construído com os gestores", txt: "O orçamento é construído com os gestores, por área ou centro de custo?" },
-    { id: "fpa_oxr", tipo: "escolha", ops: SPN, peso: true, rot: "Orçado × realizado mensal", txt: "Todo mês é feita a comparação orçado × realizado, com explicação dos desvios?" },
-    { id: "fpa_forecast", tipo: "escolha", ops: SPN, peso: true, rot: "Forecast / revisão da projeção", txt: "A projeção do ano é revisada periodicamente (forecast)?" },
-    { id: "fpa_fcproj", tipo: "escolha", ops: SPN, peso: true, rot: "Fluxo de caixa projetado 12 meses", txt: "Existe fluxo de caixa projetado para os próximos 12 meses?" },
-    { id: "fpa_capex", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Plano de investimentos", txt: "Os investimentos (CAPEX) são planejados com análise de retorno?" } ] },
-  { secao: "Indicadores e análise de resultado", setor: true, rotSetor: "Indicadores", itens: [
-    { id: "fpa_mc", tipo: "escolha", ops: SPN, peso: true, rot: "Margem de contribuição", txt: "A empresa conhece a margem de contribuição por produto, serviço ou cliente?" },
-    { id: "fpa_pe", tipo: "escolha", ops: SPN, peso: true, rot: "Ponto de equilíbrio", txt: "O ponto de equilíbrio (quanto precisa faturar para não ter prejuízo) é conhecido?" },
-    { id: "fpa_kpi", tipo: "escolha", ops: SPN, peso: true, rot: "Painel de KPIs mensal", txt: "Existe um painel de indicadores definido e atualizado todo mês?" },
-    { id: "fpa_custos", tipo: "escolha", ops: SPN, peso: true, rot: "Análise de custos e despesas", txt: "Custos e despesas são analisados por natureza e tendência (não só pagos)?" },
-    { id: "fpa_giro", tipo: "escolha", ops: SPN, peso: true, rot: "Capital de giro (PMR, PMP, ciclo)", txt: "O capital de giro é acompanhado (prazo médio de recebimento, de pagamento e ciclo de caixa)?" },
-    { id: "fpa_kpis", tipo: "multi", txt: "Quais indicadores são acompanhados hoje?", ops: ["Faturamento", "Margem bruta", "Margem de contribuição", "EBITDA", "Lucro líquido", "Ticket médio", "Inadimplência", "Ciclo de caixa", "Endividamento", "Indicadores operacionais", "Nenhum de forma regular"] } ] },
-  { secao: "Cenários e decisões", setor: true, rotSetor: "Cenários", itens: [
-    { id: "fpa_cen", tipo: "escolha", ops: SPN, peso: true, rot: "Simulação de cenários", txt: "Antes de decisões importantes, a empresa simula cenários (otimista, realista, pessimista)?" },
-    { id: "fpa_viab", tipo: "escolha", ops: SPN, peso: true, rot: "Análise de viabilidade", txt: "Novos projetos, contratações e expansões passam por análise de viabilidade?" },
-    { id: "fpa_preco", tipo: "escolha", ops: SPN, peso: true, rot: "Precificação por custo e margem", txt: "A precificação considera custos e margem-alvo?" },
-    { id: "fpa_divida", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Endividamento acompanhado", txt: "O endividamento é acompanhado (custo, prazo e capacidade de pagamento)?" } ] },
-  { secao: "Governança e rotina de gestão", setor: true, rotSetor: "Governança", itens: [
-    { id: "fpa_reuniao", tipo: "escolha", ops: SPN, peso: true, rot: "Reunião mensal de resultados", txt: "Existe reunião mensal de resultados com sócios e gestores?" },
-    { id: "fpa_metas", tipo: "escolha", ops: SPN, peso: true, rot: "Metas por área", txt: "As metas são desdobradas por área e acompanhadas?" },
-    { id: "fpa_planos", tipo: "escolha", ops: SPN, peso: true, rot: "Planos de ação cobrados", txt: "As decisões viram planos de ação com responsável e prazo, e são cobradas?" },
-    { id: "fpa_dono", tipo: "curto", txt: "Quem é (ou será) o responsável interno pela gestão dos números?" } ] },
-  { secao: "Expectativas do serviço de FP&A", itens: [
-    { id: "fpa_entregas", tipo: "multi", txt: "Quais entregas são esperadas?", ops: ["DRE gerencial mensal", "Indicadores essenciais", "Fluxo de caixa projetado", "Orçamento anual", "Orçado × realizado", "Forecast (revisão da projeção)", "Dashboard de indicadores", "Análise de rentabilidade e precificação", "Cenários e simulações", "Acompanhamento de metas por área", "Relatório para bancos / investidores"] },
-    { id: "fpa_freq", tipo: "escolha", txt: "Com que frequência a empresa quer as reuniões de resultado?", ops: ["Mensal", "Quinzenal", "Semanal", "Trimestral"] },
-    { id: "fpa_formato", tipo: "escolha", txt: "Formato preferido para os resultados", ops: ["Dashboard online", "Relatório em PDF", "Apresentação em reunião", "Todos"] },
-    { id: "fpa_prazo", tipo: "curto", txt: "Para quando a empresa precisa do primeiro relatório gerencial?" } ] },
+    { id: "prc_fpa_fonte", tipo: "escolha", txt: "De onde vêm os dados financeiros?", ops: [FONTE_WL, "Equipe própria do cliente", "Terceiros (outro BPO ou contabilidade)"], dica: "Pesa no preço: com o BPO da WL o dado já chega no padrão dos relatórios." },
+    { id: "prc_fpa_dados", tipo: "escolha", txt: "Em que estado os dados chegam?", ops: ["Estruturados (exportação do sistema)", "Planilhas organizadas", "Dados brutos / desorganizados"], se: r => !!r.prc_fpa_fonte?.v && r.prc_fpa_fonte.v !== FONTE_WL },
+    { ...qBPO("fluxo") }, { ...qBPO("conciliacao") } ] },
+  { secao: "Objetivos", itens: [
+    { id: "fpa_motivo", tipo: "multi", txt: "O que motivou a busca por FP&A agora?", ops: ["Falta de visibilidade do resultado", "Decisões tomadas sem números", "Vende bem, mas o caixa não acompanha", "Margens caindo", "Crescimento ou expansão", "Captação, crédito ou investidor"] },
+    { id: "fpa_meta", tipo: "texto", txt: "Qual a meta da empresa para os próximos 12 meses (faturamento, margem, lucro ou caixa)?" } ] },
+  { secao: "Estrutura gerencial", setor: true, rotSetor: "Estrutura", itens: [
+    { id: "fpa_dre", tipo: "escolha", ops: SPN, peso: true, rot: "DRE gerencial confiável", txt: "Existe DRE gerencial confiável todo mês?" },
+    { id: "fpa_fcproj", tipo: "escolha", ops: SPN, peso: true, rot: "Fluxo de caixa projetado 12 meses", txt: "Existe fluxo de caixa projetado para os próximos 12 meses?" } ] },
+  { secao: "Análise e gestão", setor: true, rotSetor: "Análise", itens: [
+    { id: "fpa_orc", tipo: "escolha", ops: SPN, peso: true, rot: "Orçamento anual", txt: "Existe orçamento anual?" },
+    { id: "fpa_oxr", tipo: "escolha", ops: SPN, peso: true, rot: "Orçado × realizado mensal", txt: "Todo mês é feita a comparação orçado × realizado?" },
+    { id: "fpa_kpi", tipo: "escolha", ops: SPN, peso: true, rot: "Painel de indicadores", txt: "Existe um painel de indicadores atualizado todo mês?" },
+    { id: "fpa_mc", tipo: "escolha", ops: SPN, peso: true, rot: "Margem por produto / serviço", txt: "A empresa conhece a margem por produto, serviço ou cliente?" },
+    { id: "fpa_reuniao", tipo: "escolha", ops: SPN, peso: true, rot: "Reunião mensal de resultados", txt: "Existe reunião mensal de resultados com os sócios?" } ] },
+  { secao: "Expectativas do serviço", itens: [
+    { id: "fpa_entregas", tipo: "multi", txt: "Quais entregas são esperadas?", ops: ["DRE gerencial mensal", "Fluxo de caixa projetado", "Orçamento anual", "Orçado × realizado", "Dashboard de indicadores", "Análise de rentabilidade e precificação", "Cenários e simulações", "Acompanhamento de metas por área"] },
+    { id: "fpa_freq", tipo: "escolha", txt: "Com que frequência as reuniões de resultado?", ops: ["Mensal", "Quinzenal", "Semanal"] } ] },
   { secao: "Precificação · FP&A", precif: true, itens: [
-    { id: "prc_fpa_cc", tipo: "numero", txt: "Quantos centros de custo / áreas terão análise própria?", dica: "Coloque 0 se não houver divisão por centro de custo." },
-    { id: "prc_fpa_unidades", tipo: "numero", txt: "Quantas unidades de negócio ou filiais terão resultado separado?" },
-    { id: "prc_fpa_fontes", tipo: "numero", txt: "De quantas fontes vêm os dados (ERP, planilhas, bancos, outros sistemas)?" } ] }
+    { id: "prc_fpa_cc", tipo: "numero", txt: "Quantos centros de custo / áreas terão análise própria?", dica: "0 se não houver divisão por centro de custo." },
+    { id: "prc_fpa_unidades", tipo: "numero", txt: "Quantas unidades ou filiais terão resultado separado?" } ] }
 ];
-const SECOES_FPA = [...DIAG_FPA, SEC_AUTOAVAL];
+const SECOES_FPA = DIAG_FPA;
 const PERGUNTAS_FPA = SECOES_FPA.flatMap(s => s.itens);
-/* BPO + FP&A: bloco de BPO (sem as perguntas que o FP&A aprofunda) + FP&A sem a base financeira + autoavaliação */
+/* BPO + FP&A: bloco de BPO (sem as perguntas que o FP&A aprofunda) + FP&A sem a base financeira */
 const SECOES_COMBO = [
-  ...DIAG_BPO.slice(0, -1).map(s => ({ ...s, grupo: "BPO Financeiro", itens: s.itens.filter(q => !["planejamento", "indicadores"].includes(q.id)) })),
-  ...DIAG_FPA.filter(s => !s.soloFPA).map(s => ({ ...s, grupo: "FP&A" })),
-  SEC_AUTOAVAL
+  ...DIAG_BPO.map(s => ({ ...s, grupo: "BPO Financeiro", itens: s.itens.filter(q => !q.soloBPO) })),
+  ...DIAG_FPA.filter(s => !s.soloFPA).map(s => ({ ...s, grupo: "FP&A" }))
 ];
 const PERGUNTAS_COMBO = SECOES_COMBO.flatMap(s => s.itens);
 const PLANOS_FPA = ["FP&A Start", "FP&A Performance", "FP&A Gestão", "A definir"];
@@ -2983,50 +2870,24 @@ function nivelFPA(d) {
 /* ---- Diagnóstico de Planejamento Financeiro (criado do zero) — sozinho ou dentro da Gestão Financeira ---- */
 const qFPA = id => DIAG_FPA.flatMap(s => s.itens).find(q => q.id === id);
 const DIAG_PLA = [
-  { ...DIAG_FPA[0], soloPla: true },
+  { secao: "Base financeira", soloPla: true, setor: true, rotSetor: "Base", itens: [qBPO("faturamento"), qBPO("cnpjs"), { ...qBPO("fluxo") }, { ...qBPO("contabil") }] },
   { secao: "Objetivos e horizonte", itens: [
-    { id: "pla_objetivos", tipo: "multi", txt: "Quais objetivos o planejamento precisa sustentar?", ops: ["Crescer o faturamento", "Melhorar a margem", "Organizar e folgar o caixa", "Expandir (nova unidade, produto ou mercado)", "Investir em estrutura ou equipamentos", "Reduzir o endividamento", "Captar crédito ou investidor", "Aumentar a distribuição aos sócios", "Preparar venda ou sucessão"] },
+    { id: "pla_objetivos", tipo: "multi", txt: "O que o planejamento precisa sustentar?", ops: ["Crescer o faturamento", "Melhorar a margem", "Folgar o caixa", "Expandir (unidade, produto ou mercado)", "Investir em estrutura", "Reduzir dívidas", "Captar crédito ou investidor"] },
     { id: "pla_horizonte", tipo: "escolha", txt: "Qual o horizonte do planejamento?", ops: ["12 meses", "2 a 3 anos", "5 anos ou mais"] },
-    { id: "pla_meta", tipo: "texto", txt: "Onde a empresa quer estar ao final desse período (faturamento, margem, caixa, estrutura)?" },
-    { id: "pla_projetos", tipo: "texto", txt: "Há projetos ou investimentos previstos? Qual o valor estimado e quando?" } ] },
-  { secao: "Estratégia e orçamento", setor: true, rotSetor: "Estratégia", itens: [
-    { id: "pla_estrat", tipo: "escolha", ops: SPN, peso: true, rot: "Planejamento estratégico com metas", txt: "Existe planejamento estratégico com metas de médio e longo prazo?" },
-    { ...qFPA("fpa_orc") },
-    { id: "pla_premissas", tipo: "escolha", ops: SPN, peso: true, rot: "Premissas documentadas", txt: "As projeções partem de premissas documentadas (crescimento, preço, inflação, custos, contratações)?" },
-    { id: "pla_receita", tipo: "escolha", ops: SPN, peso: true, rot: "Projeção de receita com sazonalidade", txt: "A projeção de receitas considera sazonalidade, carteira de clientes e capacidade de atender?" },
-    { id: "pla_pessoas", tipo: "escolha", ops: SPN, peso: true, rot: "Pessoas no orçamento", txt: "Contratações e custos com pessoas são planejados no orçamento?" } ] },
-  { secao: "Caixa e capital de giro", setor: true, rotSetor: "Caixa", itens: [
-    { ...qFPA("fpa_fcproj") },
-    { id: "pla_longo", tipo: "escolha", ops: SPN, peso: true, rot: "Projeção de 2 a 3 anos", txt: "Existe projeção de caixa e resultado além de 12 meses (2 a 3 anos)?" },
-    { id: "pla_reserva", tipo: "escolha", ops: SPN, peso: true, rot: "Reserva de caixa definida", txt: "Existe uma reserva de caixa mínima definida e respeitada?" },
-    { id: "pla_ncg", tipo: "escolha", ops: SPN, peso: true, rot: "Necessidade de capital de giro", txt: "A necessidade de capital de giro é calculada antes de crescer ou fechar contratos grandes?" },
-    { id: "pla_aperto", tipo: "escolha", ops: SPN, peso: true, rot: "Meses de aperto antecipados", txt: "Os meses de aperto de caixa são conhecidos e planejados com antecedência?" },
-    { id: "pla_antecip", tipo: "escolha", txt: "Com que frequência a empresa recorre a antecipação de recebíveis, cheque especial ou capital de giro bancário?", ops: ["Todo mês", "Às vezes", "Raramente", "Nunca"] } ] },
-  { secao: "Investimentos e estrutura de capital", setor: true, rotSetor: "Investimentos", itens: [
-    { ...qFPA("fpa_capex") }, { ...qFPA("fpa_viab") }, { ...qFPA("fpa_divida") },
-    { id: "pla_credito", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Capacidade de endividamento conhecida", txt: "A empresa sabe quanto pode se endividar com segurança e qual linha de crédito é mais adequada?" },
-    { id: "pla_divtotal", tipo: "escolha", txt: "Endividamento atual em relação ao faturamento mensal", ops: ["Sem dívidas", "Até 1 faturamento", "1 a 3 faturamentos", "Acima de 3 faturamentos", "Não sabe"] } ] },
-  { secao: "Cenários e riscos", setor: true, rotSetor: "Riscos", itens: [
-    { ...qFPA("fpa_cen") },
-    { id: "pla_conting", tipo: "escolha", ops: SPN, peso: true, rot: "Plano de contingência", txt: "Existe plano de contingência caso o faturamento caia 20% ou um cliente grande saia?" },
-    { id: "pla_concentr", tipo: "escolha", txt: "Quanto do faturamento vem dos 3 maiores clientes?", ops: ["Até 20%", "20% a 50%", "Acima de 50%", "Não sabe"] },
-    { id: "pla_riscos", tipo: "multi", txt: "Quais riscos mais preocupam?", ops: ["Dependência de poucos clientes", "Inadimplência", "Aumento de custos", "Juros", "Sazonalidade", "Concorrência", "Perda de pessoas-chave", "Mudanças de mercado ou regulação"] } ] },
-  { secao: "Sócios e destino do resultado", setor: true, rotSetor: "Sócios", itens: [
-    { id: "pla_pfpj", tipo: "escolha", ops: SPN, peso: true, rot: "Finanças PF e PJ separadas", txt: "As finanças da empresa e dos sócios são separadas?" },
-    { id: "pla_prolabore", tipo: "escolha", ops: SPN, peso: true, rot: "Pró-labore definido", txt: "Existe pró-labore definido para os sócios?" },
-    { id: "pla_distrib", tipo: "escolha", ops: SPN, peso: true, rot: "Política de distribuição de lucros", txt: "A distribuição de lucros segue uma política (quando, quanto e com base no resultado)?" },
-    { id: "pla_reinvest", tipo: "escolha", ops: SPN, peso: true, rot: "Regra de reinvestimento", txt: "Existe definição de quanto do lucro é reinvestido na empresa?" },
-    { id: "pla_acordo", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Sócios alinhados", txt: "Os sócios estão alinhados sobre metas, retiradas e investimentos?" } ] },
+    { ...qFPA("fpa_meta") } ] },
+  { secao: "Planejamento hoje", setor: true, rotSetor: "Planejamento", itens: [
+    { ...qFPA("fpa_orc") }, { ...qFPA("fpa_fcproj") },
+    { id: "pla_reserva", tipo: "escolha", ops: SPN, peso: true, rot: "Reserva de caixa definida", txt: "Existe uma reserva de caixa mínima definida?" },
+    { id: "pla_cen", tipo: "escolha", ops: SPN, peso: true, rot: "Simulação de cenários", txt: "Antes de decisões importantes, a empresa simula cenários?" },
+    { id: "pla_distrib", tipo: "escolha", ops: SPN, peso: true, rot: "Política de retirada dos sócios", txt: "Pró-labore e distribuição de lucros seguem uma regra definida?" } ] },
   { secao: "Expectativas do planejamento", itens: [
-    { id: "pla_entregas", tipo: "multi", txt: "Quais entregas são esperadas?", ops: ["Orçamento anual", "Projeção de caixa de 12 meses", "Projeção de 2 a 3 anos", "Cenários (otimista, realista e pessimista)", "Plano de investimentos e viabilidade", "Plano de capital de giro e reserva", "Estratégia de endividamento e crédito", "Política de retirada e distribuição dos sócios", "Revisão periódica do plano"] },
-    { id: "pla_revisao", tipo: "escolha", txt: "Com que frequência o plano deve ser revisado?", ops: ["Mensal", "Trimestral", "Semestral", "Anual"] },
-    { id: "pla_prazo", tipo: "curto", txt: "Para quando o planejamento precisa estar pronto?" } ] },
+    { id: "pla_entregas", tipo: "multi", txt: "Quais entregas são esperadas?", ops: ["Orçamento anual", "Projeção de caixa de 12 meses", "Projeção de 2 a 3 anos", "Cenários (otimista, realista e pessimista)", "Plano de investimentos e viabilidade", "Política de retirada dos sócios", "Revisão periódica do plano"] },
+    { id: "pla_revisao", tipo: "escolha", txt: "Com que frequência o plano deve ser revisado?", ops: ["Mensal", "Trimestral", "Semestral", "Anual"] } ] },
   { secao: "Precificação · Planejamento", precif: true, itens: [
     { ...qFPA("prc_fpa_cc") }, { ...qFPA("prc_fpa_unidades") },
-    { id: "prc_pla_cenarios", tipo: "escolha", ops: ["1 (realista)", "3 (otimista, realista e pessimista)"], txt: "Quantos cenários o plano deve ter?" },
     { id: "prc_pla_invest", tipo: "numero", txt: "Quantos projetos de investimento ou expansão serão analisados?" } ] }
 ];
-const SECOES_PLA = [...DIAG_PLA, SEC_AUTOAVAL];
+const SECOES_PLA = DIAG_PLA;
 const PERGUNTAS_PLA = SECOES_PLA.flatMap(s => s.itens);
 /* junta blocos sem repetir perguntas (a primeira ocorrência fica) */
 function mesclarSecoes(...listas) {
@@ -3039,11 +2900,7 @@ function mesclarSecoes(...listas) {
   return out;
 }
 /* Gestão Financeira = BPO + FP&A + Planejamento */
-const SECOES_GESTAO = mesclarSecoes(
-  SECOES_COMBO.slice(0, -1),
-  DIAG_PLA.filter(s => !s.soloPla).map(s => ({ ...s, grupo: "Planejamento Financeiro" })),
-  [SEC_AUTOAVAL]
-);
+const SECOES_GESTAO = mesclarSecoes(SECOES_COMBO, DIAG_PLA.filter(s => !s.soloPla).map(s => ({ ...s, grupo: "Planejamento Financeiro" })));
 const PERGUNTAS_GESTAO = SECOES_GESTAO.flatMap(s => s.itens);
 const PLANOS_PLA = ["Planejamento Essencial", "Planejamento Estratégico", "Planejamento Contínuo", "A definir"];
 const DESC_PLANO_PLA = { "Planejamento Essencial": "orçamento anual + caixa projetado de 12 meses", "Planejamento Estratégico": "+ horizonte de 2 a 3 anos, cenários, investimentos e crédito", "Planejamento Contínuo": "plano + revisões periódicas com a WL" };
@@ -3133,14 +2990,14 @@ function maturidade(d) {
 /* Sugestão de plano com base nos volumes e necessidades informados (a decisão final é do consultor) */
 function sugestaoBPO(d) {
   const r = d.respostas || {}, v = id => r[id]?.v;
-  const cnpjs = Number(v("cnpjs")) || 0, pag = Number(v("pagamentos")) || 0, bol = Number(v("boletos")) || 0;
+  const cnpjs = Number(v("cnpjs")) || 0, pag = Number(v("prc_pagar")) || 0, nf = Number(v("prc_nf_manual")) || 0, bol = Number(v("prc_boletos")) || 0;
   const motivos = [];
   if (cnpjs >= 2) motivos.push(`${cnpjs} CNPJs`);
-  if (v("planejamento") === "Não" && v("indicadores") !== "Sim") motivos.push("sem planejamento nem indicadores");
-  if (motivos.length) return { plano: "BPO Gestão", tier: 2, motivo: "Inclui finanças estratégicas: " + motivos.join(", ") };
-  if (bol > 0 || v("nf") === "Sim" || pag > 15) return { plano: "BPO Performance", tier: 1, motivo: "Inclui faturamento (boletos e NF) e relatórios gerenciais" + (pag > 15 ? `; ${pag} pagamentos/dia` : "") };
-  if (!v("faturamento") && !pag && !bol) return null;
-  return { plano: "BPO Start", tier: 0, motivo: "Volume operacional baixo, sem emissão de boletos/NF" };
+  if (!ehCombo(d) && v("indicadores") === "Não") motivos.push("sócios sem acompanhamento de indicadores");
+  if (motivos.length) return { plano: "BPO Gestão", tier: 2, motivo: "Rotina estruturada e acompanhamento próximo: " + motivos.join(", ") };
+  if (bol || nf || pag > 40) return { plano: "BPO Performance", tier: 1, motivo: "Inclui faturamento (boletos e NF) e mais controle" + (pag > 40 ? `; ${pag} pagamentos por semana` : "") };
+  if (!v("faturamento") && !pag) return null;
+  return { plano: "BPO Start", tier: 0, motivo: "Operação simples, baixo volume" };
 }
 function sugestaoPlano(d) {
   const t = tipoDe(d);
@@ -3148,12 +3005,13 @@ function sugestaoPlano(d) {
   if (t.frente === "planejamento") return sugestaoPla(d);
   if (t.frente === "bpo" && !ehCombo(d)) return sugestaoBPO(d);
   const f = nivelFPA(d), mt = maturidade(d);
-  const dados = mt?.setores.find(x => x.nome === "Dados e estrutura gerencial");
+  const dados = mt?.setores.find(x => x.nome === "Estrutura gerencial");
   const alerta = dados && dados.pct !== null && dados.pct < 40 ? ` Atenção: a base de dados está frágil (${dados.pct}%) e o FP&A depende de dados confiáveis.` : "";
   if (t.frente === "fpa") {
     if (!f.temDados) return null;
     let extra = alerta;
-    if (["Os próprios sócios", "Não há rotina definida"].includes(d.respostas?.fpa_quem?.v)) extra += " A rotina financeira não está estruturada: avalie oferecer BPO + FP&A (Integrado).";
+    const base = mt?.setores.find(x => x.nome === "Base financeira");
+    if (d.respostas?.prc_fpa_fonte?.v !== FONTE_WL && base && base.pct !== null && base.pct < 50) extra += " A rotina financeira não está estruturada: avalie oferecer BPO + FP&A (Integrado).";
     return { plano: PLANOS_FPA[f.tier], motivo: (f.motivos.length ? f.motivos.join("; ") : "visibilidade: DRE gerencial e indicadores essenciais") + "." + extra };
   }
   const b = sugestaoBPO(d);
@@ -3346,6 +3204,7 @@ function abrirDiag(id) {
     else if (it.tipo === "numero") campo = `<input class="resp" data-q="${it.id}" type="number" min="0" inputmode="numeric" value="${esc(v)}" style="max-width:180px">`;
     else if (it.tipo === "curto") campo = `<input class="resp" data-q="${it.id}" value="${esc(v)}">`;
     else campo = `<textarea class="resp" data-q="${it.id}" rows="2">${esc(v)}</textarea>`;
+    if (it.outro) campo += `<input class="resp outro-inp ${(Array.isArray(v) ? v.includes(it.outro) : v === it.outro) ? "" : "oculto"}" data-outro-q="${it.id}" value="${esc(r[it.id]?.outro || "")}" placeholder="Qual? Digite aqui">`;
     return `<div class="pergunta ${visivel(it, r) ? "" : "oculto"}" id="p-${it.id}">
       <div class="p-txt"><span class="p-num">${n}</span><div><b>${esc(it.txt)}</b>${it.dica ? `<small>${esc(it.dica)}</small>` : ""}${it.tipo === "multi" ? `<small class="dica-multi">Marque quantas opções quiser</small>` : ""}</div></div>
       ${campo}
@@ -3494,6 +3353,7 @@ function ligarForm() {
   raiz.oninput = e => {
     const t = e.target;
     if (t.dataset.tab) { const lin = (dd[t.dataset.tab] || [])[+t.dataset.lin]; if (!lin) return; lin[t.dataset.col] = t.value; }
+    else if (t.dataset.outroQ) resp(t.dataset.outroQ, "outro", t.value);
     else if (t.dataset.q) resp(t.dataset.q, "v", t.value);
     else if (t.dataset.obs) resp(t.dataset.obs, "obs", t.value);
     else if (t.dataset.d) dd[t.dataset.d] = t.value;
@@ -3516,6 +3376,7 @@ function ligarForm() {
         b.classList.toggle("ativo");
         const sel = [...grupo.querySelectorAll("[data-v].ativo")].map(x => x.dataset.v);
         if (grupo.dataset.multi) resp(grupo.dataset.q, "v", sel); else dd[grupo.dataset.dMulti] = sel;
+        mostrarOutro(grupo.dataset.q);
         return alterouDiag();
       }
       if (grupo.dataset.dOp === "escopo") {
@@ -3530,10 +3391,18 @@ function ligarForm() {
       if (grupo.dataset.q) resp(grupo.dataset.q, "v", novo);
       if (grupo.dataset.dOp) dd[grupo.dataset.dOp] = novo;
       if (grupo.dataset.mz) dd.matriz = { ...(dd.matriz || {}), [grupo.dataset.mz]: novo ? Number(novo) : 0 };
+      mostrarOutro(grupo.dataset.q);
       for (const q of perguntasDe(dd).filter(q => q.se)) $("p-" + q.id).classList.toggle("oculto", !visivel(q, dd.respostas || {}));
       return alterouDiag();
     }
   };
+}
+function mostrarOutro(id) {
+  const q = id && perguntasDe(diagAtual).find(x => x.id === id), inp = q?.outro && document.querySelector(`[data-outro-q="${id}"]`);
+  if (!inp) return;
+  const v = diagAtual.respostas?.[id]?.v, on = Array.isArray(v) ? v.includes(q.outro) : v === q.outro;
+  inp.classList.toggle("oculto", !on);
+  if (on && !inp.value) inp.focus();
 }
 function marcarSalvo(txt, classe = "") { const el = $("statusSalvo"); if (el) { el.textContent = txt; el.className = "status-salvo " + classe; } }
 function alterouDiag() {
@@ -3631,7 +3500,9 @@ function htmlPDFDiag(dd, interno = false) {
   const fmt = (q) => {
     const v = r[q.id]?.v;
     if (v === undefined || v === "" || (Array.isArray(v) && !v.length)) return `<span class="pdf-vazio">Não respondido</span>`;
-    if (Array.isArray(v)) return v.map(esc).join(" · ");
+    const outro = q.outro && r[q.id]?.outro ? `${q.outro}: ${r[q.id].outro}` : null;
+    if (Array.isArray(v)) return v.map(x => esc(outro && x === q.outro ? outro : x)).join(" · ");
+    if (outro && v === q.outro) return esc(outro);
     if (q.tipo === "escala") return `${esc(v)} — ${esc(q.ops[Number(v) - 1] || "")}`;
     return esc(v).replace(/\n/g, "<br>");
   };
@@ -3786,20 +3657,20 @@ const TABELA_PADRAO = {
   "Consultoria Start": 48000, "Consultoria Performance": 72000, "Consultoria Gestão": 100000
 };
 const PARAM_PADRAO = {
-  hora: 300,
+  hora: 300, licenca_erp: 300,
   bpo_base: 240, bpo_pagar: 1.2, bpo_receber: 0.8, bpo_nf_manual: 4, bpo_nf_auto: 0.5, bpo_boleto: 1, bpo_conta: 30, bpo_adquirente: 60, bpo_cartao: 30,
-  bpo_caixa: 90, bpo_aplic: 20, bpo_contrato: 2, bpo_cobranca: 4, bpo_cnpj: 60, bpo_reuniao: 60, bpo_plano1: 60, bpo_plano2: 180,
+  bpo_caixa: 90, bpo_aplic: 20, bpo_contrato: 60, bpo_cobranca: 4, bpo_cnpj: 60, bpo_reuniao: 60, bpo_plano1: 60, bpo_plano2: 180,
   fpa_h0: 11.5, fpa_h1: 16.5, fpa_h2: 21, fpa_integrado: 0.7, fpa_quinzenal: 1.5, fpa_semanal: 4,
   pla_h0: 24, pla_h1: 36, pla_revisao: 4, pla_invest: 3, pla_cenarios: 6,
   rt_setor: 40, rt_sistema: 0.2, rt_trein: 0.5, rt_plano1: 4, rt_plano2: 8
 };
 const PARAM_GRUPOS = [
-  ["Geral", [["hora", "Valor da hora técnica", "R$/h"]]],
+  ["Geral", [["hora", "Valor da hora técnica", "R$/h"], ["licenca_erp", "Licença ContaAzul (padrão na proposta)", "R$/mês"]]],
   ["BPO Financeiro — tempo por operação", [["bpo_base", "Rotina fixa (fechamento, relatório, agenda e organização)", "min/mês"], ["bpo_pagar", "Por conta paga", "min"], ["bpo_receber", "Por recebimento", "min"],
-    ["bpo_nf_manual", "Por nota fiscal manual", "min"], ["bpo_nf_auto", "Por nota fiscal automática", "min"], ["bpo_boleto", "Por boleto emitido", "min"],
-    ["bpo_conta", "Por conta bancária conciliada", "min/mês"], ["bpo_adquirente", "Por adquirente de cartão", "min/mês"], ["bpo_cartao", "Por cartão corporativo", "min/mês"],
-    ["bpo_caixa", "Conciliação de caixa físico", "min/mês"], ["bpo_aplic", "Aplicações financeiras", "min/mês"], ["bpo_contrato", "Por contrato recorrente", "min"],
-    ["bpo_cobranca", "Por título em cobrança", "min"], ["bpo_cnpj", "Por CNPJ adicional", "min/mês"], ["bpo_reuniao", "Por reunião", "min"],
+    ["bpo_nf_manual", "Por nota fiscal emitida", "min"], ["bpo_boleto", "Por boleto emitido", "min"],
+    ["bpo_conta", "Por conta bancária conciliada", "min/mês"], ["bpo_adquirente", "Por maquininha / cartão corporativo", "min/mês"],
+    ["bpo_caixa", "Conciliação de caixa físico", "min/mês"], ["bpo_aplic", "Aplicações financeiras", "min/mês"], ["bpo_contrato", "Controle de contratos recorrentes", "min/mês"],
+    ["bpo_cnpj", "Por CNPJ adicional", "min/mês"], ["bpo_reuniao", "Por reunião", "min"],
     ["bpo_plano1", "Entregas extras do BPO Performance", "min/mês"], ["bpo_plano2", "Entregas extras do BPO Gestão", "min/mês"]]],
   ["CFO por assinatura (FP&A)", [["fpa_h0", "FP&A Start", "h/mês"], ["fpa_h1", "FP&A Performance", "h/mês"], ["fpa_h2", "FP&A Gestão", "h/mês"],
     ["fpa_integrado", "Fator quando o BPO é feito pela WL", "×"], ["fpa_quinzenal", "Reuniões quinzenais (extra)", "h/mês"], ["fpa_semanal", "Reuniões semanais (extra)", "h/mês"]]],
@@ -3851,25 +3722,21 @@ function bloco(titulo, linhas, fatores) {
   return { titulo, linhas: linhas.filter(l => l.h > 0), fatores: fs, mult, base, horas: base * mult };
 }
 function calcBPO(d, tier) {
-  const p = P(), r = d.respostas || {}, m = x => x / 60;
-  const pagar = nR(r, "prc_pagar") || nR(r, "pagamentos") * 22, receber = nR(r, "prc_receber") || nR(r, "boletos") * 22;
+  const p = P(), r = d.respostas || {}, m = x => x / 60, sem = 4.33;
+  const pagS = nR(r, "prc_pagar"), recS = nR(r, "prc_receber"), pagar = Math.round(pagS * sem), receber = Math.round(recS * sem);
   const contas = Math.max(nR(r, "prc_contas"), 1), cnpjs = Math.max(nR(r, "cnpjs"), 1), reun = parseInt(vR(r, "prc_reunioes")) || 1;
-  const nfm = nR(r, "prc_nf_manual"), nfa = nR(r, "prc_nf_auto"), bol = nR(r, "prc_boletos"), adq = nR(r, "prc_adquirentes"), car = nR(r, "prc_cartoes"), ctr = nR(r, "prc_contratos");
-  const atr = vR(r, "prc_cobranca") === "Sim" ? (nR(r, "prc_atrasos") || 10) : 0;
+  const nf = nR(r, "prc_nf_manual"), bol = nR(r, "prc_boletos"), adq = nR(r, "prc_adquirentes"), ext = vR(r, "prc_extras") || [];
   const L = [
     { rot: "Rotina fixa: fechamento, relatório e organização", det: "mensal", h: m(p.bpo_base) },
-    { rot: "Contas a pagar", det: `${pagar} títulos/mês`, h: m(pagar * p.bpo_pagar) },
-    { rot: "Recebimentos", det: `${receber}/mês`, h: m(receber * p.bpo_receber) },
-    { rot: "Notas fiscais manuais", det: `${nfm}/mês`, h: m(nfm * p.bpo_nf_manual) },
-    { rot: "Notas fiscais automáticas", det: `${nfa}/mês`, h: m(nfa * p.bpo_nf_auto) },
+    { rot: "Contas a pagar", det: `${pagS}/semana ≈ ${pagar}/mês`, h: m(pagar * p.bpo_pagar) },
+    { rot: "Recebimentos", det: `${recS}/semana ≈ ${receber}/mês`, h: m(receber * p.bpo_receber) },
+    { rot: "Emissão de notas fiscais", det: `${nf}/mês`, h: m(nf * p.bpo_nf_manual) },
     { rot: "Emissão de boletos", det: `${bol}/mês`, h: m(bol * p.bpo_boleto) },
     { rot: "Conciliação bancária", det: `${contas} conta(s)`, h: m(contas * p.bpo_conta) },
-    { rot: "Conciliação de cartões (adquirentes)", det: `${adq}`, h: m(adq * p.bpo_adquirente) },
-    { rot: "Faturas de cartão corporativo", det: `${car}`, h: m(car * p.bpo_cartao) },
-    { rot: "Conciliação de caixa físico", det: "", h: vR(r, "prc_caixa") === "Sim" ? m(p.bpo_caixa) : 0 },
-    { rot: "Aplicações financeiras", det: "", h: vR(r, "prc_aplic") === "Sim" ? m(p.bpo_aplic) : 0 },
-    { rot: "Controle de contratos recorrentes", det: `${ctr}`, h: m(ctr * p.bpo_contrato) },
-    { rot: "Cobrança de clientes em atraso", det: `${atr} títulos/mês`, h: m(atr * p.bpo_cobranca) },
+    { rot: "Maquininhas e cartões corporativos", det: `${adq}`, h: m(adq * p.bpo_adquirente) },
+    { rot: "Conciliação de caixa físico", det: "", h: ext.includes("Conciliação de caixa físico") ? m(p.bpo_caixa) : 0 },
+    { rot: "Aplicações financeiras", det: "", h: ext.includes("Aplicações financeiras") ? m(p.bpo_aplic) : 0 },
+    { rot: "Controle de contratos recorrentes", det: "", h: ext.includes("Contratos recorrentes a faturar") ? m(p.bpo_contrato) : 0 },
     { rot: "CNPJs adicionais", det: `${cnpjs - 1}`, h: m((cnpjs - 1) * p.bpo_cnpj) },
     { rot: "Reuniões de acompanhamento", det: `${reun}/mês`, h: m(reun * p.bpo_reuniao) },
     { rot: "Análises e relatórios do plano", det: SERVICOS.bpo.planos[tier], h: m([0, p.bpo_plano1, p.bpo_plano2][tier] || 0) }
@@ -3884,7 +3751,7 @@ function calcBPO(d, tier) {
   return bloco("BPO Financeiro (por mês)", L, F);
 }
 const FAT_FPA = { "Até R$ 50 mil": 0.85, "R$ 50 a 100 mil": 0.9, "R$ 100 a 300 mil": 1, "R$ 300 mil a 1 milhão": 1.15, "Acima de R$ 1 milhão": 1.3 };
-const DADOS_FPA = { "Exportação estruturada do sistema": 1, "Planilhas organizadas": 1.1, "Planilhas desorganizadas / dados brutos": 1.3, "Precisam ser levantados do zero": 1.5 };
+const DADOS_FPA = { "Estruturados (exportação do sistema)": 1, "Planilhas organizadas": 1.1, "Dados brutos / desorganizados": 1.35 };
 const faixaCC = (n, fs) => n <= 0 ? 1 : n <= 5 ? fs[0] : n <= 15 ? fs[1] : fs[2];
 function calcFPA(d, tier, integrado) {
   const p = P(), r = d.respostas || {};
@@ -3895,16 +3762,16 @@ function calcFPA(d, tier, integrado) {
   const F = [];
   const fat = vR(r, "faturamento");
   if (FAT_FPA[fat]) F.push(fx(`Porte: faturamento ${fat}`, FAT_FPA[fat]));
-  if (integrado) F.push(fx("Dados já no padrão (BPO feito pela WL)", p.fpa_integrado));
+  const fonte = vR(r, "prc_fpa_fonte");
+  if (integrado || fonte === FONTE_WL) F.push(fx("Dados já no padrão (BPO feito pela WL)", p.fpa_integrado));
   else {
+    if (fonte === "Terceiros (outro BPO ou contabilidade)") F.push(fx("Dados vindos de terceiros", 1.1));
     const dq = vR(r, "prc_fpa_dados");
     if (DADOS_FPA[dq]) F.push(fx(`Dados: ${dq.toLowerCase()}`, DADOS_FPA[dq]));
     else {
-      const mt = d.frente ? maturidade(d) : null, ds = mt?.setores.find(x => x.nome === "Dados e estrutura gerencial");
+      const mt = d.frente ? maturidade(d) : null, ds = mt?.setores.find(x => x.nome === "Estrutura gerencial");
       if (ds && ds.pct !== null) F.push(fx(`Qualidade dos dados (${ds.pct}%)`, ds.pct < 40 ? 1.3 : ds.pct < 70 ? 1.15 : 1));
     }
-    const fontes = nR(r, "prc_fpa_fontes");
-    if (fontes > 2) F.push(fx(`${fontes} fontes de dados`, Math.min(1 + 0.05 * (fontes - 2), 1.3)));
   }
   const cc = nR(r, "prc_fpa_cc");
   if (cc) F.push(fx(`${cc} centros de custo`, faixaCC(cc, [1.05, 1.1, 1.2])));
@@ -3920,7 +3787,7 @@ function calcPla(d, tier, integrado) {
   if (tier === 2) { const n = REVISOES[vR(r, "pla_revisao")] || 4; L.push({ rot: "Revisões do plano no ano", det: `${n} revisões`, h: n * p.pla_revisao }); }
   const inv = nR(r, "prc_pla_invest");
   if (inv) L.push({ rot: "Projetos de investimento analisados", det: `${inv}`, h: inv * p.pla_invest });
-  if ((vR(r, "prc_pla_cenarios") || "").startsWith("3")) L.push({ rot: "Três cenários", det: "otimista, realista e pessimista", h: p.pla_cenarios });
+  if ((vR(r, "pla_entregas") || []).includes("Cenários (otimista, realista e pessimista)")) L.push({ rot: "Três cenários", det: "otimista, realista e pessimista", h: p.pla_cenarios });
   const F = [];
   const fat = vR(r, "faturamento");
   if (FAT_PLA[fat]) F.push(fx(`Porte: faturamento ${fat}`, FAT_PLA[fat]));
@@ -3994,6 +3861,7 @@ function calcularItem(it, d) {
   else if (it.serv === "int") blocos = [calcBPO(d, tier), calcFPA(d, tier, true)];
   else if (it.serv === "pla") blocos = [calcPla(d, tier, ehGestao(d))];
   else ({ blocos, meses } = calcRental(d, tier, it.meses));
+  if (it.serv === "pla" && vR(d.respostas || {}, "prc_fpa_fonte") === FONTE_WL) blocos[0] = calcPla(d, tier, true);
   const horas = blocos.reduce((s, b) => s + b.horas, 0);
   const unico = SERVICOS[it.serv].cobranca === "unico";
   const bruto = horas * p.hora;
@@ -4018,11 +3886,11 @@ function diagDaProposta(pp) {
 function entregasDe(serv, plano, d) {
   const lista = [...(ENTREGAS[plano] || [])], r = d?.respostas || {};
   if (serv === "bpo" || serv === "int") {
-    if (nR(r, "prc_adquirentes")) lista.push(`Conciliação de cartões (${nR(r, "prc_adquirentes")} adquirente(s))`);
-    if (nR(r, "prc_cartoes")) lista.push("Conciliação das faturas de cartão corporativo");
-    if (nR(r, "prc_nf_manual") || nR(r, "prc_nf_auto")) lista.push("Emissão de notas fiscais");
+    if (nR(r, "prc_adquirentes")) lista.push(`Conciliação de maquininhas e cartões (${nR(r, "prc_adquirentes")})`);
+    if (nR(r, "prc_nf_manual")) lista.push("Emissão de notas fiscais");
     if (nR(r, "prc_boletos")) lista.push("Emissão e baixa de boletos");
-    if (vR(r, "prc_cobranca") === "Sim") lista.push("Cobrança de clientes em atraso");
+    for (const x of vR(r, "prc_extras") || []) lista.push(x);
+    if (vR(r, "erp_uso") === ERP_WL) lista.push("Operação no ERP ContaAzul");
     if ((vR(r, "prc_cc") || "").startsWith("Sim")) lista.push("Classificação por centro de custo" + (vR(r, "prc_cc") === "Sim, com rateio" ? " com rateio" : ""));
     if (nR(r, "cnpjs") > 1) lista.push(`Operação de ${nR(r, "cnpjs")} CNPJs`);
   }
@@ -4040,6 +3908,7 @@ function novoItem(serv, plano, d) {
   it.calc = calcularItem(it, d || {});
   if (serv === "rt") { it.meses = it.calc.meses; it.parcelas = it.meses; }
   it.sugerido = it.calc.sugerido; it.valor = it.sugerido;
+  if (serv === "bpo" || serv === "int") it.licenca = vR(d?.respostas || {}, "erp_uso") === ERP_WL ? P().licenca_erp : 0;
   return it;
 }
 const tipoPropDe = dd => { const t = tipoDe(dd); return t.frente === "processos" ? "consultoria" : t.frente === "planejamento" ? "planejamento" : t.frente === "fpa" ? "cfo" : ehGestao(dd) ? "gestao" : ehCombo(dd) ? "bpo+cfo" : "bpo"; };
@@ -4107,7 +3976,7 @@ const totaisProp = pp => {
   let mensal = 0, unico = 0;
   for (const it of pp.itens || []) {
     const v = Number(it.valor) || 0;
-    if (SERVICOS[it.serv].cobranca === "mensal") mensal += v;
+    if (SERVICOS[it.serv].cobranca === "mensal") mensal += v + (Number(it.licenca) || 0);
     else if (it.serv === "rt" && it.modalidade === "recorrente") mensal += v / Math.max(it.meses || 1, 1);
     else unico += v;
   }
@@ -4115,7 +3984,7 @@ const totaisProp = pp => {
 };
 function pagamentoItem(it) {
   const v = Number(it.valor) || 0;
-  if (SERVICOS[it.serv].cobranca === "mensal") return `Mensalidade de ${brl(v)}.`;
+  if (SERVICOS[it.serv].cobranca === "mensal") return `Mensalidade de ${brl(v)}` + (Number(it.licenca) ? ` + licença do ERP ContaAzul de ${brl(it.licenca)}/mês (total ${brl(v + Number(it.licenca))}/mês).` : ".");
   if (it.serv === "rt" && it.modalidade === "recorrente") return `Mensalidade de ${brl(v / it.meses)} durante ${it.meses} meses (modelo recorrente).`;
   const n = Math.max(1, Number(it.parcelas) || 1);
   if (n === 1) return `Valor único de ${brl(v)}, à vista.`;
@@ -4289,6 +4158,7 @@ function htmlItemProp(it, k) {
         <div class="sug"><small>Sugerido pelo cálculo</small><b>${moeda(it.sugerido)}</b><span>${c.horas ? c.horas.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " h × " + moeda(c.hora) : ""}${tabelaPlano(it.plano) ? ` · ${fmtPct(varPct(it.sugerido, tabelaPlano(it.plano)))} vs. tabela` : ""}</span></div>
         <div class="final"><small>Valor final ${unico ? "(total)" : "(por mês)"}</small><input class="inp-valor" data-it="${k}" data-f="valor" inputmode="decimal" value="${esc(brl(it.valor))}"><span id="var-${k}" style="color:${corVar(v)}">${Math.abs(v) < 0.05 ? "igual ao sugerido" : fmtPct(v) + " vs. sugerido"}</span></div>
       </div>
+      ${it.serv === "bpo" || it.serv === "int" ? `<div class="campo campo-lic"><label>Licença do ERP ContaAzul (R$/mês) <span class="dica-campo">0 se o cliente usar o próprio ERP</span></label><input data-it="${k}" data-f="licenca" inputmode="decimal" value="${esc(brl(it.licenca || 0))}"></div>` : ""}
       <p class="txt-pag" id="pag-${k}">${esc(pagamentoItem(it))}</p>
       <details class="calc-det"><summary>Como chegamos ao valor sugerido <span>uso interno</span></summary>
         ${(c.blocos || []).map(b => `<div class="calc-bloco"><b>${esc(b.titulo)}</b>
@@ -4309,6 +4179,7 @@ function atualizarResumoProp() {
     return `<div class="rs-item"><div class="rs-nome"><b>${esc(it.nome || SERVICOS[it.serv].nome)}</b><small>${esc(it.plano)}</small></div>
       <div class="rs-linha"><span>Sugerido</span><b>${moeda(it.sugerido)}</b></div>
       <div class="rs-linha"><span>Final</span><b>${brl(it.valor)}${unico ? "" : "/mês"}</b></div>
+      ${Number(it.licenca) ? `<div class="rs-linha"><span>Licença ContaAzul</span><b>${brl(it.licenca)}/mês</b></div>` : ""}
       <div class="rs-var" style="color:${corVar(v)}">${Math.abs(v) < 0.05 ? "= sugerido" : fmtPct(v)}</div></div>`;
   }).join("")}
   <div class="rs-total">${t.mensal ? `<div><span>Total mensal</span><b>${brl(t.mensal)}</b></div>` : ""}${t.unico ? `<div><span>Total valor único</span><b>${brl(t.unico)}</b></div>` : ""}${!t.mensal && !t.unico ? `<div><span>Total</span><b>R$ 0,00</b></div>` : ""}</div>`;
@@ -4336,6 +4207,8 @@ function ligarProp() {
         el.textContent = Math.abs(v) < 0.05 ? "igual ao sugerido" : fmtPct(v) + " vs. sugerido"; el.style.color = corVar(v);
         $("pag-" + t.dataset.it).textContent = pagamentoItem(it);
         atualizarResumoProp();
+      } else if (t.dataset.f === "licenca") {
+        it.licenca = lerValor(t.value); $("pag-" + t.dataset.it).textContent = pagamentoItem(it); atualizarResumoProp();
       } else if (["nome", "entregas"].includes(t.dataset.f)) { it[t.dataset.f] = t.value; if (t.dataset.f === "entregas") it.entregasEditadas = true; if (t.dataset.f === "nome") atualizarResumoProp(); }
       else return;
     } else return;
@@ -4345,6 +4218,7 @@ function ligarProp() {
     const t = e.target;
     if (t.dataset.p && t.tagName === "SELECT") { pp[t.dataset.p] = t.value; if (t.dataset.p === "tipo") return redesenhar(); return alterouProp(); }
     if (t.dataset.f === "valor") { t.value = brl(pp.itens[+t.dataset.it].valor); return; }
+    if (t.dataset.f === "licenca") { t.value = brl(pp.itens[+t.dataset.it].licenca || 0); return; }
     if (t.dataset.it === undefined) return;
     const it = pp.itens[+t.dataset.it];
     if (t.dataset.f === "plano") { it.plano = t.value; if (!it.entregasEditadas || confirmar("Trocar também as entregas pelas do novo plano?")) { it.entregas = entregasDe(it.serv, it.plano, diagDaProposta(pp) || {}).join("\n"); it.entregasEditadas = false; } recalc(it, true); return redesenhar(); }
@@ -4476,7 +4350,8 @@ function htmlPDFProposta(pp) {
     <div class="pp-bloco pp-invest">${tit("Investimento")}
       <table class="pp-tab"><thead><tr><th>Serviço</th><th>Plano</th><th>Forma</th><th>Valor</th></tr></thead><tbody>
         ${(pp.itens || []).map(it => { const men = SERVICOS[it.serv].cobranca === "mensal", rec = it.serv === "rt" && it.modalidade === "recorrente";
-          return `<tr><td>${esc(it.nome || SERVICOS[it.serv].nome)}</td><td>${esc(it.plano)}</td><td>${men ? "Mensal" : rec ? `Mensal por ${it.meses} meses` : "Valor único"}</td><td><b>${men ? brl(it.valor) + "/mês" : rec ? brl(it.valor / it.meses) + "/mês" : brl(it.valor)}</b></td></tr>`; }).join("")}
+          return `<tr><td>${esc(it.nome || SERVICOS[it.serv].nome)}</td><td>${esc(it.plano)}</td><td>${men ? "Mensal" : rec ? `Mensal por ${it.meses} meses` : "Valor único"}</td><td><b>${men ? brl(it.valor) + "/mês" : rec ? brl(it.valor / it.meses) + "/mês" : brl(it.valor)}</b></td></tr>`
+            + (Number(it.licenca) ? `<tr><td>Licença do ERP ContaAzul</td><td>—</td><td>Mensal</td><td><b>${brl(it.licenca)}/mês</b></td></tr>` : ""); }).join("")}
       </tbody></table>
       <div class="pp-totais">${t.mensal ? `<div><small>Investimento mensal</small><b>${brl(t.mensal)}</b></div>` : ""}${t.unico ? `<div><small>Investimento único</small><b>${brl(t.unico)}</b></div>` : ""}</div>
       <div class="pp-pag"><small>Forma de pagamento</small>${(pp.itens || []).map(it => `<p><b>${esc(it.nome || SERVICOS[it.serv].nome)}:</b> ${esc(pagamentoItem(it))}</p>`).join("")}</div>
