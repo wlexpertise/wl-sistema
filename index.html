@@ -511,7 +511,7 @@
   .lnk{font-size:.74rem;font-weight:700;color:var(--turq);text-transform:none;letter-spacing:0}
 
   .diag-grade{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
-  @media(min-width:1000px){.diag-grade{grid-template-columns:minmax(0,1fr) 300px;align-items:start}.diag-lado{position:sticky;top:80px}}
+  @media(min-width:1000px){.diag-grade{grid-template-columns:minmax(0,1fr) 300px;align-items:start}.diag-lado{position:sticky;top:80px;max-height:calc(100vh - 96px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:8px}}
   .diag-form,.diag-lado{display:grid;gap:12px;align-content:start}
   .secao-diag{scroll-margin-top:80px}
   .pergunta{padding:14px 0;border-top:1px solid var(--borda);display:grid;gap:10px}
@@ -551,6 +551,34 @@
   .pt.nao{background:var(--erro)}
   .atencao b{font-size:.7rem;color:var(--txt-2);text-transform:uppercase;letter-spacing:.06em}
   .acoes-diag{display:grid;gap:8px}
+  .dica-multi{color:var(--txt-2)!important;font-weight:500!important}
+  .opcoes.multi button.ativo::before{content:"✓ ";font-weight:800}
+  .chip-setor{margin-left:auto;font-size:.68rem;font-weight:800;color:#fff;background:var(--cor,transparent);padding:3px 9px;border-radius:999px;letter-spacing:.02em;text-transform:none}
+  .chip-setor:empty{display:none}
+  .nav-secoes a.nav-wl{color:var(--teal);font-weight:600}
+  .setores-mat{display:grid;gap:7px;margin-top:14px}
+  .sm-lin{display:grid;grid-template-columns:96px 1fr 38px;gap:8px;align-items:center;font-size:.72rem}
+  .sm-lin span{font-weight:600;color:var(--txt)} .sm-lin b{text-align:right;color:var(--txt-2)}
+  .sm-lin .barra-prog{height:6px}
+  details.atencao summary{cursor:pointer;font-size:.7rem;font-weight:700;color:var(--txt-2);text-transform:uppercase;letter-spacing:.06em}
+  details.atencao b{margin-top:6px;color:var(--teal)}
+  .mat-num small{font-size:.9rem;color:var(--txt-2);font-weight:700}
+  .txt-sec{font-size:.8rem;color:var(--txt-2);line-height:1.5;margin:4px 0 10px}
+  .mz-linha{display:grid;gap:6px;padding:10px 0;border-top:1px solid var(--borda)}
+  .mz-linha>b{font-size:.86rem;font-weight:600}
+  .opcoes.mz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .opcoes.mz button{display:flex;gap:8px;align-items:center;text-align:left;font-size:.74rem;font-weight:500;padding:8px 10px;line-height:1.3}
+  .opcoes.mz button b{font-size:1rem;font-weight:800}
+  .res-pront{font-size:.86rem;margin:12px 0 4px}
+  .tab-ed{display:grid;gap:8px}
+  .lin-tab{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr)) 34px;gap:6px;align-items:start;background:var(--bg);border-radius:12px;padding:8px}
+  .lin-tab label{display:grid;gap:3px;min-width:0}
+  .lin-tab label span{font-size:.64rem;font-weight:700;color:var(--txt-2);text-transform:uppercase;letter-spacing:.05em}
+  .lin-tab textarea{resize:vertical;line-height:1.4}
+  .lin-tab input,.lin-tab textarea{width:100%;border:1.5px solid var(--borda);border-radius:8px;padding:8px 10px;font:inherit;font-size:.82rem;background:#fff;outline:none}
+  .lin-tab input:focus,.lin-tab textarea:focus{border-color:var(--turq)}
+  @media(max-width:760px){.lin-tab{grid-template-columns:1fr}.lin-tab .acao{justify-self:end}.opcoes.mz{grid-template-columns:1fr}}
+  .botoes-diag{display:flex;gap:8px;flex-wrap:wrap}
   .fin-ok{font-size:.84rem;font-weight:700;color:#1D7F45;background:rgba(40,178,96,.1);padding:10px 12px;border-radius:10px;text-align:center}
   .lnk-pdf{font-size:.74rem;font-weight:600;color:var(--turq);text-align:center}
   .status-salvo{font-size:.74rem;font-weight:700;color:var(--txt-2);background:#fff;border:1px solid var(--borda);padding:7px 12px;border-radius:999px;white-space:nowrap}
@@ -586,6 +614,13 @@
   .pdf-resp{margin:2px 0 0 20px}
   .pdf-vazio{color:#9AA9A9;font-style:italic}
   .pdf-obs{margin:2px 0 0 20px;color:#5B6B6B;font-size:9.5px}
+  .pdf-setores{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin:4px 0 10px}
+  .pdf-setores div{display:grid;grid-template-columns:90px 1fr 30px;gap:6px;align-items:center;font-size:9px}
+  .pdf-setores .pdf-barra{margin:0;height:5px} .pdf-setores b{text-align:right}
+  .pdf-set{font-style:normal;color:#13A3B5;font-weight:700}
+  .pdf-tab{width:100%;border-collapse:collapse;font-size:9px;margin-top:4px}
+  .pdf-tab th{background:#0B5A60;color:#fff;text-align:left;padding:4px 6px;font-weight:700}
+  .pdf-tab td{border-bottom:1px solid #E3ECEC;padding:4px 6px;vertical-align:top}
   .pdf-rodape{margin-top:16px;padding-top:8px;border-top:1px solid #E3ECEC;font-size:8.5px;color:#5B6B6B;text-align:center}
 
   /* ---------- Editor de documentos ---------- */
@@ -2005,9 +2040,9 @@ function linkWhats(tel) {
   return "https://wa.me/" + d;
 }
 function renderFicha(id) {
-  if (!diagStore.carregado && !diagStore.carregando) {
-    diagStore.carregando = true;
-    carregarStore(diagStore).then(() => { if (abertoId) renderFicha(abertoId); }).catch(() => {}).finally(() => { diagStore.carregando = false; });
+  for (const st of [diagStore, diagRentalStore]) if (!st.carregado && !st.carregando) {
+    st.carregando = true;
+    carregarStore(st).then(() => { if (abertoId) renderFicha(abertoId); }).catch(() => {}).finally(() => { st.carregando = false; });
   }
   const l = leadPorId(id);
   if (!l) return fecharFicha();
@@ -2083,12 +2118,12 @@ function renderFicha(id) {
     <section class="g-sec"><h4>Agenda do cliente</h4><div id="agendaLead"></div></section>
 
     <section class="g-sec"><h4>Diagnósticos</h4>
-      ${!diagStore.carregado ? `<div style="font-size:.8rem;color:var(--txt-2)">Carregando…</div>` : (() => {
-        const ds = diags().filter(d => d.leadId === l.id).sort((a, b) => (b.atualizadoEm || "").localeCompare(a.atualizadoEm || ""));
-        return (ds.length ? `<ul class="lista-cli" style="margin:0 0 10px">${ds.map(d => { const mt = maturidade(d); return `<li data-g-diag="${d.id}"><div><b>Diagnóstico BPO · ${esc(d.id)}</b>
+      ${!diagStore.carregado || !diagRentalStore.carregado ? `<div style="font-size:.8rem;color:var(--txt-2)">Carregando…</div>` : (() => {
+        const ds = [diagStore, diagRentalStore].flatMap(st => st.dados?.diagnosticos || []).filter(d => d.leadId === l.id).sort((a, b) => (b.atualizadoEm || "").localeCompare(a.atualizadoEm || ""));
+        return (ds.length ? `<ul class="lista-cli" style="margin:0 0 10px">${ds.map(d => { const mt = maturidade(d); return `<li data-g-diag="${tipoDe(d).frente}/${d.id}"><div><b>${esc(tipoDe(d).curto)} · ${esc(d.id)}</b>
           <small>${d.status === "finalizado" ? "Finalizado em " + data(d.finalizadoEm) : "Em edição"}${mt ? ` · maturidade ${mt.pct}%` : ""}</small></div>
           <span class="chip-etapa" style="--cor:${d.status === "finalizado" ? "var(--verde)" : "var(--alerta)"}"><i></i>${d.status === "finalizado" ? "Finalizado" : "Em edição"}</span></li>`; }).join("")}</ul>` : "")
-          + `<button class="btn-s" data-g="novoDiag"><svg><use href="#i-atd"/></svg>Iniciar diagnóstico BPO</button>`;
+          + `<div class="botoes-diag"><button class="btn-s" data-g="novoDiag"><svg><use href="#i-atd"/></svg>Diagnóstico BPO</button><button class="btn-s" data-g="novoDiagRental"><svg><use href="#i-atd"/></svg>Diagnóstico Rental</button></div>`;
       })()}</section>
 
     <section class="g-sec"><h4>Negócio</h4>
@@ -2220,8 +2255,9 @@ function ligarFicha(l) {
     if (d.calMes) { agenda.mes = d.calMes; agenda.dia = null; return desenharAgenda(leadPorId(l.id)); }
     if (d.calDia) { agenda.dia = d.calDia; return desenharAgenda(leadPorId(l.id)); }
     if (d.g === "semInteresse") return marcarSemInteresse(l);
-    if (d.g === "novoDiag") { fecharFicha(); return novoDiagnostico(l.id); }
-    if (d.gDiag) { fecharFicha(); location.hash = `atendimento/bpo/diagnostico/${d.gDiag}`; return; }
+    if (d.g === "novoDiag") { fecharFicha(); return novoDiagnostico(l.id, "bpo"); }
+    if (d.g === "novoDiagRental") { fecharFicha(); return novoDiagnostico(l.id, "processos"); }
+    if (d.gDiag) { fecharFicha(); const [fr, id] = d.gDiag.split("/"); location.hash = rotaDiag(id, TIPOS_DIAG[fr]); return; }
     if (d.g === "reativar") return alterarLead(l.id, x => { registrar(x, "reativado", x.semInteresse?.motivo ? `Estava sem interesse: ${x.semInteresse.motivo}` : ""); delete x.semInteresse; }, "Lead reativado");
     if (d.g === "excluir") {
       if (!confirmar(`Excluir "${l.empresa}" do CRM? Esta ação não pode ser desfeita.`)) return;
@@ -2504,8 +2540,8 @@ const FRENTES_AT = [
     etapas: [{ id: "diagnostico", nome: "Diagnóstico" }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "planejamento", nome: "Planejamento Financeiro", icone: "i-a-pla", desc: "Orçamentos, fluxo de caixa e cenários.",
     etapas: [{ id: "diagnostico", nome: "Diagnóstico" }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
-  { id: "processos", nome: "Consultoria de Processos", icone: "i-a-pro", desc: "Mapeamento e redesenho de processos.",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico" }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] }
+  { id: "processos", nome: "Consultoria de Processos", icone: "i-a-pro", desc: "Processos, sistema e treinamento para locadoras (Rental).",
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Consultoria Rental.", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] }
 ];
 function htmlMenuAtendimento() {
   return FRENTES_AT.map(f => `<div class="grupo-menu">
@@ -2582,35 +2618,189 @@ const DIAG_BPO = [
 ];
 const PERGUNTAS_BPO = DIAG_BPO.flatMap(s => s.itens);
 const PLANOS_BPO = ["Plano Básico", "Plano Intermediário", "Plano Avançado", "A definir"];
-const ARQ_DIAG_BPO = "dados/atendimento/bpo-diagnosticos.json";
-const diagStore = criarStore(ARQ_DIAG_BPO, { versao: 1, seq: 0, diagnosticos: [] });
-const diags = () => diagStore.dados?.diagnosticos || [];
+const diagStore = criarStore("dados/atendimento/bpo-diagnosticos.json", { versao: 1, seq: 0, diagnosticos: [] });
+
+/* ---- Diagnóstico de Consultoria Rental (base: "Formulário de Diagnóstico do Cliente", adaptado para locadoras de equipamentos) ---- */
+const SETORES_RENTAL = ["Almoxarifado", "Expedição", "Compras", "Manutenção", "Financeiro", "Administrativo"];
+const NA = [...SPN, "Não se aplica"];
+const DIAG_RENTAL = [
+  { secao: "Perfil da locadora", itens: [
+    { id: "equipamentos", tipo: "multi", txt: "Quais tipos de equipamento a empresa loca?", ops: ["Equipamentos leves para construção", "Andaimes e escoramentos", "Máquinas pesadas / linha amarela", "Plataformas elevatórias", "Geradores e compressores", "Containers e módulos", "Equipamentos de limpeza", "Veículos", "Equipamentos para eventos", "Outros"] },
+    { id: "unidades", tipo: "numero", txt: "Quantas unidades / filiais a empresa possui?" },
+    { id: "frota", tipo: "escolha", txt: "Qual o tamanho aproximado da frota (itens patrimoniados)?", ops: ["Até 300", "300 a 1.000", "1.000 a 3.000", "3.000 a 10.000", "Acima de 10.000"] },
+    { id: "colaboradores", tipo: "escolha", txt: "Quantos colaboradores a empresa tem?", ops: ["Até 10", "11 a 30", "31 a 80", "81 a 200", "Acima de 200"] },
+    { id: "faturamento", tipo: "escolha", txt: "Qual é a média do faturamento mensal?", ops: ["Até R$ 100 mil", "R$ 100 a 300 mil", "R$ 300 mil a 1 milhão", "R$ 1 a 3 milhões", "Acima de R$ 3 milhões"] },
+    { id: "tempo", tipo: "escolha", txt: "Há quanto tempo a empresa está no mercado?", ops: ["Menos de 3 anos", "3 a 10 anos", "10 a 20 anos", "Mais de 20 anos"] } ] },
+  { secao: "Contexto atual", itens: [
+    { id: "momento", tipo: "texto", txt: "Descreva, em poucas linhas, o momento atual da locadora." },
+    { id: "gatilho", tipo: "texto", txt: "Qual situação, problema ou oportunidade fez a empresa buscar uma consultoria agora?" },
+    { id: "tentativas", tipo: "texto", txt: "O que já foi tentado para resolver isso? O que funcionou parcialmente e o que não funcionou?" },
+    { id: "porque", tipo: "texto", txt: "Na sua visão, por que esse problema ainda não foi resolvido?" } ] },
+  { secao: "Mapa do problema central", itens: [
+    { id: "problema", tipo: "texto", txt: "Qual é o principal problema que precisa ser resolvido?" },
+    { id: "sintomas", tipo: "multi", txt: "Quais sintomas aparecem hoje na operação?", ops: ["Equipamento devolvido sem conferência", "Avarias não cobradas do cliente", "Equipamento parado aguardando manutenção", "Falta de peças na hora do reparo", "Divergência entre estoque físico e sistema", "Compras emergenciais / sem cotação", "Locação sem faturamento ou faturada errada", "Atraso na entrega ao cliente", "Não se sabe onde está cada equipamento", "Retrabalho e reincidência de defeitos", "Informações em planilhas paralelas", "Equipe sem padrão de trabalho"] },
+    { id: "causas", tipo: "texto", txt: "Quais causas você acredita que estão por trás desse problema?" },
+    { id: "noventa", tipo: "texto", txt: "O que acontece se nada mudar nos próximos 90 dias?" },
+    { id: "afeta", tipo: "multi", txt: "O problema afeta:", ops: ["Disponibilidade da frota", "Margem / rentabilidade", "Faturamento", "Caixa", "Experiência do cliente", "Controle patrimonial", "Produtividade da equipe", "Previsibilidade", "Crescimento"] } ] },
+  { secao: "Almoxarifado", setor: true, itens: [
+    { id: "alm_cadastro", tipo: "escolha", ops: NA, peso: true, rot: "Cadastro padronizado de peças", txt: "Existe cadastro padronizado de peças e materiais no sistema (código, descrição, unidade, aplicação)?" },
+    { id: "alm_mov", tipo: "escolha", ops: NA, peso: true, rot: "Entradas e saídas no sistema", txt: "Todas as entradas e saídas de peças são registradas no sistema no momento em que acontecem?" },
+    { id: "alm_req", tipo: "escolha", ops: NA, peso: true, rot: "Requisição vinculada à OS", txt: "As peças só saem mediante requisição vinculada a uma ordem de serviço da manutenção?" },
+    { id: "alm_inv", tipo: "escolha", ops: NA, peso: true, rot: "Inventário periódico", txt: "É feito inventário periódico (rotativo ou geral) com acerto das divergências?" },
+    { id: "alm_min", tipo: "escolha", ops: NA, peso: true, rot: "Estoque mínimo / reposição", txt: "Existe estoque mínimo e ponto de reposição definidos para os itens críticos?" },
+    { id: "alm_layout", tipo: "escolha", ops: NA, peso: true, rot: "Layout e endereçamento", txt: "O almoxarifado tem layout organizado, com endereçamento e acesso controlado?" },
+    { id: "alm_dor", tipo: "texto", txt: "Principal dor percebida no almoxarifado" } ] },
+  { secao: "Expedição", setor: true, itens: [
+    { id: "exp_saida", tipo: "escolha", ops: NA, peso: true, rot: "Checklist de saída", txt: "Os equipamentos saem com checklist de saída (estado, acessórios, horímetro, fotos) assinado?" },
+    { id: "exp_dev", tipo: "escolha", ops: NA, peso: true, rot: "Vistoria na devolução", txt: "Na devolução é feita vistoria com checklist e registro das avarias?" },
+    { id: "exp_avaria", tipo: "escolha", ops: NA, peso: true, rot: "Cobrança de avarias", txt: "As avarias e faltas identificadas na devolução são efetivamente cobradas do cliente?" },
+    { id: "exp_prog", tipo: "escolha", ops: NA, peso: true, rot: "Programação de entregas e retiradas", txt: "Existe programação de entregas e retiradas (agenda, roteiro, veículo e responsável)?" },
+    { id: "exp_status", tipo: "escolha", ops: NA, peso: true, rot: "Status do equipamento no sistema", txt: "O status de cada equipamento (locado, disponível, em manutenção) é atualizado no sistema em tempo real?" },
+    { id: "exp_fat", tipo: "escolha", ops: NA, peso: true, rot: "Movimentação aciona o faturamento", txt: "A saída e a devolução do equipamento acionam automaticamente o faturamento?" },
+    { id: "exp_mov", tipo: "numero", txt: "Quantas movimentações (entregas + retiradas) acontecem em média por dia?" },
+    { id: "exp_dor", tipo: "texto", txt: "Principal dor percebida na expedição" } ] },
+  { secao: "Compras", setor: true, itens: [
+    { id: "cmp_req", tipo: "escolha", ops: NA, peso: true, rot: "Requisição e aprovação formais", txt: "Existe processo formal de requisição e aprovação de compras?" },
+    { id: "cmp_alcada", tipo: "escolha", ops: NA, peso: true, rot: "Alçadas de aprovação", txt: "Há alçadas de aprovação por valor ou tipo de compra?" },
+    { id: "cmp_cot", tipo: "escolha", ops: NA, peso: true, rot: "Cotações registradas", txt: "São feitas cotações com mais de um fornecedor, registradas no sistema?" },
+    { id: "cmp_forn", tipo: "escolha", ops: NA, peso: true, rot: "Cadastro e avaliação de fornecedores", txt: "Há cadastro e avaliação de fornecedores (prazo, qualidade, preço)?" },
+    { id: "cmp_plan", tipo: "escolha", ops: NA, peso: true, rot: "Compras planejadas", txt: "As compras são planejadas com base em consumo e estoque mínimo (e não emergenciais)?" },
+    { id: "cmp_receb", tipo: "escolha", ops: NA, peso: true, rot: "Conferência pedido × NF", txt: "No recebimento, a mercadoria é conferida contra o pedido de compra e a nota fiscal?" },
+    { id: "cmp_dor", tipo: "texto", txt: "Principal dor percebida em compras" } ] },
+  { secao: "Manutenção", setor: true, itens: [
+    { id: "man_os", tipo: "escolha", ops: NA, peso: true, rot: "Ordem de serviço para toda manutenção", txt: "Toda manutenção é aberta e encerrada com ordem de serviço (OS) no sistema?" },
+    { id: "man_prev", tipo: "escolha", ops: NA, peso: true, rot: "Plano de preventiva", txt: "Existe plano de manutenção preventiva por equipamento (por horímetro ou tempo)?" },
+    { id: "man_custo", tipo: "escolha", ops: NA, peso: true, rot: "Custo de manutenção por equipamento", txt: "O custo de manutenção (peças + mão de obra) é apurado por equipamento?" },
+    { id: "man_parado", tipo: "escolha", ops: NA, peso: true, rot: "Controle de equipamento parado", txt: "Há controle do tempo de equipamento parado (aguardando manutenção ou peça)?" },
+    { id: "man_tec", tipo: "escolha", ops: NA, peso: true, rot: "Produtividade e reincidência", txt: "Existe controle de produtividade dos técnicos e de reincidência de defeitos?" },
+    { id: "man_lib", tipo: "escolha", ops: NA, peso: true, rot: "Liberação formal para locação", txt: "O equipamento só volta a ficar disponível após liberação formal (checklist) da manutenção?" },
+    { id: "man_tecnicos", tipo: "numero", txt: "Quantos técnicos trabalham na manutenção?" },
+    { id: "man_fila", tipo: "numero", txt: "Quantos equipamentos estão aguardando manutenção hoje (aproximadamente)?" },
+    { id: "man_dor", tipo: "texto", txt: "Principal dor percebida na manutenção" } ] },
+  { secao: "Financeiro", setor: true, itens: [
+    { id: "fin_fat", tipo: "escolha", ops: NA, peso: true, rot: "Faturamento sem perdas", txt: "O faturamento das locações (medições, renovações, devoluções) é feito no prazo e sem perdas?" },
+    { id: "fin_receber", tipo: "escolha", ops: NA, peso: true, rot: "Contas a receber e cobrança", txt: "Existe controle de contas a receber com régua de cobrança?" },
+    { id: "fin_pagar", tipo: "escolha", ops: NA, peso: true, rot: "Contas a pagar e conciliação", txt: "O contas a pagar é organizado, com agendamento e conciliação bancária?" },
+    { id: "fin_fluxo", tipo: "escolha", ops: NA, peso: true, rot: "Fluxo de caixa projetado", txt: "O fluxo de caixa é atualizado e projetado para as próximas semanas?" },
+    { id: "fin_rent", tipo: "escolha", ops: NA, peso: true, rot: "Rentabilidade por equipamento", txt: "A empresa conhece a rentabilidade por equipamento ou família (receita × custo)?" },
+    { id: "fin_dre", tipo: "escolha", ops: NA, peso: true, rot: "DRE gerencial mensal", txt: "Existe DRE gerencial mensal analisado pela gestão?" },
+    { id: "fin_dor", tipo: "texto", txt: "Principal dor percebida no financeiro" } ] },
+  { secao: "Administrativo", setor: true, itens: [
+    { id: "adm_contrato", tipo: "escolha", ops: NA, peso: true, rot: "Contrato assinado antes da saída", txt: "Os contratos de locação são padronizados e assinados antes da saída do equipamento?" },
+    { id: "adm_credito", tipo: "escolha", ops: NA, peso: true, rot: "Cadastro e análise de crédito", txt: "Os clientes passam por cadastro completo e análise de crédito antes de locar?" },
+    { id: "adm_patrim", tipo: "escolha", ops: NA, peso: true, rot: "Controle patrimonial", txt: "Existe controle patrimonial dos ativos (nº de patrimônio, documentação, seguro, depreciação)?" },
+    { id: "adm_pop", tipo: "escolha", ops: NA, peso: true, rot: "Processos documentados (POPs)", txt: "Os processos e responsabilidades estão documentados (fluxos, POPs, manuais)?" },
+    { id: "adm_ind", tipo: "escolha", ops: NA, peso: true, rot: "Indicadores operacionais", txt: "Indicadores como taxa de utilização da frota e tempo de manutenção são acompanhados?" },
+    { id: "adm_dor", tipo: "texto", txt: "Principal dor percebida no administrativo" } ] },
+  { secao: "Sistema e equipe", setor: true, rotSetor: "Sistema e equipe", itens: [
+    { id: "sis_nome", tipo: "curto", txt: "Qual sistema de gestão a empresa utiliza?" },
+    { id: "sis_tipo", tipo: "escolha", txt: "Que tipo de sistema é?", ops: ["ERP específico para locação", "ERP genérico", "Planilhas", "Nenhum"] },
+    { id: "sis_modulos", tipo: "multi", txt: "Quais setores usam o sistema hoje?", ops: SETORES_RENTAL },
+    { id: "sis_paralelo", tipo: "escolha", ops: NA, peso: true, rot: "Operação sem planilhas paralelas", txt: "A operação roda inteira no sistema, sem controles paralelos em planilha?" },
+    { id: "sis_param", tipo: "escolha", ops: NA, peso: true, rot: "Sistema bem parametrizado", txt: "O sistema está bem configurado (cadastros, tabelas de preço, permissões, integrações entre setores)?" },
+    { id: "sis_trein", tipo: "escolha", ops: NA, peso: true, rot: "Equipe treinada no sistema", txt: "A equipe foi treinada e usa o sistema corretamente?" },
+    { id: "sis_novos", tipo: "escolha", ops: NA, peso: true, rot: "Integração de novos colaboradores", txt: "Existe treinamento estruturado para novos colaboradores?" },
+    { id: "sis_satisf", tipo: "escala", txt: "Qual o nível de satisfação com o sistema atual?", ops: ["Muito baixo", "Baixo", "Regular", "Bom", "Excelente"] } ] },
+  { secao: "Objetivo desejado", itens: [
+    { id: "resultado", tipo: "texto", txt: "Qual é o resultado principal que a empresa deseja alcançar com esta consultoria?" },
+    { id: "ideal", tipo: "texto", txt: "Qual seria o cenário ideal ao final do projeto?" },
+    { id: "prazo", tipo: "curto", txt: "Em qual prazo esse resultado precisa acontecer?" },
+    { id: "sucesso", tipo: "texto", txt: "Como vocês saberão, de forma prática, que a consultoria foi bem-sucedida?" },
+    { id: "indicadores", tipo: "multi", txt: "Quais indicadores precisam melhorar para o projeto valer a pena?", ops: ["Taxa de utilização da frota", "Disponibilidade de equipamentos", "Tempo de manutenção", "Custo de manutenção por equipamento", "Acuracidade do estoque", "Custo das compras", "Prazo de entrega ao cliente", "Avarias recuperadas", "Faturamento sem perdas", "Inadimplência", "Margem / rentabilidade", "Produtividade da equipe", "Previsibilidade de caixa"] },
+    { id: "setores_prio", tipo: "multi", txt: "Quais setores são prioridade para a empresa?", ops: SETORES_RENTAL },
+    { id: "servicos", tipo: "multi", txt: "O que a empresa espera da consultoria?", ops: ["Configuração do sistema", "Desenho e redesenho de processos", "Procedimentos (POPs) e manuais", "Treinamento da equipe", "Indicadores e painel de gestão", "Acompanhamento pós-implantação"] } ] },
+  { secao: "Urgência e prioridade", itens: [
+    { id: "agora", tipo: "texto", txt: "Por que este projeto precisa acontecer agora?" },
+    { id: "pressao", tipo: "texto", txt: "Existe alguma data, meta, troca de sistema, expansão ou pressão externa relacionada a este projeto?" },
+    { id: "emjogo", tipo: "texto", txt: "O que está em jogo se esse problema continuar aberto?" },
+    { id: "urgencia", tipo: "escolha", txt: "Nível de urgência", ops: ["Alta", "Média", "Baixa", "Ainda não há prioridade clara"] },
+    { id: "urg_sinais", tipo: "multi", txt: "Sinais de urgência", ops: ["Há prazo externo", "Há impacto financeiro imediato", "Há impacto na reputação", "Há equipe aguardando decisão", "Implantação / troca de sistema em andamento"] } ] },
+  { secao: "Capacidade de execução", itens: [
+    { id: "decisor", tipo: "curto", txt: "Quem decide sobre este projeto?" },
+    { id: "executor", tipo: "texto", txt: "Quem executará as ações recomendadas (responsáveis por setor)?" },
+    { id: "recursos", tipo: "texto", txt: "Quais recursos, acessos ou pessoas estarão disponíveis durante o projeto?" },
+    { id: "limites", tipo: "texto", txt: "Existe alguma limitação de orçamento, equipe, tempo, tecnologia ou autoridade?" } ] }
+];
+const PERGUNTAS_RENTAL = DIAG_RENTAL.flatMap(s => s.itens);
+
+/* Matriz de prontidão do cliente (uso do consultor) */
+const MATRIZ_PRONTIDAO = [
+  { id: "clareza", nome: "Clareza do problema", n: ["Fala apenas de sintomas", "Tem hipótese do problema", "Sabe o problema central"] },
+  { id: "urgencia", nome: "Urgência", n: ["Sem prazo ou prioridade", "Há interesse, sem pressão", "Há prazo, risco ou meta clara"] },
+  { id: "impacto", nome: "Impacto financeiro", n: ["Impacto pouco claro", "Impacto provável", "Impacto direto e mensurável"] },
+  { id: "decisao", nome: "Capacidade de decisão", n: ["Decisor ausente", "Decisão compartilhada", "Decisor envolvido"] },
+  { id: "execucao", nome: "Capacidade de execução", n: ["Sem equipe ou tempo", "Execução parcial", "Recursos disponíveis"] },
+  { id: "valor", nome: "Percepção de valor", n: ["Compara por preço", "Entende parte do valor", "Valor ligado ao resultado"] },
+  { id: "aderencia", nome: "Aderência à consultoria", n: ["Quer só um curso ou palpite", "Busca orientação", "Busca método, sistema e equipe treinada"] }
+];
+function prontidao(d) {
+  const m = d.matriz || {};
+  const notas = MATRIZ_PRONTIDAO.map(c => Number(m[c.id]) || 0);
+  if (!notas.some(Boolean)) return null;
+  const pts = notas.reduce((a, b) => a + b, 0), feitas = notas.filter(Boolean).length;
+  const [nivel, cor] = feitas < MATRIZ_PRONTIDAO.length ? ["Preencha os 7 critérios", "var(--txt-2)"]
+    : pts <= 11 ? ["Cliente imaturo ou baixa prioridade", "#C8463D"] : pts <= 16 ? ["Potencial, mas precisa de mais clareza", "#D99A1E"] : ["Pronto para consultoria de alto valor", "#28B260"];
+  return { pts, feitas, nivel, cor };
+}
+const CONCLUSOES_RENTAL = ["Pronto para proposta", "Precisa de alinhamento antes da proposta", "Precisa amadurecer a prioridade", "Não é aderente à consultoria"];
+/* Sugestões para o mapa de ação, por setor */
+const SUGESTAO_SETOR = {
+  "Almoxarifado": { objetivo: "Estoque confiável e peça disponível na hora do reparo", entrega: "Fluxo de requisição e inventário desenhados, cadastro saneado, estoque mínimo definido e equipe treinada" },
+  "Expedição": { objetivo: "Saída e devolução controladas, sem avaria perdida", entrega: "Checklists de saída e devolução, programação de entregas e status da frota no sistema" },
+  "Compras": { objetivo: "Comprar no prazo, com cotação e aprovação", entrega: "Fluxo requisição → cotação → aprovação → recebimento configurado, com alçadas e avaliação de fornecedores" },
+  "Manutenção": { objetivo: "Reduzir tempo parado e conhecer o custo por equipamento", entrega: "OS no sistema, plano de preventiva, liberação formal e indicadores de manutenção" },
+  "Financeiro": { objetivo: "Faturar tudo o que foi locado e ter previsibilidade de caixa", entrega: "Faturamento integrado à movimentação, régua de cobrança, fluxo de caixa e rentabilidade por equipamento" },
+  "Administrativo": { objetivo: "Contratos, cadastro e patrimônio sob controle", entrega: "Contrato padrão, política de crédito, controle patrimonial e POPs publicados" },
+  "Sistema e equipe": { objetivo: "Sistema configurado e equipe usando corretamente", entrega: "Parametrização revisada, fim das planilhas paralelas e trilha de treinamento por função" }
+};
+const diagRentalStore = criarStore("dados/atendimento/rental-diagnosticos.json", { versao: 1, seq: 0, diagnosticos: [] });
+
+/* Cada tipo de diagnóstico usa o mesmo motor (formulário, autosave, CRM, PDF) com suas próprias perguntas */
+const TIPOS_DIAG = {
+  bpo: { frente: "bpo", tipo: "bpo-preliminar", prefixo: "DG", secoes: DIAG_BPO, perguntas: PERGUNTAS_BPO, store: diagStore,
+    menu: "BPO Financeiro", titulo: "Diagnóstico Preliminar", curto: "Diagnóstico BPO", pdfTitulo: "Diagnóstico Preliminar", pdfSub: "BPO Financeiro",
+    nomeMat: "Maturidade financeira", crmFrente: "BPO Financeiro", segmento: "", nav: [["sec-parecer", "Parecer da WL"]] },
+  processos: { frente: "processos", tipo: "rental-consultoria", prefixo: "DR", secoes: DIAG_RENTAL, perguntas: PERGUNTAS_RENTAL, store: diagRentalStore,
+    menu: "Consultoria de Processos", titulo: "Diagnóstico de Consultoria Rental", curto: "Diagnóstico Rental", pdfTitulo: "Diagnóstico de Consultoria", pdfSub: "Locação de equipamentos · Processos e sistema",
+    nomeMat: "Maturidade operacional", crmFrente: "Consultoria de Processos", segmento: "Locadora",
+    nav: [["sec-parecer", "Parecer da WL"], ["sec-matriz", "Matriz de prontidão"], ["sec-sintese", "Síntese"], ["sec-mapa", "Mapa de ação"], ["sec-criterios", "Critérios de sucesso"], ["sec-conclusao", "Conclusão"]] }
+};
+let TD = TIPOS_DIAG.bpo;
+const tipoDe = d => TIPOS_DIAG[d?.frente] || TIPOS_DIAG.bpo;
+const diags = () => TD.store.dados?.diagnosticos || [];
+const rotaDiag = (id, t = TD) => `atendimento/${t.frente}/diagnostico` + (id ? "/" + id : "");
 
 const visivel = (q, r) => !q.se || q.se(r);
-const respondida = (q, r) => { const v = r[q.id]?.v; return v !== undefined && v !== null && String(v).trim() !== ""; };
+const respondida = (q, r) => { const v = r[q.id]?.v; if (Array.isArray(v)) return v.length > 0; return v !== undefined && v !== null && String(v).trim() !== ""; };
 function progresso(d) {
   const r = d.respostas || {};
-  const qs = PERGUNTAS_BPO.filter(q => visivel(q, r));
+  const qs = tipoDe(d).perguntas.filter(q => visivel(q, r));
   return { feitas: qs.filter(q => respondida(q, r)).length, total: qs.length };
 }
 /* Índice de maturidade: Sim = 2, Parcial = 1, Não = 0 (perguntas de controle) */
 function maturidade(d) {
   const r = d.respostas || {};
   let pts = 0, max = 0;
-  const atencao = [];
-  for (const q of PERGUNTAS_BPO.filter(q => q.peso)) {
-    const v = r[q.id]?.v;
-    if (!v || v === "Não se aplica") continue;
-    max += 2; pts += v === "Sim" ? 2 : v === "Parcial" ? 1 : 0;
-    if (v !== "Sim") atencao.push({ q, v });
+  const atencao = [], setores = [];
+  for (const s of tipoDe(d).secoes) {
+    let sp = 0, sm = 0;
+    for (const q of s.itens.filter(q => q.peso)) {
+      const v = r[q.id]?.v;
+      if (!v || v === "Não se aplica") continue;
+      sm += 2; sp += v === "Sim" ? 2 : v === "Parcial" ? 1 : 0;
+      if (v !== "Sim") atencao.push({ q, v, setor: s.secao });
+    }
+    pts += sp; max += sm;
+    if (s.setor) setores.push({ nome: s.secao, pct: sm ? Math.round(sp / sm * 100) : null });
   }
   if (!max) return null;
   const pct = Math.round(pts / max * 100);
   const nivel = pct < 40 ? "Inicial" : pct < 70 ? "Em estruturação" : "Estruturado";
-  return { pct, nivel, atencao };
+  return { pct, nivel, atencao, setores };
 }
 /* Sugestão de plano com base nos volumes e necessidades informados (a decisão final é do consultor) */
 function sugestaoPlano(d) {
+  if (tipoDe(d).frente !== "bpo") return null;
   const r = d.respostas || {}, v = id => r[id]?.v;
   const cnpjs = Number(v("cnpjs")) || 0, pag = Number(v("pagamentos")) || 0, bol = Number(v("boletos")) || 0;
   const motivos = [];
@@ -2626,10 +2816,11 @@ function sugestaoPlano(d) {
 let diagAtual = null, timerDiag = null, salvandoDiag = false, diagPendente = false;
 async function renderAtendimento() {
   const [frente, etapa, id] = rota;
-  if (frente === "bpo" && etapa === "diagnostico") {
-    if (!diagStore.carregado) {
+  if (etapa === "diagnostico" && TIPOS_DIAG[frente]) {
+    TD = TIPOS_DIAG[frente];
+    if (!TD.store.carregado) {
       $("atdConteudo").innerHTML = `<div class="esqueleto"></div>`;
-      try { await carregarStore(diagStore); } catch (e) { $("atdConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os diagnósticos.</b><br>${esc(e.message)}</div>`; return; }
+      try { await carregarStore(TD.store); } catch (e) { $("atdConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os diagnósticos.</b><br>${esc(e.message)}</div>`; return; }
       if (viewAtual !== "atendimento") return;
     }
     if (!crm.carregado) carregarCRM(true);
@@ -2659,7 +2850,7 @@ const filtroDiag = { status: "todos", busca: "" };
 function renderListaDiag() {
   diagAtual = null;
   $("atdConteudo").oninput = $("atdConteudo").onclick = $("atdConteudo").onchange = null;
-  cabAtd([["Atendimento", "#atendimento"], ["BPO Financeiro", "#atendimento"], ["Diagnóstico"]], "BPO Financeiro", "Diagnóstico Preliminar",
+  cabAtd([["Atendimento", "#atendimento"], [TD.menu, "#atendimento"], ["Diagnóstico"]], TD.menu, TD.titulo,
     "Inicie um diagnóstico novo ou continue um já existente. Tudo é salvo automaticamente na nuvem.",
     `<button class="btn-p" data-atd="novo"><svg><use href="#i-mais"/></svg>Novo diagnóstico</button>`);
   const termos = norm(filtroDiag.busca).split(" ").filter(Boolean);
@@ -2694,10 +2885,12 @@ function renderListaDiag() {
 const corNivel = pct => pct < 40 ? "#C8463D" : pct < 70 ? "#D99A1E" : "#28B260";
 
 /* ---- Novo diagnóstico: escolher cliente do CRM ou cadastrar ---- */
-async function novoDiagnostico(leadIdPre) {
+async function novoDiagnostico(leadIdPre, frente) {
+  if (frente) TD = TIPOS_DIAG[frente];
+  if (!TD.store.carregado) await carregarStore(TD.store);
   if (!crm.carregado) await carregarCRM(true);
   if (leadIdPre) return criarDiag({ leadId: leadIdPre });
-  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo diagnóstico</h3></div>
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo ${esc(TD.curto.toLowerCase())}</h3></div>
     <div class="modal-corpo">
       <nav class="abas" id="abasCli"><button data-cli="buscar" class="ativo">Buscar no CRM</button><button data-cli="novo">Cadastrar cliente novo</button></nav>
       <div id="cliBuscar">
@@ -2706,7 +2899,7 @@ async function novoDiagnostico(leadIdPre) {
       </div>
       <form id="cliNovo" class="dados-grid oculto">
         ${campoTxt("empresa", "Empresa *", "")}
-        <div class="linha2">${campoTxt("contato", "Contato / responsável", "")}${campoTxt("segmento", "Segmento", "")}</div>
+        <div class="linha2">${campoTxt("contato", "Contato / responsável", "")}${campoTxt("segmento", "Segmento", TD.segmento)}</div>
         <div class="linha2">${campoTxt("telefone", "Telefone", "")}${campoTxt("email", "E-mail", "")}</div>
         <div class="linha2">${campoTxt("cidade", "Cidade", "")}${campoTxt("uf", "UF", "")}</div>
         <p style="font-size:.76rem;color:var(--txt-2)">O cliente entra no CRM, na etapa <b>Diagnóstico feito</b>, quando o diagnóstico for finalizado.</p>
@@ -2755,29 +2948,29 @@ function clienteDoLead(l) {
 async function criarDiag({ leadId, cliente }) {
   const l = leadId ? leadPorId(leadId) : null;
   const rascunho = leadId && diags().find(d => d.leadId === leadId && d.status === "rascunho");
-  if (rascunho) { toast("Este cliente já tem um diagnóstico em edição — abrindo"); location.hash = `atendimento/bpo/diagnostico/${rascunho.id}`; return; }
+  if (rascunho) { toast("Este cliente já tem um diagnóstico em edição — abrindo"); location.hash = rotaDiag(rascunho.id); return; }
   chip("sincronizando", "Criando…");
   let id;
   try {
-    await salvarStore(diagStore, d => {
+    await salvarStore(TD.store, d => {
       d.seq = (d.seq || d.diagnosticos.length) + 1;
-      id = "DG-" + String(d.seq).padStart(4, "0");
-      d.diagnosticos.push({ id, tipo: "bpo-preliminar", status: "rascunho", leadId: l?.id || null, cliente: l ? clienteDoLead(l) : cliente,
+      id = TD.prefixo + "-" + String(d.seq).padStart(4, "0");
+      d.diagnosticos.push({ id, frente: TD.frente, tipo: TD.tipo, status: "rascunho", leadId: l?.id || null, cliente: l ? clienteDoLead(l) : cliente,
         entrevistado: l?.contato || cliente?.contato || "", cargo: "", dataReuniao: hojeISO(), responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "",
         respostas: {}, parecer: "", plano: "", proximosPassos: "", criadoEm: new Date().toISOString(), criadoPor: meuNome(), atualizadoEm: new Date().toISOString(), atualizadoPor: meuNome() });
     });
     chip("", "Sincronizado");
-    location.hash = `atendimento/bpo/diagnostico/${id}`;
+    location.hash = rotaDiag(id);
   } catch (e) { chip("erro", "Erro"); toast("Não foi possível criar: " + e.message, "erro", 6000); }
 }
 
 /* ---- Formulário ---- */
 function abrirDiag(id) {
   const d = diags().find(x => x.id === id);
-  if (!d) { toast("Diagnóstico não encontrado", "erro"); location.hash = "atendimento/bpo/diagnostico"; return; }
+  if (!d) { toast("Diagnóstico não encontrado", "erro"); location.hash = rotaDiag(); return; }
   if (!diagAtual || diagAtual.id !== id || !diagPendente) diagAtual = structuredClone(d);
   const dd = diagAtual, fin = dd.status === "finalizado";
-  cabAtd([["Atendimento", "#atendimento"], ["Diagnóstico BPO", "#atendimento/bpo/diagnostico"], [dd.id]], `Diagnóstico Preliminar · ${dd.id}`, dd.cliente?.empresa || "Diagnóstico",
+  cabAtd([["Atendimento", "#atendimento"], [TD.curto, "#" + rotaDiag()], [dd.id]], `${TD.titulo} · ${dd.id}`, dd.cliente?.empresa || "Diagnóstico",
     fin ? `Finalizado em ${dataHora(dd.finalizadoEm)} por ${dd.finalizadoPor || ""}. As alterações continuam sendo salvas automaticamente.` : "Em edição · as respostas são salvas automaticamente na nuvem.",
     `<span class="status-salvo" id="statusSalvo">Salvo na nuvem</span>`);
   const r = dd.respostas || {};
@@ -2788,11 +2981,12 @@ function abrirDiag(id) {
     let campo = "";
     if (it.tipo === "escolha") campo = `<div class="opcoes" data-q="${it.id}">${it.ops.map(o => `<button type="button" data-v="${esc(o)}" class="${o === v ? "ativo" : ""} ${o === "Sim" ? "o-sim" : o === "Não" ? "o-nao" : o === "Parcial" ? "o-parc" : ""}">${esc(o)}</button>`).join("")}</div>`;
     else if (it.tipo === "escala") campo = `<div class="opcoes escala" data-q="${it.id}">${it.ops.map((o, k) => `<button type="button" data-v="${k + 1}" class="${String(k + 1) === String(v) ? "ativo" : ""}"><b>${k + 1}</b>${esc(o)}</button>`).join("")}</div>`;
+    else if (it.tipo === "multi") campo = `<div class="opcoes multi" data-q="${it.id}" data-multi="1">${it.ops.map(o => `<button type="button" data-v="${esc(o)}" class="${Array.isArray(v) && v.includes(o) ? "ativo" : ""}">${esc(o)}</button>`).join("")}</div>`;
     else if (it.tipo === "numero") campo = `<input class="resp" data-q="${it.id}" type="number" min="0" inputmode="numeric" value="${esc(v)}" style="max-width:180px">`;
     else if (it.tipo === "curto") campo = `<input class="resp" data-q="${it.id}" value="${esc(v)}">`;
     else campo = `<textarea class="resp" data-q="${it.id}" rows="2">${esc(v)}</textarea>`;
     return `<div class="pergunta ${visivel(it, r) ? "" : "oculto"}" id="p-${it.id}">
-      <div class="p-txt"><span class="p-num">${n}</span><div><b>${esc(it.txt)}</b>${it.dica ? `<small>${esc(it.dica)}</small>` : ""}</div></div>
+      <div class="p-txt"><span class="p-num">${n}</span><div><b>${esc(it.txt)}</b>${it.dica ? `<small>${esc(it.dica)}</small>` : ""}${it.tipo === "multi" ? `<small class="dica-multi">Marque quantas opções quiser</small>` : ""}</div></div>
       ${campo}
       <input class="obs" data-obs="${it.id}" value="${esc(obs)}" placeholder="Observação (opcional)">
     </div>`;
@@ -2811,20 +3005,14 @@ function abrirDiag(id) {
           <div class="linha2"><div class="campo"><label>Telefone</label><input data-cli-f="telefone" value="${esc(dd.cliente?.telefone || "")}"></div>
             <div class="campo"><label>E-mail</label><input data-cli-f="email" value="${esc(dd.cliente?.email || "")}"></div></div>
         </div></section>
-      ${DIAG_BPO.map((s, k) => `<section class="g-sec secao-diag" id="sec-${k}"><h4>${esc(s.secao)}</h4>${s.itens.map(q).join("")}</section>`).join("")}
-      <section class="g-sec" id="sec-parecer"><h4>Parecer da WL <span class="tag-breve" style="text-transform:none">uso do consultor</span></h4>
-        <div class="dados-grid">
-          <div class="campo"><label>Plano recomendado</label>
-            <div class="opcoes" data-d-op="plano">${PLANOS_BPO.map(p => `<button type="button" data-v="${esc(p)}" class="${dd.plano === p ? "ativo" : ""}">${esc(p)}</button>`).join("")}</div>
-            <small class="sugestao" id="sugPlano"></small></div>
-          <div class="campo"><label>Parecer / conclusão</label><textarea data-d="parecer" rows="4" placeholder="Principais achados e recomendação">${esc(dd.parecer || "")}</textarea></div>
-          <div class="campo"><label>Próximos passos</label><textarea data-d="proximosPassos" rows="3" placeholder="Ex.: enviar proposta até sexta, agendar kick-off">${esc(dd.proximosPassos || "")}</textarea></div>
-        </div></section>
+      ${TD.secoes.map((s, k) => `<section class="g-sec secao-diag" id="sec-${k}"><h4>${esc(s.secao)}${s.setor ? `<span class="chip-setor" id="mset-${k}"></span>` : ""}</h4>${s.itens.map(q).join("")}</section>`).join("")}
+      ${TD.frente === "bpo" ? parecerBPO(dd) : parecerRental(dd)}
     </div>
     <aside class="diag-lado">
       <section class="g-sec"><h4>Progresso</h4><div class="barra-prog"><i id="barProg"></i></div><p class="txt-prog" id="txtProg"></p>
-        <nav class="nav-secoes">${DIAG_BPO.map((s, k) => `<a data-ir-sec="sec-${k}">${esc(s.secao)}<span id="cnt-${k}"></span></a>`).join("")}<a data-ir-sec="sec-parecer">Parecer da WL</a></nav></section>
-      <section class="g-sec"><h4>Maturidade financeira</h4><div id="painelMat"></div></section>
+        <nav class="nav-secoes">${TD.secoes.map((s, k) => `<a data-ir-sec="sec-${k}">${esc(s.secao)}<span id="cnt-${k}"></span></a>`).join("")}${TD.nav.map(([a, r]) => `<a data-ir-sec="${a}" class="nav-wl">${esc(r)}</a>`).join("")}</nav></section>
+      <section class="g-sec"><h4>${esc(TD.nomeMat)}</h4><div id="painelMat"></div></section>
+      ${TD.frente === "bpo" ? "" : `<section class="g-sec"><h4>Prontidão para consultoria</h4><div id="painelPront"></div></section>`}
       <section class="g-sec acoes-diag">
         ${fin ? `<div class="fin-ok">✓ Finalizado em ${data(dd.finalizadoEm)}</div>` : `<button class="btn-p" data-atd="finalizar" style="justify-content:center">Finalizar diagnóstico</button>`}
         <button class="btn-s" data-atd="pdf" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Gerar PDF</button>
@@ -2836,25 +3024,111 @@ function abrirDiag(id) {
   atualizarLado();
   ligarForm();
 }
+function parecerBPO(dd) {
+  return `<section class="g-sec" id="sec-parecer"><h4>Parecer da WL <span class="tag-breve" style="text-transform:none">uso do consultor</span></h4>
+        <div class="dados-grid">
+          <div class="campo"><label>Plano recomendado</label>
+            <div class="opcoes" data-d-op="plano">${PLANOS_BPO.map(p => `<button type="button" data-v="${esc(p)}" class="${dd.plano === p ? "ativo" : ""}">${esc(p)}</button>`).join("")}</div>
+            <small class="sugestao" id="sugPlano"></small></div>
+          <div class="campo"><label>Parecer / conclusão</label><textarea data-d="parecer" rows="4" placeholder="Principais achados e recomendação">${esc(dd.parecer || "")}</textarea></div>
+          <div class="campo"><label>Próximos passos</label><textarea data-d="proximosPassos" rows="3" placeholder="Ex.: enviar proposta até sexta, agendar kick-off">${esc(dd.proximosPassos || "")}</textarea></div>
+        </div></section>`;
+}
+const COLS_MAPA = [["etapa", "Etapa / setor"], ["objetivo", "Objetivo", 1], ["acao", "Ação recomendada", 1], ["entrega", "Evidência / entrega", 1]];
+const COLS_CRIT = [["resultado", "Resultado esperado", 1], ["indicador", "Indicador"], ["atual", "Situação atual"], ["meta", "Meta desejada"], ["prazo", "Prazo"]];
+const SINTESE = [["sinProblema", "Diagnóstico principal: qual é o problema real?"], ["sinOportunidade", "Oportunidade central: onde está o maior ganho de controle, disponibilidade ou margem?"],
+  ["sinRisco", "Risco principal: o que pode impedir o resultado?"], ["sinHipotese", "Hipótese de plano: quais etapas devem aparecer na proposta?"]];
+const SETORES_REC = [...SETORES_RENTAL, "Sistema e equipe"];
+function linhaTab(tab, cols, k, row) {
+  return `<div class="lin-tab" style="--cols:${cols.length}">${cols.map(([c, rot, longo]) => `<label><span>${rot}</span>${longo ? `<textarea rows="3" data-tab="${tab}" data-lin="${k}" data-col="${c}">${esc(row[c] || "")}</textarea>` : `<input data-tab="${tab}" data-lin="${k}" data-col="${c}" value="${esc(row[c] || "")}">`}</label>`).join("")}
+    <button type="button" class="acao perigo-ico" data-dica="Remover linha" data-atd="remLinha" data-tab="${tab}" data-lin="${k}"><svg><use href="#i-lixo"/></svg></button></div>`;
+}
+function parecerRental(dd) {
+  const sel = (lista, atual) => lista.map(o => `<button type="button" data-v="${esc(o)}" class="${atual === o || (Array.isArray(atual) && atual.includes(o)) ? "ativo" : ""}">${esc(o)}</button>`).join("");
+  const tabela = (tab, cols, vazio, rotBtn) => `<div class="tab-ed">${(dd[tab] || []).map((row, k) => linhaTab(tab, cols, k, row)).join("") || `<p class="txt-sec">${vazio}</p>`}</div>
+    <button class="btn-s" data-atd="addLinha" data-tab="${tab}" style="justify-self:start"><svg><use href="#i-mais"/></svg>${rotBtn}</button>`;
+  const tag = `<span class="tag-breve" style="text-transform:none">uso do consultor</span>`;
+  return `
+  <section class="g-sec" id="sec-parecer"><h4>Parecer da WL ${tag}</h4>
+    <div class="dados-grid"><div class="campo"><label>Setores recomendados para o projeto</label>
+      <div class="opcoes" data-d-multi="setoresRec">${sel(SETORES_REC, dd.setoresRec || [])}</div>
+      <small class="sugestao" id="sugSetores"></small></div></div></section>
+  <section class="g-sec" id="sec-matriz"><h4>Matriz de prontidão do cliente ${tag}</h4>
+    <p class="txt-sec">Pontue de 1 a 3 para decidir se o cliente está pronto para uma consultoria de alto valor ou precisa de uma etapa anterior.</p>
+    ${MATRIZ_PRONTIDAO.map(c => `<div class="mz-linha"><b>${esc(c.nome)}</b><div class="opcoes mz" data-mz="${c.id}">${c.n.map((t, k) => `<button type="button" data-v="${k + 1}" class="${String(dd.matriz?.[c.id] || "") === String(k + 1) ? "ativo" : ""}"><b>${k + 1}</b>${esc(t)}</button>`).join("")}</div></div>`).join("")}
+    <div class="res-pront" id="resPront"></div>
+    <p class="txt-sec">7 a 11 pontos: cliente imaturo ou baixa prioridade · 12 a 16: potencial, mas precisa de mais clareza · 17 a 21: pronto para consultoria de alto valor.</p></section>
+  <section class="g-sec" id="sec-sintese"><h4>Síntese do diagnóstico ${tag}</h4><div class="dados-grid">
+    ${SINTESE.map(([k, r]) => `<div class="campo"><label>${r}</label><textarea data-d="${k}" rows="3">${esc(dd[k] || "")}</textarea></div>`).join("")}</div></section>
+  <section class="g-sec" id="sec-mapa"><h4>Mapa preliminar de ação <button class="lnk" data-atd="sugerirMapa">Sugerir pelo diagnóstico ›</button></h4>
+    <div class="dados-grid">${tabela("mapa", COLS_MAPA, "Nenhuma etapa ainda. Use “Sugerir pelo diagnóstico” ou adicione manualmente.", "Adicionar etapa")}</div></section>
+  <section class="g-sec" id="sec-criterios"><h4>Critérios de sucesso</h4>
+    <div class="dados-grid">${tabela("criterios", COLS_CRIT, "Defina o que será considerado resultado concreto.", "Adicionar critério")}</div></section>
+  <section class="g-sec" id="sec-conclusao"><h4>Conclusão do diagnóstico</h4><div class="dados-grid">
+    <div class="campo"><label>Situação do cliente</label><div class="opcoes" data-d-op="conclusao">${sel(CONCLUSOES_RENTAL, dd.conclusao)}</div></div>
+    <div class="campo"><label>Recomendação final do consultor</label><textarea data-d="parecer" rows="4">${esc(dd.parecer || "")}</textarea></div>
+    <div class="linha2"><div class="campo"><label>Próxima ação</label><input data-d="proximaAcao" value="${esc(dd.proximaAcao || "")}" placeholder="Ex.: apresentar proposta"></div>
+      <div class="campo"><label>Prazo para retorno</label><input type="date" data-d="prazoRetorno" value="${esc(dd.prazoRetorno || "")}"></div></div>
+    <small class="sugestao">Ao finalizar, a próxima ação entra nas ações e na agenda do cliente no CRM.</small>
+  </div></section>`;
+}
+function sugerirMapa(dd) {
+  const mt = maturidade(dd);
+  if (!mt) return toast("Responda as perguntas dos setores primeiro", "erro"), false;
+  const alvo = dd.setoresRec?.length ? dd.setoresRec
+    : mt.setores.filter(s => s.pct !== null && s.pct < 70).sort((a, b) => a.pct - b.pct).map(s => s.nome);
+  if (!alvo.length) return toast("Nenhum setor abaixo de 70% — escolha os setores recomendados no Parecer"), false;
+  dd.mapa = dd.mapa || [];
+  let n = 0;
+  for (const st of alvo) {
+    if (dd.mapa.some(x => norm(x.etapa || "").includes(norm(st)))) continue;
+    const at = mt.atencao.filter(a => a.setor === st).map(a => a.q.rot || a.q.txt);
+    const sg = SUGESTAO_SETOR[st] || {};
+    dd.mapa.push({ etapa: st, objetivo: sg.objetivo || "", acao: (at.length ? "Mapear e redesenhar: " + at.join("; ") : "Mapear o processo atual e redesenhar") + ". Configurar o sistema e treinar a equipe.", entrega: sg.entrega || "" });
+    n++;
+  }
+  toast(n ? `${n} etapa(s) sugerida(s) — ajuste à vontade` : "As etapas desses setores já estão no mapa");
+  return n > 0;
+}
 function atualizarLado() {
   const dd = diagAtual, p = progresso(dd), r = dd.respostas || {};
   $("barProg").style.width = (p.feitas / p.total * 100) + "%";
   $("txtProg").textContent = `${p.feitas} de ${p.total} perguntas respondidas`;
-  DIAG_BPO.forEach((s, k) => { const qs = s.itens.filter(q => visivel(q, r)); $("cnt-" + k).textContent = `${qs.filter(q => respondida(q, r)).length}/${qs.length}`; });
   const mt = maturidade(dd);
+  TD.secoes.forEach((s, k) => {
+    const qs = s.itens.filter(q => visivel(q, r)); $("cnt-" + k).textContent = `${qs.filter(q => respondida(q, r)).length}/${qs.length}`;
+    const ch = $("mset-" + k), x = mt?.setores.find(z => z.nome === s.secao);
+    if (ch) { ch.textContent = x?.pct != null ? `${x.pct}% maturidade` : ""; ch.style.setProperty("--cor", x?.pct != null ? corNivel(x.pct) : "transparent"); }
+  });
+  const rotQ = a => esc(a.q.rot || a.q.txt.replace(/\?$/, ""));
+  const listaAt = mt?.atencao.length ? (mt.setores.length
+      ? `<details class="atencao"><summary>Pontos de atenção (${mt.atencao.length})</summary>${[...new Set(mt.atencao.map(a => a.setor))].map(st => `<b>${esc(st)}</b>${mt.atencao.filter(a => a.setor === st).map(a => `<span><i class="pt ${a.v === "Não" ? "nao" : "parc"}"></i>${rotQ(a)}</span>`).join("")}`).join("")}</details>`
+      : `<div class="atencao"><b>Pontos de atenção</b>${mt.atencao.map(a => `<span><i class="pt ${a.v === "Não" ? "nao" : "parc"}"></i>${rotQ(a)}</span>`).join("")}</div>`)
+    : `<p class="txt-prog">Nenhum ponto de atenção nas perguntas de controle.</p>`;
   $("painelMat").innerHTML = mt ? `<div class="mat-num" style="color:${corNivel(mt.pct)}">${mt.pct}%<span>${mt.nivel}</span></div>
     <div class="barra-prog"><i style="width:${mt.pct}%;background:${corNivel(mt.pct)}"></i></div>
-    ${mt.atencao.length ? `<div class="atencao"><b>Pontos de atenção</b>${mt.atencao.map(a => `<span><i class="pt ${a.v === "Não" ? "nao" : "parc"}"></i>${esc(a.q.txt.replace(/\?$/, ""))}</span>`).join("")}</div>` : `<p class="txt-prog">Nenhum ponto de atenção nas perguntas de controle.</p>`}`
+    ${mt.setores.length ? `<div class="setores-mat">${mt.setores.map(s => `<div class="sm-lin"><span>${esc(s.nome)}</span><div class="barra-prog"><i style="width:${s.pct ?? 0}%;background:${s.pct == null ? "transparent" : corNivel(s.pct)}"></i></div><b>${s.pct == null ? "—" : s.pct + "%"}</b></div>`).join("")}</div>` : ""}
+    ${listaAt}`
     : `<p class="txt-prog">Responda as perguntas de Sim / Parcial / Não para calcular.</p>`;
-  const sug = sugestaoPlano(dd);
-  $("sugPlano").innerHTML = sug ? `Sugestão do sistema: <b>${esc(sug.plano)}</b> — ${esc(sug.motivo)}` : "";
+  if ($("sugPlano")) { const sug = sugestaoPlano(dd); $("sugPlano").innerHTML = sug ? `Sugestão do sistema: <b>${esc(sug.plano)}</b> — ${esc(sug.motivo)}` : ""; }
+  if ($("sugSetores")) {
+    const fr = mt ? mt.setores.filter(s => s.pct !== null && s.pct < 70).sort((a, b) => a.pct - b.pct) : [];
+    $("sugSetores").innerHTML = fr.length ? `Menor maturidade: ${fr.map(s => `<b>${esc(s.nome)}</b> (${s.pct}%)`).join(", ")}` : "";
+  }
+  if ($("painelPront")) {
+    const pr = prontidao(dd);
+    const htm = pr ? `<div class="mat-num" style="color:${pr.cor}">${pr.pts}<small> / 21</small><span>${esc(pr.nivel)}</span></div>` : `<p class="txt-prog">Pontue a matriz de prontidão no Parecer da WL.</p>`;
+    $("painelPront").innerHTML = htm;
+    if ($("resPront")) $("resPront").innerHTML = pr ? `<b style="color:${pr.cor}">${pr.pts} / 21</b> · ${esc(pr.nivel)}` : "";
+  }
 }
 function ligarForm() {
   const raiz = $("atdConteudo"), dd = diagAtual;
   const resp = (id, campo, valor) => { dd.respostas = dd.respostas || {}; dd.respostas[id] = { ...(dd.respostas[id] || {}), [campo]: valor }; };
   raiz.oninput = e => {
     const t = e.target;
-    if (t.dataset.q) resp(t.dataset.q, "v", t.value);
+    if (t.dataset.tab) { const lin = (dd[t.dataset.tab] || [])[+t.dataset.lin]; if (!lin) return; lin[t.dataset.col] = t.value; }
+    else if (t.dataset.q) resp(t.dataset.q, "v", t.value);
     else if (t.dataset.obs) resp(t.dataset.obs, "obs", t.value);
     else if (t.dataset.d) dd[t.dataset.d] = t.value;
     else if (t.dataset.cliF) { dd.cliente = { ...(dd.cliente || {}), [t.dataset.cliF]: t.value }; if (t.dataset.cliF === "empresa") $("atdTitulo").textContent = t.value || "Diagnóstico"; }
@@ -2866,13 +3140,24 @@ function ligarForm() {
     const b = e.target.closest("[data-v],[data-atd],[data-ir-sec]");
     if (!b) return;
     if (b.dataset.irSec) return $(b.dataset.irSec).scrollIntoView({ behavior: "smooth", block: "start" });
+    const redesenhar = () => { const y = scrollY; alterouDiag(); abrirDiag(dd.id); scrollTo(0, y); };
+    if (b.dataset.atd === "addLinha") { (dd[b.dataset.tab] ||= []).push({}); return redesenhar(); }
+    if (b.dataset.atd === "remLinha") { const row = dd[b.dataset.tab]?.[+b.dataset.lin]; if (row && Object.values(row).some(x => String(x).trim()) && !confirmar("Remover esta linha?")) return; dd[b.dataset.tab].splice(+b.dataset.lin, 1); return redesenhar(); }
+    if (b.dataset.atd === "sugerirMapa") { if (sugerirMapa(dd)) redesenhar(); return; }
     if (b.dataset.v !== undefined) {
       const grupo = b.parentElement;
+      if (grupo.dataset.multi || grupo.dataset.dMulti) {
+        b.classList.toggle("ativo");
+        const sel = [...grupo.querySelectorAll("[data-v].ativo")].map(x => x.dataset.v);
+        if (grupo.dataset.multi) resp(grupo.dataset.q, "v", sel); else dd[grupo.dataset.dMulti] = sel;
+        return alterouDiag();
+      }
       const novo = b.classList.contains("ativo") ? "" : b.dataset.v;
       grupo.querySelectorAll("[data-v]").forEach(x => x.classList.toggle("ativo", x === b && novo !== ""));
       if (grupo.dataset.q) resp(grupo.dataset.q, "v", novo);
       if (grupo.dataset.dOp) dd[grupo.dataset.dOp] = novo;
-      for (const q of PERGUNTAS_BPO.filter(q => q.se)) $("p-" + q.id).classList.toggle("oculto", !visivel(q, dd.respostas || {}));
+      if (grupo.dataset.mz) dd.matriz = { ...(dd.matriz || {}), [grupo.dataset.mz]: novo ? Number(novo) : 0 };
+      for (const q of TD.perguntas.filter(q => q.se)) $("p-" + q.id).classList.toggle("oculto", !visivel(q, dd.respostas || {}));
       return alterouDiag();
     }
   };
@@ -2894,7 +3179,7 @@ async function salvarDiag() {
   copia.atualizadoEm = new Date().toISOString(); copia.atualizadoPor = meuNome();
   diagAtual.atualizadoEm = copia.atualizadoEm; diagAtual.atualizadoPor = copia.atualizadoPor;
   try {
-    await salvarStore(diagStore, d => { const k = d.diagnosticos.findIndex(x => x.id === copia.id); if (k >= 0) d.diagnosticos[k] = copia; else d.diagnosticos.push(copia); });
+    await salvarStore(tipoDe(copia).store, d => { const k = d.diagnosticos.findIndex(x => x.id === copia.id); if (k >= 0) d.diagnosticos[k] = copia; else d.diagnosticos.push(copia); });
     if (!diagPendente) marcarSalvo(`Salvo na nuvem às ${hora(Date.now()).slice(0, 5)}`, "ok");
     return true;
   } catch (e) {
@@ -2914,15 +3199,19 @@ async function finalizarDiag() {
   if (p.feitas < p.total && !confirmar(`Ainda há ${p.total - p.feitas} pergunta(s) sem resposta. Finalizar mesmo assim?`)) return;
   if (!crm.carregado) await carregarCRM(true);
   chip("sincronizando", "Finalizando…");
-  const texto = `Diagnóstico Preliminar BPO ${dd.id} finalizado` + (maturidade(dd) ? ` · maturidade ${maturidade(dd).pct}% (${maturidade(dd).nivel})` : "") + (dd.plano ? ` · ${dd.plano}` : "");
+  const t = tipoDe(dd), mtF = maturidade(dd), prF = t.frente === "bpo" ? null : prontidao(dd);
+  const texto = `${t.curto} ${dd.id} finalizado` + (mtF ? ` · maturidade ${mtF.pct}% (${mtF.nivel})` : "") + (dd.plano ? ` · ${dd.plano}` : "")
+    + (prF && prF.feitas === MATRIZ_PRONTIDAO.length ? ` · prontidão ${prF.pts}/21` : "") + (dd.conclusao ? ` · ${dd.conclusao}` : "");
+  const acaoCRM = l => { if (dd.proximaAcao?.trim() && !(l.acoes || []).some(a => !a.concluida && a.texto === dd.proximaAcao.trim())) novaAcao(l, dd.proximaAcao.trim(), dd.prazoRetorno || ""); };
   let ok;
   if (dd.leadId && leadPorId(dd.leadId)) {
     ok = await alterarLead(dd.leadId, l => {
       if (l.semInteresse) { registrar(l, "reativado", "Reativado pelo diagnóstico"); delete l.semInteresse; }
       registrar(l, "diagnostico", texto);
       if (l.etapa === "perdido" || ORDEM_ETAPA[l.etapa] < ORDEM_ETAPA.diagnostico) moverEtapa(l, "diagnostico");
-      l.frentes = [...new Set([...(l.frentes || []), "BPO Financeiro"])];
+      l.frentes = [...new Set([...(l.frentes || []), t.crmFrente])];
       for (const a of pendentes(l)) if (/diagn|reuni/i.test(a.texto)) concluirAcao(l, a.id, "diagnóstico realizado");
+      acaoCRM(l);
     });
   } else {
     let novoLeadId;
@@ -2930,10 +3219,11 @@ async function finalizarDiag() {
     ok = await salvarCRM(d => {
       novoLeadId = novoId(d);
       const l = { id: novoLeadId, empresa: c.empresa.trim(), segmento: c.segmento || "", contato: c.contato || dd.entrevistado || "", cidade: c.cidade || "", uf: c.uf || "",
-        telefones: c.telefone ? [c.telefone] : [], email: c.email || "", fit: "", origem: "Diagnóstico BPO", frentes: ["BPO Financeiro"], etapa: "diagnostico",
-        responsavel: dd.responsavel || "", criadoEm: new Date().toISOString(), criadoPor: meuNome(), historico: [] };
-      registrar(l, "criado", "Cadastrado pelo Diagnóstico BPO");
+        telefones: c.telefone ? [c.telefone] : [], email: c.email || "", fit: "", origem: t.curto, frentes: [t.crmFrente], etapa: "diagnostico",
+        responsavel: dd.responsavel || "", criadoEm: new Date().toISOString(), criadoPor: meuNome(), historico: [], acoes: [] };
+      registrar(l, "criado", "Cadastrado pelo " + t.curto);
       registrar(l, "diagnostico", texto);
+      acaoCRM(l);
       d.leads.push(l);
     });
     if (ok) dd.leadId = novoLeadId;
@@ -2948,11 +3238,11 @@ async function finalizarDiag() {
 }
 function oferecerPDF() {
   const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Diagnóstico finalizado ✓</h3></div>
-    <div class="modal-corpo"><p>O cliente foi atualizado no CRM para <b>Diagnóstico feito</b> e o registro foi adicionado ao histórico.</p><p>Deseja gerar o PDF agora?</p></div>
+    <div class="modal-corpo"><p>O cliente foi atualizado no CRM para <b>Diagnóstico feito</b> e o registro foi adicionado ao histórico${diagAtual?.proximaAcao?.trim() ? ", junto com a próxima ação" : ""}.</p><p>Deseja gerar o PDF agora?</p></div>
     <div class="modal-rod"><button class="btn-s" data-m="nao">Depois</button><button class="btn-p" data-m="pdf"><svg><use href="#i-pdf"/></svg>Gerar PDF</button></div>`);
   veu.onclick = fecharModal;
   m.querySelector("[data-m=nao]").onclick = fecharModal;
-  m.querySelector("[data-m=pdf]").onclick = () => { fecharModal(); gerarPDFDiag(diagAtual); };
+  m.querySelector("[data-m=pdf]").onclick = () => { fecharModal(); emitirPDF(diagAtual); };
 }
 
 /* ---- PDF ---- */
@@ -2964,17 +3254,18 @@ function carregarScript(url) {
     document.head.appendChild(s);
   });
 }
-function htmlPDFDiag(dd) {
-  const r = dd.respostas || {}, mt = maturidade(dd), c = dd.cliente || {};
+function htmlPDFDiag(dd, interno = false) {
+  const t = tipoDe(dd), r = dd.respostas || {}, mt = maturidade(dd), c = dd.cliente || {};
   const fmt = (q) => {
     const v = r[q.id]?.v;
-    if (v === undefined || v === "") return `<span class="pdf-vazio">Não respondido</span>`;
+    if (v === undefined || v === "" || (Array.isArray(v) && !v.length)) return `<span class="pdf-vazio">Não respondido</span>`;
+    if (Array.isArray(v)) return v.map(esc).join(" · ");
     if (q.tipo === "escala") return `${esc(v)} — ${esc(q.ops[Number(v) - 1] || "")}`;
     return esc(v).replace(/\n/g, "<br>");
   };
   let n = 0;
   return `<div class="pdf">
-    <div class="pdf-topo"><img src="logo-cor.png" alt="WL Expertise"><div><b>Diagnóstico Preliminar</b><span>BPO Financeiro</span></div></div>
+    <div class="pdf-topo"><img src="logo-cor.png" alt="WL Expertise"><div><b>${esc(t.pdfTitulo)}${interno ? " · uso interno" : ""}</b><span>${esc(t.pdfSub)}</span></div></div>
     <div class="pdf-cliente">
       <div><small>Empresa</small><b>${esc(c.empresa || "")}</b></div>
       <div><small>Entrevistado</small><b>${esc(dd.entrevistado || "—")}${dd.cargo ? ` · ${esc(dd.cargo)}` : ""}</b></div>
@@ -2984,14 +3275,15 @@ function htmlPDFDiag(dd) {
       <div><small>Situação</small><b>${dd.status === "finalizado" ? "Finalizado em " + data(dd.finalizadoEm) : "Em edição"}</b></div>
     </div>
     ${mt ? `<div class="pdf-bloco pdf-mat">
-      <div class="pdf-mat-num" style="color:${corNivel(mt.pct)}">${mt.pct}%<span>Maturidade financeira · ${mt.nivel}</span></div>
+      <div class="pdf-mat-num" style="color:${corNivel(mt.pct)}">${mt.pct}%<span>${esc(t.nomeMat)} · ${mt.nivel}</span></div>
       <div class="pdf-barra"><i style="width:${mt.pct}%;background:${corNivel(mt.pct)}"></i></div>
-      ${mt.atencao.length ? `<div class="pdf-atencao"><b>Pontos de atenção</b><ul>${mt.atencao.map(a => `<li><span class="pdf-tag ${a.v === "Não" ? "nao" : "parc"}">${a.v}</span>${esc(a.q.txt)}</li>`).join("")}</ul></div>` : ""}
+      ${mt.setores.length ? `<div class="pdf-setores">${mt.setores.map(s => `<div><span>${esc(s.nome)}</span><div class="pdf-barra"><i style="width:${s.pct ?? 0}%;background:${s.pct == null ? "transparent" : corNivel(s.pct)}"></i></div><b>${s.pct == null ? "—" : s.pct + "%"}</b></div>`).join("")}</div>` : ""}
+      ${mt.atencao.length ? `<div class="pdf-atencao"><b>Pontos de atenção</b><ul>${mt.atencao.map(a => `<li><span class="pdf-tag ${a.v === "Não" ? "nao" : "parc"}">${a.v}</span>${mt.setores.length ? `<i class="pdf-set">${esc(a.setor)}</i> ` : ""}${esc(a.q.rot || a.q.txt)}</li>`).join("")}</ul></div>` : ""}
     </div>` : ""}
-    ${DIAG_BPO.map(s => `<div class="pdf-secao"><h3>${esc(s.secao)}</h3>${s.itens.filter(q => visivel(q, r)).map(q => { n++; return `<div class="pdf-q">
+    ${t.secoes.map(s => `<div class="pdf-secao"><h3>${esc(s.secao)}${s.setor && mt?.setores.find(z => z.nome === s.secao)?.pct != null ? ` · ${mt.setores.find(z => z.nome === s.secao).pct}%` : ""}</h3>${s.itens.filter(q => visivel(q, r)).map(q => { n++; return `<div class="pdf-q">
       <div class="pdf-perg"><span>${n}</span>${esc(q.txt)}</div><div class="pdf-resp">${fmt(q)}</div>
       ${r[q.id]?.obs ? `<div class="pdf-obs">Obs.: ${esc(r[q.id].obs)}</div>` : ""}</div>`; }).join("")}</div>`).join("")}
-    ${dd.plano || dd.parecer || dd.proximosPassos ? `<div class="pdf-secao pdf-bloco"><h3>Parecer da WL Expertise</h3>
+    ${t.frente !== "bpo" ? pdfParecerRental(dd, interno) : dd.plano || dd.parecer || dd.proximosPassos ? `<div class="pdf-secao pdf-bloco"><h3>Parecer da WL Expertise</h3>
       ${dd.plano ? `<div class="pdf-q"><div class="pdf-perg">Plano recomendado</div><div class="pdf-resp"><b>${esc(dd.plano)}</b></div></div>` : ""}
       ${dd.parecer ? `<div class="pdf-q"><div class="pdf-perg">Parecer</div><div class="pdf-resp">${esc(dd.parecer).replace(/\n/g, "<br>")}</div></div>` : ""}
       ${dd.proximosPassos ? `<div class="pdf-q"><div class="pdf-perg">Próximos passos</div><div class="pdf-resp">${esc(dd.proximosPassos).replace(/\n/g, "<br>")}</div></div>` : ""}
@@ -2999,7 +3291,38 @@ function htmlPDFDiag(dd) {
     <div class="pdf-rodape">WL Expertise · BPO Financeiro, FP&amp;A, Planejamento Financeiro e Consultoria de Processos · contato@wlexpertise.com · (31) 99736-1414</div>
   </div>`;
 }
-async function gerarPDFDiag(dd) {
+function pdfParecerRental(dd, interno) {
+  const bloco = (rot, txt) => txt?.trim() ? `<div class="pdf-q"><div class="pdf-perg">${esc(rot)}</div><div class="pdf-resp">${esc(txt).replace(/\n/g, "<br>")}</div></div>` : "";
+  const tab = (rows, cols) => { const ls = (rows || []).filter(x => cols.some(([c]) => (x[c] || "").trim())); return ls.length ? `<table class="pdf-tab"><thead><tr>${cols.map(([, r]) => `<th>${esc(r)}</th>`).join("")}</tr></thead><tbody>${ls.map(x => `<tr>${cols.map(([c]) => `<td>${esc(x[c] || "")}</td>`).join("")}</tr>`).join("")}</tbody></table>` : ""; };
+  const pr = prontidao(dd), mapa = tab(dd.mapa, COLS_MAPA), crit = tab(dd.criterios, COLS_CRIT);
+  const sint = SINTESE.map(([k, r]) => bloco(r, dd[k])).join("");
+  return `${dd.setoresRec?.length || sint ? `<div class="pdf-secao pdf-bloco"><h3>Parecer da WL Expertise</h3>
+      ${dd.setoresRec?.length ? `<div class="pdf-q"><div class="pdf-perg">Setores recomendados para o projeto</div><div class="pdf-resp"><b>${dd.setoresRec.map(esc).join(" · ")}</b></div></div>` : ""}${sint}</div>` : ""}
+    ${interno && pr ? `<div class="pdf-secao pdf-bloco"><h3>Matriz de prontidão · ${pr.pts} / 21</h3><div class="pdf-q"><div class="pdf-resp" style="margin-left:0"><b style="color:${pr.cor}">${esc(pr.nivel)}</b></div></div>
+      <table class="pdf-tab"><thead><tr><th>Critério</th><th>Nota</th><th>Leitura</th></tr></thead><tbody>${MATRIZ_PRONTIDAO.map(cr => { const n = Number(dd.matriz?.[cr.id]) || 0; return `<tr><td>${esc(cr.nome)}</td><td>${n || "—"}</td><td>${n ? esc(cr.n[n - 1]) : ""}</td></tr>`; }).join("")}</tbody></table></div>` : ""}
+    ${mapa ? `<div class="pdf-secao pdf-bloco"><h3>Mapa preliminar de ação</h3>${mapa}</div>` : ""}
+    ${crit ? `<div class="pdf-secao pdf-bloco"><h3>Critérios de sucesso</h3>${crit}</div>` : ""}
+    ${dd.parecer?.trim() || dd.proximaAcao?.trim() || (interno && dd.conclusao) ? `<div class="pdf-secao pdf-bloco"><h3>Conclusão</h3>
+      ${interno && dd.conclusao ? `<div class="pdf-q"><div class="pdf-perg">Situação do cliente</div><div class="pdf-resp"><b>${esc(dd.conclusao)}</b></div></div>` : ""}
+      ${bloco("Recomendação final", dd.parecer)}
+      ${dd.proximaAcao?.trim() ? `<div class="pdf-q"><div class="pdf-perg">Próximo passo</div><div class="pdf-resp">${esc(dd.proximaAcao)}${dd.prazoRetorno ? ` · até ${data(dd.prazoRetorno + "T12:00")}` : ""}</div></div>` : ""}</div>` : ""}`;
+}
+/* Rental: versão para o cliente (sem a matriz de prontidão) ou interna (completa) */
+function emitirPDF(dd) {
+  if (tipoDe(dd).frente === "bpo") return gerarPDFDiag(dd);
+  return new Promise(ok => {
+    const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Emitir PDF</h3></div>
+      <div class="modal-corpo"><div class="opcoes-salvar">
+        <label><input type="radio" name="vpdf" value="cliente" checked><div><b>Versão para o cliente</b><small>Respostas, maturidade por setor, síntese, mapa de ação, critérios e próximo passo.</small></div></label>
+        <label><input type="radio" name="vpdf" value="interno"><div><b>Versão interna</b><small>Tudo da versão do cliente + matriz de prontidão e situação do cliente.</small></div></label>
+      </div></div>
+      <div class="modal-rod"><button class="btn-s" data-m="nao">Cancelar</button><button class="btn-p" data-m="pdf"><svg><use href="#i-pdf"/></svg>Gerar PDF</button></div>`);
+    veu.onclick = () => { fecharModal(); ok(); };
+    m.querySelector("[data-m=nao]").onclick = () => { fecharModal(); ok(); };
+    m.querySelector("[data-m=pdf]").onclick = async () => { const interno = m.querySelector("[name=vpdf]:checked").value === "interno"; fecharModal(); await gerarPDFDiag(dd, interno); ok(); };
+  });
+}
+async function gerarPDFDiag(dd, interno = false) {
   if (diagPendente) await salvarDiag();
   toast("Gerando PDF…", "prog", 0);
   try {
@@ -3007,17 +3330,17 @@ async function gerarPDFDiag(dd) {
     // o conteúdo é montado num contêiner fixo no topo (atrás da página) para o capturador renderizar corretamente
     const host = document.createElement("div");
     host.style.cssText = "position:fixed;left:0;top:0;width:190mm;z-index:-1;pointer-events:none;background:#fff";
-    host.innerHTML = htmlPDFDiag(dd);
+    host.innerHTML = htmlPDFDiag(dd, interno);
     document.body.appendChild(host);
     await Promise.all([...host.querySelectorAll("img")].map(i => i.complete ? 0 : new Promise(ok => { i.onload = i.onerror = ok; })));
     const empresa = limparNome(dd.cliente?.empresa || "Cliente");
-    const nomeArq = `Diagnóstico BPO - ${empresa} - ${(dd.finalizadoEm || dd.atualizadoEm || new Date().toISOString()).slice(0, 10)}.pdf`;
+    const nomeArq = `${tipoDe(dd).curto} - ${empresa} - ${(dd.finalizadoEm || dd.atualizadoEm || new Date().toISOString()).slice(0, 10)}${interno ? " (interno)" : ""}.pdf`;
     let blob;
     try {
     blob = await html2pdf().set({
       margin: [10, 10, 14, 10], filename: nomeArq, image: { type: "jpeg", quality: 0.92 },
       html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0 }, jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      pagebreak: { mode: ["css", "legacy"], avoid: [".pdf-q", ".pdf-cliente", ".pdf-mat", ".pdf-secao h3"] }
+      pagebreak: { mode: ["css", "legacy"], avoid: [".pdf-q", ".pdf-cliente", ".pdf-mat", ".pdf-secao h3", ".pdf-bloco", "tr"] }
     }).from(host.firstElementChild).toPdf().get("pdf").then(pdf => {
       const tot = pdf.internal.getNumberOfPages();
       for (let i = 1; i <= tot; i++) { pdf.setPage(i); pdf.setFontSize(8); pdf.setTextColor(120); pdf.text(`${dd.id} · página ${i} de ${tot}`, 200, 290, { align: "right" }); }
@@ -3031,8 +3354,8 @@ async function gerarPDFDiag(dd) {
     await criarPasta("clientes", empresa);
     const item = await enviarArquivo(`clientes/${empresa}/${nomeArq}`, new File([blob], nomeArq, { type: "application/pdf" }), "replace");
     const pdfInfo = { id: item.id, webUrl: item.webUrl, nome: nomeArq, em: new Date().toISOString() };
-    await salvarStore(diagStore, d => { const x = d.diagnosticos.find(y => y.id === dd.id); if (x) x.pdf = pdfInfo; });
-    if (diagAtual?.id === dd.id) diagAtual.pdf = pdfInfo;
+    if (!interno) await salvarStore(tipoDe(dd).store, d => { const x = d.diagnosticos.find(y => y.id === dd.id); if (x) x.pdf = pdfInfo; });
+    if (diagAtual?.id === dd.id && !interno) diagAtual.pdf = pdfInfo;
     if (dd.leadId && crm.carregado && leadPorId(dd.leadId)) alterarLead(dd.leadId, l => registrar(l, "documento", `PDF gerado: ${nomeArq}`, { link: item.webUrl }));
     toast(`PDF salvo em clientes/${empresa}`);
     if (viewAtual === "atendimento" && rota[2] === dd.id) abrirDiag(dd.id);
@@ -3046,10 +3369,10 @@ async function excluirDiag(d) {
   if (!confirmar(`Excluir o diagnóstico ${d.id} de ${d.cliente?.empresa || "cliente"}?` + (fin ? "\n\nEle já foi finalizado: o registro no histórico do CRM e o PDF salvo na pasta do cliente serão mantidos." : ""))) return;
   if (diagAtual?.id === d.id) { diagAtual = null; diagPendente = false; clearTimeout(timerDiag); }
   try {
-    await salvarStore(diagStore, x => { x.diagnosticos = x.diagnosticos.filter(y => y.id !== d.id); });
+    await salvarStore(tipoDe(d).store, x => { x.diagnosticos = x.diagnosticos.filter(y => y.id !== d.id); });
     if (d.leadId && crm.carregado && leadPorId(d.leadId)) alterarLead(d.leadId, l => registrar(l, "nota", `Diagnóstico ${d.id} excluído`));
     toast(`Diagnóstico ${d.id} excluído`);
-    if (rota[2]) location.hash = "atendimento/bpo/diagnostico"; else renderListaDiag();
+    if (rota[2]) location.hash = rotaDiag(null, tipoDe(d)); else renderListaDiag();
   } catch (e) { toast("Não foi possível excluir: " + e.message, "erro", 6000); }
 }
 
@@ -3061,18 +3384,18 @@ $("atdConteudo").addEventListener("click", async e => {
     e.stopPropagation();
     const d = diags().find(x => x.id === ac.dataset.diag);
     if (!d) return;
-    if (ac.dataset.diagAcao === "editar") location.hash = `atendimento/bpo/diagnostico/${d.id}`;
-    if (ac.dataset.diagAcao === "pdf") { ac.disabled = true; await gerarPDFDiag(structuredClone(d)); ac.disabled = false; }
+    if (ac.dataset.diagAcao === "editar") location.hash = rotaDiag(d.id);
+    if (ac.dataset.diagAcao === "pdf") { ac.disabled = true; await emitirPDF(structuredClone(d)); ac.disabled = false; }
     if (ac.dataset.diagAcao === "excluir") excluirDiag(d);
     return;
   }
   const el = e.target.closest("[data-abrir-diag],[data-atd]");
   if (!el) return;
-  if (el.dataset.abrirDiag) { location.hash = `atendimento/bpo/diagnostico/${el.dataset.abrirDiag}`; return; }
+  if (el.dataset.abrirDiag) { location.hash = rotaDiag(el.dataset.abrirDiag); return; }
   const a = el.dataset.atd;
   if (a === "novo") novoDiagnostico();
   if (a === "finalizar") { el.disabled = true; await finalizarDiag(); el.disabled = false; }
-  if (a === "pdf") { el.disabled = true; await gerarPDFDiag(diagAtual); el.disabled = false; }
+  if (a === "pdf") { el.disabled = true; await emitirPDF(diagAtual); el.disabled = false; }
   if (a === "verLead") { if (!crm.carregado) await carregarCRM(true); abrirLead(diagAtual.leadId); }
   if (a === "excluirDiag") excluirDiag(diags().find(x => x.id === diagAtual.id) || diagAtual);
 });
@@ -3650,7 +3973,7 @@ function sincronizarVisivel() {
   if (viewAtual === "biblioteca") carregarBiblioteca();
   else if (viewAtual === "sistema") verificarTeste();
   else if (viewAtual === "crm") verificarCRM();
-  else if (viewAtual === "atendimento" && rota[1] === "diagnostico" && !rota[2] && diagStore.carregado) carregarStore(diagStore).then(() => { if (viewAtual === "atendimento" && !rota[2]) renderListaDiag(); }).catch(() => {});
+  else if (viewAtual === "atendimento" && rota[1] === "diagnostico" && !rota[2] && TIPOS_DIAG[rota[0]]?.store.carregado) carregarStore(TIPOS_DIAG[rota[0]].store).then(() => { if (viewAtual === "atendimento" && !rota[2]) renderListaDiag(); }).catch(() => {});
 }
 async function abrirApp() {
   const nome = conta.name || conta.username;
