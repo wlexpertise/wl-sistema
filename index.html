@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root{
     --teal:#0B5A60; --teal-2:#0d474c; --turq:#13A3B5; --verde:#28B260;
@@ -581,6 +581,77 @@
   .botoes-diag{display:flex;gap:8px;flex-wrap:wrap}
   /* Propostas */
   .campo-lic input{max-width:220px}
+  /* Contratos */
+  .aviso-falta{display:grid;gap:3px;font-size:.78rem;color:#9A6A0C;background:rgba(217,154,30,.12);border-radius:10px;padding:10px 12px}
+  .aviso-falta b{font-size:.74rem;text-transform:uppercase;letter-spacing:.05em}
+  .ctr-bloqueado .diag-form{opacity:.6;pointer-events:none}
+  .sig-status{padding:8px 0;border-bottom:1px solid var(--borda);display:grid;gap:2px}
+  .sig-status small{font-size:.74rem;color:var(--txt-2)} .sig-status.ok small{color:#1D7F45;font-weight:600}
+  .sig-acoes{display:flex;gap:12px;flex-wrap:wrap}
+  .modal.modal-envio{width:min(1180px,calc(100vw - 16px));max-height:calc(100vh - 20px);display:flex;flex-direction:column}
+  .modal-envio .modal-corpo{flex:1;min-height:0;overflow:hidden}
+  .envio-ass{display:grid;grid-template-columns:320px minmax(0,1fr);gap:16px;height:min(74vh,820px)}
+  .env-lado{overflow-y:auto;display:grid;gap:8px;align-content:start;padding-right:4px}
+  .env-lado h5{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-top:6px}
+  .env-doc{overflow-y:auto;background:#E8EEEE;border-radius:12px;padding:12px}
+  .sig-card{border:1.5px solid var(--borda);border-radius:12px;padding:10px;display:grid;gap:6px;cursor:pointer;background:#fff}
+  .sig-card.ativo{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 25%,transparent)}
+  .sig-card input{border:1.5px solid var(--borda);border-radius:8px;padding:7px 9px;font:inherit;font-size:.8rem}
+  .sig-top{display:flex;align-items:center;gap:8px;font-size:.8rem}
+  .sig-top i{width:12px;height:12px;border-radius:4px;background:var(--c)}
+  .sig-top span{margin-left:auto;font-size:.7rem;color:var(--txt-2)}
+  .pg-wrap{position:relative;margin:0 auto 14px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);cursor:crosshair}
+  .pg-wrap canvas{display:block}
+  .pg-num{position:absolute;left:6px;top:6px;font-size:.62rem;font-weight:700;background:rgba(11,90,96,.85);color:#fff;border-radius:6px;padding:2px 6px;z-index:2}
+  .campo-ass{position:absolute;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 18%,transparent);border-radius:6px;display:grid;place-items:center;font-size:.68rem;font-weight:800;color:var(--c);cursor:pointer}
+  .campo-ass:hover::after{content:"remover";position:absolute;top:-16px;right:0;font-size:.6rem;background:var(--erro);color:#fff;border-radius:4px;padding:1px 4px}
+  @media(max-width:860px){.envio-ass{grid-template-columns:1fr;height:auto}.env-doc{max-height:60vh}}
+  /* Clientes */
+  .grade-cli{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  .card-cli{text-align:left;background:#fff;border:1px solid var(--borda);border-radius:16px;padding:16px;display:grid;gap:6px;cursor:pointer;font:inherit;color:var(--txt)}
+  .card-cli:hover{border-color:var(--turq);box-shadow:0 8px 24px rgba(6,30,33,.08)}
+  .card-cli b{font-size:1rem;color:var(--teal)} .card-cli small{font-size:.74rem;color:var(--txt-2)}
+  .chips-cli{display:flex;flex-wrap:wrap;gap:4px} .chips-cli span{font-size:.66rem;font-weight:700;background:rgba(19,163,181,.12);color:var(--teal);border-radius:999px;padding:3px 8px}
+  .rod-cli{display:flex;justify-content:space-between;font-size:.74rem;color:var(--txt-2);margin-top:4px} .rod-cli span:first-child{font-weight:800;color:var(--txt)}
+  .hist-cli{list-style:none;display:grid;gap:0}
+  .hist-cli li{display:grid;gap:2px;padding:9px 0;border-bottom:1px solid var(--borda);font-size:.82rem}
+  .hist-cli small{font-size:.7rem;color:var(--txt-2)} .hist-cli span{color:var(--txt-2)} .hist-cli a{font-size:.74rem;color:var(--turq);font-weight:700}
+  .docs-cli{list-style:none;display:grid;gap:6px;margin-top:6px}
+  .docs-cli a{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--borda);border-radius:10px;color:var(--txt);text-decoration:none}
+  .docs-cli a:hover{border-color:var(--turq)}
+  .docs-cli svg{width:18px;height:18px;color:var(--turq);flex:none} .docs-cli span{display:grid;min-width:0} .docs-cli b{font-size:.8rem} .docs-cli small{font-size:.7rem;color:var(--txt-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  /* PDF do contrato (layout do modelo WL) */
+  .ct{width:182mm;font-family:"Montserrat","Segoe UI",sans-serif;color:#3B4747;font-size:10.2px;line-height:1.6;background:#fff}
+  .ct-parte{position:relative;background:#F2F6F7;border:1px solid #E1EAEB;border-radius:8px;padding:30px 18px 10px;margin:14px 0 22px}
+  .ct-tab{position:absolute;left:16px;top:-14px;background:#0E5C63;color:#fff;font-weight:800;letter-spacing:.12em;font-size:10.5px;padding:8px 26px;border-radius:7px}
+  .ct-lin{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid #E6EEEF;font-size:9.6px}
+  .ct-lin:last-child{border-bottom:0} .ct-lin span{color:#566464} .ct-lin b{color:#1F2B2B}
+  .ct-cl{margin-top:16px}
+  .ct-cl h3{font-size:11.2px;font-weight:800;color:#1CA0B0;margin-bottom:6px;letter-spacing:.01em}
+  .ct p{margin:0 0 7px;text-align:justify} .ct p b{color:#1F2B2B}
+  .ct-sub{font-weight:800;color:#1F2B2B;margin-top:10px!important}
+  .ct-num{list-style:none;counter-reset:n;margin:4px 0 8px;display:grid;gap:5px}
+  .ct-num li{counter-increment:n;display:grid;grid-template-columns:24px 1fr;gap:2px}
+  .ct-num li::before{content:counter(n) ".";font-weight:800;color:#1CA0B0}
+  .ct-rom{list-style:none;margin:2px 0 8px 18px;display:grid;gap:4px}
+  .ct-rom b{color:#1CA0B0;display:inline-block;min-width:34px}
+  .ct-bul{margin:2px 0 8px 22px;display:grid;gap:4px} .ct-bul li::marker{color:#1CA0B0}
+  .ct-ind{margin-left:10px!important}
+  .ct-fases{display:grid;gap:10px;margin:12px 0}
+  .ct-fases div{display:grid;grid-template-columns:120px 1fr;align-items:center;background:#F2F6F7;border-radius:8px;overflow:hidden}
+  .ct-fases span{display:grid;place-items:center;align-self:stretch;color:#fff;font-weight:800;font-size:10px;padding:16px 0}
+  .ct-fases .f1{background:#0E5C63} .ct-fases .f2{background:#1CA0B0}
+  .ct-fases p{margin:0;padding:8px 12px;font-size:9.4px}
+  .ct-pag{background:#F2F6F7;border-radius:8px;padding:12px 16px;display:grid;gap:3px;margin-top:10px;font-size:9.6px;color:#1F2B2B}
+  .ct-pag>b{color:#0E5C63}
+  .ct-fim{margin-top:20px}
+  .ct-local{text-align:center!important;margin:14px 0 40px!important}
+  .ct-assin{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .ct-assin div{display:grid;gap:1px;text-align:center;font-size:8.8px;color:#3B4747}
+  .ct-assin i{display:block;border-top:1px solid #1F2B2B;margin-bottom:5px}
+  .ct-assin b{font-style:italic;color:#0E5C63;font-size:10px;margin-bottom:4px}
+  .ct-assin .it{font-style:italic;margin-top:3px}
+  .ct-anexo{font-size:8.4px;text-align:center!important;font-style:italic;color:#0E5C63;margin-top:22px!important}
   .linha3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
   @media(max-width:600px){.linha3{grid-template-columns:1fr}}
   .ld-ico.prop{background:rgba(19,163,181,.14);color:var(--teal);font-size:.8rem}
@@ -825,6 +896,7 @@
   <symbol id="i-estrela" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
   <symbol id="i-estrela-cheia" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
   <symbol id="i-doc-editar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h5"/><path d="M14 2v6h6M20 8v3"/><path d="M18.4 13.6a1.9 1.9 0 0 1 2.7 2.7L15.5 22H13v-2.5z"/></symbol>
+  <symbol id="i-cli" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
   <symbol id="i-pasta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
   <symbol id="i-chave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8M17 6l3 3M14.5 8.5l2 2"/></symbol>
   <symbol id="i-atual" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></symbol>
@@ -925,6 +997,15 @@
       <div id="atdConteudo"></div>
     </div>
 
+    <!-- ============ CLIENTES ============ -->
+    <div data-view="clientes" class="oculto">
+      <div class="cab-atd"><div><div class="eyebrow" id="cliEyebrow">Carteira</div>
+        <h2 id="cliTitulo" style="font-size:1.5rem;font-weight:700;margin-top:4px;color:var(--teal)">Clientes</h2>
+        <p id="cliDesc" style="font-size:.86rem;color:var(--txt-2);margin-top:4px"></p></div>
+        <button class="btn-s" data-link="#clientes">Todos os clientes</button></div>
+      <div id="cliConteudo"></div>
+    </div>
+
     <!-- ============ MEUS DOCUMENTOS ============ -->
     <div data-view="meus" class="oculto">
       <div class="cab-pagina"><div><div class="eyebrow">Pessoal</div><h2>Meus documentos</h2><p>Suas versões editadas e seus favoritos da Biblioteca. Só você vê esta área.</p></div></div>
@@ -992,6 +1073,7 @@ const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial"
 const MODULOS = [
   { id: "biblioteca", nome: "Biblioteca", icone: "i-bib", menu: true },
   { id: "crm", nome: "CRM", icone: "i-crm" },
+  { id: "clientes", nome: "Clientes", icone: "i-cli" },
   { id: "atendimento", nome: "Atendimento", icone: "i-atd", menu: true },
   { id: "meus", nome: "Meus documentos", icone: "i-pasta" },
   { id: "sistema", nome: "Sistema", icone: "i-sis" }
@@ -1225,6 +1307,7 @@ function irPara(hash) {
   fecharMenus();
   if (diagPendente) salvarDiag();
   if (propPendente) salvarProp();
+  if (ctrPendente) salvarCtr();
   if (id !== "crm" && !(id === "atendimento" && $("gaveta"))) fecharFicha();
   document.querySelectorAll("[data-view]").forEach(v => v.classList.toggle("oculto", v.dataset.view !== id));
   document.querySelectorAll("[data-ir]").forEach(b => b.classList.toggle("ativo", b.dataset.ir === id));
@@ -1232,6 +1315,7 @@ function irPara(hash) {
   if (id === "biblioteca") { $("busca").value = ""; filtroBusca = ""; renderBiblioteca(); }
   if (id === "sistema") { abrirSistema(); renderUsuarios(); }
   if (id === "meus") { renderMeus(); carregarMeus(); }
+  if (id === "clientes") renderClientes();
   document.querySelector("main").classList.toggle("largo", id === "crm" || id === "atendimento");
   if (id === "atendimento") renderAtendimento();
   if (id === "crm") { renderCRM(); if (!crm.carregado) carregarCRM(); else verificarCRM(); }
@@ -2661,7 +2745,8 @@ const FRENTES_AT = [
 ];
 function htmlMenuAtendimento() {
   return `<div class="grupo-menu"><button data-link="#atendimento/propostas"><svg><use href="#i-pdf"/></svg>Comercial</button>
-    <ul><li><button data-link="#atendimento/propostas" class="${viewAtual === "atendimento" && rota[0] === "propostas" ? "atual" : ""}"><span>Todas as propostas</span></button></li></ul></div>` + FRENTES_AT.map(f => `<div class="grupo-menu">
+    <ul><li><button data-link="#atendimento/propostas" class="${viewAtual === "atendimento" && rota[0] === "propostas" ? "atual" : ""}"><span>Propostas</span></button></li>
+      <li><button data-link="#atendimento/contratos" class="${viewAtual === "atendimento" && rota[0] === "contratos" ? "atual" : ""}"><span>Contratos</span></button></li></ul></div>` + FRENTES_AT.map(f => `<div class="grupo-menu">
     <button data-link="#atendimento"><svg><use href="#${f.icone}"/></svg>${esc(f.nome)}</button>
     <ul>${f.etapas.map(e => e.ativo
       ? `<li><button data-link="#atendimento/${f.id}/${e.id}" class="${viewAtual === "atendimento" && rota[0] === f.id && rota[1] === e.id ? "atual" : ""}"><span>${esc(e.nome)}</span></button></li>`
@@ -2724,8 +2809,9 @@ const DIAG_BPO = [
     { id: "prc_receber", tipo: "numero", txt: "Quantos recebimentos entram por semana?" },
     { id: "prc_nf_manual", tipo: "numero", txt: "Quantas notas fiscais a WL vai emitir por mês?" },
     { id: "prc_boletos", tipo: "numero", txt: "Quantos boletos a WL vai emitir por mês?" },
+    { id: "prc_emissao", tipo: "escolha", ops: ["Automática (integrada ao sistema)", "Manual"], txt: "Notas e boletos são emitidos de forma:" },
     { id: "prc_adquirentes", tipo: "numero", txt: "Quantas maquininhas e cartões corporativos serão conciliados?" },
-    { id: "prc_extras", tipo: "multi", txt: "Rotinas extras", ops: ["Conciliação de caixa físico", "Aplicações financeiras", "Contratos recorrentes a faturar"] },
+    { id: "prc_extras", tipo: "multi", txt: "Rotinas extras", ops: ["Agendamento dos pagamentos no banco", "Conciliação de caixa físico", "Aplicações financeiras", "Contratos recorrentes a faturar"] },
     { id: "prc_cc", tipo: "escolha", ops: ["Não", "Sim, sem rateio", "Sim, com rateio"], txt: "Os lançamentos serão classificados por centro de custo?" },
     { id: "prc_docs", tipo: "escolha", ops: ["Digitais e organizados", "Digitais, mas desorganizados", "Em papel / dispersos"], txt: "Como chegam os documentos (notas, boletos, comprovantes)?" },
     { id: "prc_reunioes", tipo: "escolha", ops: ["1", "2", "4 (semanal)"], txt: "Quantas reuniões de acompanhamento por mês?" } ] }
@@ -3024,6 +3110,13 @@ function sugestaoPlano(d) {
 let diagAtual = null, timerDiag = null, salvandoDiag = false, diagPendente = false;
 async function renderAtendimento() {
   const [frente, etapa, id] = rota;
+  if (frente === "contratos") {
+    diagAtual = null; propAtual = null;
+    if (!ctrStore.carregado) $("atdConteudo").innerHTML = `<div class="esqueleto"></div>`;
+    try { await garantirStoresCtr(); } catch (e) { $("atdConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os contratos.</b><br>${esc(e.message)}</div>`; return; }
+    if (viewAtual !== "atendimento") return;
+    return etapa ? abrirContrato(etapa) : renderListaContratos();
+  }
   if (frente === "propostas" || etapa === "proposta") {
     diagAtual = null;
     if (!propStore.carregado || !cfgStore.carregado) $("atdConteudo").innerHTML = `<div class="esqueleto"></div>`;
@@ -3658,20 +3751,22 @@ const TABELA_PADRAO = {
 };
 const PARAM_PADRAO = {
   hora: 300, licenca_erp: 300,
-  bpo_base: 240, bpo_pagar: 1.2, bpo_receber: 0.8, bpo_nf_manual: 4, bpo_nf_auto: 0.5, bpo_boleto: 1, bpo_conta: 30, bpo_adquirente: 60, bpo_cartao: 30,
-  bpo_caixa: 90, bpo_aplic: 20, bpo_contrato: 60, bpo_cobranca: 4, bpo_cnpj: 60, bpo_reuniao: 60, bpo_plano1: 60, bpo_plano2: 180,
+  c10_gastos: 20000, c10_pessoas: 4, c10_horas: 180, c10_margem: 50, c10_imposto: 10,
+  bpo_nf_auto: 2, bpo_nf_man: 5, bpo_bol_auto: 1, bpo_bol_man: 3, bpo_receber: 3, bpo_pagar: 3, bpo_agend: 4,
+  bpo_conta: 20, bpo_caixa: 50, bpo_plataforma: 50, bpo_aplic: 20, bpo_contrato: 50, bpo_reuniao: 200, bpo_contador: 50, bpo_cnpj: 150, bpo_plano1: 150, bpo_plano2: 400,
   fpa_h0: 11.5, fpa_h1: 16.5, fpa_h2: 21, fpa_integrado: 0.7, fpa_quinzenal: 1.5, fpa_semanal: 4,
   pla_h0: 24, pla_h1: 36, pla_revisao: 4, pla_invest: 3, pla_cenarios: 6,
   rt_setor: 40, rt_sistema: 0.2, rt_trein: 0.5, rt_plano1: 4, rt_plano2: 8
 };
 const PARAM_GRUPOS = [
   ["Geral", [["hora", "Valor da hora técnica", "R$/h"], ["licenca_erp", "Licença ContaAzul (padrão na proposta)", "R$/mês"]]],
-  ["BPO Financeiro — tempo por operação", [["bpo_base", "Rotina fixa (fechamento, relatório, agenda e organização)", "min/mês"], ["bpo_pagar", "Por conta paga", "min"], ["bpo_receber", "Por recebimento", "min"],
-    ["bpo_nf_manual", "Por nota fiscal emitida", "min"], ["bpo_boleto", "Por boleto emitido", "min"],
-    ["bpo_conta", "Por conta bancária conciliada", "min/mês"], ["bpo_adquirente", "Por maquininha / cartão corporativo", "min/mês"],
-    ["bpo_caixa", "Conciliação de caixa físico", "min/mês"], ["bpo_aplic", "Aplicações financeiras", "min/mês"], ["bpo_contrato", "Controle de contratos recorrentes", "min/mês"],
-    ["bpo_cnpj", "Por CNPJ adicional", "min/mês"], ["bpo_reuniao", "Por reunião", "min"],
-    ["bpo_plano1", "Entregas extras do BPO Performance", "min/mês"], ["bpo_plano2", "Entregas extras do BPO Gestão", "min/mês"]]],
+  ["BPO Financeiro — premissas internas (modelo C10)", [["c10_gastos", "Gastos totais da empresa", "R$/mês"], ["c10_pessoas", "Pessoas na operação", "pessoas"], ["c10_horas", "Horas trabalhadas por pessoa", "h/mês"],
+    ["c10_margem", "Margem desejada", "%"], ["c10_imposto", "Alíquota do Simples Nacional", "%"]]],
+  ["BPO Financeiro — minutos por tarefa", [["bpo_pagar", "Conta a pagar (registro)", "min"], ["bpo_agend", "Agendamento bancário", "min"], ["bpo_receber", "Conta a receber (registro)", "min"],
+    ["bpo_nf_auto", "NF: emissão automática", "min"], ["bpo_nf_man", "NF: emissão manual", "min"], ["bpo_bol_auto", "Boleto: emissão automática", "min"], ["bpo_bol_man", "Boleto: emissão manual", "min"]]],
+  ["BPO Financeiro — taxas fixas por mês", [["bpo_conta", "Por conta bancária", "R$"], ["bpo_plataforma", "Por maquininha / plataforma / fatura de cartão", "R$"], ["bpo_caixa", "Gestão da conta caixa", "R$"],
+    ["bpo_aplic", "Aplicações financeiras", "R$"], ["bpo_contrato", "Controle de contratos recorrentes", "R$"], ["bpo_reuniao", "Por reunião mensal (1 hora)", "R$"],
+    ["bpo_contador", "Envio do financeiro ao contador", "R$"], ["bpo_cnpj", "Por CNPJ adicional", "R$"], ["bpo_plano1", "Relatórios do BPO Performance", "R$"], ["bpo_plano2", "Relatórios e indicadores do BPO Gestão", "R$"]]],
   ["CFO por assinatura (FP&A)", [["fpa_h0", "FP&A Start", "h/mês"], ["fpa_h1", "FP&A Performance", "h/mês"], ["fpa_h2", "FP&A Gestão", "h/mês"],
     ["fpa_integrado", "Fator quando o BPO é feito pela WL", "×"], ["fpa_quinzenal", "Reuniões quinzenais (extra)", "h/mês"], ["fpa_semanal", "Reuniões semanais (extra)", "h/mês"]]],
   ["Planejamento Financeiro", [["pla_h0", "Planejamento Essencial", "h"], ["pla_h1", "Planejamento Estratégico / Contínuo", "h"], ["pla_revisao", "Por revisão do plano", "h"],
@@ -3715,41 +3810,52 @@ const nR = (r, id) => Number(r[id]?.v) || 0;
 const vR = (r, id) => r[id]?.v;
 const fx = (rot, x) => ({ rot, x });
 /* Os fatores de complexidade se somam (1 + Σ ajustes), com piso 0,7 e teto 1,8, para não se multiplicarem em cascata */
-function bloco(titulo, linhas, fatores) {
-  const base = linhas.reduce((s, l) => s + l.h, 0);
+function bloco(titulo, linhas, fatores, custo) {
   const fs = fatores.filter(f => f.x !== 1);
   const mult = Math.min(1.8, Math.max(0.7, 1 + fs.reduce((s, f) => s + (f.x - 1), 0)));
+  if (custo) {
+    const ls = linhas.filter(l => l.rs > 0), base = ls.reduce((s, l) => s + l.rs, 0), c = base * mult;
+    const valor = c * (1 + custo.margem / 100) * (1 + custo.imposto / 100);
+    return { titulo, linhas: ls, fatores: fs, mult, base, custo: c, margem: custo.margem, imposto: custo.imposto, valor, horas: 0 };
+  }
+  const base = linhas.reduce((s, l) => s + l.h, 0);
   return { titulo, linhas: linhas.filter(l => l.h > 0), fatores: fs, mult, base, horas: base * mult };
 }
+/* BPO pelo modelo C10: minutos × custo por minuto (gastos ÷ pessoas ÷ horas ÷ 60) + taxas fixas, depois margem e imposto */
 function calcBPO(d, tier) {
-  const p = P(), r = d.respostas || {}, m = x => x / 60, sem = 4.33;
+  const p = P(), r = d.respostas || {}, sem = 4.33;
+  const cmin = p.c10_gastos / Math.max(p.c10_pessoas, 1) / Math.max(p.c10_horas, 1) / 60;
+  const mins = (n, min) => n * min * cmin;
   const pagS = nR(r, "prc_pagar"), recS = nR(r, "prc_receber"), pagar = Math.round(pagS * sem), receber = Math.round(recS * sem);
   const contas = Math.max(nR(r, "prc_contas"), 1), cnpjs = Math.max(nR(r, "cnpjs"), 1), reun = parseInt(vR(r, "prc_reunioes")) || 1;
   const nf = nR(r, "prc_nf_manual"), bol = nR(r, "prc_boletos"), adq = nR(r, "prc_adquirentes"), ext = vR(r, "prc_extras") || [];
+  const manual = vR(r, "prc_emissao") === "Manual";
   const L = [
-    { rot: "Rotina fixa: fechamento, relatório e organização", det: "mensal", h: m(p.bpo_base) },
-    { rot: "Contas a pagar", det: `${pagS}/semana ≈ ${pagar}/mês`, h: m(pagar * p.bpo_pagar) },
-    { rot: "Recebimentos", det: `${recS}/semana ≈ ${receber}/mês`, h: m(receber * p.bpo_receber) },
-    { rot: "Emissão de notas fiscais", det: `${nf}/mês`, h: m(nf * p.bpo_nf_manual) },
-    { rot: "Emissão de boletos", det: `${bol}/mês`, h: m(bol * p.bpo_boleto) },
-    { rot: "Conciliação bancária", det: `${contas} conta(s)`, h: m(contas * p.bpo_conta) },
-    { rot: "Maquininhas e cartões corporativos", det: `${adq}`, h: m(adq * p.bpo_adquirente) },
-    { rot: "Conciliação de caixa físico", det: "", h: ext.includes("Conciliação de caixa físico") ? m(p.bpo_caixa) : 0 },
-    { rot: "Aplicações financeiras", det: "", h: ext.includes("Aplicações financeiras") ? m(p.bpo_aplic) : 0 },
-    { rot: "Controle de contratos recorrentes", det: "", h: ext.includes("Contratos recorrentes a faturar") ? m(p.bpo_contrato) : 0 },
-    { rot: "CNPJs adicionais", det: `${cnpjs - 1}`, h: m((cnpjs - 1) * p.bpo_cnpj) },
-    { rot: "Reuniões de acompanhamento", det: `${reun}/mês`, h: m(reun * p.bpo_reuniao) },
-    { rot: "Análises e relatórios do plano", det: SERVICOS.bpo.planos[tier], h: m([0, p.bpo_plano1, p.bpo_plano2][tier] || 0) }
+    { rot: "Contas a pagar (registro)", det: `${pagS}/semana ≈ ${pagar}/mês`, rs: mins(pagar, p.bpo_pagar) },
+    { rot: "Agendamento bancário dos pagamentos", det: `${pagar}/mês`, rs: ext.includes("Agendamento dos pagamentos no banco") ? mins(pagar, p.bpo_agend) : 0 },
+    { rot: "Contas a receber (registro)", det: `${recS}/semana ≈ ${receber}/mês`, rs: mins(receber, p.bpo_receber) },
+    { rot: `Notas fiscais (emissão ${manual ? "manual" : "automática"})`, det: `${nf}/mês`, rs: mins(nf, manual ? p.bpo_nf_man : p.bpo_nf_auto) },
+    { rot: `Boletos (emissão ${manual ? "manual" : "automática"})`, det: `${bol}/mês`, rs: mins(bol, manual ? p.bpo_bol_man : p.bpo_bol_auto) },
+    { rot: "Contas bancárias", det: `${contas}`, rs: contas * p.bpo_conta },
+    { rot: "Maquininhas, plataformas e faturas de cartão", det: `${adq}`, rs: adq * p.bpo_plataforma },
+    { rot: "Gestão da conta caixa", det: "", rs: ext.includes("Conciliação de caixa físico") ? p.bpo_caixa : 0 },
+    { rot: "Aplicações financeiras", det: "", rs: ext.includes("Aplicações financeiras") ? p.bpo_aplic : 0 },
+    { rot: "Controle de contratos recorrentes", det: "", rs: ext.includes("Contratos recorrentes a faturar") ? p.bpo_contrato : 0 },
+    { rot: "Reuniões mensais (1 hora)", det: `${reun}/mês`, rs: reun * p.bpo_reuniao },
+    { rot: "Envio do financeiro ao contador", det: "mensal", rs: p.bpo_contador },
+    { rot: "CNPJs adicionais", det: `${cnpjs - 1}`, rs: (cnpjs - 1) * p.bpo_cnpj },
+    { rot: "Relatórios do plano", det: SERVICOS.bpo.planos[tier], rs: [0, p.bpo_plano1, p.bpo_plano2][tier] || 0 }
   ];
   const F = [];
   const docs = vR(r, "prc_docs");
   if (docs === "Digitais, mas desorganizados") F.push(fx("Documentos desorganizados", 1.1));
   if (docs === "Em papel / dispersos") F.push(fx("Documentos em papel / dispersos", 1.25));
   const cc = vR(r, "prc_cc");
-  if (cc === "Sim, sem rateio") F.push(fx("Classificação por centro de custo", 1.05));
-  if (cc === "Sim, com rateio") F.push(fx("Centro de custo com rateio", 1.3));
-  return bloco("BPO Financeiro (por mês)", L, F);
+  if (cc === "Sim, sem rateio") F.push(fx("Classificação por centro de custo", 1.1));
+  if (cc === "Sim, com rateio") F.push(fx("Centro de custo com rateio", 1.4));
+  return bloco("BPO Financeiro (por mês)", L, F, { margem: p.c10_margem, imposto: p.c10_imposto });
 }
+
 const FAT_FPA = { "Até R$ 50 mil": 0.85, "R$ 50 a 100 mil": 0.9, "R$ 100 a 300 mil": 1, "R$ 300 mil a 1 milhão": 1.15, "Acima de R$ 1 milhão": 1.3 };
 const DADOS_FPA = { "Estruturados (exportação do sistema)": 1, "Planilhas organizadas": 1.1, "Dados brutos / desorganizados": 1.35 };
 const faixaCC = (n, fs) => n <= 0 ? 1 : n <= 5 ? fs[0] : n <= 15 ? fs[1] : fs[2];
@@ -3864,8 +3970,8 @@ function calcularItem(it, d) {
   if (it.serv === "pla" && vR(d.respostas || {}, "prc_fpa_fonte") === FONTE_WL) blocos[0] = calcPla(d, tier, true);
   const horas = blocos.reduce((s, b) => s + b.horas, 0);
   const unico = SERVICOS[it.serv].cobranca === "unico";
-  const bruto = horas * p.hora;
-  return { blocos, horas, hora: p.hora, meses, sugerido: unico ? Math.ceil(bruto / 100) * 100 : Math.ceil(bruto / 50) * 50, tabela: tabelaPlano(it.plano), em: new Date().toISOString() };
+  const bruto = blocos.reduce((s, b) => s + (b.valor != null ? b.valor : b.horas * p.hora), 0);
+  return { blocos, horas, bruto, hora: p.hora, meses, sugerido: unico ? Math.ceil(bruto / 100) * 100 : Math.ceil(bruto / 50) * 50, tabela: tabelaPlano(it.plano), em: new Date().toISOString() };
 }
 
 /* ================== PROPOSTAS ================== */
@@ -3889,7 +3995,7 @@ function entregasDe(serv, plano, d) {
     if (nR(r, "prc_adquirentes")) lista.push(`Conciliação de maquininhas e cartões (${nR(r, "prc_adquirentes")})`);
     if (nR(r, "prc_nf_manual")) lista.push("Emissão de notas fiscais");
     if (nR(r, "prc_boletos")) lista.push("Emissão e baixa de boletos");
-    for (const x of vR(r, "prc_extras") || []) lista.push(x);
+    for (const x of vR(r, "prc_extras") || []) lista.push(x === "Conciliação de caixa físico" ? "Gestão da conta caixa" : x);
     if (vR(r, "erp_uso") === ERP_WL) lista.push("Operação no ERP ContaAzul");
     if ((vR(r, "prc_cc") || "").startsWith("Sim")) lista.push("Classificação por centro de custo" + (vR(r, "prc_cc") === "Sim, com rateio" ? " com rateio" : ""));
     if (nR(r, "cnpjs") > 1) lista.push(`Operação de ${nR(r, "cnpjs")} CNPJs`);
@@ -4110,9 +4216,8 @@ function abrirProposta(id) {
             <div class="campo"><label>Validade (dias)</label><input type="number" min="1" data-p="validade" value="${esc(pp.validade || 15)}"></div>
             <div class="campo"><label>Consultor WL</label><select data-p="responsavel">${opcoes(RESPONSAVEIS.map(x => [x, x]), pp.responsavel || "", "—")}</select></div></div>
         </div></section>
-      <section class="g-sec"><h4>Apresentação e contexto</h4>
+      <section class="g-sec"><h4>Contexto</h4>
         <div class="dados-grid">
-          ${ta("apresentacao", "Apresentação", 3)}
           ${ta("desafio", "O desafio que o cliente quer resolver", 4, dg ? "veio do diagnóstico" : "")}
           ${ta("pontos", "Pontos identificados no diagnóstico", 4, "um por linha")}
           ${ta("objetivos", "Onde queremos chegar", 4, "um por linha")}
@@ -4129,6 +4234,7 @@ function abrirProposta(id) {
         ${pp.pdf?.webUrl ? `<a class="lnk-pdf" href="${esc(pp.pdf.webUrl)}" target="_blank" rel="noopener">Último PDF salvo · ${dataHora(pp.pdf.em)}</a>` : ""}
         ${dg ? `<button class="btn-s" data-prop="pdfDiag" style="justify-content:center"><svg><use href="#i-pdf"/></svg>PDF do diagnóstico</button>
           <button class="btn-s" data-prop="verDiag" style="justify-content:center">Abrir diagnóstico</button>` : ""}
+        ${pp.status === "aceita" ? `<button class="btn-p" data-prop="contrato" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Abrir contrato</button>` : ""}
         <div class="botoes-status">
           <button class="btn-s ${pp.status === "aceita" ? "ativo-ok" : ""}" data-prop="aceita">✓ Aceita</button>
           <button class="btn-s ${pp.status === "recusada" ? "ativo-nao" : ""}" data-prop="recusada">Recusada</button>
@@ -4155,18 +4261,19 @@ function htmlItemProp(it, k) {
       ${unico && !(it.serv === "rt" && it.modalidade === "recorrente") ? `<div class="campo"><label>Parcelamento</label><select data-it="${k}" data-f="parcelas">${parcelasOps.map(n => `<option value="${n}" ${Number(it.parcelas) === n ? "selected" : ""}>${n === 1 ? "À vista" : n + "x"}</option>`).join("")}</select></div>` : ""}
       <div class="preco-box">
         <div><small>Tabela do plano</small><b>${moeda(tabelaPlano(it.plano))}</b><span>${unico ? "valor único" : "por mês"}</span></div>
-        <div class="sug"><small>Sugerido pelo cálculo</small><b>${moeda(it.sugerido)}</b><span>${c.horas ? c.horas.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " h × " + moeda(c.hora) : ""}${tabelaPlano(it.plano) ? ` · ${fmtPct(varPct(it.sugerido, tabelaPlano(it.plano)))} vs. tabela` : ""}</span></div>
+        <div class="sug"><small>Sugerido pelo cálculo</small><b>${moeda(it.sugerido)}</b><span>${(c.blocos || []).some(b => b.valor != null) ? "custo da operação + margem + impostos" : c.horas ? c.horas.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " h × " + moeda(c.hora) : ""}${tabelaPlano(it.plano) ? ` · ${fmtPct(varPct(it.sugerido, tabelaPlano(it.plano)))} vs. tabela` : ""}</span></div>
         <div class="final"><small>Valor final ${unico ? "(total)" : "(por mês)"}</small><input class="inp-valor" data-it="${k}" data-f="valor" inputmode="decimal" value="${esc(brl(it.valor))}"><span id="var-${k}" style="color:${corVar(v)}">${Math.abs(v) < 0.05 ? "igual ao sugerido" : fmtPct(v) + " vs. sugerido"}</span></div>
       </div>
       ${it.serv === "bpo" || it.serv === "int" ? `<div class="campo campo-lic"><label>Licença do ERP ContaAzul (R$/mês) <span class="dica-campo">0 se o cliente usar o próprio ERP</span></label><input data-it="${k}" data-f="licenca" inputmode="decimal" value="${esc(brl(it.licenca || 0))}"></div>` : ""}
       <p class="txt-pag" id="pag-${k}">${esc(pagamentoItem(it))}</p>
       <details class="calc-det"><summary>Como chegamos ao valor sugerido <span>uso interno</span></summary>
         ${(c.blocos || []).map(b => `<div class="calc-bloco"><b>${esc(b.titulo)}</b>
-          <table>${b.linhas.map(l => `<tr><td>${esc(l.rot)}${l.det ? ` <small>${esc(l.det)}</small>` : ""}</td><td>${l.h.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} h</td></tr>`).join("")}
+          <table>${b.linhas.map(l => `<tr><td>${esc(l.rot)}${l.det ? ` <small>${esc(l.det)}</small>` : ""}</td><td>${l.rs != null ? brl(l.rs) : l.h.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " h"}</td></tr>`).join("")}
           ${b.fatores.map(f => `<tr class="fat"><td>${esc(f.rot)}</td><td>${fmtPct((f.x - 1) * 100)}</td></tr>`).join("")}
           ${b.fatores.length ? `<tr class="fat"><td>Fator de complexidade (soma dos ajustes)</td><td>× ${b.mult.toLocaleString("pt-BR", { maximumFractionDigits: 2 })}</td></tr>` : ""}
-          <tr class="tot"><td>Subtotal</td><td>${b.horas.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} h</td></tr></table></div>`).join("")}
-        <div class="calc-rod">${(c.horas || 0).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} h × ${moeda(c.hora)}/h = ${brl((c.horas || 0) * (c.hora || 0))} → arredondado ${moeda(it.sugerido)}</div>
+          ${b.valor != null ? `<tr class="tot"><td>Custo da operação</td><td>${brl(b.custo)}</td></tr><tr><td>+ Margem (${b.margem}%) e impostos (${b.imposto}%)</td><td>${brl(b.valor - b.custo)}</td></tr><tr class="tot"><td>Preço do bloco</td><td>${brl(b.valor)}</td></tr>`
+            : `<tr class="tot"><td>Subtotal</td><td>${b.horas.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} h × ${moeda(c.hora)} = ${brl(b.horas * c.hora)}</td></tr>`}</table></div>`).join("")}
+        <div class="calc-rod">Total ${brl(c.bruto ?? (c.horas || 0) * (c.hora || 0))} → arredondado ${moeda(it.sugerido)}</div>
         <button class="lnk" data-it-acao="recalcular" data-it="${k}">Recalcular com as respostas atuais do diagnóstico ›</button>
       </details>
       <div class="campo"><label>Entregas <span class="dica-campo">uma por linha · aparecem no PDF</span></label><textarea data-it="${k}" data-f="entregas" rows="6">${esc(it.entregas || "")}</textarea></div>
@@ -4275,11 +4382,12 @@ async function mudarStatusProp(status) {
   if (pp.leadId && leadPorId(pp.leadId)) {
     const t = totaisProp(pp), resumo = [t.mensal ? brl(t.mensal) + "/mês" : "", t.unico ? brl(t.unico) + " único" : ""].filter(Boolean).join(" + ");
     await alterarLead(pp.leadId, l => {
-      if (status === "aceita") { registrar(l, "venda", `Proposta ${pp.id} aceita · ${resumo}`); moverEtapa(l, "ganho"); l.valor = Math.round(t.mensal || t.unico); }
+      if (status === "aceita") { registrar(l, "nota", `Proposta ${pp.id} aceita pelo cliente · ${resumo}`); if (ORDEM_ETAPA[l.etapa] < ORDEM_ETAPA.negociacao) moverEtapa(l, "negociacao"); l.valor = Math.round(t.mensal || t.unico); }
       else if (status === "recusada") registrar(l, "nota", `Proposta ${pp.id} recusada`);
     });
   }
-  toast(status === "aceita" ? "Proposta aceita · cliente marcado como Ganho no CRM" : "Proposta marcada como recusada");
+  if (status === "aceita") { toast("Proposta aceita · gerando o contrato"); return irParaContrato(pp); }
+  toast("Proposta marcada como recusada");
   abrirProposta(pp.id);
 }
 async function excluirProposta(p) {
@@ -4329,7 +4437,7 @@ function htmlPDFProposta(pp) {
   return `<div class="pp">
     <div class="pp-capa">
       <img src="logo-branca.png" alt="WL Expertise">
-      <div class="pp-capa-txt"><small>Proposta comercial · ${esc(pp.id)}</small><h1>${esc(TIPOS_PROP[pp.tipo] || "Proposta")}</h1>
+      <div class="pp-capa-txt"><small>Proposta comercial</small><h1>${esc(TIPOS_PROP[pp.tipo] || "Proposta")}</h1>
         <p>Preparada para <b>${esc(c.empresa || "")}</b> · ${esc(dataExt)}</p></div>
     </div>
     <div class="pp-partes">
@@ -4339,7 +4447,6 @@ function htmlPDFProposta(pp) {
       <div><small>Proposto por</small><b>${WL.nome}</b><span>CNPJ ${WL.cnpj}</span>${consultor ? `<span>Consultor: ${esc(consultor)}</span>` : ""}
         <span>${WL.email} · ${WL.tel}</span><span>${WL.site} · ${WL.cidade}</span></div>
     </div>
-    ${pp.apresentacao?.trim() ? `<div class="pp-bloco">${tit("Apresentação")}${par(pp.apresentacao)}</div>` : ""}
     ${pp.desafio?.trim() || pp.pontos?.trim() ? `<div class="pp-bloco">${tit("O desafio")}${par(pp.desafio)}
       ${pp.pontos?.trim() ? `<div class="pp-pontos"><small>O que identificamos no diagnóstico</small>${lista(pp.pontos)}</div>` : ""}</div>` : ""}
     ${pp.objetivos?.trim() ? `<div class="pp-bloco">${tit("Onde queremos chegar")}${lista(pp.objetivos)}</div>` : ""}
@@ -4367,30 +4474,33 @@ function htmlPDFProposta(pp) {
     <div class="pp-rodape">${WL.nome} · BPO Financeiro, FP&amp;A, Planejamento Financeiro e Consultoria de Processos · ${WL.email} · ${WL.tel} · ${WL.site}</div>
   </div>`;
 }
+async function blobPDFProposta(pp) {
+  await carregarScript("https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js");
+  const host = document.createElement("div");
+  host.style.cssText = "position:fixed;left:0;top:0;width:190mm;z-index:-1;pointer-events:none;background:#fff";
+  host.innerHTML = htmlPDFProposta(pp);
+  document.body.appendChild(host);
+  await Promise.all([...host.querySelectorAll("img")].map(i => i.complete ? 0 : new Promise(ok => { i.onload = i.onerror = ok; })));
+  try {
+    return await html2pdf().set({
+      margin: [10, 10, 14, 10], image: { type: "jpeg", quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0 }, jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: { mode: ["css", "legacy"], avoid: [".pp-capa", ".pp-partes", ".pp-serv", ".pp-invest", ".pp-tit", ".pp-totais", ".pp-pag", ".pp-aceite", ".pp-cases", "tr", "li", "p"] }
+    }).from(host.firstElementChild).toPdf().get("pdf").then(pdf => {
+      const tot = pdf.internal.getNumberOfPages();
+      for (let i = 1; i <= tot; i++) { pdf.setPage(i); pdf.setFontSize(8); pdf.setTextColor(120); pdf.text(`Página ${i} de ${tot}`, 200, 290, { align: "right" }); }
+    }).outputPdf("blob");
+  } finally { host.remove(); }
+}
+const nomeArqProposta = pp => `Proposta ${TIPOS_PROP[pp.tipo] || ""} - ${limparNome(pp.cliente?.empresa || "Cliente")} - ${(pp.data || hojeISO()).split("-").reverse().join("-")}.pdf`.replace(/\s+/g, " ");
 async function gerarPDFProposta(pp) {
   if (propPendente) await salvarProp();
   if (!(pp.itens || []).length) return toast("Adicione pelo menos um serviço", "erro");
   toast("Gerando a proposta em PDF…", "prog", 0);
   try {
-    await carregarScript("https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js");
-    const host = document.createElement("div");
-    host.style.cssText = "position:fixed;left:0;top:0;width:190mm;z-index:-1;pointer-events:none;background:#fff";
-    host.innerHTML = htmlPDFProposta(pp);
-    document.body.appendChild(host);
-    await Promise.all([...host.querySelectorAll("img")].map(i => i.complete ? 0 : new Promise(ok => { i.onload = i.onerror = ok; })));
     const empresa = limparNome(pp.cliente?.empresa || "Cliente");
-    const nomeArq = `Proposta ${TIPOS_PROP[pp.tipo] || ""} - ${empresa} - ${pp.id}.pdf`.replace(/\s+/g, " ");
-    let blob;
-    try {
-      blob = await html2pdf().set({
-        margin: [10, 10, 14, 10], filename: nomeArq, image: { type: "jpeg", quality: 0.95 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0 }, jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-        pagebreak: { mode: ["css", "legacy"], avoid: [".pp-capa", ".pp-partes", ".pp-serv", ".pp-invest", ".pp-tit", ".pp-totais", ".pp-pag", ".pp-aceite", ".pp-cases", "tr", "li", "p"] }
-      }).from(host.firstElementChild).toPdf().get("pdf").then(pdf => {
-        const tot = pdf.internal.getNumberOfPages();
-        for (let i = 1; i <= tot; i++) { pdf.setPage(i); pdf.setFontSize(8); pdf.setTextColor(120); pdf.text(`${pp.id} · página ${i} de ${tot}`, 200, 290, { align: "right" }); }
-      }).outputPdf("blob");
-    } finally { host.remove(); }
+    const nomeArq = nomeArqProposta(pp);
+    const blob = await blobPDFProposta(pp);
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a"); a.href = url; a.download = nomeArq; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 60000);
@@ -4440,8 +4550,761 @@ $("atdConteudo").addEventListener("click", async e => {
   if (a === "verDiag") { const d = diagDaProposta(pp); if (d) location.hash = rotaDiag(d.id, tipoDe(d)); }
   if (a === "verLead") abrirLead(pp.leadId);
   if (a === "aceita" || a === "recusada") mudarStatusProp(a);
+  if (a === "contrato") irParaContrato(pp);
   if (a === "excluir") excluirProposta(props().find(x => x.id === pp.id) || pp);
 });
+
+/* ================== CONTRATOS ================== */
+const CONTRATADA = {
+  nome: "WL EXPERTISE LTDA", socio: "WASHINGTON JUNIO SALLES", cnpjCpf: "57.072.317/0001-50 | 069.040.486-70", cnpj: "57.072.317/0001-50", cpf: "069.040.486-70",
+  telefone: "(31) 99736-1414   (31) 99272-8339", email: "washington.salles@wlexpertise.com", endereco: "Rua do Registro, 1893, Vila Magdalena, Contagem MG",
+  pix: "57.072.317/0001-50", banco: "0260 - Nu Pagamentos S.A.", agencia: "0001", conta: "38211050-0",
+  signatario: { nome: "Washington Junio Salles", email: "washington.salles@wlexpertise.com", whatsapp: "(31) 99736-1414" }
+};
+const REGIMES = ["Simples Nacional", "Lucro Presumido", "Lucro Real", "MEI"];
+const ctrStore = criarStore("dados/comercial/contratos.json", { versao: 1, seq: 0, contratos: [] });
+const ctrs = () => ctrStore.dados?.contratos || [];
+const STATUS_CTR = { rascunho: ["Em elaboração", "var(--alerta)"], enviado: ["Aguardando assinaturas", "var(--turq)"], assinado: ["Assinado", "var(--verde)"], cancelado: ["Cancelado", "var(--erro)"] };
+let ctrAtual = null, timerCtr = null, ctrPendente = false, salvandoCtr = false;
+
+/* número por extenso (reais) */
+function extenso(v) {
+  const n = Math.round((Number(v) || 0) * 100), reais = Math.floor(n / 100), cent = n % 100;
+  const U = ["", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"];
+  const D = ["", "", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"];
+  const C = ["", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"];
+  const ate999 = x => { if (!x) return ""; if (x === 100) return "cem"; const c = Math.floor(x / 100), r = x % 100, p = []; if (c) p.push(C[c]); if (r) p.push(r < 20 ? U[r] : D[Math.floor(r / 10)] + (r % 10 ? " e " + U[r % 10] : "")); return p.join(" e "); };
+  const grupo = x => {
+    const mi = Math.floor(x / 1e6), mil = Math.floor((x % 1e6) / 1000), r = x % 1000, p = [];
+    if (mi) p.push(ate999(mi) + (mi > 1 ? " milhões" : " milhão"));
+    if (mil) p.push(mil === 1 ? "mil" : ate999(mil) + " mil");
+    if (r) p.push(ate999(r));
+    if (p.length > 1 && r && (r < 100 || r % 100 === 0)) { const u = p.pop(); return p.join(" ") + " e " + u; }
+    return p.join(" ");
+  };
+  let s = reais ? grupo(reais) + (reais === 1 ? " real" : reais % 1e6 === 0 ? " de reais" : " reais") : "";
+  if (cent) s += (s ? " e " : "") + ate999(cent) + (cent === 1 ? " centavo" : " centavos");
+  return s || "zero reais";
+}
+const dataExtenso = iso => iso ? new Date(iso + "T12:00").toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" }) : "____ de __________ de ______";
+const addMeses = (iso, n) => { const d = new Date(iso + "T12:00"); const dia = d.getDate(); d.setDate(1); d.setMonth(d.getMonth() + n); d.setDate(Math.min(dia, new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())); return d.toISOString().slice(0, 10); };
+function proximoVencimento(dia, minDias = 3) {
+  const h = new Date(); h.setHours(12, 0, 0, 0); const lim = new Date(h.getTime() + minDias * 864e5);
+  let d = new Date(h.getFullYear(), h.getMonth(), dia, 12);
+  while (d < lim) d = new Date(d.getFullYear(), d.getMonth() + 1, dia, 12);
+  return d.toISOString().slice(0, 10);
+}
+const limparEntregas = s => String(s || "").split("\n").map(x => x.trim()).filter(x => x && !/^tudo d[oa] /i.test(x) && !/^setores no escopo/i.test(x));
+const ehProjeto = it => SERVICOS[it.serv].cobranca === "unico" && !(it.serv === "rt" && it.modalidade === "recorrente");
+
+/* Monta o rascunho do contrato a partir da proposta (e do CRM) */
+function preContrato(pp) {
+  const c = pp.cliente || {}, l = pp.leadId && crm.carregado ? leadPorId(pp.leadId) : null;
+  const proj = (pp.itens || []).filter(ehProjeto), rec = (pp.itens || []).filter(it => !ehProjeto(it));
+  const venc = 10, prim = proximoVencimento(venc);
+  const parcelas = [];
+  for (const it of proj) {
+    const n = Math.max(1, Number(it.parcelas) || 1), v = (Number(it.valor) || 0) / n;
+    for (let k = 0; k < n; k++) parcelas.push({ valor: Math.round(v * 100) / 100, data: addMeses(prim, k), ref: it.nome });
+  }
+  const mensal = rec.reduce((s, it) => s + (it.serv === "rt" ? (Number(it.valor) || 0) / Math.max(it.meses || 1, 1) : (Number(it.valor) || 0) + (Number(it.licenca) || 0)), 0);
+  const nomes = (pp.itens || []).map(it => (it.nome || SERVICOS[it.serv].nome).replace(/\s*\(FP&A\)/, " (FP&A)"));
+  const fin = { bpo: ["Terceirizar a rotina financeira (BPO) da CONTRATANTE.", "Estruturar a organização financeira da empresa."], fpa: ["Fornecer indicadores gerenciais e análises que apoiam a tomada de decisão.", "Acompanhar o orçamento e os desvios do resultado."],
+    int: ["Terceirizar a rotina financeira (BPO) da CONTRATANTE.", "Estruturar a organização financeira da empresa.", "Fornecer informações que apoiam a tomada de decisão baseada em dados financeiros."],
+    pla: ["Implantar planejamento e orçamento financeiro.", "Prover projeção e controle de fluxo de caixa."],
+    rt: ["Mapear e redesenhar os processos dos setores do projeto.", "Configurar o sistema de gestão e treinar a equipe.", "Implantar indicadores para acompanhamento da operação."] };
+  return {
+    propostaId: pp.id, leadId: pp.leadId || null, diagId: pp.diagId || null, status: "rascunho",
+    contratante: { razao: (c.empresa || "").toUpperCase(), fantasia: "", cnpj: c.cnpj || "", regime: "", socios: [{ nome: (c.contato || l?.contato || "").toUpperCase(), cpf: "" }],
+      telefone: c.telefone || (l?.telefones || [])[0] || "", email: c.email || l?.email || "", cep: "", logradouro: "", numero: "", complemento: "", bairro: "", cidade: c.cidade || l?.cidade || "", uf: c.uf || l?.uf || "" },
+    objeto: `O presente contrato tem como objeto a prestação de serviços de ${nomes.join(", ").replace(/, ([^,]*)$/, " e $1")} para a CONTRATANTE, conforme a proposta comercial anexa.`,
+    finalidades: [...new Set((pp.itens || []).flatMap(it => fin[it.serv] || []))].join("\n"),
+    fase1: [...new Set(proj.flatMap(it => limparEntregas(it.entregas)))].join("\n"),
+    fase2: [...new Set(rec.flatMap(it => limparEntregas(it.entregas)))].join("\n"),
+    cond: { cidade: "Contagem", data: hojeISO(), vencDia: venc, prazoFase1: proj.some(i => i.serv === "rt") ? `${proj.find(i => i.serv === "rt").meses} meses` : "15 dias",
+      prazoMinMeses: 3, avisoDias: 30, parcelas, valorMensal: Math.round(mensal * 100) / 100, primeiraMensal: parcelas.length > 1 ? parcelas[1].data : proj.length ? addMeses(prim, 1) : prim,
+      temBPO: (pp.itens || []).some(i => i.serv === "bpo" || i.serv === "int") },
+    signatarios: null, criadoEm: new Date().toISOString(), criadoPor: meuNome()
+  };
+}
+async function garantirStoresCtr() {
+  await garantirStoresProp();
+  await Promise.all([ctrStore, cliStore].filter(s => !s.carregado).map(s => carregarStore(s)));
+}
+async function irParaContrato(pp) {
+  try { await garantirStoresCtr(); } catch (e) { return toast("Não foi possível abrir os contratos: " + e.message, "erro", 6000); }
+  const ex = ctrs().find(c => c.propostaId === pp.id && c.status !== "cancelado");
+  if (ex) { location.hash = "atendimento/contratos/" + ex.id; return; }
+  const novo = preContrato(pp);
+  try {
+    await salvarStore(ctrStore, d => { d.seq = (d.seq || d.contratos.length) + 1; novo.id = "CT-" + String(d.seq).padStart(4, "0"); d.contratos.push(structuredClone(novo)); });
+    toast("Contrato gerado a partir da proposta");
+    location.hash = "atendimento/contratos/" + novo.id;
+  } catch (e) { toast("Não foi possível criar o contrato: " + e.message, "erro", 6000); }
+}
+const propDoContrato = ct => props().find(p => p.id === ct.propostaId) || null;
+
+/* ---- Lista ---- */
+function renderListaContratos() {
+  ctrAtual = null;
+  $("atdConteudo").oninput = $("atdConteudo").onclick = $("atdConteudo").onchange = null;
+  cabAtd([["Atendimento", "#atendimento"], ["Contratos"]], "Comercial", "Contratos", "Contratos gerados a partir das propostas aceitas, com envio para assinatura eletrônica.");
+  const lista = [...ctrs()].sort((a, b) => (b.atualizadoEm || b.criadoEm || "").localeCompare(a.atualizadoEm || a.criadoEm || ""));
+  $("atdConteudo").innerHTML = `<section class="bloco">${lista.length ? `<ul class="lista-diag">${lista.map(c => {
+    const st = STATUS_CTR[c.status] || STATUS_CTR.rascunho;
+    return `<li data-abrir-ctr="${c.id}"><div class="ld-ico prop">§</div>
+      <div class="ld-info"><b>${esc(c.contratante?.razao || "Sem empresa")}</b><small>${esc(c.id)} · proposta ${esc(c.propostaId || "—")} · ${c.cond?.valorMensal ? brl(c.cond.valorMensal) + "/mês" : ""}${c.cond?.parcelas?.length ? " · " + brl(c.cond.parcelas.reduce((s, p) => s + (Number(p.valor) || 0), 0)) + " projeto" : ""}</small></div>
+      <span class="chip-etapa" style="--cor:${st[1]}"><i></i>${st[0]}</span></li>`;
+  }).join("")}</ul>` : `<div class="vazio-etapa"><b>Nenhum contrato ainda</b>Marque uma proposta como aceita para gerar o contrato.</div>`}</section>`;
+}
+
+/* ---- Editor ---- */
+function abrirContrato(id) {
+  const c0 = ctrs().find(x => x.id === id);
+  if (!c0) { toast("Contrato não encontrado", "erro"); location.hash = "atendimento/contratos"; return; }
+  if (!ctrAtual || ctrAtual.id !== id || !ctrPendente) ctrAtual = structuredClone(c0);
+  const ct = ctrAtual, k = ct.contratante, cd = ct.cond, st = STATUS_CTR[ct.status] || STATUS_CTR.rascunho, bloqueado = ct.status === "enviado" || ct.status === "assinado";
+  const pp = propDoContrato(ct);
+  cabAtd([["Atendimento", "#atendimento"], ["Contratos", "#atendimento/contratos"], [ct.id]], `Contrato · ${ct.id}`, k.razao || "Contrato",
+    ct.status === "assinado" ? "Contrato assinado por todos. A via final, com o certificado de assinatura, está na pasta do cliente." : bloqueado ? "O contrato foi enviado para assinatura. Para alterar, cancele o envio." : "Revise os dados, complete o que falta e envie para assinatura. Tudo é salvo automaticamente.",
+    `<span class="chip-etapa" style="--cor:${st[1]}"><i></i>${st[0]}</span><span class="status-salvo" id="statusSalvo">Salvo na nuvem</span>`);
+  const inp = (g, f, rot, extra = "") => `<div class="campo"><label>${rot}</label><input data-ct="${g}" data-f="${f}" value="${esc((g === "k" ? k : cd)[f] ?? "")}" ${extra}></div>`;
+  const ta = (f, rot, rows, dica = "") => `<div class="campo"><label>${rot}${dica ? ` <span class="dica-campo">${dica}</span>` : ""}</label><textarea data-ct="t" data-f="${f}" rows="${rows}">${esc(ct[f] || "")}</textarea></div>`;
+  const falta = pendenciasContrato(ct);
+  const temF1 = cd.parcelas.length > 0, temF2 = cd.valorMensal > 0;
+  $("atdConteudo").innerHTML = `
+  <div class="diag-grade ${bloqueado ? "ctr-bloqueado" : ""}">
+    <div class="diag-form">
+      <section class="g-sec"><h4>Contratante <button class="lnk" data-ctr="cnpj">Buscar dados pelo CNPJ ›</button></h4>
+        <div class="dados-grid">
+          <div class="linha2">${inp("k", "razao", "Razão social *")}${inp("k", "fantasia", "Nome fantasia")}</div>
+          <div class="linha2">${inp("k", "cnpj", "CNPJ *", 'inputmode="numeric"')}
+            <div class="campo"><label>Regime tributário *</label><select data-ct="k" data-f="regime"><option value="">—</option>${REGIMES.map(r => `<option ${k.regime === r ? "selected" : ""}>${r}</option>`).join("")}</select></div></div>
+          <div class="linha2">${inp("k", "telefone", "Telefone *")}${inp("k", "email", "E-mail *", 'type="email"')}</div>
+          <div class="linha3">${inp("k", "cep", `CEP <button class="lnk" data-ctr="cep" type="button">buscar</button>`, 'inputmode="numeric"')}${inp("k", "numero", "Número *")}${inp("k", "complemento", "Complemento")}</div>
+          <div class="linha2">${inp("k", "logradouro", "Logradouro *")}${inp("k", "bairro", "Bairro")}</div>
+          <div class="linha2">${inp("k", "cidade", "Cidade *")}${inp("k", "uf", "UF *")}</div>
+        </div></section>
+      <section class="g-sec"><h4>Sócios / representantes legais <button class="lnk" data-ctr="addSocio">+ adicionar</button></h4>
+        <div class="tab-ed">${(k.socios || []).map((s, i) => `<div class="lin-tab" style="--cols:2"><label><span>Nome *</span><input data-socio="${i}" data-f="nome" value="${esc(s.nome || "")}"></label>
+          <label><span>CPF *</span><input data-socio="${i}" data-f="cpf" inputmode="numeric" value="${esc(s.cpf || "")}"></label>
+          <button type="button" class="acao perigo-ico" data-dica="Remover" data-ctr="remSocio" data-i="${i}"><svg><use href="#i-lixo"/></svg></button></div>`).join("")}</div></section>
+      <section class="g-sec"><h4>Objeto e escopo <span class="tag-breve" style="text-transform:none">veio da proposta</span></h4>
+        <div class="dados-grid">${ta("objeto", "Objeto do contrato", 3)}${ta("finalidades", "Finalidades", 4, "uma por linha")}
+          ${temF1 ? ta("fase1", temF2 ? "Fase 1 — projeto único (escopo)" : "Escopo do projeto", 5, "uma por linha") : ""}
+          ${temF2 ? ta("fase2", temF1 ? "Fase 2 — serviços mensais (escopo)" : "Escopo dos serviços mensais", 5, "uma por linha") : ""}</div></section>
+      <section class="g-sec"><h4>Valores e condições</h4>
+        <div class="dados-grid">
+          ${temF1 ? `<div class="campo"><label>${temF2 ? "Fase 1 — " : ""}Parcelas do projeto (total ${brl(cd.parcelas.reduce((s, p) => s + (Number(p.valor) || 0), 0))})</label>
+            <div class="tab-ed">${cd.parcelas.map((p, i) => `<div class="lin-tab" style="--cols:2"><label><span>Parcela ${i + 1} · valor</span><input data-parc="${i}" data-f="valor" inputmode="decimal" value="${esc(brl(p.valor))}"></label>
+              <label><span>Vencimento</span><input type="date" data-parc="${i}" data-f="data" value="${esc(p.data)}"></label><span></span></div>`).join("")}</div></div>` : ""}
+          ${temF2 ? `<div class="linha3">${inp("c", "valorMensal", "Mensalidade (R$)", 'inputmode="decimal"')}<div class="campo"><label>1ª mensalidade</label><input type="date" data-ct="c" data-f="primeiraMensal" value="${esc(cd.primeiraMensal || "")}"></div>${inp("c", "vencDia", "Vencimento (dia do mês)", 'type="number" min="1" max="28"')}</div>
+          <div class="linha3">${inp("c", "prazoMinMeses", "Prazo mínimo (meses)", 'type="number" min="0"')}${inp("c", "avisoDias", "Aviso prévio (dias)", 'type="number" min="0"')}${temF1 ? inp("c", "prazoFase1", "Prazo da Fase 1") : "<span></span>"}</div>` : temF1 ? `<div class="linha3">${inp("c", "prazoFase1", "Prazo do projeto")}${inp("c", "avisoDias", "Aviso prévio (dias)", 'type="number" min="0"')}<span></span></div>` : ""}
+          <div class="linha2">${inp("c", "cidade", "Cidade da assinatura")}<div class="campo"><label>Data do contrato</label><input type="date" data-ct="c" data-f="data" value="${esc(cd.data || "")}"></div></div>
+        </div></section>
+    </div>
+    <aside class="diag-lado">
+      <section class="g-sec"><h4>Assinatura</h4><div id="painelAss">${htmlPainelAss(ct, falta)}</div></section>
+      <section class="g-sec acoes-diag">
+        <button class="btn-s" data-ctr="previa" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Pré-visualizar contrato + proposta</button>
+        ${pp ? `<button class="btn-s" data-ctr="verProp" style="justify-content:center">Abrir proposta</button>` : ""}
+        ${ct.leadId ? `<button class="btn-s" data-ctr="verLead" style="justify-content:center">Ver no CRM</button>` : ""}
+        ${ct.status !== "assinado" ? `<button class="perigo" data-ctr="excluir" style="justify-self:center">Excluir contrato</button>` : ""}
+      </section>
+    </aside>
+  </div>`;
+  ligarContrato();
+  if (ct.status === "enviado" && ct.envelope?.id) atualizarStatusAss(ct);
+}
+function pendenciasContrato(ct) {
+  const k = ct.contratante, f = [];
+  if (!k.razao?.trim()) f.push("Razão social");
+  if (soDigitos(k.cnpj).length !== 14 && soDigitos(k.cnpj).length !== 11) f.push("CNPJ");
+  if (!k.regime) f.push("Regime tributário");
+  if (!k.telefone?.trim()) f.push("Telefone");
+  if (!/\S+@\S+\.\S+/.test(k.email || "")) f.push("E-mail");
+  if (!k.logradouro?.trim() || !k.numero?.trim() || !k.cidade?.trim() || !k.uf?.trim()) f.push("Endereço completo");
+  if (!(k.socios || []).some(s => s.nome?.trim() && soDigitos(s.cpf).length === 11)) f.push("Sócio com nome e CPF");
+  return f;
+}
+function htmlPainelAss(ct, falta) {
+  if (ct.status === "assinado") return `<div class="fin-ok">✓ Assinado por todos em ${dataHora(ct.assinado?.em)}</div>
+    ${ct.assinado?.pdf?.webUrl ? `<a class="btn-p" style="justify-content:center;margin-top:8px" href="${esc(ct.assinado.pdf.webUrl)}" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Abrir contrato assinado</a>` : ""}
+    ${ct.clienteId ? `<button class="btn-s" data-link="#clientes/${ct.clienteId}" style="justify-content:center;margin-top:8px;width:100%">Abrir página do cliente</button>` : ""}`;
+  if (ct.status === "enviado") return `<div id="statusAss"><p class="txt-prog">Consultando assinaturas…</p></div>
+    <button class="btn-s" data-ctr="cancelarEnvio" style="justify-content:center;margin-top:10px;width:100%">Cancelar envio</button>`;
+  return `${falta.length ? `<div class="aviso-falta"><b>Preencha antes de enviar:</b>${falta.map(x => `<span>• ${esc(x)}</span>`).join("")}</div>` : `<p class="txt-prog">Tudo pronto para enviar.</p>`}
+    <button class="btn-p" data-ctr="enviar" style="justify-content:center;width:100%;margin-top:10px" ${falta.length ? "disabled" : ""}><svg><use href="#i-atd"/></svg>Enviar contrato para assinatura</button>`;
+}
+function ligarContrato() {
+  const raiz = $("atdConteudo"), ct = ctrAtual;
+  const redesenhar = () => { const y = scrollY; ctrPendente = true; abrirContrato(ct.id); alterouCtr(); scrollTo(0, y); };
+  const refrescarPainel = () => { if (ct.status === "rascunho") $("painelAss").innerHTML = htmlPainelAss(ct, pendenciasContrato(ct)); };
+  raiz.oninput = e => {
+    const t = e.target;
+    if (t.dataset.ct === "k") ct.contratante[t.dataset.f] = t.value;
+    else if (t.dataset.ct === "c") ct.cond[t.dataset.f] = ["valorMensal"].includes(t.dataset.f) ? lerValor(t.value) : ["vencDia", "prazoMinMeses", "avisoDias"].includes(t.dataset.f) ? Number(t.value) || 0 : t.value;
+    else if (t.dataset.ct === "t") ct[t.dataset.f] = t.value;
+    else if (t.dataset.socio !== undefined) ct.contratante.socios[+t.dataset.socio][t.dataset.f] = t.value;
+    else if (t.dataset.parc !== undefined) ct.cond.parcelas[+t.dataset.parc][t.dataset.f] = t.dataset.f === "valor" ? lerValor(t.value) : t.value;
+    else return;
+    if (t.dataset.f === "razao") $("atdTitulo").textContent = t.value || "Contrato";
+    alterouCtr(); refrescarPainel();
+  };
+  raiz.onchange = e => {
+    const t = e.target;
+    if (t.tagName === "SELECT" && t.dataset.ct === "k") { ct.contratante[t.dataset.f] = t.value; alterouCtr(); refrescarPainel(); }
+    if (t.dataset.f === "cep" && soDigitos(t.value).length === 8) buscarCEP();
+  };
+  raiz.onclick = async e => {
+    const b = e.target.closest("[data-ctr]"); if (!b) return;
+    const a = b.dataset.ctr;
+    if (a === "addSocio") { ct.contratante.socios.push({ nome: "", cpf: "" }); return redesenhar(); }
+    if (a === "remSocio") { ct.contratante.socios.splice(+b.dataset.i, 1); return redesenhar(); }
+    if (a === "cnpj") return buscarCNPJ();
+    if (a === "cep") return buscarCEP();
+    if (a === "previa") { b.disabled = true; try { const { blob, nome } = await gerarDocAssinatura(ct, false); baixarBlob(blob, nome); } catch (er) { toast("Falha ao gerar: " + er.message, "erro", 7000); } b.disabled = false; return; }
+    if (a === "verProp") location.hash = "atendimento/propostas/" + ct.propostaId;
+    if (a === "verLead") { if (!crm.carregado) await carregarCRM(true); abrirLead(ct.leadId); }
+    if (a === "enviar") return abrirEnvioAssinatura(ct);
+    if (a === "cancelarEnvio") return cancelarEnvio(ct);
+    if (a === "reenviar") { try { await api(`/assinaturas/${ct.envelope.id}/reenviar`, { method: "POST", body: JSON.stringify({ i: +b.dataset.i }) }); toast("E-mail reenviado"); } catch (er) { toast(er.message, "erro", 6000); } return; }
+    if (a === "excluir") {
+      if (!confirmar(`Excluir o contrato ${ct.id}?`)) return;
+      ctrAtual = null; ctrPendente = false; clearTimeout(timerCtr);
+      await salvarStore(ctrStore, d => { d.contratos = d.contratos.filter(x => x.id !== ct.id); });
+      location.hash = "atendimento/contratos";
+    }
+  };
+}
+function marcarSalvoCtr(txt, classe = "") { const el = $("statusSalvo"); if (el) { el.textContent = txt; el.className = "status-salvo " + classe; } }
+function alterouCtr() { ctrPendente = true; marcarSalvoCtr("Salvando…", "pend"); clearTimeout(timerCtr); timerCtr = setTimeout(salvarCtr, 1200); }
+async function salvarCtr() {
+  clearTimeout(timerCtr);
+  if (!ctrAtual || !ctrPendente) return true;
+  if (salvandoCtr) { timerCtr = setTimeout(salvarCtr, 500); return false; }
+  salvandoCtr = true; ctrPendente = false;
+  const copia = structuredClone(ctrAtual);
+  copia.atualizadoEm = ctrAtual.atualizadoEm = new Date().toISOString(); copia.atualizadoPor = meuNome();
+  try {
+    await salvarStore(ctrStore, d => { const i = d.contratos.findIndex(x => x.id === copia.id); if (i >= 0) d.contratos[i] = copia; else d.contratos.push(copia); });
+    if (!ctrPendente) marcarSalvoCtr(`Salvo na nuvem às ${hora(Date.now()).slice(0, 5)}`, "ok");
+    return true;
+  } catch (e) { ctrPendente = true; marcarSalvoCtr("Erro ao salvar — tentando novamente", "erro"); timerCtr = setTimeout(salvarCtr, 5000); return false; }
+  finally { salvandoCtr = false; }
+}
+addEventListener("beforeunload", e => { if (ctrPendente) { salvarCtr(); e.preventDefault(); e.returnValue = ""; } });
+
+/* Consulta de CNPJ (BrasilAPI) e CEP (ViaCEP) — serviços públicos e gratuitos */
+async function buscarCNPJ() {
+  const ct = ctrAtual, cnpj = soDigitos(ct.contratante.cnpj);
+  if (cnpj.length !== 14) return toast("Digite os 14 números do CNPJ", "erro");
+  toast("Buscando dados do CNPJ…", "prog", 0);
+  try {
+    const r = await fetch("https://brasilapi.com.br/api/cnpj/v1/" + cnpj);
+    if (!r.ok) throw new Error(r.status === 404 ? "CNPJ não encontrado" : "consulta indisponível");
+    const j = await r.json(), k = ct.contratante;
+    k.razao = (j.razao_social || k.razao || "").toUpperCase(); k.fantasia = j.nome_fantasia || k.fantasia;
+    k.cnpj = cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
+    k.cep = j.cep ? String(j.cep).replace(/^(\d{5})(\d{3})$/, "$1-$2") : k.cep;
+    k.logradouro = [j.descricao_tipo_de_logradouro, j.logradouro].filter(Boolean).join(" ") || k.logradouro;
+    k.numero = j.numero || k.numero; k.complemento = j.complemento || k.complemento; k.bairro = j.bairro || k.bairro;
+    k.cidade = j.municipio ? j.municipio.replace(/\w\S*/g, w => w[0] + w.slice(1).toLowerCase()) : k.cidade; k.uf = j.uf || k.uf;
+    if (!k.regime) k.regime = j.opcao_pelo_mei ? "MEI" : j.opcao_pelo_simples ? "Simples Nacional" : "";
+    const qsa = (j.qsa || []).map(s => s.nome_socio).filter(Boolean);
+    if (qsa.length && !(k.socios || []).some(s => s.cpf)) k.socios = qsa.map(n => ({ nome: n.toUpperCase(), cpf: "" }));
+    if (!k.telefone && j.ddd_telefone_1) k.telefone = j.ddd_telefone_1;
+    toast("Dados preenchidos pelo CNPJ · confira o regime e os CPFs");
+    ctrPendente = true; abrirContrato(ct.id); alterouCtr();
+  } catch (e) { toast("Não foi possível buscar o CNPJ: " + e.message, "erro", 6000); }
+}
+async function buscarCEP() {
+  const ct = ctrAtual, cep = soDigitos(ct.contratante.cep);
+  if (cep.length !== 8) return toast("Digite os 8 números do CEP", "erro");
+  try {
+    const j = await (await fetch(`https://viacep.com.br/ws/${cep}/json/`)).json();
+    if (j.erro) throw new Error("CEP não encontrado");
+    const k = ct.contratante;
+    Object.assign(k, { logradouro: j.logradouro || k.logradouro, bairro: j.bairro || k.bairro, cidade: j.localidade || k.cidade, uf: j.uf || k.uf, cep: cep.replace(/^(\d{5})(\d{3})$/, "$1-$2") });
+    ctrPendente = true; abrirContrato(ct.id); alterouCtr();
+  } catch (e) { toast("Não foi possível buscar o CEP: " + e.message, "erro", 5000); }
+}
+
+/* ---- Texto do contrato (mantém o layout do modelo da WL) ---- */
+const ORDINAIS = ["PRIMEIRA", "SEGUNDA", "TERCEIRA", "QUARTA", "QUINTA", "SEXTA", "SÉTIMA", "OITAVA", "NONA", "DÉCIMA", "DÉCIMA PRIMEIRA", "DÉCIMA SEGUNDA", "DÉCIMA TERCEIRA", "DÉCIMA QUARTA", "DÉCIMA QUINTA", "DÉCIMA SEXTA", "DÉCIMA SÉTIMA", "DÉCIMA OITAVA", "DÉCIMA NONA", "VIGÉSIMA"];
+const ROMANOS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+function htmlContrato(ct) {
+  const k = ct.contratante, cd = ct.cond, L = s => String(s || "").split("\n").map(x => x.trim()).filter(Boolean);
+  const temF1 = cd.parcelas.length > 0, temF2 = Number(cd.valorMensal) > 0, ambos = temF1 && temF2;
+  const f1 = ambos ? "Fase 1" : "o projeto", f2 = ambos ? "Fase 2" : "os serviços mensais";
+  const totalF1 = cd.parcelas.reduce((s, p) => s + (Number(p.valor) || 0), 0);
+  const cl = [];
+  const num = lista => `<ol class="ct-num">${lista.map(x => `<li>${esc(x)}</li>`).join("")}</ol>`;
+  const rom = lista => `<ul class="ct-rom">${lista.map((x, i) => `<li><b>${ROMANOS[i]} –</b> ${esc(x)}</li>`).join("")}</ul>`;
+  const bul = lista => `<ul class="ct-bul">${lista.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
+  const P = (n, html) => `<p><b>${n}º.</b> ${html}</p>`;
+  const add = (titulo, corpo) => cl.push({ titulo, corpo });
+  const idxRescisao = () => cl.findIndex(c => /PRAZO MÍNIMO|RESCISÃO/.test(c.titulo));
+  add("DO OBJETO DO CONTRATO", P(1, esc(ct.objeto)) + (L(ct.finalidades).length ? P(2, "O serviço contratado tem como finalidade:") + num(L(ct.finalidades)) : ""));
+  add("DA VIGÊNCIA", P(1, "O presente contrato entra em vigor na data de sua assinatura.")
+    + (temF1 ? P(2, `${ambos ? "A Fase 1 (projeto)" : "O projeto"} terá a duração de até ${esc(cd.prazoFase1 || "15 dias")}.`) : "")
+    + (temF2 ? P(temF1 ? 3 : 2, `Os serviços recorrentes${ambos ? " (Fase 2)" : ""} permanecerão vigentes até sua rescisão, observado o prazo mínimo de permanência estabelecido na Cláusula §RESCISAO§.`) : ""));
+  add("DO ESCOPO DOS SERVIÇOS", ambos ? P(1, "Os serviços contemplam duas fases complementares:") + `<p class="ct-sub">Fase 1 — Projeto (valor único):</p>${num(L(ct.fase1))}<p class="ct-sub">Fase 2 — Serviços mensais (recorrente):</p>${num(L(ct.fase2))}`
+    : P(1, "Os serviços contemplam:") + num(L(temF1 ? ct.fase1 : ct.fase2)));
+  add("DO ESCOPO E DAS ALTERAÇÕES", P(1, "Os serviços serão executados exclusivamente dentro do escopo contratado.")
+    + P(2, "Solicitações que impliquem aumento do volume operacional, novas atividades, novos processos, novas unidades, novas empresas do grupo econômico ou qualquer atividade não prevista na proposta comercial serão consideradas serviços adicionais.")
+    + P(3, "A execução de serviços adicionais dependerá de aprovação formal da CONTRATANTE e poderá implicar revisão dos honorários.")
+    + P(4, "Considera-se aumento relevante de escopo, exemplificativamente:") + rom(["aumento superior a 20% do volume mensal de documentos financeiros;", "inclusão de novas contas bancárias;", "inclusão de novas empresas ou filiais;", "aumento expressivo das movimentações financeiras;", "inclusão de novos relatórios ou indicadores não previstos inicialmente."]));
+  if (ambos) add("DOS PRAZOS E FASES", P(1, `A Fase 1 tem prazo estimado de ${esc(cd.prazoFase1 || "15 dias")}, contados do início dos trabalhos.`)
+    + P(2, "Concluída a Fase 1, inicia-se a Fase 2 (serviços mensais), de caráter contínuo, conforme cronograma abaixo.")
+    + `<div class="ct-fases"><div><span class="f1">Fase 1</span><p>${esc(L(ct.fase1).slice(0, 4).join(", ").replace(/\.$/, ""))}.</p></div><div><span class="f2">Fase 2</span><p>Execução dos serviços mensais pela CONTRATADA, em regime pleno, com faturamento recorrente.</p></div></div>`);
+  let n6 = 2;
+  add("DAS CONDIÇÕES DE EXECUÇÃO", P(1, "A prestação dos serviços ocorrerá predominantemente de forma remota. Reuniões e visitas presenciais poderão ser agendadas mediante acordo entre as partes.")
+    + P(2, "A CONTRATANTE compromete-se a:") + bul(["disponibilizar todas as informações e acessos necessários à execução do serviço;", "indicar colaborador responsável pelo acompanhamento do projeto;", "apoiar a implementação das melhorias propostas;", "garantir a participação ativa dos colaboradores envolvidos."])
+    + (cd.temBPO ? P(++n6, "<b>Do acesso bancário e aprovação de pagamentos:</b> A CONTRATADA poderá ter acesso, em modo somente lançamento de pagamento, leitura, extração de extrato bancário e consulta (acesso secundário), às contas bancárias da CONTRATANTE exclusivamente para fins de conciliação e controle financeiro. Qualquer execução ou aprovação de pagamento dependerá de autorização expressa e prévia da CONTRATANTE ou de seu representante legal designado, sendo vedada à CONTRATADA a movimentação unilateral de recursos de qualquer natureza.") : "")
+    + P(++n6, "<b>Da proteção de dados:</b> As partes se comprometem a tratar os dados pessoais e financeiros compartilhados no âmbito deste contrato em conformidade com a Lei nº 13.709/2018 (LGPD) e demais normas aplicáveis. A CONTRATADA adotará medidas técnicas e organizacionais adequadas para proteger as informações da CONTRATANTE contra acesso não autorizado, perda, alteração ou divulgação indevida."));
+  let n7 = 1, hon = P(n7, "Pela prestação dos serviços, a CONTRATANTE pagará à CONTRATADA os valores discriminados a seguir.");
+  if (temF1) hon += (ambos ? `<p class="ct-sub">a) Fase 1 — Projeto (valor único):</p>` : "") + P(++n7, `Valor total de ${brl(totalF1)} (${extenso(totalF1)}), pago em ${cd.parcelas.length === 1 ? "parcela única" : `${cd.parcelas.length} (${extenso(cd.parcelas.length).replace(/ reais?$/, "").replace(/^um$/, "uma").replace(/^dois$/, "duas")}) parcelas`}:`)
+    + bul(cd.parcelas.map(p => `${brl(p.valor)} no dia ${dataExtenso(p.data)}`));
+  if (temF2) hon += (ambos ? `<p class="ct-sub">b) Fase 2 — Serviços mensais (recorrente):</p>` : "") + P(++n7, `Valor de ${brl(cd.valorMensal)} (${extenso(cd.valorMensal)}) por mês. A primeira mensalidade deverá ser paga no dia ${dataExtenso(cd.primeiraMensal)}, seguindo-se as demais de forma sucessiva e mensal.`);
+  add("DOS HONORÁRIOS E FORMA DE PAGAMENTO", hon);
+  if (temF2) add("DO REAJUSTE", P(1, "Os honorários serão reajustados anualmente, contado da data de assinatura deste contrato, tendo como base mínima de reajuste o índice IPCA acumulado dos últimos 12 meses.")
+    + P(2, "Na hipótese de extinção do IPCA, será utilizado outro índice oficial que venha substituí-lo.")
+    + P(3, "Caso a inflação acumulada ultrapasse significativamente os custos da prestação dos serviços, ou ocorra alteração substancial do escopo contratado, as partes poderão renegociar os valores antes do período anual."));
+  add("DAS CONDIÇÕES DE PAGAMENTO", P(1, `${temF1 ? "As parcelas do projeto" : ""}${ambos ? " e as mensalidades" : temF2 ? "As mensalidades" : ""} serão pagas via transferência bancária ou PIX.`)
+    + (temF2 ? P(2, `As mensalidades têm vencimento no dia ${cd.vencDia} (${extenso(cd.vencDia).replace(/ reais?$/, "")}) de cada mês.`) : "")
+    + P(temF2 ? 3 : 2, "Em caso de atraso:") + bul(["multa de 2% (dois por cento) sobre o valor devido;", "juros de 1% (um por cento) ao mês."])
+    + P(temF2 ? 4 : 3, "Em caso de atraso superior a 15 dias, a CONTRATADA poderá suspender temporariamente a prestação dos serviços até a regularização dos pagamentos.")
+    + `<div class="ct-pag"><b>Dados para pagamento</b><span><b>CHAVE PIX (CNPJ):</b> ${CONTRATADA.pix}</span><span><b>BANCO:</b> ${CONTRATADA.banco} &nbsp; <b>AGÊNCIA:</b> ${CONTRATADA.agencia} &nbsp; <b>CONTA:</b> ${CONTRATADA.conta}</span></div>`);
+  const pm = Number(cd.prazoMinMeses) || 0, av = Number(cd.avisoDias) || 30;
+  if (temF2) add("DO PRAZO MÍNIMO E DA RESCISÃO", P(1, `${ambos ? "A Fase 2 (serviços mensais)" : "Os serviços mensais"} têm prazo mínimo de vigência de ${pm} (${extenso(pm).replace(/ reais?$/, "")}) meses, contados do início da primeira mensalidade.`)
+    + P(2, `Durante o prazo mínimo, nenhuma das partes poderá rescindir o contrato sem o pagamento integral das mensalidades restantes até o fim do ${pm}º mês, a título de multa compensatória. Não se aplica aviso prévio para rescisão dentro desse período; a saída antecipada implica obrigatoriamente o pagamento das mensalidades faltantes.`)
+    + P(3, `O aviso prévio de ${av} dias somente se aplica após o cumprimento integral do prazo mínimo. Para que o encerramento ocorra ao final do ${pm}º mês, o aviso deverá ser comunicado por escrito com ${av} dias de antecedência. Caso contrário, o contrato se prorrogará automaticamente por prazo indeterminado.`)
+    + P(4, `Após cumprido o prazo mínimo, qualquer das partes poderá rescindir mediante aviso prévio de ${av} dias. Em caso de rescisão sem aviso prévio após o período mínimo, a parte que der causa pagará multa equivalente a 1 (uma) mensalidade.`)
+    + P(5, "A CONTRATADA somente poderá rescindir o contrato antes do término do prazo mínimo nos casos de inadimplência da CONTRATANTE superior a 15 (quinze) dias, hipótese em que a rescisão será imediata e sem pagamento de multa pela CONTRATADA. Fora dessa hipótese, aplica-se à CONTRATADA a mesma obrigação de multa compensatória prevista no § 2º."));
+  else add("DA RESCISÃO", P(1, `Qualquer das partes poderá rescindir este contrato mediante comunicação por escrito com aviso prévio de ${av} dias.`)
+    + P(2, "Em caso de rescisão, serão devidos à CONTRATADA os valores correspondentes às etapas executadas até a data do encerramento, além das parcelas vencidas e não pagas.")
+    + P(3, "Em caso de inadimplência da CONTRATANTE superior a 15 (quinze) dias, a CONTRATADA poderá suspender os serviços ou rescindir o contrato imediatamente, sem pagamento de multa."));
+  add("DA LIMITAÇÃO DE RESPONSABILIDADE", P(1, "A CONTRATADA compromete-se a executar os serviços com zelo, diligência e observância das melhores práticas profissionais.")
+    + P(2, "A atuação da CONTRATADA possui natureza exclusivamente consultiva e operacional, não assumindo poderes de administração, representação, deliberação ou gestão da CONTRATANTE.")
+    + P(3, "A CONTRATADA não garante resultados financeiros, aumento de faturamento, redução de custos, lucratividade ou qualquer desempenho econômico específico, uma vez que tais resultados dependem de fatores externos e de decisões da própria CONTRATANTE.")
+    + P(4, "A responsabilidade da CONTRATADA limita-se aos danos diretos comprovadamente decorrentes de culpa exclusiva na execução dos serviços.")
+    + P(5, "<b>Em nenhuma hipótese a CONTRATADA responderá por:</b>") + rom(["lucros cessantes;", "perda de oportunidade;", "danos indiretos;", "decisões tomadas pela administração da CONTRATANTE;", "informações incorretas fornecidas pela CONTRATANTE;", "falhas de sistemas de terceiros;", "indisponibilidade de instituições financeiras;", "atos praticados por colaboradores da CONTRATANTE."])
+    + `<p>Parágrafo Único. A responsabilidade financeira total da CONTRATADA fica limitada ao montante correspondente aos honorários efetivamente pagos pela CONTRATANTE nos últimos 12 meses anteriores ao evento que deu origem à reclamação, exceto nos casos de dolo ou fraude comprovados.</p>`);
+  add("DA CONFIDENCIALIDADE", P(1, "As partes comprometem-se a manter sigilo absoluto sobre todas as informações obtidas durante a execução dos serviços, sendo vedada qualquer divulgação sem autorização prévia.")
+    + P(2, "O dever de confidencialidade sobre informações financeiras da CONTRATANTE é reforçado e permanece após o término deste contrato.")
+    + P(3, "A presente prestação de serviços não contempla: escrituração contábil ou fiscal; execução de obrigações acessórias e tributárias; gestão direta de equipe; mediação de conflitos internos; rotinas de departamento pessoal e cobrança de inadimplência."));
+  add("DA PROPRIEDADE INTELECTUAL", P(1, "Os materiais, modelos e metodologias desenvolvidos são de propriedade da CONTRATADA, sendo concedido à CONTRATANTE o direito de uso interno.")
+    + P(2, "É vedada a reprodução ou comercialização dos materiais fornecidos pela CONTRATADA sem autorização prévia."));
+  add("DA NÃO EXCLUSIVIDADE", P(1, "O presente contrato não estabelece exclusividade entre as partes.")
+    + P(2, "A CONTRATADA poderá prestar serviços a outras empresas, inclusive do mesmo segmento econômico da CONTRATANTE, desde que preserve integralmente o sigilo das informações confidenciais."));
+  add("DAS COMUNICAÇÕES", P(1, "Todas as comunicações entre as partes deverão ocorrer por escrito, mediante:") + rom(["e-mail;", "plataforma eletrônica utilizada no projeto;", "correspondência;", "aplicativo de mensagens previamente indicado pelas partes."])
+    + P(2, "As comunicações enviadas aos endereços eletrônicos constantes neste contrato serão consideradas válidas até que uma das partes informe formalmente sua alteração."));
+  add("DO CASO FORTUITO E DA FORÇA MAIOR", P(1, "Nenhuma das partes responderá pelo descumprimento de obrigações decorrentes de eventos imprevisíveis ou inevitáveis, nos termos do art. 393 do Código Civil.")
+    + P(2, "Consideram-se hipóteses de força maior, entre outras:") + rom(["desastres naturais, incêndios e enchentes;", "pandemias e calamidades públicas;", "greves gerais;", "ataques cibernéticos e falhas de energia elétrica;", "indisponibilidade da internet ou de sistemas de terceiros;", "indisponibilidade de instituições financeiras."])
+    + P(3, "Enquanto perdurar o evento de força maior, ficam suspensas as obrigações diretamente afetadas."));
+  add("DO ENCERRAMENTO E DEVOLUÇÃO DE INFORMAÇÕES", P(1, "Na hipótese de rescisão ou término deste contrato, por qualquer causa, a CONTRATADA compromete-se a:")
+    + `<p class="ct-ind">I – entregar à CONTRATANTE, no prazo de até 15 (quinze) dias após a data efetiva de encerramento, todos os arquivos, relatórios, planilhas, dashboards, indicadores e documentos financeiros produzidos no âmbito deste contrato;</p>
+       <p class="ct-ind">II – disponibilizar os dados em formato acessível (Excel, PDF ou equivalente), sem retenção de qualquer informação de titularidade da CONTRATANTE;</p>
+       <p class="ct-ind">III – realizar reunião de transição para apresentar o status de todas as rotinas em andamento, pendências e orientações necessárias para a continuidade da operação.</p>`
+    + P(2, "A entrega prevista no § 1º ficará condicionada à quitação integral de todos os valores devidos pela CONTRATANTE até a data do encerramento.")
+    + P(3, `O descumprimento do prazo de entrega previsto no § 1º, I, sem justificativa, sujeitará a CONTRATADA ao pagamento de multa diária de 0,5% sobre ${temF2 ? "a última mensalidade paga" : "a última parcela paga"}, limitada a 10% do valor total.`));
+  add("DAS DISPOSIÇÕES GERAIS", P(1, "Este contrato não gera vínculo empregatício entre as partes, sendo a CONTRATADA prestadora de serviços independente.")
+    + P(2, "As partes elegem o foro da comarca de Contagem/MG para dirimir quaisquer questões oriundas deste contrato.")
+    + P(3, "Os casos omissos serão resolvidos de comum acordo entre as partes, à luz dos princípios da boa-fé e da função social do contrato."));
+  const iR = idxRescisao();
+  const corpo = cl.map((c, i) => `<div class="ct-cl"><h3>CLÁUSULA ${ORDINAIS[i]} – ${c.titulo}</h3>${c.corpo.replace("§RESCISAO§", ORDINAIS[iR] ? ORDINAIS[iR].toLowerCase().replace(/(^|\s)\S/g, m => m.toUpperCase()) : "")}</div>`).join("");
+  const end = [k.logradouro && `${k.logradouro}${k.numero ? ", " + k.numero : ""}`, k.complemento, k.bairro, k.cidade && `${k.cidade}${k.uf ? "/" + k.uf : ""}`, k.cep && `CEP ${k.cep}`].filter(Boolean).join(", ");
+  const socios = (k.socios || []).filter(s => s.nome?.trim());
+  const linha = (rot, val) => `<div class="ct-lin"><span>${rot}</span><b>${esc(val || "")}</b></div>`;
+  return `<div class="ct">
+    <div class="ct-parte"><div class="ct-tab">CONTRATANTE:</div>
+      ${linha("Nome:", k.razao)}${k.fantasia ? linha("Nome fantasia:", k.fantasia) : ""}${linha("Sócio(a):", socios.map(s => s.nome).join(" | "))}
+      ${linha("CNPJ/CPF:", [k.cnpj, ...socios.map(s => s.cpf).filter(Boolean)].join(" | "))}${k.regime ? linha("Regime:", k.regime) : ""}
+      ${linha("Telefone:", k.telefone)}${linha("E-mail:", k.email)}${linha("Endereço:", end)}</div>
+    <div class="ct-parte"><div class="ct-tab">CONTRATADA:</div>
+      ${linha("Nome:", CONTRATADA.nome)}${linha("Sócio:", CONTRATADA.socio)}${linha("CNPJ/CPF:", CONTRATADA.cnpjCpf)}${linha("Telefone:", CONTRATADA.telefone)}${linha("E-mail:", CONTRATADA.email)}${linha("Endereço:", CONTRATADA.endereco)}</div>
+    ${corpo}
+    <div class="ct-fim"><p class="ct-local">${esc(cd.cidade || "Contagem")}, ${dataExtenso(cd.data)}.</p>
+      <div class="ct-assin">
+        <div><i></i><b>Assinatura Contratante</b><span>${esc(k.razao)}</span><span>CNPJ: ${esc(k.cnpj)}</span>${socios.map(s => `<span class="it">${esc(s.nome.replace(/\b\w+/g, w => w[0] + w.slice(1).toLowerCase()))}</span><span>CPF: ${esc(s.cpf)}</span>`).join("")}</div>
+        <div><i></i><b>Assinatura Contratada</b><span>${CONTRATADA.nome}</span><span>CNPJ: ${CONTRATADA.cnpj}</span><span class="it">Washington Junio Salles</span><span>CPF: ${CONTRATADA.cpf}</span></div>
+      </div>
+      <p class="ct-anexo">Integra este contrato como parte indissociável: Anexo I — Proposta Comercial.</p></div>
+  </div>`;
+}
+const carregarImg = src => new Promise((ok, falha) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => falha(new Error("Imagem não carregou: " + src)); i.src = src; });
+/* PDF do contrato: capa do modelo + páginas com cabeçalho (marca WL) e rodapé (faixa verde) */
+async function blobPDFContrato(ct) {
+  await carregarScript(LIB.html2pdf);
+  const [capa, marca, branca] = await Promise.all([carregarImg("contrato-capa.jpg"), carregarImg("logo-marca.png"), carregarImg("logo-branca.png")]);
+  const host = document.createElement("div");
+  host.style.cssText = "position:fixed;left:0;top:0;width:182mm;z-index:-1;pointer-events:none;background:#fff";
+  host.innerHTML = htmlContrato(ct);
+  document.body.appendChild(host);
+  const ano = (ct.cond.data || hojeISO()).slice(0, 4);
+  try {
+    return await html2pdf().set({
+      margin: [24, 14, 28, 14], image: { type: "jpeg", quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0 }, jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: { mode: ["css", "legacy"], avoid: [".ct-parte", ".ct-cl h3", ".ct-pag", ".ct-fases", ".ct-assin", ".ct-fim", "p", "li"] }
+    }).from(host.firstElementChild).toPdf().get("pdf").then(pdf => {
+      const tot = pdf.internal.getNumberOfPages();
+      for (let i = 1; i <= tot; i++) {
+        pdf.setPage(i);
+        pdf.addImage(marca, "PNG", 182, 8, 15, 15 * 118 / 204);
+        pdf.setFillColor(14, 90, 96); pdf.rect(0, 278, 210, 19, "F");
+        pdf.addImage(branca, "PNG", 12, 284.5, 36, 36 * 49 / 360);
+        pdf.setFont("helvetica", "italic"); pdf.setFontSize(9); pdf.setTextColor(200, 225, 228); pdf.text(ano, 196, 289, { align: "right" });
+      }
+      pdf.insertPage(1);
+      pdf.addImage(capa, "JPEG", 0, 0, 210, 297);
+    }).outputPdf("blob");
+  } finally { host.remove(); }
+}
+async function carregarPdfLib() { await carregarScript(LIB.pdflib); return window.PDFLib; }
+/* Documento para assinatura = contrato + proposta (Anexo I), num único PDF */
+async function gerarDocAssinatura(ct, salvar = true) {
+  toast("Montando contrato + proposta…", "prog", 0);
+  const pp = propDoContrato(ct);
+  const [bc, bp] = await Promise.all([blobPDFContrato(ct), pp ? blobPDFProposta(pp) : null]);
+  const { PDFDocument } = await carregarPdfLib();
+  const doc = await PDFDocument.create();
+  const pc = await PDFDocument.load(await bc.arrayBuffer());
+  (await doc.copyPages(pc, pc.getPageIndices())).forEach(p => doc.addPage(p));
+  const nContrato = pc.getPageCount();
+  if (bp) { const pr = await PDFDocument.load(await bp.arrayBuffer()); (await doc.copyPages(pr, pr.getPageIndices())).forEach(p => doc.addPage(p)); }
+  doc.setTitle(`Contrato e Proposta - ${ct.contratante.razao}`); doc.setAuthor("WL Expertise");
+  const blob = new Blob([await doc.save()], { type: "application/pdf" });
+  const empresa = limparNome(pp?.cliente?.empresa || ct.contratante.fantasia || ct.contratante.razao || "Cliente");
+  const nome = `Contrato e Proposta - ${empresa}.pdf`;
+  if (!salvar) { toast("Pré-visualização pronta"); return { blob, nome, nContrato }; }
+  await criarPasta("", "clientes"); await criarPasta("clientes", empresa);
+  const item = await enviarArquivo(`clientes/${empresa}/${nome}`, new File([blob], nome, { type: "application/pdf" }), "replace");
+  return { blob, nome, nContrato, item, empresa };
+}
+function baixarBlob(blob, nome) { const u = URL.createObjectURL(blob), a = document.createElement("a"); a.href = u; a.download = nome; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 60000); }
+
+/* ---- Envio para assinatura: signatários + posicionamento das assinaturas no documento ---- */
+async function carregarPdfJs() {
+  await carregarScript(LIB.pdfjs);
+  if (!window.pdfjsLib.GlobalWorkerOptions.workerSrc) {
+    const txt = await (await fetch(LIB.pdfjsWorker)).text();
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([txt], { type: "text/javascript" }));
+  }
+  return window.pdfjsLib;
+}
+const CORES_SIG = ["#13A3B5", "#28B260", "#D99A1E", "#8E5BD0", "#C8463D"];
+async function abrirEnvioAssinatura(ct) {
+  if (ctrPendente) await salvarCtr();
+  const falta = pendenciasContrato(ct);
+  if (falta.length) return toast("Complete: " + falta.join(", "), "erro", 6000);
+  let doc;
+  try { doc = await gerarDocAssinatura(ct, true); } catch (e) { return toast("Não foi possível montar o documento: " + e.message, "erro", 7000); }
+  toast("Documento pronto · indique onde cada parte assina");
+  const k = ct.contratante, socio = (k.socios || []).find(s => s.nome?.trim()) || {};
+  const sig = [
+    { papel: "cliente", nome: (socio.nome || k.razao).replace(/\b\w+/g, w => w[0] + w.slice(1).toLowerCase()), email: k.email, whatsapp: k.telefone },
+    { papel: "wl", nome: CONTRATADA.signatario.nome, email: CONTRATADA.signatario.email, whatsapp: CONTRATADA.signatario.whatsapp }
+  ];
+  let cc = [CONTRATADA.signatario.email], campos = [], ativo = 0;
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Enviar contrato para assinatura</h3></div>
+    <div class="modal-corpo envio-ass">
+      <div class="env-lado">
+        <h5>Quem assina</h5><div id="listaSig"></div>
+        <button class="lnk" id="addSig" type="button">+ adicionar signatário</button>
+        <h5>Cópia dos e-mails para</h5><input id="ccEnvio" class="campo-busca" value="${esc(cc.join(", "))}">
+        <p class="txt-sec">Escolha quem vai assinar e clique no documento onde essa pessoa assina. Pode marcar quantos locais quiser, em qualquer página. Clique numa marcação para removê-la.</p>
+        <div id="resumoCampos" class="txt-prog"></div>
+      </div>
+      <div class="env-doc" id="envDoc"><p class="txt-prog">Carregando documento…</p></div>
+    </div>
+    <div class="modal-rod"><button class="btn-s" data-m="nao">Cancelar</button><button class="btn-p" data-m="ok"><svg><use href="#i-atd"/></svg>Enviar para assinatura</button></div>`);
+  m.classList.add("modal-largo", "modal-envio");
+  veu.onclick = null;
+  const desenharSig = () => {
+    $("listaSig").innerHTML = sig.map((s, i) => `<div class="sig-card ${i === ativo ? "ativo" : ""}" data-sig="${i}" style="--c:${CORES_SIG[i % CORES_SIG.length]}">
+      <div class="sig-top"><i></i><b>${s.papel === "wl" ? "WL Expertise" : "Cliente"}</b><span>${campos.filter(c => c.s === i).length} local(is)</span>${i > 1 ? `<button class="lnk perigo-lnk" data-rem-sig="${i}" type="button">remover</button>` : ""}</div>
+      <input data-s="${i}" data-f="nome" placeholder="Nome" value="${esc(s.nome || "")}">
+      <input data-s="${i}" data-f="email" type="email" placeholder="E-mail (recebe o link e o código)" value="${esc(s.email || "")}">
+      <input data-s="${i}" data-f="whatsapp" placeholder="WhatsApp (opcional)" value="${esc(s.whatsapp || "")}">
+    </div>`).join("");
+    $("resumoCampos").textContent = sig.map((s, i) => `${s.nome || "Signatário " + (i + 1)}: ${campos.filter(c => c.s === i).length}`).join(" · ");
+  };
+  const desenharCampos = () => {
+    m.querySelectorAll(".campo-ass").forEach(x => x.remove());
+    campos.forEach((c, idx) => {
+      const pg = m.querySelector(`.pg-wrap[data-pg="${c.pg}"]`); if (!pg) return;
+      const el = document.createElement("div"); el.className = "campo-ass"; el.dataset.idx = idx;
+      el.style.cssText = `left:${c.x * 100}%;top:${c.y * 100}%;width:${c.w * 100}%;height:${c.h * 100}%;--c:${CORES_SIG[c.s % CORES_SIG.length]}`;
+      el.innerHTML = `<span>${esc((sig[c.s]?.nome || "").split(" ")[0] || "Assinatura")}</span>`;
+      pg.appendChild(el);
+    });
+    desenharSig();
+  };
+  desenharSig();
+  m.addEventListener("input", e => { const t = e.target; if (t.dataset.s !== undefined) { sig[+t.dataset.s][t.dataset.f] = t.value; if (t.dataset.f === "nome") $("resumoCampos").textContent = sig.map((s, i) => `${s.nome}: ${campos.filter(c => c.s === i).length}`).join(" · "); } });
+  m.addEventListener("click", e => {
+    const rs = e.target.closest("[data-rem-sig]");
+    if (rs) { const i = +rs.dataset.remSig; sig.splice(i, 1); campos = campos.filter(c => c.s !== i).map(c => ({ ...c, s: c.s > i ? c.s - 1 : c.s })); ativo = 0; return desenharCampos(); }
+    const card = e.target.closest("[data-sig]");
+    if (card && e.target.tagName !== "INPUT") { ativo = +card.dataset.sig; return desenharSig(); }
+    if (e.target.id === "addSig") { sig.push({ papel: "cliente", nome: "", email: "", whatsapp: "" }); ativo = sig.length - 1; return desenharSig(); }
+    const ca = e.target.closest(".campo-ass");
+    if (ca) { campos.splice(+ca.dataset.idx, 1); return desenharCampos(); }
+    const pg = e.target.closest(".pg-wrap");
+    if (pg) {
+      const r = pg.getBoundingClientRect(), w = 0.3, h = 0.055;
+      const x = Math.min(Math.max((e.clientX - r.left) / r.width - w / 2, 0), 1 - w), y = Math.min(Math.max((e.clientY - r.top) / r.height - h / 2, 0), 1 - h);
+      campos.push({ s: ativo, pg: +pg.dataset.pg, x, y, w, h });
+      desenharCampos();
+    }
+  });
+  m.querySelector("[data-m=nao]").onclick = fecharModal;
+  m.querySelector("[data-m=ok]").onclick = async ev => {
+    cc = $("ccEnvio").value.split(/[,;\s]+/).map(x => x.trim()).filter(x => /\S+@\S+\.\S+/.test(x));
+    const invalido = sig.find(s => !s.nome?.trim() || !/\S+@\S+\.\S+/.test(s.email || ""));
+    if (invalido) return toast("Cada signatário precisa de nome e e-mail válidos", "erro", 5000);
+    const semCampo = sig.findIndex((s, i) => !campos.some(c => c.s === i));
+    if (semCampo >= 0) return toast(`Marque no documento onde ${sig[semCampo].nome} assina`, "erro", 5000);
+    ev.target.disabled = true;
+    try {
+      const r = await api("/assinaturas", { method: "POST", body: JSON.stringify({
+        titulo: `Contrato e Proposta - ${ct.contratante.razao}`, empresa: ct.contratante.razao, docItemId: doc.item.id, contratoId: ct.id, propostaId: ct.propostaId,
+        signatarios: sig.map(s => ({ papel: s.papel, nome: s.nome.trim(), email: s.email.trim(), whatsapp: s.whatsapp || "" })), campos, cc,
+        site: new URL("assinar.html", location.href).href }) });
+      ct.status = "enviado"; ct.envelope = { id: r.id, enviadoEm: new Date().toISOString(), links: r.links };
+      ct.docAssinatura = { id: doc.item.id, webUrl: doc.item.webUrl, nome: doc.nome, empresa: doc.empresa };
+      ctrPendente = true; await salvarCtr();
+      fecharModal();
+      if (ct.leadId && crm.carregado && leadPorId(ct.leadId)) alterarLead(ct.leadId, l => { registrar(l, "documento", `Contrato ${ct.id} enviado para assinatura`, { link: doc.item.webUrl }); if (ORDEM_ETAPA[l.etapa] < ORDEM_ETAPA.negociacao) moverEtapa(l, "negociacao"); });
+      mostrarLinksEnvio(r.links, r.avisoEmail);
+      abrirContrato(ct.id);
+    } catch (e) { ev.target.disabled = false; toast("Não foi possível enviar: " + e.message, "erro", 8000); }
+  };
+  try {
+    const pdfjs = await carregarPdfJs();
+    const pdf = await pdfjs.getDocument({ data: new Uint8Array(await doc.blob.arrayBuffer()) }).promise;
+    const cont = $("envDoc"); cont.innerHTML = "";
+    const larg = Math.min(cont.clientWidth - 8, 760);
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i), v0 = page.getViewport({ scale: 1 }), vp = page.getViewport({ scale: larg / v0.width * (devicePixelRatio || 1) });
+      const wrap = document.createElement("div"); wrap.className = "pg-wrap"; wrap.dataset.pg = i - 1;
+      const cv = document.createElement("canvas"); cv.width = vp.width; cv.height = vp.height; cv.style.width = "100%";
+      wrap.innerHTML = `<span class="pg-num">Página ${i}${i <= doc.nContrato ? " · contrato" : " · proposta"}</span>`;
+      wrap.appendChild(cv); cont.appendChild(wrap);
+      await page.render({ canvasContext: cv.getContext("2d"), viewport: vp }).promise;
+    }
+    desenharCampos();
+  } catch (e) { $("envDoc").innerHTML = `<div class="aviso-erro">Não foi possível exibir o documento: ${esc(e.message)}</div>`; }
+}
+function mostrarLinksEnvio(links, aviso) {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Contrato enviado ✓</h3></div>
+    <div class="modal-corpo">${aviso ? `<div class="aviso-falta"><b>Atenção</b><span>Algum e-mail não foi enviado: ${esc(aviso)}. Use “Reenviar e-mail” ou envie o link pelo WhatsApp.</span></div>` : ""}
+      <p>Cada signatário recebeu um e-mail com o link para assinar. Se quiser, envie também pelo WhatsApp:</p>
+      <ul class="lista-cli">${(links || []).map(l => `<li><div><b>${esc(l.nome)}</b><small>${esc(l.email)}</small></div>
+        ${linkWhats(l.whatsapp) ? `<a class="btn-s" target="_blank" rel="noopener" href="${linkWhats(l.whatsapp)}?text=${encodeURIComponent(`Olá, ${l.nome.split(" ")[0]}! Segue o link para assinar o contrato com a WL Expertise: ${l.url}`)}">WhatsApp</a>` : ""}
+        <button class="btn-s" data-copiar="${esc(l.url)}">Copiar link</button></li>`).join("")}</ul></div>
+    <div class="modal-rod"><button class="btn-p" data-m="ok">Fechar</button></div>`);
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=ok]").onclick = fecharModal;
+  m.onclick = e => { const b = e.target.closest("[data-copiar]"); if (b) navigator.clipboard?.writeText(b.dataset.copiar).then(() => toast("Link copiado")); };
+}
+async function atualizarStatusAss(ct) {
+  try {
+    const env = await api(`/assinaturas/${ct.envelope.id}`);
+    const el = $("statusAss"); if (!el || ctrAtual?.id !== ct.id) return;
+    el.innerHTML = `${env.signatarios.map((s, i) => `<div class="sig-status ${s.assinado ? "ok" : ""}"><b>${esc(s.nome)}</b><small>${s.assinado ? `✓ assinou em ${dataHora(s.assinado.em)}` : `aguardando · ${esc(s.email)}`}</small>
+      ${!s.assinado ? `<div class="sig-acoes"><button class="lnk" data-ctr="reenviar" data-i="${i}">Reenviar e-mail</button>${linkWhats(s.whatsapp) && s.link ? `<a class="lnk" target="_blank" rel="noopener" href="${linkWhats(s.whatsapp)}?text=${encodeURIComponent(`Olá, ${s.nome.split(" ")[0]}! Segue o link para assinar o contrato com a WL Expertise: ${s.link}`)}">WhatsApp</a>` : ""}${s.link ? `<button class="lnk" data-copiar-link="${esc(s.link)}">Copiar link</button>` : ""}</div>` : ""}</div>`).join("")}
+      ${env.status === "concluido" ? `<p class="txt-prog">Todos assinaram · finalizando o documento…</p>` : ""}`;
+    el.onclick = e => { const b = e.target.closest("[data-copiar-link]"); if (b) navigator.clipboard?.writeText(b.dataset.copiarLink).then(() => toast("Link copiado")); };
+    if (env.status === "concluido") verificarAssinaturas();
+  } catch (e) { const el = $("statusAss"); if (el) el.innerHTML = `<div class="aviso-erro">${esc(e.message)}</div>`; }
+}
+async function cancelarEnvio(ct) {
+  if (!confirmar("Cancelar o envio? Os links de assinatura deixam de funcionar e o contrato volta a ser editável.")) return;
+  try { await api(`/assinaturas/${ct.envelope.id}/cancelar`, { method: "POST", body: "{}" }); } catch (e) { if (e.status !== 404) return toast(e.message, "erro", 6000); }
+  ct.status = "rascunho"; ct.envelopesCancelados = [...(ct.envelopesCancelados || []), ct.envelope]; delete ct.envelope;
+  ctrPendente = true; await salvarCtr(); abrirContrato(ct.id);
+}
+
+/* ---- Conclusão: quando todos assinam, o sistema gera o PDF final e cria o cliente ---- */
+let verificandoAss = false;
+async function verificarAssinaturas() {
+  if (verificandoAss || !conta) return;
+  verificandoAss = true;
+  try {
+    if (!ctrStore.carregado) await carregarStore(ctrStore); else await carregarStore(ctrStore);
+    const pend = ctrs().filter(c => c.status === "enviado" && c.envelope?.id);
+    for (const c of pend) {
+      let env; try { env = await api(`/assinaturas/${c.envelope.id}`); } catch { continue; }
+      if (env.status === "concluido" && !env.arquivado) {
+        try { await api(`/assinaturas/${env.id}/travar`, { method: "POST", body: "{}" }); } catch { continue; }
+        await finalizarContrato(c, env);
+      } else if (env.status === "concluido" && env.arquivado && c.status !== "assinado") {
+        await salvarStore(ctrStore, d => { const x = d.contratos.find(y => y.id === c.id); if (x) { x.status = "assinado"; x.assinado = x.assinado || { em: env.concluidoEm, pdf: env.final }; } });
+      }
+    }
+  } catch {} finally { verificandoAss = false; }
+}
+function imagemAssinatura(nome) {
+  const cv = document.createElement("canvas"); cv.width = 900; cv.height = 220;
+  const x = cv.getContext("2d");
+  let tam = 130;
+  x.font = `${tam}px "Great Vibes", "Dancing Script", cursive`;
+  while (x.measureText(nome).width > 860 && tam > 40) { tam -= 6; x.font = `${tam}px "Great Vibes", "Dancing Script", cursive`; }
+  x.fillStyle = "#0B2E5C"; x.textBaseline = "middle"; x.fillText(nome, 20, 115);
+  return cv.toDataURL("image/png");
+}
+async function finalizarContrato(c, env) {
+  toast("Contrato assinado por todos · gerando o documento final…", "prog", 0);
+  try { await document.fonts?.load('80px "Great Vibes"'); } catch {}
+  const { PDFDocument, rgb, StandardFonts } = await carregarPdfLib();
+  const orig = await (await graph(`/me/drive/items/${env.docItemId}/content`)).arrayBuffer();
+  const pdf = await PDFDocument.load(orig);
+  const fonte = await pdf.embedFont(StandardFonts.Helvetica), negrito = await pdf.embedFont(StandardFonts.HelveticaBold);
+  const paginas = pdf.getPages(), imgs = {};
+  for (const [i, s] of env.signatarios.entries()) imgs[i] = await pdf.embedPng(imagemAssinatura(s.assinado.nome));
+  const dh = iso => new Date(iso).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+  for (const cp of env.campos) {
+    const pg = paginas[cp.pg]; if (!pg) continue;
+    const { width: W, height: H } = pg.getSize(), s = env.signatarios[cp.s];
+    const x = cp.x * W, y = H - (cp.y + cp.h) * H, w = cp.w * W, h = cp.h * H;
+    const im = imgs[cp.s], esc2 = Math.min(w / im.width, (h * 0.78) / im.height);
+    pg.drawImage(im, { x: x + (w - im.width * esc2) / 2, y: y + h * 0.22, width: im.width * esc2, height: im.height * esc2 });
+    pg.drawText(`Assinado eletronicamente por ${s.assinado.nome} em ${dh(s.assinado.em)}`, { x: x + 2, y: y + 2, size: Math.max(4.5, h * 0.12), font: fonte, color: rgb(0.35, 0.42, 0.42) });
+  }
+  const cert = pdf.addPage([595.28, 841.89]);
+  const marca = await pdf.embedPng(await (await fetch("logo-marca.png")).arrayBuffer());
+  cert.drawRectangle({ x: 0, y: 781.89, width: 595.28, height: 60, color: rgb(0.043, 0.353, 0.376) });
+  cert.drawText("Certificado de assinatura eletrônica", { x: 40, y: 805, size: 18, font: negrito, color: rgb(1, 1, 1) });
+  cert.drawImage(marca, { x: 505, y: 795, width: 50, height: 50 * 118 / 204 });
+  let yy = 750;
+  const linha = (rot, val, tam = 9.5) => { cert.drawText(rot, { x: 40, y: yy, size: tam, font: negrito, color: rgb(0.1, 0.18, 0.18) }); cert.drawText(String(val), { x: 175, y: yy, size: tam, font: fonte, color: rgb(0.2, 0.25, 0.25), maxWidth: 380 }); yy -= 16; };
+  linha("Documento:", env.titulo); linha("Identificador:", env.id); linha("Criado em:", dh(env.criadoEm)); linha("Concluído em:", dh(env.concluidoEm));
+  cert.drawText("Hash SHA-256 do documento original:", { x: 40, y: yy, size: 9.5, font: negrito, color: rgb(0.1, 0.18, 0.18) }); yy -= 14;
+  cert.drawText(env.docHash, { x: 40, y: yy, size: 8, font: fonte, color: rgb(0.2, 0.25, 0.25) }); yy -= 26;
+  for (const s of env.signatarios) {
+    cert.drawRectangle({ x: 36, y: yy - 88, width: 523, height: 102, borderColor: rgb(0.89, 0.93, 0.93), borderWidth: 1, color: rgb(0.96, 0.975, 0.975) });
+    cert.drawText(`${s.papel === "wl" ? "CONTRATADA — WL Expertise" : "CONTRATANTE"}`, { x: 46, y: yy, size: 8, font: negrito, color: rgb(0.075, 0.64, 0.71) }); yy -= 15;
+    linha("Nome assinado:", s.assinado.nome); linha("E-mail:", s.email); linha("Data e hora:", dh(s.assinado.em) + " (horário de Brasília)");
+    linha("Autenticação:", "código de 6 dígitos enviado ao e-mail"); linha("IP / navegador:", `${s.assinado.ip || "—"} · ${(s.assinado.ua || "").slice(0, 70)}`, 8); yy -= 18;
+  }
+  cert.drawText("As assinaturas foram registradas pela plataforma WL Sistema, com confirmação por código enviado ao e-mail de cada signatário.", { x: 40, y: 60, size: 7.5, font: fonte, color: rgb(0.4, 0.45, 0.45), maxWidth: 515 });
+  cert.drawText("Assinatura eletrônica nos termos da MP 2.200-2/2001, art. 10, § 2º, e da Lei 14.063/2020.", { x: 40, y: 48, size: 7.5, font: fonte, color: rgb(0.4, 0.45, 0.45) });
+  const bytes = await pdf.save();
+  const empresa = c.docAssinatura?.empresa || limparNome(c.contratante.razao);
+  const nome = `Contrato assinado - ${empresa}.pdf`;
+  await criarPasta("", "clientes"); await criarPasta("clientes", empresa);
+  const item = await enviarArquivo(`clientes/${empresa}/${nome}`, new File([bytes], nome, { type: "application/pdf" }), "replace");
+  const final = { id: item.id, webUrl: item.webUrl, nome, em: new Date().toISOString() };
+  await api(`/assinaturas/${env.id}/arquivar`, { method: "POST", body: JSON.stringify({ finalItemId: item.id, webUrl: item.webUrl }) });
+  const clienteId = await criarClienteDoContrato(c, env, final);
+  await salvarStore(ctrStore, d => { const x = d.contratos.find(y => y.id === c.id); if (x) { x.status = "assinado"; x.assinado = { em: env.concluidoEm, pdf: final }; x.clienteId = clienteId; } });
+  if (ctrAtual?.id === c.id) { ctrAtual.status = "assinado"; ctrAtual.assinado = { em: env.concluidoEm, pdf: final }; ctrAtual.clienteId = clienteId; ctrPendente = false; }
+  const pp = propDoContrato(c);
+  if (pp && pp.status !== "aceita") await salvarStore(propStore, d => { const x = d.propostas.find(y => y.id === pp.id); if (x) { x.status = "aceita"; x.aceitaEm = x.aceitaEm || env.concluidoEm; } });
+  if (c.leadId) { if (!crm.carregado) await carregarCRM(true); if (leadPorId(c.leadId)) await alterarLead(c.leadId, l => { registrar(l, "venda", `Contrato ${c.id} assinado por todos`, { link: item.webUrl }); moverEtapa(l, "ganho"); }); }
+  toast(`Contrato de ${c.contratante.razao} assinado · cliente criado em Clientes`, "", 7000);
+  if (viewAtual === "atendimento" && rota[0] === "contratos" && rota[1] === c.id) abrirContrato(c.id);
+  if (viewAtual === "clientes") renderClientes();
+}
+
+/* ================== CLIENTES ================== */
+const cliStore = criarStore("dados/clientes/clientes.json", { versao: 1, seq: 0, clientes: [] });
+const clis = () => cliStore.dados?.clientes || [];
+async function criarClienteDoContrato(c, env, final) {
+  const k = c.contratante, pp = propDoContrato(c), t = pp ? totaisProp(pp) : { mensal: c.cond.valorMensal, unico: 0 };
+  let id;
+  await salvarStore(cliStore, d => {
+    const ex = d.clientes.find(x => (c.leadId && x.leadId === c.leadId) || soDigitos(x.cnpj) === soDigitos(k.cnpj));
+    const docs = [{ tipo: "Contrato assinado", nome: final.nome, id: final.id, webUrl: final.webUrl, em: final.em }];
+    if (pp?.pdf) docs.push({ tipo: "Proposta", nome: pp.pdf.nome, id: pp.pdf.id, webUrl: pp.pdf.webUrl, em: pp.pdf.em });
+    const base = { leadId: c.leadId, razao: k.razao, fantasia: k.fantasia, cnpj: k.cnpj, regime: k.regime, socios: k.socios, telefone: k.telefone, email: k.email,
+      cep: k.cep, logradouro: k.logradouro, numero: k.numero, complemento: k.complemento, bairro: k.bairro, cidade: k.cidade, uf: k.uf,
+      contato: (k.socios || [])[0]?.nome || "", servicos: (pp?.itens || []).map(i => ({ nome: i.nome || SERVICOS[i.serv].nome, plano: i.plano, cobranca: ehProjeto(i) ? "unico" : "mensal", valor: Number(i.valor) || 0, licenca: Number(i.licenca) || 0 })),
+      mensal: t.mensal, unico: t.unico, pasta: `clientes/${c.docAssinatura?.empresa || limparNome(k.razao)}` };
+    if (ex) {
+      Object.assign(ex, base); id = ex.id;
+      ex.contratos = [...new Set([...(ex.contratos || []), c.id])]; ex.propostas = [...new Set([...(ex.propostas || []), c.propostaId].filter(Boolean))];
+      ex.documentos = [...docs, ...(ex.documentos || []).filter(x => !docs.some(y => y.id === x.id))];
+    } else {
+      d.seq = (d.seq || d.clientes.length) + 1; id = "CL-" + String(d.seq).padStart(4, "0");
+      d.clientes.push({ id, ...base, status: "ativo", desde: (env.concluidoEm || new Date().toISOString()).slice(0, 10), contratos: [c.id], propostas: [c.propostaId].filter(Boolean), documentos: docs, criadoEm: new Date().toISOString() });
+    }
+  });
+  return id;
+}
+async function renderClientes() {
+  const [, id] = [null, rota[0]];
+  $("cliConteudo").innerHTML = `<div class="esqueleto"></div>`;
+  try { await garantirStoresCtr(); } catch (e) { $("cliConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os clientes.</b><br>${esc(e.message)}</div>`; return; }
+  if (viewAtual !== "clientes") return;
+  if (id) return abrirCliente(id);
+  $("cliTitulo").textContent = "Clientes"; $("cliEyebrow").textContent = "Carteira";
+  $("cliDesc").textContent = "Clientes com contrato assinado: dados, documentos, serviços e histórico.";
+  const lista = [...clis()].sort((a, b) => (a.fantasia || a.razao).localeCompare(b.fantasia || b.razao));
+  $("cliConteudo").innerHTML = lista.length ? `<div class="grade-cli">${lista.map(c => `<button class="card-cli" data-link="#clientes/${c.id}">
+      <b>${esc(c.fantasia || c.razao)}</b><small>${esc(c.razao)}${c.cnpj ? " · " + esc(c.cnpj) : ""}</small>
+      <div class="chips-cli">${(c.servicos || []).map(s => `<span>${esc(s.plano || s.nome)}</span>`).join("")}</div>
+      <div class="rod-cli"><span>${c.mensal ? brl(c.mensal) + "/mês" : c.unico ? brl(c.unico) + " projeto" : ""}</span><span>desde ${data((c.desde || hojeISO()) + "T12:00")}</span></div></button>`).join("")}</div>`
+    : `<div class="vazio-etapa"><b>Nenhum cliente ainda</b>Quando um contrato for assinado por todos, o cliente aparece aqui automaticamente.</div>`;
+}
+async function abrirCliente(id) {
+  const c = clis().find(x => x.id === id);
+  if (!c) { $("cliConteudo").innerHTML = `<div class="aviso-erro">Cliente não encontrado.</div>`; return; }
+  if (!crm.carregado) await carregarCRM(true);
+  const l = c.leadId ? leadPorId(c.leadId) : null;
+  $("cliEyebrow").textContent = `Cliente · ${c.id}`; $("cliTitulo").textContent = c.fantasia || c.razao; $("cliDesc").textContent = `${c.razao}${c.cnpj ? " · CNPJ " + c.cnpj : ""}`;
+  const campo = (f, rot, extra = "") => `<div class="campo"><label>${rot}</label><input data-cli="${f}" value="${esc(c[f] || "")}" ${extra}></div>`;
+  const hist = (l?.historico || []).slice(0, 60);
+  $("cliConteudo").innerHTML = `
+  <div class="diag-grade">
+    <div class="diag-form">
+      <section class="g-sec"><h4>Dados cadastrais <span class="status-salvo" id="statusCli">Salvo</span></h4>
+        <div class="dados-grid">
+          <div class="linha2">${campo("razao", "Razão social")}${campo("fantasia", "Nome fantasia")}</div>
+          <div class="linha2">${campo("cnpj", "CNPJ")}<div class="campo"><label>Regime tributário</label><select data-cli="regime"><option value="">—</option>${REGIMES.map(r => `<option ${c.regime === r ? "selected" : ""}>${r}</option>`).join("")}</select></div></div>
+          <div class="linha2">${campo("contato", "Contato principal")}${campo("telefone", "Telefone")}</div>
+          <div class="linha2">${campo("email", "E-mail")}${campo("cep", "CEP")}</div>
+          <div class="linha2">${campo("logradouro", "Logradouro")}${campo("numero", "Número")}</div>
+          <div class="linha3">${campo("bairro", "Bairro")}${campo("cidade", "Cidade")}${campo("uf", "UF")}</div>
+          <div class="campo"><label>Sócios / representantes</label><p class="txt-prog">${(c.socios || []).map(s => `${esc(s.nome)}${s.cpf ? " · CPF " + esc(s.cpf) : ""}`).join("<br>") || "—"}</p></div>
+        </div></section>
+      <section class="g-sec"><h4>Histórico de contato</h4>
+        ${hist.length ? `<ul class="hist-cli">${hist.map(h => `<li><small>${dataHora(h.em)} · ${esc(h.por || "")}</small><b>${esc(h.tipo === "etapa" ? `Etapa: ${etapaDe(h.de).nome} → ${etapaDe(h.para).nome}` : interacaoDe(h.tipo)?.nome || ({ documento: "Documento", acao: "Ação concluída", criado: "Lead cadastrado", venda: "Venda" })[h.tipo] || h.tipo)}</b>${h.texto ? `<span>${esc(h.texto)}</span>` : ""}${h.link ? `<a href="${esc(h.link)}" target="_blank" rel="noopener">abrir documento</a>` : ""}</li>`).join("")}</ul>` : `<p class="txt-prog">Sem histórico no CRM.</p>`}
+      </section>
+    </div>
+    <aside class="diag-lado">
+      <section class="g-sec"><h4>Serviços contratados</h4>
+        ${(c.servicos || []).map(s => `<div class="rs-item"><div class="rs-nome"><b>${esc(s.nome)}</b><small>${esc(s.plano || "")}</small></div><div class="rs-linha"><span>${s.cobranca === "mensal" ? "Mensal" : "Projeto"}</span><b>${brl(s.valor)}${s.cobranca === "mensal" ? "/mês" : ""}</b></div>${s.licenca ? `<div class="rs-linha"><span>Licença ContaAzul</span><b>${brl(s.licenca)}/mês</b></div>` : ""}</div>`).join("") || `<p class="txt-prog">—</p>`}
+        <div class="rs-total">${c.mensal ? `<div><span>Total mensal</span><b>${brl(c.mensal)}</b></div>` : ""}${c.unico ? `<div><span>Projeto</span><b>${brl(c.unico)}</b></div>` : ""}</div></section>
+      <section class="g-sec"><h4>Documentos</h4>
+        <ul class="docs-cli">${(c.documentos || []).map(d => `<li><a href="${esc(d.webUrl)}" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg><span><b>${esc(d.tipo)}</b><small>${esc(d.nome)}</small></span></a></li>`).join("")}</ul>
+        <div id="pastaCli"><p class="txt-prog">Carregando a pasta do cliente…</p></div></section>
+      <section class="g-sec acoes-diag">
+        ${c.leadId ? `<button class="btn-s" data-cli-acao="lead" style="justify-content:center">Ver no CRM</button>` : ""}
+        ${(c.contratos || []).map(x => `<button class="btn-s" data-link="#atendimento/contratos/${x}" style="justify-content:center">Contrato ${esc(x)}</button>`).join("")}
+        ${(c.propostas || []).map(x => `<button class="btn-s" data-link="#atendimento/propostas/${x}" style="justify-content:center">Proposta ${esc(x)}</button>`).join("")}
+      </section>
+    </aside>
+  </div>`;
+  let t;
+  $("cliConteudo").oninput = $("cliConteudo").onchange = e => {
+    const f = e.target.dataset.cli; if (!f) return;
+    c[f] = e.target.value; $("statusCli").textContent = "Salvando…";
+    clearTimeout(t); t = setTimeout(async () => {
+      try { await salvarStore(cliStore, d => { const x = d.clientes.find(y => y.id === c.id); if (x) x[f] = c[f]; }); $("statusCli").textContent = "Salvo"; if (f === "fantasia" || f === "razao") $("cliTitulo").textContent = c.fantasia || c.razao; }
+      catch (er) { $("statusCli").textContent = "Erro ao salvar"; }
+    }, 900);
+  };
+  $("cliConteudo").onclick = e => { if (e.target.closest("[data-cli-acao=lead]")) { location.hash = "crm/funil"; setTimeout(() => abrirLead(c.leadId), 400); } };
+  try {
+    const r = await (await graph(caminho(c.pasta) + ":/children?$select=id,name,webUrl,lastModifiedDateTime,size,file")).json();
+    const arqs = (r.value || []).filter(x => x.file).sort((a, b) => b.lastModifiedDateTime.localeCompare(a.lastModifiedDateTime));
+    $("pastaCli").innerHTML = arqs.length ? `<small class="rot-botoes" style="margin-top:10px">Pasta do cliente no OneDrive</small><ul class="docs-cli">${arqs.map(a => `<li><a href="${esc(a.webUrl)}" target="_blank" rel="noopener"><svg><use href="#i-pasta"/></svg><span><b>${esc(a.name)}</b><small>${dataHora(a.lastModifiedDateTime)}</small></span></a></li>`).join("")}</ul>` : "";
+  } catch { $("pastaCli").innerHTML = ""; }
+}
 
 /* ================== EDITOR DE DOCUMENTOS (Word .docx) ================== */
 const LIB = {
@@ -4449,7 +5312,10 @@ const LIB = {
   tinymce: "https://cdn.jsdelivr.net/npm/tinymce@7.6.1/tinymce.min.js",
   tinymcePt: "https://cdn.jsdelivr.net/npm/tinymce-i18n@26.9.28/langs7/pt_BR.js",
   docx: "https://cdn.jsdelivr.net/npm/docx@9.0.3/build/index.iife.js",
-  html2pdf: "https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js"
+  html2pdf: "https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.2/dist/html2pdf.bundle.min.js",
+  pdflib: "https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js",
+  pdfjs: "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js",
+  pdfjsWorker: "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js"
 };
 const EDITAVEIS = ["docx"];
 const podeEditarDoc = nome => EDITAVEIS.includes(extDe(nome));
@@ -5037,6 +5903,8 @@ async function abrirApp() {
   carregarEquipe();
   if (conta.trocarSenha) trocarMinhaSenha(true);
   setInterval(sincronizarVisivel, CONFIG.intervaloSync * 2);
+  setTimeout(verificarAssinaturas, 4000);
+  setInterval(() => { if (document.visibilityState === "visible") verificarAssinaturas(); }, 60000);
   document.addEventListener("visibilitychange", sincronizarVisivel);
 }
 

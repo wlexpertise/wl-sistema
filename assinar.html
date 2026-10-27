@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Assinatura de documento · WL Expertise</title>
+<meta name="theme-color" content="#0B5A60">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root{--teal:#0B5A60;--turq:#13A3B5;--verde:#28B260;--txt:#1A2E2E;--txt-2:#5B6B6B;--borda:#E3ECEC;--bg:#F1F5F5;--erro:#C8463D;--alerta:#D99A1E}
+  *{box-sizing:border-box;margin:0}
+  body{font-family:Montserrat,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;padding-bottom:110px}
+  header{background:var(--teal);padding:14px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+  header img{height:22px}
+  .wrap{max-width:900px;margin:0 auto;padding:16px}
+  .card{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:16px 18px;margin-bottom:14px}
+  h1{font-size:1.15rem;color:var(--teal);line-height:1.3}
+  .eyebrow{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--turq);margin-bottom:4px}
+  .sigs{display:grid;gap:8px;margin-top:12px}
+  .sig{display:flex;align-items:center;gap:10px;font-size:.85rem}
+  .sig i{width:10px;height:10px;border-radius:50%;background:var(--alerta);flex:none}
+  .sig.ok i{background:var(--verde)}
+  .sig small{color:var(--txt-2);margin-left:auto;font-size:.75rem;text-align:right}
+  .pg{position:relative;margin:0 auto 14px;background:#fff;box-shadow:0 4px 18px rgba(6,30,33,.12);border-radius:4px;overflow:hidden}
+  .pg canvas{display:block;width:100%}
+  .campo{position:absolute;border:2px dashed var(--c,#13A3B5);background:rgba(19,163,181,.08);border-radius:6px;display:grid;place-items:center;font-size:.7rem;font-weight:700;color:var(--c,#13A3B5);text-align:center;line-height:1.1;padding:2px}
+  .campo.meu{cursor:pointer;animation:pulsa 1.8s infinite;background:rgba(255,214,0,.18);border-color:#D99A1E;color:#9A6A0C}
+  .campo.feito{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0;animation:none;overflow:hidden}
+  .campo .ass{font-family:"Great Vibes",cursive;color:#0B2E5C;line-height:1;white-space:nowrap}
+  .campo .mini{font-size:.42rem;font-weight:500;color:#5B6B6B;white-space:nowrap}
+  @keyframes pulsa{50%{box-shadow:0 0 0 6px rgba(217,154,30,.18)}}
+  .barra{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--borda);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;align-items:center;justify-content:center;z-index:6;box-shadow:0 -8px 24px rgba(6,30,33,.08)}
+  .barra p{font-size:.82rem;color:var(--txt-2);flex:1;max-width:520px}
+  button,.btn{font:inherit;font-weight:700;font-size:.92rem;border:0;border-radius:12px;padding:13px 20px;cursor:pointer;background:var(--turq);color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+  button.sec,.btn.sec{background:#fff;color:var(--teal);border:1.5px solid var(--borda)}
+  button:disabled{opacity:.55;cursor:default}
+  .veu{position:fixed;inset:0;background:rgba(6,30,33,.5);z-index:9}
+  .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(460px,calc(100vw - 24px));background:#fff;border-radius:18px;z-index:10;padding:22px;box-shadow:0 30px 90px rgba(0,0,0,.3)}
+  .modal h2{font-size:1.1rem;color:var(--teal);margin-bottom:8px}
+  .modal p{font-size:.86rem;color:var(--txt-2);line-height:1.5;margin-bottom:12px}
+  .modal label{display:block;font-size:.75rem;font-weight:700;margin:10px 0 4px}
+  .modal input[type=text]{width:100%;border:1.5px solid var(--borda);border-radius:10px;padding:12px;font:inherit;font-size:1rem;outline:none}
+  .modal input:focus{border-color:var(--turq)}
+  .previa{border:1.5px dashed var(--borda);border-radius:12px;height:86px;display:grid;place-items:center;font-family:"Great Vibes",cursive;font-size:2.6rem;color:#0B2E5C;margin-top:10px;overflow:hidden;white-space:nowrap;padding:0 10px}
+  .aceite{display:flex;gap:8px;align-items:flex-start;font-size:.8rem;color:var(--txt);margin:14px 0 4px;line-height:1.45}
+  .codigo{letter-spacing:.5em;text-align:center;font-size:1.6rem!important;font-weight:800}
+  .rod{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+  .erro{color:var(--erro);font-size:.82rem;font-weight:600;margin-top:8px;min-height:1em}
+  .lnk{background:none;color:var(--turq);padding:0;font-size:.8rem}
+  .ok-box{background:rgba(40,178,96,.1);color:#1D7F45;border-radius:12px;padding:12px 14px;font-weight:700;font-size:.88rem}
+  .centro{text-align:center;padding:60px 20px;color:var(--txt-2)}
+  .legal{font-size:.7rem;color:var(--txt-2);text-align:center;margin:10px auto 0;max-width:640px;line-height:1.5}
+</style>
+</head>
+<body>
+<header><img src="logo-branca.png" alt="WL Expertise"></header>
+<div class="wrap">
+  <div id="topo" class="card"><div class="centro">Carregando documento…</div></div>
+  <div id="paginas"></div>
+  <p class="legal">Assinatura eletrônica com confirmação por código enviado ao seu e-mail. Registramos nome, data, hora, IP e navegador para validade do documento (MP 2.200-2/2001, art. 10, § 2º, e Lei 14.063/2020).</p>
+</div>
+<div class="barra" id="barra" hidden></div>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script>
+const API = "https://wl-sistema-api.wlexpertise.workers.dev";
+const T = new URLSearchParams(location.search).get("t") || "";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const dh = iso => new Date(iso).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
+const CORES = ["#13A3B5", "#28B260", "#D99A1E", "#8E5BD0", "#C8463D"];
+let E = null;
+async function api(p, opt = {}) {
+  const r = await fetch(API + p + (p.includes("?") ? "&" : "?") + "t=" + encodeURIComponent(T), { ...opt, headers: { "Content-Type": "application/json" } });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.erro || "Não foi possível concluir.");
+  return j;
+}
+function topo() {
+  const eu = E.eu, todos = E.status === "concluido";
+  $("topo").innerHTML = `<div class="eyebrow">Documento para assinatura</div><h1>${esc(E.titulo)}</h1>
+    <div class="sigs">${E.signatarios.map((s, i) => `<div class="sig ${s.assinado ? "ok" : ""}"><i></i><b>${esc(s.nome)}</b>${i === E.euIndice ? " (você)" : ""}<small>${s.assinado ? "assinou em " + dh(s.assinado.em) : "aguardando assinatura"}</small></div>`).join("")}</div>`;
+  const b = $("barra"); b.hidden = false;
+  if (todos) b.innerHTML = `<p><b>Assinado por todos ✓</b> ${E.temFinal ? "A via final já está disponível." : "A via final com o certificado será disponibilizada em instantes."}</p>${E.temFinal ? `<a class="btn" href="${API}/pub/final?t=${encodeURIComponent(T)}" target="_blank" rel="noopener">Baixar via assinada</a>` : `<a class="btn sec" href="${API}/pub/doc?t=${encodeURIComponent(T)}" target="_blank" rel="noopener">Baixar documento</a>`}`;
+  else if (eu.assinado) b.innerHTML = `<p><b>Você assinou em ${dh(eu.assinado.em)} ✓</b> Aguardando as demais assinaturas. Você receberá um e-mail quando todos assinarem.</p>`;
+  else b.innerHTML = `<p>Confira o documento e clique em <b>Assinar</b>. Os locais da sua assinatura estão destacados.</p><button id="btnAss">Assinar documento</button>`;
+  const ba = $("btnAss"); if (ba) ba.onclick = abrirAssinar;
+}
+function campos() {
+  document.querySelectorAll(".campo").forEach(x => x.remove());
+  E.campos.forEach(c => {
+    const pg = document.querySelector(`.pg[data-pg="${c.pg}"]`); if (!pg) return;
+    const s = E.signatarios[c.s], meu = c.s === E.euIndice, el = document.createElement("div");
+    el.className = "campo" + (s.assinado ? " feito" : meu ? " meu" : "");
+    el.style.cssText = `left:${c.x * 100}%;top:${c.y * 100}%;width:${c.w * 100}%;height:${c.h * 100}%;--c:${CORES[c.s % CORES.length]}`;
+    if (s.assinado) {
+      const alt = pg.clientHeight * c.h;
+      el.innerHTML = `<span class="ass" style="font-size:${Math.max(10, alt * 0.62)}px">${esc(s.assinado.nome)}</span><span class="mini">Assinado eletronicamente em ${dh(s.assinado.em)}</span>`;
+      requestAnimationFrame(() => { const sp = el.querySelector(".ass"); let f = parseFloat(sp.style.fontSize); while (sp.scrollWidth > el.clientWidth && f > 8) { f -= 1; sp.style.fontSize = f + "px"; } });
+    } else el.innerHTML = meu ? "Assine aqui" : `Assinatura de<br>${esc(s.nome.split(" ")[0])}`;
+    if (meu && !s.assinado) el.onclick = abrirAssinar;
+    pg.appendChild(el);
+  });
+}
+function modal(html) {
+  fechar();
+  const v = document.createElement("div"); v.className = "veu"; v.id = "veu";
+  const m = document.createElement("div"); m.className = "modal"; m.id = "modal"; m.innerHTML = html;
+  document.body.append(v, m); return m;
+}
+function fechar() { ["veu", "modal"].forEach(i => $(i)?.remove()); }
+function abrirAssinar() {
+  const m = modal(`<h2>Assinar documento</h2><p>Digite seu nome completo. Ele será inserido no documento como sua assinatura.</p>
+    <label>Nome completo</label><input type="text" id="nomeAss" value="${esc(E.eu.nome)}" autocomplete="name">
+    <div class="previa" id="previa">${esc(E.eu.nome)}</div>
+    <label class="aceite"><input type="checkbox" id="concordo"> Li o documento e concordo com seus termos. Entendo que esta assinatura eletrônica tem validade jurídica.</label>
+    <div class="erro" id="err1"></div>
+    <div class="rod"><button class="sec" id="cancelar">Cancelar</button><button id="continuar">Continuar</button></div>`);
+  const ajustar = () => { $("previa").textContent = $("nomeAss").value; };
+  $("nomeAss").oninput = ajustar; $("nomeAss").focus();
+  $("cancelar").onclick = fechar;
+  $("continuar").onclick = async ev => {
+    const nome = $("nomeAss").value.trim();
+    if (!$("concordo").checked) return $("err1").textContent = "Marque que você leu e concorda com o documento.";
+    if (nome.split(/\s+/).length < 2) return $("err1").textContent = "Digite seu nome completo.";
+    ev.target.disabled = true; $("err1").textContent = "";
+    try { const r = await api("/pub/assinar", { method: "POST", body: JSON.stringify({ nome }) }); abrirCodigo(nome, r.email); }
+    catch (e) { ev.target.disabled = false; $("err1").textContent = e.message; }
+  };
+}
+function abrirCodigo(nome, email) {
+  modal(`<h2>Confirme com o código</h2><p>Enviamos um código de 6 dígitos para <b>${esc(email)}</b>. Digite-o abaixo para concluir a sua assinatura.</p>
+    <input type="text" id="cod" class="codigo" inputmode="numeric" maxlength="6" autocomplete="one-time-code">
+    <div class="erro" id="err2"></div>
+    <div class="rod"><button class="lnk" id="reenviar">Reenviar código</button><span style="flex:1"></span><button class="sec" id="cancelar">Cancelar</button><button id="confirmar">Confirmar assinatura</button></div>`);
+  $("cod").focus();
+  $("cancelar").onclick = fechar;
+  $("reenviar").onclick = async () => { try { await api("/pub/assinar", { method: "POST", body: JSON.stringify({ nome }) }); $("err2").style.color = "#1D7F45"; $("err2").textContent = "Novo código enviado."; } catch (e) { $("err2").style.color = ""; $("err2").textContent = e.message; } };
+  $("confirmar").onclick = async ev => {
+    ev.target.disabled = true;
+    try {
+      E = await api("/pub/confirmar", { method: "POST", body: JSON.stringify({ codigo: $("cod").value.trim() }) });
+      modal(`<h2>Assinatura concluída ✓</h2><div class="ok-box">Você assinou “${esc(E.titulo)}”.</div><p style="margin-top:12px">${E.status === "concluido" ? "Todos já assinaram. Você vai receber um e-mail de confirmação." : "Assim que as demais partes assinarem, você receberá um e-mail."}</p><div class="rod"><button id="okF">Fechar</button></div>`);
+      $("okF").onclick = fechar; topo(); campos();
+    } catch (e) { ev.target.disabled = false; $("err2").style.color = ""; $("err2").textContent = e.message; }
+  };
+}
+async function iniciar() {
+  if (!T) { $("topo").innerHTML = `<div class="centro">Link inválido.</div>`; return; }
+  try { E = await api("/pub/env"); } catch (e) { $("topo").innerHTML = `<div class="centro"><b>${esc(e.message)}</b></div>`; return; }
+  topo();
+  try {
+    const txt = await (await fetch("https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js")).text();
+    pdfjsLib.GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([txt], { type: "text/javascript" }));
+    const buf = await (await fetch(API + "/pub/doc?t=" + encodeURIComponent(T))).arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(buf) }).promise;
+    const cont = $("paginas"), larg = Math.min(cont.clientWidth, 860);
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i), v0 = page.getViewport({ scale: 1 }), vp = page.getViewport({ scale: larg / v0.width * Math.min(devicePixelRatio || 1, 2) });
+      const div = document.createElement("div"); div.className = "pg"; div.dataset.pg = i - 1;
+      const cv = document.createElement("canvas"); cv.width = vp.width; cv.height = vp.height;
+      div.appendChild(cv); cont.appendChild(div);
+      await page.render({ canvasContext: cv.getContext("2d"), viewport: vp }).promise;
+    }
+    campos();
+    const primeiro = document.querySelector(".campo.meu");
+    if (primeiro && !E.eu.assinado) setTimeout(() => {}, 0);
+    addEventListener("resize", () => campos());
+  } catch (e) { $("paginas").innerHTML = `<div class="card centro">Não foi possível exibir o documento: ${esc(e.message)}</div>`; }
+}
+iniciar();
+</script>
+</body>
+</html>
