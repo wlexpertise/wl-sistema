@@ -1,7 +1,7 @@
 // Service worker da WL Sistema: permite instalar como app e abrir a "casca" offline.
 // Estratégia: sempre busca a versão mais nova na internet; usa a cópia salva só se estiver offline.
 // Dados do OneDrive (outro domínio) nunca passam por aqui.
-const CACHE = "wl-sistema-v13";
+const CACHE = "wl-sistema-v14";
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => e.waitUntil(
   caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())

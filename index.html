@@ -579,6 +579,11 @@
   .lin-tab input:focus,.lin-tab textarea:focus{border-color:var(--turq)}
   @media(max-width:760px){.lin-tab{grid-template-columns:1fr}.lin-tab .acao{justify-self:end}.opcoes.mz{grid-template-columns:1fr}}
   .botoes-diag{display:flex;gap:8px;flex-wrap:wrap}
+  .rot-botoes{display:block;font-size:.7rem;font-weight:700;color:var(--txt-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .tag-combo{font-size:.66rem;font-weight:800;color:#fff;background:var(--turq);padding:2px 7px;border-radius:999px;vertical-align:middle;margin-left:4px}
+  .divisor-grupo{font-size:.74rem;font-weight:800;color:#fff;background:linear-gradient(90deg,var(--teal),var(--turq));padding:9px 16px;border-radius:12px;letter-spacing:.08em;text-transform:uppercase}
+  .sm-lin.grupo span{font-weight:800;color:var(--teal)}
+  .sm-lin.grupo:last-of-type{margin-bottom:6px}
   .fin-ok{font-size:.84rem;font-weight:700;color:#1D7F45;background:rgba(40,178,96,.1);padding:10px 12px;border-radius:10px;text-align:center}
   .lnk-pdf{font-size:.74rem;font-weight:600;color:var(--turq);text-align:center}
   .status-salvo{font-size:.74rem;font-weight:700;color:var(--txt-2);background:#fff;border:1px solid var(--borda);padding:7px 12px;border-radius:999px;white-space:nowrap}
@@ -617,6 +622,7 @@
   .pdf-setores{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin:4px 0 10px}
   .pdf-setores div{display:grid;grid-template-columns:90px 1fr 30px;gap:6px;align-items:center;font-size:9px}
   .pdf-setores .pdf-barra{margin:0;height:5px} .pdf-setores b{text-align:right}
+  .pdf-grupo{background:#0B5A60;color:#fff;font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:6px;margin:14px 0 8px}
   .pdf-set{font-style:normal;color:#13A3B5;font-weight:700}
   .pdf-tab{width:100%;border-collapse:collapse;font-size:9px;margin-top:4px}
   .pdf-tab th{background:#0B5A60;color:#fff;text-align:left;padding:4px 6px;font-weight:700}
@@ -2040,7 +2046,7 @@ function linkWhats(tel) {
   return "https://wa.me/" + d;
 }
 function renderFicha(id) {
-  for (const st of [diagStore, diagRentalStore]) if (!st.carregado && !st.carregando) {
+  for (const st of [diagStore, diagFpaStore, diagRentalStore]) if (!st.carregado && !st.carregando) {
     st.carregando = true;
     carregarStore(st).then(() => { if (abertoId) renderFicha(abertoId); }).catch(() => {}).finally(() => { st.carregando = false; });
   }
@@ -2118,12 +2124,12 @@ function renderFicha(id) {
     <section class="g-sec"><h4>Agenda do cliente</h4><div id="agendaLead"></div></section>
 
     <section class="g-sec"><h4>Diagnósticos</h4>
-      ${!diagStore.carregado || !diagRentalStore.carregado ? `<div style="font-size:.8rem;color:var(--txt-2)">Carregando…</div>` : (() => {
-        const ds = [diagStore, diagRentalStore].flatMap(st => st.dados?.diagnosticos || []).filter(d => d.leadId === l.id).sort((a, b) => (b.atualizadoEm || "").localeCompare(a.atualizadoEm || ""));
-        return (ds.length ? `<ul class="lista-cli" style="margin:0 0 10px">${ds.map(d => { const mt = maturidade(d); return `<li data-g-diag="${tipoDe(d).frente}/${d.id}"><div><b>${esc(tipoDe(d).curto)} · ${esc(d.id)}</b>
+      ${!diagStore.carregado || !diagRentalStore.carregado || !diagFpaStore.carregado ? `<div style="font-size:.8rem;color:var(--txt-2)">Carregando…</div>` : (() => {
+        const ds = [diagStore, diagFpaStore, diagRentalStore].flatMap(st => st.dados?.diagnosticos || []).filter(d => d.leadId === l.id).sort((a, b) => (b.atualizadoEm || "").localeCompare(a.atualizadoEm || ""));
+        return (ds.length ? `<ul class="lista-cli" style="margin:0 0 10px">${ds.map(d => { const mt = maturidade(d); return `<li data-g-diag="${tipoDe(d).frente}/${d.id}"><div><b>${esc(nomeDiag(d))} · ${esc(d.id)}</b>
           <small>${d.status === "finalizado" ? "Finalizado em " + data(d.finalizadoEm) : "Em edição"}${mt ? ` · maturidade ${mt.pct}%` : ""}</small></div>
           <span class="chip-etapa" style="--cor:${d.status === "finalizado" ? "var(--verde)" : "var(--alerta)"}"><i></i>${d.status === "finalizado" ? "Finalizado" : "Em edição"}</span></li>`; }).join("")}</ul>` : "")
-          + `<div class="botoes-diag"><button class="btn-s" data-g="novoDiag"><svg><use href="#i-atd"/></svg>Diagnóstico BPO</button><button class="btn-s" data-g="novoDiagRental"><svg><use href="#i-atd"/></svg>Diagnóstico Rental</button></div>`;
+          + `<small class="rot-botoes">Iniciar diagnóstico</small><div class="botoes-diag">${[["novoDiag", "BPO Financeiro"], ["novoDiagCombo", "BPO + FP&A"], ["novoDiagFpa", "FP&A"], ["novoDiagRental", "Rental"]].map(([k, r]) => `<button class="btn-s" data-g="${k}"><svg><use href="#i-atd"/></svg>${r}</button>`).join("")}</div>`;
       })()}</section>
 
     <section class="g-sec"><h4>Negócio</h4>
@@ -2255,7 +2261,9 @@ function ligarFicha(l) {
     if (d.calMes) { agenda.mes = d.calMes; agenda.dia = null; return desenharAgenda(leadPorId(l.id)); }
     if (d.calDia) { agenda.dia = d.calDia; return desenharAgenda(leadPorId(l.id)); }
     if (d.g === "semInteresse") return marcarSemInteresse(l);
-    if (d.g === "novoDiag") { fecharFicha(); return novoDiagnostico(l.id, "bpo"); }
+    if (d.g === "novoDiag") { fecharFicha(); return novoDiagnostico(l.id, "bpo", "bpo"); }
+    if (d.g === "novoDiagCombo") { fecharFicha(); return novoDiagnostico(l.id, "bpo", "bpo+fpa"); }
+    if (d.g === "novoDiagFpa") { fecharFicha(); return novoDiagnostico(l.id, "fpa"); }
     if (d.g === "novoDiagRental") { fecharFicha(); return novoDiagnostico(l.id, "processos"); }
     if (d.gDiag) { fecharFicha(); const [fr, id] = d.gDiag.split("/"); location.hash = rotaDiag(id, TIPOS_DIAG[fr]); return; }
     if (d.g === "reativar") return alterarLead(l.id, x => { registrar(x, "reativado", x.semInteresse?.motivo ? `Estava sem interesse: ${x.semInteresse.motivo}` : ""); delete x.semInteresse; }, "Lead reativado");
@@ -2537,7 +2545,7 @@ const FRENTES_AT = [
     etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico Preliminar de BPO Financeiro.", ativo: true },
              { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "fpa", nome: "FP&A", icone: "i-a-fpa", desc: "Indicadores gerenciais e análise de desempenho.",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico" }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de FP&A.", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "planejamento", nome: "Planejamento Financeiro", icone: "i-a-pla", desc: "Orçamentos, fluxo de caixa e cenários.",
     etapas: [{ id: "diagnostico", nome: "Diagnóstico" }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "processos", nome: "Consultoria de Processos", icone: "i-a-pro", desc: "Processos, sistema e treinamento para locadoras (Rental).",
@@ -2753,13 +2761,96 @@ const SUGESTAO_SETOR = {
   "Administrativo": { objetivo: "Contratos, cadastro e patrimônio sob controle", entrega: "Contrato padrão, política de crédito, controle patrimonial e POPs publicados" },
   "Sistema e equipe": { objetivo: "Sistema configurado e equipe usando corretamente", entrega: "Parametrização revisada, fim das planilhas paralelas e trilha de treinamento por função" }
 };
+/* ---- Diagnóstico de FP&A (criado do zero) — usado sozinho ou mesclado ao Diagnóstico BPO ---- */
+const qBPO = id => DIAG_BPO.flatMap(s => s.itens).find(q => q.id === id);
+const SEC_AUTOAVAL = DIAG_BPO[DIAG_BPO.length - 1];
+const DIAG_FPA = [
+  /* só no FP&A avulso: no BPO + FP&A essas informações já vêm do bloco de BPO */
+  { secao: "Base financeira", soloFPA: true, setor: true, itens: [
+    qBPO("faturamento"), qBPO("cnpjs"),
+    { id: "fpa_quem", tipo: "escolha", txt: "Quem executa a rotina financeira hoje (pagar, receber, conciliar)?", ops: ["Equipe financeira interna", "BPO terceirizado", "Contabilidade", "Os próprios sócios", "Não há rotina definida"] },
+    qBPO("erp"),
+    { id: "fpa_conc", tipo: "escolha", ops: SPN, peso: true, rot: "Conciliação bancária em dia", txt: "A conciliação bancária é feita com frequência e está em dia?" },
+    { ...qBPO("fluxo"), rot: "Fluxo de caixa realizado" },
+    { ...qBPO("registro"), rot: "Movimentação 100% no sistema" },
+    { ...qBPO("contabil"), rot: "Balanço e DRE contábil mensais" } ] },
+  { secao: "Contexto e objetivos", itens: [
+    { id: "fpa_motivo", tipo: "multi", txt: "O que motivou a busca por FP&A agora?", ops: ["Falta de visibilidade do resultado", "Decisões tomadas sem números", "Vende bem, mas o caixa não acompanha", "Margens caindo", "Crescimento acelerado", "Expansão (filial, produto, mercado)", "Captação, crédito ou investidor", "Organizar governança / sociedade"] },
+    { id: "fpa_decisoes", tipo: "texto", txt: "Quais decisões a empresa precisa tomar nos próximos 12 meses que dependem de números?" },
+    { id: "fpa_usuarios", tipo: "multi", txt: "Quem vai usar as informações gerenciais?", ops: ["Sócios", "Diretoria", "Conselho", "Gestores de área", "Bancos / investidores"] },
+    { id: "fpa_meta", tipo: "texto", txt: "Existe uma meta de resultado para o ano (faturamento, margem, lucro, caixa)? Qual?" } ] },
+  { secao: "Dados e estrutura gerencial", setor: true, rotSetor: "Dados", itens: [
+    { id: "fpa_dre", tipo: "escolha", ops: SPN, peso: true, rot: "Plano de contas / DRE gerencial", txt: "Existe plano de contas gerencial que gera uma DRE gerencial confiável?" },
+    { id: "fpa_cc", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Centros de custo / unidades", txt: "Os centros de custo ou unidades de negócio estão definidos e são usados nos lançamentos?" },
+    { id: "fpa_comp", tipo: "escolha", ops: SPN, peso: true, rot: "Competência separada do caixa", txt: "O resultado é apurado por competência, separado da visão de caixa?" },
+    { id: "fpa_dadosop", tipo: "escolha", ops: SPN, peso: true, rot: "Dados de vendas e operação acessíveis", txt: "Os dados de vendas e operação (volumes, clientes, produtos, serviços) são acessíveis e confiáveis?" },
+    { id: "fpa_fech", tipo: "escolha", txt: "Em quanto tempo os números do mês ficam prontos?", ops: ["Até o 5º dia útil", "Até o 10º dia útil", "Depois do 10º dia útil", "Não existe fechamento gerencial"] },
+    { id: "fpa_onde", tipo: "escolha", txt: "Onde ficam os relatórios gerenciais hoje?", ops: ["No ERP", "Em ferramenta de BI (Power BI etc.)", "Em planilhas", "Não existem"] } ] },
+  { secao: "Orçamento e planejamento", setor: true, rotSetor: "Orçamento", itens: [
+    { id: "fpa_orc", tipo: "escolha", ops: SPN, peso: true, rot: "Orçamento anual", txt: "Existe orçamento anual de receitas, custos, despesas e investimentos?" },
+    { id: "fpa_orcgest", tipo: "escolha", ops: SPN, peso: true, rot: "Orçamento construído com os gestores", txt: "O orçamento é construído com os gestores, por área ou centro de custo?" },
+    { id: "fpa_oxr", tipo: "escolha", ops: SPN, peso: true, rot: "Orçado × realizado mensal", txt: "Todo mês é feita a comparação orçado × realizado, com explicação dos desvios?" },
+    { id: "fpa_forecast", tipo: "escolha", ops: SPN, peso: true, rot: "Forecast / revisão da projeção", txt: "A projeção do ano é revisada periodicamente (forecast)?" },
+    { id: "fpa_fcproj", tipo: "escolha", ops: SPN, peso: true, rot: "Fluxo de caixa projetado 12 meses", txt: "Existe fluxo de caixa projetado para os próximos 12 meses?" },
+    { id: "fpa_capex", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Plano de investimentos", txt: "Os investimentos (CAPEX) são planejados com análise de retorno?" } ] },
+  { secao: "Indicadores e análise de resultado", setor: true, rotSetor: "Indicadores", itens: [
+    { id: "fpa_mc", tipo: "escolha", ops: SPN, peso: true, rot: "Margem de contribuição", txt: "A empresa conhece a margem de contribuição por produto, serviço ou cliente?" },
+    { id: "fpa_pe", tipo: "escolha", ops: SPN, peso: true, rot: "Ponto de equilíbrio", txt: "O ponto de equilíbrio (quanto precisa faturar para não ter prejuízo) é conhecido?" },
+    { id: "fpa_kpi", tipo: "escolha", ops: SPN, peso: true, rot: "Painel de KPIs mensal", txt: "Existe um painel de indicadores definido e atualizado todo mês?" },
+    { id: "fpa_custos", tipo: "escolha", ops: SPN, peso: true, rot: "Análise de custos e despesas", txt: "Custos e despesas são analisados por natureza e tendência (não só pagos)?" },
+    { id: "fpa_giro", tipo: "escolha", ops: SPN, peso: true, rot: "Capital de giro (PMR, PMP, ciclo)", txt: "O capital de giro é acompanhado (prazo médio de recebimento, de pagamento e ciclo de caixa)?" },
+    { id: "fpa_kpis", tipo: "multi", txt: "Quais indicadores são acompanhados hoje?", ops: ["Faturamento", "Margem bruta", "Margem de contribuição", "EBITDA", "Lucro líquido", "Ticket médio", "Inadimplência", "Ciclo de caixa", "Endividamento", "Indicadores operacionais", "Nenhum de forma regular"] } ] },
+  { secao: "Cenários e decisões", setor: true, rotSetor: "Cenários", itens: [
+    { id: "fpa_cen", tipo: "escolha", ops: SPN, peso: true, rot: "Simulação de cenários", txt: "Antes de decisões importantes, a empresa simula cenários (otimista, realista, pessimista)?" },
+    { id: "fpa_viab", tipo: "escolha", ops: SPN, peso: true, rot: "Análise de viabilidade", txt: "Novos projetos, contratações e expansões passam por análise de viabilidade?" },
+    { id: "fpa_preco", tipo: "escolha", ops: SPN, peso: true, rot: "Precificação por custo e margem", txt: "A precificação considera custos e margem-alvo?" },
+    { id: "fpa_divida", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Endividamento acompanhado", txt: "O endividamento é acompanhado (custo, prazo e capacidade de pagamento)?" } ] },
+  { secao: "Governança e rotina de gestão", setor: true, rotSetor: "Governança", itens: [
+    { id: "fpa_reuniao", tipo: "escolha", ops: SPN, peso: true, rot: "Reunião mensal de resultados", txt: "Existe reunião mensal de resultados com sócios e gestores?" },
+    { id: "fpa_metas", tipo: "escolha", ops: SPN, peso: true, rot: "Metas por área", txt: "As metas são desdobradas por área e acompanhadas?" },
+    { id: "fpa_planos", tipo: "escolha", ops: SPN, peso: true, rot: "Planos de ação cobrados", txt: "As decisões viram planos de ação com responsável e prazo, e são cobradas?" },
+    { id: "fpa_dono", tipo: "curto", txt: "Quem é (ou será) o responsável interno pela gestão dos números?" } ] },
+  { secao: "Expectativas do serviço de FP&A", itens: [
+    { id: "fpa_entregas", tipo: "multi", txt: "Quais entregas são esperadas?", ops: ["DRE gerencial mensal", "Indicadores essenciais", "Fluxo de caixa projetado", "Orçamento anual", "Orçado × realizado", "Forecast (revisão da projeção)", "Dashboard de indicadores", "Análise de rentabilidade e precificação", "Cenários e simulações", "Acompanhamento de metas por área", "Relatório para bancos / investidores"] },
+    { id: "fpa_freq", tipo: "escolha", txt: "Com que frequência a empresa quer as reuniões de resultado?", ops: ["Mensal", "Quinzenal", "Semanal", "Trimestral"] },
+    { id: "fpa_formato", tipo: "escolha", txt: "Formato preferido para os resultados", ops: ["Dashboard online", "Relatório em PDF", "Apresentação em reunião", "Todos"] },
+    { id: "fpa_prazo", tipo: "curto", txt: "Para quando a empresa precisa do primeiro relatório gerencial?" } ] }
+];
+const SECOES_FPA = [...DIAG_FPA, SEC_AUTOAVAL];
+const PERGUNTAS_FPA = SECOES_FPA.flatMap(s => s.itens);
+/* BPO + FP&A: bloco de BPO (sem as perguntas que o FP&A aprofunda) + FP&A sem a base financeira + autoavaliação */
+const SECOES_COMBO = [
+  ...DIAG_BPO.slice(0, -1).map(s => ({ ...s, grupo: "BPO Financeiro", itens: s.itens.filter(q => !["planejamento", "indicadores"].includes(q.id)) })),
+  ...DIAG_FPA.filter(s => !s.soloFPA).map(s => ({ ...s, grupo: "FP&A" })),
+  SEC_AUTOAVAL
+];
+const PERGUNTAS_COMBO = SECOES_COMBO.flatMap(s => s.itens);
+const PLANOS_FPA = ["FP&A Start", "FP&A Performance", "FP&A Gestão", "A definir"];
+const PLANOS_INT = ["Integrado Start", "Integrado Performance", "Integrado Gestão", "A definir"];
+const PRECO_PLANO = { "FP&A Start": 3500, "FP&A Performance": 5000, "FP&A Gestão": 6300, "Integrado Start": 4500, "Integrado Performance": 7000, "Integrado Gestão": 9000 };
+/* Nível de FP&A (0 Start, 1 Performance, 2 Gestão) pelas entregas e intensidade desejadas — base: Modelo Comercial 9 Planos */
+function nivelFPA(d) {
+  const r = d.respostas || {}, v = id => r[id]?.v, ent = v("fpa_entregas") || [];
+  let tier = 0; const motivos = [];
+  const perf = ent.filter(e => ["Orçamento anual", "Orçado × realizado", "Forecast (revisão da projeção)", "Dashboard de indicadores"].includes(e));
+  const gest = ent.filter(e => ["Cenários e simulações", "Análise de rentabilidade e precificação", "Acompanhamento de metas por área"].includes(e));
+  if (perf.length) { tier = 1; motivos.push(perf.join(", ").toLowerCase()); }
+  if (gest.length) { tier = 2; motivos.push(gest.join(", ").toLowerCase()); }
+  if (["Quinzenal", "Semanal"].includes(v("fpa_freq"))) { tier = 2; motivos.push(`reuniões ${v("fpa_freq").toLowerCase()}s`); }
+  if (v("faturamento") === "Acima de R$ 1 milhão" || Number(v("cnpjs")) >= 3) { tier = Math.max(tier, 2); motivos.push("porte e complexidade"); }
+  return { tier, motivos, temDados: !!(ent.length || v("fpa_freq") || v("faturamento")) };
+}
 const diagRentalStore = criarStore("dados/atendimento/rental-diagnosticos.json", { versao: 1, seq: 0, diagnosticos: [] });
+const diagFpaStore = criarStore("dados/atendimento/fpa-diagnosticos.json", { versao: 1, seq: 0, diagnosticos: [] });
 
 /* Cada tipo de diagnóstico usa o mesmo motor (formulário, autosave, CRM, PDF) com suas próprias perguntas */
 const TIPOS_DIAG = {
   bpo: { frente: "bpo", tipo: "bpo-preliminar", prefixo: "DG", secoes: DIAG_BPO, perguntas: PERGUNTAS_BPO, store: diagStore,
     menu: "BPO Financeiro", titulo: "Diagnóstico Preliminar", curto: "Diagnóstico BPO", pdfTitulo: "Diagnóstico Preliminar", pdfSub: "BPO Financeiro",
     nomeMat: "Maturidade financeira", crmFrente: "BPO Financeiro", segmento: "", nav: [["sec-parecer", "Parecer da WL"]] },
+  fpa: { frente: "fpa", tipo: "fpa-diagnostico", prefixo: "DF", secoes: SECOES_FPA, perguntas: PERGUNTAS_FPA, store: diagFpaStore,
+    menu: "FP&A", titulo: "Diagnóstico de FP&A", curto: "Diagnóstico FP&A", pdfTitulo: "Diagnóstico de FP&A", pdfSub: "Planejamento e Análise Financeira",
+    nomeMat: "Maturidade gerencial", crmFrente: "FP&A", segmento: "", nav: [["sec-parecer", "Parecer da WL"]] },
   processos: { frente: "processos", tipo: "rental-consultoria", prefixo: "DR", secoes: DIAG_RENTAL, perguntas: PERGUNTAS_RENTAL, store: diagRentalStore,
     menu: "Consultoria de Processos", titulo: "Diagnóstico de Consultoria Rental", curto: "Diagnóstico Rental", pdfTitulo: "Diagnóstico de Consultoria", pdfSub: "Locação de equipamentos · Processos e sistema",
     nomeMat: "Maturidade operacional", crmFrente: "Consultoria de Processos", segmento: "Locadora",
@@ -2768,21 +2859,30 @@ const TIPOS_DIAG = {
 let TD = TIPOS_DIAG.bpo;
 const tipoDe = d => TIPOS_DIAG[d?.frente] || TIPOS_DIAG.bpo;
 const diags = () => TD.store.dados?.diagnosticos || [];
+const ehCombo = d => tipoDe(d).frente === "bpo" && d?.escopo === "bpo+fpa";
+const secoesDe = d => ehCombo(d) ? SECOES_COMBO : tipoDe(d).secoes;
+const perguntasDe = d => ehCombo(d) ? PERGUNTAS_COMBO : tipoDe(d).perguntas;
+const nomeDiag = d => ehCombo(d) ? "Diagnóstico BPO + FP&A" : tipoDe(d).curto;
+const nomeMatDe = d => ehCombo(d) ? "Maturidade financeira e gerencial" : tipoDe(d).nomeMat;
+const pdfSubDe = d => ehCombo(d) ? "BPO Financeiro + FP&A" : tipoDe(d).pdfSub;
+const frentesCRM = d => ehCombo(d) ? ["BPO Financeiro", "FP&A"] : [tipoDe(d).crmFrente];
+const planosDe = d => ehCombo(d) ? PLANOS_INT : tipoDe(d).frente === "fpa" ? PLANOS_FPA : PLANOS_BPO;
+const ESCOPOS = [["bpo", "Apenas BPO Financeiro"], ["bpo+fpa", "BPO Financeiro + FP&A"]];
 const rotaDiag = (id, t = TD) => `atendimento/${t.frente}/diagnostico` + (id ? "/" + id : "");
 
 const visivel = (q, r) => !q.se || q.se(r);
 const respondida = (q, r) => { const v = r[q.id]?.v; if (Array.isArray(v)) return v.length > 0; return v !== undefined && v !== null && String(v).trim() !== ""; };
 function progresso(d) {
   const r = d.respostas || {};
-  const qs = tipoDe(d).perguntas.filter(q => visivel(q, r));
+  const qs = perguntasDe(d).filter(q => visivel(q, r));
   return { feitas: qs.filter(q => respondida(q, r)).length, total: qs.length };
 }
 /* Índice de maturidade: Sim = 2, Parcial = 1, Não = 0 (perguntas de controle) */
 function maturidade(d) {
   const r = d.respostas || {};
   let pts = 0, max = 0;
-  const atencao = [], setores = [];
-  for (const s of tipoDe(d).secoes) {
+  const atencao = [], setores = [], grupos = {};
+  for (const s of secoesDe(d)) {
     let sp = 0, sm = 0;
     for (const q of s.itens.filter(q => q.peso)) {
       const v = r[q.id]?.v;
@@ -2791,25 +2891,43 @@ function maturidade(d) {
       if (v !== "Sim") atencao.push({ q, v, setor: s.secao });
     }
     pts += sp; max += sm;
-    if (s.setor) setores.push({ nome: s.secao, pct: sm ? Math.round(sp / sm * 100) : null });
+    if (s.setor) setores.push({ nome: s.secao, rot: s.rotSetor || s.secao, pct: sm ? Math.round(sp / sm * 100) : null });
+    if (s.grupo) { grupos[s.grupo] ||= [0, 0]; grupos[s.grupo][0] += sp; grupos[s.grupo][1] += sm; }
   }
   if (!max) return null;
   const pct = Math.round(pts / max * 100);
   const nivel = pct < 40 ? "Inicial" : pct < 70 ? "Em estruturação" : "Estruturado";
-  return { pct, nivel, atencao, setores };
+  return { pct, nivel, atencao, setores, grupos: Object.entries(grupos).filter(([, v]) => v[1]).map(([nome, [p, m]]) => ({ nome, rot: nome, pct: Math.round(p / m * 100) })) };
 }
 /* Sugestão de plano com base nos volumes e necessidades informados (a decisão final é do consultor) */
-function sugestaoPlano(d) {
-  if (tipoDe(d).frente !== "bpo") return null;
+function sugestaoBPO(d) {
   const r = d.respostas || {}, v = id => r[id]?.v;
   const cnpjs = Number(v("cnpjs")) || 0, pag = Number(v("pagamentos")) || 0, bol = Number(v("boletos")) || 0;
   const motivos = [];
   if (cnpjs >= 2) motivos.push(`${cnpjs} CNPJs`);
   if (v("planejamento") === "Não" && v("indicadores") !== "Sim") motivos.push("sem planejamento nem indicadores");
-  if (motivos.length) return { plano: "Plano Avançado", motivo: "Inclui finanças estratégicas: " + motivos.join(", ") };
-  if (bol > 0 || v("nf") === "Sim" || pag > 15) return { plano: "Plano Intermediário", motivo: "Inclui faturamento (boletos e NF) e relatórios gerenciais" + (pag > 15 ? `; ${pag} pagamentos/dia` : "") };
+  if (motivos.length) return { plano: "Plano Avançado", tier: 2, motivo: "Inclui finanças estratégicas: " + motivos.join(", ") };
+  if (bol > 0 || v("nf") === "Sim" || pag > 15) return { plano: "Plano Intermediário", tier: 1, motivo: "Inclui faturamento (boletos e NF) e relatórios gerenciais" + (pag > 15 ? `; ${pag} pagamentos/dia` : "") };
   if (!v("faturamento") && !pag && !bol) return null;
-  return { plano: "Plano Básico", motivo: "Volume operacional baixo, sem emissão de boletos/NF" };
+  return { plano: "Plano Básico", tier: 0, motivo: "Volume operacional baixo, sem emissão de boletos/NF" };
+}
+function sugestaoPlano(d) {
+  const t = tipoDe(d);
+  if (t.frente === "processos") return null;
+  if (t.frente === "bpo" && !ehCombo(d)) return sugestaoBPO(d);
+  const f = nivelFPA(d), mt = maturidade(d);
+  const dados = mt?.setores.find(x => x.nome === "Dados e estrutura gerencial");
+  const alerta = dados && dados.pct !== null && dados.pct < 40 ? ` Atenção: a base de dados está frágil (${dados.pct}%) e o FP&A depende de dados confiáveis.` : "";
+  if (t.frente === "fpa") {
+    if (!f.temDados) return null;
+    let extra = alerta;
+    if (["Os próprios sócios", "Não há rotina definida"].includes(d.respostas?.fpa_quem?.v)) extra += " A rotina financeira não está estruturada: avalie oferecer BPO + FP&A (Integrado).";
+    return { plano: PLANOS_FPA[f.tier], motivo: (f.motivos.length ? f.motivos.join("; ") : "visibilidade: DRE gerencial e indicadores essenciais") + "." + extra };
+  }
+  const b = sugestaoBPO(d);
+  if (!b && !f.temDados) return null;
+  const tier = Math.max(b?.tier || 0, f.tier);
+  return { plano: PLANOS_INT[tier], motivo: [b ? "BPO " + b.plano.replace("Plano ", "").toLowerCase() : "", f.motivos.length ? "FP&A: " + f.motivos.join("; ") : ""].filter(Boolean).join(" · ") + "." + alerta };
 }
 
 /* ---- Navegação do módulo ---- */
@@ -2867,7 +2985,7 @@ function renderListaDiag() {
       const p = progresso(d), mt = maturidade(d);
       return `<li data-abrir-diag="${d.id}">
         <div class="ld-ico ${d.status}">${d.status === "finalizado" ? "✓" : Math.round(p.feitas / p.total * 100) + "%"}</div>
-        <div class="ld-info"><b>${esc(d.cliente?.empresa || "Sem empresa")}</b>
+        <div class="ld-info"><b>${esc(d.cliente?.empresa || "Sem empresa")}${ehCombo(d) ? ` <span class="tag-combo">+ FP&amp;A</span>` : ""}</b>
           <small>${esc(d.id)} · ${d.status === "finalizado" ? `finalizado em ${data(d.finalizadoEm)}` : `em edição · ${p.feitas}/${p.total} respostas`} · atualizado ${dataHora(d.atualizadoEm)} por ${esc(d.atualizadoPor || "")}</small></div>
         ${mt ? `<span class="chip-etapa" style="--cor:${corNivel(mt.pct)}"><i></i>${mt.pct}% · ${mt.nivel}</span>` : ""}
         <span class="chip-etapa ${d.status}" style="--cor:${d.status === "finalizado" ? "var(--verde)" : "var(--alerta)"}"><i></i>${d.status === "finalizado" ? "Finalizado" : "Em edição"}</span>
@@ -2885,13 +3003,15 @@ function renderListaDiag() {
 const corNivel = pct => pct < 40 ? "#C8463D" : pct < 70 ? "#D99A1E" : "#28B260";
 
 /* ---- Novo diagnóstico: escolher cliente do CRM ou cadastrar ---- */
-async function novoDiagnostico(leadIdPre, frente) {
+async function novoDiagnostico(leadIdPre, frente, escopo) {
   if (frente) TD = TIPOS_DIAG[frente];
+  let escopoSel = escopo || "bpo";
   if (!TD.store.carregado) await carregarStore(TD.store);
   if (!crm.carregado) await carregarCRM(true);
-  if (leadIdPre) return criarDiag({ leadId: leadIdPre });
+  if (leadIdPre) return criarDiag({ leadId: leadIdPre, escopo: escopoSel });
   const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo ${esc(TD.curto.toLowerCase())}</h3></div>
     <div class="modal-corpo">
+      ${TD.frente === "bpo" ? `<div class="campo" style="margin-bottom:14px"><label>Escopo do diagnóstico</label><div class="opcoes" id="escopoNovo">${ESCOPOS.map(([v, r]) => `<button type="button" data-esc="${v}" class="${escopoSel === v ? "ativo" : ""}">${r}</button>`).join("")}</div></div>` : ""}
       <nav class="abas" id="abasCli"><button data-cli="buscar" class="ativo">Buscar no CRM</button><button data-cli="novo">Cadastrar cliente novo</button></nav>
       <div id="cliBuscar">
         <input id="buscaCli" type="search" class="campo-busca" placeholder="Digite o nome da empresa, cidade ou contato…" autocomplete="off">
@@ -2921,15 +3041,16 @@ async function novoDiagnostico(leadIdPre, frente) {
   $("buscaCli").oninput = desenharLista;
   $("buscaCli").focus();
   m.onclick = e => {
-    const b = e.target.closest("[data-cli],[data-cli-id]");
+    const b = e.target.closest("[data-cli],[data-cli-id],[data-esc]");
     if (!b) return;
+    if (b.dataset.esc) { escopoSel = b.dataset.esc; m.querySelectorAll("[data-esc]").forEach(x => x.classList.toggle("ativo", x === b)); return; }
     if (b.dataset.cli) {
       m.querySelectorAll("[data-cli]").forEach(x => x.classList.toggle("ativo", x === b));
       $("cliBuscar").classList.toggle("oculto", b.dataset.cli !== "buscar");
       $("cliNovo").classList.toggle("oculto", b.dataset.cli !== "novo");
       (b.dataset.cli === "novo" ? m.querySelector("[name=empresa]") : $("buscaCli")).focus();
     }
-    if (b.dataset.cliId) { fecharModal(); criarDiag({ leadId: b.dataset.cliId }); }
+    if (b.dataset.cliId) { fecharModal(); criarDiag({ leadId: b.dataset.cliId, escopo: escopoSel }); }
   };
   $("cliNovo").onsubmit = e => {
     e.preventDefault();
@@ -2937,15 +3058,15 @@ async function novoDiagnostico(leadIdPre, frente) {
     if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
     const chave = norm(f.empresa) + "|" + norm(f.cidade || "");
     const igual = leads().find(l => norm(l.empresa) + "|" + norm(l.cidade || "") === chave);
-    if (igual) { toast(`"${igual.empresa}" já está no CRM — selecionei o cadastro existente`); fecharModal(); return criarDiag({ leadId: igual.id }); }
+    if (igual) { toast(`"${igual.empresa}" já está no CRM — selecionei o cadastro existente`); fecharModal(); return criarDiag({ leadId: igual.id, escopo: escopoSel }); }
     fecharModal();
-    criarDiag({ cliente: { empresa: f.empresa.trim(), contato: f.contato.trim(), segmento: f.segmento.trim(), telefone: f.telefone.trim(), email: f.email.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase() } });
+    criarDiag({ escopo: escopoSel, cliente: { empresa: f.empresa.trim(), contato: f.contato.trim(), segmento: f.segmento.trim(), telefone: f.telefone.trim(), email: f.email.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase() } });
   };
 }
 function clienteDoLead(l) {
   return { empresa: l.empresa, contato: l.contato || "", segmento: l.segmento || "", telefone: (l.telefones || [])[0] || "", email: l.email || "", cidade: l.cidade || "", uf: l.uf || "" };
 }
-async function criarDiag({ leadId, cliente }) {
+async function criarDiag({ leadId, cliente, escopo }) {
   const l = leadId ? leadPorId(leadId) : null;
   const rascunho = leadId && diags().find(d => d.leadId === leadId && d.status === "rascunho");
   if (rascunho) { toast("Este cliente já tem um diagnóstico em edição — abrindo"); location.hash = rotaDiag(rascunho.id); return; }
@@ -2955,7 +3076,7 @@ async function criarDiag({ leadId, cliente }) {
     await salvarStore(TD.store, d => {
       d.seq = (d.seq || d.diagnosticos.length) + 1;
       id = TD.prefixo + "-" + String(d.seq).padStart(4, "0");
-      d.diagnosticos.push({ id, frente: TD.frente, tipo: TD.tipo, status: "rascunho", leadId: l?.id || null, cliente: l ? clienteDoLead(l) : cliente,
+      d.diagnosticos.push({ id, frente: TD.frente, tipo: TD.tipo, ...(TD.frente === "bpo" ? { escopo: escopo || "bpo" } : {}), status: "rascunho", leadId: l?.id || null, cliente: l ? clienteDoLead(l) : cliente,
         entrevistado: l?.contato || cliente?.contato || "", cargo: "", dataReuniao: hojeISO(), responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "",
         respostas: {}, parecer: "", plano: "", proximosPassos: "", criadoEm: new Date().toISOString(), criadoPor: meuNome(), atualizadoEm: new Date().toISOString(), atualizadoPor: meuNome() });
     });
@@ -2970,7 +3091,7 @@ function abrirDiag(id) {
   if (!d) { toast("Diagnóstico não encontrado", "erro"); location.hash = rotaDiag(); return; }
   if (!diagAtual || diagAtual.id !== id || !diagPendente) diagAtual = structuredClone(d);
   const dd = diagAtual, fin = dd.status === "finalizado";
-  cabAtd([["Atendimento", "#atendimento"], [TD.curto, "#" + rotaDiag()], [dd.id]], `${TD.titulo} · ${dd.id}`, dd.cliente?.empresa || "Diagnóstico",
+  cabAtd([["Atendimento", "#atendimento"], [TD.curto, "#" + rotaDiag()], [dd.id]], `${ehCombo(dd) ? "Diagnóstico Preliminar BPO + FP&A" : TD.titulo} · ${dd.id}`, dd.cliente?.empresa || "Diagnóstico",
     fin ? `Finalizado em ${dataHora(dd.finalizadoEm)} por ${dd.finalizadoPor || ""}. As alterações continuam sendo salvas automaticamente.` : "Em edição · as respostas são salvas automaticamente na nuvem.",
     `<span class="status-salvo" id="statusSalvo">Salvo na nuvem</span>`);
   const r = dd.respostas || {};
@@ -2996,6 +3117,7 @@ function abrirDiag(id) {
     <div class="diag-form">
       <section class="g-sec"><h4>Cliente e reunião ${dd.leadId ? `<button class="lnk" data-atd="verLead">Ver no CRM ›</button>` : `<span class="tag-breve" style="text-transform:none">entra no CRM ao finalizar</span>`}</h4>
         <div class="dados-grid">
+          ${TD.frente === "bpo" ? `<div class="campo"><label>Escopo do diagnóstico</label><div class="opcoes" data-d-op="escopo">${ESCOPOS.map(([v, r]) => `<button type="button" data-v="${v}" class="${(dd.escopo || "bpo") === v ? "ativo" : ""}">${r}</button>`).join("")}</div></div>` : ""}
           <div class="linha2"><div class="campo"><label>Empresa *</label><input data-cli-f="empresa" value="${esc(dd.cliente?.empresa || "")}"></div>
             <div class="campo"><label>Segmento</label><input data-cli-f="segmento" value="${esc(dd.cliente?.segmento || "")}"></div></div>
           <div class="linha2"><div class="campo"><label>Entrevistado</label><input data-d="entrevistado" value="${esc(dd.entrevistado || "")}"></div>
@@ -3005,14 +3127,14 @@ function abrirDiag(id) {
           <div class="linha2"><div class="campo"><label>Telefone</label><input data-cli-f="telefone" value="${esc(dd.cliente?.telefone || "")}"></div>
             <div class="campo"><label>E-mail</label><input data-cli-f="email" value="${esc(dd.cliente?.email || "")}"></div></div>
         </div></section>
-      ${TD.secoes.map((s, k) => `<section class="g-sec secao-diag" id="sec-${k}"><h4>${esc(s.secao)}${s.setor ? `<span class="chip-setor" id="mset-${k}"></span>` : ""}</h4>${s.itens.map(q).join("")}</section>`).join("")}
-      ${TD.frente === "bpo" ? parecerBPO(dd) : parecerRental(dd)}
+      ${secoesDe(dd).map((s, k) => `${s.grupo && s.grupo !== secoesDe(dd)[k - 1]?.grupo ? `<div class="divisor-grupo">${esc(s.grupo)}</div>` : ""}<section class="g-sec secao-diag" id="sec-${k}"><h4>${esc(s.secao)}${s.setor ? `<span class="chip-setor" id="mset-${k}"></span>` : ""}</h4>${s.itens.map(q).join("")}</section>`).join("")}
+      ${TD.frente === "processos" ? parecerRental(dd) : parecerBPO(dd)}
     </div>
     <aside class="diag-lado">
       <section class="g-sec"><h4>Progresso</h4><div class="barra-prog"><i id="barProg"></i></div><p class="txt-prog" id="txtProg"></p>
-        <nav class="nav-secoes">${TD.secoes.map((s, k) => `<a data-ir-sec="sec-${k}">${esc(s.secao)}<span id="cnt-${k}"></span></a>`).join("")}${TD.nav.map(([a, r]) => `<a data-ir-sec="${a}" class="nav-wl">${esc(r)}</a>`).join("")}</nav></section>
-      <section class="g-sec"><h4>${esc(TD.nomeMat)}</h4><div id="painelMat"></div></section>
-      ${TD.frente === "bpo" ? "" : `<section class="g-sec"><h4>Prontidão para consultoria</h4><div id="painelPront"></div></section>`}
+        <nav class="nav-secoes">${secoesDe(dd).map((s, k) => `<a data-ir-sec="sec-${k}">${esc(s.secao)}<span id="cnt-${k}"></span></a>`).join("")}${TD.nav.map(([a, r]) => `<a data-ir-sec="${a}" class="nav-wl">${esc(r)}</a>`).join("")}</nav></section>
+      <section class="g-sec"><h4>${esc(nomeMatDe(dd))}</h4><div id="painelMat"></div></section>
+      ${TD.frente !== "processos" ? "" : `<section class="g-sec"><h4>Prontidão para consultoria</h4><div id="painelPront"></div></section>`}
       <section class="g-sec acoes-diag">
         ${fin ? `<div class="fin-ok">✓ Finalizado em ${data(dd.finalizadoEm)}</div>` : `<button class="btn-p" data-atd="finalizar" style="justify-content:center">Finalizar diagnóstico</button>`}
         <button class="btn-s" data-atd="pdf" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Gerar PDF</button>
@@ -3028,7 +3150,7 @@ function parecerBPO(dd) {
   return `<section class="g-sec" id="sec-parecer"><h4>Parecer da WL <span class="tag-breve" style="text-transform:none">uso do consultor</span></h4>
         <div class="dados-grid">
           <div class="campo"><label>Plano recomendado</label>
-            <div class="opcoes" data-d-op="plano">${PLANOS_BPO.map(p => `<button type="button" data-v="${esc(p)}" class="${dd.plano === p ? "ativo" : ""}">${esc(p)}</button>`).join("")}</div>
+            <div class="opcoes" data-d-op="plano">${planosDe(dd).map(p => `<button type="button" data-v="${esc(p)}" class="${dd.plano === p ? "ativo" : ""}">${esc(p)}</button>`).join("")}</div>
             <small class="sugestao" id="sugPlano"></small></div>
           <div class="campo"><label>Parecer / conclusão</label><textarea data-d="parecer" rows="4" placeholder="Principais achados e recomendação">${esc(dd.parecer || "")}</textarea></div>
           <div class="campo"><label>Próximos passos</label><textarea data-d="proximosPassos" rows="3" placeholder="Ex.: enviar proposta até sexta, agendar kick-off">${esc(dd.proximosPassos || "")}</textarea></div>
@@ -3095,8 +3217,8 @@ function atualizarLado() {
   $("barProg").style.width = (p.feitas / p.total * 100) + "%";
   $("txtProg").textContent = `${p.feitas} de ${p.total} perguntas respondidas`;
   const mt = maturidade(dd);
-  TD.secoes.forEach((s, k) => {
-    const qs = s.itens.filter(q => visivel(q, r)); $("cnt-" + k).textContent = `${qs.filter(q => respondida(q, r)).length}/${qs.length}`;
+  secoesDe(dd).forEach((s, k) => {
+    const qs = s.itens.filter(q => visivel(q, r)), cnt = $("cnt-" + k); if (cnt) cnt.textContent = `${qs.filter(q => respondida(q, r)).length}/${qs.length}`;
     const ch = $("mset-" + k), x = mt?.setores.find(z => z.nome === s.secao);
     if (ch) { ch.textContent = x?.pct != null ? `${x.pct}% maturidade` : ""; ch.style.setProperty("--cor", x?.pct != null ? corNivel(x.pct) : "transparent"); }
   });
@@ -3107,10 +3229,10 @@ function atualizarLado() {
     : `<p class="txt-prog">Nenhum ponto de atenção nas perguntas de controle.</p>`;
   $("painelMat").innerHTML = mt ? `<div class="mat-num" style="color:${corNivel(mt.pct)}">${mt.pct}%<span>${mt.nivel}</span></div>
     <div class="barra-prog"><i style="width:${mt.pct}%;background:${corNivel(mt.pct)}"></i></div>
-    ${mt.setores.length ? `<div class="setores-mat">${mt.setores.map(s => `<div class="sm-lin"><span>${esc(s.nome)}</span><div class="barra-prog"><i style="width:${s.pct ?? 0}%;background:${s.pct == null ? "transparent" : corNivel(s.pct)}"></i></div><b>${s.pct == null ? "—" : s.pct + "%"}</b></div>`).join("")}</div>` : ""}
+    ${mt.grupos.length > 1 || mt.setores.length ? `<div class="setores-mat">${[...(mt.grupos.length > 1 ? mt.grupos.map(g => ({ ...g, g: 1 })) : []), ...mt.setores].map(s => `<div class="sm-lin ${s.g ? "grupo" : ""}"><span>${esc(s.rot || s.nome)}</span><div class="barra-prog"><i style="width:${s.pct ?? 0}%;background:${s.pct == null ? "transparent" : corNivel(s.pct)}"></i></div><b>${s.pct == null ? "—" : s.pct + "%"}</b></div>`).join("")}</div>` : ""}
     ${listaAt}`
     : `<p class="txt-prog">Responda as perguntas de Sim / Parcial / Não para calcular.</p>`;
-  if ($("sugPlano")) { const sug = sugestaoPlano(dd); $("sugPlano").innerHTML = sug ? `Sugestão do sistema: <b>${esc(sug.plano)}</b> — ${esc(sug.motivo)}` : ""; }
+  if ($("sugPlano")) { const sug = sugestaoPlano(dd); $("sugPlano").innerHTML = sug ? `Sugestão do sistema: <b>${esc(sug.plano)}</b>${PRECO_PLANO[sug.plano] ? ` (R$ ${PRECO_PLANO[sug.plano].toLocaleString("pt-BR")}/mês)` : ""} — ${esc(sug.motivo)}` : ""; }
   if ($("sugSetores")) {
     const fr = mt ? mt.setores.filter(s => s.pct !== null && s.pct < 70).sort((a, b) => a.pct - b.pct) : [];
     $("sugSetores").innerHTML = fr.length ? `Menor maturidade: ${fr.map(s => `<b>${esc(s.nome)}</b> (${s.pct}%)`).join(", ")}` : "";
@@ -3140,7 +3262,7 @@ function ligarForm() {
     const b = e.target.closest("[data-v],[data-atd],[data-ir-sec]");
     if (!b) return;
     if (b.dataset.irSec) return $(b.dataset.irSec).scrollIntoView({ behavior: "smooth", block: "start" });
-    const redesenhar = () => { const y = scrollY; alterouDiag(); abrirDiag(dd.id); scrollTo(0, y); };
+    const redesenhar = () => { const y = scrollY; diagPendente = true; abrirDiag(dd.id); alterouDiag(); scrollTo(0, y); };
     if (b.dataset.atd === "addLinha") { (dd[b.dataset.tab] ||= []).push({}); return redesenhar(); }
     if (b.dataset.atd === "remLinha") { const row = dd[b.dataset.tab]?.[+b.dataset.lin]; if (row && Object.values(row).some(x => String(x).trim()) && !confirmar("Remover esta linha?")) return; dd[b.dataset.tab].splice(+b.dataset.lin, 1); return redesenhar(); }
     if (b.dataset.atd === "sugerirMapa") { if (sugerirMapa(dd)) redesenhar(); return; }
@@ -3152,12 +3274,18 @@ function ligarForm() {
         if (grupo.dataset.multi) resp(grupo.dataset.q, "v", sel); else dd[grupo.dataset.dMulti] = sel;
         return alterouDiag();
       }
+      if (grupo.dataset.dOp === "escopo") {
+        if ((dd.escopo || "bpo") === b.dataset.v) return;
+        dd.escopo = b.dataset.v;
+        if (dd.plano && !planosDe(dd).includes(dd.plano)) dd.plano = "";
+        return redesenhar();
+      }
       const novo = b.classList.contains("ativo") ? "" : b.dataset.v;
       grupo.querySelectorAll("[data-v]").forEach(x => x.classList.toggle("ativo", x === b && novo !== ""));
       if (grupo.dataset.q) resp(grupo.dataset.q, "v", novo);
       if (grupo.dataset.dOp) dd[grupo.dataset.dOp] = novo;
       if (grupo.dataset.mz) dd.matriz = { ...(dd.matriz || {}), [grupo.dataset.mz]: novo ? Number(novo) : 0 };
-      for (const q of TD.perguntas.filter(q => q.se)) $("p-" + q.id).classList.toggle("oculto", !visivel(q, dd.respostas || {}));
+      for (const q of perguntasDe(dd).filter(q => q.se)) $("p-" + q.id).classList.toggle("oculto", !visivel(q, dd.respostas || {}));
       return alterouDiag();
     }
   };
@@ -3199,8 +3327,8 @@ async function finalizarDiag() {
   if (p.feitas < p.total && !confirmar(`Ainda há ${p.total - p.feitas} pergunta(s) sem resposta. Finalizar mesmo assim?`)) return;
   if (!crm.carregado) await carregarCRM(true);
   chip("sincronizando", "Finalizando…");
-  const t = tipoDe(dd), mtF = maturidade(dd), prF = t.frente === "bpo" ? null : prontidao(dd);
-  const texto = `${t.curto} ${dd.id} finalizado` + (mtF ? ` · maturidade ${mtF.pct}% (${mtF.nivel})` : "") + (dd.plano ? ` · ${dd.plano}` : "")
+  const t = tipoDe(dd), mtF = maturidade(dd), prF = t.frente === "processos" ? prontidao(dd) : null;
+  const texto = `${nomeDiag(dd)} ${dd.id} finalizado` + (mtF ? ` · maturidade ${mtF.pct}% (${mtF.nivel})` : "") + (dd.plano ? ` · ${dd.plano}` : "")
     + (prF && prF.feitas === MATRIZ_PRONTIDAO.length ? ` · prontidão ${prF.pts}/21` : "") + (dd.conclusao ? ` · ${dd.conclusao}` : "");
   const acaoCRM = l => { if (dd.proximaAcao?.trim() && !(l.acoes || []).some(a => !a.concluida && a.texto === dd.proximaAcao.trim())) novaAcao(l, dd.proximaAcao.trim(), dd.prazoRetorno || ""); };
   let ok;
@@ -3209,7 +3337,7 @@ async function finalizarDiag() {
       if (l.semInteresse) { registrar(l, "reativado", "Reativado pelo diagnóstico"); delete l.semInteresse; }
       registrar(l, "diagnostico", texto);
       if (l.etapa === "perdido" || ORDEM_ETAPA[l.etapa] < ORDEM_ETAPA.diagnostico) moverEtapa(l, "diagnostico");
-      l.frentes = [...new Set([...(l.frentes || []), t.crmFrente])];
+      l.frentes = [...new Set([...(l.frentes || []), ...frentesCRM(dd)])];
       for (const a of pendentes(l)) if (/diagn|reuni/i.test(a.texto)) concluirAcao(l, a.id, "diagnóstico realizado");
       acaoCRM(l);
     });
@@ -3219,9 +3347,9 @@ async function finalizarDiag() {
     ok = await salvarCRM(d => {
       novoLeadId = novoId(d);
       const l = { id: novoLeadId, empresa: c.empresa.trim(), segmento: c.segmento || "", contato: c.contato || dd.entrevistado || "", cidade: c.cidade || "", uf: c.uf || "",
-        telefones: c.telefone ? [c.telefone] : [], email: c.email || "", fit: "", origem: t.curto, frentes: [t.crmFrente], etapa: "diagnostico",
+        telefones: c.telefone ? [c.telefone] : [], email: c.email || "", fit: "", origem: nomeDiag(dd), frentes: frentesCRM(dd), etapa: "diagnostico",
         responsavel: dd.responsavel || "", criadoEm: new Date().toISOString(), criadoPor: meuNome(), historico: [], acoes: [] };
-      registrar(l, "criado", "Cadastrado pelo " + t.curto);
+      registrar(l, "criado", "Cadastrado pelo " + nomeDiag(dd));
       registrar(l, "diagnostico", texto);
       acaoCRM(l);
       d.leads.push(l);
@@ -3265,7 +3393,7 @@ function htmlPDFDiag(dd, interno = false) {
   };
   let n = 0;
   return `<div class="pdf">
-    <div class="pdf-topo"><img src="logo-cor.png" alt="WL Expertise"><div><b>${esc(t.pdfTitulo)}${interno ? " · uso interno" : ""}</b><span>${esc(t.pdfSub)}</span></div></div>
+    <div class="pdf-topo"><img src="logo-cor.png" alt="WL Expertise"><div><b>${esc(t.pdfTitulo)}${interno ? " · uso interno" : ""}</b><span>${esc(pdfSubDe(dd))}</span></div></div>
     <div class="pdf-cliente">
       <div><small>Empresa</small><b>${esc(c.empresa || "")}</b></div>
       <div><small>Entrevistado</small><b>${esc(dd.entrevistado || "—")}${dd.cargo ? ` · ${esc(dd.cargo)}` : ""}</b></div>
@@ -3275,12 +3403,12 @@ function htmlPDFDiag(dd, interno = false) {
       <div><small>Situação</small><b>${dd.status === "finalizado" ? "Finalizado em " + data(dd.finalizadoEm) : "Em edição"}</b></div>
     </div>
     ${mt ? `<div class="pdf-bloco pdf-mat">
-      <div class="pdf-mat-num" style="color:${corNivel(mt.pct)}">${mt.pct}%<span>${esc(t.nomeMat)} · ${mt.nivel}</span></div>
+      <div class="pdf-mat-num" style="color:${corNivel(mt.pct)}">${mt.pct}%<span>${esc(nomeMatDe(dd))} · ${mt.nivel}</span></div>
       <div class="pdf-barra"><i style="width:${mt.pct}%;background:${corNivel(mt.pct)}"></i></div>
-      ${mt.setores.length ? `<div class="pdf-setores">${mt.setores.map(s => `<div><span>${esc(s.nome)}</span><div class="pdf-barra"><i style="width:${s.pct ?? 0}%;background:${s.pct == null ? "transparent" : corNivel(s.pct)}"></i></div><b>${s.pct == null ? "—" : s.pct + "%"}</b></div>`).join("")}</div>` : ""}
+      ${mt.grupos.length > 1 || mt.setores.length ? `<div class="pdf-setores">${[...(mt.grupos.length > 1 ? mt.grupos : []), ...mt.setores].map(s => `<div><span>${esc(s.rot || s.nome)}</span><div class="pdf-barra"><i style="width:${s.pct ?? 0}%;background:${s.pct == null ? "transparent" : corNivel(s.pct)}"></i></div><b>${s.pct == null ? "—" : s.pct + "%"}</b></div>`).join("")}</div>` : ""}
       ${mt.atencao.length ? `<div class="pdf-atencao"><b>Pontos de atenção</b><ul>${mt.atencao.map(a => `<li><span class="pdf-tag ${a.v === "Não" ? "nao" : "parc"}">${a.v}</span>${mt.setores.length ? `<i class="pdf-set">${esc(a.setor)}</i> ` : ""}${esc(a.q.rot || a.q.txt)}</li>`).join("")}</ul></div>` : ""}
     </div>` : ""}
-    ${t.secoes.map(s => `<div class="pdf-secao"><h3>${esc(s.secao)}${s.setor && mt?.setores.find(z => z.nome === s.secao)?.pct != null ? ` · ${mt.setores.find(z => z.nome === s.secao).pct}%` : ""}</h3>${s.itens.filter(q => visivel(q, r)).map(q => { n++; return `<div class="pdf-q">
+    ${secoesDe(dd).map((s, k, arr) => `${s.grupo && s.grupo !== arr[k - 1]?.grupo ? `<div class="pdf-grupo">${esc(s.grupo)}</div>` : ""}<div class="pdf-secao"><h3>${esc(s.secao)}${s.setor && mt?.setores.find(z => z.nome === s.secao)?.pct != null ? ` · ${mt.setores.find(z => z.nome === s.secao).pct}%` : ""}</h3>${s.itens.filter(q => visivel(q, r)).map(q => { n++; return `<div class="pdf-q">
       <div class="pdf-perg"><span>${n}</span>${esc(q.txt)}</div><div class="pdf-resp">${fmt(q)}</div>
       ${r[q.id]?.obs ? `<div class="pdf-obs">Obs.: ${esc(r[q.id].obs)}</div>` : ""}</div>`; }).join("")}</div>`).join("")}
     ${t.frente !== "bpo" ? pdfParecerRental(dd, interno) : dd.plano || dd.parecer || dd.proximosPassos ? `<div class="pdf-secao pdf-bloco"><h3>Parecer da WL Expertise</h3>
@@ -3309,7 +3437,7 @@ function pdfParecerRental(dd, interno) {
 }
 /* Rental: versão para o cliente (sem a matriz de prontidão) ou interna (completa) */
 function emitirPDF(dd) {
-  if (tipoDe(dd).frente === "bpo") return gerarPDFDiag(dd);
+  if (tipoDe(dd).frente !== "processos") return gerarPDFDiag(dd);
   return new Promise(ok => {
     const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Emitir PDF</h3></div>
       <div class="modal-corpo"><div class="opcoes-salvar">
@@ -3334,7 +3462,7 @@ async function gerarPDFDiag(dd, interno = false) {
     document.body.appendChild(host);
     await Promise.all([...host.querySelectorAll("img")].map(i => i.complete ? 0 : new Promise(ok => { i.onload = i.onerror = ok; })));
     const empresa = limparNome(dd.cliente?.empresa || "Cliente");
-    const nomeArq = `${tipoDe(dd).curto} - ${empresa} - ${(dd.finalizadoEm || dd.atualizadoEm || new Date().toISOString()).slice(0, 10)}${interno ? " (interno)" : ""}.pdf`;
+    const nomeArq = `${nomeDiag(dd)} - ${empresa} - ${(dd.finalizadoEm || dd.atualizadoEm || new Date().toISOString()).slice(0, 10)}${interno ? " (interno)" : ""}.pdf`;
     let blob;
     try {
     blob = await html2pdf().set({
