@@ -2046,7 +2046,7 @@ function linkWhats(tel) {
   return "https://wa.me/" + d;
 }
 function renderFicha(id) {
-  for (const st of [diagStore, diagFpaStore, diagRentalStore]) if (!st.carregado && !st.carregando) {
+  for (const st of [diagStore, diagFpaStore, diagPlaStore, diagRentalStore]) if (!st.carregado && !st.carregando) {
     st.carregando = true;
     carregarStore(st).then(() => { if (abertoId) renderFicha(abertoId); }).catch(() => {}).finally(() => { st.carregando = false; });
   }
@@ -2124,12 +2124,12 @@ function renderFicha(id) {
     <section class="g-sec"><h4>Agenda do cliente</h4><div id="agendaLead"></div></section>
 
     <section class="g-sec"><h4>Diagnósticos</h4>
-      ${!diagStore.carregado || !diagRentalStore.carregado || !diagFpaStore.carregado ? `<div style="font-size:.8rem;color:var(--txt-2)">Carregando…</div>` : (() => {
-        const ds = [diagStore, diagFpaStore, diagRentalStore].flatMap(st => st.dados?.diagnosticos || []).filter(d => d.leadId === l.id).sort((a, b) => (b.atualizadoEm || "").localeCompare(a.atualizadoEm || ""));
+      ${!diagStore.carregado || !diagRentalStore.carregado || !diagFpaStore.carregado || !diagPlaStore.carregado ? `<div style="font-size:.8rem;color:var(--txt-2)">Carregando…</div>` : (() => {
+        const ds = [diagStore, diagFpaStore, diagPlaStore, diagRentalStore].flatMap(st => st.dados?.diagnosticos || []).filter(d => d.leadId === l.id).sort((a, b) => (b.atualizadoEm || "").localeCompare(a.atualizadoEm || ""));
         return (ds.length ? `<ul class="lista-cli" style="margin:0 0 10px">${ds.map(d => { const mt = maturidade(d); return `<li data-g-diag="${tipoDe(d).frente}/${d.id}"><div><b>${esc(nomeDiag(d))} · ${esc(d.id)}</b>
           <small>${d.status === "finalizado" ? "Finalizado em " + data(d.finalizadoEm) : "Em edição"}${mt ? ` · maturidade ${mt.pct}%` : ""}</small></div>
           <span class="chip-etapa" style="--cor:${d.status === "finalizado" ? "var(--verde)" : "var(--alerta)"}"><i></i>${d.status === "finalizado" ? "Finalizado" : "Em edição"}</span></li>`; }).join("")}</ul>` : "")
-          + `<small class="rot-botoes">Iniciar diagnóstico</small><div class="botoes-diag">${[["novoDiag", "BPO Financeiro"], ["novoDiagCombo", "BPO + FP&A"], ["novoDiagFpa", "FP&A"], ["novoDiagRental", "Rental"]].map(([k, r]) => `<button class="btn-s" data-g="${k}"><svg><use href="#i-atd"/></svg>${r}</button>`).join("")}</div>`;
+          + `<small class="rot-botoes">Iniciar diagnóstico</small><div class="botoes-diag">${[["novoDiag", "BPO Financeiro"], ["novoDiagCombo", "BPO + FP&A"], ["novoDiagGestao", "Gestão Financeira"], ["novoDiagFpa", "FP&A"], ["novoDiagPla", "Planejamento"], ["novoDiagRental", "Rental"]].map(([k, r]) => `<button class="btn-s" data-g="${k}"><svg><use href="#i-atd"/></svg>${r}</button>`).join("")}</div>`;
       })()}</section>
 
     <section class="g-sec"><h4>Negócio</h4>
@@ -2264,6 +2264,8 @@ function ligarFicha(l) {
     if (d.g === "novoDiag") { fecharFicha(); return novoDiagnostico(l.id, "bpo", "bpo"); }
     if (d.g === "novoDiagCombo") { fecharFicha(); return novoDiagnostico(l.id, "bpo", "bpo+fpa"); }
     if (d.g === "novoDiagFpa") { fecharFicha(); return novoDiagnostico(l.id, "fpa"); }
+    if (d.g === "novoDiagGestao") { fecharFicha(); return novoDiagnostico(l.id, "bpo", "gestao"); }
+    if (d.g === "novoDiagPla") { fecharFicha(); return novoDiagnostico(l.id, "planejamento"); }
     if (d.g === "novoDiagRental") { fecharFicha(); return novoDiagnostico(l.id, "processos"); }
     if (d.gDiag) { fecharFicha(); const [fr, id] = d.gDiag.split("/"); location.hash = rotaDiag(id, TIPOS_DIAG[fr]); return; }
     if (d.g === "reativar") return alterarLead(l.id, x => { registrar(x, "reativado", x.semInteresse?.motivo ? `Estava sem interesse: ${x.semInteresse.motivo}` : ""); delete x.semInteresse; }, "Lead reativado");
@@ -2547,7 +2549,7 @@ const FRENTES_AT = [
   { id: "fpa", nome: "FP&A", icone: "i-a-fpa", desc: "Indicadores gerenciais e análise de desempenho.",
     etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de FP&A.", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "planejamento", nome: "Planejamento Financeiro", icone: "i-a-pla", desc: "Orçamentos, fluxo de caixa e cenários.",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico" }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Planejamento Financeiro.", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "processos", nome: "Consultoria de Processos", icone: "i-a-pro", desc: "Processos, sistema e treinamento para locadoras (Rental).",
     etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Consultoria Rental.", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] }
 ];
@@ -2840,6 +2842,86 @@ function nivelFPA(d) {
   if (v("faturamento") === "Acima de R$ 1 milhão" || Number(v("cnpjs")) >= 3) { tier = Math.max(tier, 2); motivos.push("porte e complexidade"); }
   return { tier, motivos, temDados: !!(ent.length || v("fpa_freq") || v("faturamento")) };
 }
+/* ---- Diagnóstico de Planejamento Financeiro (criado do zero) — sozinho ou dentro da Gestão Financeira ---- */
+const qFPA = id => DIAG_FPA.flatMap(s => s.itens).find(q => q.id === id);
+const DIAG_PLA = [
+  { ...DIAG_FPA[0], soloPla: true },
+  { secao: "Objetivos e horizonte", itens: [
+    { id: "pla_objetivos", tipo: "multi", txt: "Quais objetivos o planejamento precisa sustentar?", ops: ["Crescer o faturamento", "Melhorar a margem", "Organizar e folgar o caixa", "Expandir (nova unidade, produto ou mercado)", "Investir em estrutura ou equipamentos", "Reduzir o endividamento", "Captar crédito ou investidor", "Aumentar a distribuição aos sócios", "Preparar venda ou sucessão"] },
+    { id: "pla_horizonte", tipo: "escolha", txt: "Qual o horizonte do planejamento?", ops: ["12 meses", "2 a 3 anos", "5 anos ou mais"] },
+    { id: "pla_meta", tipo: "texto", txt: "Onde a empresa quer estar ao final desse período (faturamento, margem, caixa, estrutura)?" },
+    { id: "pla_projetos", tipo: "texto", txt: "Há projetos ou investimentos previstos? Qual o valor estimado e quando?" } ] },
+  { secao: "Estratégia e orçamento", setor: true, rotSetor: "Estratégia", itens: [
+    { id: "pla_estrat", tipo: "escolha", ops: SPN, peso: true, rot: "Planejamento estratégico com metas", txt: "Existe planejamento estratégico com metas de médio e longo prazo?" },
+    { ...qFPA("fpa_orc") },
+    { id: "pla_premissas", tipo: "escolha", ops: SPN, peso: true, rot: "Premissas documentadas", txt: "As projeções partem de premissas documentadas (crescimento, preço, inflação, custos, contratações)?" },
+    { id: "pla_receita", tipo: "escolha", ops: SPN, peso: true, rot: "Projeção de receita com sazonalidade", txt: "A projeção de receitas considera sazonalidade, carteira de clientes e capacidade de atender?" },
+    { id: "pla_pessoas", tipo: "escolha", ops: SPN, peso: true, rot: "Pessoas no orçamento", txt: "Contratações e custos com pessoas são planejados no orçamento?" } ] },
+  { secao: "Caixa e capital de giro", setor: true, rotSetor: "Caixa", itens: [
+    { ...qFPA("fpa_fcproj") },
+    { id: "pla_longo", tipo: "escolha", ops: SPN, peso: true, rot: "Projeção de 2 a 3 anos", txt: "Existe projeção de caixa e resultado além de 12 meses (2 a 3 anos)?" },
+    { id: "pla_reserva", tipo: "escolha", ops: SPN, peso: true, rot: "Reserva de caixa definida", txt: "Existe uma reserva de caixa mínima definida e respeitada?" },
+    { id: "pla_ncg", tipo: "escolha", ops: SPN, peso: true, rot: "Necessidade de capital de giro", txt: "A necessidade de capital de giro é calculada antes de crescer ou fechar contratos grandes?" },
+    { id: "pla_aperto", tipo: "escolha", ops: SPN, peso: true, rot: "Meses de aperto antecipados", txt: "Os meses de aperto de caixa são conhecidos e planejados com antecedência?" },
+    { id: "pla_antecip", tipo: "escolha", txt: "Com que frequência a empresa recorre a antecipação de recebíveis, cheque especial ou capital de giro bancário?", ops: ["Todo mês", "Às vezes", "Raramente", "Nunca"] } ] },
+  { secao: "Investimentos e estrutura de capital", setor: true, rotSetor: "Investimentos", itens: [
+    { ...qFPA("fpa_capex") }, { ...qFPA("fpa_viab") }, { ...qFPA("fpa_divida") },
+    { id: "pla_credito", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Capacidade de endividamento conhecida", txt: "A empresa sabe quanto pode se endividar com segurança e qual linha de crédito é mais adequada?" },
+    { id: "pla_divtotal", tipo: "escolha", txt: "Endividamento atual em relação ao faturamento mensal", ops: ["Sem dívidas", "Até 1 faturamento", "1 a 3 faturamentos", "Acima de 3 faturamentos", "Não sabe"] } ] },
+  { secao: "Cenários e riscos", setor: true, rotSetor: "Riscos", itens: [
+    { ...qFPA("fpa_cen") },
+    { id: "pla_conting", tipo: "escolha", ops: SPN, peso: true, rot: "Plano de contingência", txt: "Existe plano de contingência caso o faturamento caia 20% ou um cliente grande saia?" },
+    { id: "pla_concentr", tipo: "escolha", txt: "Quanto do faturamento vem dos 3 maiores clientes?", ops: ["Até 20%", "20% a 50%", "Acima de 50%", "Não sabe"] },
+    { id: "pla_riscos", tipo: "multi", txt: "Quais riscos mais preocupam?", ops: ["Dependência de poucos clientes", "Inadimplência", "Aumento de custos", "Juros", "Sazonalidade", "Concorrência", "Perda de pessoas-chave", "Mudanças de mercado ou regulação"] } ] },
+  { secao: "Sócios e destino do resultado", setor: true, rotSetor: "Sócios", itens: [
+    { id: "pla_pfpj", tipo: "escolha", ops: SPN, peso: true, rot: "Finanças PF e PJ separadas", txt: "As finanças da empresa e dos sócios são separadas?" },
+    { id: "pla_prolabore", tipo: "escolha", ops: SPN, peso: true, rot: "Pró-labore definido", txt: "Existe pró-labore definido para os sócios?" },
+    { id: "pla_distrib", tipo: "escolha", ops: SPN, peso: true, rot: "Política de distribuição de lucros", txt: "A distribuição de lucros segue uma política (quando, quanto e com base no resultado)?" },
+    { id: "pla_reinvest", tipo: "escolha", ops: SPN, peso: true, rot: "Regra de reinvestimento", txt: "Existe definição de quanto do lucro é reinvestido na empresa?" },
+    { id: "pla_acordo", tipo: "escolha", ops: [...SPN, "Não se aplica"], peso: true, rot: "Sócios alinhados", txt: "Os sócios estão alinhados sobre metas, retiradas e investimentos?" } ] },
+  { secao: "Expectativas do planejamento", itens: [
+    { id: "pla_entregas", tipo: "multi", txt: "Quais entregas são esperadas?", ops: ["Orçamento anual", "Projeção de caixa de 12 meses", "Projeção de 2 a 3 anos", "Cenários (otimista, realista e pessimista)", "Plano de investimentos e viabilidade", "Plano de capital de giro e reserva", "Estratégia de endividamento e crédito", "Política de retirada e distribuição dos sócios", "Revisão periódica do plano"] },
+    { id: "pla_revisao", tipo: "escolha", txt: "Com que frequência o plano deve ser revisado?", ops: ["Mensal", "Trimestral", "Semestral", "Anual"] },
+    { id: "pla_prazo", tipo: "curto", txt: "Para quando o planejamento precisa estar pronto?" } ] }
+];
+const SECOES_PLA = [...DIAG_PLA, SEC_AUTOAVAL];
+const PERGUNTAS_PLA = SECOES_PLA.flatMap(s => s.itens);
+/* junta blocos sem repetir perguntas (a primeira ocorrência fica) */
+function mesclarSecoes(...listas) {
+  const vistos = new Set(), out = [];
+  for (const s of listas.flat()) {
+    const itens = s.itens.filter(q => !vistos.has(q.id));
+    itens.forEach(q => vistos.add(q.id));
+    if (itens.length) out.push({ ...s, itens });
+  }
+  return out;
+}
+/* Gestão Financeira = BPO + FP&A + Planejamento */
+const SECOES_GESTAO = mesclarSecoes(
+  SECOES_COMBO.slice(0, -1),
+  DIAG_PLA.filter(s => !s.soloPla).map(s => ({ ...s, grupo: "Planejamento Financeiro" })),
+  [SEC_AUTOAVAL]
+);
+const PERGUNTAS_GESTAO = SECOES_GESTAO.flatMap(s => s.itens);
+const PLANOS_PLA = ["Planejamento Essencial", "Planejamento Estratégico", "Planejamento Contínuo", "A definir"];
+const DESC_PLANO_PLA = { "Planejamento Essencial": "orçamento anual + caixa projetado de 12 meses", "Planejamento Estratégico": "+ horizonte de 2 a 3 anos, cenários, investimentos e crédito", "Planejamento Contínuo": "plano + revisões periódicas com a WL" };
+function nivelPla(d) {
+  const r = d.respostas || {}, v = id => r[id]?.v, ent = v("pla_entregas") || [];
+  let tier = 0; const motivos = [];
+  const est = ent.filter(e => ["Projeção de 2 a 3 anos", "Cenários (otimista, realista e pessimista)", "Plano de investimentos e viabilidade", "Estratégia de endividamento e crédito"].includes(e));
+  if (est.length || ["2 a 3 anos", "5 anos ou mais"].includes(v("pla_horizonte"))) { tier = 1; motivos.push(est.length ? est.join(", ").toLowerCase() : "horizonte de " + v("pla_horizonte")); }
+  if (ent.includes("Revisão periódica do plano") || ["Mensal", "Trimestral"].includes(v("pla_revisao"))) { tier = 2; motivos.push("revisões " + (v("pla_revisao") ? v("pla_revisao").toLowerCase().replace(/l$/, "is") : "periódicas")); }
+  return { tier, motivos, temDados: !!(ent.length || v("pla_horizonte") || v("pla_revisao")) };
+}
+function sugestaoPla(d) {
+  const f = nivelPla(d);
+  if (!f.temDados) return null;
+  const plano = PLANOS_PLA[f.tier];
+  const mt = maturidade(d), base = mt?.setores.find(x => x.nome === "Base financeira");
+  const alerta = base && base.pct !== null && base.pct < 50 ? ` Atenção: o realizado ainda não é confiável (${base.pct}%) e o planejamento precisa dessa base.` : "";
+  return { plano, motivo: `${DESC_PLANO_PLA[plano]}` + (f.motivos.length ? ` (${f.motivos.join("; ")})` : "") + "." + alerta };
+}
+const diagPlaStore = criarStore("dados/atendimento/planejamento-diagnosticos.json", { versao: 1, seq: 0, diagnosticos: [] });
 const diagRentalStore = criarStore("dados/atendimento/rental-diagnosticos.json", { versao: 1, seq: 0, diagnosticos: [] });
 const diagFpaStore = criarStore("dados/atendimento/fpa-diagnosticos.json", { versao: 1, seq: 0, diagnosticos: [] });
 
@@ -2851,6 +2933,9 @@ const TIPOS_DIAG = {
   fpa: { frente: "fpa", tipo: "fpa-diagnostico", prefixo: "DF", secoes: SECOES_FPA, perguntas: PERGUNTAS_FPA, store: diagFpaStore,
     menu: "FP&A", titulo: "Diagnóstico de FP&A", curto: "Diagnóstico FP&A", pdfTitulo: "Diagnóstico de FP&A", pdfSub: "Planejamento e Análise Financeira",
     nomeMat: "Maturidade gerencial", crmFrente: "FP&A", segmento: "", nav: [["sec-parecer", "Parecer da WL"]] },
+  planejamento: { frente: "planejamento", tipo: "planejamento-diagnostico", prefixo: "DP", secoes: SECOES_PLA, perguntas: PERGUNTAS_PLA, store: diagPlaStore,
+    menu: "Planejamento Financeiro", titulo: "Diagnóstico de Planejamento Financeiro", curto: "Diagnóstico Planejamento", pdfTitulo: "Diagnóstico de Planejamento Financeiro", pdfSub: "Orçamento, projeções e cenários",
+    nomeMat: "Maturidade de planejamento", crmFrente: "Planejamento Financeiro", segmento: "", nav: [["sec-parecer", "Parecer da WL"]] },
   processos: { frente: "processos", tipo: "rental-consultoria", prefixo: "DR", secoes: DIAG_RENTAL, perguntas: PERGUNTAS_RENTAL, store: diagRentalStore,
     menu: "Consultoria de Processos", titulo: "Diagnóstico de Consultoria Rental", curto: "Diagnóstico Rental", pdfTitulo: "Diagnóstico de Consultoria", pdfSub: "Locação de equipamentos · Processos e sistema",
     nomeMat: "Maturidade operacional", crmFrente: "Consultoria de Processos", segmento: "Locadora",
@@ -2859,15 +2944,19 @@ const TIPOS_DIAG = {
 let TD = TIPOS_DIAG.bpo;
 const tipoDe = d => TIPOS_DIAG[d?.frente] || TIPOS_DIAG.bpo;
 const diags = () => TD.store.dados?.diagnosticos || [];
-const ehCombo = d => tipoDe(d).frente === "bpo" && d?.escopo === "bpo+fpa";
-const secoesDe = d => ehCombo(d) ? SECOES_COMBO : tipoDe(d).secoes;
-const perguntasDe = d => ehCombo(d) ? PERGUNTAS_COMBO : tipoDe(d).perguntas;
-const nomeDiag = d => ehCombo(d) ? "Diagnóstico BPO + FP&A" : tipoDe(d).curto;
+/* Escopo do diagnóstico de BPO: apenas BPO, BPO + FP&A ou Gestão Financeira (BPO + FP&A + Planejamento) */
+const escopoDe = d => tipoDe(d).frente === "bpo" ? (d?.escopo || "bpo") : null;
+const ehGestao = d => escopoDe(d) === "gestao";
+const ehCombo = d => ["bpo+fpa", "gestao"].includes(escopoDe(d));
+const temPla = d => tipoDe(d).frente === "planejamento" || ehGestao(d);
+const secoesDe = d => ehGestao(d) ? SECOES_GESTAO : ehCombo(d) ? SECOES_COMBO : tipoDe(d).secoes;
+const perguntasDe = d => ehGestao(d) ? PERGUNTAS_GESTAO : ehCombo(d) ? PERGUNTAS_COMBO : tipoDe(d).perguntas;
+const nomeDiag = d => ehGestao(d) ? "Diagnóstico de Gestão Financeira" : ehCombo(d) ? "Diagnóstico BPO + FP&A" : tipoDe(d).curto;
 const nomeMatDe = d => ehCombo(d) ? "Maturidade financeira e gerencial" : tipoDe(d).nomeMat;
-const pdfSubDe = d => ehCombo(d) ? "BPO Financeiro + FP&A" : tipoDe(d).pdfSub;
-const frentesCRM = d => ehCombo(d) ? ["BPO Financeiro", "FP&A"] : [tipoDe(d).crmFrente];
-const planosDe = d => ehCombo(d) ? PLANOS_INT : tipoDe(d).frente === "fpa" ? PLANOS_FPA : PLANOS_BPO;
-const ESCOPOS = [["bpo", "Apenas BPO Financeiro"], ["bpo+fpa", "BPO Financeiro + FP&A"]];
+const pdfSubDe = d => ehGestao(d) ? "BPO Financeiro + FP&A + Planejamento" : ehCombo(d) ? "BPO Financeiro + FP&A" : tipoDe(d).pdfSub;
+const frentesCRM = d => ehGestao(d) ? ["BPO Financeiro", "FP&A", "Planejamento Financeiro"] : ehCombo(d) ? ["BPO Financeiro", "FP&A"] : [tipoDe(d).crmFrente];
+const planosDe = d => ehCombo(d) ? PLANOS_INT : tipoDe(d).frente === "fpa" ? PLANOS_FPA : tipoDe(d).frente === "planejamento" ? PLANOS_PLA : PLANOS_BPO;
+const ESCOPOS = [["bpo", "Apenas BPO Financeiro"], ["bpo+fpa", "BPO Financeiro + FP&A"], ["gestao", "Gestão Financeira (BPO + FP&A + Planejamento)"]];
 const rotaDiag = (id, t = TD) => `atendimento/${t.frente}/diagnostico` + (id ? "/" + id : "");
 
 const visivel = (q, r) => !q.se || q.se(r);
@@ -2897,7 +2986,7 @@ function maturidade(d) {
   if (!max) return null;
   const pct = Math.round(pts / max * 100);
   const nivel = pct < 40 ? "Inicial" : pct < 70 ? "Em estruturação" : "Estruturado";
-  return { pct, nivel, atencao, setores, grupos: Object.entries(grupos).filter(([, v]) => v[1]).map(([nome, [p, m]]) => ({ nome, rot: nome, pct: Math.round(p / m * 100) })) };
+  return { pct, nivel, atencao, setores, grupos: Object.entries(grupos).filter(([, v]) => v[1]).map(([nome, [p, m]]) => ({ nome, rot: nome.replace(" Financeiro", ""), pct: Math.round(p / m * 100) })) };
 }
 /* Sugestão de plano com base nos volumes e necessidades informados (a decisão final é do consultor) */
 function sugestaoBPO(d) {
@@ -2914,6 +3003,7 @@ function sugestaoBPO(d) {
 function sugestaoPlano(d) {
   const t = tipoDe(d);
   if (t.frente === "processos") return null;
+  if (t.frente === "planejamento") return sugestaoPla(d);
   if (t.frente === "bpo" && !ehCombo(d)) return sugestaoBPO(d);
   const f = nivelFPA(d), mt = maturidade(d);
   const dados = mt?.setores.find(x => x.nome === "Dados e estrutura gerencial");
@@ -2985,7 +3075,7 @@ function renderListaDiag() {
       const p = progresso(d), mt = maturidade(d);
       return `<li data-abrir-diag="${d.id}">
         <div class="ld-ico ${d.status}">${d.status === "finalizado" ? "✓" : Math.round(p.feitas / p.total * 100) + "%"}</div>
-        <div class="ld-info"><b>${esc(d.cliente?.empresa || "Sem empresa")}${ehCombo(d) ? ` <span class="tag-combo">+ FP&amp;A</span>` : ""}</b>
+        <div class="ld-info"><b>${esc(d.cliente?.empresa || "Sem empresa")}${ehGestao(d) ? ` <span class="tag-combo">Gestão Financeira</span>` : ehCombo(d) ? ` <span class="tag-combo">+ FP&amp;A</span>` : ""}</b>
           <small>${esc(d.id)} · ${d.status === "finalizado" ? `finalizado em ${data(d.finalizadoEm)}` : `em edição · ${p.feitas}/${p.total} respostas`} · atualizado ${dataHora(d.atualizadoEm)} por ${esc(d.atualizadoPor || "")}</small></div>
         ${mt ? `<span class="chip-etapa" style="--cor:${corNivel(mt.pct)}"><i></i>${mt.pct}% · ${mt.nivel}</span>` : ""}
         <span class="chip-etapa ${d.status}" style="--cor:${d.status === "finalizado" ? "var(--verde)" : "var(--alerta)"}"><i></i>${d.status === "finalizado" ? "Finalizado" : "Em edição"}</span>
@@ -3091,7 +3181,7 @@ function abrirDiag(id) {
   if (!d) { toast("Diagnóstico não encontrado", "erro"); location.hash = rotaDiag(); return; }
   if (!diagAtual || diagAtual.id !== id || !diagPendente) diagAtual = structuredClone(d);
   const dd = diagAtual, fin = dd.status === "finalizado";
-  cabAtd([["Atendimento", "#atendimento"], [TD.curto, "#" + rotaDiag()], [dd.id]], `${ehCombo(dd) ? "Diagnóstico Preliminar BPO + FP&A" : TD.titulo} · ${dd.id}`, dd.cliente?.empresa || "Diagnóstico",
+  cabAtd([["Atendimento", "#atendimento"], [TD.curto, "#" + rotaDiag()], [dd.id]], `${ehCombo(dd) ? nomeDiag(dd) : TD.titulo} · ${dd.id}`, dd.cliente?.empresa || "Diagnóstico",
     fin ? `Finalizado em ${dataHora(dd.finalizadoEm)} por ${dd.finalizadoPor || ""}. As alterações continuam sendo salvas automaticamente.` : "Em edição · as respostas são salvas automaticamente na nuvem.",
     `<span class="status-salvo" id="statusSalvo">Salvo na nuvem</span>`);
   const r = dd.respostas || {};
@@ -3152,6 +3242,9 @@ function parecerBPO(dd) {
           <div class="campo"><label>Plano recomendado</label>
             <div class="opcoes" data-d-op="plano">${planosDe(dd).map(p => `<button type="button" data-v="${esc(p)}" class="${dd.plano === p ? "ativo" : ""}">${esc(p)}</button>`).join("")}</div>
             <small class="sugestao" id="sugPlano"></small></div>
+          ${ehGestao(dd) ? `<div class="campo"><label>Projeto de planejamento financeiro</label>
+            <div class="opcoes" data-d-op="planoPla">${PLANOS_PLA.map(p => `<button type="button" data-v="${esc(p)}" class="${dd.planoPla === p ? "ativo" : ""}">${esc(p)}</button>`).join("")}</div>
+            <small class="sugestao" id="sugPla"></small></div>` : ""}
           <div class="campo"><label>Parecer / conclusão</label><textarea data-d="parecer" rows="4" placeholder="Principais achados e recomendação">${esc(dd.parecer || "")}</textarea></div>
           <div class="campo"><label>Próximos passos</label><textarea data-d="proximosPassos" rows="3" placeholder="Ex.: enviar proposta até sexta, agendar kick-off">${esc(dd.proximosPassos || "")}</textarea></div>
         </div></section>`;
@@ -3232,6 +3325,7 @@ function atualizarLado() {
     ${mt.grupos.length > 1 || mt.setores.length ? `<div class="setores-mat">${[...(mt.grupos.length > 1 ? mt.grupos.map(g => ({ ...g, g: 1 })) : []), ...mt.setores].map(s => `<div class="sm-lin ${s.g ? "grupo" : ""}"><span>${esc(s.rot || s.nome)}</span><div class="barra-prog"><i style="width:${s.pct ?? 0}%;background:${s.pct == null ? "transparent" : corNivel(s.pct)}"></i></div><b>${s.pct == null ? "—" : s.pct + "%"}</b></div>`).join("")}</div>` : ""}
     ${listaAt}`
     : `<p class="txt-prog">Responda as perguntas de Sim / Parcial / Não para calcular.</p>`;
+  if ($("sugPla")) { const sp = sugestaoPla(dd); $("sugPla").innerHTML = sp ? `Sugestão do sistema: <b>${esc(sp.plano)}</b> — ${esc(sp.motivo)}` : ""; }
   if ($("sugPlano")) { const sug = sugestaoPlano(dd); $("sugPlano").innerHTML = sug ? `Sugestão do sistema: <b>${esc(sug.plano)}</b>${PRECO_PLANO[sug.plano] ? ` (R$ ${PRECO_PLANO[sug.plano].toLocaleString("pt-BR")}/mês)` : ""} — ${esc(sug.motivo)}` : ""; }
   if ($("sugSetores")) {
     const fr = mt ? mt.setores.filter(s => s.pct !== null && s.pct < 70).sort((a, b) => a.pct - b.pct) : [];
@@ -3278,6 +3372,7 @@ function ligarForm() {
         if ((dd.escopo || "bpo") === b.dataset.v) return;
         dd.escopo = b.dataset.v;
         if (dd.plano && !planosDe(dd).includes(dd.plano)) dd.plano = "";
+        if (!ehGestao(dd)) delete dd.planoPla;
         return redesenhar();
       }
       const novo = b.classList.contains("ativo") ? "" : b.dataset.v;
@@ -3328,7 +3423,7 @@ async function finalizarDiag() {
   if (!crm.carregado) await carregarCRM(true);
   chip("sincronizando", "Finalizando…");
   const t = tipoDe(dd), mtF = maturidade(dd), prF = t.frente === "processos" ? prontidao(dd) : null;
-  const texto = `${nomeDiag(dd)} ${dd.id} finalizado` + (mtF ? ` · maturidade ${mtF.pct}% (${mtF.nivel})` : "") + (dd.plano ? ` · ${dd.plano}` : "")
+  const texto = `${nomeDiag(dd)} ${dd.id} finalizado` + (mtF ? ` · maturidade ${mtF.pct}% (${mtF.nivel})` : "") + (dd.plano ? ` · ${dd.plano}` : "") + (dd.planoPla && ehGestao(dd) ? ` · ${dd.planoPla}` : "")
     + (prF && prF.feitas === MATRIZ_PRONTIDAO.length ? ` · prontidão ${prF.pts}/21` : "") + (dd.conclusao ? ` · ${dd.conclusao}` : "");
   const acaoCRM = l => { if (dd.proximaAcao?.trim() && !(l.acoes || []).some(a => !a.concluida && a.texto === dd.proximaAcao.trim())) novaAcao(l, dd.proximaAcao.trim(), dd.prazoRetorno || ""); };
   let ok;
@@ -3393,7 +3488,7 @@ function htmlPDFDiag(dd, interno = false) {
   };
   let n = 0;
   return `<div class="pdf">
-    <div class="pdf-topo"><img src="logo-cor.png" alt="WL Expertise"><div><b>${esc(t.pdfTitulo)}${interno ? " · uso interno" : ""}</b><span>${esc(pdfSubDe(dd))}</span></div></div>
+    <div class="pdf-topo"><img src="logo-cor.png" alt="WL Expertise"><div><b>${esc(ehGestao(dd) ? "Diagnóstico de Gestão Financeira" : t.pdfTitulo)}${interno ? " · uso interno" : ""}</b><span>${esc(pdfSubDe(dd))}</span></div></div>
     <div class="pdf-cliente">
       <div><small>Empresa</small><b>${esc(c.empresa || "")}</b></div>
       <div><small>Entrevistado</small><b>${esc(dd.entrevistado || "—")}${dd.cargo ? ` · ${esc(dd.cargo)}` : ""}</b></div>
@@ -3411,8 +3506,9 @@ function htmlPDFDiag(dd, interno = false) {
     ${secoesDe(dd).map((s, k, arr) => `${s.grupo && s.grupo !== arr[k - 1]?.grupo ? `<div class="pdf-grupo">${esc(s.grupo)}</div>` : ""}<div class="pdf-secao"><h3>${esc(s.secao)}${s.setor && mt?.setores.find(z => z.nome === s.secao)?.pct != null ? ` · ${mt.setores.find(z => z.nome === s.secao).pct}%` : ""}</h3>${s.itens.filter(q => visivel(q, r)).map(q => { n++; return `<div class="pdf-q">
       <div class="pdf-perg"><span>${n}</span>${esc(q.txt)}</div><div class="pdf-resp">${fmt(q)}</div>
       ${r[q.id]?.obs ? `<div class="pdf-obs">Obs.: ${esc(r[q.id].obs)}</div>` : ""}</div>`; }).join("")}</div>`).join("")}
-    ${t.frente !== "bpo" ? pdfParecerRental(dd, interno) : dd.plano || dd.parecer || dd.proximosPassos ? `<div class="pdf-secao pdf-bloco"><h3>Parecer da WL Expertise</h3>
+    ${t.frente === "processos" ? pdfParecerRental(dd, interno) : dd.plano || dd.parecer || dd.proximosPassos ? `<div class="pdf-secao pdf-bloco"><h3>Parecer da WL Expertise</h3>
       ${dd.plano ? `<div class="pdf-q"><div class="pdf-perg">Plano recomendado</div><div class="pdf-resp"><b>${esc(dd.plano)}</b></div></div>` : ""}
+      ${dd.planoPla && ehGestao(dd) ? `<div class="pdf-q"><div class="pdf-perg">Projeto de planejamento financeiro</div><div class="pdf-resp"><b>${esc(dd.planoPla)}</b></div></div>` : ""}
       ${dd.parecer ? `<div class="pdf-q"><div class="pdf-perg">Parecer</div><div class="pdf-resp">${esc(dd.parecer).replace(/\n/g, "<br>")}</div></div>` : ""}
       ${dd.proximosPassos ? `<div class="pdf-q"><div class="pdf-perg">Próximos passos</div><div class="pdf-resp">${esc(dd.proximosPassos).replace(/\n/g, "<br>")}</div></div>` : ""}
     </div>` : ""}
