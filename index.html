@@ -901,15 +901,97 @@
   .be-mais{align-self:center}
   .be-rodape{position:sticky;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid var(--borda);border-radius:14px;padding:10px 14px;box-shadow:0 -8px 24px rgba(6,30,33,.08);font-size:.84rem;font-weight:600}
   .modal-cab:has(.sub-modal){display:block}
-  .be-fontes{margin-top:12px;background:rgba(255,255,255,.12);border:0;display:inline-flex}
-  .be-fontes button{color:rgba(255,255,255,.8)}
-  .be-fontes button.ativo{background:#fff;color:var(--teal)}
-  .be-g{grid-template-columns:2fr 1.4fr 1fr}
-  .be-nota{grid-column:1/-1;font-size:.74rem;color:var(--txt-2)}
-  a.chip-p{text-decoration:none}
   .sub-modal{display:block;font-size:.76rem;color:var(--txt-2);margin-top:4px}
-  @media(max-width:860px){.be-g{grid-template-columns:1fr!important}.gaveta.be{width:100vw}.be-filtros{grid-template-columns:1fr 1fr}.be-filtros .be-cid{grid-column:1/-1}.be-corpo{padding:12px 12px 0}
+  @media(max-width:860px){.gaveta.be{width:100vw}.be-filtros{grid-template-columns:1fr 1fr}.be-filtros .be-cid{grid-column:1/-1}.be-corpo{padding:12px 12px 0}
     .be-lista li{grid-template-columns:auto 1fr}.be-lista li>:last-child{grid-column:2;justify-self:start}}
+
+  /* Clientes: tarefas, arquivos, atividades */
+  .tar-cli{display:flex;gap:6px;flex-wrap:wrap}
+  .chips-cli .inat{background:rgba(200,70,61,.1)!important;color:var(--erro)!important}
+  .bolinha{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--erro);color:#fff;font-size:.66rem;font-weight:800;margin-left:4px}
+  .bolinha.neutra{background:var(--borda);color:var(--txt-2)}
+  .abas button.ativo .bolinha.neutra{background:rgba(255,255,255,.25);color:#fff}
+  .badge-nav{position:absolute;top:-3px;right:-4px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--erro);color:#fff;font-size:.6rem;font-weight:800;font-style:normal;display:grid;place-items:center;line-height:1}
+  [data-ir]{position:relative}
+  .tiles.tiles4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tile.atr b{color:var(--erro)} .tile.ok b{color:var(--verde)}
+  .grupo-tf{margin-bottom:12px}
+  .lista-tf{list-style:none}
+  .lista-tf .tf{display:flex;align-items:center;gap:10px;padding:11px 14px;border-top:1px solid var(--borda);cursor:pointer;box-shadow:inset 3px 0 0 var(--prio)}
+  .lista-tf .tf:hover{background:var(--bg)}
+  .lista-tf .q{flex:1;min-width:0}
+  .lista-tf .q b{display:block;font-size:.86rem;font-weight:600}
+  .lista-tf .q small{display:block;font-size:.72rem;color:var(--txt-2);margin-top:2px}
+  .lista-tf .tf.feita .q b{text-decoration:line-through;color:var(--txt-2)}
+  .lista-tf .feito-por{color:var(--verde)!important}
+  .lista-tf .chip-p.sem{opacity:.6}
+  .lista-tf.curta .tf{padding:9px 6px}
+  .chk-acao.feito{background:var(--verde);border-color:var(--verde)}
+  .concl-tf summary{padding:14px 16px;font-weight:700;font-size:.86rem;cursor:pointer;color:var(--teal)}
+  .barra-tf{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-size:.84rem;color:var(--txt-2)}
+  .barra-tf .dir{display:flex;gap:8px;flex-wrap:wrap}
+  .log-tf td small{display:block;font-size:.7rem;color:var(--txt-2)}
+  .atraso-txt{font-size:.68rem;font-weight:700;color:var(--erro)}
+  .modal.modal-largo{width:min(760px,calc(100vw - 24px))}
+  .dias-sem{display:flex;gap:6px;flex-wrap:wrap}
+  .dias-sem label{cursor:pointer} .dias-sem input{display:none}
+  .dias-sem span{display:inline-block;padding:7px 11px;border-radius:9px;border:1px solid var(--borda);font-size:.78rem;font-weight:600}
+  .dias-sem input:checked+span{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .ck-tf{list-style:none;display:grid;gap:4px;margin-bottom:6px}
+  .ck-tf li{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--borda);border-radius:9px;font-size:.84rem}
+  .ck-tf label{flex:1;display:flex;gap:8px;align-items:center;cursor:pointer}
+  .ck-tf input:checked+span{text-decoration:line-through;color:var(--txt-2)}
+  .ck-tf button{color:var(--txt-2);font-size:1rem;width:24px}
+  .ck-tf li label{display:flex!important;justify-content:flex-start!important;align-items:center;gap:8px;font-size:.84rem!important;font-weight:500!important;text-transform:none!important;letter-spacing:0!important;color:var(--txt)!important;margin:0!important;flex:1}
+  .ck-tf input[type=checkbox]{width:17px!important;height:17px;flex:none;accent-color:var(--teal);padding:0!important}
+  #cliConteudo .filtros-crm select{min-width:170px}
+  .lista-tf.curta .chip-p,.lista-tf.curta .q small{display:none}
+  .lista-tf.curta .tf{gap:8px}
+  .ck-novo{display:flex;gap:8px} .ck-novo input{flex:1}
+  .coment-tf{list-style:none;display:grid;gap:6px;margin-bottom:6px;max-height:180px;overflow:auto}
+  .coment-tf li{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:.82rem}
+  .coment-tf li small{display:block;font-size:.68rem;color:var(--txt-2);margin-bottom:2px}
+  .coment-tf li.vazio{color:var(--txt-2);font-size:.78rem}
+  .serie-tf summary{font-size:.8rem;font-weight:700;color:var(--teal);cursor:pointer}
+  .serie-tf ul{list-style:none;margin-top:6px;font-size:.78rem}
+  .serie-tf li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid var(--borda)}
+  .tf-rod{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .aviso-ok{background:rgba(40,178,96,.1);color:#1d7f45;border-radius:10px;padding:10px 12px;font-size:.82rem}
+  .rot-serv{border:1px solid var(--borda);border-radius:12px;padding:4px 10px}
+  .rot-serv summary{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.8rem;color:var(--txt-2)}
+  .rot-serv summary .chk{background:none;padding:6px 0;font-weight:700;color:var(--teal);font-size:.86rem}
+  .rot-serv ul{list-style:none;display:grid;gap:4px;padding:4px 0 8px}
+  .rot-serv li{display:flex;justify-content:space-between;gap:10px;font-size:.8rem}
+  .rot-serv li label{display:flex;gap:6px;align-items:center} .rot-serv li small{color:var(--txt-2);white-space:nowrap}
+  .arq-cli{padding:14px}
+  .arq-topo{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .arq-topo .dir{display:flex;gap:8px;flex-wrap:wrap}
+  .migalhas{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:.86rem}
+  .migalhas a{color:var(--turq);font-weight:600;cursor:pointer} .migalhas span{color:var(--txt-2)} .migalhas b{color:var(--teal)}
+  .zona-arq{margin:12px 0;border:2px dashed var(--borda);border-radius:12px;padding:16px;text-align:center;font-size:.8rem;color:var(--txt-2)}
+  .zona-arq.sobre{border-color:var(--turq);background:rgba(19,163,181,.06)}
+  .prog-arq{display:grid;gap:4px;font-size:.76rem;margin-bottom:10px}
+  .prog-arq i{height:6px;border-radius:3px;background:var(--borda);overflow:hidden} .prog-arq b{display:block;height:100%;background:var(--turq);transition:width .2s}
+  .lista-arq{list-style:none;border:1px solid var(--borda);border-radius:12px;overflow:hidden}
+  .lista-arq li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid var(--borda)}
+  .lista-arq li:first-child{border-top:0}
+  .lista-arq li>svg{width:20px;height:20px;color:var(--turq);flex:none}
+  .lista-arq li.pasta{cursor:pointer} .lista-arq li.pasta:hover{background:var(--bg)} .lista-arq li.pasta>svg{color:var(--alerta)}
+  .lista-arq .q{flex:1;min-width:0} .lista-arq .q b{font-size:.86rem;font-weight:600;color:var(--txt);overflow-wrap:anywhere} .lista-arq .q a{text-decoration:none}
+  .lista-arq .q small{display:block;font-size:.7rem;color:var(--txt-2)}
+  .log-dia{padding:4px 16px 12px} .log-dia h5{font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--txt-2);margin:10px 0 4px}
+  .log-cli{list-style:none}
+  .log-cli li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--borda);font-size:.82rem}
+  .log-cli .hora{font-size:.72rem;color:var(--txt-2);width:40px;flex:none;padding-top:3px}
+  .log-cli .av{width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:.7rem;font-weight:700;flex:none}
+  .log-cli p{flex:1}
+  .serv-ed{display:grid;gap:6px}
+  .serv-lin{display:grid;grid-template-columns:1.4fr 1fr .8fr .9fr;gap:8px;align-items:center;padding:6px 8px;border:1px solid var(--borda);border-radius:10px}
+  .serv-lin:not(.on) [data-sf]{opacity:.45;pointer-events:none}
+  .serv-lin .chk{background:none;padding:0;font-weight:600!important;display:flex!important;justify-content:flex-start!important;gap:8px;align-items:center;font-size:.84rem!important;text-transform:none!important;letter-spacing:0!important;color:var(--txt)!important;margin:0!important}
+  .serv-lin .chk input{width:17px!important;height:17px;flex:none;accent-color:var(--teal);padding:0!important}
+  @media(max-width:640px){.tiles.tiles4{grid-template-columns:repeat(2,minmax(0,1fr))}.serv-lin{grid-template-columns:1fr 1fr}.serv-lin .chk{grid-column:1/-1}
+    .lista-tf .tf{flex-wrap:wrap}.lista-tf .tf .q{flex-basis:calc(100% - 40px)}.lista-tf .tf .chip-p{margin-left:32px}}
 </style>
 </head>
 <body>
@@ -1064,7 +1146,7 @@
       <div class="cab-atd"><div><div class="eyebrow" id="cliEyebrow">Carteira</div>
         <h2 id="cliTitulo" style="font-size:1.5rem;font-weight:700;margin-top:4px;color:var(--teal)">Clientes</h2>
         <p id="cliDesc" style="font-size:.86rem;color:var(--txt-2);margin-top:4px"></p></div>
-        <button class="btn-s" data-link="#clientes">Todos os clientes</button></div>
+        <div class="dir" id="cliBotoes"></div></div>
       <div id="cliConteudo"></div>
     </div>
 
@@ -2325,7 +2407,6 @@ function renderFicha(id) {
         ${linkWhats(t) ? `<a href="${linkWhats(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}`).join("")}
       ${l.email ? `<a href="mailto:${esc(l.email)}">${esc(l.email)}</a>` : ""}
       ${ig ? `<a href="${esc(ig)}" target="_blank" rel="noopener">Instagram</a>` : ""}
-      ${l.site ? `<a href="${esc(/^https?:/.test(l.site) ? l.site : "https://" + l.site)}" target="_blank" rel="noopener">Site</a>` : ""}${l.mapsUrl ? `<a href="${esc(l.mapsUrl)}" target="_blank" rel="noopener">Google Maps${l.notaGoogle ? " ★ " + esc(l.notaGoogle.split(" ")[0]) : ""}</a>` : ""}
       ${!tels.length && !l.email && !ig ? `<span style="font-size:.76rem;opacity:.7">Sem contato cadastrado</span>` : ""}
     </div>
   </div>
@@ -2641,7 +2722,7 @@ function escolherMotivo(l) {
 /* ---- Novo lead ---- */
 function abrirNovoLead(pre = {}, depois) {
   const v = k => esc(Array.isArray(pre[k]) ? pre[k].join(" / ") : pre[k] || "");
-  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo lead</h3>${pre.origemBase ? `<small class="sub-modal">Pré-preenchido com dados de: ${esc(pre.origemBase)}${pre.notaGoogle ? " · ★ " + esc(pre.notaGoogle) : ""}. Confira e ajuste antes de cadastrar.</small>` : ""}</div>
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo lead</h3>${pre.origemBase ? `<small class="sub-modal">Pré-preenchido com os dados públicos do CNPJ. Confira e ajuste antes de cadastrar.</small>` : ""}</div>
     <form class="modal-corpo" id="formNovo">
       ${pre.situacao ? `<div class="aviso-erro">Situação cadastral na Receita: <b>${esc(pre.situacao)}</b></div>` : ""}
       <div class="linha2">${campoTxt("empresa", "Empresa *", pre.empresa)}<div class="campo"><label>CNPJ <button type="button" class="lnk" data-m="cnpj">buscar dados ›</button></label><input name="cnpj" value="${v("cnpj")}"></div></div>
@@ -2649,7 +2730,6 @@ function abrirNovoLead(pre = {}, depois) {
       <div class="linha2">${campoTxt("cidade", "Cidade", pre.cidade)}${campoTxt("uf", "UF", pre.uf)}</div>
       <div class="linha2">${campoTxt("telefones", "Telefone(s)", (pre.telefones || []).join(" / "))}${campoTxt("email", "E-mail", pre.email)}</div>
       ${pre.endereco ? campoTxt("endereco", "Endereço", pre.endereco) : ""}
-      ${pre.site ? campoTxt("site", "Site", pre.site) : ""}
       <div class="linha2"><div class="campo"><label>Fit WL</label><select name="fit">${opcoes([["A", "A"], ["B", "B"], ["C", "C"]], "", "—")}</select></div>
         <div class="campo"><label>Origem</label><select name="origem">${opcoes(["Indicação", "Prospecção ativa", "Instagram", "LinkedIn", "Site", "Evento", "Parceria", "Outro"].map(x => [x, x]), "Prospecção ativa", "—")}</select></div></div>
       <div class="campo"><label>Observações</label><textarea name="observacoes">${[pre.porte ? "Porte: " + pre.porte : "", pre.abertura ? "Aberta em " + pre.abertura : "", pre.simples ? "Optante do Simples" : ""].filter(Boolean).join(" · ")}</textarea></div>
@@ -4000,7 +4080,7 @@ function renderListaPA() {
 /* ---- Novo parceiro ---- */
 function abrirNovoParceiro(pre = {}, depois) {
   const tipoPre = pre.tipo || TIPO_POR_SEG[pre.segBase] || TIPOS_PARCEIRO[0];
-  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo parceiro</h3>${pre.origemBase ? `<small class="sub-modal">Pré-preenchido com dados de: ${esc(pre.origemBase)}${pre.notaGoogle ? " · ★ " + esc(pre.notaGoogle) : ""}. Confira e ajuste antes de cadastrar.</small>` : ""}</div>
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo parceiro</h3>${pre.origemBase ? `<small class="sub-modal">Pré-preenchido com os dados públicos do CNPJ. Confira e ajuste antes de cadastrar.</small>` : ""}</div>
     <form class="modal-corpo dados-grid" id="formNovoPA">
       ${pre.situacao ? `<div class="aviso-erro">Situação cadastral na Receita: <b>${esc(pre.situacao)}</b></div>` : ""}
       <div class="linha2">${campoTxt("empresa", "Empresa *", pre.empresa)}<div class="campo"><label>CNPJ <button type="button" class="lnk" data-m="cnpj">buscar dados ›</button></label><input name="cnpj" value="${esc(pre.cnpj || "")}"></div></div>
@@ -4009,7 +4089,6 @@ function abrirNovoParceiro(pre = {}, depois) {
       <div class="linha2">${campoTxt("telefones", "Telefone / WhatsApp", (pre.telefones || []).join(" / "))}${campoTxt("email", "E-mail", pre.email)}</div>
       <div class="linha2">${campoTxt("cidade", "Cidade", pre.cidade)}${campoTxt("uf", "UF", pre.uf)}</div>
       ${pre.endereco ? campoTxt("endereco", "Endereço", pre.endereco) : ""}
-      ${pre.site ? campoTxt("site", "Site", pre.site) : ""}
       <div class="campo"><label>Observações</label><textarea name="observacoes" rows="2" placeholder="Como chegou até ele, quantos clientes atende, etc.">${[pre.porte ? "Porte: " + pre.porte : "", pre.abertura ? "Aberta em " + pre.abertura : ""].filter(Boolean).join(" · ")}</textarea></div>
       <div class="modal-rod" style="padding:0"><button class="btn-s" type="button" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Cadastrar</button></div>
     </form>`);
@@ -4067,7 +4146,6 @@ function renderFichaPA(id) {
     <div class="g-contatos">
       ${tels.map(t => `<a href="tel:${soDigitos(t)}">${esc(t)}</a>${linkWhats(t) ? `<a href="${linkWhats(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}`).join("")}
       ${p.email ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ""}
-      ${p.site ? `<a href="${esc(/^https?:/.test(p.site) ? p.site : "https://" + p.site)}" target="_blank" rel="noopener">Site</a>` : ""}${p.mapsUrl ? `<a href="${esc(p.mapsUrl)}" target="_blank" rel="noopener">Google Maps${p.notaGoogle ? " ★ " + esc(p.notaGoogle.split(" ")[0]) : ""}</a>` : ""}
       ${!tels.length && !p.email ? `<span style="font-size:.76rem;opacity:.7">Sem contato cadastrado</span>` : ""}
     </div>
   </div>
@@ -4271,7 +4349,7 @@ const BASE_CNPJ = (() => {
 const R = { cnpj: 0, razao: 1, fant: 2, cnae: 3, abert: 4, porte: 5, cap: 6, end: 7, bairro: 8, cep: 9, t1: 10, t2: 11, email: 12, matriz: 13, simples: 14, contato: 15 };
 const PORTES = { "01": "ME", "03": "EPP", "05": "Demais", "00": "Não informado" };
 const UFS = ["AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"];
-const be = { destino: "crm", fonte: "receita", meta: null, seg: "", uf: "", cidades: [], indice: [], res: [], lim: 40, sel: new Set(), feitos: new Set(), carregando: false,
+const be = { destino: "crm", meta: null, seg: "", uf: "", cidades: [], indice: [], res: [], lim: 40, sel: new Set(), feitos: new Set(), carregando: false,
   f: { nome: "", bairro: "", porte: "", matriz: false, tel: false, email: false, simples: "", anos: 0 } };
 const cacheBE = new Map();
 async function jsonBE(rel) {
@@ -4307,7 +4385,7 @@ function jaExiste(r, ch, cidade) { return ch.cnpjs.has(r[R.cnpj]) || ch.nomes.ha
 
 async function abrirBuscaEmpresas(destino) {
   be.destino = destino;
-  be.sel.clear(); bg.sel.clear();
+  be.sel.clear();
   if (destino === "crm" && !crm.carregado) await carregarCRM(true);
   if (destino === "parceiros" && !paStore.carregado) await carregarParceiros();
   document.querySelectorAll("#buscaEmp,#veuBE").forEach(x => x.remove());
@@ -4315,163 +4393,21 @@ async function abrirBuscaEmpresas(destino) {
   const g = document.createElement("aside"); g.className = "gaveta be"; g.id = "buscaEmp";
   document.body.append(veu, g);
   g.innerHTML = `<div class="g-cab"><div class="g-topo"><h2>Buscar empresas ${ehDestinoPA() ? "para parcerias" : "para o CRM"}</h2><button class="g-fechar" data-be="fechar" aria-label="Fechar">×</button></div>
-    <div class="g-sub" id="beSub">Base pública da Receita Federal e Google Maps</div>
-    <nav class="abas be-fontes" id="beFontes"><button data-be-fonte="receita">Receita Federal</button><button data-be-fonte="google">Google Maps</button></nav></div>
+    <div class="g-sub" id="beSub">Base pública da Receita Federal (CNPJ)</div></div>
     <div class="be-corpo" id="beCorpo"><div class="esqueleto"></div></div>`;
   g.onclick = cliqueBE;
-  const [meta] = await Promise.all([jsonBE("meta.json").catch(e => { be.erroMeta = e; return null; }), statusGoogle()]);
-  be.meta = meta;
-  if (meta) {
-    if (!be.seg || !meta.segmentos[be.seg]) be.seg = ehDestinoPA() ? (meta.segmentos.contabilidade ? "contabilidade" : Object.keys(meta.segmentos)[0]) : (meta.segmentos.rental ? "rental" : Object.keys(meta.segmentos)[0]);
-    if (!be.uf) be.uf = "MG";
-    await carregarIndiceBE();
-  } else if (bg.ativo) be.fonte = "google";
-  desenharFonteBE();
-}
-async function statusGoogle() {
-  try { const r = await api("/places/status"); bg.ativo = r.ativo; bg.usado = r.usado; bg.limite = r.limite; } catch { bg.ativo = false; }
-}
-function desenharFonteBE() {
-  $("beFontes").querySelectorAll("button").forEach(b => b.classList.toggle("ativo", b.dataset.beFonte === be.fonte));
-  const m = be.meta;
-  if (be.fonte === "google") {
-    $("beSub").textContent = bg.ativo ? `Google Maps · telefone, site e avaliação · ${bg.usado} de ${bg.limite} buscas usadas este mês (cota gratuita)` : "Google Maps";
-    return desenharGoogleBE();
-  }
-  if (!m) {
-    $("beSub").textContent = "Base pública da Receita Federal";
-    $("beCorpo").innerHTML = `<div class="aviso-erro" style="margin:18px 0"><b>A base de empresas ainda não está disponível.</b><br>${be.erroMeta?.status === 404 ? "O robô mensal (repositório wl-cnpj no GitHub) ainda não publicou a primeira versão. Depois da primeira execução, a busca passa a funcionar aqui." : "Não foi possível ler a base: " + esc(be.erroMeta?.message || "")}${bg.ativo ? "<br>Enquanto isso, use a aba Google Maps." : ""}</div>`;
+  try { be.meta = await jsonBE("meta.json"); }
+  catch (e) {
+    $("beCorpo").innerHTML = `<div class="aviso-erro" style="margin:18px"><b>A base de empresas ainda não está disponível.</b><br>${e.status === 404 ? "O robô mensal (repositório wl-cnpj no GitHub) ainda não publicou a primeira versão. Depois da primeira execução, a busca passa a funcionar aqui." : "Não foi possível ler a base: " + esc(e.message)}</div>`;
     return;
   }
+  const m = be.meta;
+  if (!be.seg || !m.segmentos[be.seg]) be.seg = ehDestinoPA() ? (m.segmentos.contabilidade ? "contabilidade" : Object.keys(m.segmentos)[0]) : (m.segmentos.rental ? "rental" : Object.keys(m.segmentos)[0]);
+  if (!be.uf) be.uf = "MG";
   const dt = m.referencia && /^\d{4}-\d{2}$/.test(m.referencia) ? new Date(m.referencia + "-15T12:00").toLocaleDateString("pt-BR", { month: "long", year: "numeric" }) : m.referencia;
   $("beSub").textContent = `Base pública da Receita Federal · referência ${dt} · empresas ativas, sem MEI`;
   desenharBE();
-}
-
-/* ---- Google Maps (via Worker, que guarda a chave e controla a cota gratuita) ---- */
-const bg = { ativo: false, usado: 0, limite: 0, q: "", onde: "", res: [], prox: "", carregando: false, sel: new Set(), completar: true };
-const TERMO_SEG = { contabilidade: "escritório de contabilidade", advocacia: "escritório de advocacia", consultoria: "consultoria empresarial", software: "empresa de software", rental: "locação de equipamentos para construção", clinicas: "clínica médica", estetica: "clínica de estética", engenharia: "escritório de engenharia", marketing: "agência de marketing" };
-function desenharGoogleBE() {
-  if (!bg.ativo) {
-    $("beCorpo").innerHTML = `<div class="aviso-erro" style="margin:18px 0"><b>O Google Maps ainda não foi ligado.</b><br>Falta cadastrar a chave da API do Google no Worker (Cloudflare → wl-sistema-api → Settings → Variables and Secrets → <b>GOOGLE_PLACES_KEY</b>). Depois disso, esta aba passa a funcionar.</div>`;
-    return;
-  }
-  if (!bg.q) bg.q = TERMO_SEG[be.seg] || (ehDestinoPA() ? TERMO_SEG.contabilidade : "");
-  if (!bg.onde && be.cidades.length) bg.onde = `${tituloBR(be.cidades[0][1])} ${be.uf}`;
-  $("beCorpo").innerHTML = `
-  <form class="be-filtros be-g" id="bgForm">
-    <div class="campo"><label>O que buscar</label><input id="bgQ" value="${esc(bg.q)}" placeholder="Ex.: escritório de contabilidade" data-mascara="nenhuma"></div>
-    <div class="campo"><label>Onde</label><input id="bgOnde" value="${esc(bg.onde)}" placeholder="Cidade e UF, bairro…" data-mascara="nenhuma"></div>
-    <div class="campo" style="align-self:end"><button class="btn-p" type="submit" style="width:100%;justify-content:center"><svg><use href="#i-busca"/></svg>Buscar no Google</button></div>
-    <p class="be-nota">Cada busca traz até 20 empresas e conta 1 da cota gratuita de ${bg.limite} por mês (${Math.max(0, bg.limite - bg.usado)} restantes). Filtrar e adicionar não gasta cota.</p>
-  </form>
-  <div class="be-res" id="bgRes"></div>`;
-  $("bgForm").onsubmit = e => { e.preventDefault(); buscarGoogle(false); };
-  desenharResGoogle();
-}
-async function buscarGoogle(mais) {
-  const q = $("bgQ")?.value.trim() ?? bg.q, onde = $("bgOnde")?.value.trim() ?? bg.onde;
-  if (!q) return toast("Diga o que buscar", "erro");
-  if (!onde) { toast("Informe a cidade", "erro"); return $("bgOnde")?.focus(); }
-  bg.q = q; bg.onde = onde;
-  if (!mais) { bg.res = []; bg.prox = ""; bg.sel.clear(); }
-  bg.carregando = true; desenharResGoogle();
-  try {
-    const r = await api("/places/buscar", { method: "POST", body: JSON.stringify({ q: `${q} em ${onde}`, pagina: mais ? bg.prox : "" }) });
-    bg.usado = r.usado; bg.limite = r.limite; bg.prox = r.proxima;
-    const vistos = new Set(bg.res.map(x => x.id));
-    bg.res.push(...r.lugares.filter(x => !vistos.has(x.id)));
-    $("beSub").textContent = `Google Maps · telefone, site e avaliação · ${bg.usado} de ${bg.limite} buscas usadas este mês (cota gratuita)`;
-  } catch (e) { toast(e.message, "erro", 7000); }
-  bg.carregando = false; desenharResGoogle();
-}
-const jaExisteG = (x, ch) => ch.nomes.has(norm(x.nome) + "|" + norm(x.cidade)) || be.feitos.has(be.destino + "g" + x.id);
-function desenharResGoogle() {
-  const alvo = $("bgRes"); if (!alvo) return;
-  if (bg.carregando && !bg.res.length) { alvo.innerHTML = `<div class="esqueleto"></div>`; return; }
-  if (!bg.res.length) { alvo.innerHTML = `<div class="vazio-bloco">Digite o tipo de empresa e a cidade e clique em <b>Buscar no Google</b>.</div>`; return; }
-  const ch = chavesExistentes(), livres = bg.res.filter(x => !jaExisteG(x, ch));
-  const rot = ehDestinoPA() ? "Já é parceiro" : "Já está no CRM";
-  alvo.innerHTML = `
-    <div class="be-topo"><span><b>${bg.res.length}</b> empresa${bg.res.length === 1 ? "" : "s"} no Google${bg.res.length !== livres.length ? ` · ${bg.res.length - livres.length} já cadastrada${bg.res.length - livres.length === 1 ? "" : "s"}` : ""}</span>
-      ${livres.length ? `<label class="chk"><input type="checkbox" id="bgTodos" ${bg.sel.size && livres.every(x => bg.sel.has(x.id)) ? "checked" : ""}> Selecionar todas</label>` : ""}</div>
-    <ul class="be-lista">${bg.res.map(x => {
-      const ja = jaExisteG(x, ch);
-      return `<li class="${ja ? "ja" : ""}"><input type="checkbox" class="be-sel" data-bg-sel="${esc(x.id)}" ${ja ? "disabled" : bg.sel.has(x.id) ? "checked" : ""} aria-label="Selecionar">
-        <div class="be-info"><b>${esc(x.nome)}</b><small>${esc(x.endereco)}</small>
-          <div class="be-tags">${x.nota ? `<span class="chip-p">★ ${String(x.nota).replace(".", ",")} (${x.avaliacoes})</span>` : `<span class="chip-p">Sem avaliações</span>`}${x.status && x.status !== "OPERATIONAL" ? `<span class="chip-p" style="color:var(--erro)">${x.status === "CLOSED_PERMANENTLY" ? "Fechada" : "Fechada temporariamente"}</span>` : ""}${x.site ? `<a class="chip-p" href="${esc(x.site)}" target="_blank" rel="noopener">site ↗</a>` : ""}${x.maps ? `<a class="chip-p" href="${esc(x.maps)}" target="_blank" rel="noopener">Google Maps ↗</a>` : ""}</div>
-          <small class="be-cont">${x.telefone ? esc(x.telefone) : "Sem telefone no Google"}</small></div>
-        ${ja ? `<span class="chip-etapa" style="--cor:var(--verde)"><i></i>${be.feitos.has(be.destino + "g" + x.id) ? "Adicionada" : rot}</span>` : `<button class="btn-s" data-bg-add="${esc(x.id)}"><svg><use href="#i-mais"/></svg>Adicionar</button>`}</li>`;
-    }).join("")}</ul>
-    ${bg.prox ? `<button class="btn-s be-mais" data-bg="mais" ${bg.carregando ? "disabled" : ""}>${bg.carregando ? "Carregando…" : "Buscar mais 20 (usa 1 da cota)"}</button>` : ""}
-    ${bg.sel.size ? `<div class="be-rodape"><span>${bg.sel.size} selecionada${bg.sel.size === 1 ? "" : "s"}</span><button class="btn-p" data-bg="lote"><svg><use href="#i-mais"/></svg>Adicionar ${bg.sel.size} ${ehDestinoPA() ? "aos parceiros" : "ao CRM"}</button></div>` : ""}`;
-  if ($("bgTodos")) $("bgTodos").onchange = e => { for (const x of livres) e.target.checked ? bg.sel.add(x.id) : bg.sel.delete(x.id); desenharResGoogle(); };
-}
-/* Tenta achar a mesma empresa na base da Receita (pelo nome, na mesma cidade) para trazer o CNPJ */
-async function cnpjPeloNome(nome, cidade, uf) {
-  if (!be.meta || !uf) return null;
-  const segs = [be.seg, ...Object.keys(be.meta.segmentos).filter(s => s !== be.seg)].filter(s => be.meta.segmentos[s]?.ufs?.[uf]).slice(0, 3);
-  const pal = norm(nome).split(" ").filter(w => w.length > 2 && !["ltda", "eireli", "contabilidade", "contabil", "escritorio", "assessoria", "consultoria", "clinica", "servicos", "comercio"].includes(w));
-  if (!pal.length) return null;
-  for (const s of segs) {
-    try {
-      const idx = await jsonBE(`${s}/${uf}/index.json`), c = idx.find(x => norm(x[1]) === norm(cidade));
-      if (!c) continue;
-      const regs = await jsonBE(`${s}/${uf}/${c[0]}.json`);
-      const achados = regs.filter(r => { const t = norm(r[R.fant] + " " + r[R.razao]); return pal.every(w => t.includes(w)); });
-      if (achados.length === 1) return { r: achados[0], cidade: tituloBR(c[1]), uf };
-    } catch {}
-  }
-  return null;
-}
-function mesclarGoogle(pre, x) {
-  if (x.telefone) pre.telefones = [...new Set([fmtTelefone(x.telefone), ...(pre.telefones || [])])];
-  if (x.site) pre.site = x.site;
-  if (x.maps) pre.mapsUrl = x.maps;
-  if (x.nota) pre.notaGoogle = `${String(x.nota).replace(".", ",")} (${x.avaliacoes} avaliações)`;
-  if (!pre.endereco && x.endereco) pre.endereco = x.endereco;
-  return pre;
-}
-async function preGoogle(x, consultar) {
-  let pre = { empresa: x.nome, cidade: x.cidade, uf: x.uf, telefones: [], email: "", endereco: x.endereco, segmento: be.meta?.segmentos[be.seg]?.nome || "", origemBase: "Google Maps", segBase: be.seg };
-  const rec = consultar ? await cnpjPeloNome(x.nome, x.cidade, x.uf) : null;
-  if (rec) { pre = await dadosParaCadastro(rec, true); pre.empresa = x.nome; pre.origemBase = "Google Maps + Receita"; }
-  return mesclarGoogle(pre, x);
-}
-async function cliqueGoogle(el, d) {
-  if (d.bg === "mais") return buscarGoogle(true);
-  if (d.bgSel) { el.checked ? bg.sel.add(d.bgSel) : bg.sel.delete(d.bgSel); return desenharResGoogle(); }
-  if (d.bgAdd) {
-    const x = bg.res.find(y => y.id === d.bgAdd); if (!x) return;
-    el.disabled = true; el.innerHTML = "Buscando CNPJ…";
-    const pre = await preGoogle(x, true);
-    const ok = () => { be.feitos.add(be.destino + "g" + x.id); if (pre.cnpj) be.feitos.add(be.destino + soDigitos(pre.cnpj)); desenharResGoogle(); };
-    if (ehDestinoPA()) abrirNovoParceiro(pre, ok); else abrirNovoLead(pre, ok);
-    el.disabled = false; el.innerHTML = `<svg><use href="#i-mais"/></svg>Adicionar`;
-    return;
-  }
-  if (d.bg === "lote") {
-    const itens = bg.res.filter(x => bg.sel.has(x.id)); if (!itens.length) return;
-    const pres = await Promise.all(itens.map(x => preGoogle(x, false)));
-    try {
-      if (ehDestinoPA()) { await salvarStore(paStore, dd => { for (const p of pres) dd.parceiros.push(novoParceiroDe(dd, p)); }); renderParceiros(); }
-      else if (!(await salvarCRM(dd => { for (const p of pres) dd.leads.push(novoLeadDe(dd, p)); }))) return;
-      itens.forEach(x => be.feitos.add(be.destino + "g" + x.id)); bg.sel.clear(); desenharResGoogle();
-      toast(`${itens.length} empresa${itens.length === 1 ? "" : "s"} adicionada${itens.length === 1 ? "" : "s"}`);
-    } catch (er) { toast("Não foi possível salvar: " + er.message, "erro", 6000); }
-  }
-}
-/* Receita → completa com o Google ao adicionar (1 busca da cota) */
-async function completarComGoogle(pre) {
-  if (!bg.ativo || !bg.completar || bg.usado >= bg.limite) return pre;
-  try {
-    const r = await api("/places/buscar", { method: "POST", body: JSON.stringify({ q: `${pre.empresa} ${pre.cidade} ${pre.uf}`, max: 3 }) });
-    bg.usado = r.usado;
-    const pal = norm(pre.empresa).split(" ").filter(w => w.length > 2);
-    const x = r.lugares.find(l => norm(l.cidade) === norm(pre.cidade) && pal.some(w => norm(l.nome).includes(w)));
-    if (x) mesclarGoogle(pre, x);
-  } catch {}
-  return pre;
+  await carregarIndiceBE();
 }
 function fecharBuscaEmp() { document.querySelectorAll("#buscaEmp,#veuBE").forEach(x => x.remove()); }
 function desenharBE() {
@@ -4493,7 +4429,6 @@ function desenharBE() {
       <label class="chk"><input type="checkbox" data-bef="tel" ${f.tel ? "checked" : ""}> Com telefone</label>
       <label class="chk"><input type="checkbox" data-bef="email" ${f.email ? "checked" : ""}> Com e-mail</label>
       <label class="chk"><input type="checkbox" data-bef="matriz" ${f.matriz ? "checked" : ""}> Só matriz</label>
-      ${bg.ativo ? `<label class="chk" title="Ao clicar em Adicionar, busca a empresa no Google para trazer telefone atualizado, site e avaliação (usa 1 da cota gratuita)"><input type="checkbox" id="bgCompletar" ${bg.completar ? "checked" : ""}> Completar com Google ao adicionar</label>` : ""}
     </div>
   </form>
   <div class="be-res" id="beRes"></div>`;
@@ -4509,7 +4444,6 @@ function desenharBE() {
   inp.onchange = adicionar;
   inp.onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); adicionar(); } if (e.key === "Backspace" && !inp.value && be.cidades.length) { be.cidades.pop(); desenharBE(); preencherListaCid(); buscarBE(); setTimeout(() => $("beCidade")?.focus(), 0); } };
   $("beForm").onchange = async e => {
-    if (e.target.id === "bgCompletar") { bg.completar = e.target.checked; return; }
     const k = e.target.dataset.bef; if (!k) return;
     if (k === "seg" || k === "uf") {
       be[k] = e.target.value;
@@ -4578,10 +4512,8 @@ function desenharRes() {
   if ($("beTodos")) $("beTodos").onchange = e => { for (const x of livres.slice(0, be.lim)) e.target.checked ? be.sel.add(x.r[R.cnpj]) : be.sel.delete(x.r[R.cnpj]); desenharRes(); };
 }
 async function cliqueBE(e) {
-  const el = e.target.closest("[data-be],[data-be-add],[data-be-sel],[data-be-rem],[data-be-fonte],[data-bg],[data-bg-add],[data-bg-sel]"); if (!el) return;
+  const el = e.target.closest("[data-be],[data-be-add],[data-be-sel],[data-be-rem]"); if (!el) return;
   const d = el.dataset;
-  if (d.beFonte) { be.fonte = d.beFonte; return desenharFonteBE(); }
-  if (d.bg || d.bgAdd || d.bgSel) return cliqueGoogle(el, d);
   if (d.be === "fechar") return fecharBuscaEmp();
   if (d.be === "mais") { be.lim += 40; return desenharRes(); }
   if (d.beRem) { be.cidades = be.cidades.filter(c => c[0] !== d.beRem); desenharBE(); return buscarBE(); }
@@ -4589,7 +4521,7 @@ async function cliqueBE(e) {
   if (d.beAdd) {
     const x = be.res.find(y => y.r[R.cnpj] === d.beAdd); if (!x) return;
     el.disabled = true; el.innerHTML = "Consultando…";
-    const pre = await completarComGoogle(await dadosParaCadastro(x, true));
+    const pre = await dadosParaCadastro(x, true);
     const ok = () => { be.feitos.add(be.destino + x.r[R.cnpj]); desenharRes(); };
     if (ehDestinoPA()) abrirNovoParceiro(pre, ok); else abrirNovoLead(pre, ok);
     el.disabled = false; el.innerHTML = `<svg><use href="#i-mais"/></svg>Adicionar`;
@@ -4657,18 +4589,18 @@ function novoLeadDe(d, f) {
   const id = novoId(d);
   const l = { id, empresa: f.empresa.trim(), razaoSocial: f.razaoSocial || "", cnpj: f.cnpj || "", segmento: (f.segmento || "").trim(), contato: (f.contato || "").trim(),
     cidade: (f.cidade || "").trim(), uf: (f.uf || "").trim().toUpperCase(), telefones: Array.isArray(f.telefones) ? f.telefones : String(f.telefones || "").split("/").map(t => t.trim()).filter(Boolean),
-    email: (f.email || "").trim(), endereco: f.endereco || "", porte: f.porte || "", abertura: f.abertura || "", site: f.site || "", mapsUrl: f.mapsUrl || "", notaGoogle: f.notaGoogle || "", fit: f.fit || "", origem: f.origem || "Prospecção ativa",
+    email: (f.email || "").trim(), endereco: f.endereco || "", porte: f.porte || "", abertura: f.abertura || "", fit: f.fit || "", origem: f.origem || "Prospecção ativa",
     observacoes: f.observacoes || "", etapa: "abordar", criadoEm: new Date().toISOString(), criadoPor: meuNome(), responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", historico: [], acoes: [] };
-  registrar(l, "criado", [f.origem ? `Origem: ${f.origem}` : "", f.origemBase ? "dados de: " + f.origemBase : ""].filter(Boolean).join(" · "));
+  registrar(l, "criado", [f.origem ? `Origem: ${f.origem}` : "", f.origemBase ? "dados da base pública da Receita" : ""].filter(Boolean).join(" · "));
   return l;
 }
 function novoParceiroDe(d, f) {
   d.seq = (d.seq || d.parceiros.length) + 1;
   const p = { id: "PA-" + String(d.seq).padStart(4, "0"), empresa: f.empresa.trim(), razaoSocial: f.razaoSocial || "", cnpj: f.cnpj || "", tipo: f.tipo || TIPO_POR_SEG[f.segBase] || TIPOS_PARCEIRO[0],
     contato: (f.contato || "").trim(), cargo: (f.cargo || "").trim(), telefones: Array.isArray(f.telefones) ? f.telefones : String(f.telefones || "").split("/").map(t => t.trim()).filter(Boolean),
-    email: (f.email || "").trim(), cidade: (f.cidade || "").trim(), uf: (f.uf || "").trim().toUpperCase(), endereco: f.endereco || "", porte: f.porte || "", abertura: f.abertura || "", site: f.site || "", mapsUrl: f.mapsUrl || "", notaGoogle: f.notaGoogle || "",
+    email: (f.email || "").trim(), cidade: (f.cidade || "").trim(), uf: (f.uf || "").trim().toUpperCase(), endereco: f.endereco || "", porte: f.porte || "", abertura: f.abertura || "",
     observacoes: f.observacoes || "", etapa: "prospectar", responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", acoes: [], historico: [], criadoEm: new Date().toISOString(), criadoPor: meuNome() };
-  registrarPA(p, "criado", f.origemBase ? "Parceiro cadastrado com dados de: " + f.origemBase : "Parceiro cadastrado");
+  registrarPA(p, "criado", f.origemBase ? "Parceiro cadastrado a partir da base pública da Receita" : "Parceiro cadastrado");
   return p;
 }
 /* Botão "buscar dados pelo CNPJ" dentro dos formulários de cadastro */
@@ -6247,55 +6179,280 @@ async function finalizarContrato(c, env) {
   if (viewAtual === "clientes") renderClientes();
 }
 
-/* ================== CLIENTES ================== */
+/* ================== CLIENTES ==================
+   Carteira de clientes (vindos do contrato assinado ou cadastrados à mão) com:
+   visão geral · tarefas do atendimento (recorrência, checklist, lembretes) · arquivos (OneDrive) · atividades (log). */
 const cliStore = criarStore("dados/clientes/clientes.json", { versao: 1, seq: 0, clientes: [] });
 const clis = () => cliStore.dados?.clientes || [];
+const cliPorId = id => clis().find(x => x.id === id);
+const tarStore = criarStore("dados/clientes/tarefas.json", { versao: 1, seq: 0, tarefas: [], log: [] });
+const tarefas = () => tarStore.dados?.tarefas || [];
+const tarPorId = id => tarefas().find(t => t.id === id);
+const nomeCli = c => c ? (c.fantasia || c.razao || "Cliente") : "—";
+const pastaCli = c => c.pasta || `clientes/${limparNome(c.fantasia || c.razao || c.id)}`;
+const SERV_CLI = [["bpo", "BPO Financeiro"], ["fpa", "FP&A"], ["pla", "Planejamento Financeiro"], ["rt", "Consultoria de Processos"], ["outro", "Outro"]];
+const nomeServ = s => (SERV_CLI.find(x => x[0] === s) || [, ""])[1];
+const RECORRENCIAS = [["", "Não repete"], ["diaria", "Todo dia"], ["uteis", "Dias úteis (seg a sex)"], ["semanal", "Toda semana"], ["quinzenal", "A cada 15 dias"], ["mensal", "Todo mês"], ["trimestral", "A cada 3 meses"], ["anual", "Todo ano"]];
+const LEMBRETES = [["", "Sem lembrete"], ["0", "No dia"], ["1", "1 dia antes"], ["2", "2 dias antes"], ["7", "1 semana antes"]];
+const PRIORIDADES = [["baixa", "Baixa", "#9AA9A9"], ["media", "Média", "#D99A1E"], ["alta", "Alta", "#C8463D"]];
+const DIAS_SEM = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+const cl = { filtroC: { busca: "", status: "ativo", serv: "" }, filtroT: { resp: "eu", cliente: "", serv: "", busca: "" }, pastaSub: "", verConcluidas: false };
+
+/* Rotinas padrão por serviço: viram tarefas do cliente com um clique */
+const ROTINAS = {
+  bpo: [
+    { t: "Lançar contas a pagar e a receber", rec: "uteis" },
+    { t: "Conciliação bancária", rec: "uteis" },
+    { t: "Agendar os pagamentos da semana", rec: "semanal", dias: [1] },
+    { t: "Cobrar documentos pendentes do cliente", rec: "semanal", dias: [3] },
+    { t: "Enviar o movimento do mês ao contador", rec: "mensal", dia: 5, lembrete: "2" },
+    { t: "Fechamento do mês e DRE gerencial", rec: "mensal", dia: 10, lembrete: "2", prio: "alta", checklist: ["Conciliar todas as contas", "Conferir as categorias", "Gerar a DRE gerencial", "Revisar o fluxo de caixa"] },
+    { t: "Reunião mensal de resultados", rec: "mensal", dia: 15, lembrete: "2" }],
+  fpa: [
+    { t: "Atualizar a base de dados do mês", rec: "mensal", dia: 5 },
+    { t: "Relatório de indicadores (KPIs)", rec: "mensal", dia: 10, lembrete: "2", prio: "alta" },
+    { t: "Análise orçado × realizado e desvios", rec: "mensal", dia: 12 },
+    { t: "Reunião de análise de resultados", rec: "mensal", dia: 15, lembrete: "2" },
+    { t: "Revisão do forecast", rec: "trimestral", dia: 20 }],
+  pla: [
+    { t: "Coletar histórico financeiro e premissas", prazo: 7 },
+    { t: "Montar o orçamento anual (receitas e despesas)", prazo: 21 },
+    { t: "Projeção do fluxo de caixa", prazo: 28 },
+    { t: "Cenários e análise de investimentos", prazo: 35 },
+    { t: "Apresentar o planejamento ao cliente", prazo: 42, lembrete: "2", prio: "alta" },
+    { t: "Revisão do planejamento", rec: "trimestral", prazo: 90 }],
+  rt: [
+    { t: "Kick-off e cronograma do projeto", prazo: 3, prio: "alta" },
+    { t: "Mapear os processos atuais por setor", prazo: 21 },
+    { t: "Desenhar os processos futuros", prazo: 42 },
+    { t: "Configurar o sistema", prazo: 60 },
+    { t: "Treinar a equipe", prazo: 75 },
+    { t: "Acompanhamento semanal com o cliente", rec: "semanal", dias: [2] },
+    { t: "Relatório mensal de evolução", rec: "mensal", dia: 28 }]
+};
+/* Serviços do cliente → ids (contratos antigos guardam só o nome) */
+function servsDoCliente(c) {
+  const s = new Set();
+  for (const x of c.servicos || []) {
+    const id = x.serv, n = norm(x.nome + " " + (x.plano || ""));
+    if (id === "int" || /integrad/.test(n)) { s.add("bpo"); s.add("fpa"); continue; }
+    if (id && id !== "int") { s.add(id === "rt" ? "rt" : id); continue; }
+    if (/bpo/.test(n)) s.add("bpo");
+    if (/fp&?a|cfo/.test(n)) s.add("fpa");
+    if (/planejamento/.test(n)) s.add("pla");
+    if (/consultoria|processo|rental/.test(n)) s.add("rt");
+  }
+  return [...s];
+}
+
+/* ---- Datas e recorrência ---- */
+const isoD = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+function somarMeses(d, n, dia) {
+  const alvo = dia || d.getDate();
+  d.setDate(1); d.setMonth(d.getMonth() + n);
+  d.setDate(Math.min(alvo, new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate()));
+}
+function passoRec(d, rec) {
+  switch (rec.tipo) {
+    case "diaria": d.setDate(d.getDate() + 1); break;
+    case "uteis": do d.setDate(d.getDate() + 1); while (d.getDay() === 0 || d.getDay() === 6); break;
+    case "semanal": if (rec.dias?.length) { do d.setDate(d.getDate() + 1); while (!rec.dias.includes(d.getDay())); } else d.setDate(d.getDate() + 7); break;
+    case "quinzenal": d.setDate(d.getDate() + 14); break;
+    case "mensal": somarMeses(d, 1, rec.dia); break;
+    case "trimestral": somarMeses(d, 3, rec.dia); break;
+    case "anual": somarMeses(d, 12, rec.dia); break;
+    default: d.setDate(d.getDate() + 1);
+  }
+}
+/* Próxima ocorrência depois de `venc`, pulando as que já ficaram para trás */
+function proximaData(venc, rec) {
+  const d = new Date((venc || hojeISO()) + "T12:00"), hoje = hojeISO();
+  passoRec(d, rec);
+  let n = 0;
+  while (isoD(d) < hoje && n++ < 4000) passoRec(d, rec);
+  return isoD(d);
+}
+/* Primeira ocorrência a partir de hoje (para rotinas novas) */
+function primeiraData(rec, prazo) {
+  if (!rec?.tipo) { const d = new Date(); d.setDate(d.getDate() + (prazo || 0)); return isoD(d); }
+  const d = new Date(hojeISO() + "T12:00");
+  if (prazo) d.setDate(d.getDate() + prazo);
+  const ok = x => rec.tipo === "uteis" ? x.getDay() % 6 !== 0 : rec.tipo === "semanal" && rec.dias?.length ? rec.dias.includes(x.getDay()) : ["mensal", "trimestral", "anual"].includes(rec.tipo) && rec.dia ? x.getDate() === Math.min(rec.dia, new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate()) : true;
+  let n = 0;
+  while (!ok(d) && n++ < 400) d.setDate(d.getDate() + 1);
+  return isoD(d);
+}
+function textoRec(r) {
+  if (!r?.tipo) return "";
+  if (r.tipo === "semanal" && r.dias?.length) return "Toda " + r.dias.map(x => DIAS_SEM[x].toLowerCase()).join(", ");
+  if (r.tipo === "mensal" && r.dia) return `Todo dia ${r.dia}`;
+  return (RECORRENCIAS.find(x => x[0] === r.tipo) || [, ""])[1];
+}
+const venceTxt = t => t.venc ? (t.hora ? `${t.venc}T${t.hora}` : t.venc) : "";
+const stTarefa = t => t.status === "concluida" ? "feita" : t.venc ? statusData(venceTxt(t)) : "semdata";
+
+/* ---- Log de atividades ---- */
+function logar(d, clienteId, texto, extra = {}) {
+  d.log = d.log || [];
+  d.log.unshift({ id: crypto.randomUUID(), em: new Date().toISOString(), por: meuNome(), clienteId, texto, ...extra });
+  if (d.log.length > 6000) d.log.length = 6000;
+}
+async function salvarTar(alterar, msg) {
+  try { await salvarStore(tarStore, alterar); if (msg) toast(msg); atualizarBadgeTarefas(); return true; }
+  catch (e) { toast("Não foi possível salvar: " + e.message, "erro", 6000); return false; }
+}
+function novaTarefaObj(d, base) {
+  d.seq = (d.seq || d.tarefas.length) + 1;
+  const id = "T-" + String(d.seq).padStart(5, "0");
+  return { id, serieId: base.serieId || id, clienteId: base.clienteId, titulo: base.titulo, descricao: base.descricao || "", servico: base.servico || "", responsavel: base.responsavel || "",
+    prioridade: base.prioridade || "media", venc: base.venc || "", hora: base.hora || "", rec: base.rec?.tipo ? base.rec : null, lembrete: base.lembrete ?? "",
+    checklist: (base.checklist || []).map(x => ({ id: crypto.randomUUID(), txt: typeof x === "string" ? x : x.txt, feito: false })), comentarios: [],
+    status: "pendente", criadoEm: new Date().toISOString(), criadoPor: meuNome() };
+}
+
+/* ---- Carregamento ---- */
+async function garantirCli() {
+  await Promise.all([cliStore, tarStore].filter(s => !s.carregado).map(s => carregarStore(s)));
+}
+
+/* ---- Cliente vindo do contrato assinado ---- */
 async function criarClienteDoContrato(c, env, final) {
   const k = c.contratante, pp = propDoContrato(c), t = pp ? totaisProp(pp) : { mensal: c.cond.valorMensal, unico: 0 };
-  let id;
+  let id, novo = false;
   await salvarStore(cliStore, d => {
     const ex = d.clientes.find(x => (c.leadId && x.leadId === c.leadId) || soDigitos(x.cnpj) === soDigitos(k.cnpj));
     const docs = [{ tipo: "Contrato assinado", nome: final.nome, id: final.id, webUrl: final.webUrl, em: final.em }];
     if (pp?.pdf) docs.push({ tipo: "Proposta", nome: pp.pdf.nome, id: pp.pdf.id, webUrl: pp.pdf.webUrl, em: pp.pdf.em });
     const base = { leadId: c.leadId, razao: k.razao, fantasia: k.fantasia, cnpj: k.cnpj, regime: k.regime, socios: k.socios, telefone: k.telefone, email: k.email,
       cep: k.cep, logradouro: k.logradouro, numero: k.numero, complemento: k.complemento, bairro: k.bairro, cidade: k.cidade, uf: k.uf,
-      contato: (k.socios || [])[0]?.nome || "", servicos: (pp?.itens || []).map(i => ({ nome: i.nome || SERVICOS[i.serv].nome, plano: i.plano, cobranca: ehProjeto(i) ? "unico" : "mensal", valor: Number(i.valor) || 0, licenca: Number(i.licenca) || 0 })),
+      contato: (k.socios || [])[0]?.nome || "", servicos: (pp?.itens || []).map(i => ({ serv: i.serv, nome: i.nome || SERVICOS[i.serv].nome, plano: i.plano, cobranca: ehProjeto(i) ? "unico" : "mensal", valor: Number(i.valor) || 0, licenca: Number(i.licenca) || 0 })),
       mensal: t.mensal, unico: t.unico, pasta: `clientes/${c.docAssinatura?.empresa || limparNome(k.razao)}` };
     if (ex) {
       Object.assign(ex, base); id = ex.id;
       ex.contratos = [...new Set([...(ex.contratos || []), c.id])]; ex.propostas = [...new Set([...(ex.propostas || []), c.propostaId].filter(Boolean))];
       ex.documentos = [...docs, ...(ex.documentos || []).filter(x => !docs.some(y => y.id === x.id))];
     } else {
+      novo = true;
       d.seq = (d.seq || d.clientes.length) + 1; id = "CL-" + String(d.seq).padStart(4, "0");
-      d.clientes.push({ id, ...base, status: "ativo", desde: (env.concluidoEm || new Date().toISOString()).slice(0, 10), contratos: [c.id], propostas: [c.propostaId].filter(Boolean), documentos: docs, criadoEm: new Date().toISOString() });
+      d.clientes.push({ id, ...base, status: "ativo", origem: "contrato", desde: (env.concluidoEm || new Date().toISOString()).slice(0, 10), contratos: [c.id], propostas: [c.propostaId].filter(Boolean), documentos: docs, criadoEm: new Date().toISOString() });
     }
   });
+  try { await carregarStore(tarStore); await salvarStore(tarStore, d => logar(d, id, novo ? `Cliente criado pelo contrato ${c.id} assinado` : `Contrato ${c.id} assinado`)); } catch {}
   return id;
 }
+
+/* ================= Tela ================= */
 async function renderClientes() {
-  const [, id] = [null, rota[0]];
+  const id = rota[0];
   $("cliConteudo").innerHTML = `<div class="esqueleto"></div>`;
-  try { await garantirStoresCtr(); } catch (e) { $("cliConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os clientes.</b><br>${esc(e.message)}</div>`; return; }
+  try { await garantirStoresCtr(); await garantirCli(); } catch (e) { $("cliConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os clientes.</b><br>${esc(e.message)}</div>`; return; }
   if (viewAtual !== "clientes") return;
-  if (id) return abrirCliente(id);
+  atualizarBadgeTarefas();
+  if (!id || id === "tarefas" || ["tarefas", "atividades"].includes(rota[1])) {
+    const antes = tarStore.eTag;
+    carregarStore(tarStore).then(() => { if (tarStore.eTag !== antes && viewAtual === "clientes" && !$("modal")) reRenderCli(); }).catch(() => {});
+  }
+  if (id === "tarefas") return renderPainelTarefas();
+  if (id) return abrirCliente(id, rota[1] || "geral");
   $("cliTitulo").textContent = "Clientes"; $("cliEyebrow").textContent = "Carteira";
-  $("cliDesc").textContent = "Clientes com contrato assinado: dados, documentos, serviços e histórico.";
-  const lista = [...clis()].sort((a, b) => (a.fantasia || a.razao).localeCompare(b.fantasia || b.razao));
-  $("cliConteudo").innerHTML = lista.length ? `<div class="grade-cli">${lista.map(c => `<button class="card-cli" data-link="#clientes/${c.id}">
-      <b>${esc(c.fantasia || c.razao)}</b><small>${esc(c.razao)}${c.cnpj ? " · " + esc(c.cnpj) : ""}</small>
-      <div class="chips-cli">${(c.servicos || []).map(s => `<span>${esc(s.plano || s.nome)}</span>`).join("")}</div>
-      <div class="rod-cli"><span>${c.mensal ? brl(c.mensal) + "/mês" : c.unico ? brl(c.unico) + " projeto" : ""}</span><span>desde ${data((c.desde || hojeISO()) + "T12:00")}</span></div></button>`).join("")}</div>`
-    : `<div class="vazio-etapa"><b>Nenhum cliente ainda</b>Quando um contrato for assinado por todos, o cliente aparece aqui automaticamente.</div>`;
+  $("cliDesc").textContent = "Dados, serviços, tarefas do atendimento, arquivos e histórico de cada cliente.";
+  $("cliBotoes").innerHTML = `<button class="btn-p" data-clia="novo"><svg><use href="#i-mais"/></svg>Novo cliente</button>`;
+  const f = cl.filtroC, termos = norm(f.busca).split(" ").filter(Boolean);
+  const lista = clis().filter(c => (f.status === "todos" || (c.status || "ativo") === f.status) && (!f.serv || servsDoCliente(c).includes(f.serv))
+    && (!termos.length || termos.every(t => norm([c.razao, c.fantasia, c.cnpj, c.contato, c.cidade].join(" ")).includes(t))))
+    .sort((a, b) => nomeCli(a).localeCompare(nomeCli(b)));
+  const pend = id => tarefas().filter(t => t.clienteId === id && t.status !== "concluida");
+  $("cliConteudo").innerHTML = `
+  ${abasCli("lista")}
+  <div class="filtros-crm">
+    <input class="fbusca" id="cliBusca" type="search" placeholder="Buscar cliente, CNPJ, contato…" value="${esc(f.busca)}">
+    <select data-clf="status"><option value="ativo" ${f.status === "ativo" ? "selected" : ""}>Ativos</option><option value="inativo" ${f.status === "inativo" ? "selected" : ""}>Inativos</option><option value="todos" ${f.status === "todos" ? "selected" : ""}>Todos</option></select>
+    <select data-clf="serv">${opcoes(SERV_CLI.slice(0, 4), f.serv, "Todos os serviços")}</select>
+  </div>
+  ${lista.length ? `<div class="grade-cli">${lista.map(c => {
+    const p = pend(c.id), atr = p.filter(t => stTarefa(t) === "atraso").length, hj = p.filter(t => stTarefa(t) === "hoje").length;
+    return `<button class="card-cli" data-link="#clientes/${c.id}">
+      <b>${esc(nomeCli(c))}</b><small>${esc(c.razao || "")}${c.cnpj ? " · " + esc(c.cnpj) : ""}</small>
+      <div class="chips-cli">${(c.servicos || []).map(s => `<span>${esc(s.plano || s.nome)}</span>`).join("")}${c.status === "inativo" ? `<span class="inat">Inativo</span>` : ""}</div>
+      <div class="tar-cli">${atr ? `<span class="quando atraso">${atr} atrasada${atr === 1 ? "" : "s"}</span>` : ""}${hj ? `<span class="quando hoje">${hj} para hoje</span>` : ""}<span class="quando">${p.length} pendente${p.length === 1 ? "" : "s"}</span></div>
+      <div class="rod-cli"><span>${c.mensal ? brl(c.mensal) + "/mês" : c.unico ? brl(c.unico) + " projeto" : ""}</span><span>${c.desde ? "desde " + data(c.desde + "T12:00") : ""}</span></div></button>`;
+  }).join("")}</div>`
+    : clis().length ? `<div class="vazio-bloco">Nenhum cliente com esses filtros.</div>` : `<div class="vazio-etapa"><b>Nenhum cliente ainda</b>Clientes entram aqui quando um contrato é assinado por todos, ou pelo botão <b>Novo cliente</b> (para clientes antigos ou que vieram por fora do CRM).<br><br><button class="btn-p" style="margin:0 auto" data-clia="novo"><svg><use href="#i-mais"/></svg>Novo cliente</button></div>`}`;
+  let tm;
+  $("cliBusca").oninput = e => { clearTimeout(tm); tm = setTimeout(() => { cl.filtroC.busca = e.target.value; renderClientes(); const i = $("cliBusca"); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }, 250); };
+  $("cliConteudo").querySelectorAll("[data-clf]").forEach(s => s.onchange = () => { cl.filtroC[s.dataset.clf] = s.value; renderClientes(); });
 }
-async function abrirCliente(id) {
-  const c = clis().find(x => x.id === id);
+function abasCli(ativa) {
+  const minhas = tarefas().filter(t => t.status !== "concluida" && t.responsavel === meuNome() && ["atraso", "hoje"].includes(stTarefa(t))).length;
+  return `<div class="barra-crm"><nav class="abas"><button data-link="#clientes" class="${ativa === "lista" ? "ativo" : ""}">Clientes</button>
+    <button data-link="#clientes/tarefas" class="${ativa === "tarefas" ? "ativo" : ""}">Tarefas${minhas ? ` <span class="bolinha">${minhas}</span>` : ""}</button></nav></div>`;
+}
+
+/* ---- Painel geral de tarefas (todas as carteiras) ---- */
+function renderPainelTarefas() {
+  $("cliTitulo").textContent = "Tarefas"; $("cliEyebrow").textContent = "Carteira";
+  $("cliDesc").textContent = "O que precisa ser feito em todos os clientes: atrasadas, de hoje e da semana.";
+  $("cliBotoes").innerHTML = `<button class="btn-p" data-clia="novaTarefa"><svg><use href="#i-mais"/></svg>Nova tarefa</button>`;
+  const f = cl.filtroT, eu = meuNome();
+  const base = tarefas().filter(t => cliPorId(t.clienteId) && (f.resp === "" || (f.resp === "eu" ? t.responsavel === eu : f.resp === "_sem" ? !t.responsavel : t.responsavel === f.resp))
+    && (!f.cliente || t.clienteId === f.cliente) && (!f.serv || t.servico === f.serv) && (!f.busca || norm(t.titulo + " " + nomeCli(cliPorId(t.clienteId))).includes(norm(f.busca))));
+  const abertas = base.filter(t => t.status !== "concluida");
+  const semana = isoD(new Date(Date.now() + 7 * 864e5));
+  const grupos = [["Atrasadas", abertas.filter(t => stTarefa(t) === "atraso")], ["Hoje", abertas.filter(t => stTarefa(t) === "hoje")],
+    ["Próximos 7 dias", abertas.filter(t => stTarefa(t) === "futuro" && t.venc <= semana)], ["Mais adiante", abertas.filter(t => stTarefa(t) === "futuro" && t.venc > semana)], ["Sem data", abertas.filter(t => !t.venc)]];
+  const feitas7 = base.filter(t => t.status === "concluida" && (t.concluidaEm || "") >= new Date(Date.now() - 7 * 864e5).toISOString());
+  $("cliConteudo").innerHTML = `
+  ${abasCli("tarefas")}
+  <section class="bloco" style="margin-bottom:14px"><div class="tiles tiles4">${[["Atrasadas", grupos[0][1].length, "atr"], ["Para hoje", grupos[1][1].length, ""], ["Próximos 7 dias", grupos[2][1].length, ""], ["Concluídas em 7 dias", feitas7.length, "ok"]]
+    .map(([n, v, c]) => `<div class="tile ${c}"><i>&nbsp;</i><b>${v}</b><span>${n}</span></div>`).join("")}</div></section>
+  <div class="filtros-crm">
+    <input class="fbusca" id="tfBusca" type="search" placeholder="Buscar tarefa ou cliente…" value="${esc(f.busca)}">
+    <select data-tff="resp"><option value="eu" ${f.resp === "eu" ? "selected" : ""}>Minhas tarefas</option><option value="" ${f.resp === "" ? "selected" : ""}>Toda a equipe</option>${RESPONSAVEIS.filter(r => r !== eu).map(r => `<option value="${esc(r)}" ${f.resp === r ? "selected" : ""}>${esc(r)}</option>`).join("")}<option value="_sem" ${f.resp === "_sem" ? "selected" : ""}>Sem responsável</option></select>
+    <select data-tff="cliente">${opcoes(clis().filter(c => c.status !== "inativo").map(c => [c.id, nomeCli(c)]).sort((a, b) => a[1].localeCompare(b[1])), f.cliente, "Todos os clientes")}</select>
+    <select data-tff="serv">${opcoes(SERV_CLI, f.serv, "Todos os serviços")}</select>
+  </div>
+  ${abertas.length ? grupos.filter(g => g[1].length).map(([n, ls]) => `<section class="bloco grupo-tf"><div class="bloco-cab"><div><h3>${n}</h3></div><span class="tag-breve">${ls.length}</span></div>
+    <ul class="lista-tf">${ordenarTf(ls).map(t => linhaTarefa(t, true)).join("")}</ul></section>`).join("")
+    : `<div class="vazio-bloco" style="background:#fff;border:1px solid var(--borda);border-radius:14px">${tarefas().length ? "Nenhuma tarefa pendente com esses filtros." : "Nenhuma tarefa criada ainda. Abra um cliente e use <b>Aplicar rotina padrão</b> ou <b>Nova tarefa</b>."}</div>`}
+  ${feitas7.length ? `<details class="bloco concl-tf"><summary>Concluídas nos últimos 7 dias (${feitas7.length})</summary><ul class="lista-tf">${feitas7.sort((a, b) => b.concluidaEm.localeCompare(a.concluidaEm)).map(t => linhaTarefa(t, true)).join("")}</ul></details>` : ""}`;
+  let tm;
+  $("tfBusca").oninput = e => { clearTimeout(tm); tm = setTimeout(() => { cl.filtroT.busca = e.target.value; renderPainelTarefas(); const i = $("tfBusca"); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }, 250); };
+  $("cliConteudo").querySelectorAll("[data-tff]").forEach(s => s.onchange = () => { cl.filtroT[s.dataset.tff] = s.value; renderPainelTarefas(); });
+}
+const ordenarTf = ls => [...ls].sort((a, b) => (a.venc || "9999").localeCompare(b.venc || "9999") || (a.hora || "99").localeCompare(b.hora || "99") || ["alta", "media", "baixa"].indexOf(a.prioridade) - ["alta", "media", "baixa"].indexOf(b.prioridade));
+function linhaTarefa(t, comCliente) {
+  const st = stTarefa(t), c = cliPorId(t.clienteId), ck = t.checklist || [], pr = PRIORIDADES.find(p => p[0] === t.prioridade) || PRIORIDADES[1];
+  const meta = [comCliente ? esc(nomeCli(c)) : "", t.servico ? esc(nomeServ(t.servico)) : "", t.rec ? "↻ " + esc(textoRec(t.rec)) : "", ck.length ? `☑ ${ck.filter(x => x.feito).length}/${ck.length}` : "", t.comentarios?.length ? `💬 ${t.comentarios.length}` : "", t.status === "andamento" ? "em andamento" : ""].filter(Boolean).join(" · ");
+  return `<li class="tf ${st}" data-tf="${t.id}" style="--prio:${pr[2]}">
+    <button class="chk-acao ${t.status === "concluida" ? "feito" : ""}" data-tf-ok="${t.id}" aria-label="${t.status === "concluida" ? "Reabrir" : "Concluir"}">${t.status === "concluida" ? "✓" : ""}</button>
+    <div class="q"><b>${esc(t.titulo)}</b>${meta ? `<small>${meta}</small>` : ""}${t.status === "concluida" ? `<small class="feito-por">Concluída por ${esc(t.concluidaPor || "—")} em ${dataHora(t.concluidaEm)}</small>` : ""}</div>
+    ${t.responsavel ? `<span class="chip-p">${esc(t.responsavel)}</span>` : `<span class="chip-p sem">sem resp.</span>`}
+    ${t.status !== "concluida" ? `<span class="quando ${st}">${t.venc ? (st === "atraso" ? "Atrasada · " : "") + rotuloData(venceTxt(t)) : "Sem data"}</span>` : ""}</li>`;
+}
+
+/* ---- Página do cliente ---- */
+async function abrirCliente(id, aba) {
+  const c = cliPorId(id);
   if (!c) { $("cliConteudo").innerHTML = `<div class="aviso-erro">Cliente não encontrado.</div>`; return; }
   if (!crm.carregado) await carregarCRM(true);
+  if (!["geral", "tarefas", "arquivos", "atividades"].includes(aba)) aba = "geral";
+  $("cliEyebrow").textContent = `Cliente · ${c.id}${c.status === "inativo" ? " · inativo" : ""}`; $("cliTitulo").textContent = nomeCli(c);
+  $("cliDesc").textContent = `${c.razao || ""}${c.cnpj ? " · CNPJ " + c.cnpj : ""}`;
+  $("cliBotoes").innerHTML = `<button class="btn-s" data-link="#clientes">Todos os clientes</button>`;
+  const pend = tarefas().filter(t => t.clienteId === id && t.status !== "concluida"), atr = pend.filter(t => stTarefa(t) === "atraso").length;
+  const nav = `<div class="barra-crm"><nav class="abas">${[["geral", "Visão geral"], ["tarefas", `Tarefas <span class="bolinha ${atr ? "" : "neutra"}">${pend.length}</span>`], ["arquivos", "Arquivos"], ["atividades", "Atividades"]]
+    .map(([k, n]) => `<button data-link="#clientes/${id}/${k}" class="${aba === k ? "ativo" : ""}">${n}</button>`).join("")}</nav></div>`;
+  $("cliConteudo").innerHTML = nav + `<div id="cliAba"></div>`;
+  if (aba === "geral") abaGeralCli(c);
+  if (aba === "tarefas") abaTarefasCli(c);
+  if (aba === "arquivos") abaArquivosCli(c);
+  if (aba === "atividades") abaAtividadesCli(c);
+}
+function abaGeralCli(c) {
   const l = c.leadId ? leadPorId(c.leadId) : null;
-  $("cliEyebrow").textContent = `Cliente · ${c.id}`; $("cliTitulo").textContent = c.fantasia || c.razao; $("cliDesc").textContent = `${c.razao}${c.cnpj ? " · CNPJ " + c.cnpj : ""}`;
   const campo = (f, rot, extra = "") => `<div class="campo"><label>${rot}</label><input data-cli="${f}" value="${esc(c[f] || "")}" ${extra}></div>`;
   const hist = (l?.historico || []).slice(0, 60);
-  $("cliConteudo").innerHTML = `
+  $("cliAba").innerHTML = `
   <div class="diag-grade">
     <div class="diag-form">
       <section class="g-sec"><h4>Dados cadastrais <span class="status-salvo" id="statusCli">Salvo</span></h4>
@@ -6306,42 +6463,465 @@ async function abrirCliente(id) {
           <div class="linha2">${campo("email", "E-mail")}${campo("cep", "CEP")}</div>
           <div class="linha2">${campo("logradouro", "Logradouro")}${campo("numero", "Número")}</div>
           <div class="linha3">${campo("bairro", "Bairro")}${campo("cidade", "Cidade")}${campo("uf", "UF")}</div>
+          <div class="linha3"><div class="campo"><label>Situação</label><select data-cli="status"><option value="ativo" ${c.status !== "inativo" ? "selected" : ""}>Ativo</option><option value="inativo" ${c.status === "inativo" ? "selected" : ""}>Inativo</option></select></div>
+            <div class="campo"><label>Responsável WL</label><select data-cli="responsavel">${opcoes(RESPONSAVEIS.map(r => [r, r]), c.responsavel || "", "—")}</select></div>
+            ${campo("desde", "Cliente desde", 'type="date"')}</div>
           <div class="campo"><label>Sócios / representantes</label><p class="txt-prog">${(c.socios || []).map(s => `${esc(s.nome)}${s.cpf ? " · CPF " + esc(s.cpf) : ""}`).join("<br>") || "—"}</p></div>
+          <div class="campo"><label>Observações</label><textarea data-cli="observacoes" rows="3">${esc(c.observacoes || "")}</textarea></div>
         </div></section>
-      <section class="g-sec"><h4>Histórico de contato</h4>
-        ${hist.length ? `<ul class="hist-cli">${hist.map(h => `<li><small>${dataHora(h.em)} · ${esc(h.por || "")}</small><b>${esc(h.tipo === "etapa" ? `Etapa: ${etapaDe(h.de).nome} → ${etapaDe(h.para).nome}` : interacaoDe(h.tipo)?.nome || ({ documento: "Documento", acao: "Ação concluída", criado: "Lead cadastrado", venda: "Venda" })[h.tipo] || h.tipo)}</b>${h.texto ? `<span>${esc(h.texto)}</span>` : ""}${h.link ? `<a href="${esc(h.link)}" target="_blank" rel="noopener">abrir documento</a>` : ""}</li>`).join("")}</ul>` : `<p class="txt-prog">Sem histórico no CRM.</p>`}
+      <section class="g-sec"><h4>Histórico de contato (CRM)</h4>
+        ${hist.length ? `<ul class="hist-cli">${hist.map(h => `<li><small>${dataHora(h.em)} · ${esc(h.por || "")}</small><b>${esc(h.tipo === "etapa" ? `Etapa: ${etapaDe(h.de).nome} → ${etapaDe(h.para).nome}` : interacaoDe(h.tipo)?.nome || ({ documento: "Documento", acao: "Ação concluída", criado: "Lead cadastrado", venda: "Venda" })[h.tipo] || h.tipo)}</b>${h.texto ? `<span>${esc(h.texto)}</span>` : ""}${h.link ? `<a href="${esc(h.link)}" target="_blank" rel="noopener">abrir documento</a>` : ""}</li>`).join("")}</ul>` : `<p class="txt-prog">${c.leadId ? "Sem histórico no CRM." : "Cliente cadastrado fora do CRM."}</p>`}
       </section>
     </div>
     <aside class="diag-lado">
-      <section class="g-sec"><h4>Serviços contratados</h4>
-        ${(c.servicos || []).map(s => `<div class="rs-item"><div class="rs-nome"><b>${esc(s.nome)}</b><small>${esc(s.plano || "")}</small></div><div class="rs-linha"><span>${s.cobranca === "mensal" ? "Mensal" : "Projeto"}</span><b>${brl(s.valor)}${s.cobranca === "mensal" ? "/mês" : ""}</b></div>${s.licenca ? `<div class="rs-linha"><span>Licença ContaAzul</span><b>${brl(s.licenca)}/mês</b></div>` : ""}</div>`).join("") || `<p class="txt-prog">—</p>`}
+      <section class="g-sec"><h4>Serviços contratados <button class="lnk" data-clia="servicos">editar ›</button></h4>
+        ${(c.servicos || []).map(s => `<div class="rs-item"><div class="rs-nome"><b>${esc(s.nome)}</b><small>${esc(s.plano || "")}</small></div><div class="rs-linha"><span>${s.cobranca === "mensal" ? "Mensal" : "Projeto"}</span><b>${brl(s.valor)}${s.cobranca === "mensal" ? "/mês" : ""}</b></div>${s.licenca ? `<div class="rs-linha"><span>Licença ContaAzul</span><b>${brl(s.licenca)}/mês</b></div>` : ""}</div>`).join("") || `<p class="txt-prog">Nenhum serviço cadastrado.</p>`}
         <div class="rs-total">${c.mensal ? `<div><span>Total mensal</span><b>${brl(c.mensal)}</b></div>` : ""}${c.unico ? `<div><span>Projeto</span><b>${brl(c.unico)}</b></div>` : ""}</div></section>
-      <section class="g-sec"><h4>Documentos</h4>
-        <ul class="docs-cli">${(c.documentos || []).map(d => `<li><a href="${esc(d.webUrl)}" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg><span><b>${esc(d.tipo)}</b><small>${esc(d.nome)}</small></span></a></li>`).join("")}</ul>
-        <div id="pastaCli"><p class="txt-prog">Carregando a pasta do cliente…</p></div></section>
+      <section class="g-sec"><h4>Próximas tarefas <button class="lnk" data-link="#clientes/${c.id}/tarefas">ver todas ›</button></h4>
+        ${(() => { const ls = ordenarTf(tarefas().filter(t => t.clienteId === c.id && t.status !== "concluida")).slice(0, 5); return ls.length ? `<ul class="lista-tf curta">${ls.map(t => linhaTarefa(t, false)).join("")}</ul>` : `<p class="txt-prog">Nenhuma tarefa pendente. <a href="#clientes/${c.id}/tarefas">Criar tarefas</a></p>`; })()}</section>
+      ${(c.documentos || []).length ? `<section class="g-sec"><h4>Documentos do contrato</h4>
+        <ul class="docs-cli">${(c.documentos || []).map(d => `<li><a href="${esc(d.webUrl)}" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg><span><b>${esc(d.tipo)}</b><small>${esc(d.nome)}</small></span></a></li>`).join("")}</ul></section>` : ""}
       <section class="g-sec acoes-diag">
-        ${c.leadId ? `<button class="btn-s" data-cli-acao="lead" style="justify-content:center">Ver no CRM</button>` : ""}
+        ${c.leadId ? `<button class="btn-s" data-clia="lead" style="justify-content:center">Ver no CRM</button>` : ""}
         ${(c.contratos || []).map(x => `<button class="btn-s" data-link="#atendimento/contratos/${x}" style="justify-content:center">Contrato ${esc(x)}</button>`).join("")}
         ${(c.propostas || []).map(x => `<button class="btn-s" data-link="#atendimento/propostas/${x}" style="justify-content:center">Proposta ${esc(x)}</button>`).join("")}
+        <button class="perigo" data-clia="excluirCli" style="justify-self:center">Excluir cliente</button>
       </section>
     </aside>
   </div>`;
-  let t;
-  $("cliConteudo").oninput = $("cliConteudo").onchange = e => {
-    const f = e.target.dataset.cli; if (!f) return;
-    c[f] = e.target.value; $("statusCli").textContent = "Salvando…";
-    clearTimeout(t); t = setTimeout(async () => {
-      try { await salvarStore(cliStore, d => { const x = d.clientes.find(y => y.id === c.id); if (x) x[f] = c[f]; }); $("statusCli").textContent = "Salvo"; if (f === "fantasia" || f === "razao") $("cliTitulo").textContent = c.fantasia || c.razao; }
-      catch (er) { $("statusCli").textContent = "Erro ao salvar"; }
-    }, 900);
+  let tm, mud = {};
+  const salvar = () => {
+    clearTimeout(tm); tm = setTimeout(async () => {
+      const m = mud; mud = {};
+      try {
+        await salvarStore(cliStore, d => { const x = d.clientes.find(y => y.id === c.id); if (x) Object.assign(x, m); });
+        $("statusCli") && ($("statusCli").textContent = "Salvo");
+        if ("fantasia" in m || "razao" in m) $("cliTitulo").textContent = nomeCli(c);
+        if ("status" in m) { await salvarTar(d => logar(d, c.id, m.status === "inativo" ? "Cliente marcado como inativo" : "Cliente reativado")); $("cliEyebrow").textContent = `Cliente · ${c.id}${c.status === "inativo" ? " · inativo" : ""}`; }
+      } catch (er) { $("statusCli") && ($("statusCli").textContent = "Erro ao salvar"); }
+    }, 800);
   };
-  $("cliConteudo").onclick = e => { if (e.target.closest("[data-cli-acao=lead]")) { location.hash = "crm/funil"; setTimeout(() => abrirLead(c.leadId), 400); } };
-  try {
-    const r = await (await graph(caminho(c.pasta) + ":/children?$select=id,name,webUrl,lastModifiedDateTime,size,file")).json();
-    const arqs = (r.value || []).filter(x => x.file).sort((a, b) => b.lastModifiedDateTime.localeCompare(a.lastModifiedDateTime));
-    $("pastaCli").innerHTML = arqs.length ? `<small class="rot-botoes" style="margin-top:10px">Pasta do cliente no OneDrive</small><ul class="docs-cli">${arqs.map(a => `<li><a href="${esc(a.webUrl)}" target="_blank" rel="noopener"><svg><use href="#i-pasta"/></svg><span><b>${esc(a.name)}</b><small>${dataHora(a.lastModifiedDateTime)}</small></span></a></li>`).join("")}</ul>` : "";
-  } catch { $("pastaCli").innerHTML = ""; }
+  $("cliAba").oninput = $("cliAba").onchange = e => { const f = e.target.dataset.cli; if (!f) return; c[f] = e.target.value; mud[f] = e.target.value; $("statusCli").textContent = "Salvando…"; salvar(); };
 }
+
+/* ---- Aba Tarefas do cliente ---- */
+function abaTarefasCli(c) {
+  const todas = tarefas().filter(t => t.clienteId === c.id), abertas = ordenarTf(todas.filter(t => t.status !== "concluida"));
+  const feitas = todas.filter(t => t.status === "concluida").sort((a, b) => (b.concluidaEm || "").localeCompare(a.concluidaEm || ""));
+  const semana = isoD(new Date(Date.now() + 7 * 864e5));
+  const grupos = [["Atrasadas", abertas.filter(t => stTarefa(t) === "atraso")], ["Hoje", abertas.filter(t => stTarefa(t) === "hoje")],
+    ["Próximos 7 dias", abertas.filter(t => stTarefa(t) === "futuro" && t.venc <= semana)], ["Mais adiante", abertas.filter(t => stTarefa(t) === "futuro" && t.venc > semana)], ["Sem data", abertas.filter(t => !t.venc)]];
+  $("cliAba").innerHTML = `
+  <div class="barra-tf"><span>${abertas.length} pendente${abertas.length === 1 ? "" : "s"} · ${feitas.length} concluída${feitas.length === 1 ? "" : "s"}</span>
+    <div class="dir"><button class="btn-s" data-clia="rotina"><svg><use href="#i-atual"/></svg>Aplicar rotina padrão</button><button class="btn-p" data-clia="novaTarefa"><svg><use href="#i-mais"/></svg>Nova tarefa</button></div></div>
+  ${abertas.length ? grupos.filter(g => g[1].length).map(([n, ls]) => `<section class="bloco grupo-tf"><div class="bloco-cab"><div><h3>${n}</h3></div><span class="tag-breve">${ls.length}</span></div>
+    <ul class="lista-tf">${ls.map(t => linhaTarefa(t, false)).join("")}</ul></section>`).join("")
+    : `<div class="vazio-bloco" style="background:#fff;border:1px solid var(--borda);border-radius:14px">Nenhuma tarefa pendente para este cliente.<br><br>Use <b>Aplicar rotina padrão</b> para criar de uma vez as tarefas recorrentes dos serviços contratados, ou <b>Nova tarefa</b> para uma tarefa avulsa.</div>`}
+  <section class="bloco grupo-tf"><div class="bloco-cab"><div><h3>Executadas</h3><small>Quem fez e quando</small></div><span class="tag-breve">${feitas.length}</span></div>
+    ${feitas.length ? `<table class="tabela log-tf"><thead><tr><th>Tarefa</th><th>Venc.</th><th>Concluída em</th><th>Por</th></tr></thead><tbody>${feitas.slice(0, cl.verConcluidas ? 500 : 15).map(t => `<tr class="lin" data-tf="${t.id}"><td><b>${esc(t.titulo)}</b>${t.rec ? `<small>↻ ${esc(textoRec(t.rec))}</small>` : ""}</td><td>${t.venc ? data(t.venc + "T12:00") : "—"}</td><td>${dataHora(t.concluidaEm)}${t.venc && t.concluidaEm.slice(0, 10) > t.venc ? ` <span class="atraso-txt">com atraso</span>` : ""}</td><td>${esc(t.concluidaPor || "—")}</td></tr>`).join("")}</tbody></table>
+      ${feitas.length > 15 && !cl.verConcluidas ? `<button class="btn-s be-mais" data-clia="verTodas" style="margin:10px auto;display:flex">Ver todas as ${feitas.length}</button>` : ""}` : `<div class="vazio-bloco">Nada executado ainda.</div>`}</section>`;
+}
+
+/* ---- Editor de tarefa ---- */
+function abrirTarefa(id, novaPara) {
+  const t = id ? structuredClone(tarPorId(id)) : { clienteId: novaPara || "", titulo: "", descricao: "", servico: "", responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", prioridade: "media", venc: hojeISO(), hora: "", rec: null, lembrete: "", checklist: [], comentarios: [], status: "pendente" };
+  if (!t) return;
+  const c = cliPorId(t.clienteId), feita = t.status === "concluida";
+  const serie = id ? tarefas().filter(x => x.serieId === t.serieId && x.status === "concluida" && x.id !== t.id).sort((a, b) => b.concluidaEm.localeCompare(a.concluidaEm)).slice(0, 12) : [];
+  const rec = t.rec || {};
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>${id ? (feita ? "Tarefa concluída" : "Tarefa") : "Nova tarefa"}</h3>${c ? `<small class="sub-modal">${esc(nomeCli(c))}${id ? " · " + t.id : ""}${t.criadoPor ? ` · criada por ${esc(t.criadoPor)} em ${data(t.criadoEm)}` : ""}</small>` : ""}</div>
+    <form class="modal-corpo dados-grid" id="formTf">
+      ${feita ? `<div class="aviso-ok">Concluída por <b>${esc(t.concluidaPor || "—")}</b> em ${dataHora(t.concluidaEm)}</div>` : ""}
+      ${!novaPara && !id ? `<div class="campo"><label>Cliente *</label><select name="clienteId" required>${opcoes(clis().filter(x => x.status !== "inativo").map(x => [x.id, nomeCli(x)]).sort((a, b) => a[1].localeCompare(b[1])), "", "Escolha o cliente")}</select></div>` : ""}
+      <div class="campo"><label>Tarefa *</label><input name="titulo" value="${esc(t.titulo)}" placeholder="Ex.: Conciliação bancária" data-mascara="nenhuma"></div>
+      <div class="campo"><label>Descrição</label><textarea name="descricao" rows="2" placeholder="Detalhes, passo a passo, links…">${esc(t.descricao || "")}</textarea></div>
+      <div class="linha3"><div class="campo"><label>Responsável</label><select name="responsavel">${opcoes(RESPONSAVEIS.map(r => [r, r]), t.responsavel || "", "Sem responsável")}</select></div>
+        <div class="campo"><label>Serviço</label><select name="servico">${opcoes(SERV_CLI, t.servico || "", "—")}</select></div>
+        <div class="campo"><label>Prioridade</label><select name="prioridade">${PRIORIDADES.map(p => `<option value="${p[0]}" ${t.prioridade === p[0] ? "selected" : ""}>${p[1]}</option>`).join("")}</select></div></div>
+      <div class="linha3"><div class="campo"><label>Vencimento</label><input type="date" name="venc" value="${esc(t.venc || "")}"></div>
+        <div class="campo"><label>Hora (opcional)</label><input type="time" name="hora" value="${esc(t.hora || "")}"></div>
+        <div class="campo"><label>Lembrete</label><select name="lembrete">${LEMBRETES.map(([v, n]) => `<option value="${v}" ${String(t.lembrete ?? "") === v ? "selected" : ""}>${n}</option>`).join("")}</select></div></div>
+      <div class="linha2"><div class="campo"><label>Repetir</label><select name="rec">${RECORRENCIAS.map(([v, n]) => `<option value="${v}" ${(rec.tipo || "") === v ? "selected" : ""}>${n}</option>`).join("")}</select></div>
+        <div class="campo ${["mensal", "trimestral", "anual"].includes(rec.tipo) ? "" : "oculto"}" id="tfDiaMes"><label>Dia do mês</label><input type="number" name="dia" min="1" max="31" value="${esc(rec.dia || (t.venc ? Number(t.venc.slice(8)) : ""))}"></div></div>
+      <div class="campo ${rec.tipo === "semanal" ? "" : "oculto"}" id="tfDias"><label>Dias da semana</label><div class="dias-sem">${DIAS_SEM.map((n, k) => `<label><input type="checkbox" value="${k}" ${(rec.dias || []).includes(k) ? "checked" : ""}><span>${n}</span></label>`).join("")}</div></div>
+      <div class="campo"><label>Checklist</label><ul class="ck-tf" id="tfCk">${(t.checklist || []).map(x => itemCk(x)).join("")}</ul>
+        <div class="ck-novo"><input id="tfCkNovo" placeholder="Adicionar item e tecle Enter" data-mascara="nenhuma"><button type="button" class="btn-s" data-tfa="addCk">Adicionar</button></div></div>
+      ${id ? `<div class="campo"><label>Comentários</label><ul class="coment-tf">${(t.comentarios || []).map(x => `<li><small>${esc(x.por)} · ${dataHora(x.em)}</small><p>${esc(x.txt)}</p></li>`).join("") || `<li class="vazio">Nenhum comentário.</li>`}</ul>
+        <div class="ck-novo"><input id="tfComent" placeholder="Escreva um comentário" data-mascara="nenhuma"><button type="button" class="btn-s" data-tfa="comentar">Comentar</button></div></div>` : ""}
+      ${serie.length ? `<details class="serie-tf"><summary>Execuções anteriores desta rotina (${serie.length})</summary><ul>${serie.map(x => `<li><span>${x.venc ? data(x.venc + "T12:00") : "—"}</span><span>concluída ${dataHora(x.concluidaEm)} por <b>${esc(x.concluidaPor || "—")}</b></span></li>`).join("")}</ul></details>` : ""}
+      <div class="modal-rod tf-rod" style="padding:0">
+        ${id ? `<button type="button" class="perigo" data-tfa="excluir">Excluir</button>` : ""}
+        <span style="flex:1"></span>
+        ${id && !feita ? `<button type="button" class="btn-s" data-tfa="andamento">${t.status === "andamento" ? "Voltar para pendente" : "Em andamento"}</button>` : ""}
+        ${id ? `<button type="button" class="btn-s" data-tfa="${feita ? "reabrir" : "concluir"}">${feita ? "Reabrir" : "✓ Concluir"}</button>` : ""}
+        <button class="btn-p" type="submit">${id ? "Salvar" : "Criar tarefa"}</button></div>
+    </form>`);
+  m.classList.add("modal-largo");
+  veu.onclick = fecharModal;
+  const ck = structuredClone(t.checklist || []);
+  const desenharCk = () => { $("tfCk").innerHTML = ck.map(itemCk).join(""); };
+  const form = $("formTf");
+  form.rec.onchange = () => { const v = form.rec.value; $("tfDias").classList.toggle("oculto", v !== "semanal"); $("tfDiaMes").classList.toggle("oculto", !["mensal", "trimestral", "anual"].includes(v)); if (!form.dia.value && form.venc.value) form.dia.value = Number(form.venc.value.slice(8)); };
+  const addCk = () => { const v = $("tfCkNovo").value.trim(); if (!v) return; ck.push({ id: crypto.randomUUID(), txt: v, feito: false }); $("tfCkNovo").value = ""; desenharCk(); $("tfCkNovo").focus(); };
+  $("tfCkNovo").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); addCk(); } };
+  if ($("tfComent")) $("tfComent").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); m.querySelector("[data-tfa=comentar]").click(); } };
+  const ler = () => {
+    const f = Object.fromEntries(new FormData(form));
+    const tipo = f.rec || "", dias = [...$("tfDias").querySelectorAll("input:checked")].map(x => Number(x.value));
+    return { clienteId: f.clienteId || t.clienteId, titulo: f.titulo.trim(), descricao: f.descricao, responsavel: f.responsavel, servico: f.servico, prioridade: f.prioridade,
+      venc: f.venc, hora: f.hora, lembrete: f.lembrete, rec: tipo ? { tipo, ...(tipo === "semanal" && dias.length ? { dias } : {}), ...(["mensal", "trimestral", "anual"].includes(tipo) && f.dia ? { dia: Math.min(31, Math.max(1, Number(f.dia))) } : {}) } : null, checklist: ck };
+  };
+  m.onclick = async e => {
+    const ckEl = e.target.closest("[data-ck]");
+    if (ckEl) {
+      const x = ck.find(i => i.id === ckEl.dataset.ck);
+      if (e.target.closest("[data-ck-del]")) ck.splice(ck.indexOf(x), 1); else if (e.target.closest("input[type=checkbox]")) { x.feito = e.target.checked; x.por = meuNome(); x.em = new Date().toISOString(); }
+      return desenharCk();
+    }
+    const b = e.target.closest("[data-tfa]"); if (!b) return;
+    const a = b.dataset.tfa;
+    if (a === "addCk") return addCk();
+    if (a === "comentar") {
+      const txt = $("tfComent").value.trim(); if (!txt) return;
+      await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; (x.comentarios = x.comentarios || []).push({ em: new Date().toISOString(), por: meuNome(), txt }); logar(d, x.clienteId, `Comentou em "${x.titulo}": ${txt.slice(0, 120)}`, { tarefaId: id }); });
+      return abrirTarefa(id);
+    }
+    if (a === "excluir") {
+      const recor = !!t.rec;
+      if (!confirmar(recor ? `Excluir "${t.titulo}"? É uma tarefa que se repete: ela deixa de ser criada nos próximos períodos (o que já foi executado continua no histórico).` : `Excluir "${t.titulo}"?`)) return;
+      fecharModal();
+      await salvarTar(d => { d.tarefas = d.tarefas.filter(x => x.id !== id); logar(d, t.clienteId, `Excluiu a tarefa "${t.titulo}"`); }, "Tarefa excluída");
+      return reRenderCli();
+    }
+    if (a === "concluir") { const v = ler(); await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (x) Object.assign(x, v, { clienteId: x.clienteId }); }); fecharModal(); return concluirTarefa(id); }
+    if (a === "reabrir") { fecharModal(); return reabrirTarefa(id); }
+    if (a === "andamento") {
+      const v = ler(); fecharModal();
+      await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; Object.assign(x, v, { clienteId: x.clienteId }); x.status = x.status === "andamento" ? "pendente" : "andamento"; logar(d, x.clienteId, `${x.status === "andamento" ? "Iniciou" : "Pausou"} "${x.titulo}"`, { tarefaId: id }); });
+      return reRenderCli();
+    }
+  };
+  form.onsubmit = async e => {
+    e.preventDefault();
+    const v = ler();
+    if (!v.titulo) return toast("Dê um nome à tarefa", "erro");
+    if (!v.clienteId) return toast("Escolha o cliente", "erro");
+    if (v.rec && !v.venc) return toast("Tarefas que se repetem precisam de uma data de vencimento", "erro");
+    fecharModal();
+    if (id) await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; Object.assign(x, v, { clienteId: x.clienteId }); x.alteradaEm = new Date().toISOString(); x.alteradaPor = meuNome(); logar(d, x.clienteId, `Editou a tarefa "${x.titulo}"`, { tarefaId: id }); }, "Tarefa salva");
+    else await salvarTar(d => { const x = novaTarefaObj(d, v); x.checklist = v.checklist.map(i => ({ ...i, feito: false })); d.tarefas.push(x); logar(d, x.clienteId, `Criou a tarefa "${x.titulo}"${x.rec ? " (" + textoRec(x.rec).toLowerCase() + ")" : ""}`, { tarefaId: x.id }); }, "Tarefa criada");
+    reRenderCli();
+  };
+}
+const itemCk = x => `<li data-ck="${x.id}"><label><input type="checkbox" ${x.feito ? "checked" : ""}><span>${esc(x.txt)}</span></label><button type="button" data-ck-del aria-label="Remover">×</button></li>`;
+async function concluirTarefa(id) {
+  const t = tarPorId(id); if (!t) return;
+  const falta = (t.checklist || []).filter(x => !x.feito).length;
+  if (falta && !confirmar(`Ainda há ${falta} item(ns) do checklist sem marcar. Concluir mesmo assim?`)) return;
+  let prox = null;
+  await salvarTar(d => {
+    const x = d.tarefas.find(y => y.id === id); if (!x || x.status === "concluida") return;
+    x.status = "concluida"; x.concluidaEm = new Date().toISOString(); x.concluidaPor = meuNome();
+    logar(d, x.clienteId, `Concluiu "${x.titulo}"${x.venc ? ` (venc. ${data(x.venc + "T12:00")})` : ""}`, { tarefaId: id });
+    if (x.rec?.tipo) {
+      const n = novaTarefaObj(d, { ...x, serieId: x.serieId || x.id, venc: proximaData(x.venc, x.rec), checklist: x.checklist });
+      x.proxId = n.id; prox = n; d.tarefas.push(n);
+    }
+  }, "Tarefa concluída");
+  if (prox) toast(`Concluída · próxima: ${data(prox.venc + "T12:00")}`);
+  reRenderCli();
+}
+async function reabrirTarefa(id) {
+  await salvarTar(d => {
+    const x = d.tarefas.find(y => y.id === id); if (!x) return;
+    x.status = "pendente"; delete x.concluidaEm; delete x.concluidaPor;
+    const p = x.proxId && d.tarefas.find(y => y.id === x.proxId);
+    if (p && p.status === "pendente" && !p.comentarios?.length && !(p.checklist || []).some(i => i.feito)) d.tarefas = d.tarefas.filter(y => y.id !== p.id);
+    delete x.proxId;
+    logar(d, x.clienteId, `Reabriu "${x.titulo}"`, { tarefaId: id });
+  }, "Tarefa reaberta");
+  reRenderCli();
+}
+function reRenderCli() { if (viewAtual === "clientes") { const [a, b] = rota; if (a === "tarefas") renderPainelTarefas(); else if (a) abrirCliente(a, b || "geral"); else renderClientes(); } }
+
+/* ---- Rotina padrão por serviço ---- */
+function abrirRotina(c) {
+  const sv = servsDoCliente(c), ativos = new Set(tarefas().filter(t => t.clienteId === c.id && t.status !== "concluida").map(t => norm(t.titulo)));
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Aplicar rotina padrão</h3><small class="sub-modal">Cria as tarefas recorrentes de cada serviço para ${esc(nomeCli(c))}. Depois dá para editar, excluir ou mudar datas e responsáveis.</small></div>
+    <form class="modal-corpo dados-grid" id="formRot">
+      ${Object.entries(ROTINAS).map(([s, ls]) => `<details class="rot-serv" ${sv.includes(s) ? "open" : ""}><summary><label class="chk" onclick="event.stopPropagation()"><input type="checkbox" name="s_${s}" ${sv.includes(s) ? "checked" : ""}> ${nomeServ(s)}</label><span>${ls.length} tarefas</span></summary>
+        <ul>${ls.map((r, k) => `<li><label><input type="checkbox" name="t_${s}_${k}" ${ativos.has(norm(r.t)) ? "disabled" : "checked"}> ${esc(r.t)}</label><small>${r.rec ? esc(textoRec({ tipo: r.rec, dias: r.dias, dia: r.dia })) : `prazo de ${r.prazo} dias`}${ativos.has(norm(r.t)) ? " · já existe" : ""}</small></li>`).join("")}</ul></details>`).join("")}
+      <div class="campo"><label>Responsável pelas tarefas</label><select name="resp">${opcoes(RESPONSAVEIS.map(r => [r, r]), c.responsavel || (RESPONSAVEIS.includes(meuNome()) ? meuNome() : ""), "Sem responsável")}</select></div>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Criar tarefas</button></div>
+    </form>`);
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  $("formRot").onsubmit = async e => {
+    e.preventDefault();
+    const f = new FormData(e.target), novas = [];
+    for (const [s, ls] of Object.entries(ROTINAS)) {
+      if (!f.get("s_" + s)) continue;
+      ls.forEach((r, k) => {
+        if (!f.get(`t_${s}_${k}`)) return;
+        const rec = r.rec ? { tipo: r.rec, ...(r.dias ? { dias: r.dias } : {}), ...(r.dia ? { dia: r.dia } : {}) } : null;
+        novas.push({ clienteId: c.id, titulo: r.t, servico: s, responsavel: f.get("resp") || "", prioridade: r.prio || "media", venc: primeiraData(rec, r.prazo), rec, lembrete: r.lembrete || "", checklist: r.checklist || [] });
+      });
+    }
+    if (!novas.length) return toast("Marque pelo menos uma tarefa", "erro");
+    fecharModal();
+    await salvarTar(d => { for (const v of novas) d.tarefas.push(novaTarefaObj(d, v)); logar(d, c.id, `Aplicou a rotina padrão: ${novas.length} tarefa${novas.length === 1 ? "" : "s"} criada${novas.length === 1 ? "" : "s"}`); }, `${novas.length} tarefas criadas`);
+    reRenderCli();
+  };
+}
+
+/* ---- Arquivos do cliente (pasta no OneDrive) ---- */
+async function abaArquivosCli(c) {
+  const raiz = pastaCli(c), sub = cl.pastaCli === c.id ? cl.pastaSub : "";
+  cl.pastaCli = c.id; cl.pastaSub = sub;
+  const rel = raiz + (sub ? "/" + sub : "");
+  const migalhas = [["", nomeCli(c)], ...sub.split("/").filter(Boolean).map((p, k, a) => [a.slice(0, k + 1).join("/"), p])];
+  $("cliAba").innerHTML = `
+  <section class="bloco arq-cli">
+    <div class="arq-topo"><nav class="migalhas">${migalhas.map(([p, n], k) => k === migalhas.length - 1 ? `<b>${esc(n)}</b>` : `<a data-arq-pasta="${esc(p)}">${esc(n)}</a><span>›</span>`).join("")}</nav>
+      <div class="dir"><button class="btn-s" data-clia="novaPasta"><svg><use href="#i-pasta"/></svg>Nova pasta</button>
+        <label class="btn-p" style="cursor:pointer"><svg><use href="#i-enviar"/></svg>Enviar arquivos<input type="file" id="arqInput" multiple hidden></label></div></div>
+    <div class="zona-arq" id="zonaArq">Arraste arquivos aqui para enviar para <b>${esc(migalhas[migalhas.length - 1][1])}</b></div>
+    <div id="arqProg"></div>
+    <div id="arqLista"><div class="esqueleto"></div></div>
+  </section>
+  ${(c.documentos || []).length && !sub ? `<section class="bloco" style="margin-top:14px"><div class="bloco-cab"><div><h3>Documentos do contrato</h3></div></div><ul class="docs-cli" style="padding:0 14px 14px">${c.documentos.map(d => `<li><a href="${esc(d.webUrl)}" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg><span><b>${esc(d.tipo)}</b><small>${esc(d.nome)}</small></span></a></li>`).join("")}</ul></section>` : ""}`;
+  const z = $("zonaArq");
+  z.ondragover = e => { e.preventDefault(); z.classList.add("sobre"); };
+  z.ondragleave = () => z.classList.remove("sobre");
+  z.ondrop = e => { e.preventDefault(); z.classList.remove("sobre"); enviarArquivosCli(c, rel, [...e.dataTransfer.files]); };
+  $("arqInput").onchange = e => enviarArquivosCli(c, rel, [...e.target.files]);
+  let itens = [];
+  try {
+    const r = await (await graph(caminho(rel) + ":/children?$select=id,name,webUrl,lastModifiedDateTime,size,file,folder,lastModifiedBy&$top=500")).json();
+    itens = r.value || [];
+  } catch (e) { if (e.status !== 404) { $("arqLista").innerHTML = `<div class="aviso-erro">Não foi possível ler a pasta: ${esc(e.message)}</div>`; return; } }
+  if (!$("arqLista") || cl.pastaCli !== c.id) return;
+  const pastas = itens.filter(i => i.folder).sort((a, b) => a.name.localeCompare(b.name)), arqs = itens.filter(i => i.file).sort((a, b) => b.lastModifiedDateTime.localeCompare(a.lastModifiedDateTime));
+  const tam = n => n > 1048576 ? (n / 1048576).toFixed(1).replace(".", ",") + " MB" : Math.max(1, Math.round(n / 1024)) + " KB";
+  $("arqLista").innerHTML = pastas.length || arqs.length ? `<ul class="lista-arq">
+    ${pastas.map(p => `<li class="pasta" data-arq-pasta="${esc((sub ? sub + "/" : "") + p.name)}"><svg><use href="#i-pasta"/></svg><div class="q"><b>${esc(p.name)}</b><small>${p.folder?.childCount ?? ""} ${p.folder?.childCount === 1 ? "item" : p.folder?.childCount !== undefined ? "itens" : ""}</small></div></li>`).join("")}
+    ${arqs.map(a => `<li><svg><use href="#i-pdf"/></svg><div class="q"><a href="${esc(a.webUrl)}" target="_blank" rel="noopener"><b>${esc(a.name)}</b></a><small>${dataHora(a.lastModifiedDateTime)}${a.size ? " · " + tam(a.size) : ""}${a.lastModifiedBy?.user?.displayName ? "" : ""}</small></div>
+      <a class="acao" href="${esc(a.webUrl)}" target="_blank" rel="noopener" data-dica="Abrir"><svg><use href="#i-abrir"/></svg></a>
+      <button class="acao perigo-ico" data-arq-del="${esc(a.id)}" data-nome="${esc(a.name)}" data-dica="Excluir"><svg><use href="#i-lixo"/></svg></button></li>`).join("")}</ul>`
+    : `<div class="vazio-bloco">${sub ? "Pasta vazia." : "Nenhum arquivo ainda. Envie extratos, notas, relatórios, contratos… Eles ficam na pasta do cliente no OneDrive."}</div>`;
+}
+async function enviarArquivosCli(c, rel, arquivos) {
+  if (!arquivos.length) return;
+  const prog = $("arqProg");
+  try { await garantirCaminho(rel + "/x"); await criarPasta(rel.split("/").slice(0, -1).join("/"), rel.split("/").pop()); } catch {}
+  let ok = 0;
+  for (const [k, a] of arquivos.entries()) {
+    if (prog) prog.innerHTML = `<div class="prog-arq"><span>Enviando ${k + 1} de ${arquivos.length}: ${esc(a.name)}</span><i><b id="arqBarra" style="width:0%"></b></i></div>`;
+    try { await enviarArquivo(rel + "/" + limparNome(a.name), a, "rename", p => { const b = $("arqBarra"); if (b) b.style.width = Math.round(p * 100) + "%"; }); ok++; }
+    catch (e) { toast(`Falha ao enviar ${a.name}: ${e.message}`, "erro", 6000); }
+  }
+  if (prog) prog.innerHTML = "";
+  if (ok) {
+    if (!c.pasta) try { await salvarStore(cliStore, d => { const x = d.clientes.find(y => y.id === c.id); if (x && !x.pasta) x.pasta = pastaCli(c); }); } catch {}
+    await salvarTar(d => logar(d, c.id, `Enviou ${ok === 1 ? `o arquivo "${arquivos[0].name}"` : ok + " arquivos"}${rel !== pastaCli(c) ? ` para ${rel.slice(pastaCli(c).length + 1)}` : ""}`), `${ok} arquivo${ok === 1 ? "" : "s"} enviado${ok === 1 ? "" : "s"}`);
+  }
+  if (viewAtual === "clientes" && rota[0] === c.id) abaArquivosCli(c);
+}
+
+/* ---- Atividades (log) ---- */
+function abaAtividadesCli(c) {
+  const ls = (tarStore.dados?.log || []).filter(x => x.clienteId === c.id).slice(0, 400);
+  const porDia = {};
+  for (const x of ls) { const d = new Date(x.em), k = isoD(d); (porDia[k] ||= []).push(x); }
+  $("cliAba").innerHTML = `<section class="bloco"><div class="bloco-cab"><div><h3>Atividades</h3><small>Tudo o que a equipe fez neste cliente: tarefas, comentários, arquivos e alterações</small></div></div>
+    ${ls.length ? Object.entries(porDia).map(([d, xs]) => `<div class="log-dia"><h5>${(t => t.charAt(0).toUpperCase() + t.slice(1))(new Date(d + "T12:00").toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric" }))}</h5>
+      <ul class="log-cli">${xs.map(x => `<li><span class="hora">${new Date(x.em).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span><span class="av">${esc((x.por || "?").slice(0, 1))}</span><p><b>${esc(x.por || "—")}</b> ${esc(x.texto)}</p>${x.tarefaId && tarPorId(x.tarefaId) ? `<button class="lnk" data-tf="${x.tarefaId}">abrir</button>` : ""}</li>`).join("")}</ul></div>`).join("")
+      : `<div class="vazio-bloco">Nenhuma atividade registrada ainda.</div>`}</section>`;
+}
+
+/* ---- Novo cliente / serviços ---- */
+function formServicos(lista) {
+  return `<div class="serv-ed" id="servEd">${SERV_CLI.slice(0, 4).map(([s, n]) => { const x = (lista || []).find(i => (i.serv === s) || (!i.serv && servsDoCliente({ servicos: [i] }).includes(s))) || null;
+    return `<div class="serv-lin ${x ? "on" : ""}" data-serv="${s}"><label class="chk"><input type="checkbox" ${x ? "checked" : ""}> ${n}</label>
+      <input data-sf="plano" placeholder="Plano (ex.: Start)" value="${esc(x?.plano || "")}" data-mascara="nenhuma">
+      <select data-sf="cobranca"><option value="mensal" ${x?.cobranca !== "unico" ? "selected" : ""}>Mensal</option><option value="unico" ${x?.cobranca === "unico" ? "selected" : ""}>Projeto</option></select>
+      <input data-sf="valor" inputmode="decimal" placeholder="Valor R$" value="${x?.valor ? String(x.valor).replace(".", ",") : ""}"></div>`; }).join("")}</div>`;
+}
+function lerServicos(raiz) {
+  return [...raiz.querySelectorAll(".serv-lin")].filter(l => l.querySelector("input[type=checkbox]").checked).map(l => ({ serv: l.dataset.serv, nome: nomeServ(l.dataset.serv), plano: l.querySelector("[data-sf=plano]").value.trim(),
+    cobranca: l.querySelector("[data-sf=cobranca]").value, valor: Number(String(l.querySelector("[data-sf=valor]").value).replace(/\./g, "").replace(",", ".")) || 0 }));
+}
+const totaisServ = sv => ({ mensal: sv.filter(s => s.cobranca === "mensal").reduce((a, s) => a + s.valor + (s.licenca || 0), 0), unico: sv.filter(s => s.cobranca === "unico").reduce((a, s) => a + s.valor, 0) });
+function abrirNovoCliente() {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo cliente</h3><small class="sub-modal">Para clientes antigos ou que entraram por fora do fluxo do CRM.</small></div>
+    <form class="modal-corpo dados-grid" id="formCli">
+      <div class="linha2"><div class="campo"><label>CNPJ <button type="button" class="lnk" data-m="cnpj">buscar dados ›</button></label><input name="cnpj"></div>
+        <div class="campo"><label>Regime tributário</label><select name="regime"><option value="">—</option>${REGIMES.map(r => `<option>${r}</option>`).join("")}</select></div></div>
+      <div class="linha2">${campoTxt("razao", "Razão social *", "")}${campoTxt("fantasia", "Nome fantasia", "")}</div>
+      <div class="linha3">${campoTxt("contato", "Contato principal", "")}${campoTxt("telefone", "Telefone", "")}${campoTxt("email", "E-mail", "")}</div>
+      <div class="linha3">${campoTxt("cep", "CEP", "")}${campoTxt("cidade", "Cidade", "")}${campoTxt("uf", "UF", "")}</div>
+      <div class="linha2"><div class="campo"><label>Cliente desde</label><input type="date" name="desde" value="${hojeISO()}"></div>
+        <div class="campo"><label>Responsável WL</label><select name="responsavel">${opcoes(RESPONSAVEIS.map(r => [r, r]), RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", "—")}</select></div></div>
+      <div class="campo"><label>Serviços contratados</label>${formServicos([])}</div>
+      <label class="chk"><input type="checkbox" name="rotina" checked> Criar as tarefas da rotina padrão dos serviços marcados</label>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Cadastrar cliente</button></div>
+    </form>`);
+  m.classList.add("modal-largo");
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  const form = $("formCli");
+  form._extra = {};
+  $("servEd").onchange = e => { const l = e.target.closest(".serv-lin"); if (l && e.target.type === "checkbox") l.classList.toggle("on", e.target.checked); };
+  m.querySelector("[data-m=cnpj]").onclick = async () => {
+    const d = soDigitos(form.cnpj.value);
+    if (d.length !== 14) return toast("Digite os 14 caracteres do CNPJ", "erro");
+    toast("Consultando CNPJ…");
+    const a = await consultarCNPJ(d);
+    if (!a) return toast("CNPJ não encontrado na consulta pública", "erro");
+    const por = (n, v) => { if (v && form[n] && !form[n].value.trim()) { form[n].value = v; form[n].dispatchEvent(new Event("input", { bubbles: true })); } };
+    por("razao", a.razao_social); por("fantasia", tituloBR(a.nome_fantasia || "")); por("email", (a.email || "").toLowerCase()); por("telefone", soDigitos(a.ddd_telefone_1));
+    por("cep", soDigitos(a.cep)); por("cidade", tituloBR(a.municipio || "")); por("uf", a.uf);
+    const adm = (a.qsa || []).find(s => /administrador|titular|presidente|diretor/i.test(s.qualificacao_socio || "")) || (a.qsa || [])[0];
+    por("contato", tituloBR(adm?.nome_socio || ""));
+    const op = (a.opcao_pelo_mei ? "MEI" : a.opcao_pelo_simples ? "Simples Nacional" : "");
+    if (op && REGIMES.includes(op) && !form.regime.value) form.regime.value = op;
+    form._extra = { logradouro: tituloBR(`${a.descricao_tipo_de_logradouro || ""} ${a.logradouro || ""}`.trim()), numero: a.numero || "", complemento: tituloBR(a.complemento || ""), bairro: tituloBR(a.bairro || ""),
+      socios: (a.qsa || []).map(s => ({ nome: s.nome_socio, cpf: "" })) };
+    toast(/ativa/i.test(a.descricao_situacao_cadastral || "ATIVA") ? "Dados preenchidos pela consulta do CNPJ" : `Atenção: situação cadastral ${a.descricao_situacao_cadastral}`);
+  };
+  form.onsubmit = async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(form));
+    if (!f.razao.trim()) return toast("Informe a razão social", "erro");
+    const dc = soDigitos(f.cnpj), dup = dc.length === 14 && clis().find(x => soDigitos(x.cnpj) === dc);
+    if (dup) { fecharModal(); toast(`Esse CNPJ já é o cliente ${nomeCli(dup)}`); location.hash = "clientes/" + dup.id; return; }
+    const servicos = lerServicos(form), tot = totaisServ(servicos);
+    let id;
+    try {
+      await salvarStore(cliStore, d => {
+        d.seq = (d.seq || d.clientes.length) + 1; id = "CL-" + String(d.seq).padStart(4, "0");
+        d.clientes.push({ id, razao: f.razao.trim(), fantasia: f.fantasia.trim(), cnpj: f.cnpj.trim(), regime: f.regime, contato: f.contato.trim(), telefone: f.telefone.trim(), email: f.email.trim(),
+          cep: f.cep.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(), ...form._extra, responsavel: f.responsavel, desde: f.desde, status: "ativo", origem: "manual",
+          servicos, mensal: tot.mensal, unico: tot.unico, documentos: [], contratos: [], propostas: [], criadoEm: new Date().toISOString(), criadoPor: meuNome() });
+      });
+    } catch (er) { return toast("Não foi possível cadastrar: " + er.message, "erro", 6000); }
+    const c = cliPorId(id);
+    let n = 0;
+    await salvarTar(d => {
+      logar(d, id, "Cadastrou o cliente");
+      if (f.rotina) for (const s of servicos.map(x => x.serv)) for (const r of ROTINAS[s] || []) {
+        const rec = r.rec ? { tipo: r.rec, ...(r.dias ? { dias: r.dias } : {}), ...(r.dia ? { dia: r.dia } : {}) } : null;
+        d.tarefas.push(novaTarefaObj(d, { clienteId: id, titulo: r.t, servico: s, responsavel: f.responsavel, prioridade: r.prio || "media", venc: primeiraData(rec, r.prazo), rec, lembrete: r.lembrete || "", checklist: r.checklist || [] })); n++;
+      }
+      if (n) logar(d, id, `Aplicou a rotina padrão: ${n} tarefas criadas`);
+    });
+    fecharModal();
+    toast(`Cliente cadastrado${n ? ` · ${n} tarefas criadas` : ""}`);
+    location.hash = "clientes/" + id;
+  };
+}
+function editarServicos(c) {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Serviços contratados</h3><small class="sub-modal">${esc(nomeCli(c))}</small></div>
+    <form class="modal-corpo dados-grid" id="formServ">${formServicos(c.servicos)}
+      ${(c.servicos || []).some(s => s.licenca) ? `<small class="txt-prog">A licença do ContaAzul (${brl((c.servicos || []).reduce((a, s) => a + (s.licenca || 0), 0))}/mês) continua somada ao total mensal.</small>` : ""}
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Salvar</button></div></form>`);
+  m.classList.add("modal-largo");
+  veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  $("servEd").onchange = e => { const l = e.target.closest(".serv-lin"); if (l && e.target.type === "checkbox") l.classList.toggle("on", e.target.checked); };
+  $("formServ").onsubmit = async e => {
+    e.preventDefault();
+    const novos = lerServicos(e.target).map(s => { const ant = (c.servicos || []).find(x => x.serv === s.serv || (!x.serv && servsDoCliente({ servicos: [x] }).includes(s.serv))); return ant?.licenca ? { ...s, licenca: ant.licenca } : s; });
+    const tot = totaisServ(novos);
+    fecharModal();
+    try {
+      await salvarStore(cliStore, d => { const x = d.clientes.find(y => y.id === c.id); if (x) Object.assign(x, { servicos: novos, mensal: tot.mensal, unico: tot.unico }); });
+      await salvarTar(d => logar(d, c.id, `Atualizou os serviços: ${novos.map(s => s.nome).join(", ") || "nenhum"}`), "Serviços salvos");
+    } catch (er) { toast(er.message, "erro"); }
+    reRenderCli();
+  };
+}
+
+/* ---- Lembretes e contador do menu ---- */
+function atualizarBadgeTarefas() {
+  if (!tarStore.carregado) return;
+  const n = tarefas().filter(t => t.status !== "concluida" && t.responsavel === meuNome() && ["atraso", "hoje"].includes(stTarefa(t)) && cliPorId(t.clienteId)).length;
+  document.querySelectorAll('[data-ir="clientes"]').forEach(b => { let s = b.querySelector(".badge-nav"); if (!n) return s?.remove(); if (!s) { s = document.createElement("i"); s.className = "badge-nav"; b.append(s); } s.textContent = n > 99 ? "99+" : n; });
+}
+async function verificarLembretes() {
+  try { if (!tarStore.carregado || !cliStore.carregado) await garantirCli(); else await carregarStore(tarStore); } catch { return; }
+  atualizarBadgeTarefas();
+  const hoje = hojeISO(), eu = meuNome();
+  let vistos = {}; try { vistos = JSON.parse(localStorage.getItem("wl.lembretes") || "{}"); } catch {}
+  const avisar = tarefas().filter(t => t.status !== "concluida" && t.venc && t.lembrete !== "" && t.lembrete != null && (!t.responsavel || t.responsavel === eu) && cliPorId(t.clienteId)
+    && isoD(new Date(new Date(t.venc + "T12:00") - Number(t.lembrete) * 864e5)) <= hoje && t.venc >= hoje && !vistos[t.id + t.venc]);
+  if (avisar.length) {
+    toast(avisar.length === 1 ? `Lembrete: ${avisar[0].titulo} · ${nomeCli(cliPorId(avisar[0].clienteId))} (${rotuloData(venceTxt(avisar[0]))})` : `${avisar.length} lembretes de tarefas · veja em Clientes › Tarefas`, "", 8000);
+    if ("Notification" in window && Notification.permission === "granted") avisar.slice(0, 3).forEach(t => { try { new Notification("WL Sistema · " + t.titulo, { body: `${nomeCli(cliPorId(t.clienteId))} · vence ${rotuloData(venceTxt(t))}`, icon: "icon-192.png", tag: t.id }); } catch {} });
+    avisar.forEach(t => vistos[t.id + t.venc] = 1);
+    try { localStorage.setItem("wl.lembretes", JSON.stringify(Object.fromEntries(Object.entries(vistos).slice(-500)))); } catch {}
+  }
+  const chave = "wl.resumoTarefas." + hoje;
+  let jaResumo = false; try { jaResumo = !!localStorage.getItem(chave); } catch {}
+  if (!jaResumo) {
+    const minhas = tarefas().filter(t => t.status !== "concluida" && t.responsavel === eu && ["atraso", "hoje"].includes(stTarefa(t)) && cliPorId(t.clienteId));
+    if (minhas.length) { const atr = minhas.filter(t => stTarefa(t) === "atraso").length; setTimeout(() => toast(`Você tem ${minhas.length} tarefa${minhas.length === 1 ? "" : "s"} para hoje${atr ? ` (${atr} atrasada${atr === 1 ? "" : "s"})` : ""} · Clientes › Tarefas`, "", 8000), 9000); }
+    try { localStorage.setItem(chave, "1"); } catch {}
+  }
+}
+function iniciarLembretes() {
+  setTimeout(verificarLembretes, 3000);
+  setInterval(() => { if (document.visibilityState === "visible") verificarLembretes(); }, 10 * 60000);
+  if ("Notification" in window && Notification.permission === "default") {
+    const pedir = () => { Notification.requestPermission().catch(() => {}); document.removeEventListener("click", pedir); };
+    document.addEventListener("click", pedir, { once: true });
+  }
+}
+
+/* ---- Cliques da área Clientes ---- */
+$("cliConteudo").addEventListener("click", async e => {
+  const ok = e.target.closest("[data-tf-ok]");
+  if (ok) { e.stopPropagation(); const t = tarPorId(ok.dataset.tfOk); return t?.status === "concluida" ? reabrirTarefa(t.id) : concluirTarefa(ok.dataset.tfOk); }
+  const tf = e.target.closest("[data-tf]");
+  if (tf) return abrirTarefa(tf.dataset.tf);
+  const pasta = e.target.closest("[data-arq-pasta]");
+  if (pasta) { cl.pastaSub = pasta.dataset.arqPasta; return abaArquivosCli(cliPorId(rota[0])); }
+  const del = e.target.closest("[data-arq-del]");
+  if (del) {
+    if (!confirmar(`Excluir o arquivo "${del.dataset.nome}"? Ele vai para a lixeira do OneDrive.`)) return;
+    const c = cliPorId(rota[0]);
+    try { await graph(`/me/drive/items/${del.dataset.arqDel}`, { method: "DELETE" }); await salvarTar(d => logar(d, c.id, `Excluiu o arquivo "${del.dataset.nome}"`), "Arquivo excluído"); }
+    catch (er) { toast("Não foi possível excluir: " + er.message, "erro"); }
+    return abaArquivosCli(c);
+  }
+  const b = e.target.closest("[data-clia]"); if (!b) return;
+  const a = b.dataset.clia, c = cliPorId(rota[0]);
+  if (a === "novo") return abrirNovoCliente();
+  if (a === "novaTarefa") return abrirTarefa(null, c?.id);
+  if (a === "rotina") return abrirRotina(c);
+  if (a === "servicos") return editarServicos(c);
+  if (a === "verTodas") { cl.verConcluidas = true; return abaTarefasCli(c); }
+  if (a === "lead") { location.hash = "crm/funil"; setTimeout(() => abrirLead(c.leadId), 400); return; }
+  if (a === "novaPasta") {
+    const nome = limparNome(prompt("Nome da nova pasta:") || ""); if (!nome) return;
+    const rel = pastaCli(c) + (cl.pastaSub ? "/" + cl.pastaSub : "");
+    try { await garantirCaminho(rel + "/" + nome + "/x"); await criarPasta(rel, nome); await salvarTar(d => logar(d, c.id, `Criou a pasta "${nome}"`)); } catch (er) { toast(er.message, "erro"); }
+    return abaArquivosCli(c);
+  }
+  if (a === "excluirCli") {
+    const n = tarefas().filter(t => t.clienteId === c.id).length;
+    if (!confirmar(`Excluir o cliente "${nomeCli(c)}"? ${n ? `As ${n} tarefas dele também serão apagadas. ` : ""}Os arquivos no OneDrive não são apagados. Se ele só parou de ser cliente, prefira marcar como Inativo.`)) return;
+    try {
+      await salvarStore(cliStore, d => { d.clientes = d.clientes.filter(x => x.id !== c.id); });
+      await salvarTar(d => { d.tarefas = d.tarefas.filter(t => t.clienteId !== c.id); logar(d, c.id, `Excluiu o cliente ${nomeCli(c)}`); }, "Cliente excluído");
+    } catch (er) { return toast(er.message, "erro"); }
+    location.hash = "clientes";
+  }
+});
+$("cliBotoes").onclick = e => {
+  const b = e.target.closest("[data-clia]"); if (!b) return;
+  if (b.dataset.clia === "novo") abrirNovoCliente();
+  if (b.dataset.clia === "novaTarefa") abrirTarefa(null);
+};
 
 /* ================== EDITOR DE DOCUMENTOS (Word .docx) ================== */
 const LIB = {
@@ -6938,6 +7518,7 @@ async function abrirApp() {
   carregarBiblioteca();
   garantirPrefs().then(() => { if (viewAtual === "biblioteca") renderBiblioteca(); });
   carregarEquipe();
+  iniciarLembretes();
   if (conta.trocarSenha) trocarMinhaSenha(true);
   setInterval(sincronizarVisivel, CONFIG.intervaloSync * 2);
   setTimeout(verificarAssinaturas, 4000);
