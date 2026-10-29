@@ -64,6 +64,9 @@
   .nav-topo button:hover{background:rgba(255,255,255,.08);color:#fff}
   .nav-topo button.ativo{background:rgba(255,255,255,.14);color:#fff}
   .nav-topo button.breve{opacity:.45}
+  .nav-topo button span{white-space:nowrap}
+  @media(max-width:1520px){.nav-topo{margin-left:12px;gap:2px}.nav-topo button{padding:8px 10px;gap:6px;font-size:.8rem}}
+  @media(max-width:1260px) and (min-width:861px){.nav-topo button span{display:none}.nav-topo button{padding:9px 11px}}
   .nav-topo svg,.nav-base svg{width:18px;height:18px}
   .nav-base{display:none}
   .chip-sync{display:flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;background:rgba(255,255,255,.12);
@@ -914,6 +917,8 @@
   .badge-nav{position:absolute;top:-3px;right:-4px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--erro);color:#fff;font-size:.6rem;font-weight:800;font-style:normal;display:grid;place-items:center;line-height:1}
   [data-ir]{position:relative}
   .tiles.tiles4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tiles.tiles6{grid-template-columns:repeat(6,minmax(0,1fr))}
+  @media(max-width:900px){.tiles.tiles6{grid-template-columns:repeat(3,minmax(0,1fr))}}
   .tile.atr b{color:var(--erro)} .tile.ok b{color:var(--verde)}
   .grupo-tf{margin-bottom:12px}
   .lista-tf{list-style:none}
@@ -992,6 +997,31 @@
   .serv-lin .chk input{width:17px!important;height:17px;flex:none;accent-color:var(--teal);padding:0!important}
   @media(max-width:640px){.tiles.tiles4{grid-template-columns:repeat(2,minmax(0,1fr))}.serv-lin{grid-template-columns:1fr 1fr}.serv-lin .chk{grid-column:1/-1}
     .lista-tf .tf{flex-wrap:wrap}.lista-tf .tf .q{flex-basis:calc(100% - 40px)}.lista-tf .tf .chip-p{margin-left:32px}}
+
+  /* Início e notificações */
+  .sino{position:relative;width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;flex:none}
+  .sino svg{width:19px;height:19px}
+  .sino i{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--erro);color:#fff;font-size:.62rem;font-weight:800;font-style:normal;display:grid;place-items:center;border:2px solid var(--teal)}
+  .painel-not{position:fixed;top:64px;right:16px;width:min(380px,calc(100vw - 24px));max-height:70vh;overflow:auto;background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(6,30,33,.25);z-index:60;border:1px solid var(--borda)}
+  .painel-not .pn-cab{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--borda);position:sticky;top:0;background:#fff}
+  .painel-not .pn-cab button{font-size:.74rem;font-weight:700;color:var(--turq)}
+  .painel-not ul,.not-ini{list-style:none}
+  .painel-not li,.not-ini li{display:flex;gap:10px;padding:10px 14px;border-top:1px solid var(--borda);cursor:pointer;font-size:.82rem}
+  .painel-not li:first-child,.not-ini li:first-child{border-top:0}
+  .painel-not li.nova,.not-ini li.nova{background:rgba(19,163,181,.07)}
+  .painel-not li:hover,.not-ini li:hover{background:var(--bg)}
+  .painel-not .av,.not-ini .av{width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:.74rem;font-weight:700;flex:none}
+  .painel-not small,.not-ini small{font-size:.7rem;color:var(--txt-2)}
+  .grade-ini{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;align-items:start}
+  .col-ini{display:grid;gap:16px}
+  .ini-grupo{padding:0 0 6px} .ini-grupo h5{display:flex;gap:8px;align-items:center;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--txt-2);padding:12px 16px 4px}
+  .ini-grupo h5 span{background:var(--bg);padding:1px 7px;border-radius:6px}
+  .ini-grupo .lnk{display:block;padding:8px 16px}
+  .atalhos-ini{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 14px}
+  .atalhos-ini button{display:flex;gap:8px;align-items:center;padding:11px 12px;border:1px solid var(--borda);border-radius:11px;font-size:.8rem;font-weight:600;color:var(--teal);text-align:left}
+  .atalhos-ini button:hover{border-color:var(--turq)} .atalhos-ini svg{width:17px;height:17px;flex:none}
+  .lista-acoes li[data-link],.lista-acoes li[data-ini-ag]{cursor:pointer}
+  @media(max-width:900px){.grade-ini{grid-template-columns:1fr}.painel-not{top:58px;right:12px}}
 </style>
 </head>
 <body>
@@ -1001,6 +1031,7 @@
   <symbol id="i-crm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></symbol>
   <symbol id="i-cli" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
   <symbol id="i-parc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/></symbol>
   <symbol id="i-sis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
   <symbol id="i-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
   <symbol id="i-baixar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
@@ -1063,6 +1094,12 @@
   </header>
 
   <main>
+    <!-- ============ INÍCIO ============ -->
+    <div data-view="inicio" class="oculto">
+      <div class="cab-pagina"><div><div class="eyebrow" id="iniData"></div><h2 id="iniOla">Olá!</h2><p>Seus clientes, suas tarefas e o que precisa da sua atenção hoje.</p></div></div>
+      <div id="iniConteudo"></div>
+    </div>
+
     <!-- ============ BIBLIOTECA ============ -->
     <div data-view="biblioteca">
       <nav class="trilha" id="trilha"></nav>
@@ -1215,12 +1252,13 @@ const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial"
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
 const MODULOS = [
-  { id: "biblioteca", nome: "Biblioteca", icone: "i-bib", menu: true },
+  { id: "inicio", nome: "Início", icone: "i-home" },
+  { id: "biblioteca", nome: "Biblioteca", curto: "Acervo", icone: "i-bib", menu: true },
   { id: "crm", nome: "CRM", icone: "i-crm" },
   { id: "parceiros", nome: "Parceiros", icone: "i-parc" },
   { id: "clientes", nome: "Clientes", icone: "i-cli" },
-  { id: "atendimento", nome: "Atendimento", icone: "i-atd", menu: true },
-  { id: "meus", nome: "Meus documentos", icone: "i-pasta" },
+  { id: "atendimento", nome: "Atendimento", curto: "Atender", icone: "i-atd", menu: true },
+  { id: "meus", nome: "Meus documentos", curto: "Meus docs", topo: "Meus docs", icone: "i-pasta" },
   { id: "sistema", nome: "Sistema", icone: "i-sis" }
 ];
 
@@ -1332,9 +1370,11 @@ function trocarMinhaSenha(obrigatorio = false) {
 }
 
 /* Equipe (nomes para os campos "Responsável") */
+let EQUIPE = [];
 async function carregarEquipe() {
   try {
     const eq = await api("/equipe");
+    EQUIPE = eq.map(u => ({ nome: u.nome, email: String(u.email || "").toLowerCase(), primeiro: u.nome.split(" ")[0], papel: u.papel }));
     const nomes = eq.map(u => u.nome.split(" ")[0]).filter((v, k, a) => a.indexOf(v) === k);
     if (nomes.length) RESPONSAVEIS.splice(0, RESPONSAVEIS.length, ...nomes);
   } catch {}
@@ -1422,9 +1462,9 @@ async function enviarArquivo(rel, arquivo, conflito, progresso = () => {}) {
 let viewAtual = null, rota = [];
 function montarNav() {
   const html = MODULOS.map(m => `<button data-ir="${m.id}" class="${m.breve ? "breve" : ""} ${m.menu ? "tem-menu" : ""}" title="${m.breve ? "Em breve" : m.nome}">
-    <svg><use href="#${m.icone}"/></svg><span>${m.nome}</span>${m.menu ? `<svg class="caret"><use href="#i-seta"/></svg>` : ""}</button>`).join("");
+    <svg><use href="#${m.icone}"/></svg><span>${m.topo || m.nome}</span>${m.menu ? `<svg class="caret"><use href="#i-seta"/></svg>` : ""}</button>`).join("");
   $("navTopo").innerHTML = html;
-  $("navBase").innerHTML = html.replace(/<svg class="caret">.*?<\/svg>/g, "");
+  $("navBase").innerHTML = MODULOS.map(m => `<button data-ir="${m.id}" class="${m.breve ? "breve" : ""}" title="${m.nome}"><svg><use href="#${m.icone}"/></svg><span>${m.curto || m.nome}</span></button>`).join("");
   $("navTopo").onclick = e => {
     const b = e.target.closest("[data-ir]");
     if (!b || e.target.closest(".mega")) return;
@@ -1446,7 +1486,7 @@ function navegar(id) {
 function irPara(hash) {
   const partes = hash.split("/").filter(Boolean).map(decodeURIComponent);
   let id = partes[0];
-  if (!MODULOS.some(m => m.id === id && !m.breve)) id = "biblioteca";
+  if (!MODULOS.some(m => m.id === id && !m.breve)) id = "inicio";
   viewAtual = id;
   rota = partes.slice(1);
   fecharMenus();
@@ -1462,7 +1502,8 @@ function irPara(hash) {
   if (id === "sistema") { abrirSistema(); renderUsuarios(); }
   if (id === "meus") { renderMeus(); carregarMeus(); }
   if (id === "clientes") renderClientes();
-  document.querySelector("main").classList.toggle("largo", id === "crm" || id === "atendimento" || id === "parceiros");
+  if (id === "inicio") renderHome();
+  document.querySelector("main").classList.toggle("largo", id === "crm" || id === "atendimento" || id === "parceiros" || id === "inicio");
   if (id === "atendimento") renderAtendimento();
   if (id === "parceiros") { renderParceiros(); if (paStore.carregado) carregarParceiros(true).then(renderParceiros).catch(() => {}); }
   if (id === "crm") { renderCRM(); if (!crm.carregado) carregarCRM(); else verificarCRM(); }
@@ -6304,10 +6345,10 @@ async function salvarTar(alterar, msg) {
 function novaTarefaObj(d, base) {
   d.seq = (d.seq || d.tarefas.length) + 1;
   const id = "T-" + String(d.seq).padStart(5, "0");
-  return { id, serieId: base.serieId || id, clienteId: base.clienteId, titulo: base.titulo, descricao: base.descricao || "", servico: base.servico || "", responsavel: base.responsavel || "",
+  return { id, serieId: base.serieId || id, clienteId: base.clienteId, titulo: base.titulo, descricao: base.descricao || "", servico: base.servico || "", responsavel: base.responsavel || "", respEmail: base.responsavel ? emailDe(base.responsavel) : "",
     prioridade: base.prioridade || "media", venc: base.venc || "", hora: base.hora || "", rec: base.rec?.tipo ? base.rec : null, lembrete: base.lembrete ?? "",
     checklist: (base.checklist || []).map(x => ({ id: crypto.randomUUID(), txt: typeof x === "string" ? x : x.txt, feito: false })), comentarios: [],
-    status: "pendente", criadoEm: new Date().toISOString(), criadoPor: meuNome() };
+    status: "pendente", criadoEm: new Date().toISOString(), criadoPor: meuNome(), criadoPorEmail: meuEmail() };
 }
 
 /* ---- Carregamento ---- */
@@ -6383,7 +6424,7 @@ async function renderClientes() {
   $("cliConteudo").querySelectorAll("[data-clf]").forEach(s => s.onchange = () => { cl.filtroC[s.dataset.clf] = s.value; renderClientes(); });
 }
 function abasCli(ativa) {
-  const minhas = tarefas().filter(t => t.status !== "concluida" && t.responsavel === meuNome() && ["atraso", "hoje"].includes(stTarefa(t))).length;
+  const minhas = tarefas().filter(t => t.status !== "concluida" && ehMinha(t) && ["atraso", "hoje"].includes(stTarefa(t))).length;
   return `<div class="barra-crm"><nav class="abas"><button data-link="#clientes" class="${ativa === "lista" ? "ativo" : ""}">Clientes</button>
     <button data-link="#clientes/tarefas" class="${ativa === "tarefas" ? "ativo" : ""}">Tarefas${minhas ? ` <span class="bolinha">${minhas}</span>` : ""}</button></nav></div>`;
 }
@@ -6394,7 +6435,7 @@ function renderPainelTarefas() {
   $("cliDesc").textContent = "O que precisa ser feito em todos os clientes: atrasadas, de hoje e da semana.";
   $("cliBotoes").innerHTML = `<button class="btn-p" data-clia="novaTarefa"><svg><use href="#i-mais"/></svg>Nova tarefa</button>`;
   const f = cl.filtroT, eu = meuNome();
-  const base = tarefas().filter(t => cliPorId(t.clienteId) && (f.resp === "" || (f.resp === "eu" ? t.responsavel === eu : f.resp === "_sem" ? !t.responsavel : t.responsavel === f.resp))
+  const base = tarefas().filter(t => cliPorId(t.clienteId) && (f.resp === "" || (f.resp === "eu" ? ehMinha(t) : f.resp === "_sem" ? !t.responsavel : t.responsavel === f.resp))
     && (!f.cliente || t.clienteId === f.cliente) && (!f.serv || t.servico === f.serv) && (!f.busca || norm(t.titulo + " " + nomeCli(cliPorId(t.clienteId))).includes(norm(f.busca))));
   const abertas = base.filter(t => t.status !== "concluida");
   const semana = isoD(new Date(Date.now() + 7 * 864e5));
@@ -6497,6 +6538,8 @@ function abaGeralCli(c) {
         await salvarStore(cliStore, d => { const x = d.clientes.find(y => y.id === c.id); if (x) Object.assign(x, m); });
         $("statusCli") && ($("statusCli").textContent = "Salvo");
         if ("fantasia" in m || "razao" in m) $("cliTitulo").textContent = nomeCli(c);
+        if ("responsavel" in m && m.responsavel && m.responsavel !== meuNome()) notificar([{ para: m.responsavel, texto: `colocou você como responsável pelo cliente ${nomeCli(c)}`, link: `#clientes/${c.id}`,
+          email: { assunto: `Cliente sob sua responsabilidade: ${nomeCli(c)}`, titulo: "Novo cliente para você", corpo: `${meuNome()} colocou você como responsável pelo cliente <b>${esc(nomeCli(c))}</b>.` } }]);
         if ("status" in m) { await salvarTar(d => logar(d, c.id, m.status === "inativo" ? "Cliente marcado como inativo" : "Cliente reativado")); $("cliEyebrow").textContent = `Cliente · ${c.id}${c.status === "inativo" ? " · inativo" : ""}`; }
       } catch (er) { $("statusCli") && ($("statusCli").textContent = "Erro ao salvar"); }
     }, 800);
@@ -6583,7 +6626,9 @@ function abrirTarefa(id, novaPara) {
     if (a === "addCk") return addCk();
     if (a === "comentar") {
       const txt = $("tfComent").value.trim(); if (!txt) return;
-      await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; (x.comentarios = x.comentarios || []).push({ em: new Date().toISOString(), por: meuNome(), txt }); logar(d, x.clienteId, `Comentou em "${x.titulo}": ${txt.slice(0, 120)}`, { tarefaId: id }); });
+      await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; (x.comentarios = x.comentarios || []).push({ em: new Date().toISOString(), por: meuNome(), porEmail: meuEmail(), txt }); logar(d, x.clienteId, `Comentou em "${x.titulo}": ${txt.slice(0, 120)}`, { tarefaId: id }); });
+      { const x = tarPorId(id), quem = new Set([x?.respEmail || emailDe(x?.responsavel), x?.criadoPorEmail || emailDe(x?.criadoPor), ...(x?.comentarios || []).map(k => k.porEmail || emailDe(k.por))].filter(Boolean));
+        notificar([...quem].map(em => ({ para: em, texto: `comentou em "${x.titulo}" (${nomeCli(cliPorId(x.clienteId))}): ${txt.slice(0, 140)}`, link: `#clientes/${x.clienteId}/tarefas`, tarefaId: id }))); }
       return abrirTarefa(id);
     }
     if (a === "excluir") {
@@ -6608,10 +6653,26 @@ function abrirTarefa(id, novaPara) {
     if (!v.clienteId) return toast("Escolha o cliente", "erro");
     if (v.rec && !v.venc) return toast("Tarefas que se repetem precisam de uma data de vencimento", "erro");
     fecharModal();
-    if (id) await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; Object.assign(x, v, { clienteId: x.clienteId }); x.alteradaEm = new Date().toISOString(); x.alteradaPor = meuNome(); logar(d, x.clienteId, `Editou a tarefa "${x.titulo}"`, { tarefaId: id }); }, "Tarefa salva");
-    else await salvarTar(d => { const x = novaTarefaObj(d, v); x.checklist = v.checklist.map(i => ({ ...i, feito: false })); d.tarefas.push(x); logar(d, x.clienteId, `Criou a tarefa "${x.titulo}"${x.rec ? " (" + textoRec(x.rec).toLowerCase() + ")" : ""}`, { tarefaId: x.id }); }, "Tarefa criada");
+    let alvo = null;
+    if (id) await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; const antes = x.responsavel; Object.assign(x, v, { clienteId: x.clienteId, respEmail: v.responsavel ? emailDe(v.responsavel) : "" }); x.alteradaEm = new Date().toISOString(); x.alteradaPor = meuNome(); logar(d, x.clienteId, `Editou a tarefa "${x.titulo}"${antes !== x.responsavel ? ` (responsável: ${x.responsavel || "ninguém"})` : ""}`, { tarefaId: id }); if (antes !== x.responsavel && x.responsavel) alvo = x; }, "Tarefa salva");
+    else await salvarTar(d => { const x = novaTarefaObj(d, v); x.checklist = v.checklist.map(i => ({ ...i, feito: false })); d.tarefas.push(x); logar(d, x.clienteId, `Criou a tarefa "${x.titulo}"${x.rec ? " (" + textoRec(x.rec).toLowerCase() + ")" : ""}${x.responsavel ? " para " + x.responsavel : ""}`, { tarefaId: x.id }); if (x.responsavel) alvo = x; }, "Tarefa criada");
+    if (alvo) avisarAtribuicao([alvo]);
     reRenderCli();
   };
+}
+/* Avisa (no sistema e por e-mail) quem recebeu tarefas de outra pessoa */
+function avisarAtribuicao(lista, cliente) {
+  const porResp = {};
+  for (const t of lista) if (t.responsavel && t.responsavel !== meuNome()) (porResp[t.responsavel] ||= []).push(t);
+  notificar(Object.entries(porResp).map(([resp, ts]) => {
+    const c = cliente || cliPorId(ts[0].clienteId), um = ts.length === 1 ? ts[0] : null;
+    return { para: resp, link: `#clientes/${c?.id || ts[0].clienteId}/tarefas`, tarefaId: um?.id || "",
+      texto: um ? `atribuiu a você a tarefa "${um.titulo}" (${nomeCli(c)})${um.venc ? ", vence " + data(um.venc + "T12:00") : ""}` : `atribuiu a você ${ts.length} tarefas de ${nomeCli(c)}`,
+      email: { assunto: um ? `Nova tarefa: ${um.titulo} · ${nomeCli(c)}` : `${ts.length} novas tarefas · ${nomeCli(c)}`, titulo: um ? "Nova tarefa para você" : "Novas tarefas para você",
+        corpo: `<p>${esc(meuNome())} atribuiu a você ${um ? `a tarefa <b>${esc(um.titulo)}</b>` : `${ts.length} tarefas`} do cliente <b>${esc(nomeCli(c))}</b>.</p>` +
+          (um ? `<p>${um.venc ? "Vencimento: <b>" + data(um.venc + "T12:00") + (um.hora ? " às " + um.hora : "") + "</b><br>" : ""}${um.rec ? "Repete: " + esc(textoRec(um.rec)) + "<br>" : ""}${um.descricao ? esc(um.descricao) : ""}</p>`
+            : `<ul>${ts.slice(0, 15).map(t => `<li>${esc(t.titulo)}${t.venc ? " · " + data(t.venc + "T12:00") : ""}</li>`).join("")}</ul>`) } };
+  }));
 }
 const itemCk = x => `<li data-ck="${x.id}"><label><input type="checkbox" ${x.feito ? "checked" : ""}><span>${esc(x.txt)}</span></label><button type="button" data-ck-del aria-label="Remover">×</button></li>`;
 async function concluirTarefa(id) {
@@ -6642,7 +6703,7 @@ async function reabrirTarefa(id) {
   }, "Tarefa reaberta");
   reRenderCli();
 }
-function reRenderCli() { if (viewAtual === "clientes") { const [a, b] = rota; if (a === "tarefas") renderPainelTarefas(); else if (a) abrirCliente(a, b || "geral"); else renderClientes(); } }
+function reRenderCli() { if (viewAtual === "inicio") return renderHome(); if (viewAtual === "clientes") { const [a, b] = rota; if (a === "tarefas") renderPainelTarefas(); else if (a) abrirCliente(a, b || "geral"); else renderClientes(); } }
 
 /* ---- Rotina padrão por serviço ---- */
 function abrirRotina(c) {
@@ -6670,6 +6731,7 @@ function abrirRotina(c) {
     if (!novas.length) return toast("Marque pelo menos uma tarefa", "erro");
     fecharModal();
     await salvarTar(d => { for (const v of novas) d.tarefas.push(novaTarefaObj(d, v)); logar(d, c.id, `Aplicou a rotina padrão: ${novas.length} tarefa${novas.length === 1 ? "" : "s"} criada${novas.length === 1 ? "" : "s"}`); }, `${novas.length} tarefas criadas`);
+    if (f.get("resp")) avisarAtribuicao(novas.map(v => ({ ...v, responsavel: f.get("resp") })), c);
     reRenderCli();
   };
 }
@@ -6817,6 +6879,8 @@ function abrirNovoCliente() {
     });
     fecharModal();
     toast(`Cliente cadastrado${n ? ` · ${n} tarefas criadas` : ""}`);
+    if (f.responsavel && f.responsavel !== meuNome()) notificar([{ para: f.responsavel, texto: `colocou você como responsável pelo cliente ${nomeCli(c)}${n ? ` (${n} tarefas da rotina criadas para você)` : ""}`, link: `#clientes/${id}`,
+      email: { assunto: `Novo cliente sob sua responsabilidade: ${nomeCli(c)}`, titulo: "Novo cliente para você", corpo: `${meuNome()} colocou você como responsável pelo cliente <b>${esc(nomeCli(c))}</b>${n ? `, com ${n} tarefas da rotina padrão` : ""}.` } }]);
     location.hash = "clientes/" + id;
   };
 }
@@ -6844,7 +6908,7 @@ function editarServicos(c) {
 /* ---- Lembretes e contador do menu ---- */
 function atualizarBadgeTarefas() {
   if (!tarStore.carregado) return;
-  const n = tarefas().filter(t => t.status !== "concluida" && t.responsavel === meuNome() && ["atraso", "hoje"].includes(stTarefa(t)) && cliPorId(t.clienteId)).length;
+  const n = tarefas().filter(t => t.status !== "concluida" && ehMinha(t) && ["atraso", "hoje"].includes(stTarefa(t)) && cliPorId(t.clienteId)).length;
   document.querySelectorAll('[data-ir="clientes"]').forEach(b => { let s = b.querySelector(".badge-nav"); if (!n) return s?.remove(); if (!s) { s = document.createElement("i"); s.className = "badge-nav"; b.append(s); } s.textContent = n > 99 ? "99+" : n; });
 }
 async function verificarLembretes() {
@@ -6852,7 +6916,7 @@ async function verificarLembretes() {
   atualizarBadgeTarefas();
   const hoje = hojeISO(), eu = meuNome();
   let vistos = {}; try { vistos = JSON.parse(localStorage.getItem("wl.lembretes") || "{}"); } catch {}
-  const avisar = tarefas().filter(t => t.status !== "concluida" && t.venc && t.lembrete !== "" && t.lembrete != null && (!t.responsavel || t.responsavel === eu) && cliPorId(t.clienteId)
+  const avisar = tarefas().filter(t => t.status !== "concluida" && t.venc && t.lembrete !== "" && t.lembrete != null && (!t.responsavel || ehMinha(t)) && cliPorId(t.clienteId)
     && isoD(new Date(new Date(t.venc + "T12:00") - Number(t.lembrete) * 864e5)) <= hoje && t.venc >= hoje && !vistos[t.id + t.venc]);
   if (avisar.length) {
     toast(avisar.length === 1 ? `Lembrete: ${avisar[0].titulo} · ${nomeCli(cliPorId(avisar[0].clienteId))} (${rotuloData(venceTxt(avisar[0]))})` : `${avisar.length} lembretes de tarefas · veja em Clientes › Tarefas`, "", 8000);
@@ -6863,7 +6927,7 @@ async function verificarLembretes() {
   const chave = "wl.resumoTarefas." + hoje;
   let jaResumo = false; try { jaResumo = !!localStorage.getItem(chave); } catch {}
   if (!jaResumo) {
-    const minhas = tarefas().filter(t => t.status !== "concluida" && t.responsavel === eu && ["atraso", "hoje"].includes(stTarefa(t)) && cliPorId(t.clienteId));
+    const minhas = tarefas().filter(t => t.status !== "concluida" && ehMinha(t) && ["atraso", "hoje"].includes(stTarefa(t)) && cliPorId(t.clienteId));
     if (minhas.length) { const atr = minhas.filter(t => stTarefa(t) === "atraso").length; setTimeout(() => toast(`Você tem ${minhas.length} tarefa${minhas.length === 1 ? "" : "s"} para hoje${atr ? ` (${atr} atrasada${atr === 1 ? "" : "s"})` : ""} · Clientes › Tarefas`, "", 8000), 9000); }
     try { localStorage.setItem(chave, "1"); } catch {}
   }
@@ -6922,6 +6986,166 @@ $("cliBotoes").onclick = e => {
   if (b.dataset.clia === "novo") abrirNovoCliente();
   if (b.dataset.clia === "novaTarefa") abrirTarefa(null);
 };
+
+/* ================== EQUIPE, NOTIFICAÇÕES E INÍCIO ================== */
+const meuEmail = () => String(conta?.username || "").trim().toLowerCase();
+/* Nome (primeiro nome, como aparece nos campos "Responsável") → e-mail do usuário. Com nomes repetidos, prefere você e depois quem não é a conta administradora. */
+const emailDe = nome => {
+  const c = EQUIPE.filter(u => u.primeiro === nome);
+  return ((c.length > 1 && (c.find(u => u.email === meuEmail()) || c.find(u => u.papel !== "admin"))) || c[0] || {}).email || "";
+};
+const nomeDeEmail = email => (EQUIPE.find(u => u.email === String(email || "").toLowerCase()) || {}).primeiro || "";
+const ehMinha = t => (t.respEmail && t.respEmail === meuEmail()) || (!t.respEmail && t.responsavel === meuNome()) || (t.respEmail && !EQUIPE.length && t.responsavel === meuNome());
+
+/* ---- Notificações (dados/notificacoes.json): avisos para cada usuário dentro do sistema ---- */
+const notStore = criarStore("dados/notificacoes.json", { versao: 1, itens: [] });
+const minhasNot = () => (notStore.dados?.itens || []).filter(n => n.para === meuEmail());
+/* lista: [{ para: nome ou e-mail, texto, link, email: { assunto, titulo, corpo, botao } }] */
+async function notificar(lista) {
+  const itens = lista.map(n => ({ ...n, para: n.para?.includes?.("@") ? n.para.toLowerCase() : emailDe(n.para) })).filter(n => n.para && n.para !== meuEmail());
+  if (!itens.length) return;
+  try {
+    if (!notStore.carregado) await carregarStore(notStore);
+    await salvarStore(notStore, d => {
+      d.itens = d.itens || [];
+      for (const n of itens) d.itens.unshift({ id: crypto.randomUUID(), para: n.para, de: meuNome(), em: new Date().toISOString(), texto: n.texto, link: n.link || "", tarefaId: n.tarefaId || "", lida: false });
+      if (d.itens.length > 3000) d.itens.length = 3000;
+    });
+  } catch {}
+  for (const n of itens.filter(x => x.email)) {
+    api("/notificar", { method: "POST", body: JSON.stringify({ para: n.para, assunto: n.email.assunto, titulo: n.email.titulo || n.email.assunto, corpo: n.email.corpo || n.texto,
+      link: new URL((n.link || "").replace(/^#?/, "#"), location.href.split("#")[0]).href, botao: n.email.botao || "Abrir no WL Sistema" }) }).catch(() => {});
+  }
+}
+async function verificarNotificacoes(silencioso) {
+  try { await carregarStore(notStore); } catch { return; }
+  const ls = minhasNot(), novas = ls.filter(n => !n.lida);
+  const b = $("sinoBadge");
+  if (b) { b.textContent = novas.length > 99 ? "99+" : novas.length; b.classList.toggle("oculto", !novas.length); }
+  let ultimo = ""; try { ultimo = localStorage.getItem("wl.notVista") || ""; } catch {}
+  const recentes = novas.filter(n => n.em > ultimo);
+  if (recentes.length && !silencioso) toast(recentes.length === 1 ? `${recentes[0].de}: ${recentes[0].texto}` : `Você tem ${recentes.length} novas notificações`, "", 7000);
+  if (recentes.length) {
+    try { localStorage.setItem("wl.notVista", recentes[0].em); } catch {}
+    if (!silencioso && "Notification" in window && Notification.permission === "granted") recentes.slice(0, 3).forEach(n => { try { new Notification("WL Sistema", { body: `${n.de}: ${n.texto}`, icon: "icon-192.png", tag: n.id }); } catch {} });
+  }
+  if ($("painelNot") && !$("painelNot").classList.contains("oculto")) desenharPainelNot();
+  if (viewAtual === "inicio") desenharNotInicio();
+}
+function desenharPainelNot() {
+  const ls = minhasNot().slice(0, 40);
+  $("painelNot").innerHTML = `<div class="pn-cab"><b>Notificações</b>${ls.some(n => !n.lida) ? `<button data-not="todas">Marcar todas como lidas</button>` : ""}</div>
+    ${ls.length ? `<ul>${ls.map(n => `<li class="${n.lida ? "" : "nova"}" data-not-id="${n.id}"><span class="av">${esc((n.de || "?").slice(0, 1))}</span><div><p><b>${esc(n.de || "")}</b> ${esc(n.texto)}</p><small>${dataHora(n.em)}</small></div></li>`).join("")}</ul>`
+      : `<div class="vazio-acoes" style="padding:18px">Nenhuma notificação.</div>`}`;
+}
+async function marcarLidas(ids) {
+  try { await salvarStore(notStore, d => { for (const n of d.itens || []) if (n.para === meuEmail() && (!ids || ids.includes(n.id))) n.lida = true; }); } catch {}
+  verificarNotificacoes(true);
+}
+function montarSino() {
+  if ($("btnSino")) return;
+  const b = document.createElement("button"); b.id = "btnSino"; b.className = "sino"; b.setAttribute("aria-label", "Notificações");
+  b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><i id="sinoBadge" class="oculto">0</i>`;
+  const p = document.createElement("div"); p.id = "painelNot"; p.className = "painel-not oculto";
+  $("avatar").before(b); document.body.append(p);
+  b.onclick = e => { e.stopPropagation(); p.classList.toggle("oculto"); if (!p.classList.contains("oculto")) desenharPainelNot(); };
+  p.onclick = e => {
+    e.stopPropagation();
+    if (e.target.closest("[data-not=todas]")) return marcarLidas(null);
+    const li = e.target.closest("[data-not-id]"); if (!li) return;
+    const n = minhasNot().find(x => x.id === li.dataset.notId);
+    p.classList.add("oculto");
+    if (n && !n.lida) marcarLidas([n.id]);
+    if (n?.link) { location.hash = n.link.replace(/^#/, ""); if (n.tarefaId) setTimeout(() => tarPorId(n.tarefaId) && abrirTarefa(n.tarefaId), 900); }
+  };
+  document.addEventListener("click", () => p.classList.add("oculto"));
+}
+function iniciarNotificacoes() {
+  montarSino();
+  setTimeout(() => verificarNotificacoes(false), 2500);
+  setInterval(() => { if (document.visibilityState === "visible") verificarNotificacoes(false); }, 2 * 60000);
+}
+
+/* ---- Página inicial: área do usuário ---- */
+async function renderHome() {
+  const agora = new Date(), h = agora.getHours();
+  $("iniOla").textContent = `${h < 12 ? "Bom dia" : h < 18 ? "Boa tarde" : "Boa noite"}, ${meuNome() || "bem-vindo"}!`;
+  $("iniData").textContent = (t => t.charAt(0).toUpperCase() + t.slice(1))(agora.toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric" }));
+  if (!tarStore.carregado || !cliStore.carregado) $("iniConteudo").innerHTML = `<div class="esqueleto"></div>`;
+  try {
+    await Promise.all([garantirCli(), crm.carregado ? null : carregarCRM(true), paStore.carregado ? null : carregarStore(paStore).catch(() => {}), notStore.carregado ? null : carregarStore(notStore).catch(() => {}), garantirStoresCtr().catch(() => {})]);
+  } catch (e) { $("iniConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível carregar os seus dados.</b><br>${esc(e.message)}</div>`; return; }
+  if (viewAtual !== "inicio") return;
+  const eu = meuNome(), semana = isoD(new Date(Date.now() + 7 * 864e5));
+  const minhas = tarefas().filter(t => t.status !== "concluida" && ehMinha(t) && cliPorId(t.clienteId));
+  const atr = minhas.filter(t => stTarefa(t) === "atraso"), hj = minhas.filter(t => stTarefa(t) === "hoje"), prox = minhas.filter(t => stTarefa(t) === "futuro" && t.venc <= semana);
+  const semResp = tarefas().filter(t => t.status !== "concluida" && !t.responsavel && cliPorId(t.clienteId) && ["atraso", "hoje"].includes(stTarefa(t)));
+  const meusCli = clis().filter(c => c.status !== "inativo" && (c.responsavel === eu || tarefas().some(t => t.clienteId === c.id && t.status !== "concluida" && ehMinha(t))))
+    .sort((a, b) => nomeCli(a).localeCompare(nomeCli(b)));
+  const acoesCRM = leads().filter(l => !l.semInteresse && !["ganho", "perdido"].includes(l.etapa) && (!l.responsavel || l.responsavel === eu))
+    .flatMap(l => pendentes(l).filter(a => a.data && statusData(a.data) !== "futuro").map(a => ({ tipo: "Lead", nome: l.empresa, txt: a.texto, data: a.data, link: () => { location.hash = "crm/funil"; setTimeout(() => abrirLead(l.id), 400); } })));
+  const acoesPA = parceiros().filter(p => p.etapa !== "encerrado" && (!p.responsavel || p.responsavel === eu))
+    .flatMap(p => pendentes(p).filter(a => a.data && statusData(a.data) !== "futuro").map(a => ({ tipo: "Parceiro", nome: p.empresa, txt: a.texto, data: a.data, link: () => { location.hash = "parceiros/painel"; setTimeout(() => abrirParceiro(p.id), 400); } })));
+  const agenda = [...acoesCRM, ...acoesPA].sort((a, b) => a.data.localeCompare(b.data));
+  ini.agenda = agenda;
+  const propsAbertas = (propStore.dados?.propostas || []).filter(p => p.status === "emitida");
+  const ctrsAss = (ctrStore.dados?.contratos || []).filter(c => c.status === "enviado");
+  const feitasSemana = tarefas().filter(t => t.status === "concluida" && t.concluidaPor === eu && (t.concluidaEm || "") >= new Date(Date.now() - 7 * 864e5).toISOString()).length;
+  const tiles = [["Tarefas atrasadas", atr.length, atr.length ? "atr" : ""], ["Tarefas para hoje", hj.length, ""], ["Próximos 7 dias", prox.length, ""], ["Meus clientes", meusCli.length, ""], ["Ações comerciais hoje", agenda.length, ""], ["Concluí na semana", feitasSemana, "ok"]];
+  const grupo = (n, ls) => ls.length ? `<div class="ini-grupo"><h5>${n} <span>${ls.length}</span></h5><ul class="lista-tf">${ordenarTf(ls).slice(0, 12).map(t => linhaTarefa(t, true)).join("")}</ul>${ls.length > 12 ? `<a class="lnk" href="#clientes/tarefas">+ ${ls.length - 12} no painel de tarefas</a>` : ""}</div>` : "";
+  $("iniConteudo").innerHTML = `
+  <section class="bloco" style="margin-bottom:16px"><div class="tiles tiles6">${tiles.map(([n, v, c]) => `<div class="tile ${c}"><i>&nbsp;</i><b>${v}</b><span>${n}</span></div>`).join("")}</div></section>
+  <div class="grade-ini">
+    <div class="col-ini">
+      <section class="bloco"><div class="bloco-cab"><div><h3>Minhas tarefas</h3><small>Atrasadas, de hoje e da próxima semana nos clientes</small></div><a href="#clientes/tarefas">Painel de tarefas</a></div>
+        <div class="ini-tarefas">${atr.length || hj.length || prox.length ? grupo("Atrasadas", atr) + grupo("Hoje", hj) + grupo("Próximos 7 dias", prox) : `<div class="vazio-bloco">Nada pendente para você nos próximos dias. 🎉</div>`}</div></section>
+      ${semResp.length ? `<section class="bloco"><div class="bloco-cab"><div><h3>Sem responsável</h3><small>Tarefas de hoje ou atrasadas que ninguém assumiu</small></div></div><ul class="lista-tf">${ordenarTf(semResp).slice(0, 8).map(t => linhaTarefa(t, true)).join("")}</ul></section>` : ""}
+      <section class="bloco"><div class="bloco-cab"><div><h3>Agenda comercial de hoje</h3><small>Ações do CRM e das parcerias atrasadas ou para hoje</small></div><a href="#crm/painel">Abrir CRM</a></div>
+        ${agenda.length ? `<ul class="lista-acoes">${agenda.slice(0, 12).map((a, k) => `<li data-ini-ag="${k}"><span class="chip-p">${a.tipo}</span><div class="q"><b>${esc(a.nome)}</b><span>${esc(a.txt || "Ação")}</span></div><span class="quando ${statusData(a.data)}">${statusData(a.data) === "atraso" ? "Atrasada · " : ""}${rotuloData(a.data)}</span></li>`).join("")}</ul>` : `<div class="vazio-bloco">Nenhuma ação comercial pendente para hoje.</div>`}</section>
+    </div>
+    <div class="col-ini">
+      <section class="bloco"><div class="bloco-cab"><div><h3>Notificações</h3></div>${minhasNot().some(n => !n.lida) ? `<a data-ini="lidas">Marcar como lidas</a>` : ""}</div><div id="iniNot"></div></section>
+      <section class="bloco"><div class="bloco-cab"><div><h3>Meus clientes</h3><small>Sob sua responsabilidade ou com tarefas suas</small></div><a href="#clientes">Todos</a></div>
+        ${meusCli.length ? `<ul class="lista-acoes">${meusCli.map(c => { const p = tarefas().filter(t => t.clienteId === c.id && t.status !== "concluida"), a = p.filter(t => stTarefa(t) === "atraso").length;
+          return `<li data-link="#clientes/${c.id}"><div class="q"><b>${esc(nomeCli(c))}</b><span>${(c.servicos || []).map(s => esc(s.plano || s.nome)).join(" · ") || "—"}</span></div>${a ? `<span class="quando atraso">${a} atrasada${a === 1 ? "" : "s"}</span>` : ""}<span class="quando">${p.length} pend.</span></li>`; }).join("")}</ul>`
+          : `<div class="vazio-bloco">Nenhum cliente sob sua responsabilidade. Defina o <b>Responsável WL</b> na página do cliente.</div>`}</section>
+      ${propsAbertas.length || ctrsAss.length ? `<section class="bloco"><div class="bloco-cab"><div><h3>Comercial em andamento</h3><small>Aguardando resposta ou assinatura</small></div></div><ul class="lista-acoes">
+        ${ctrsAss.map(c => `<li data-link="#atendimento/contratos/${c.id}"><span class="chip-p">Contrato</span><div class="q"><b>${esc(c.contratante?.razao || c.id)}</b><span>enviado para assinatura${c.envelope?.enviadoEm ? " em " + data(c.envelope.enviadoEm) : ""}</span></div></li>`).join("")}
+        ${propsAbertas.slice(0, 8).map(p => `<li data-link="#atendimento/propostas/${p.id}"><span class="chip-p">Proposta</span><div class="q"><b>${esc(p.cliente?.empresa || p.id)}</b><span>emitida${p.emitidaEm ? " em " + data(p.emitidaEm) : ""}, aguardando resposta</span></div></li>`).join("")}</ul></section>` : ""}
+      <section class="bloco"><div class="bloco-cab"><div><h3>Atalhos</h3></div></div>
+        <div class="atalhos-ini"><button data-ini="tarefa"><svg><use href="#i-mais"/></svg>Nova tarefa</button><button data-ini="lead"><svg><use href="#i-crm"/></svg>Novo lead</button>
+          <button data-ini="cliente"><svg><use href="#i-cli"/></svg>Novo cliente</button><button data-link="#atendimento"><svg><use href="#i-atd"/></svg>Diagnósticos e propostas</button>
+          <button data-link="#biblioteca"><svg><use href="#i-bib"/></svg>Biblioteca</button><button data-ini="resumo"><svg><use href="#i-enviar"/></svg>Receber resumo por e-mail</button></div></section>
+    </div>
+  </div>`;
+  desenharNotInicio();
+}
+const ini = { agenda: [] };
+function desenharNotInicio() {
+  const alvo = $("iniNot"); if (!alvo) return;
+  const ls = minhasNot().slice(0, 8);
+  alvo.innerHTML = ls.length ? `<ul class="not-ini">${ls.map(n => `<li class="${n.lida ? "" : "nova"}" data-not-ini="${n.id}"><span class="av">${esc((n.de || "?").slice(0, 1))}</span><div><p><b>${esc(n.de || "")}</b> ${esc(n.texto)}</p><small>${dataHora(n.em)}</small></div></li>`).join("")}</ul>` : `<div class="vazio-bloco">Nenhuma notificação.</div>`;
+}
+$("iniConteudo").addEventListener("click", async e => {
+  const ok = e.target.closest("[data-tf-ok]");
+  if (ok) { e.stopPropagation(); const t = tarPorId(ok.dataset.tfOk); return t?.status === "concluida" ? reabrirTarefa(t.id) : concluirTarefa(ok.dataset.tfOk); }
+  const tf = e.target.closest("[data-tf]"); if (tf) return abrirTarefa(tf.dataset.tf);
+  const ag = e.target.closest("[data-ini-ag]"); if (ag) return ini.agenda[+ag.dataset.iniAg]?.link();
+  const nt = e.target.closest("[data-not-ini]");
+  if (nt) { const n = minhasNot().find(x => x.id === nt.dataset.notIni); if (n && !n.lida) marcarLidas([n.id]); if (n?.link) location.hash = n.link.replace(/^#/, ""); if (n?.tarefaId) setTimeout(() => tarPorId(n.tarefaId) && abrirTarefa(n.tarefaId), 900); return; }
+  const b = e.target.closest("[data-ini]"); if (!b) return;
+  const a = b.dataset.ini;
+  if (a === "lidas") return marcarLidas(null).then(renderHome);
+  if (a === "tarefa") return abrirTarefa(null);
+  if (a === "cliente") return abrirNovoCliente();
+  if (a === "lead") { if (!crm.carregado) await carregarCRM(true); return abrirNovoLead(); }
+  if (a === "resumo") {
+    b.disabled = true;
+    try { const r = await api("/notificar/resumo", { method: "POST", body: JSON.stringify({ site: location.href.split("#")[0] }) }); toast(r.enviado ? `Resumo enviado para ${meuEmail()}` : "Você não tem tarefas atrasadas ou para hoje: nada a enviar"); }
+    catch (er) { toast(er.message, "erro", 6000); }
+    b.disabled = false;
+  }
+});
 
 /* ================== EDITOR DE DOCUMENTOS (Word .docx) ================== */
 const LIB = {
@@ -7514,11 +7738,12 @@ async function abrirApp() {
   const cacheCRM = lerLocal(CRM_CACHE);
   if (cacheCRM?.dados) { crm.dados = cacheCRM.dados; crm.dados.leads.forEach(normalizarLead); crm.eTag = cacheCRM.eTag; crm.carregado = true; }
   mostrar("telaApp");
-  irPara(location.hash.slice(1) || "biblioteca");
+  irPara(location.hash.slice(1) || "inicio");
   carregarBiblioteca();
   garantirPrefs().then(() => { if (viewAtual === "biblioteca") renderBiblioteca(); });
   carregarEquipe();
   iniciarLembretes();
+  iniciarNotificacoes();
   if (conta.trocarSenha) trocarMinhaSenha(true);
   setInterval(sincronizarVisivel, CONFIG.intervaloSync * 2);
   setTimeout(verificarAssinaturas, 4000);
