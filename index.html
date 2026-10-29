@@ -881,6 +881,7 @@
   <symbol id="i-bib" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6.5A2.5 2.5 0 0 0 4 21.5v-2z"/><path d="M8 7h7M8 11h5"/></symbol>
   <symbol id="i-crm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></symbol>
   <symbol id="i-cli" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-parc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></symbol>
   <symbol id="i-sis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
   <symbol id="i-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
   <symbol id="i-baixar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
@@ -983,6 +984,28 @@
       <div id="crmConteudo"></div>
     </div>
 
+    <!-- ============ PARCEIROS ============ -->
+    <div data-view="parceiros" class="oculto">
+      <div class="cab-pagina">
+        <div>
+          <div class="eyebrow">Comercial</div>
+          <h2>Parceiros</h2>
+          <p id="paDesc">Escritórios de contabilidade e outras empresas que podem indicar clientes.</p>
+        </div>
+      </div>
+      <div class="barra-crm">
+        <nav class="abas" id="paAbas">
+          <button data-aba="painel">Painel</button>
+          <button data-aba="funil">Funil</button>
+          <button data-aba="lista">Parceiros</button>
+        </nav>
+        <div class="dir">
+          <button class="btn-p" id="btnNovoPA"><svg><use href="#i-mais"/></svg>Novo parceiro</button>
+        </div>
+      </div>
+      <div id="paConteudo"></div>
+    </div>
+
     <!-- ============ ATENDIMENTO ============ -->
     <div data-view="atendimento" class="oculto">
       <nav class="trilha" id="atdTrilha"></nav>
@@ -1073,6 +1096,7 @@ const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial"
 const MODULOS = [
   { id: "biblioteca", nome: "Biblioteca", icone: "i-bib", menu: true },
   { id: "crm", nome: "CRM", icone: "i-crm" },
+  { id: "parceiros", nome: "Parceiros", icone: "i-parc" },
   { id: "clientes", nome: "Clientes", icone: "i-cli" },
   { id: "atendimento", nome: "Atendimento", icone: "i-atd", menu: true },
   { id: "meus", nome: "Meus documentos", icone: "i-pasta" },
@@ -1309,6 +1333,7 @@ function irPara(hash) {
   if (propPendente) salvarProp();
   if (ctrPendente) salvarCtr();
   if (id !== "crm" && !(id === "atendimento" && $("gaveta"))) fecharFicha();
+  if (id !== "parceiros" && typeof pa !== "undefined") pa.abertoId = null;
   document.querySelectorAll("[data-view]").forEach(v => v.classList.toggle("oculto", v.dataset.view !== id));
   document.querySelectorAll("[data-ir]").forEach(b => b.classList.toggle("ativo", b.dataset.ir === id));
   scrollTo(0, 0);
@@ -1316,8 +1341,9 @@ function irPara(hash) {
   if (id === "sistema") { abrirSistema(); renderUsuarios(); }
   if (id === "meus") { renderMeus(); carregarMeus(); }
   if (id === "clientes") renderClientes();
-  document.querySelector("main").classList.toggle("largo", id === "crm" || id === "atendimento");
+  document.querySelector("main").classList.toggle("largo", id === "crm" || id === "atendimento" || id === "parceiros");
   if (id === "atendimento") renderAtendimento();
+  if (id === "parceiros") { renderParceiros(); if (paStore.carregado) carregarParceiros(true).then(renderParceiros).catch(() => {}); }
   if (id === "crm") { renderCRM(); if (!crm.carregado) carregarCRM(); else verificarCRM(); }
 }
 addEventListener("hashchange", () => irPara(location.hash.slice(1)));
@@ -2059,7 +2085,7 @@ function renderPainel() {
   <section class="bloco" style="margin-bottom:16px">
     <div class="bloco-cab"><div><h3>Balanço do dia</h3><small>Mesmas siglas da Tabela de Trabalho · contado automaticamente pelas interações registradas</small></div>
       <div class="seg"><button data-bal="eu" class="${crm.balancoTodos ? "" : "ativo"}">Eu</button><button data-bal="todos" class="${crm.balancoTodos ? "ativo" : ""}">Equipe</button></div></div>
-    <div class="tiles">${tiles.map(([n, v, s], k) => `<div class="tile ${k >= 3 && v ? "forte" : ""}"><i>${s || "&nbsp;"}</i><b>${v}</b><span>${n}</span></div>`).join("")}</div>
+    <div class="tiles">${tiles.map(([n, v, s], k) => `<div class="tile ${k >= 4 && v ? "forte" : ""}"><i>${s || "&nbsp;"}</i><b>${v}</b><span>${n}</span></div>`).join("")}</div>
   </section>
   <div class="grade-painel">
     <div style="display:grid;gap:16px;align-content:start">
@@ -2380,10 +2406,10 @@ function eventosLead(l) {
   }
   return ev;
 }
-function desenharAgenda(l) {
+function desenharAgenda(l, fnEventos = eventosLead) {
   const alvo = $("agendaLead");
   if (!alvo || !l) return;
-  const ev = eventosLead(l);
+  const ev = fnEventos(l);
   const hoje = hojeISO();
   if (!agenda.mes) {
     const prox = pendentes(l).find(a => a.data && a.data.slice(0, 10) >= hoje);
@@ -2479,7 +2505,7 @@ function ligarFicha(l) {
       if (concluirPend && proxAcao(x)) concluirAcao(x, proxAcao(x).id, sel.nome.toLowerCase());
       if (sel.pedeData) novaAcao(x, prox || "Reunião de diagnóstico", dReun);
       else if (prox || proxData) novaAcao(x, prox || "Ação", proxData);
-    }, `${sel.nome} registrado`);
+    }, `Registrado: ${sel.nome}`);
   };
   $("formAcao").onsubmit = e => {
     e.preventDefault();
@@ -3738,6 +3764,459 @@ $("atdConteudo").addEventListener("click", async e => {
   if (a === "verLead") { if (!crm.carregado) await carregarCRM(true); abrirLead(diagAtual.leadId); }
   if (a === "excluirDiag") excluirDiag(diags().find(x => x.id === diagAtual.id) || diagAtual);
 });
+
+/* ================== PARCEIROS ==================
+   CRM adaptado para parcerias (ex.: escritórios de contabilidade): prospecção → contato → reunião → parceria fechada.
+   As indicações feitas por um parceiro entram no CRM como leads ligados a ele. */
+const ETAPAS_PA = [
+  { id: "prospectar", nome: "A prospectar", cor: "#9AA9A9" },
+  { id: "tentativa", nome: "Tentativa de contato", cor: "#D99A1E" },
+  { id: "contato", nome: "Em contato", cor: "#7FB8C0" },
+  { id: "reuniao", nome: "Reunião agendada", cor: "#13A3B5" },
+  { id: "reuniao_feita", nome: "Reunião feita", cor: "#0E8C9C" },
+  { id: "negociacao", nome: "Negociando termos", cor: "#0B6F78" },
+  { id: "ativo", nome: "Parceria fechada", cor: "#28B260" },
+  { id: "encerrado", nome: "Não avançou", cor: "#C8463D" }
+];
+const ORDEM_PA = Object.fromEntries(ETAPAS_PA.map((e, k) => [e.id, k]));
+const etapaPA = id => ETAPAS_PA.find(e => e.id === id) || ETAPAS_PA[0];
+const INTERACOES_PA = [
+  { id: "nao_atendeu", nome: "Não atendeu", sigla: "X", tentativa: true, avanca: "tentativa" },
+  { id: "mensagem", nome: "Mensagem enviada", sigla: "MSG", tentativa: true, avanca: "tentativa" },
+  { id: "conversou", nome: "Consegui falar", sigla: "OK", tentativa: true, avanca: "contato" },
+  { id: "agendou", nome: "Agendou reunião", sigla: "AG", avanca: "reuniao", pedeData: true },
+  { id: "reuniao_feita", nome: "Reunião feita", sigla: "R", avanca: "reuniao_feita" },
+  { id: "termos", nome: "Enviei proposta de parceria", sigla: "T", avanca: "negociacao" },
+  { id: "fechou", nome: "Parceria fechada", sigla: "✓", avanca: "ativo" },
+  { id: "nota", nome: "Anotação", sigla: "NT" }
+];
+const interacaoPA = id => INTERACOES_PA.find(i => i.id === id);
+const TIPOS_PARCEIRO = ["Escritório de contabilidade", "Advocacia", "Consultoria", "Software / ERP", "Associação / entidade de classe", "Banco / fintech", "Agência de marketing", "Outro"];
+const MODELOS_PARCERIA = ["Indicação com comissão", "Indicação recíproca", "Co-venda / atuação conjunta", "Revenda"];
+const MOTIVOS_PA = ["Sem interesse", "Já tem parceiro de BPO/financeiro", "Concorrente", "Não conseguimos contato", "Momento errado (retomar depois)", "Outro"];
+const paStore = criarStore("dados/parceiros/parceiros.json", { versao: 1, seq: 0, parceiros: [] });
+const parceiros = () => paStore.dados?.parceiros || [];
+const parceiroPorId = id => parceiros().find(p => p.id === id);
+const pa = { aba: "painel", filtro: { busca: "", etapa: "", tipo: "" }, abertoId: null };
+const indicacoesDe = p => leads().filter(l => l.parceiroId === p.id);
+
+async function carregarParceiros(forcar = false) {
+  if (paStore.carregado && !forcar) return;
+  await carregarStore(paStore);
+  if (!crm.carregado) await carregarCRM(true);
+}
+async function alterarParceiro(id, fn, msg) {
+  try {
+    await salvarStore(paStore, d => { const p = d.parceiros.find(x => x.id === id); if (p) { fn(p, d); p.atualizadoEm = new Date().toISOString(); } });
+    if (msg) toast(msg);
+    renderParceiros();
+    if (pa.abertoId) renderFichaPA(pa.abertoId);
+    return true;
+  } catch (e) { toast("Não foi possível salvar: " + e.message, "erro", 6000); return false; }
+}
+function registrarPA(p, tipo, texto, extra = {}) {
+  p.historico = p.historico || [];
+  p.historico.unshift({ id: crypto.randomUUID(), em: new Date().toISOString(), por: meuNome(), tipo, texto: texto || "", ...extra });
+}
+function moverEtapaPA(p, para, motivo) {
+  if (p.etapa === para) return;
+  registrarPA(p, "etapa", motivo ? `Motivo: ${motivo}` : "", { de: p.etapa, para });
+  p.etapa = para;
+  if (para === "encerrado") p.motivoEncerramento = motivo || "";
+  if (para === "ativo") { p.parceria = { modelo: "Indicação com comissão", comissao: "", inicio: hojeISO(), termo: false, ...(p.parceria || {}) }; }
+}
+
+/* ---- Tela ---- */
+async function renderParceiros() {
+  if (viewAtual !== "parceiros") return;
+  const [aba] = rota;
+  pa.aba = ["painel", "funil", "lista"].includes(aba) ? aba : "painel";
+  $("paAbas").querySelectorAll("button").forEach(b => b.classList.toggle("ativo", b.dataset.aba === pa.aba));
+  if (!paStore.carregado) {
+    $("paConteudo").innerHTML = `<div class="esqueleto"></div>`;
+    try { await carregarParceiros(); } catch (e) { $("paConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os parceiros.</b><br>${esc(e.message)}</div>`; return; }
+    if (viewAtual !== "parceiros") return;
+  }
+  const n = parceiros().length;
+  $("paDesc").textContent = n ? `${n} parceiro${n === 1 ? "" : "s"} na base · ${parceiros().filter(p => p.etapa === "ativo").length} parceria(s) ativa(s).` : "Escritórios de contabilidade e outras empresas que podem indicar clientes.";
+  if (!n) { $("paConteudo").innerHTML = `<div class="bloco"><div class="vazio-etapa"><b>Nenhum parceiro ainda</b>Cadastre o primeiro possível parceiro para começar a acompanhar os contatos.<br><br><button class="btn-p" style="margin:0 auto" data-pa="novo"><svg><use href="#i-mais"/></svg>Novo parceiro</button></div></div>`; return; }
+  if (pa.aba === "painel") renderPainelPA();
+  else if (pa.aba === "funil") renderFunilPA();
+  else renderListaPA();
+}
+function renderPainelPA() {
+  const todos = parceiros(), abertos = todos.filter(p => !["ativo", "encerrado"].includes(p.etapa));
+  const ativos = todos.filter(p => p.etapa === "ativo");
+  const inds = leads().filter(l => l.parceiroId);
+  const mes = hojeISO().slice(0, 7);
+  const indMes = inds.filter(l => (l.criadoEm || "").slice(0, 7) === mes).length;
+  const ganhos = inds.filter(l => l.etapa === "ganho");
+  const valorGanho = ganhos.reduce((s, l) => s + (l.valor || 0), 0);
+  const tiles = [["Parcerias ativas", ativos.length], ["Em prospecção", abertos.length], ["Em negociação", todos.filter(p => p.etapa === "negociacao").length], ["Reuniões agendadas", todos.filter(p => p.etapa === "reuniao").length],
+    ["Indicações (total)", inds.length], ["Indicações no mês", indMes], ["Viraram clientes", ganhos.length]];
+  const todasAcoes = todos.filter(p => p.etapa !== "encerrado").flatMap(p => pendentes(p).filter(a => a.data).map(a => ({ p, a, st: statusData(a.data) })));
+  const hoje = todasAcoes.filter(x => x.st !== "futuro").sort((x, y) => x.a.data.localeCompare(y.a.data));
+  const prox = todasAcoes.filter(x => x.st === "futuro").sort((x, y) => x.a.data.localeCompare(y.a.data)).slice(0, 8);
+  const item = ({ p, a, st }) => `<li data-pa-id="${p.id}"><span class="chip-p">${esc((p.tipo || "Parceiro").split(" ")[0])}</span><div class="q"><b>${esc(p.empresa)}</b><span>${esc(a.texto || "Ação")} · ${esc(etapaPA(p.etapa).nome)}</span></div><span class="quando ${st}">${st === "atraso" ? "Atrasada · " : ""}${rotuloData(a.data)}</span></li>`;
+  const porEtapa = ETAPAS_PA.map(e => ({ e, n: todos.filter(p => p.etapa === e.id).length })), max = Math.max(1, ...porEtapa.map(x => x.n));
+  const ranking = ativos.map(p => ({ p, n: indicacoesDe(p).length, g: indicacoesDe(p).filter(l => l.etapa === "ganho").length })).sort((a, b) => b.n - a.n || b.g - a.g).slice(0, 8);
+  const fila = todos.filter(p => p.etapa === "prospectar" && !proxAcao(p)?.data).slice(0, 8);
+  $("paConteudo").innerHTML = `
+  <section class="bloco" style="margin-bottom:16px"><div class="bloco-cab"><div><h3>Resumo das parcerias</h3><small>${ganhos.length ? `Clientes vindos de parceiros: ${moeda(valorGanho)} em negócios fechados` : "Indicações registradas pelos parceiros e o que virou cliente"}</small></div></div>
+    <div class="tiles">${tiles.map(([n, v], k) => `<div class="tile ${k >= 4 && v ? "forte" : ""}"><i>&nbsp;</i><b>${v}</b><span>${n}</span></div>`).join("")}</div></section>
+  <div class="grade-painel">
+    <div style="display:grid;gap:16px;align-content:start">
+      <section class="bloco"><div class="bloco-cab"><div><h3>Ações para hoje</h3><small>Atrasadas e marcadas para hoje</small></div></div>
+        ${hoje.length ? `<ul class="lista-acoes">${hoje.map(item).join("")}</ul>` : `<div class="vazio-bloco">Nenhuma ação pendente para hoje.</div>`}</section>
+      <section class="bloco"><div class="bloco-cab"><div><h3>Ranking de parceiros</h3><small>Indicações e clientes fechados por parceiro ativo</small></div></div>
+        ${ranking.length ? `<ul class="lista-acoes">${ranking.map(({ p, n, g }) => `<li data-pa-id="${p.id}"><span class="chip-p">${n}</span><div class="q"><b>${esc(p.empresa)}</b><span>${n} indicaç${n === 1 ? "ão" : "ões"} · ${g} cliente${g === 1 ? "" : "s"} fechado${g === 1 ? "" : "s"}</span></div></li>`).join("")}</ul>` : `<div class="vazio-bloco">Nenhuma parceria fechada ainda.</div>`}</section>
+      <section class="bloco"><div class="bloco-cab"><div><h3>A prospectar</h3><small>Ainda sem contato</small></div><a data-pa="filaProsp">Ver todos</a></div>
+        ${fila.length ? `<ul class="lista-acoes">${fila.map(p => `<li data-pa-id="${p.id}"><span class="chip-p">${esc((p.tipo || "—").split(" ")[0])}</span><div class="q"><b>${esc(p.empresa)}</b><span>${esc(p.cidade || "")}${p.uf ? "/" + esc(p.uf) : ""}</span></div></li>`).join("")}</ul>` : `<div class="vazio-bloco">Todos já foram contatados.</div>`}</section>
+    </div>
+    <div style="display:grid;gap:16px;align-content:start">
+      <section class="bloco"><div class="bloco-cab"><div><h3>Funil de parcerias</h3><small>Parceiros por etapa</small></div><a data-pa="funil">Abrir funil</a></div>
+        <div class="mini-funil">${porEtapa.map(({ e, n }) => `<div class="mf-linha" data-pa-etapa="${e.id}"><span>${e.nome}</span><div class="mf-barra"><i style="width:${n ? Math.max(4, n / max * 100) : 0}%;background:${e.cor}"></i></div><b>${n}</b></div>`).join("")}</div></section>
+      <section class="bloco"><div class="bloco-cab"><div><h3>Próximos compromissos</h3></div></div>
+        ${prox.length ? `<ul class="lista-acoes">${prox.map(item).join("")}</ul>` : `<div class="vazio-bloco">Nada agendado para os próximos dias.</div>`}</section>
+    </div>
+  </div>`;
+}
+function cardPA(p) {
+  const st = proxAcao(p)?.data ? statusData(proxAcao(p).data) : "", n = indicacoesDe(p).length, tent = (p.historico || []).filter(h => interacaoPA(h.tipo)?.tentativa).length;
+  return `<article class="card-lead" draggable="true" data-pa-id="${p.id}">
+    <b>${esc(p.empresa)}</b><small>${esc(p.tipo || "")}${p.cidade ? " · " + esc(p.cidade) : ""}</small>
+    <div class="rodape">${p.contato ? `<span class="chip-p">${esc(p.contato.split(" ")[0])}</span>` : ""}${n ? `<span class="chip-p">${n} indicaç${n === 1 ? "ão" : "ões"}</span>` : ""}
+      ${tent && p.etapa === "tentativa" ? `<span class="chip-p">${tent}× tent.</span>` : ""}
+      ${proxAcao(p)?.data ? `<span class="acao-prox ${st === "atraso" ? "atraso" : ""}">${rotuloData(proxAcao(p).data)}</span>` : ""}</div></article>`;
+}
+function renderFunilPA() {
+  $("paConteudo").innerHTML = `<div class="kanban">${ETAPAS_PA.map(e => {
+    const ls = parceiros().filter(p => p.etapa === e.id).sort((a, b) => (proxAcao(a)?.data || "9").localeCompare(proxAcao(b)?.data || "9") || a.empresa.localeCompare(b.empresa));
+    return `<section class="coluna" data-col="${e.id}" style="--cor:${e.cor}"><div class="col-cab"><i></i><b>${e.nome}</b><span>${ls.length}</span></div>
+      <div class="col-cards">${ls.map(cardPA).join("")}</div></section>`;
+  }).join("")}</div>`;
+  let arr = null;
+  $("paConteudo").querySelectorAll(".card-lead").forEach(c => { c.ondragstart = e => { arr = c.dataset.paId; c.classList.add("arrastando"); e.dataTransfer.effectAllowed = "move"; }; c.ondragend = () => c.classList.remove("arrastando"); });
+  $("paConteudo").querySelectorAll(".coluna").forEach(col => {
+    col.ondragover = e => { e.preventDefault(); col.classList.add("sobre"); };
+    col.ondragleave = () => col.classList.remove("sobre");
+    col.ondrop = e => { e.preventDefault(); col.classList.remove("sobre"); if (arr) mudarEtapaPA(arr, col.dataset.col); };
+  });
+}
+async function mudarEtapaPA(id, para) {
+  const p = parceiroPorId(id);
+  if (!p || p.etapa === para) return;
+  if (para === "encerrado") {
+    const motivo = await escolherMotivoPA(p);
+    if (motivo === null) return renderParceiros();
+    return alterarParceiro(id, x => { moverEtapaPA(x, para, motivo); x.acoes = (x.acoes || []).filter(a => a.concluida); }, `${p.empresa} → Não avançou`);
+  }
+  alterarParceiro(id, x => moverEtapaPA(x, para), `${p.empresa} → ${etapaPA(para).nome}`);
+}
+function escolherMotivoPA(p) {
+  return new Promise(resolve => {
+    const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Por que ${esc(p.empresa)} não avançou?</h3></div>
+      <div class="modal-corpo"><div class="etapas-sel">${MOTIVOS_PA.map(x => `<button data-mot="${esc(x)}" style="--cor:var(--erro)">${esc(x)}</button>`).join("")}</div>
+      <div class="campo"><label>Detalhe (opcional)</label><input id="motDetPA"></div></div>
+      <div class="modal-rod"><button class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" data-m="ok" style="background:var(--erro)">Confirmar</button></div>`);
+    let mot = "";
+    const sair = v => { fecharModal(); resolve(v); };
+    veu.onclick = () => sair(null);
+    m.onclick = e => {
+      const b = e.target.closest("[data-mot],[data-m]"); if (!b) return;
+      if (b.dataset.mot) { mot = b.dataset.mot; m.querySelectorAll("[data-mot]").forEach(x => x.classList.toggle("ativo", x === b)); }
+      if (b.dataset.m === "cancelar") sair(null);
+      if (b.dataset.m === "ok") { if (!mot) return toast("Escolha um motivo", "erro"); const det = $("motDetPA").value.trim(); sair(det ? `${mot} — ${det}` : mot); }
+    };
+  });
+}
+function renderListaPA() {
+  const f = pa.filtro, termos = norm(f.busca).split(" ").filter(Boolean);
+  const ls = parceiros().filter(p => (!f.etapa || p.etapa === f.etapa) && (!f.tipo || p.tipo === f.tipo)
+    && (!termos.length || termos.every(t => norm([p.empresa, p.contato, p.cidade, p.uf, p.tipo, (p.telefones || []).join(" ")].join(" ")).includes(t))))
+    .sort((a, b) => ORDEM_PA[a.etapa] - ORDEM_PA[b.etapa] || a.empresa.localeCompare(b.empresa));
+  $("paConteudo").innerHTML = `
+  <div class="filtros-crm">
+    <input class="fbusca" id="paBusca" type="search" placeholder="Buscar parceiro, contato, cidade…" value="${esc(f.busca)}">
+    <select data-paf="etapa">${opcoes(ETAPAS_PA.map(e => [e.id, e.nome]), f.etapa, "Todas as etapas")}</select>
+    <select data-paf="tipo">${opcoes(TIPOS_PARCEIRO.map(t => [t, t]), f.tipo, "Todos os tipos")}</select>
+  </div>
+  <div class="conta-filtro"><span>${ls.length} de ${parceiros().length} parceiros</span>${f.busca || f.etapa || f.tipo ? `<button data-pa="limpar">Limpar filtros</button>` : ""}</div>
+  <section class="bloco">
+    <table class="tabela"><thead><tr><th>Parceiro</th><th>Contato</th><th>Cidade</th><th>Etapa</th><th>Indicações</th><th>Próxima ação</th></tr></thead>
+      <tbody>${ls.map(p => { const e = etapaPA(p.etapa), n = indicacoesDe(p).length; return `<tr class="lin" data-pa-id="${p.id}"><td><b>${esc(p.empresa)}</b><small>${esc(p.tipo || "")}</small></td>
+        <td>${esc(p.contato || "")}<small>${esc((p.telefones || [])[0] || "")}</small></td><td>${esc(p.cidade || "")}<small>${p.uf ? " / " + esc(p.uf) : ""}</small></td>
+        <td><span class="chip-etapa" style="--cor:${e.cor}"><i></i>${e.nome}</span></td><td>${n || "—"}</td>
+        <td>${proxAcao(p)?.data ? `<span class="quando ${statusData(proxAcao(p).data)}">${rotuloData(proxAcao(p).data)}</span>` : `<small>—</small>`}</td></tr>`; }).join("")}</tbody></table>
+    <ul class="cards-leads">${ls.map(p => { const e = etapaPA(p.etapa); return `<li data-pa-id="${p.id}"><div class="l1"><b>${esc(p.empresa)}</b></div><small>${esc(p.tipo || "")} · ${esc(p.cidade || "")}${p.uf ? "/" + esc(p.uf) : ""}</small>
+      <div class="l3"><span class="chip-etapa" style="--cor:${e.cor}"><i></i>${e.nome}</span>${indicacoesDe(p).length ? `<span class="chip-p">${indicacoesDe(p).length} ind.</span>` : ""}${proxAcao(p)?.data ? `<span class="quando ${statusData(proxAcao(p).data)}">${rotuloData(proxAcao(p).data)}</span>` : ""}</div></li>`; }).join("")}</ul>
+    ${!ls.length ? `<div class="vazio-bloco">Nenhum parceiro com esses filtros.</div>` : ""}
+  </section>`;
+  let t;
+  $("paBusca").oninput = e => { clearTimeout(t); t = setTimeout(() => { pa.filtro.busca = e.target.value; renderListaPA(); const i = $("paBusca"); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }, 200); };
+  $("paConteudo").querySelectorAll("[data-paf]").forEach(s => s.onchange = () => { pa.filtro[s.dataset.paf] = s.value; renderListaPA(); });
+}
+
+/* ---- Novo parceiro ---- */
+function abrirNovoParceiro() {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo parceiro</h3></div>
+    <form class="modal-corpo dados-grid" id="formNovoPA">
+      ${campoTxt("empresa", "Empresa *", "")}
+      <div class="campo"><label>Tipo de parceiro</label><select name="tipo">${TIPOS_PARCEIRO.map(t => `<option ${t === TIPOS_PARCEIRO[0] ? "selected" : ""}>${t}</option>`).join("")}</select></div>
+      <div class="linha2">${campoTxt("contato", "Contato", "")}${campoTxt("cargo", "Cargo", "")}</div>
+      <div class="linha2">${campoTxt("telefones", "Telefone / WhatsApp", "")}${campoTxt("email", "E-mail", "")}</div>
+      <div class="linha2">${campoTxt("cidade", "Cidade", "")}${campoTxt("uf", "UF", "")}</div>
+      <div class="campo"><label>Observações</label><textarea name="observacoes" rows="2" placeholder="Como chegou até ele, quantos clientes atende, etc."></textarea></div>
+      <div class="modal-rod" style="padding:0"><button class="btn-s" type="button" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Cadastrar</button></div>
+    </form>`);
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  m.querySelector("[name=empresa]").focus();
+  $("formNovoPA").onsubmit = async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
+    const dup = parceiros().find(p => norm(p.empresa) === norm(f.empresa) && norm(p.cidade || "") === norm(f.cidade || ""));
+    if (dup) { fecharModal(); toast(`"${dup.empresa}" já está cadastrado`); return abrirParceiro(dup.id); }
+    let id;
+    try {
+      await salvarStore(paStore, d => {
+        d.seq = (d.seq || d.parceiros.length) + 1; id = "PA-" + String(d.seq).padStart(4, "0");
+        const p = { id, empresa: f.empresa.trim(), tipo: f.tipo, contato: f.contato.trim(), cargo: f.cargo.trim(), telefones: f.telefones.split("/").map(x => x.trim()).filter(Boolean),
+          email: f.email.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(), observacoes: f.observacoes, etapa: "prospectar",
+          responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", acoes: [], historico: [], criadoEm: new Date().toISOString(), criadoPor: meuNome() };
+        registrarPA(p, "criado", "Parceiro cadastrado");
+        d.parceiros.push(p);
+      });
+      fecharModal(); toast("Parceiro cadastrado"); renderParceiros(); abrirParceiro(id);
+    } catch (er) { toast("Não foi possível cadastrar: " + er.message, "erro", 6000); }
+  };
+}
+
+/* ---- Ficha do parceiro (janela central, como a do CRM) ---- */
+const abrirParceiro = id => { if (pa.abertoId !== id) { agenda.mes = null; agenda.dia = null; } pa.abertoId = id; renderFichaPA(id); };
+function fecharFichaPA() { pa.abertoId = null; document.querySelectorAll("#gaveta,#veuG").forEach(x => x.remove()); }
+function eventosParceiro(p) {
+  const ev = [];
+  for (const a of p.acoes || []) if (!a.concluida && a.data) ev.push({ dia: a.data.slice(0, 10), hora: a.data.slice(11, 16), tipo: statusData(a.data) === "atraso" ? "atrasada" : "prevista", txt: a.texto });
+  for (const h of p.historico || []) {
+    if (["etapa", "criado"].includes(h.tipo)) continue;
+    const d = new Date(h.em), dia = new Date(d - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+    const nome = h.tipo === "acao" ? "Ação concluída: " + h.texto : (interacaoPA(h.tipo)?.nome || ({ indicacao: "Indicação recebida", termos_upd: "Termos atualizados" }[h.tipo] || h.tipo)) + (h.texto && h.tipo !== "acao" ? " — " + h.texto : "");
+    ev.push({ dia, hora: d.toTimeString().slice(0, 5), tipo: "executada", txt: nome });
+  }
+  return ev;
+}
+function renderFichaPA(id) {
+  const p = parceiroPorId(id);
+  if (!p) return fecharFichaPA();
+  let g = $("gaveta");
+  const rolagem = g?.querySelector(".g-corpo")?.scrollTop || 0;
+  if (!g) {
+    const veu = document.createElement("div"); veu.className = "veu"; veu.id = "veuG"; veu.style.zIndex = 44; veu.onclick = fecharFichaPA;
+    g = document.createElement("aside"); g.className = "gaveta"; g.id = "gaveta";
+    document.body.append(veu, g);
+  }
+  const tels = (p.telefones || []).filter(Boolean), inds = indicacoesDe(p), tent = (p.historico || []).filter(h => interacaoPA(h.tipo)?.tentativa);
+  const pc = p.parceria || {};
+  g.innerHTML = `
+  <div class="g-cab">
+    <div class="g-topo"><h2>${esc(p.empresa)}</h2><button class="g-fechar" data-pg="fechar" aria-label="Fechar">×</button></div>
+    <div class="g-sub"><span>${esc(p.tipo || "")}${p.cidade ? " · " + esc(p.cidade) + (p.uf ? "/" + esc(p.uf) : "") : ""}</span>
+      ${p.contato ? `<span class="chip-p">${esc(p.contato)}${p.cargo ? " · " + esc(p.cargo) : ""}</span>` : ""}<span class="chip-p">${esc(p.id)}</span></div>
+    <div class="g-contatos">
+      ${tels.map(t => `<a href="tel:${soDigitos(t)}">${esc(t)}</a>${linkWhats(t) ? `<a href="${linkWhats(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}`).join("")}
+      ${p.email ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ""}
+      ${!tels.length && !p.email ? `<span style="font-size:.76rem;opacity:.7">Sem contato cadastrado</span>` : ""}
+    </div>
+  </div>
+  <div class="g-corpo">
+    <section class="g-sec"><h4>Etapa da parceria ${p.etapa === "encerrado" && p.motivoEncerramento ? `<span style="text-transform:none;letter-spacing:0;color:var(--erro)">${esc(p.motivoEncerramento)}</span>` : ""}</h4>
+      <div class="etapas-sel">${ETAPAS_PA.map(x => `<button data-pg-etapa="${x.id}" style="--cor:${x.cor}" class="${x.id === p.etapa ? "ativo" : ""}">${x.nome}</button>`).join("")}</div></section>
+    <section class="g-sec"><h4>Registrar interação</h4>
+      <div class="botoes-int">${INTERACOES_PA.map(i => `<button data-pg-int="${i.id}"><i>${i.sigla}</i>${i.nome}</button>`).join("")}</div>
+      <form class="form-int oculto" id="formIntPA">
+        <div class="campo oculto" id="campoReuniaoPA"><label>Data e hora da reunião</label><input type="datetime-local" id="intDataPA"></div>
+        <div class="campo"><label>Observação</label><textarea id="intTextoPA" placeholder="O que aconteceu? (opcional)"></textarea></div>
+        ${proxAcao(p) ? `<label class="chk"><input type="checkbox" id="intConcluirPA"> Concluir a ação pendente: <b>${esc(proxAcao(p).texto)}</b></label>` : ""}
+        <div class="linha2"><div class="campo"><label>Nova ação (opcional)</label><input id="intProxPA"></div><div class="campo"><label>Quando</label><input type="date" id="intProxDataPA"></div></div>
+        <div class="rod"><button type="button" class="btn-s" data-pg="cancelarInt">Cancelar</button><button class="btn-p" type="submit">Registrar</button></div>
+      </form></section>
+    <section class="g-sec"><h4>Indicações <span class="tag-breve" style="text-transform:none">${inds.length}</span></h4>
+      ${inds.length ? `<ul class="lista-cli" style="margin:0 0 10px">${inds.sort((a, b) => (b.criadoEm || "").localeCompare(a.criadoEm || "")).map(l => { const e = etapaDe(l.etapa); return `<li data-pg-lead="${l.id}"><div><b>${esc(l.empresa)}</b><small>indicado em ${data(l.criadoEm)}${l.valor && l.etapa === "ganho" ? " · " + moeda(l.valor) : ""}</small></div><span class="chip-etapa" style="--cor:${e.cor}"><i></i>${e.nome}</span></li>`; }).join("")}</ul>` : `<div class="vazio-acoes">Nenhuma indicação ainda.</div>`}
+      <button class="btn-p" data-pg="indicacao" style="justify-self:start"><svg><use href="#i-mais"/></svg>Registrar indicação</button>
+      <small style="font-size:.74rem;color:var(--txt-2)">A empresa indicada entra no CRM como lead, marcada como indicação deste parceiro.</small></section>
+    ${["negociacao", "ativo"].includes(p.etapa) || p.parceria ? `<section class="g-sec"><h4>Termos da parceria</h4>
+      <form class="dados-grid" id="formTermosPA">
+        <div class="linha2"><div class="campo"><label>Modelo</label><select name="modelo">${opcoes(MODELOS_PARCERIA.map(x => [x, x]), pc.modelo || "", "—")}</select></div>
+          <div class="campo"><label>Comissão / contrapartida</label><input name="comissao" value="${esc(pc.comissao || "")}" placeholder="Ex.: 10% da 1ª mensalidade"></div></div>
+        <div class="linha2"><div class="campo"><label>Início da parceria</label><input type="date" name="inicio" value="${esc(pc.inicio || "")}"></div>
+          <div class="campo"><label>Termo de parceria assinado?</label><select name="termo"><option value="">Não</option><option value="1" ${pc.termo ? "selected" : ""}>Sim</option></select></div></div>
+        <div class="campo"><label>Observações dos termos</label><textarea name="obs" rows="2">${esc(pc.obs || "")}</textarea></div>
+        <button class="btn-s" type="submit" style="justify-self:end">Salvar termos</button>
+      </form></section>` : ""}
+    <section class="g-sec"><h4>Ações <span class="tag-breve" style="text-transform:none">${pendentes(p).length} pendente${pendentes(p).length === 1 ? "" : "s"}</span></h4>
+      ${pendentes(p).length ? `<ul class="lista-acoes-lead">${pendentes(p).map(a => `<li><button class="chk-acao" data-pg-concluir="${a.id}" aria-label="Concluir"></button>
+        <div class="q"><b>${esc(a.texto)}</b><small>${a.por ? "criada por " + esc(a.por) + " · " : ""}${data(a.criadaEm)}</small></div>
+        <span class="quando ${statusData(a.data)}">${a.data ? (statusData(a.data) === "atraso" ? "Atrasada · " : "") + rotuloData(a.data) : "Sem data"}</span>
+        <button class="x-acao" data-pg-excluir-acao="${a.id}" aria-label="Excluir ação">×</button></li>`).join("")}</ul>` : `<div class="vazio-acoes">Nenhuma ação pendente.</div>`}
+      <form class="form-acao" id="formAcaoPA"><input id="acaoTextoPA" placeholder="Nova ação (ex.: ligar para o sócio)" required><input type="date" id="acaoDataPA"><input type="time" id="acaoHoraPA">
+        <button class="btn-p" type="submit"><svg><use href="#i-mais"/></svg><span>Adicionar</span></button></form>
+      ${concluidas(p).length ? `<details class="concluidas"><summary>${concluidas(p).length} concluída${concluidas(p).length === 1 ? "" : "s"}</summary><ul class="lista-acoes-lead feitas">${concluidas(p).map(a => `<li><span class="chk-acao feito">✓</span><div class="q"><b>${esc(a.texto)}</b><small>concluída ${dataHora(a.concluidaEm)}</small></div></li>`).join("")}</ul></details>` : ""}
+    </section>
+    <section class="g-sec"><h4>Tentativas de contato <span class="tag-breve" style="text-transform:none">${tent.length}</span></h4>
+      ${tent.length ? `<ul class="lista-tent">${tent.map((h, k) => `<li><span class="n">${tent.length - k}ª</span><span class="tl-ico">${interacaoPA(h.tipo).sigla}</span><div class="q"><b>${esc(interacaoPA(h.tipo).nome)}</b>${h.texto ? `<small>${esc(h.texto)}</small>` : ""}</div>
+        <span class="quando">${new Date(h.em).toLocaleDateString("pt-BR")} · ${new Date(h.em).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span><small class="por">${esc(h.por || "")}</small></li>`).join("")}</ul>` : `<div class="vazio-acoes">Nenhuma tentativa registrada.</div>`}</section>
+    <section class="g-sec"><h4>Agenda do parceiro</h4><div id="agendaLead"></div></section>
+    <details class="g-sec"><summary>Dados do parceiro <span>editar ▾</span></summary>
+      <form class="dados-grid" id="formDadosPA">
+        ${campoTxt("empresa", "Empresa", p.empresa)}
+        <div class="linha2"><div class="campo"><label>Tipo</label><select name="tipo">${opcoes(TIPOS_PARCEIRO.map(t => [t, t]), p.tipo || "", "—")}</select></div>
+          <div class="campo"><label>Responsável WL</label><select name="responsavel">${opcoes(RESPONSAVEIS.map(r => [r, r]), p.responsavel || "", "—")}</select></div></div>
+        <div class="linha2">${campoTxt("contato", "Contato", p.contato)}${campoTxt("cargo", "Cargo", p.cargo)}</div>
+        <div class="linha2">${campoTxt("telefones", "Telefones (separe com /)", (p.telefones || []).join(" / "))}${campoTxt("email", "E-mail", p.email)}</div>
+        <div class="linha2">${campoTxt("cidade", "Cidade", p.cidade)}${campoTxt("uf", "UF", p.uf)}</div>
+        <div class="campo"><label>Observações</label><textarea name="observacoes">${esc(p.observacoes || "")}</textarea></div>
+        <button class="btn-s" type="submit" style="justify-self:end">Salvar dados</button>
+      </form></details>
+    <section class="g-sec"><h4>Histórico</h4>
+      ${(p.historico || []).length ? `<ul class="timeline">${p.historico.map(h => {
+        const i = interacaoPA(h.tipo);
+        const tit = h.tipo === "etapa" ? `Etapa: ${etapaPA(h.de).nome} → ${etapaPA(h.para).nome}` : h.tipo === "acao" ? "Ação concluída" : h.tipo === "criado" ? "Parceiro cadastrado" : h.tipo === "indicacao" ? "Indicação recebida" : h.tipo === "termos_upd" ? "Termos da parceria atualizados" : (i?.nome || h.tipo);
+        return `<li><span class="tl-ico ${i ? "" : "sis"}">${i ? i.sigla : h.tipo === "indicacao" ? "+" : "•"}</span><div class="t"><b>${esc(tit)}</b>${h.texto ? `<p>${esc(h.texto)}</p>` : ""}<small>${esc(h.por || "")} · ${dataHora(h.em)}</small></div></li>`;
+      }).join("")}</ul>` : `<div style="font-size:.8rem;color:var(--txt-2)">Nenhuma interação registrada ainda.</div>`}</section>
+    <div style="display:flex;justify-content:flex-end"><button class="perigo" data-pg="excluir">Excluir parceiro</button></div>
+  </div>`;
+  g.querySelector(".g-corpo").scrollTop = rolagem;
+  ligarFichaPA(p);
+}
+function ligarFichaPA(p) {
+  const g = $("gaveta");
+  let intSel = null;
+  g.onclick = async e => {
+    const el = e.target.closest("[data-pg],[data-pg-etapa],[data-pg-int],[data-pg-concluir],[data-pg-excluir-acao],[data-pg-lead],[data-cal-mes],[data-cal-dia]");
+    if (!el) return;
+    const d = el.dataset;
+    if (d.pg === "fechar") return fecharFichaPA();
+    if (d.pgEtapa) return mudarEtapaPA(p.id, d.pgEtapa);
+    if (d.pgInt) {
+      intSel = interacaoPA(d.pgInt);
+      g.querySelectorAll("[data-pg-int]").forEach(b => b.classList.toggle("sel", b === el));
+      $("formIntPA").classList.remove("oculto");
+      $("campoReuniaoPA").classList.toggle("oculto", !intSel.pedeData);
+      if ($("intConcluirPA")) $("intConcluirPA").checked = intSel.id !== "nota";
+      const sug = { nao_atendeu: ["Tentar ligar novamente", 1], mensagem: ["Cobrar retorno da mensagem", 2], conversou: ["Agendar reunião de apresentação", 2], reuniao_feita: ["Enviar proposta de parceria", 2], termos: ["Cobrar retorno da proposta de parceria", 3], fechou: ["Enviar materiais da WL para o parceiro", 1] }[intSel.id];
+      if (intSel.pedeData) { $("intProxPA").value = "Reunião com o parceiro"; $("intProxDataPA").value = ""; }
+      else if (sug) { const dt = new Date(Date.now() + sug[1] * 864e5); $("intProxPA").value = sug[0]; $("intProxDataPA").value = new Date(dt - dt.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); }
+      else { $("intProxPA").value = ""; $("intProxDataPA").value = ""; }
+      $("intTextoPA").focus();
+      return;
+    }
+    if (d.pg === "cancelarInt") { $("formIntPA").classList.add("oculto"); g.querySelectorAll("[data-pg-int]").forEach(b => b.classList.remove("sel")); intSel = null; return; }
+    if (d.pgConcluir) return alterarParceiro(p.id, x => concluirAcaoPA(x, d.pgConcluir), "Ação concluída");
+    if (d.pgExcluirAcao) { if (!confirmar("Excluir esta ação?")) return; return alterarParceiro(p.id, x => { x.acoes = (x.acoes || []).filter(a => a.id !== d.pgExcluirAcao); }, "Ação excluída"); }
+    if (d.pgLead) { fecharFichaPA(); location.hash = "crm/funil"; setTimeout(() => abrirLead(d.pgLead), 300); return; }
+    if (d.calMes) { agenda.mes = d.calMes; agenda.dia = null; return desenharAgenda(parceiroPorId(p.id), eventosParceiro); }
+    if (d.calDia) { agenda.dia = d.calDia; return desenharAgenda(parceiroPorId(p.id), eventosParceiro); }
+    if (d.pg === "indicacao") return registrarIndicacao(p);
+    if (d.pg === "excluir") {
+      if (!confirmar(`Excluir "${p.empresa}" dos parceiros? As indicações continuam no CRM.`)) return;
+      fecharFichaPA();
+      try { await salvarStore(paStore, dd => { dd.parceiros = dd.parceiros.filter(x => x.id !== p.id); }); toast("Parceiro excluído"); renderParceiros(); } catch (er) { toast(er.message, "erro"); }
+    }
+  };
+  $("formIntPA").onsubmit = e => {
+    e.preventDefault();
+    if (!intSel) return;
+    const texto = $("intTextoPA").value.trim(), dReun = $("intDataPA").value, prox = $("intProxPA").value.trim(), proxData = $("intProxDataPA").value, concl = !!$("intConcluirPA")?.checked;
+    if (intSel.pedeData && !dReun) { toast("Informe a data da reunião", "erro"); return $("intDataPA").focus(); }
+    const sel = intSel;
+    alterarParceiro(p.id, x => {
+      registrarPA(x, sel.id, (sel.pedeData ? `Reunião em ${dataHora(dReun)}. ` : "") + texto);
+      if (sel.avanca && (ORDEM_PA[sel.avanca] > ORDEM_PA[x.etapa] || x.etapa === "encerrado")) moverEtapaPA(x, sel.avanca);
+      if (concl && proxAcao(x)) concluirAcaoPA(x, proxAcao(x).id, sel.nome.toLowerCase());
+      if (sel.pedeData) novaAcao(x, prox || "Reunião com o parceiro", dReun);
+      else if (prox || proxData) novaAcao(x, prox || "Ação", proxData);
+    }, `Registrado: ${sel.nome}`);
+  };
+  $("formAcaoPA").onsubmit = e => {
+    e.preventDefault();
+    const texto = $("acaoTextoPA").value.trim(), dt = $("acaoDataPA").value, hr = $("acaoHoraPA").value;
+    if (!texto) return;
+    if (hr && !dt) { toast("Informe a data da ação", "erro"); return $("acaoDataPA").focus(); }
+    alterarParceiro(p.id, x => novaAcao(x, texto, dt ? (hr ? `${dt}T${hr}` : dt) : ""), "Ação adicionada");
+  };
+  if ($("formTermosPA")) $("formTermosPA").onsubmit = e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    alterarParceiro(p.id, x => { x.parceria = { modelo: f.modelo, comissao: f.comissao.trim(), inicio: f.inicio, termo: !!f.termo, obs: f.obs }; registrarPA(x, "termos_upd", [f.modelo, f.comissao].filter(Boolean).join(" · ")); }, "Termos salvos");
+  };
+  $("formDadosPA").onsubmit = e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
+    alterarParceiro(p.id, x => Object.assign(x, { empresa: f.empresa.trim(), tipo: f.tipo, responsavel: f.responsavel, contato: f.contato.trim(), cargo: f.cargo.trim(),
+      telefones: f.telefones.split("/").map(t => t.trim()).filter(Boolean), email: f.email.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(), observacoes: f.observacoes }), "Dados salvos");
+  };
+  desenharAgenda(p, eventosParceiro);
+}
+function concluirAcaoPA(p, id, obs) {
+  const a = (p.acoes || []).find(x => x.id === id);
+  if (!a || a.concluida) return;
+  a.concluida = true; a.concluidaEm = new Date().toISOString(); a.concluidaPor = meuNome();
+  registrarPA(p, "acao", a.texto + (obs ? ` — ${obs}` : ""));
+}
+/* Indicação: cria o lead no CRM ligado ao parceiro */
+function registrarIndicacao(p) {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Indicação de ${esc(p.empresa)}</h3></div>
+    <form class="modal-corpo dados-grid" id="formIndPA">
+      ${campoTxt("empresa", "Empresa indicada *", "")}
+      <div class="linha2">${campoTxt("contato", "Contato", "")}${campoTxt("segmento", "Segmento", "")}</div>
+      <div class="linha2">${campoTxt("telefone", "Telefone / WhatsApp", "")}${campoTxt("email", "E-mail", "")}</div>
+      <div class="linha2">${campoTxt("cidade", "Cidade", p.cidade || "")}${campoTxt("uf", "UF", p.uf || "")}</div>
+      <div class="campo"><label>O que o parceiro contou</label><textarea name="obs" rows="2" placeholder="Necessidade, contexto, melhor horário…"></textarea></div>
+      <div class="modal-rod" style="padding:0"><button class="btn-s" type="button" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Registrar e enviar ao CRM</button></div>
+    </form>`);
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  m.querySelector("[name=empresa]").focus();
+  $("formIndPA").onsubmit = async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    if (!f.empresa.trim()) return toast("Informe a empresa indicada", "erro");
+    if (!crm.carregado) await carregarCRM(true);
+    const ja = leads().find(l => norm(l.empresa) === norm(f.empresa) && norm(l.cidade || "") === norm(f.cidade || ""));
+    let leadId = ja?.id;
+    const ok = ja ? await alterarLead(ja.id, l => { l.parceiroId = l.parceiroId || p.id; registrar(l, "nota", `Indicado pelo parceiro ${p.empresa}${f.obs ? ": " + f.obs : ""}`); })
+      : await salvarCRM(d => {
+        leadId = novoId(d);
+        const l = { id: leadId, empresa: f.empresa.trim(), segmento: f.segmento.trim(), contato: f.contato.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(),
+          telefones: f.telefone ? [f.telefone.trim()] : [], email: f.email.trim(), fit: "", prioridade: "P1", origem: `Indicação · ${p.empresa}`, parceiroId: p.id, frentes: [], etapa: "abordar",
+          responsavel: p.responsavel || "", observacoes: f.obs, criadoEm: new Date().toISOString(), criadoPor: meuNome(), historico: [], acoes: [] };
+        registrar(l, "criado", `Indicação do parceiro ${p.empresa}${f.obs ? ": " + f.obs : ""}`);
+        novaAcao(l, "Fazer o primeiro contato (indicação)", hojeISO());
+        d.leads.push(l);
+      }, "Indicação enviada ao CRM");
+    if (!ok) return;
+    fecharModal();
+    await alterarParceiro(p.id, x => registrarPA(x, "indicacao", f.empresa.trim() + (ja ? " (já estava no CRM)" : ""), { leadId }), ja ? `${f.empresa} já estava no CRM · ligado ao parceiro` : "");
+  };
+}
+
+/* ---- Cliques gerais ---- */
+$("paAbas").onclick = e => { const b = e.target.closest("[data-aba]"); if (b) location.hash = "parceiros/" + b.dataset.aba; };
+$("btnNovoPA").onclick = () => abrirNovoParceiro();
+$("paConteudo").onclick = e => {
+  const el = e.target.closest("[data-pa-id],[data-pa],[data-pa-etapa]");
+  if (!el) return;
+  const d = el.dataset;
+  if (d.paId) return abrirParceiro(d.paId);
+  if (d.paEtapa) { pa.filtro = { busca: "", tipo: "", etapa: d.paEtapa }; location.hash = "parceiros/lista"; return; }
+  if (d.pa === "novo") abrirNovoParceiro();
+  if (d.pa === "funil") location.hash = "parceiros/funil";
+  if (d.pa === "filaProsp") { pa.filtro = { busca: "", tipo: "", etapa: "prospectar" }; location.hash = "parceiros/lista"; }
+  if (d.pa === "limpar") { pa.filtro = { busca: "", etapa: "", tipo: "" }; renderListaPA(); }
+};
 
 /* ================== PRECIFICAÇÃO ==================
    Tempo estimado de cada operação × valor da hora técnica (R$ 300/h, Modelo Comercial WL),
