@@ -873,6 +873,43 @@
   .toast.erro i{background:var(--erro)}
   .toast.prog i{background:var(--turq);animation:pulsa 1s infinite}
   @media(max-width:860px){.toast{bottom:calc(var(--nav-h) + 16px + env(safe-area-inset-bottom))}}
+
+  /* Busca de empresas (base pública do CNPJ) */
+  .gaveta.be{width:min(80vw,1200px)}
+  .be-corpo{flex:1;overflow:auto;padding:16px 18px 0;display:flex;flex-direction:column;gap:14px}
+  .be-filtros{align-items:start;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 12px;background:#fff;border:1px solid var(--borda);border-radius:14px;padding:14px}
+  .be-filtros .be-cid{grid-column:span 2}
+  .be-checks{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap}
+  .be-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border:1px solid var(--borda);border-radius:10px;padding:5px 6px;background:#fff;min-height:42px}
+  .be-chips input{flex:1;min-width:140px;border:0!important;outline:0;padding:6px!important;box-shadow:none!important;background:transparent}
+  .be-chip{display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:8px;padding:4px 6px 4px 10px;font-size:.78rem;font-weight:600}
+  .be-chip small{opacity:.7;font-weight:500}
+  .be-chip button{color:#fff;background:rgba(255,255,255,.18);width:20px;height:20px;border-radius:6px;font-size:.9rem;line-height:1}
+  .be-res{display:flex;flex-direction:column;gap:10px;padding-bottom:16px}
+  .be-topo{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.84rem;flex-wrap:wrap}
+  .be-lista{list-style:none;background:#fff;border:1px solid var(--borda);border-radius:14px;overflow:hidden}
+  .be-lista li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-top:1px solid var(--borda)}
+  .be-lista li:first-child{border-top:0}
+  .be-lista li.ja{background:var(--bg)}
+  .be-lista li.ja .be-info b{color:var(--txt-2)}
+  .be-sel{width:18px;height:18px;accent-color:var(--teal)}
+  .be-info{display:grid;gap:3px;min-width:0}
+  .be-info b{font-size:.9rem;font-weight:700;color:var(--teal)}
+  .be-info small{font-size:.74rem;color:var(--txt-2);overflow-wrap:anywhere}
+  .be-info .be-cont{color:var(--txt)}
+  .be-tags{display:flex;flex-wrap:wrap;gap:4px;margin:2px 0}
+  .be-mais{align-self:center}
+  .be-rodape{position:sticky;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid var(--borda);border-radius:14px;padding:10px 14px;box-shadow:0 -8px 24px rgba(6,30,33,.08);font-size:.84rem;font-weight:600}
+  .modal-cab:has(.sub-modal){display:block}
+  .be-fontes{margin-top:12px;background:rgba(255,255,255,.12);border:0;display:inline-flex}
+  .be-fontes button{color:rgba(255,255,255,.8)}
+  .be-fontes button.ativo{background:#fff;color:var(--teal)}
+  .be-g{grid-template-columns:2fr 1.4fr 1fr}
+  .be-nota{grid-column:1/-1;font-size:.74rem;color:var(--txt-2)}
+  a.chip-p{text-decoration:none}
+  .sub-modal{display:block;font-size:.76rem;color:var(--txt-2);margin-top:4px}
+  @media(max-width:860px){.be-g{grid-template-columns:1fr!important}.gaveta.be{width:100vw}.be-filtros{grid-template-columns:1fr 1fr}.be-filtros .be-cid{grid-column:1/-1}.be-corpo{padding:12px 12px 0}
+    .be-lista li{grid-template-columns:auto 1fr}.be-lista li>:last-child{grid-column:2;justify-self:start}}
 </style>
 </head>
 <body>
@@ -976,6 +1013,7 @@
           <button data-aba="leads">Leads</button>
         </nav>
         <div class="dir">
+          <button class="btn-s" id="btnBuscaEmp"><svg><use href="#i-busca"/></svg>Buscar empresas</button>
           <button class="btn-s" id="btnImportar"><svg><use href="#i-enviar"/></svg>Importar planilha</button>
           <button class="btn-p" id="btnNovoLead"><svg><use href="#i-mais"/></svg>Novo lead</button>
         </div>
@@ -1000,6 +1038,7 @@
           <button data-aba="lista">Parceiros</button>
         </nav>
         <div class="dir">
+          <button class="btn-s" id="btnBuscaPA"><svg><use href="#i-busca"/></svg>Buscar empresas</button>
           <button class="btn-p" id="btnNovoPA"><svg><use href="#i-mais"/></svg>Novo parceiro</button>
         </div>
       </div>
@@ -2286,6 +2325,7 @@ function renderFicha(id) {
         ${linkWhats(t) ? `<a href="${linkWhats(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}`).join("")}
       ${l.email ? `<a href="mailto:${esc(l.email)}">${esc(l.email)}</a>` : ""}
       ${ig ? `<a href="${esc(ig)}" target="_blank" rel="noopener">Instagram</a>` : ""}
+      ${l.site ? `<a href="${esc(/^https?:/.test(l.site) ? l.site : "https://" + l.site)}" target="_blank" rel="noopener">Site</a>` : ""}${l.mapsUrl ? `<a href="${esc(l.mapsUrl)}" target="_blank" rel="noopener">Google Maps${l.notaGoogle ? " ★ " + esc(l.notaGoogle.split(" ")[0]) : ""}</a>` : ""}
       ${!tels.length && !l.email && !ig ? `<span style="font-size:.76rem;opacity:.7">Sem contato cadastrado</span>` : ""}
     </div>
   </div>
@@ -2357,7 +2397,7 @@ function renderFicha(id) {
 
     <details class="g-sec" ${l.criadoManual ? "open" : ""}><summary>Dados da empresa <span>editar ▾</span></summary>
       <form class="dados-grid" id="formDados">
-        ${campoTxt("empresa", "Empresa", l.empresa)}
+        <div class="linha2">${campoTxt("empresa", "Empresa", l.empresa)}${campoTxt("cnpj", "CNPJ", l.cnpj)}</div>
         <div class="linha2">${campoTxt("segmento", "Segmento", l.segmento)}${campoTxt("contato", "Contato / responsável", l.contato)}</div>
         <div class="linha2">${campoTxt("cidade", "Cidade", l.cidade)}${campoTxt("uf", "UF", l.uf)}</div>
         <div class="linha2">${campoTxt("telefones", "Telefones (separe com /)", (l.telefones || []).join(" / "))}${campoTxt("email", "E-mail", l.email)}</div>
@@ -2526,7 +2566,7 @@ function ligarFicha(l) {
     const f = Object.fromEntries(new FormData(e.target));
     if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
     alterarLead(l.id, x => {
-      Object.assign(x, { empresa: f.empresa.trim(), segmento: f.segmento.trim(), contato: f.contato.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(),
+      Object.assign(x, { empresa: f.empresa.trim(), cnpj: f.cnpj.trim(), segmento: f.segmento.trim(), contato: f.contato.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(),
         email: f.email.trim(), instagram: f.instagram.trim(), endereco: f.endereco.trim(), fit: f.fit, prioridade: f.prioridade.trim(), observacoes: f.observacoes,
         telefones: f.telefones.split("/").map(t => t.trim()).filter(Boolean) });
       delete x.criadoManual;
@@ -2599,36 +2639,36 @@ function escolherMotivo(l) {
 }
 
 /* ---- Novo lead ---- */
-function abrirNovoLead() {
-  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo lead</h3></div>
+function abrirNovoLead(pre = {}, depois) {
+  const v = k => esc(Array.isArray(pre[k]) ? pre[k].join(" / ") : pre[k] || "");
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo lead</h3>${pre.origemBase ? `<small class="sub-modal">Pré-preenchido com dados de: ${esc(pre.origemBase)}${pre.notaGoogle ? " · ★ " + esc(pre.notaGoogle) : ""}. Confira e ajuste antes de cadastrar.</small>` : ""}</div>
     <form class="modal-corpo" id="formNovo">
-      ${campoTxt("empresa", "Empresa *", "")}
-      <div class="linha2">${campoTxt("segmento", "Segmento", "")}${campoTxt("contato", "Contato / responsável", "")}</div>
-      <div class="linha2">${campoTxt("cidade", "Cidade", "")}${campoTxt("uf", "UF", "")}</div>
-      <div class="linha2">${campoTxt("telefones", "Telefone(s)", "")}${campoTxt("email", "E-mail", "")}</div>
+      ${pre.situacao ? `<div class="aviso-erro">Situação cadastral na Receita: <b>${esc(pre.situacao)}</b></div>` : ""}
+      <div class="linha2">${campoTxt("empresa", "Empresa *", pre.empresa)}<div class="campo"><label>CNPJ <button type="button" class="lnk" data-m="cnpj">buscar dados ›</button></label><input name="cnpj" value="${v("cnpj")}"></div></div>
+      <div class="linha2">${campoTxt("segmento", "Segmento", pre.segmento)}${campoTxt("contato", "Contato / responsável", pre.contato)}</div>
+      <div class="linha2">${campoTxt("cidade", "Cidade", pre.cidade)}${campoTxt("uf", "UF", pre.uf)}</div>
+      <div class="linha2">${campoTxt("telefones", "Telefone(s)", (pre.telefones || []).join(" / "))}${campoTxt("email", "E-mail", pre.email)}</div>
+      ${pre.endereco ? campoTxt("endereco", "Endereço", pre.endereco) : ""}
+      ${pre.site ? campoTxt("site", "Site", pre.site) : ""}
       <div class="linha2"><div class="campo"><label>Fit WL</label><select name="fit">${opcoes([["A", "A"], ["B", "B"], ["C", "C"]], "", "—")}</select></div>
         <div class="campo"><label>Origem</label><select name="origem">${opcoes(["Indicação", "Prospecção ativa", "Instagram", "LinkedIn", "Site", "Evento", "Parceria", "Outro"].map(x => [x, x]), "Prospecção ativa", "—")}</select></div></div>
-      <div class="campo"><label>Observações</label><textarea name="observacoes"></textarea></div>
+      <div class="campo"><label>Observações</label><textarea name="observacoes">${[pre.porte ? "Porte: " + pre.porte : "", pre.abertura ? "Aberta em " + pre.abertura : "", pre.simples ? "Optante do Simples" : ""].filter(Boolean).join(" · ")}</textarea></div>
       <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Cadastrar</button></div>
     </form>`);
   veu.onclick = fecharModal;
   m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  m.querySelector("[data-m=cnpj]").onclick = () => preencherFormPorCNPJ($("formNovo"));
   m.querySelector("[name=empresa]").focus();
   $("formNovo").onsubmit = async e => {
     e.preventDefault();
-    const f = Object.fromEntries(new FormData(e.target));
+    const f = { ...pre, ...(e.target._extra || {}), ...Object.fromEntries(new FormData(e.target)) };
     if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
+    const dc = soDigitos(f.cnpj), dup = dc.length === 14 && leads().find(l => soDigitos(l.cnpj) === dc);
+    if (dup) { fecharModal(); toast(`Esse CNPJ já está no CRM: ${dup.empresa}`); return abrirLead(dup.id); }
     let id;
     fecharModal();
-    await salvarCRM(d => {
-      id = novoId(d);
-      const l = { id, empresa: f.empresa.trim(), segmento: f.segmento.trim(), contato: f.contato.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(),
-        telefones: f.telefones.split("/").map(t => t.trim()).filter(Boolean), email: f.email.trim(), fit: f.fit, origem: f.origem, observacoes: f.observacoes,
-        etapa: "abordar", criadoEm: new Date().toISOString(), criadoPor: meuNome(), responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", historico: [] };
-      registrar(l, "criado", f.origem ? `Origem: ${f.origem}` : "");
-      d.leads.push(l);
-    }, "Lead cadastrado");
-    if (id) abrirLead(id);
+    await salvarCRM(d => { const l = novoLeadDe(d, f); id = l.id; d.leads.push(l); }, "Lead cadastrado");
+    if (id) depois ? depois(id) : abrirLead(id);
   };
 }
 
@@ -3958,37 +3998,37 @@ function renderListaPA() {
 }
 
 /* ---- Novo parceiro ---- */
-function abrirNovoParceiro() {
-  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo parceiro</h3></div>
+function abrirNovoParceiro(pre = {}, depois) {
+  const tipoPre = pre.tipo || TIPO_POR_SEG[pre.segBase] || TIPOS_PARCEIRO[0];
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo parceiro</h3>${pre.origemBase ? `<small class="sub-modal">Pré-preenchido com dados de: ${esc(pre.origemBase)}${pre.notaGoogle ? " · ★ " + esc(pre.notaGoogle) : ""}. Confira e ajuste antes de cadastrar.</small>` : ""}</div>
     <form class="modal-corpo dados-grid" id="formNovoPA">
-      ${campoTxt("empresa", "Empresa *", "")}
-      <div class="campo"><label>Tipo de parceiro</label><select name="tipo">${TIPOS_PARCEIRO.map(t => `<option ${t === TIPOS_PARCEIRO[0] ? "selected" : ""}>${t}</option>`).join("")}</select></div>
-      <div class="linha2">${campoTxt("contato", "Contato", "")}${campoTxt("cargo", "Cargo", "")}</div>
-      <div class="linha2">${campoTxt("telefones", "Telefone / WhatsApp", "")}${campoTxt("email", "E-mail", "")}</div>
-      <div class="linha2">${campoTxt("cidade", "Cidade", "")}${campoTxt("uf", "UF", "")}</div>
-      <div class="campo"><label>Observações</label><textarea name="observacoes" rows="2" placeholder="Como chegou até ele, quantos clientes atende, etc."></textarea></div>
+      ${pre.situacao ? `<div class="aviso-erro">Situação cadastral na Receita: <b>${esc(pre.situacao)}</b></div>` : ""}
+      <div class="linha2">${campoTxt("empresa", "Empresa *", pre.empresa)}<div class="campo"><label>CNPJ <button type="button" class="lnk" data-m="cnpj">buscar dados ›</button></label><input name="cnpj" value="${esc(pre.cnpj || "")}"></div></div>
+      <div class="campo"><label>Tipo de parceiro</label><select name="tipo">${TIPOS_PARCEIRO.map(t => `<option ${t === tipoPre ? "selected" : ""}>${t}</option>`).join("")}</select></div>
+      <div class="linha2">${campoTxt("contato", "Contato", pre.contato)}${campoTxt("cargo", "Cargo", pre.contato && pre.origemBase ? "Sócio" : "")}</div>
+      <div class="linha2">${campoTxt("telefones", "Telefone / WhatsApp", (pre.telefones || []).join(" / "))}${campoTxt("email", "E-mail", pre.email)}</div>
+      <div class="linha2">${campoTxt("cidade", "Cidade", pre.cidade)}${campoTxt("uf", "UF", pre.uf)}</div>
+      ${pre.endereco ? campoTxt("endereco", "Endereço", pre.endereco) : ""}
+      ${pre.site ? campoTxt("site", "Site", pre.site) : ""}
+      <div class="campo"><label>Observações</label><textarea name="observacoes" rows="2" placeholder="Como chegou até ele, quantos clientes atende, etc.">${[pre.porte ? "Porte: " + pre.porte : "", pre.abertura ? "Aberta em " + pre.abertura : ""].filter(Boolean).join(" · ")}</textarea></div>
       <div class="modal-rod" style="padding:0"><button class="btn-s" type="button" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Cadastrar</button></div>
     </form>`);
   veu.onclick = fecharModal;
   m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  m.querySelector("[data-m=cnpj]").onclick = () => preencherFormPorCNPJ($("formNovoPA"));
   m.querySelector("[name=empresa]").focus();
   $("formNovoPA").onsubmit = async e => {
     e.preventDefault();
-    const f = Object.fromEntries(new FormData(e.target));
+    const f = { ...pre, ...(e.target._extra || {}), ...Object.fromEntries(new FormData(e.target)) };
     if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
-    const dup = parceiros().find(p => norm(p.empresa) === norm(f.empresa) && norm(p.cidade || "") === norm(f.cidade || ""));
+    const dc = soDigitos(f.cnpj);
+    const dup = parceiros().find(p => (dc.length === 14 && soDigitos(p.cnpj) === dc) || (norm(p.empresa) === norm(f.empresa) && norm(p.cidade || "") === norm(f.cidade || "")));
     if (dup) { fecharModal(); toast(`"${dup.empresa}" já está cadastrado`); return abrirParceiro(dup.id); }
     let id;
     try {
-      await salvarStore(paStore, d => {
-        d.seq = (d.seq || d.parceiros.length) + 1; id = "PA-" + String(d.seq).padStart(4, "0");
-        const p = { id, empresa: f.empresa.trim(), tipo: f.tipo, contato: f.contato.trim(), cargo: f.cargo.trim(), telefones: f.telefones.split("/").map(x => x.trim()).filter(Boolean),
-          email: f.email.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(), observacoes: f.observacoes, etapa: "prospectar",
-          responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", acoes: [], historico: [], criadoEm: new Date().toISOString(), criadoPor: meuNome() };
-        registrarPA(p, "criado", "Parceiro cadastrado");
-        d.parceiros.push(p);
-      });
-      fecharModal(); toast("Parceiro cadastrado"); renderParceiros(); abrirParceiro(id);
+      await salvarStore(paStore, d => { const p = novoParceiroDe(d, f); id = p.id; d.parceiros.push(p); });
+      fecharModal(); toast("Parceiro cadastrado"); renderParceiros();
+      depois ? depois(id) : abrirParceiro(id);
     } catch (er) { toast("Não foi possível cadastrar: " + er.message, "erro", 6000); }
   };
 }
@@ -4023,10 +4063,11 @@ function renderFichaPA(id) {
   <div class="g-cab">
     <div class="g-topo"><h2>${esc(p.empresa)}</h2><button class="g-fechar" data-pg="fechar" aria-label="Fechar">×</button></div>
     <div class="g-sub"><span>${esc(p.tipo || "")}${p.cidade ? " · " + esc(p.cidade) + (p.uf ? "/" + esc(p.uf) : "") : ""}</span>
-      ${p.contato ? `<span class="chip-p">${esc(p.contato)}${p.cargo ? " · " + esc(p.cargo) : ""}</span>` : ""}<span class="chip-p">${esc(p.id)}</span></div>
+      ${p.contato ? `<span class="chip-p">${esc(p.contato)}${p.cargo ? " · " + esc(p.cargo) : ""}</span>` : ""}${p.cnpj ? `<span class="chip-p">CNPJ ${esc(p.cnpj)}</span>` : ""}<span class="chip-p">${esc(p.id)}</span></div>
     <div class="g-contatos">
       ${tels.map(t => `<a href="tel:${soDigitos(t)}">${esc(t)}</a>${linkWhats(t) ? `<a href="${linkWhats(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}`).join("")}
       ${p.email ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ""}
+      ${p.site ? `<a href="${esc(/^https?:/.test(p.site) ? p.site : "https://" + p.site)}" target="_blank" rel="noopener">Site</a>` : ""}${p.mapsUrl ? `<a href="${esc(p.mapsUrl)}" target="_blank" rel="noopener">Google Maps${p.notaGoogle ? " ★ " + esc(p.notaGoogle.split(" ")[0]) : ""}</a>` : ""}
       ${!tels.length && !p.email ? `<span style="font-size:.76rem;opacity:.7">Sem contato cadastrado</span>` : ""}
     </div>
   </div>
@@ -4070,12 +4111,13 @@ function renderFichaPA(id) {
     <section class="g-sec"><h4>Agenda do parceiro</h4><div id="agendaLead"></div></section>
     <details class="g-sec"><summary>Dados do parceiro <span>editar ▾</span></summary>
       <form class="dados-grid" id="formDadosPA">
-        ${campoTxt("empresa", "Empresa", p.empresa)}
+        <div class="linha2">${campoTxt("empresa", "Empresa", p.empresa)}${campoTxt("cnpj", "CNPJ", p.cnpj)}</div>
         <div class="linha2"><div class="campo"><label>Tipo</label><select name="tipo">${opcoes(TIPOS_PARCEIRO.map(t => [t, t]), p.tipo || "", "—")}</select></div>
           <div class="campo"><label>Responsável WL</label><select name="responsavel">${opcoes(RESPONSAVEIS.map(r => [r, r]), p.responsavel || "", "—")}</select></div></div>
         <div class="linha2">${campoTxt("contato", "Contato", p.contato)}${campoTxt("cargo", "Cargo", p.cargo)}</div>
         <div class="linha2">${campoTxt("telefones", "Telefones (separe com /)", (p.telefones || []).join(" / "))}${campoTxt("email", "E-mail", p.email)}</div>
         <div class="linha2">${campoTxt("cidade", "Cidade", p.cidade)}${campoTxt("uf", "UF", p.uf)}</div>
+        ${campoTxt("endereco", "Endereço", p.endereco)}
         <div class="campo"><label>Observações</label><textarea name="observacoes">${esc(p.observacoes || "")}</textarea></div>
         <button class="btn-s" type="submit" style="justify-self:end">Salvar dados</button>
       </form></details>
@@ -4155,7 +4197,7 @@ function ligarFichaPA(p) {
     e.preventDefault();
     const f = Object.fromEntries(new FormData(e.target));
     if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
-    alterarParceiro(p.id, x => Object.assign(x, { empresa: f.empresa.trim(), tipo: f.tipo, responsavel: f.responsavel, contato: f.contato.trim(), cargo: f.cargo.trim(),
+    alterarParceiro(p.id, x => Object.assign(x, { empresa: f.empresa.trim(), cnpj: f.cnpj.trim(), endereco: f.endereco.trim(), tipo: f.tipo, responsavel: f.responsavel, contato: f.contato.trim(), cargo: f.cargo.trim(),
       telefones: f.telefones.split("/").map(t => t.trim()).filter(Boolean), email: f.email.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(), observacoes: f.observacoes }), "Dados salvos");
   };
   desenharAgenda(p, eventosParceiro);
@@ -4206,6 +4248,7 @@ function registrarIndicacao(p) {
 /* ---- Cliques gerais ---- */
 $("paAbas").onclick = e => { const b = e.target.closest("[data-aba]"); if (b) location.hash = "parceiros/" + b.dataset.aba; };
 $("btnNovoPA").onclick = () => abrirNovoParceiro();
+$("btnBuscaPA").onclick = () => abrirBuscaEmpresas("parceiros");
 $("paConteudo").onclick = e => {
   const el = e.target.closest("[data-pa-id],[data-pa],[data-pa-etapa]");
   if (!el) return;
@@ -4217,6 +4260,521 @@ $("paConteudo").onclick = e => {
   if (d.pa === "filaProsp") { pa.filtro = { busca: "", tipo: "", etapa: "prospectar" }; location.hash = "parceiros/lista"; }
   if (d.pa === "limpar") { pa.filtro = { busca: "", etapa: "", tipo: "" }; renderListaPA(); }
 };
+
+/* ================== BUSCA DE EMPRESAS (base pública da Receita Federal) ==================
+   A base é gerada todo mês pelo repositório wl-cnpj (GitHub Actions) e publicada no GitHub Pages:
+   meta.json · <segmento>/<UF>/index.json · <segmento>/<UF>/<municipio>.json */
+const BASE_CNPJ = (() => {
+  try { const o = localStorage.getItem("wl.baseCnpj"); if (o) return o.replace(/\/?$/, "/"); } catch {}
+  return location.hostname.endsWith("github.io") ? location.origin + "/wl-cnpj/" : "https://wlexpertise.github.io/wl-cnpj/";
+})();
+const R = { cnpj: 0, razao: 1, fant: 2, cnae: 3, abert: 4, porte: 5, cap: 6, end: 7, bairro: 8, cep: 9, t1: 10, t2: 11, email: 12, matriz: 13, simples: 14, contato: 15 };
+const PORTES = { "01": "ME", "03": "EPP", "05": "Demais", "00": "Não informado" };
+const UFS = ["AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"];
+const be = { destino: "crm", fonte: "receita", meta: null, seg: "", uf: "", cidades: [], indice: [], res: [], lim: 40, sel: new Set(), feitos: new Set(), carregando: false,
+  f: { nome: "", bairro: "", porte: "", matriz: false, tel: false, email: false, simples: "", anos: 0 } };
+const cacheBE = new Map();
+async function jsonBE(rel) {
+  if (cacheBE.has(rel)) return cacheBE.get(rel);
+  const r = await fetch(BASE_CNPJ + rel, { cache: rel === "meta.json" ? "no-cache" : "default" });
+  if (!r.ok) throw Object.assign(new Error(r.status === 404 ? "não encontrado" : "HTTP " + r.status), { status: r.status });
+  const j = await r.json();
+  cacheBE.set(rel, j);
+  return j;
+}
+const MINUSC = new Set(["de", "da", "do", "das", "dos", "e", "em", "a", "o", "para", "com"]);
+const SIGLAS = new Set(["LTDA", "ME", "EPP", "EIRELI", "SA", "S/A", "S.A.", "S.A", "SS", "CIA", "MEI", "LTDA.", "ME.", "II", "III", "IV", "BH", "MG", "SP", "RJ", "TI"]);
+function tituloBR(s) {
+  return String(s || "").trim().split(/\s+/).map((w, i) => {
+    const u = w.toUpperCase();
+    if (SIGLAS.has(u)) return u;
+    const l = w.toLowerCase();
+    if (i && MINUSC.has(l)) return l;
+    return l.replace(/(^|[-\/(])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
+  }).join(" ");
+}
+const anosDesde = d => d && d.length >= 8 ? Math.floor((Date.now() - new Date(`${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}T12:00`)) / 3.156e10) : null;
+const nomeEmp = r => tituloBR(r[R.fant] || r[R.razao]);
+const ehDestinoPA = () => be.destino === "parceiros";
+/* Quem já está na base (para não duplicar) */
+function chavesExistentes() {
+  const lista = ehDestinoPA() ? parceiros() : leads();
+  const cnpjs = new Set(), nomes = new Set();
+  for (const x of lista) { const d = soDigitos(x.cnpj); if (d) cnpjs.add(d); nomes.add(norm(x.empresa) + "|" + norm(x.cidade || "")); }
+  return { cnpjs, nomes };
+}
+function jaExiste(r, ch, cidade) { return ch.cnpjs.has(r[R.cnpj]) || ch.nomes.has(norm(nomeEmp(r)) + "|" + norm(cidade)) || be.feitos.has(be.destino + r[R.cnpj]); }
+
+async function abrirBuscaEmpresas(destino) {
+  be.destino = destino;
+  be.sel.clear(); bg.sel.clear();
+  if (destino === "crm" && !crm.carregado) await carregarCRM(true);
+  if (destino === "parceiros" && !paStore.carregado) await carregarParceiros();
+  document.querySelectorAll("#buscaEmp,#veuBE").forEach(x => x.remove());
+  const veu = document.createElement("div"); veu.className = "veu"; veu.id = "veuBE"; veu.style.zIndex = 44; veu.onclick = fecharBuscaEmp;
+  const g = document.createElement("aside"); g.className = "gaveta be"; g.id = "buscaEmp";
+  document.body.append(veu, g);
+  g.innerHTML = `<div class="g-cab"><div class="g-topo"><h2>Buscar empresas ${ehDestinoPA() ? "para parcerias" : "para o CRM"}</h2><button class="g-fechar" data-be="fechar" aria-label="Fechar">×</button></div>
+    <div class="g-sub" id="beSub">Base pública da Receita Federal e Google Maps</div>
+    <nav class="abas be-fontes" id="beFontes"><button data-be-fonte="receita">Receita Federal</button><button data-be-fonte="google">Google Maps</button></nav></div>
+    <div class="be-corpo" id="beCorpo"><div class="esqueleto"></div></div>`;
+  g.onclick = cliqueBE;
+  const [meta] = await Promise.all([jsonBE("meta.json").catch(e => { be.erroMeta = e; return null; }), statusGoogle()]);
+  be.meta = meta;
+  if (meta) {
+    if (!be.seg || !meta.segmentos[be.seg]) be.seg = ehDestinoPA() ? (meta.segmentos.contabilidade ? "contabilidade" : Object.keys(meta.segmentos)[0]) : (meta.segmentos.rental ? "rental" : Object.keys(meta.segmentos)[0]);
+    if (!be.uf) be.uf = "MG";
+    await carregarIndiceBE();
+  } else if (bg.ativo) be.fonte = "google";
+  desenharFonteBE();
+}
+async function statusGoogle() {
+  try { const r = await api("/places/status"); bg.ativo = r.ativo; bg.usado = r.usado; bg.limite = r.limite; } catch { bg.ativo = false; }
+}
+function desenharFonteBE() {
+  $("beFontes").querySelectorAll("button").forEach(b => b.classList.toggle("ativo", b.dataset.beFonte === be.fonte));
+  const m = be.meta;
+  if (be.fonte === "google") {
+    $("beSub").textContent = bg.ativo ? `Google Maps · telefone, site e avaliação · ${bg.usado} de ${bg.limite} buscas usadas este mês (cota gratuita)` : "Google Maps";
+    return desenharGoogleBE();
+  }
+  if (!m) {
+    $("beSub").textContent = "Base pública da Receita Federal";
+    $("beCorpo").innerHTML = `<div class="aviso-erro" style="margin:18px 0"><b>A base de empresas ainda não está disponível.</b><br>${be.erroMeta?.status === 404 ? "O robô mensal (repositório wl-cnpj no GitHub) ainda não publicou a primeira versão. Depois da primeira execução, a busca passa a funcionar aqui." : "Não foi possível ler a base: " + esc(be.erroMeta?.message || "")}${bg.ativo ? "<br>Enquanto isso, use a aba Google Maps." : ""}</div>`;
+    return;
+  }
+  const dt = m.referencia && /^\d{4}-\d{2}$/.test(m.referencia) ? new Date(m.referencia + "-15T12:00").toLocaleDateString("pt-BR", { month: "long", year: "numeric" }) : m.referencia;
+  $("beSub").textContent = `Base pública da Receita Federal · referência ${dt} · empresas ativas, sem MEI`;
+  desenharBE();
+}
+
+/* ---- Google Maps (via Worker, que guarda a chave e controla a cota gratuita) ---- */
+const bg = { ativo: false, usado: 0, limite: 0, q: "", onde: "", res: [], prox: "", carregando: false, sel: new Set(), completar: true };
+const TERMO_SEG = { contabilidade: "escritório de contabilidade", advocacia: "escritório de advocacia", consultoria: "consultoria empresarial", software: "empresa de software", rental: "locação de equipamentos para construção", clinicas: "clínica médica", estetica: "clínica de estética", engenharia: "escritório de engenharia", marketing: "agência de marketing" };
+function desenharGoogleBE() {
+  if (!bg.ativo) {
+    $("beCorpo").innerHTML = `<div class="aviso-erro" style="margin:18px 0"><b>O Google Maps ainda não foi ligado.</b><br>Falta cadastrar a chave da API do Google no Worker (Cloudflare → wl-sistema-api → Settings → Variables and Secrets → <b>GOOGLE_PLACES_KEY</b>). Depois disso, esta aba passa a funcionar.</div>`;
+    return;
+  }
+  if (!bg.q) bg.q = TERMO_SEG[be.seg] || (ehDestinoPA() ? TERMO_SEG.contabilidade : "");
+  if (!bg.onde && be.cidades.length) bg.onde = `${tituloBR(be.cidades[0][1])} ${be.uf}`;
+  $("beCorpo").innerHTML = `
+  <form class="be-filtros be-g" id="bgForm">
+    <div class="campo"><label>O que buscar</label><input id="bgQ" value="${esc(bg.q)}" placeholder="Ex.: escritório de contabilidade" data-mascara="nenhuma"></div>
+    <div class="campo"><label>Onde</label><input id="bgOnde" value="${esc(bg.onde)}" placeholder="Cidade e UF, bairro…" data-mascara="nenhuma"></div>
+    <div class="campo" style="align-self:end"><button class="btn-p" type="submit" style="width:100%;justify-content:center"><svg><use href="#i-busca"/></svg>Buscar no Google</button></div>
+    <p class="be-nota">Cada busca traz até 20 empresas e conta 1 da cota gratuita de ${bg.limite} por mês (${Math.max(0, bg.limite - bg.usado)} restantes). Filtrar e adicionar não gasta cota.</p>
+  </form>
+  <div class="be-res" id="bgRes"></div>`;
+  $("bgForm").onsubmit = e => { e.preventDefault(); buscarGoogle(false); };
+  desenharResGoogle();
+}
+async function buscarGoogle(mais) {
+  const q = $("bgQ")?.value.trim() ?? bg.q, onde = $("bgOnde")?.value.trim() ?? bg.onde;
+  if (!q) return toast("Diga o que buscar", "erro");
+  if (!onde) { toast("Informe a cidade", "erro"); return $("bgOnde")?.focus(); }
+  bg.q = q; bg.onde = onde;
+  if (!mais) { bg.res = []; bg.prox = ""; bg.sel.clear(); }
+  bg.carregando = true; desenharResGoogle();
+  try {
+    const r = await api("/places/buscar", { method: "POST", body: JSON.stringify({ q: `${q} em ${onde}`, pagina: mais ? bg.prox : "" }) });
+    bg.usado = r.usado; bg.limite = r.limite; bg.prox = r.proxima;
+    const vistos = new Set(bg.res.map(x => x.id));
+    bg.res.push(...r.lugares.filter(x => !vistos.has(x.id)));
+    $("beSub").textContent = `Google Maps · telefone, site e avaliação · ${bg.usado} de ${bg.limite} buscas usadas este mês (cota gratuita)`;
+  } catch (e) { toast(e.message, "erro", 7000); }
+  bg.carregando = false; desenharResGoogle();
+}
+const jaExisteG = (x, ch) => ch.nomes.has(norm(x.nome) + "|" + norm(x.cidade)) || be.feitos.has(be.destino + "g" + x.id);
+function desenharResGoogle() {
+  const alvo = $("bgRes"); if (!alvo) return;
+  if (bg.carregando && !bg.res.length) { alvo.innerHTML = `<div class="esqueleto"></div>`; return; }
+  if (!bg.res.length) { alvo.innerHTML = `<div class="vazio-bloco">Digite o tipo de empresa e a cidade e clique em <b>Buscar no Google</b>.</div>`; return; }
+  const ch = chavesExistentes(), livres = bg.res.filter(x => !jaExisteG(x, ch));
+  const rot = ehDestinoPA() ? "Já é parceiro" : "Já está no CRM";
+  alvo.innerHTML = `
+    <div class="be-topo"><span><b>${bg.res.length}</b> empresa${bg.res.length === 1 ? "" : "s"} no Google${bg.res.length !== livres.length ? ` · ${bg.res.length - livres.length} já cadastrada${bg.res.length - livres.length === 1 ? "" : "s"}` : ""}</span>
+      ${livres.length ? `<label class="chk"><input type="checkbox" id="bgTodos" ${bg.sel.size && livres.every(x => bg.sel.has(x.id)) ? "checked" : ""}> Selecionar todas</label>` : ""}</div>
+    <ul class="be-lista">${bg.res.map(x => {
+      const ja = jaExisteG(x, ch);
+      return `<li class="${ja ? "ja" : ""}"><input type="checkbox" class="be-sel" data-bg-sel="${esc(x.id)}" ${ja ? "disabled" : bg.sel.has(x.id) ? "checked" : ""} aria-label="Selecionar">
+        <div class="be-info"><b>${esc(x.nome)}</b><small>${esc(x.endereco)}</small>
+          <div class="be-tags">${x.nota ? `<span class="chip-p">★ ${String(x.nota).replace(".", ",")} (${x.avaliacoes})</span>` : `<span class="chip-p">Sem avaliações</span>`}${x.status && x.status !== "OPERATIONAL" ? `<span class="chip-p" style="color:var(--erro)">${x.status === "CLOSED_PERMANENTLY" ? "Fechada" : "Fechada temporariamente"}</span>` : ""}${x.site ? `<a class="chip-p" href="${esc(x.site)}" target="_blank" rel="noopener">site ↗</a>` : ""}${x.maps ? `<a class="chip-p" href="${esc(x.maps)}" target="_blank" rel="noopener">Google Maps ↗</a>` : ""}</div>
+          <small class="be-cont">${x.telefone ? esc(x.telefone) : "Sem telefone no Google"}</small></div>
+        ${ja ? `<span class="chip-etapa" style="--cor:var(--verde)"><i></i>${be.feitos.has(be.destino + "g" + x.id) ? "Adicionada" : rot}</span>` : `<button class="btn-s" data-bg-add="${esc(x.id)}"><svg><use href="#i-mais"/></svg>Adicionar</button>`}</li>`;
+    }).join("")}</ul>
+    ${bg.prox ? `<button class="btn-s be-mais" data-bg="mais" ${bg.carregando ? "disabled" : ""}>${bg.carregando ? "Carregando…" : "Buscar mais 20 (usa 1 da cota)"}</button>` : ""}
+    ${bg.sel.size ? `<div class="be-rodape"><span>${bg.sel.size} selecionada${bg.sel.size === 1 ? "" : "s"}</span><button class="btn-p" data-bg="lote"><svg><use href="#i-mais"/></svg>Adicionar ${bg.sel.size} ${ehDestinoPA() ? "aos parceiros" : "ao CRM"}</button></div>` : ""}`;
+  if ($("bgTodos")) $("bgTodos").onchange = e => { for (const x of livres) e.target.checked ? bg.sel.add(x.id) : bg.sel.delete(x.id); desenharResGoogle(); };
+}
+/* Tenta achar a mesma empresa na base da Receita (pelo nome, na mesma cidade) para trazer o CNPJ */
+async function cnpjPeloNome(nome, cidade, uf) {
+  if (!be.meta || !uf) return null;
+  const segs = [be.seg, ...Object.keys(be.meta.segmentos).filter(s => s !== be.seg)].filter(s => be.meta.segmentos[s]?.ufs?.[uf]).slice(0, 3);
+  const pal = norm(nome).split(" ").filter(w => w.length > 2 && !["ltda", "eireli", "contabilidade", "contabil", "escritorio", "assessoria", "consultoria", "clinica", "servicos", "comercio"].includes(w));
+  if (!pal.length) return null;
+  for (const s of segs) {
+    try {
+      const idx = await jsonBE(`${s}/${uf}/index.json`), c = idx.find(x => norm(x[1]) === norm(cidade));
+      if (!c) continue;
+      const regs = await jsonBE(`${s}/${uf}/${c[0]}.json`);
+      const achados = regs.filter(r => { const t = norm(r[R.fant] + " " + r[R.razao]); return pal.every(w => t.includes(w)); });
+      if (achados.length === 1) return { r: achados[0], cidade: tituloBR(c[1]), uf };
+    } catch {}
+  }
+  return null;
+}
+function mesclarGoogle(pre, x) {
+  if (x.telefone) pre.telefones = [...new Set([fmtTelefone(x.telefone), ...(pre.telefones || [])])];
+  if (x.site) pre.site = x.site;
+  if (x.maps) pre.mapsUrl = x.maps;
+  if (x.nota) pre.notaGoogle = `${String(x.nota).replace(".", ",")} (${x.avaliacoes} avaliações)`;
+  if (!pre.endereco && x.endereco) pre.endereco = x.endereco;
+  return pre;
+}
+async function preGoogle(x, consultar) {
+  let pre = { empresa: x.nome, cidade: x.cidade, uf: x.uf, telefones: [], email: "", endereco: x.endereco, segmento: be.meta?.segmentos[be.seg]?.nome || "", origemBase: "Google Maps", segBase: be.seg };
+  const rec = consultar ? await cnpjPeloNome(x.nome, x.cidade, x.uf) : null;
+  if (rec) { pre = await dadosParaCadastro(rec, true); pre.empresa = x.nome; pre.origemBase = "Google Maps + Receita"; }
+  return mesclarGoogle(pre, x);
+}
+async function cliqueGoogle(el, d) {
+  if (d.bg === "mais") return buscarGoogle(true);
+  if (d.bgSel) { el.checked ? bg.sel.add(d.bgSel) : bg.sel.delete(d.bgSel); return desenharResGoogle(); }
+  if (d.bgAdd) {
+    const x = bg.res.find(y => y.id === d.bgAdd); if (!x) return;
+    el.disabled = true; el.innerHTML = "Buscando CNPJ…";
+    const pre = await preGoogle(x, true);
+    const ok = () => { be.feitos.add(be.destino + "g" + x.id); if (pre.cnpj) be.feitos.add(be.destino + soDigitos(pre.cnpj)); desenharResGoogle(); };
+    if (ehDestinoPA()) abrirNovoParceiro(pre, ok); else abrirNovoLead(pre, ok);
+    el.disabled = false; el.innerHTML = `<svg><use href="#i-mais"/></svg>Adicionar`;
+    return;
+  }
+  if (d.bg === "lote") {
+    const itens = bg.res.filter(x => bg.sel.has(x.id)); if (!itens.length) return;
+    const pres = await Promise.all(itens.map(x => preGoogle(x, false)));
+    try {
+      if (ehDestinoPA()) { await salvarStore(paStore, dd => { for (const p of pres) dd.parceiros.push(novoParceiroDe(dd, p)); }); renderParceiros(); }
+      else if (!(await salvarCRM(dd => { for (const p of pres) dd.leads.push(novoLeadDe(dd, p)); }))) return;
+      itens.forEach(x => be.feitos.add(be.destino + "g" + x.id)); bg.sel.clear(); desenharResGoogle();
+      toast(`${itens.length} empresa${itens.length === 1 ? "" : "s"} adicionada${itens.length === 1 ? "" : "s"}`);
+    } catch (er) { toast("Não foi possível salvar: " + er.message, "erro", 6000); }
+  }
+}
+/* Receita → completa com o Google ao adicionar (1 busca da cota) */
+async function completarComGoogle(pre) {
+  if (!bg.ativo || !bg.completar || bg.usado >= bg.limite) return pre;
+  try {
+    const r = await api("/places/buscar", { method: "POST", body: JSON.stringify({ q: `${pre.empresa} ${pre.cidade} ${pre.uf}`, max: 3 }) });
+    bg.usado = r.usado;
+    const pal = norm(pre.empresa).split(" ").filter(w => w.length > 2);
+    const x = r.lugares.find(l => norm(l.cidade) === norm(pre.cidade) && pal.some(w => norm(l.nome).includes(w)));
+    if (x) mesclarGoogle(pre, x);
+  } catch {}
+  return pre;
+}
+function fecharBuscaEmp() { document.querySelectorAll("#buscaEmp,#veuBE").forEach(x => x.remove()); }
+function desenharBE() {
+  const m = be.meta, f = be.f, segs = Object.entries(m.segmentos);
+  $("beCorpo").innerHTML = `
+  <form class="be-filtros" id="beForm" onsubmit="return false">
+    <div class="campo"><label>Segmento</label><select data-bef="seg">${segs.map(([id, s]) => `<option value="${id}" ${id === be.seg ? "selected" : ""}>${esc(s.nome)}${s.total ? "" : " (vazio)"}</option>`).join("")}</select></div>
+    <div class="campo"><label>Estado</label><select data-bef="uf">${UFS.map(u => `<option ${u === be.uf ? "selected" : ""}>${u}</option>`).join("")}</select></div>
+    <div class="campo be-cid"><label>Cidades <span class="dica-campo" id="beCidInfo"></span></label>
+      <div class="be-chips" id="beChips">${be.cidades.map(c => `<span class="be-chip">${esc(tituloBR(c[1]))} <small>${c[2]}</small><button type="button" data-be-rem="${c[0]}" aria-label="Remover">×</button></span>`).join("")}
+        <input id="beCidade" list="beListaCid" placeholder="${be.cidades.length ? "+ outra cidade" : "Digite a cidade"}" autocomplete="off" data-mascara="nenhuma"></div>
+      <datalist id="beListaCid"></datalist></div>
+    <div class="campo"><label>Nome contém</label><input data-bef="nome" value="${esc(f.nome)}" placeholder="Opcional"></div>
+    <div class="campo"><label>Bairro</label><input data-bef="bairro" value="${esc(f.bairro)}" placeholder="Opcional"></div>
+    <div class="campo"><label>Porte</label><select data-bef="porte">${opcoes([["01", "ME"], ["03", "EPP"], ["05", "Demais (médio/grande)"]], f.porte, "Todos")}</select></div>
+    <div class="campo"><label>Tempo de empresa</label><select data-bef="anos">${opcoes([["1", "Mais de 1 ano"], ["3", "Mais de 3 anos"], ["5", "Mais de 5 anos"], ["10", "Mais de 10 anos"]], String(f.anos || ""), "Qualquer")}</select></div>
+    <div class="campo"><label>Regime</label><select data-bef="simples">${opcoes([["1", "Simples Nacional"], ["0", "Fora do Simples"]], f.simples, "Todos")}</select></div>
+    <div class="be-checks">
+      <label class="chk"><input type="checkbox" data-bef="tel" ${f.tel ? "checked" : ""}> Com telefone</label>
+      <label class="chk"><input type="checkbox" data-bef="email" ${f.email ? "checked" : ""}> Com e-mail</label>
+      <label class="chk"><input type="checkbox" data-bef="matriz" ${f.matriz ? "checked" : ""}> Só matriz</label>
+      ${bg.ativo ? `<label class="chk" title="Ao clicar em Adicionar, busca a empresa no Google para trazer telefone atualizado, site e avaliação (usa 1 da cota gratuita)"><input type="checkbox" id="bgCompletar" ${bg.completar ? "checked" : ""}> Completar com Google ao adicionar</label>` : ""}
+    </div>
+  </form>
+  <div class="be-res" id="beRes"></div>`;
+  const inp = $("beCidade");
+  const adicionar = () => {
+    const v = norm(inp.value.replace(/\s*\(\d+\)\s*$/, ""));
+    if (!v) return;
+    const c = be.indice.find(x => norm(x[1]) === v) || (be.indice.filter(x => norm(x[1]).startsWith(v)).length === 1 ? be.indice.find(x => norm(x[1]).startsWith(v)) : null);
+    if (!c) { if (be.indice.length) toast("Cidade não encontrada neste segmento/estado", "erro"); return; }
+    if (!be.cidades.some(x => x[0] === c[0])) be.cidades.push(c);
+    desenharBE(); preencherListaCid(); buscarBE(); setTimeout(() => $("beCidade")?.focus(), 0);
+  };
+  inp.onchange = adicionar;
+  inp.onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); adicionar(); } if (e.key === "Backspace" && !inp.value && be.cidades.length) { be.cidades.pop(); desenharBE(); preencherListaCid(); buscarBE(); setTimeout(() => $("beCidade")?.focus(), 0); } };
+  $("beForm").onchange = async e => {
+    if (e.target.id === "bgCompletar") { bg.completar = e.target.checked; return; }
+    const k = e.target.dataset.bef; if (!k) return;
+    if (k === "seg" || k === "uf") {
+      be[k] = e.target.value;
+      const antigas = be.cidades.map(c => c[1]);
+      await carregarIndiceBE();
+      be.cidades = be.indice.filter(c => antigas.includes(c[1]));
+      desenharBE(); preencherListaCid(); return buscarBE();
+    }
+    be.f[k] = e.target.type === "checkbox" ? e.target.checked : k === "anos" ? Number(e.target.value) || 0 : e.target.value;
+    be.lim = 40; desenharRes();
+  };
+  let t;
+  $("beForm").oninput = e => { const k = e.target.dataset.bef; if (k === "nome" || k === "bairro") { clearTimeout(t); t = setTimeout(() => { be.f[k] = e.target.value; be.lim = 40; desenharRes(); }, 200); } };
+  preencherListaCid();
+  desenharRes();
+}
+function preencherListaCid() {
+  const dl = $("beListaCid"); if (!dl) return;
+  dl.innerHTML = be.indice.filter(c => !be.cidades.some(x => x[0] === c[0])).map(c => `<option value="${esc(tituloBR(c[1]))}">${c[2]} empresa${c[2] === 1 ? "" : "s"}</option>`).join("");
+  const tot = be.indice.reduce((s, c) => s + c[2], 0);
+  if ($("beCidInfo")) $("beCidInfo").textContent = be.indice.length ? `${tot.toLocaleString("pt-BR")} no estado · ${be.indice.length} cidades` : "";
+}
+async function carregarIndiceBE() {
+  be.indice = [];
+  if (!be.meta.segmentos[be.seg]?.ufs?.[be.uf]) { preencherListaCid(); return; }
+  try { be.indice = await jsonBE(`${be.seg}/${be.uf}/index.json`); } catch { be.indice = []; }
+  preencherListaCid();
+}
+async function buscarBE() {
+  be.res = []; be.lim = 40; be.sel.clear();
+  if (!be.cidades.length) return desenharRes();
+  be.carregando = true; desenharRes();
+  try {
+    const partes = await Promise.all(be.cidades.map(c => jsonBE(`${be.seg}/${be.uf}/${c[0]}.json`).then(rs => rs.map(r => ({ r, cidade: tituloBR(c[1]), uf: be.uf }))).catch(() => [])));
+    be.res = partes.flat();
+  } finally { be.carregando = false; desenharRes(); }
+}
+function filtradosBE() {
+  const f = be.f, nome = norm(f.nome), bairro = norm(f.bairro);
+  return be.res.filter(({ r }) => (!f.porte || r[R.porte] === f.porte) && (!f.tel || r[R.t1] || r[R.t2]) && (!f.email || r[R.email]) && (!f.matriz || r[R.matriz] === 1)
+    && (f.simples === "" || String(r[R.simples]) === f.simples) && (!f.anos || (anosDesde(r[R.abert]) ?? 0) >= f.anos)
+    && (!nome || norm(r[R.fant] + " " + r[R.razao]).includes(nome)) && (!bairro || norm(r[R.bairro]).includes(bairro)));
+}
+function desenharRes() {
+  const alvo = $("beRes"); if (!alvo) return;
+  if (be.carregando) { alvo.innerHTML = `<div class="esqueleto"></div>`; return; }
+  if (!be.cidades.length) { alvo.innerHTML = `<div class="vazio-bloco">Escolha o segmento, o estado e uma ou mais cidades para ver as empresas.</div>`; return; }
+  const ch = chavesExistentes(), lista = filtradosBE(), vis = lista.slice(0, be.lim);
+  const livres = lista.filter(x => !jaExiste(x.r, ch, x.cidade));
+  const rot = ehDestinoPA() ? "Já é parceiro" : "Já está no CRM";
+  alvo.innerHTML = `
+    <div class="be-topo"><span><b>${lista.length.toLocaleString("pt-BR")}</b> empresa${lista.length === 1 ? "" : "s"}${lista.length !== livres.length ? ` · ${lista.length - livres.length} já cadastrada${lista.length - livres.length === 1 ? "" : "s"}` : ""}</span>
+      ${livres.length ? `<label class="chk"><input type="checkbox" id="beTodos" ${be.sel.size && livres.slice(0, be.lim).every(x => be.sel.has(x.r[R.cnpj])) ? "checked" : ""}> Selecionar os visíveis</label>` : ""}</div>
+    ${vis.length ? `<ul class="be-lista">${vis.map(({ r, cidade, uf }) => {
+      const ja = jaExiste(r, ch, cidade), anos = anosDesde(r[R.abert]), tels = [r[R.t1], r[R.t2]].filter(Boolean);
+      return `<li class="${ja ? "ja" : ""}">
+        <input type="checkbox" class="be-sel" data-be-sel="${r[R.cnpj]}" ${ja ? "disabled" : be.sel.has(r[R.cnpj]) ? "checked" : ""} aria-label="Selecionar">
+        <div class="be-info"><b>${esc(nomeEmp(r))}</b>
+          <small>${r[R.fant] ? esc(tituloBR(r[R.razao])) + " · " : ""}CNPJ ${fmtCNPJ(r[R.cnpj])}${r[R.matriz] === 2 ? " · filial" : ""}</small>
+          <div class="be-tags"><span class="chip-p">${esc(r[R.bairro] ? tituloBR(r[R.bairro]) + " · " : "")}${esc(cidade)}/${uf}</span><span class="chip-p">${PORTES[r[R.porte]] || "—"}</span>${anos !== null ? `<span class="chip-p">${anos} ano${anos === 1 ? "" : "s"}</span>` : ""}${r[R.simples] ? `<span class="chip-p">Simples</span>` : ""}${be.meta.cnaes?.[r[R.cnae]] && be.meta.segmentos[be.seg].cnaes.length > 1 ? `<span class="chip-p" title="${esc(be.meta.cnaes[r[R.cnae]])}">${esc(be.meta.cnaes[r[R.cnae]].slice(0, 38))}${be.meta.cnaes[r[R.cnae]].length > 38 ? "…" : ""}</span>` : ""}</div>
+          <small class="be-cont">${tels.map(fmtTelefone).join(" · ")}${tels.length && r[R.email] ? " · " : ""}${esc(r[R.email] || "")}${!tels.length && !r[R.email] ? "Sem telefone/e-mail na base" : ""}${r[R.contato] ? ` · ${esc(tituloBR(r[R.contato]))}` : ""}</small></div>
+        ${ja ? `<span class="chip-etapa" style="--cor:var(--verde)"><i></i>${be.feitos.has(be.destino + r[R.cnpj]) ? "Adicionada" : rot}</span>` : `<button class="btn-s" data-be-add="${r[R.cnpj]}"><svg><use href="#i-mais"/></svg>Adicionar</button>`}</li>`;
+    }).join("")}</ul>` : `<div class="vazio-bloco">Nenhuma empresa com esses filtros.</div>`}
+    ${lista.length > be.lim ? `<button class="btn-s be-mais" data-be="mais">Mostrar mais ${Math.min(40, lista.length - be.lim)} de ${(lista.length - be.lim).toLocaleString("pt-BR")}</button>` : ""}
+    ${be.sel.size ? `<div class="be-rodape"><span>${be.sel.size} selecionada${be.sel.size === 1 ? "" : "s"}</span><button class="btn-p" data-be="lote"><svg><use href="#i-mais"/></svg>Adicionar ${be.sel.size} ${ehDestinoPA() ? "aos parceiros" : "ao CRM"}</button></div>` : ""}`;
+  if ($("beTodos")) $("beTodos").onchange = e => { for (const x of livres.slice(0, be.lim)) e.target.checked ? be.sel.add(x.r[R.cnpj]) : be.sel.delete(x.r[R.cnpj]); desenharRes(); };
+}
+async function cliqueBE(e) {
+  const el = e.target.closest("[data-be],[data-be-add],[data-be-sel],[data-be-rem],[data-be-fonte],[data-bg],[data-bg-add],[data-bg-sel]"); if (!el) return;
+  const d = el.dataset;
+  if (d.beFonte) { be.fonte = d.beFonte; return desenharFonteBE(); }
+  if (d.bg || d.bgAdd || d.bgSel) return cliqueGoogle(el, d);
+  if (d.be === "fechar") return fecharBuscaEmp();
+  if (d.be === "mais") { be.lim += 40; return desenharRes(); }
+  if (d.beRem) { be.cidades = be.cidades.filter(c => c[0] !== d.beRem); desenharBE(); return buscarBE(); }
+  if (d.beSel) { el.checked ? be.sel.add(d.beSel) : be.sel.delete(d.beSel); return desenharRes(); }
+  if (d.beAdd) {
+    const x = be.res.find(y => y.r[R.cnpj] === d.beAdd); if (!x) return;
+    el.disabled = true; el.innerHTML = "Consultando…";
+    const pre = await completarComGoogle(await dadosParaCadastro(x, true));
+    const ok = () => { be.feitos.add(be.destino + x.r[R.cnpj]); desenharRes(); };
+    if (ehDestinoPA()) abrirNovoParceiro(pre, ok); else abrirNovoLead(pre, ok);
+    el.disabled = false; el.innerHTML = `<svg><use href="#i-mais"/></svg>Adicionar`;
+    return;
+  }
+  if (d.be === "lote") return adicionarLoteBE();
+}
+/* Monta o pré-cadastro a partir da base e (se pedir) atualiza com a consulta pública do CNPJ */
+async function dadosParaCadastro({ r, cidade, uf }, consultar) {
+  const pre = {
+    empresa: nomeEmp(r), razaoSocial: r[R.razao], cnpj: fmtCNPJ(r[R.cnpj]), cidade, uf,
+    telefones: [r[R.t1], r[R.t2]].filter(Boolean).map(fmtTelefone), email: r[R.email] || "", contato: tituloBR(r[R.contato] || ""),
+    endereco: [tituloBR(r[R.end]), tituloBR(r[R.bairro]), r[R.cep] ? fmtCEP(r[R.cep]) : ""].filter(Boolean).join(" · "),
+    segmento: be.meta.cnaes?.[r[R.cnae]] ? be.meta.cnaes[r[R.cnae]] : be.meta.segmentos[be.seg]?.nome || "",
+    porte: PORTES[r[R.porte]] || "", abertura: r[R.abert] ? `${r[R.abert].slice(6, 8)}/${r[R.abert].slice(4, 6)}/${r[R.abert].slice(0, 4)}` : "",
+    simples: !!r[R.simples], origemBase: "Base Receita Federal", segBase: be.seg
+  };
+  if (consultar) { const api = await consultarCNPJ(r[R.cnpj]); if (api) mesclarCNPJ(pre, api); }
+  return pre;
+}
+async function consultarCNPJ(cnpj) {
+  const d = soDigitos(cnpj); if (d.length !== 14) return null;
+  try {
+    const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 7000);
+    const r = await fetch("https://brasilapi.com.br/api/cnpj/v1/" + d, { signal: ctl.signal });
+    clearTimeout(tm);
+    return r.ok ? await r.json() : null;
+  } catch { return null; }
+}
+function mesclarCNPJ(pre, a) {
+  const tels = [a.ddd_telefone_1, a.ddd_telefone_2].map(t => soDigitos(t)).filter(t => t.length >= 10).map(fmtTelefone);
+  pre.telefones = [...new Set([...tels, ...(pre.telefones || [])])];
+  if (a.email && !pre.email) pre.email = String(a.email).toLowerCase();
+  if (!pre.razaoSocial) pre.razaoSocial = a.razao_social || "";
+  if (!pre.empresa) pre.empresa = tituloBR(a.nome_fantasia || a.razao_social || "");
+  const adm = (a.qsa || []).find(s => /administrador|titular|presidente|diretor/i.test(s.qualificacao_socio || "")) || (a.qsa || [])[0];
+  if (adm && !pre.contato) pre.contato = tituloBR(adm.nome_socio || "");
+  if (!pre.cidade && a.municipio) pre.cidade = tituloBR(a.municipio);
+  if (!pre.uf && a.uf) pre.uf = a.uf;
+  if (!pre.endereco && a.logradouro) pre.endereco = [tituloBR(`${a.descricao_tipo_de_logradouro || ""} ${a.logradouro}`.trim()) + (a.numero ? ", " + a.numero : "") + (a.complemento ? " - " + tituloBR(a.complemento) : ""), tituloBR(a.bairro || ""), a.cep ? fmtCEP(a.cep) : ""].filter(Boolean).join(" · ");
+  if (!pre.segmento && a.cnae_fiscal_descricao) pre.segmento = a.cnae_fiscal_descricao;
+  if (a.descricao_situacao_cadastral && !/ativa/i.test(a.descricao_situacao_cadastral)) pre.situacao = a.descricao_situacao_cadastral;
+  return pre;
+}
+async function adicionarLoteBE() {
+  const itens = be.res.filter(x => be.sel.has(x.r[R.cnpj]));
+  if (!itens.length) return;
+  if (itens.length > 200 && !confirmar(`Adicionar ${itens.length} empresas de uma vez?`)) return;
+  const pres = await Promise.all(itens.map(x => dadosParaCadastro(x, false)));
+  try {
+    if (ehDestinoPA()) {
+      await salvarStore(paStore, d => { for (const p of pres) d.parceiros.push(novoParceiroDe(d, p)); });
+      renderParceiros();
+    } else {
+      const ok = await salvarCRM(d => { for (const p of pres) d.leads.push(novoLeadDe(d, p)); });
+      if (!ok) return;
+    }
+    itens.forEach(x => be.feitos.add(be.destino + x.r[R.cnpj]));
+    be.sel.clear(); desenharRes();
+    toast(`${itens.length} empresa${itens.length === 1 ? "" : "s"} adicionada${itens.length === 1 ? "" : "s"} ${ehDestinoPA() ? "aos parceiros" : "ao CRM"}`);
+  } catch (er) { toast("Não foi possível salvar: " + er.message, "erro", 6000); }
+}
+const TIPO_POR_SEG = { contabilidade: "Escritório de contabilidade", advocacia: "Advocacia", consultoria: "Consultoria", software: "Software / ERP", marketing: "Agência de marketing" };
+function novoLeadDe(d, f) {
+  const id = novoId(d);
+  const l = { id, empresa: f.empresa.trim(), razaoSocial: f.razaoSocial || "", cnpj: f.cnpj || "", segmento: (f.segmento || "").trim(), contato: (f.contato || "").trim(),
+    cidade: (f.cidade || "").trim(), uf: (f.uf || "").trim().toUpperCase(), telefones: Array.isArray(f.telefones) ? f.telefones : String(f.telefones || "").split("/").map(t => t.trim()).filter(Boolean),
+    email: (f.email || "").trim(), endereco: f.endereco || "", porte: f.porte || "", abertura: f.abertura || "", site: f.site || "", mapsUrl: f.mapsUrl || "", notaGoogle: f.notaGoogle || "", fit: f.fit || "", origem: f.origem || "Prospecção ativa",
+    observacoes: f.observacoes || "", etapa: "abordar", criadoEm: new Date().toISOString(), criadoPor: meuNome(), responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", historico: [], acoes: [] };
+  registrar(l, "criado", [f.origem ? `Origem: ${f.origem}` : "", f.origemBase ? "dados de: " + f.origemBase : ""].filter(Boolean).join(" · "));
+  return l;
+}
+function novoParceiroDe(d, f) {
+  d.seq = (d.seq || d.parceiros.length) + 1;
+  const p = { id: "PA-" + String(d.seq).padStart(4, "0"), empresa: f.empresa.trim(), razaoSocial: f.razaoSocial || "", cnpj: f.cnpj || "", tipo: f.tipo || TIPO_POR_SEG[f.segBase] || TIPOS_PARCEIRO[0],
+    contato: (f.contato || "").trim(), cargo: (f.cargo || "").trim(), telefones: Array.isArray(f.telefones) ? f.telefones : String(f.telefones || "").split("/").map(t => t.trim()).filter(Boolean),
+    email: (f.email || "").trim(), cidade: (f.cidade || "").trim(), uf: (f.uf || "").trim().toUpperCase(), endereco: f.endereco || "", porte: f.porte || "", abertura: f.abertura || "", site: f.site || "", mapsUrl: f.mapsUrl || "", notaGoogle: f.notaGoogle || "",
+    observacoes: f.observacoes || "", etapa: "prospectar", responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", acoes: [], historico: [], criadoEm: new Date().toISOString(), criadoPor: meuNome() };
+  registrarPA(p, "criado", f.origemBase ? "Parceiro cadastrado com dados de: " + f.origemBase : "Parceiro cadastrado");
+  return p;
+}
+/* Botão "buscar dados pelo CNPJ" dentro dos formulários de cadastro */
+async function preencherFormPorCNPJ(form) {
+  const campo = form.querySelector("[name=cnpj]"), d = soDigitos(campo?.value);
+  if (d.length !== 14) { toast("Digite os 14 caracteres do CNPJ", "erro"); return campo?.focus(); }
+  toast("Consultando CNPJ…");
+  const a = await consultarCNPJ(d);
+  if (!a) return toast("CNPJ não encontrado na consulta pública", "erro");
+  const pre = mesclarCNPJ({}, a);
+  const por = (n, v) => { const i = form.querySelector(`[name=${n}]`); if (i && v && !i.value.trim()) { i.value = v; i.dispatchEvent(new Event("input", { bubbles: true })); } };
+  por("empresa", pre.empresa); por("contato", pre.contato); por("cidade", pre.cidade); por("uf", pre.uf); por("email", pre.email);
+  por("telefones", (pre.telefones || []).join(" / ")); por("segmento", pre.segmento); por("endereco", pre.endereco);
+  form._extra = { ...(form._extra || {}), razaoSocial: a.razao_social || "", endereco: pre.endereco };
+  toast(pre.situacao ? `Atenção: situação cadastral ${pre.situacao}` : "Dados preenchidos pela consulta do CNPJ", pre.situacao ? "erro" : undefined, pre.situacao ? 6000 : undefined);
+}
+
+$("btnBuscaEmp").onclick = () => abrirBuscaEmpresas("crm");
+
+/* ================== MÁSCARAS (telefone, CPF, CNPJ, CEP) ==================
+   Vale para qualquer campo do sistema: o tipo é reconhecido pelo nome do campo (name, data-f, data-pc, data-cli…).
+   O CNPJ aceita o formato alfanumérico da Receita (letras nas 12 primeiras posições, a partir de jul/2026). */
+const fmtTelefone = v => {
+  let d = String(v || "").replace(/\D/g, "");
+  if (/^0[38]00/.test(d)) { d = d.slice(0, 11); return d.replace(/^(\d{4})(\d{0,3})(\d{0,4}).*/, (m, a, b, c) => [a, b, c].filter(Boolean).join(" ")); }
+  if (d.length > 11 && d.startsWith("55")) d = d.slice(2);
+  if (d.length > 10 && d.startsWith("0")) d = d.slice(1);
+  d = d.slice(0, 11);
+  if (!d) return "";
+  if (d.length <= 2) return "(" + d;
+  const ddd = d.slice(0, 2), n = d.slice(2);
+  if (n.length <= 4) return `(${ddd}) ${n}`;
+  if (d.length <= 10) return `(${ddd}) ${n.slice(0, 4)}-${n.slice(4)}`;
+  return `(${ddd}) ${n.slice(0, 5)}-${n.slice(5)}`;
+};
+const fmtTelefones = v => String(v || "").split(/[\/;,]/).map((p, i, a) => { const f = fmtTelefone(p); return i < a.length - 1 || f ? f : ""; }).join(" / ").replace(/^ \/ $/, "");
+const fmtCPF = v => { const d = String(v || "").replace(/\D/g, "").slice(0, 11); return d.replace(/^(\d{3})(\d)/, "$1.$2").replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3").replace(/\.(\d{3})(\d{1,2})$/, ".$1-$2"); };
+const fmtCNPJ = v => {
+  const s = String(v || "").toUpperCase().replace(/[^0-9A-Z]/g, "");
+  const base = s.slice(0, 12), dv = s.slice(12).replace(/\D/g, "").slice(0, 2), t = base + dv;
+  let o = t.slice(0, 2);
+  if (t.length > 2) o += "." + t.slice(2, 5);
+  if (t.length > 5) o += "." + t.slice(5, 8);
+  if (t.length > 8) o += "/" + t.slice(8, 12);
+  if (t.length > 12) o += "-" + t.slice(12, 14);
+  return o;
+};
+const fmtCPFouCNPJ = v => { const s = String(v || "").toUpperCase().replace(/[^0-9A-Z]/g, ""); return s.length <= 11 && !/[A-Z]/.test(s) ? fmtCPF(s) : fmtCNPJ(s); };
+const fmtCEP = v => { const d = String(v || "").replace(/\D/g, "").slice(0, 8); return d.length > 5 ? d.slice(0, 5) + "-" + d.slice(5) : d; };
+const MASCARAS = {
+  telefone: { fmt: fmtTelefone, max: 16, modo: "tel" },
+  telefones: { fmt: fmtTelefones, max: 0, modo: "tel" },
+  cpf: { fmt: fmtCPF, max: 14, modo: "numeric" },
+  cnpj: { fmt: fmtCNPJ, max: 18, modo: "text" },
+  doc: { fmt: fmtCPFouCNPJ, max: 18, modo: "text" },
+  cep: { fmt: fmtCEP, max: 9, modo: "numeric" }
+};
+function tipoMascara(el) {
+  if (el.tagName !== "INPUT" || ["number", "date", "datetime-local", "time", "email", "search", "checkbox", "radio", "file", "password", "hidden"].includes(el.type)) return null;
+  if (el.dataset.mascara) return el.dataset.mascara === "nenhuma" ? null : el.dataset.mascara;
+  const k = (el.name || el.dataset.f || el.dataset.pc || el.dataset.cli || el.dataset.k || el.id || "").toLowerCase();
+  if (!k) return null;
+  if (/^(telefones|tels)$/.test(k)) return "telefones";
+  if (/^(telefone|tel|whatsapp|celular|fone|telefone1|telefone2)$/.test(k)) return "telefone";
+  if (/^(cpfcnpj|cnpjcpf|documento|doc)$/.test(k)) return "doc";
+  if (k === "cnpj") return "cnpj";
+  if (k === "cpf") return "cpf";
+  if (k === "cep") return "cep";
+  return null;
+}
+function prepararMascara(el) {
+  const t = tipoMascara(el);
+  if (!t || el.dataset.mascaraOk) return;
+  const m = MASCARAS[t];
+  el.dataset.mascaraOk = t;
+  if (m.max) el.maxLength = m.max;
+  el.inputMode = m.modo;
+  if (t === "cnpj" || t === "doc") el.autocapitalize = "characters";
+  if (!el.placeholder) el.placeholder = { telefone: "(00) 00000-0000", telefones: "(00) 00000-0000 / (00) 0000-0000", cpf: "000.000.000-00", cnpj: "00.000.000/0000-00", doc: "CPF ou CNPJ", cep: "00000-000" }[t];
+  if (el.value) el.value = m.fmt(el.value);
+}
+/* Reformata enquanto digita, mantendo o cursor na posição certa (conta os caracteres úteis antes dele) */
+document.addEventListener("input", e => {
+  const el = e.target, t = el.dataset?.mascaraOk || (el.tagName === "INPUT" && tipoMascara(el));
+  if (!t) return;
+  if (!el.dataset.mascaraOk) prepararMascara(el);
+  const pos = el.selectionStart ?? el.value.length;
+  const antes = [...el.value.slice(0, pos)].filter(c => t === "telefones" ? /[0-9\/]/.test(c) : /[0-9A-Za-z]/.test(c)).length;
+  const apagando = e.inputType && e.inputType.startsWith("delete");
+  let novo = MASCARAS[t].fmt(el.value);
+  if (t === "telefones" && !apagando && /\/\s*$/.test(el.value)) novo = novo.replace(/\s*\/?\s*$/, "") + " / ";
+  if (novo === el.value) return;
+  el.value = novo;
+  let n = 0, p = 0;
+  while (p < novo.length && n < antes) { if (t === "telefones" ? /[0-9\/]/.test(novo[p]) : /[0-9A-Za-z]/.test(novo[p])) n++; p++; }
+  if (!apagando) while (p < novo.length && /[\s\)\-\.]/.test(novo[p]) && !/[0-9A-Za-z]/.test(novo[p])) p++;
+  try { el.setSelectionRange(p, p); } catch {}
+}, true);
+new MutationObserver(ms => {
+  for (const m of ms) for (const n of m.addedNodes) {
+    if (n.nodeType !== 1) continue;
+    if (n.tagName === "INPUT") prepararMascara(n);
+    else n.querySelectorAll?.("input").forEach(prepararMascara);
+  }
+}).observe(document.body, { childList: true, subtree: true });
+document.querySelectorAll("input").forEach(prepararMascara);
 
 /* ================== PRECIFICAÇÃO ==================
    Tempo estimado de cada operação × valor da hora técnica (R$ 300/h, Modelo Comercial WL),
