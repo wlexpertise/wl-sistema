@@ -1022,6 +1022,36 @@
   .atalhos-ini button:hover{border-color:var(--turq)} .atalhos-ini svg{width:17px;height:17px;flex:none}
   .lista-acoes li[data-link],.lista-acoes li[data-ini-ag]{cursor:pointer}
   @media(max-width:900px){.grade-ini{grid-template-columns:1fr}.painel-not{top:58px;right:12px}}
+
+  /* Onboarding */
+  .barra-onb{display:block;height:6px;border-radius:3px;background:var(--borda);overflow:hidden;margin-top:6px}
+  .barra-onb b{display:block;height:100%;background:var(--verde);border-radius:3px}
+  .aviso-onb{background:rgba(217,154,30,.1);border:1px solid rgba(217,154,30,.35);border-radius:12px;padding:10px 14px;font-size:.82rem;margin-bottom:12px}
+  .serv-onb{display:flex;flex-wrap:wrap;gap:8px}
+  .serv-onb .chk{border:1px solid var(--borda);background:#fff} .serv-onb .chk.on{border-color:var(--teal);background:rgba(11,90,96,.06)}
+  .serv-onb small{color:var(--txt-2);font-weight:500}
+  .onb-grupo{margin-top:14px} .onb-grupo h5{font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--txt-2);margin-bottom:4px}
+  .onb-itens{list-style:none}
+  .onb-itens li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--borda)}
+  .onb-itens li:first-child{border-top:0}
+  .onb-txt{flex:1;min-width:0;display:grid;gap:3px}
+  .onb-txt b{font-size:.86rem} .onb-txt small{font-size:.74rem;color:var(--txt-2)} .onb-txt small.ok{color:var(--verde);font-weight:700}
+  .onb-itens li.recebido .onb-txt>b{color:var(--txt-2)} .onb-itens li.na .onb-txt{opacity:.5}
+  .onb-obs{margin-top:4px;font-size:.78rem!important;padding:7px 9px!important}
+  .obs-lnk{justify-self:start;font-size:.72rem!important;margin-top:2px}
+  .seg-onb{display:flex;border:1px solid var(--borda);border-radius:9px;overflow:hidden;flex:none}
+  .seg-onb button{padding:6px 9px;font-size:.72rem;font-weight:600;color:var(--txt-2);border-left:1px solid var(--borda)}
+  .seg-onb button:first-child{border-left:0}
+  .seg-onb button.ativo.pendente{background:rgba(217,154,30,.15);color:#9a6b0f} .seg-onb button.ativo.recebido{background:var(--verde);color:#fff} .seg-onb button.ativo.na{background:var(--borda);color:var(--txt)}
+  .onb-params{margin-top:14px} .onb-params summary{font-size:.8rem;font-weight:700;color:var(--teal);cursor:pointer;margin-bottom:8px}
+  .onb-anel{--p:0;width:120px;height:120px;margin:4px auto;border-radius:50%;background:conic-gradient(var(--verde) calc(var(--p)*1%),var(--borda) 0);display:grid;place-items:center;position:relative}
+  .onb-anel::before{content:"";position:absolute;inset:12px;border-radius:50%;background:#fff}
+  .onb-anel b,.onb-anel small{position:relative;grid-area:1/1} .onb-anel b{font-size:1.5rem;color:var(--teal);margin-top:-14px} .onb-anel small{font-size:.68rem;color:var(--txt-2);margin-top:30px}
+  .prev-email{border:1px solid var(--borda);border-radius:10px;padding:10px 12px;font-size:.82rem;background:var(--bg);max-height:220px;overflow:auto}
+  .prev-email p{margin:0 0 8px} .prev-email ul{margin:0 0 8px 18px}
+  .modal.modal-doc{width:min(820px,calc(100vw - 24px))}
+  .prev-onb{overflow:auto} .prev-onb .od{zoom:.8}
+  @media(max-width:640px){.onb-itens li{flex-wrap:wrap}.seg-onb{width:100%}.seg-onb button{flex:1}.prev-onb .od{zoom:.45}}
 </style>
 </head>
 <body>
@@ -1493,6 +1523,7 @@ function irPara(hash) {
   if (diagPendente) salvarDiag();
   if (propPendente) salvarProp();
   if (ctrPendente) salvarCtr();
+  if (onbPend) salvarOnb();
   if (id !== "crm" && !(id === "atendimento" && $("gaveta"))) fecharFicha();
   if (id !== "parceiros" && typeof pa !== "undefined") pa.abertoId = null;
   document.querySelectorAll("[data-view]").forEach(v => v.classList.toggle("oculto", v.dataset.view !== id));
@@ -2922,18 +2953,19 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") { if ($("mod
 const FRENTES_AT = [
   { id: "bpo", nome: "BPO Financeiro", icone: "i-a-bpo", desc: "Gestão das rotinas financeiras do cliente.",
     etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico Preliminar de BPO Financeiro.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true },
-             { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
+             { id: "onboarding", nome: "Onboarding", ativo: true }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "fpa", nome: "FP&A", icone: "i-a-fpa", desc: "Indicadores gerenciais e análise de desempenho.",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de FP&A.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de FP&A.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true }, { id: "onboarding", nome: "Onboarding", ativo: true }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "planejamento", nome: "Planejamento Financeiro", icone: "i-a-pla", desc: "Orçamentos, fluxo de caixa e cenários.",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Planejamento Financeiro.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] },
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Planejamento Financeiro.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true }, { id: "onboarding", nome: "Onboarding", ativo: true }, { id: "execucao", nome: "Execução e Entregas" }] },
   { id: "processos", nome: "Consultoria de Processos", icone: "i-a-pro", desc: "Processos, sistema e treinamento para locadoras (Rental).",
-    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Consultoria Rental.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true }, { id: "onboarding", nome: "Onboarding e Implantação" }, { id: "execucao", nome: "Execução e Entregas" }] }
+    etapas: [{ id: "diagnostico", nome: "Diagnóstico", desc: "Diagnóstico de Consultoria Rental.", ativo: true }, { id: "proposta", nome: "Proposta", ativo: true }, { id: "onboarding", nome: "Onboarding", ativo: true }, { id: "execucao", nome: "Execução e Entregas" }] }
 ];
 function htmlMenuAtendimento() {
-  return `<div class="grupo-menu"><button data-link="#atendimento/propostas"><svg><use href="#i-pdf"/></svg>Comercial</button>
+  return `<div class="grupo-menu"><button data-link="#atendimento/propostas"><svg><use href="#i-pdf"/></svg>Jornada do cliente</button>
     <ul><li><button data-link="#atendimento/propostas" class="${viewAtual === "atendimento" && rota[0] === "propostas" ? "atual" : ""}"><span>Propostas</span></button></li>
-      <li><button data-link="#atendimento/contratos" class="${viewAtual === "atendimento" && rota[0] === "contratos" ? "atual" : ""}"><span>Contratos</span></button></li></ul></div>` + FRENTES_AT.map(f => `<div class="grupo-menu">
+      <li><button data-link="#atendimento/contratos" class="${viewAtual === "atendimento" && rota[0] === "contratos" ? "atual" : ""}"><span>Contratos</span></button></li>
+      <li><button data-link="#atendimento/onboarding" class="${viewAtual === "atendimento" && rota[0] === "onboarding" ? "atual" : ""}"><span>Onboarding</span></button></li></ul></div>` + FRENTES_AT.map(f => `<div class="grupo-menu">
     <button data-link="#atendimento"><svg><use href="#${f.icone}"/></svg>${esc(f.nome)}</button>
     <ul>${f.etapas.map(e => e.ativo
       ? `<li><button data-link="#atendimento/${f.id}/${e.id}" class="${viewAtual === "atendimento" && rota[0] === f.id && rota[1] === e.id ? "atual" : ""}"><span>${esc(e.nome)}</span></button></li>`
@@ -3297,6 +3329,14 @@ function sugestaoPlano(d) {
 let diagAtual = null, timerDiag = null, salvandoDiag = false, diagPendente = false;
 async function renderAtendimento() {
   const [frente, etapa, id] = rota;
+  if (frente === "onboarding" || etapa === "onboarding") {
+    diagAtual = null; propAtual = null; ctrAtual = null;
+    if (!onbStore.carregado) $("atdConteudo").innerHTML = `<div class="esqueleto"></div>`;
+    try { await garantirOnb(); } catch (e) { $("atdConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os onboardings.</b><br>${esc(e.message)}</div>`; return; }
+    if (viewAtual !== "atendimento") return;
+    if (frente === "onboarding") return etapa ? abrirOnb(etapa) : renderListaOnb();
+    return renderListaOnb({ bpo: "bpo", fpa: "fpa", planejamento: "pla", processos: "rt" }[frente] || "");
+  }
   if (frente === "contratos") {
     diagAtual = null; propAtual = null;
     if (!ctrStore.carregado) $("atdConteudo").innerHTML = `<div class="esqueleto"></div>`;
@@ -3331,7 +3371,7 @@ function cabAtd(passos, eyebrow, titulo, desc, acoes = "") {
 function renderInicioAtd() {
   diagAtual = null;
   $("atdConteudo").oninput = $("atdConteudo").onclick = $("atdConteudo").onchange = null;
-  cabAtd([], "Operação", "Atendimento", "Ferramentas de atendimento por frente de serviço.", `<button class="btn-p" data-link="#atendimento/propostas"><svg><use href="#i-pdf"/></svg>Propostas</button>`);
+  cabAtd([], "Operação", "Atendimento", "Ferramentas de atendimento por frente de serviço.", `<button class="btn-s" data-link="#atendimento/contratos">Contratos</button><button class="btn-s" data-link="#atendimento/onboarding">Onboarding</button><button class="btn-p" data-link="#atendimento/propostas"><svg><use href="#i-pdf"/></svg>Propostas</button>`);
   $("atdConteudo").innerHTML = `<div class="areas">${FRENTES_AT.map(f => `<article class="area">
     <div class="area-cab"><span class="area-ico"><svg><use href="#${f.icone}"/></svg></span><div><h3>${esc(f.nome)}</h3><p>${esc(f.desc)}</p></div></div>
     <ul class="subs">${f.etapas.map(e => e.ativo
@@ -5717,6 +5757,7 @@ function abrirContrato(id) {
       <section class="g-sec"><h4>Assinatura</h4><div id="painelAss">${htmlPainelAss(ct, falta)}</div></section>
       <section class="g-sec acoes-diag">
         <button class="btn-s" data-ctr="previa" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Pré-visualizar contrato + proposta</button>
+        ${ct.status === "assinado" && ct.clienteId ? `<button class="btn-p" data-ctr="onboarding" style="justify-content:center">${onbStore.dados?.onboardings?.some(o => o.clienteId === ct.clienteId) ? "Abrir onboarding" : "Iniciar onboarding"}</button>` : ""}
         ${pp ? `<button class="btn-s" data-ctr="verProp" style="justify-content:center">Abrir proposta</button>` : ""}
         ${ct.leadId ? `<button class="btn-s" data-ctr="verLead" style="justify-content:center">Ver no CRM</button>` : ""}
         ${ct.status !== "assinado" ? `<button class="perigo" data-ctr="excluir" style="justify-self:center">Excluir contrato</button>` : ""}
@@ -5775,6 +5816,7 @@ function ligarContrato() {
     if (a === "cep") return buscarCEP();
     if (a === "previa") { b.disabled = true; try { const { blob, nome } = await gerarDocAssinatura(ct, false); baixarBlob(blob, nome); } catch (er) { toast("Falha ao gerar: " + er.message, "erro", 7000); } b.disabled = false; return; }
     if (a === "verProp") location.hash = "atendimento/propostas/" + ct.propostaId;
+    if (a === "onboarding") { await garantirOnb(); const ex = onbs().filter(o => o.clienteId === ct.clienteId).sort((x, y) => (y.criadoEm || "").localeCompare(x.criadoEm || ""))[0]; return ex ? (location.hash = "atendimento/onboarding/" + ex.id) : novoOnboarding({ clienteId: ct.clienteId, contratoId: ct.id }); }
     if (a === "verLead") { if (!crm.carregado) await carregarCRM(true); abrirLead(ct.leadId); }
     if (a === "enviar") return abrirEnvioAssinatura(ct);
     if (a === "cancelarEnvio") return cancelarEnvio(ct);
@@ -6386,7 +6428,7 @@ async function criarClienteDoContrato(c, env, final) {
 async function renderClientes() {
   const id = rota[0];
   $("cliConteudo").innerHTML = `<div class="esqueleto"></div>`;
-  try { await garantirStoresCtr(); await garantirCli(); } catch (e) { $("cliConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os clientes.</b><br>${esc(e.message)}</div>`; return; }
+  try { await garantirStoresCtr(); await garantirCli(); if (!onbStore.carregado) await carregarStore(onbStore).catch(() => {}); } catch (e) { $("cliConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os clientes.</b><br>${esc(e.message)}</div>`; return; }
   if (viewAtual !== "clientes") return;
   atualizarBadgeTarefas();
   if (!id || id === "tarefas" || ["tarefas", "atividades"].includes(rota[1])) {
@@ -6518,6 +6560,10 @@ function abaGeralCli(c) {
       <section class="g-sec"><h4>Serviços contratados <button class="lnk" data-clia="servicos">editar ›</button></h4>
         ${(c.servicos || []).map(s => `<div class="rs-item"><div class="rs-nome"><b>${esc(s.nome)}</b><small>${esc(s.plano || "")}</small></div><div class="rs-linha"><span>${s.cobranca === "mensal" ? "Mensal" : "Projeto"}</span><b>${brl(s.valor)}${s.cobranca === "mensal" ? "/mês" : ""}</b></div>${s.licenca ? `<div class="rs-linha"><span>Licença ContaAzul</span><b>${brl(s.licenca)}/mês</b></div>` : ""}</div>`).join("") || `<p class="txt-prog">Nenhum serviço cadastrado.</p>`}
         <div class="rs-total">${c.mensal ? `<div><span>Total mensal</span><b>${brl(c.mensal)}</b></div>` : ""}${c.unico ? `<div><span>Projeto</span><b>${brl(c.unico)}</b></div>` : ""}</div></section>
+      <section class="g-sec"><h4>Onboarding</h4>${(() => { const o = (onbStore.dados?.onboardings || []).filter(x => x.clienteId === c.id).sort((a, b) => (b.criadoEm || "").localeCompare(a.criadoEm || ""))[0];
+        if (!o) return `<p class="txt-prog">Ainda não iniciado.</p><button class="btn-s" data-clia="onboarding" style="margin-top:8px;width:100%;justify-content:center">Iniciar onboarding</button>`;
+        const p = progOnb(o), st = ST_ONB[o.status] || ST_ONB.rascunho;
+        return `<div class="rs-linha"><span class="chip-etapa" style="--cor:${st[1]}"><i></i>${st[0]}</span><b>${p.ok}/${p.tot} itens</b></div><i class="barra-onb" style="margin:8px 0"><b style="width:${p.pct}%"></b></i><button class="btn-s" data-link="#atendimento/onboarding/${o.id}" style="width:100%;justify-content:center">Abrir onboarding ${esc(o.id)}</button>`; })()}</section>
       <section class="g-sec"><h4>Próximas tarefas <button class="lnk" data-link="#clientes/${c.id}/tarefas">ver todas ›</button></h4>
         ${(() => { const ls = ordenarTf(tarefas().filter(t => t.clienteId === c.id && t.status !== "concluida")).slice(0, 5); return ls.length ? `<ul class="lista-tf curta">${ls.map(t => linhaTarefa(t, false)).join("")}</ul>` : `<p class="txt-prog">Nenhuma tarefa pendente. <a href="#clientes/${c.id}/tarefas">Criar tarefas</a></p>`; })()}</section>
       ${(c.documentos || []).length ? `<section class="g-sec"><h4>Documentos do contrato</h4>
@@ -6960,6 +7006,7 @@ $("cliConteudo").addEventListener("click", async e => {
   const b = e.target.closest("[data-clia]"); if (!b) return;
   const a = b.dataset.clia, c = cliPorId(rota[0]);
   if (a === "novo") return abrirNovoCliente();
+  if (a === "onboarding") return novoOnboarding({ clienteId: c.id });
   if (a === "novaTarefa") return abrirTarefa(null, c?.id);
   if (a === "rotina") return abrirRotina(c);
   if (a === "servicos") return editarServicos(c);
@@ -6986,6 +7033,483 @@ $("cliBotoes").onclick = e => {
   if (b.dataset.clia === "novo") abrirNovoCliente();
   if (b.dataset.clia === "novaTarefa") abrirTarefa(null);
 };
+
+/* ================== ONBOARDING ==================
+   Etapa depois do contrato assinado: envia ao cliente o manual de onboarding de cada serviço
+   (documentos e acessos necessários), acompanha o que já chegou e registra tudo no cliente. */
+const onbStore = criarStore("dados/atendimento/onboarding.json", { versao: 1, seq: 0, onboardings: [] });
+const onbs = () => onbStore.dados?.onboardings || [];
+const onbPorId = id => onbs().find(o => o.id === id);
+let onbAtual = null;
+const ST_ONB = { rascunho: ["Em preparação", "#9AA9A9"], enviado: ["Enviado ao cliente", "#13A3B5"], andamento: ["Recebendo documentos", "#D99A1E"], concluido: ["Concluído", "#28B260"] };
+const ST_ITEM = [["pendente", "Pendente"], ["recebido", "Recebido"], ["na", "Não se aplica"]];
+
+/* ---- Modelos de documento por serviço ---- */
+const LGPD = { tipo: "lgpd" };
+const ONB = {
+  bpo: {
+    nome: "BPO Financeiro", eyebrow: "Manual de onboarding & kickoff operacional",
+    intro: () => "Seja bem-vindo(a) à WL Expertise! A seguir, os insumos e os parâmetros de funcionamento da nossa parceria para darmos início à sua rotina financeira com segurança e agilidade.",
+    params: [["emailOp", "E-mail operacional dedicado", o => `${limparNome(o.empresa).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "").slice(0, 20) || "suaempresa"}@wlexpertise.com`],
+      ["diasAgendamento", "Dias fixos de agendamento", () => ""]],
+    secoes: [
+      { tipo: "check", titulo: "Acessos necessários para o início", itens: [
+        ["Contas bancárias (consulta/operacional)", "Liberar o acesso de operador/assistente (sem alçada de autorização de pagamentos) para o colaborador da WL responsável pela gestão da sua conta bancária."],
+        ["Sistemas de gestão", "Usuário e senha para o time WL no ERP, no emissor de Nota Fiscal e nas plataformas de pagamento / maquininhas, se houver."],
+        ["Ficha cadastral e contatos", "Lista da equipe interna (compras, comercial, diretoria) e o canal principal dos contadores da empresa."]] },
+      { tipo: "canais", email: "Centraliza as interações financeiras (boletos, faturas, cobranças). Comprovantes recebidos em outros canais devem ser encaminhados a este e-mail. Domínio próprio? O seu TI fornece login e senha dedicados.",
+        whats: "Grupo exclusivo com a sua diretoria e a equipe de especialistas WL. Canal oficial para avisos diários de pagamentos agendados, alinhamentos pontuais e validações de urgência." },
+      { tipo: "info", titulo: "Política de alçadas e calendário", icone: "cal",
+        html: p => `<b>Dias fixos de agendamento:</b> ${p.diasAgendamento ? esc(p.diasAgendamento) + "." : "definição dos dias e horários em que o time WL faz a varredura e os agendamentos no banco."} <b>Alçada de aprovação:</b> a WL organiza, confere e agenda os títulos; a autorização e liberação final do pagamento no app do banco permanece exclusiva dos sócios/diretores autorizados.` },
+      LGPD],
+    proximos: "Valide as informações acima e envie os acessos do Item 1 para iniciarmos o mapeamento das rotinas. Estamos prontos para transformar a gestão financeira da sua empresa!"
+  },
+  pla: {
+    nome: "Planejamento Financeiro", eyebrow: "Documentos para o planejamento financeiro",
+    intro: p => `Para desenvolver um orçamento consistente e alinhado à realidade da empresa, solicitamos o envio das seguintes informações históricas, preferencialmente referentes aos ${esc(p.periodo || "últimos 12 meses")}.`,
+    params: [["periodo", "Período do histórico", () => "últimos 12 meses"], ["emailOp", "E-mail para envio dos arquivos", () => "contato@wlexpertise.com"]],
+    secoes: [
+      { tipo: "check", titulo: "Dados financeiros", itens: [["Extratos bancários de todas as contas"], ["Relatório de contas a pagar (em aberto)"], ["Relatório de contas pagas"], ["Relatório de contas a receber (em aberto)"], ["Relatório de valores recebidos"],
+        ["Empréstimos e financiamentos ativos", "Saldo devedor, parcelas, taxas de juros e cronograma de pagamentos."], ["Aplicações financeiras", "Caso existam."], ["Fluxo de caixa histórico", "Caso seja elaborado pela empresa."]] },
+      { tipo: "check", titulo: "Dados contábeis", itens: [["DRE (Demonstração do Resultado do Exercício) mensal"], ["Balanço patrimonial"], ["Balancetes mensais"], ["Razão contábil"], ["Plano de contas contábil", "Se disponível."]] },
+      { tipo: "check", titulo: "Dados de pessoal", itens: [["Quantidade atual de colaboradores"], ["Valor mensal da folha de pagamento"], ["Valor dos encargos trabalhistas"], ["Valor dos benefícios concedidos"], ["Valor pago em comissões"],
+        ["Reajustes, admissões e desligamentos previstos", "Informações sobre reajustes salariais previstos, admissões ou desligamentos já programados (se houver)."]] },
+      { tipo: "check", titulo: "Informações operacionais e comerciais", itens: [["Faturamento mensal por produto, serviço ou unidade de negócio", "Quando aplicável."], ["Principais clientes e fornecedores", "Opcional."], ["Sazonalidades conhecidas do negócio"],
+        ["Contratos relevantes que impactem receitas ou despesas"], ["Premissas já definidas para o próximo período", "Crescimento esperado, novos investimentos, aumento de custos, expansão, etc."]] },
+      { tipo: "info", titulo: "Como enviar", icone: "mail", html: p => `Envie os arquivos para <b>${esc(p.emailOp || "contato@wlexpertise.com")}</b>, de preferência em Excel ou PDF. O que a empresa não tiver, basta sinalizar: ajustamos o planejamento ao que estiver disponível.` },
+      LGPD],
+    proximos: "Essas informações servirão como base para a construção do orçamento, projeções financeiras e análises gerenciais, garantindo maior confiabilidade nas estimativas e no planejamento da empresa."
+  },
+  fpa: {
+    nome: "FP&A", eyebrow: "Manual de onboarding · Planejamento e Análise Financeira",
+    intro: () => "Seja bem-vindo(a) à WL Expertise! Como a operação financeira é feita pela sua equipe ou por outro parceiro, precisamos de acesso às fontes de dados para transformar os números da empresa em indicadores e análises gerenciais. A seguir, o que precisamos para começar.",
+    params: [["emailOp", "E-mail para envio dos dados", () => "contato@wlexpertise.com"], ["diaDados", "Prazo mensal para os dados fechados", () => "até o dia 5 de cada mês"], ["diaReuniao", "Reunião mensal de resultados", () => "por volta do dia 15"]],
+    secoes: [
+      { tipo: "check", titulo: "Acessos e fontes de dados", itens: [
+        ["Sistema financeiro / ERP", "Usuário de consulta (somente leitura) para o time WL ou, se preferir, exportação mensal padronizada dos lançamentos."],
+        ["Extratos bancários", "Extratos mensais de todas as contas ou acesso de consulta ao internet banking."],
+        ["Contas pagas e recebidas", "Relatórios do período com categorias e centros de custo."],
+        ["Responsáveis pelos dados", "Contato de quem faz o financeiro (equipe interna ou BPO) e do escritório de contabilidade."]] },
+      { tipo: "check", titulo: "Base histórica", itens: [
+        ["DRE mensal dos últimos 12 meses", "Gerencial ou contábil."], ["Balancetes e balanço do último exercício"], ["Plano de contas e centros de custo utilizados"],
+        ["Orçamento ou metas do ano", "Se houver."], ["Faturamento por produto, serviço, unidade ou cliente", "Quando aplicável."], ["Resumo da folha de pagamento", "Quantidade de pessoas e custo total por área."],
+        ["Indicadores que a diretoria já acompanha", "Para validarmos os KPIs prioritários no kickoff."]] },
+      { tipo: "info", titulo: "Calendário de dados e reuniões", icone: "cal",
+        html: p => `<b>Dados fechados:</b> o financeiro da empresa envia ou disponibiliza os dados do mês ${esc(p.diaDados || "até o dia 5 de cada mês")}. <b>Reunião de resultados:</b> ${esc(p.diaReuniao || "por volta do dia 15")}, com indicadores, desvios e plano de ação. Os dados são enviados para <b>${esc(p.emailOp || "contato@wlexpertise.com")}</b>.` },
+      LGPD],
+    proximos: "Envie os acessos e a base histórica dos itens 1 e 2 para montarmos os primeiros indicadores e a estrutura do relatório gerencial."
+  },
+  rt: {
+    nome: "Consultoria de Processos", eyebrow: "Manual de onboarding · Consultoria Rental",
+    intro: () => "Seja bem-vindo(a) à WL Expertise! Para mapear os processos reais da locadora, configurar o sistema e treinar a equipe, precisamos de alguns acessos, documentos e da agenda de visitas. A seguir, tudo o que precisamos para começar.",
+    params: [["pontoFocal", "Ponto focal do projeto na empresa", () => ""], ["agendaVisitas", "Agenda das visitas", () => ""], ["emailOp", "E-mail para envio dos arquivos", () => "contato@wlexpertise.com"]],
+    secoes: [
+      { tipo: "check", titulo: "Acessos e pessoas", itens: [
+        ["Sistema de gestão da locadora", "Usuário para o time WL no sistema (perfil de consulta ou administrador, conforme o escopo de configuração)."],
+        ["Organograma e equipe por setor", "Nome, função e contato das pessoas de almoxarifado, expedição, compras, manutenção, financeiro e administrativo."],
+        ["Ponto focal do projeto", "Pessoa com autonomia para validar processos, liberar agendas e tomar decisões do dia a dia."]] },
+      { tipo: "check", titulo: "Documentos e informações", itens: [
+        ["Procedimentos (POPs) existentes", "Se houver."], ["Formulários, planilhas e checklists usados hoje", "Expedição, devolução, manutenção, almoxarifado e compras."],
+        ["Cadastro de equipamentos / frota", "Relatório do sistema com itens, famílias e situação."], ["Estoque de peças e materiais", "Posição atual do almoxarifado."],
+        ["Ordens de manutenção dos últimos 6 meses", "Relatório do sistema ou controle paralelo."], ["Indicadores que a empresa já acompanha", "Ex.: disponibilidade da frota, tempo de manutenção, giro de estoque."]] },
+      { tipo: "info", titulo: "Agenda do projeto", icone: "cal",
+        html: p => `<b>Visitas:</b> ${p.agendaVisitas ? esc(p.agendaVisitas) : "dias e horários das visitas presenciais definidos no kickoff"}. <b>Ponto focal:</b> ${p.pontoFocal ? esc(p.pontoFocal) : "a definir no kickoff"}. Arquivos podem ser enviados para <b>${esc(p.emailOp || "contato@wlexpertise.com")}</b> ou pelo grupo do projeto no WhatsApp.` },
+      LGPD],
+    proximos: "Envie os itens 1 e 2 e confirme a agenda das visitas para iniciarmos o mapeamento dos processos de cada setor."
+  }
+};
+const ORDEM_ONB = ["bpo", "fpa", "pla", "rt"];
+
+/* Serviços do onboarding: FP&A só entra quando o operacional NÃO é da WL (sem BPO) */
+function servicosOnb(c) {
+  const s = new Set(servsDoCliente(c || {}));
+  if (s.has("fpa") && s.has("bpo")) s.delete("fpa");
+  return ORDEM_ONB.filter(x => s.has(x));
+}
+function itensDoModelo(serv) {
+  return ONB[serv].secoes.filter(s => s.tipo === "check").flatMap((s, k) => s.itens.map(([t, d]) => ({ id: crypto.randomUUID(), serv, secao: k, t, d: d || "", status: "pendente", obs: "" })));
+}
+const progOnb = (o, serv) => { const ls = (o.itens || []).filter(i => !serv || i.serv === serv), val = ls.filter(i => i.status !== "na"); return { tot: val.length, ok: val.filter(i => i.status === "recebido").length, pct: val.length ? Math.round(val.filter(i => i.status === "recebido").length / val.length * 100) : 100 }; };
+
+async function garantirOnb() {
+  await Promise.all([onbStore, cliStore, tarStore].filter(s => !s.carregado).map(s => carregarStore(s)));
+}
+
+/* ---- Criar onboarding (a partir do cliente / contrato) ---- */
+async function novoOnboarding({ clienteId, contratoId } = {}) {
+  await garantirOnb();
+  if (!clienteId) return escolherClienteOnb();
+  const c = cliPorId(clienteId);
+  if (!c) return toast("Cliente não encontrado", "erro");
+  const ex = onbs().find(o => o.clienteId === clienteId && o.status !== "concluido");
+  if (ex) { toast("Este cliente já tem um onboarding em andamento"); location.hash = "atendimento/onboarding/" + ex.id; return; }
+  const servs = servicosOnb(c);
+  let id;
+  try {
+    await salvarStore(onbStore, d => {
+      d.seq = (d.seq || d.onboardings.length) + 1; id = "ON-" + String(d.seq).padStart(4, "0");
+      const o = { id, clienteId, contratoId: contratoId || (c.contratos || []).slice(-1)[0] || "", empresa: nomeCli(c), razao: c.razao || "", contato: c.contato || "", email: c.email || "", whatsapp: c.telefone || "",
+        servicos: servs, itens: servs.flatMap(itensDoModelo), params: {}, kickoff: { data: "", hora: "", mesma: false, local: "" }, status: "rascunho", envios: [], criadoEm: new Date().toISOString(), criadoPor: meuNome() };
+      for (const s of servs) for (const [k, , pad] of ONB[s].params) if (o.params[k] === undefined) o.params[k] = pad(o);
+      d.onboardings.push(o);
+    });
+    await salvarTar(d => logar(d, clienteId, `Iniciou o onboarding ${id} (${servs.map(s => ONB[s].nome).join(", ") || "sem serviços"})`));
+  } catch (e) { return toast("Não foi possível criar: " + e.message, "erro", 6000); }
+  location.hash = "atendimento/onboarding/" + id;
+}
+function escolherClienteOnb() {
+  const ls = clis().filter(c => c.status !== "inativo").sort((a, b) => nomeCli(a).localeCompare(nomeCli(b)));
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Novo onboarding</h3><small class="sub-modal">Escolha o cliente. Os documentos de cada serviço contratado entram automaticamente.</small></div>
+    <div class="modal-corpo">${ls.length ? `<input id="onbBusca" type="search" placeholder="Buscar cliente…" data-mascara="nenhuma" style="margin-bottom:8px">
+      <ul class="lista-cli" id="onbLista">${ls.map(c => `<li data-onb-cli="${c.id}"><div><b>${esc(nomeCli(c))}</b><small>${esc((c.servicos || []).map(s => s.plano || s.nome).join(" · ") || "sem serviços cadastrados")}</small></div>${onbs().some(o => o.clienteId === c.id && o.status !== "concluido") ? `<span class="chip-p">em andamento</span>` : ""}</li>`).join("")}</ul>`
+      : `<div class="vazio-acoes">Nenhum cliente ativo. Cadastre o cliente em Clientes (ou ele entra sozinho quando o contrato é assinado).</div>`}</div>
+    <div class="modal-rod"><button class="btn-s" data-m="cancelar">Cancelar</button></div>`);
+  veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  if ($("onbBusca")) $("onbBusca").oninput = e => { const t = norm(e.target.value); m.querySelectorAll("[data-onb-cli]").forEach(li => li.style.display = norm(li.textContent).includes(t) ? "" : "none"); };
+  m.onclick = e => { const li = e.target.closest("[data-onb-cli]"); if (li) { fecharModal(); novoOnboarding({ clienteId: li.dataset.onbCli }); } };
+}
+
+/* ---- Lista ---- */
+const filtroOnb = { status: "abertos", serv: "" };
+function renderListaOnb(servFiltro) {
+  onbAtual = null;
+  $("atdConteudo").oninput = $("atdConteudo").onclick = $("atdConteudo").onchange = null;
+  if (servFiltro !== undefined) filtroOnb.serv = servFiltro;
+  cabAtd([["Atendimento", "#atendimento"], ["Onboarding"]], "Jornada do cliente", "Onboarding",
+    "Depois do contrato assinado: envie ao cliente os documentos e acessos necessários de cada serviço e acompanhe o que já chegou.",
+    `<button class="btn-p" data-onb="novo"><svg><use href="#i-mais"/></svg>Novo onboarding</button>`);
+  const n = st => onbs().filter(o => st === "todos" || (st === "abertos" ? o.status !== "concluido" : o.status === st)).length;
+  const lista = onbs().filter(o => (filtroOnb.status === "todos" || (filtroOnb.status === "abertos" ? o.status !== "concluido" : o.status === filtroOnb.status)) && (!filtroOnb.serv || o.servicos.includes(filtroOnb.serv)))
+    .sort((a, b) => (b.atualizadoEm || b.criadoEm || "").localeCompare(a.atualizadoEm || a.criadoEm || ""));
+  const semOnb = clis().filter(c => c.status !== "inativo" && c.origem === "contrato" && !onbs().some(o => o.clienteId === c.id));
+  $("atdConteudo").innerHTML = `
+    ${semOnb.length ? `<div class="aviso-onb"><b>${semOnb.length} cliente${semOnb.length === 1 ? "" : "s"} com contrato assinado ainda sem onboarding:</b> ${semOnb.slice(0, 6).map(c => `<button class="lnk" data-onb-cliente="${c.id}">${esc(nomeCli(c))}</button>`).join(", ")}</div>` : ""}
+    <div class="barra-crm"><nav class="abas" id="abasOnb">${[["abertos", "Em aberto"], ["concluido", "Concluídos"], ["todos", "Todos"]].map(([k, r]) => `<button data-st="${k}" class="${filtroOnb.status === k ? "ativo" : ""}">${r} (${n(k)})</button>`).join("")}</nav>
+      <select id="onbServ" style="max-width:220px">${opcoes(ORDEM_ONB.map(s => [s, ONB[s].nome]), filtroOnb.serv, "Todos os serviços")}</select></div>
+    <section class="bloco">${lista.length ? `<ul class="lista-diag">${lista.map(o => { const st = ST_ONB[o.status] || ST_ONB.rascunho, p = progOnb(o);
+      return `<li data-abrir-onb="${o.id}"><div class="ld-ico prop">${p.pct}%</div>
+        <div class="ld-info"><b>${esc(o.empresa)}</b><small>${esc(o.id)} · ${o.servicos.map(s => ONB[s].nome).join(", ") || "sem serviços"} · ${p.ok} de ${p.tot} itens recebidos${o.kickoff?.data ? " · kickoff " + data(o.kickoff.data + "T12:00") : ""}</small>
+          <i class="barra-onb"><b style="width:${p.pct}%"></b></i></div>
+        <span class="chip-etapa" style="--cor:${st[1]}"><i></i>${st[0]}</span></li>`; }).join("")}</ul>`
+      : `<div class="vazio-etapa"><b>Nenhum onboarding ${filtroOnb.status === "concluido" ? "concluído" : "em aberto"}</b>Comece pelo botão <b>Novo onboarding</b> ou pela página do contrato assinado.</div>`}</section>`;
+  $("atdConteudo").onclick = e => {
+    const st = e.target.closest("[data-st]"); if (st) { filtroOnb.status = st.dataset.st; return renderListaOnb(); }
+    const li = e.target.closest("[data-abrir-onb]"); if (li) { location.hash = "atendimento/onboarding/" + li.dataset.abrirOnb; return; }
+    const cb = e.target.closest("[data-onb-cliente]"); if (cb) return novoOnboarding({ clienteId: cb.dataset.onbCliente });
+  };
+  $("onbServ").onchange = e => { filtroOnb.serv = e.target.value; renderListaOnb(); };
+  $("atdAcoes").onclick = e => { if (e.target.closest("[data-onb=novo]")) novoOnboarding(); };
+}
+
+/* ---- Editor ---- */
+let onbPend = false, onbTimer = null;
+function salvarOnbDepois() { onbPend = true; $("statusOnb") && ($("statusOnb").textContent = "Salvando…"); clearTimeout(onbTimer); onbTimer = setTimeout(salvarOnb, 700); }
+async function salvarOnb() {
+  if (!onbAtual || !onbPend) return;
+  onbPend = false;
+  const o = onbAtual;
+  const p = progOnb(o);
+  if (o.status === "enviado" && p.ok > 0) o.status = "andamento";
+  try {
+    await salvarStore(onbStore, d => { const i = d.onboardings.findIndex(x => x.id === o.id); if (i >= 0) d.onboardings[i] = { ...structuredClone(o), atualizadoEm: new Date().toISOString() }; });
+    $("statusOnb") && ($("statusOnb").textContent = "Salvo na nuvem");
+  } catch (e) { onbPend = true; $("statusOnb") && ($("statusOnb").textContent = "Erro ao salvar"); toast("Não foi possível salvar: " + e.message, "erro"); }
+}
+function abrirOnb(id) {
+  const o0 = onbPorId(id);
+  if (!o0) { toast("Onboarding não encontrado", "erro"); location.hash = "atendimento/onboarding"; return; }
+  if (!onbAtual || onbAtual.id !== id || !onbPend) onbAtual = structuredClone(o0);
+  const o = onbAtual, st = ST_ONB[o.status] || ST_ONB.rascunho, c = cliPorId(o.clienteId), pt = progOnb(o);
+  cabAtd([["Atendimento", "#atendimento"], ["Onboarding", "#atendimento/onboarding"], [o.id]], `Onboarding · ${o.id}`, o.empresa,
+    "Marque o que o cliente já enviou. O PDF e o e-mail podem trazer o manual completo ou só o que ainda falta.",
+    `<span class="chip-etapa" style="--cor:${st[1]}"><i></i>${st[0]}</span><span class="status-salvo" id="statusOnb">Salvo na nuvem</span>`);
+  const todosServ = ORDEM_ONB;
+  const temBPO = c ? servsDoCliente(c).includes("bpo") : o.servicos.includes("bpo");
+  $("atdConteudo").innerHTML = `
+  <div class="diag-grade">
+    <div class="diag-form">
+      <section class="g-sec"><h4>Serviços do onboarding</h4>
+        <div class="serv-onb">${todosServ.map(s => `<label class="chk ${o.servicos.includes(s) ? "on" : ""}"><input type="checkbox" data-onb-serv="${s}" ${o.servicos.includes(s) ? "checked" : ""}> ${ONB[s].nome}${s === "fpa" && temBPO ? ` <small>(com BPO da WL os dados já são nossos: normalmente não precisa)</small>` : ""}</label>`).join("")}</div></section>
+      ${o.servicos.map(s => {
+        const p = progOnb(o, s), mod = ONB[s];
+        return `<section class="g-sec onb-serv"><h4>${esc(mod.nome)} <span class="tag-breve" style="text-transform:none">${p.ok}/${p.tot} recebidos</span></h4>
+          <i class="barra-onb"><b style="width:${p.pct}%"></b></i>
+          ${mod.secoes.map((sec, k) => sec.tipo !== "check" ? "" : `<div class="onb-grupo"><h5>${esc(sec.titulo)}</h5><ul class="onb-itens">${o.itens.filter(i => i.serv === s && i.secao === k).map(i => `
+            <li class="${i.status}" data-item="${i.id}"><div class="onb-txt"><b>${esc(i.t)}</b>${i.d ? `<small>${esc(i.d)}</small>` : ""}${i.status === "recebido" && i.em ? `<small class="ok">recebido ${data(i.em)}${i.por ? " · " + esc(i.por) : ""}</small>` : ""}
+              ${i.obs ? `<input class="onb-obs" data-obs="${i.id}" placeholder="Observação" value="${esc(i.obs)}" data-mascara="nenhuma">` : `<button class="lnk obs-lnk" data-obs-abrir="${i.id}">+ observação</button>`}</div>
+              <div class="seg-onb">${ST_ITEM.map(([v, n]) => `<button data-st-item="${v}" class="${i.status === v ? "ativo " + v : ""}">${n}</button>`).join("")}</div>
+              ${i.extra ? `<button class="x-acao" data-del-item="${i.id}" aria-label="Remover">×</button>` : ""}</li>`).join("")}</ul>
+            <button class="lnk" data-add-item="${s}|${k}">+ adicionar item</button></div>`).join("")}
+          ${mod.params.length ? `<details class="onb-params"><summary>Informações do documento</summary><div class="dados-grid">${mod.params.map(([k, rot]) => `<div class="campo"><label>${rot}</label><input data-param="${k}" value="${esc(o.params[k] || "")}" placeholder="${k === "diasAgendamento" ? "Ex.: segundas e quintas, até as 10h" : k === "agendaVisitas" ? "Ex.: terças, das 8h às 11h" : ""}" data-mascara="nenhuma"></div>`).join("")}</div></details>` : ""}
+        </section>`;
+      }).join("") || `<div class="vazio-etapa"><b>Nenhum serviço marcado</b>Marque acima os serviços que entram neste onboarding.</div>`}
+    </div>
+    <aside class="diag-lado">
+      <section class="g-sec"><h4>Andamento</h4>
+        <div class="onb-anel" style="--p:${pt.pct}"><b>${pt.pct}%</b><small>${pt.ok} de ${pt.tot} itens</small></div>
+        ${c ? `<button class="lnk" data-link="#clientes/${c.id}" style="display:block;text-align:center;margin-top:8px">Abrir o cliente ›</button>` : ""}</section>
+      <section class="g-sec"><h4>Kickoff</h4><div class="dados-grid">
+        <label class="chk"><input type="checkbox" data-kick="mesma" ${o.kickoff?.mesma ? "checked" : ""}> Feito na mesma reunião da assinatura</label>
+        <div class="linha2"><div class="campo"><label>Data</label><input type="date" data-kick="data" value="${esc(o.kickoff?.data || "")}"></div><div class="campo"><label>Hora</label><input type="time" data-kick="hora" value="${esc(o.kickoff?.hora || "")}"></div></div>
+        <div class="campo"><label>Local / link</label><input data-kick="local" value="${esc(o.kickoff?.local || "")}" placeholder="Presencial, Meet, Teams…" data-mascara="nenhuma"></div></div></section>
+      <section class="g-sec"><h4>Enviar para</h4><div class="dados-grid">
+        <div class="campo"><label>Contato</label><input data-cab="contato" value="${esc(o.contato || "")}" data-mascara="nenhuma"></div>
+        <div class="campo"><label>E-mail do cliente</label><input type="email" data-cab="email" value="${esc(o.email || "")}"></div>
+        <div class="campo"><label>WhatsApp</label><input data-cab="whatsapp" data-mascara="telefone" value="${esc(o.whatsapp || "")}"></div></div></section>
+      <section class="g-sec acoes-diag">
+        <button class="btn-s" data-onb="previa" style="justify-content:center"><svg><use href="#i-abrir"/></svg>Pré-visualizar o manual</button>
+        <button class="btn-p" data-onb="email" style="justify-content:center"><svg><use href="#i-enviar"/></svg>${pt.ok ? "Enviar pendências por e-mail" : "Enviar por e-mail"}</button>
+        <button class="btn-s" data-onb="whats" style="justify-content:center">Enviar pelo WhatsApp</button>
+        <button class="btn-s" data-onb="pdf" style="justify-content:center"><svg><use href="#i-pdf"/></svg>Baixar PDF${pt.ok ? " (só pendências)" : ""}</button>
+        ${pt.ok ? `<button class="lnk" data-onb="pdfCompleto" style="justify-self:center">baixar o manual completo</button>` : ""}
+        ${o.status !== "concluido" ? `<button class="btn-s" data-onb="concluir" style="justify-content:center">✓ Concluir onboarding</button>` : `<button class="lnk" data-onb="reabrir" style="justify-self:center">Reabrir onboarding</button>`}
+        <button class="perigo" data-onb="excluir" style="justify-self:center">Excluir</button>
+      </section>
+      ${(o.envios || []).length ? `<section class="g-sec"><h4>Envios</h4><ul class="hist-cli">${o.envios.slice().reverse().map(e => `<li><small>${dataHora(e.em)} · ${esc(e.por || "")}</small><b>${e.canal === "whats" ? "WhatsApp" : "E-mail"} · ${e.pendencias ? "pendências" : "manual completo"}</b><span>${esc(e.para || "")}</span>${e.link ? `<a href="${esc(e.link)}" target="_blank" rel="noopener">abrir PDF</a>` : ""}</li>`).join("")}</ul></section>` : ""}
+    </aside>
+  </div>`;
+  ligarOnb();
+}
+function ligarOnb() {
+  const o = onbAtual, raiz = $("atdConteudo");
+  raiz.oninput = e => {
+    const t = e.target;
+    if (t.dataset.obs) { const i = o.itens.find(x => x.id === t.dataset.obs); if (i) { i.obs = t.value; salvarOnbDepois(); } return; }
+    if (t.dataset.param) { o.params[t.dataset.param] = t.value; return salvarOnbDepois(); }
+    if (t.dataset.cab) { o[t.dataset.cab] = t.value; return salvarOnbDepois(); }
+    if (t.dataset.kick && t.type !== "checkbox") { o.kickoff = o.kickoff || {}; o.kickoff[t.dataset.kick] = t.value; return salvarOnbDepois(); }
+  };
+  raiz.onchange = async e => {
+    const t = e.target;
+    if (t.dataset.kick === "mesma") { o.kickoff = o.kickoff || {}; o.kickoff.mesma = t.checked; return salvarOnbDepois(); }
+    if (t.dataset.onbServ) {
+      const s = t.dataset.onbServ;
+      if (t.checked) { o.servicos = ORDEM_ONB.filter(x => x === s || o.servicos.includes(x)); if (!o.itens.some(i => i.serv === s)) o.itens.push(...itensDoModelo(s)); for (const [k, , pad] of ONB[s].params) if (!o.params[k]) o.params[k] = pad(o); }
+      else { if (o.itens.some(i => i.serv === s && i.status !== "pendente") && !confirmar(`Tirar ${ONB[s].nome} do onboarding? O andamento marcado desse serviço será perdido.`)) { t.checked = true; return; } o.servicos = o.servicos.filter(x => x !== s); o.itens = o.itens.filter(i => i.serv !== s); }
+      salvarOnbDepois(); return abrirOnb(o.id);
+    }
+  };
+  raiz.onclick = async e => {
+    const ob = e.target.closest("[data-obs-abrir]");
+    if (ob) { const inp = document.createElement("input"); inp.className = "onb-obs"; inp.dataset.obs = ob.dataset.obsAbrir; inp.dataset.mascara = "nenhuma"; inp.placeholder = "Observação (ex.: acesso enviado por e-mail)"; ob.replaceWith(inp); inp.focus(); return; }
+    const b = e.target.closest("[data-st-item],[data-add-item],[data-del-item],[data-onb],[data-link]"); if (!b) return;
+    if (b.dataset.stItem) {
+      const i = o.itens.find(x => x.id === b.closest("[data-item]").dataset.item); if (!i) return;
+      i.status = b.dataset.stItem; if (i.status === "recebido") { i.em = new Date().toISOString(); i.por = meuNome(); } else { delete i.em; delete i.por; }
+      salvarOnbDepois(); return abrirOnb(o.id);
+    }
+    if (b.dataset.addItem) {
+      const [s, k] = b.dataset.addItem.split("|"), t = prompt("Item a solicitar ao cliente:"); if (!t?.trim()) return;
+      o.itens.push({ id: crypto.randomUUID(), serv: s, secao: Number(k), t: t.trim(), d: "", status: "pendente", obs: "", extra: true });
+      salvarOnbDepois(); return abrirOnb(o.id);
+    }
+    if (b.dataset.delItem) { o.itens = o.itens.filter(i => i.id !== b.dataset.delItem); salvarOnbDepois(); return abrirOnb(o.id); }
+    const a = b.dataset.onb;
+    if (a === "previa") return previaOnb(o);
+    if (a === "pdf" || a === "pdfCompleto") { if (onbPend) await salvarOnb(); const pend = a === "pdf" && progOnb(o).ok > 0; const { blob, nome } = await gerarPDFOnb(o, pend); baixarBlob(blob, nome); return; }
+    if (a === "email") return enviarOnbEmail(o);
+    if (a === "whats") return enviarOnbWhats(o);
+    if (a === "concluir") {
+      const p = progOnb(o);
+      if (p.ok < p.tot && !confirmar(`Ainda há ${p.tot - p.ok} item(ns) pendente(s). Concluir o onboarding mesmo assim?`)) return;
+      o.status = "concluido"; o.concluidoEm = new Date().toISOString(); o.concluidoPor = meuNome(); onbPend = true; await salvarOnb();
+      await salvarTar(d => { logar(d, o.clienteId, `Concluiu o onboarding ${o.id} (${p.ok} de ${p.tot} itens recebidos)`); for (const t of d.tarefas) if (t.onbId === o.id && t.status !== "concluida") { t.status = "concluida"; t.concluidaEm = new Date().toISOString(); t.concluidaPor = meuNome(); } }, "Onboarding concluído");
+      return abrirOnb(o.id);
+    }
+    if (a === "reabrir") { o.status = progOnb(o).ok ? "andamento" : (o.envios || []).length ? "enviado" : "rascunho"; delete o.concluidoEm; onbPend = true; await salvarOnb(); return abrirOnb(o.id); }
+    if (a === "excluir") {
+      if (!confirmar(`Excluir o onboarding ${o.id} de ${o.empresa}? Os PDFs já salvos na pasta do cliente continuam lá.`)) return;
+      try { await salvarStore(onbStore, d => { d.onboardings = d.onboardings.filter(x => x.id !== o.id); }); await salvarTar(d => logar(d, o.clienteId, `Excluiu o onboarding ${o.id}`), "Onboarding excluído"); } catch (er) { return toast(er.message, "erro"); }
+      onbAtual = null; onbPend = false; location.hash = "atendimento/onboarding";
+    }
+  };
+}
+
+/* ---- Documento (HTML → PDF) no padrão visual do manual da WL ---- */
+const ICO_ONB = {
+  mail: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="__COR__" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>`,
+  whats: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="__COR__" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.5c.3 2 2.5 4.3 4.5 4.6l1.2-1.1 1.8.8c-.2 1-1 1.7-2 1.7-3.3 0-6.6-3.3-6.6-6.6 0-1 .7-1.8 1.7-2l.8 1.8z"/></svg>`,
+  cal: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="__COR__" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="m9 15 2 2 4-4"/></svg>`,
+  escudo: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="__COR__" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  caixa: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="__COR__" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg>`,
+  ok: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="__COR__" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`,
+  mao: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="__COR__" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/></svg>`
+};
+const icoOnb = (n, cor) => ICO_ONB[n].replace(/__COR__/g, cor);
+const CSS_ONB = `
+.od{font-family:Montserrat,"Segoe UI",Arial,sans-serif;color:#1A2E2E;width:210mm;background:#fff}
+.od-pg{position:relative}
+.od-pg+.od-pg{page-break-before:always}
+.od-cab{background:#0D5C63;color:#fff;padding:7mm 14mm 5.5mm;border-bottom:2.2mm solid #28B260;display:flex;justify-content:space-between;align-items:center;gap:6mm}
+.od-cab img{height:6.5mm;display:block;margin-bottom:3mm}
+.od-cab .eb{font-size:8.5pt;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#13A3B5}
+.od-cab h1{font-size:22pt;font-weight:800;margin:1.5mm 0 0;line-height:1.05}
+.od-cab .para{font-size:9pt;color:rgba(255,255,255,.75);margin-top:2.5mm}
+.od-selo{width:19mm;height:19mm;border-radius:50%;border:.6mm solid #13A3B5;background:#0F6B73;display:grid;place-items:center;flex:none;color:#fff}
+.od-selo svg{width:11mm;height:11mm}
+.od-corpo{padding:6mm 14mm 0}
+.od-intro{font-size:9.8pt;line-height:1.45;color:#3d4f4f;margin-bottom:4mm}
+.od-sec{margin-bottom:3.8mm;page-break-inside:avoid}
+.od-tit{display:flex;align-items:center;gap:3.5mm;margin-bottom:2.6mm}
+.od-num{width:8mm;height:8mm;border-radius:50%;background:#28B260;color:#fff;font-weight:800;font-size:13pt;display:grid;place-items:center;flex:none}
+.od-tit h2{font-size:13pt;font-weight:800;color:#0F2E33;margin:0}
+.od-lista{list-style:none;margin:0;padding:0 0 0 2mm}
+.od-lista li{display:flex;gap:3.5mm;align-items:flex-start;font-size:9.4pt;line-height:1.36;color:#3d4f4f;margin-bottom:1.8mm;page-break-inside:avoid}
+.od-lista li i{width:3.6mm;height:3.6mm;border:.45mm solid #13A3B5;border-radius:1mm;flex:none;margin-top:.8mm;display:grid;place-items:center;color:#28B260}
+.od-lista li.ok i{background:#28B260;border-color:#28B260;color:#fff}
+.od-lista li.ok i svg{width:3mm;height:3mm}
+.od-lista li b{color:#0F2E33}
+.od-lista li.ok{opacity:.55}
+.od-dupla{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+.od-card{border-radius:2.2mm;padding:4mm 5mm;font-size:8.8pt;line-height:1.4}
+.od-card h3{display:flex;align-items:center;gap:3mm;font-size:11pt;font-weight:800;margin:0 0 2mm}
+.od-card .ic{width:9mm;height:9mm;border-radius:50%;display:grid;place-items:center;flex:none}
+.od-card .ic svg{width:6mm;height:6mm}
+.od-card .dest{font-weight:700;font-style:italic;color:#13A3B5;margin:0 0 1.8mm;font-size:9.6pt}
+.od-card .eb{font-size:8pt;font-weight:800;letter-spacing:.18em;color:#28B260;margin:0 0 1.8mm}
+.od-claro{background:#F1F6F6;color:#3d4f4f} .od-claro h3{color:#0F2E33} .od-claro .ic{background:#0D5C63;color:#fff}
+.od-teal{background:#0D5C63;color:#E6F2F2} .od-teal h3{color:#fff} .od-teal .ic{background:#fff;color:#0D5C63}
+.od-escuro,.od-verde{padding:3.5mm 4.5mm!important} .od-escuro h3,.od-verde h3{font-size:10pt!important;margin-bottom:1.2mm!important} .od-escuro .ic,.od-verde .ic{width:6mm!important;height:6mm!important}
+.od-escuro{background:#12313A;color:#DCE7E7} .od-escuro h3{color:#fff} .od-escuro .ic{color:#fff}
+.od-verde{background:#28B260;color:#fff} .od-verde h3{color:#fff} .od-verde .ic{color:#fff}
+.od-info{display:flex;gap:5mm;align-items:center;background:#F1F6F6;border-radius:2.2mm;padding:4mm 5mm;font-size:9.3pt;line-height:1.5;color:#3d4f4f}
+.od-info .ic{color:#13A3B5;flex:none} .od-info .ic svg{width:10mm;height:10mm} .od-info b{color:#0F2E33}
+.od-prox{display:flex;gap:4mm;align-items:center;background:#0D5C63;color:#E6F2F2;border-radius:2.2mm;padding:3mm 5mm;margin-top:0;page-break-inside:avoid}
+.od-prox .ic{width:8mm;height:8mm;border-radius:50%;background:#28B260;color:#0D5C63;display:grid;place-items:center;flex:none} .od-prox .ic svg{width:7mm;height:7mm}
+.od-prox h3{font-size:10.5pt;font-weight:800;color:#fff;margin:0 0 .6mm} .od-prox p{font-size:9pt;line-height:1.35;margin:0}
+.od-kick{font-size:9.2pt;color:#3d4f4f;background:#F1F6F6;border-left:1.2mm solid #13A3B5;padding:2.5mm 4mm;margin:-1mm 0 4.5mm;border-radius:1mm}
+.od-rod{font-size:7.5pt;color:#7A8A8A;margin-top:2mm;padding:0 14mm 2mm}
+`;
+function htmlDocOnb(o, soPend) {
+  const p = o.params || {}, hoje = new Date().toLocaleDateString("pt-BR");
+  return `<div class="od"><style>${CSS_ONB}</style>${o.servicos.map(s => {
+    const mod = ONB[s];
+    let n = 0;
+    const secs = mod.secoes.map((sec, k) => {
+      if (sec.tipo === "check") {
+        const its = o.itens.filter(i => i.serv === s && i.secao === k && i.status !== "na" && (!soPend || i.status !== "recebido"));
+        if (!its.length) return "";
+        return `<div class="od-sec"><div class="od-tit"><span class="od-num">${++n}</span><h2>${esc(sec.titulo)}</h2></div><ul class="od-lista">${its.map(i => `<li class="${i.status === "recebido" ? "ok" : ""}"><i>${i.status === "recebido" ? icoOnb("ok", "#ffffff") : ""}</i><span><b>${esc(i.t)}${i.d ? ":" : ""}</b> ${esc(i.d || "")}${i.status === "recebido" ? " <em>(recebido)</em>" : ""}</span></li>`).join("")}</ul></div>`;
+      }
+      if (sec.tipo === "canais") return `<div class="od-sec"><div class="od-tit"><span class="od-num">${++n}</span><h2>Canais oficiais de comunicação</h2></div><div class="od-dupla">
+        <div class="od-card od-claro"><h3><span class="ic">${icoOnb("mail", "#ffffff")}</span>E-mail operacional dedicado</h3><p class="dest">${esc(p.emailOp || "suaempresa@wlexpertise.com")}</p>${sec.email}</div>
+        <div class="od-card od-teal"><h3><span class="ic">${icoOnb("whats", "#0D5C63")}</span>Grupo oficial no WhatsApp</h3><p class="eb">ATENDIMENTO RÁPIDO</p>${sec.whats}</div></div></div>`;
+      if (sec.tipo === "info") return `<div class="od-sec"><div class="od-tit"><span class="od-num">${++n}</span><h2>${esc(sec.titulo)}</h2></div><div class="od-info"><span class="ic">${icoOnb(ICO_ONB[sec.icone] ? sec.icone : "cal", "#13A3B5")}</span><div>${sec.html(p)}</div></div></div>`;
+      if (sec.tipo === "lgpd") return `<div class="od-sec"><div class="od-tit"><span class="od-num">${++n}</span><h2>Compromisso com LGPD e segurança</h2></div><div class="od-dupla">
+        <div class="od-card od-escuro"><h3><span class="ic">${icoOnb("escudo", "#ffffff")}</span>Proteção de dados</h3>Dados tratados sob estrito cumprimento da Lei nº 13.709/2018 (LGPD), usados unicamente para a execução dos serviços contratados.</div>
+        <div class="od-card od-verde"><h3><span class="ic">${icoOnb("caixa", "#ffffff")}</span>Devolução de insumos</h3>Em caso de rescisão, devolução formal de documentos, relatórios e históricos em até <b>30 dias</b>, garantindo a continuidade da memória operacional.</div></div></div>`;
+      return "";
+    }).join("");
+    const k = o.kickoff || {};
+    return `<div class="od-pg">
+      <div class="od-cab"><div><img src="logo-branca.png" alt="WL Expertise"><div class="eb">${esc(mod.eyebrow)}</div><h1>${esc(mod.nome)}</h1>
+        <div class="para">Preparado para <b>${esc(o.razao || o.empresa)}</b> · ${hoje}${soPend ? " · itens pendentes" : ""}</div></div><div class="od-selo">${icoOnb("mao", "#ffffff")}</div></div>
+      <div class="od-corpo"><p class="od-intro">${soPend ? `Olá! Para seguirmos com a implantação, ainda precisamos dos itens abaixo. Os que já recebemos foram retirados da lista.` : mod.intro(p)}</p>
+        ${!soPend && (k.data || k.mesma) ? `<div class="od-kick"><b>Kickoff:</b> ${k.mesma ? "realizado na reunião de assinatura do contrato" : `${data(k.data + "T12:00")}${k.hora ? " às " + esc(k.hora) : ""}${k.local ? " · " + esc(k.local) : ""}`}</div>` : ""}
+        ${secs || `<div class="od-info"><span class="ic">${icoOnb("ok", "#28B260")}</span><div><b>Tudo recebido!</b> Não há pendências para este serviço.</div></div>`}
+        <div class="od-prox"><span class="ic">${icoOnb("ok", "#0D5C63")}</span><div><h3>Próximos passos</h3><p>${esc(mod.proximos)}</p></div></div></div>
+      </div>`;
+  }).join("")}</div>`;
+}
+function previaOnb(o) {
+  if (!o.servicos.length) return toast("Marque pelo menos um serviço", "erro");
+  const soPend = progOnb(o).ok > 0;
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Manual de onboarding${soPend ? " · pendências" : ""}</h3><small class="sub-modal">É assim que o documento chega ao cliente.</small></div><div class="modal-corpo prev-onb">${htmlDocOnb(o, soPend)}</div>
+    <div class="modal-rod"><button class="btn-s" data-m="fechar">Fechar</button></div>`);
+  m.classList.add("modal-largo", "modal-doc");
+  veu.onclick = fecharModal; m.querySelector("[data-m=fechar]").onclick = fecharModal;
+}
+const nomeArqOnb = (o, pend) => `Onboarding ${pend ? "(pendências) " : ""}- ${limparNome(o.empresa)} - ${hojeISO().split("-").reverse().join("-")}.pdf`;
+async function gerarPDFOnb(o, soPend) {
+  if (!o.servicos.length) { toast("Marque pelo menos um serviço", "erro"); throw new Error("sem serviços"); }
+  toast("Gerando o manual em PDF…", "prog", 0);
+  await carregarScript(LIB.html2pdf);
+  const host = document.createElement("div");
+  host.style.cssText = "position:fixed;left:0;top:0;width:210mm;z-index:-1;pointer-events:none;background:#fff";
+  host.innerHTML = htmlDocOnb(o, soPend);
+  document.body.appendChild(host);
+  await Promise.all([...host.querySelectorAll("img")].map(i => i.complete ? 0 : new Promise(ok => { i.onload = i.onerror = ok; })));
+  try {
+    const blob = await html2pdf().set({ margin: [0, 0, 3, 0], image: { type: "jpeg", quality: 0.88 }, html2canvas: { scale: 1.7, useCORS: true, backgroundColor: "#ffffff", scrollX: 0, scrollY: 0 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }, pagebreak: { mode: ["css"], avoid: [".od-sec", ".od-prox", ".od-cab", "li"] } }).from(host.firstElementChild).outputPdf("blob");
+    toast("PDF pronto");
+    return { blob, nome: nomeArqOnb(o, soPend) };
+  } finally { host.remove(); }
+}
+/* Salva o PDF na pasta do cliente (Onboarding/) e devolve o item do OneDrive */
+async function salvarPDFOnb(o, blob, nome) {
+  const c = cliPorId(o.clienteId), base = (c ? pastaCli(c) : `clientes/${limparNome(o.empresa)}`) + "/Onboarding";
+  await garantirCaminho(base + "/x");
+  return enviarArquivo(`${base}/${nome}`, new File([blob], nome, { type: "application/pdf" }), "replace");
+}
+const b64Blob = blob => new Promise((ok, err) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1]); r.onerror = err; r.readAsDataURL(blob); });
+async function registrarEnvioOnb(o, envio) {
+  o.envios = [...(o.envios || []), envio];
+  if (o.status === "rascunho") o.status = "enviado";
+  onbPend = true; await salvarOnb();
+  const c = cliPorId(o.clienteId);
+  await salvarTar(d => {
+    logar(d, o.clienteId, `Enviou o ${envio.pendencias ? "pedido de pendências" : "manual"} de onboarding por ${envio.canal === "whats" ? "WhatsApp" : "e-mail"}${envio.para ? " para " + envio.para : ""}`);
+    if (!d.tarefas.some(t => t.onbId === o.id && t.status !== "concluida")) {
+      const dt = new Date(); dt.setDate(dt.getDate() + 3);
+      const resp = c?.responsavel || meuNome();
+      d.tarefas.push({ ...novaTarefaObj(d, { clienteId: o.clienteId, titulo: "Cobrar os documentos e acessos do onboarding", descricao: `Onboarding ${o.id}: confira o que já chegou e reenvie as pendências pelo sistema (Atendimento › Onboarding).`, servico: o.servicos[0] || "", responsavel: resp, prioridade: "alta", venc: isoD(dt), lembrete: "0" }), onbId: o.id });
+    }
+  });
+}
+function textoMsgOnb(o, soPend) {
+  const pend = o.itens.filter(i => i.status === "pendente");
+  return { assunto: soPend ? `Pendências do onboarding · ${o.empresa} · WL Expertise` : `Onboarding WL Expertise · documentos e acessos para iniciarmos · ${o.empresa}`,
+    corpo: `<p>Olá${o.contato ? ", " + esc(o.contato.split(" ")[0]) : ""}!</p>` + (soPend
+      ? `<p>Para seguirmos com a implantação${o.servicos.length ? " de " + o.servicos.map(s => ONB[s].nome).join(", ") : ""}, ainda precisamos dos itens abaixo:</p><ul>${pend.slice(0, 30).map(i => `<li><b>${esc(i.t)}</b></li>`).join("")}</ul><p>O documento em anexo traz o detalhe de cada item.</p>`
+      : `<p>Seja bem-vindo(a) à WL Expertise! Em anexo está o manual de onboarding com os documentos e acessos de que precisamos para iniciar os trabalhos${o.servicos.length ? " de " + o.servicos.map(s => ONB[s].nome).join(", ") : ""}.</p><p>${o.kickoff?.data && !o.kickoff.mesma ? `Nosso kickoff está marcado para <b>${data(o.kickoff.data + "T12:00")}${o.kickoff.hora ? " às " + esc(o.kickoff.hora) : ""}</b>. ` : ""}Qualquer dúvida, é só responder este e-mail ou falar com a gente pelo WhatsApp.</p>`)
+      + `<p>Abraço,<br>${esc(conta?.name || meuNome())}<br>WL Expertise</p>` };
+}
+async function enviarOnbEmail(o) {
+  if (!/\S+@\S+\.\S+/.test(o.email || "")) { toast("Informe o e-mail do cliente", "erro"); return document.querySelector("[data-cab=email]")?.focus(); }
+  if (onbPend) await salvarOnb();
+  const soPend = progOnb(o).ok > 0, msg = textoMsgOnb(o, soPend);
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Enviar ${soPend ? "pendências" : "manual de onboarding"} por e-mail</h3><small class="sub-modal">Sai pela conta da WL Expertise, com o PDF em anexo. Você recebe uma cópia.</small></div>
+    <form class="modal-corpo dados-grid" id="formEnvOnb">
+      <div class="campo"><label>Para</label><input name="para" value="${esc(o.email)}" data-mascara="nenhuma"></div>
+      <div class="campo"><label>Cópia (separe com vírgula)</label><input name="cc" value="${esc(meuEmail())}" data-mascara="nenhuma"></div>
+      <div class="campo"><label>Assunto</label><input name="assunto" value="${esc(msg.assunto)}" data-mascara="nenhuma"></div>
+      <div class="campo"><label>Mensagem</label><div class="prev-email">${msg.corpo}</div></div>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit"><svg><use href="#i-enviar"/></svg>Enviar</button></div></form>`);
+  veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  $("formEnvOnb").onsubmit = async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target)), bt = e.target.querySelector("[type=submit]");
+    bt.disabled = true; bt.textContent = "Enviando…";
+    try {
+      const { blob, nome } = await gerarPDFOnb(o, soPend);
+      const item = await salvarPDFOnb(o, blob, nome).catch(() => null);
+      await api("/enviar-cliente", { method: "POST", body: JSON.stringify({ para: f.para.split(/[,;]/).map(x => x.trim()).filter(Boolean), cc: f.cc.split(/[,;]/).map(x => x.trim()).filter(Boolean), assunto: f.assunto, titulo: soPend ? "Pendências do onboarding" : "Bem-vindo(a) à WL Expertise", corpo: msg.corpo, anexo: { nome, base64: await b64Blob(blob) } }) });
+      fecharModal();
+      await registrarEnvioOnb(o, { em: new Date().toISOString(), por: meuNome(), canal: "email", para: f.para, pendencias: soPend, link: item?.webUrl || "" });
+      toast("E-mail enviado ao cliente"); abrirOnb(o.id);
+    } catch (er) { bt.disabled = false; bt.textContent = "Enviar"; toast("Não foi possível enviar: " + er.message, "erro", 8000); }
+  };
+}
+async function enviarOnbWhats(o) {
+  const tel = soDigitos(o.whatsapp);
+  if (tel.length < 10) { toast("Informe o WhatsApp do cliente", "erro"); return document.querySelector("[data-cab=whatsapp]")?.focus(); }
+  if (onbPend) await salvarOnb();
+  const soPend = progOnb(o).ok > 0, janela = window.open("", "_blank");
+  try {
+    const { blob, nome } = await gerarPDFOnb(o, soPend);
+    const item = await salvarPDFOnb(o, blob, nome);
+    let link = "";
+    try { link = (await (await graph(`/me/drive/items/${item.id}/createLink`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "view", scope: "anonymous" }) })).json()).link?.webUrl || ""; } catch {}
+    const pend = o.itens.filter(i => i.status === "pendente");
+    const txt = `Olá${o.contato ? ", " + o.contato.split(" ")[0] : ""}! ` + (soPend ? `Para seguirmos com a implantação, ainda precisamos de:\n${pend.slice(0, 15).map(i => "• " + i.t).join("\n")}` : `Seja bem-vindo(a) à WL Expertise! Segue o manual de onboarding com os documentos e acessos de que precisamos para iniciar os trabalhos.`)
+      + (link ? `\n\n📄 ${link}` : `\n\nO documento também foi enviado para o seu e-mail.`);
+    const url = linkWhats(o.whatsapp).split("?")[0] + "?text=" + encodeURIComponent(txt);
+    if (janela) janela.location = url; else location.href = url;
+    await registrarEnvioOnb(o, { em: new Date().toISOString(), por: meuNome(), canal: "whats", para: o.whatsapp, pendencias: soPend, link: item?.webUrl || "" });
+    abrirOnb(o.id);
+  } catch (er) { janela?.close(); toast("Não foi possível preparar o envio: " + er.message, "erro", 7000); }
+}
 
 /* ================== EQUIPE, NOTIFICAÇÕES E INÍCIO ================== */
 const meuEmail = () => String(conta?.username || "").trim().toLowerCase();
