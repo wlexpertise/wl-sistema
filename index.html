@@ -1119,6 +1119,21 @@
   .versao-sis{font-weight:700}
   @media(max-width:760px){.ag-barra{width:100%;justify-content:space-between}.ag-vistas button{padding:7px 10px}.ag-mes-d{min-height:64px}.ag-mes-d .ag-ev b{font-size:.62rem}.ag-corpo{height:62vh}
     .ag-cab,.ag-todo,.ag-corpo{grid-template-columns:40px repeat(var(--cols),minmax(0,1fr))}}
+
+  /* Notas fiscais do cliente */
+  .tab-nf td small{display:block;font-size:.7rem;color:var(--txt-2)} .tab-nf td small.canc,.cards-nf small.canc{color:var(--erro);font-weight:700}
+  .tab-nf tr.cancelada td{opacity:.55} .tab-nf tr.cancelada td b{text-decoration:line-through}
+  .arqs-nf{white-space:nowrap}
+  .tab-nf td:first-child{min-width:230px} .tab-nf .chip-arq{display:inline-block;width:auto}
+  .chip-arq{display:inline-block;padding:3px 8px;border-radius:6px;font-size:.68rem;font-weight:800;text-decoration:none;margin-right:4px}
+  .chip-arq.nfpdf{background:rgba(200,70,61,.1);color:var(--erro)} .chip-arq.nfxml{background:rgba(19,163,181,.12);color:#0E7F8D} .chip-arq.falta{background:var(--bg);color:var(--txt-2);font-weight:600}
+  .cards-nf li.cancelada{opacity:.55} .cards-nf .l1{display:flex;justify-content:space-between}
+  .zona-nf{display:grid;gap:4px;cursor:pointer} .zona-nf b{color:var(--teal);font-size:.88rem}
+  .nf-item{border:1px solid var(--borda);border-radius:12px;padding:10px 12px;display:grid;gap:8px;margin-bottom:8px}
+  .nf-item.erro{border-color:rgba(200,70,61,.4)}
+  .nf-arqs{display:flex;gap:6px;align-items:center;flex-wrap:wrap} .nf-arqs small{font-size:.72rem;color:var(--txt-2);margin-right:8px;overflow-wrap:anywhere}
+  .nf-arqs .x-acao{margin-left:auto}
+  .nf-lido{font-size:.76rem;color:var(--verde);font-weight:700}
 </style>
 </head>
 <body>
@@ -1357,7 +1372,7 @@ const GRAPH = CONFIG.api + "/graph";
 const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial", "descricao": "Estudo, prospecção, apresentações e fechamento.", "icone": "i-a-com", "pasta": "Comercial", "subs": [{"id": "estudo", "nome": "Materiais de Estudo", "descricao": "Posicionamento, ICP, scripts e guias de venda.", "pasta": "Materiais de Estudo"}, {"id": "prospeccao", "nome": "Ferramentas de Prospecção", "descricao": "Controle de prospecção, CRM e agenda de reuniões.", "pasta": "Ferramentas de Prospecção"}, {"id": "apresentacoes", "nome": "Apresentações Comerciais", "descricao": "Apresentação institucional e por segmento.", "pasta": "Apresentações Comerciais"}, {"id": "propostas", "nome": "Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos.", "pasta": "Propostas, Preços e Contratos"}]}, {"id": "bpo", "nome": "BPO Financeiro", "descricao": "Gestão das rotinas financeiras do cliente.", "icone": "i-a-bpo", "pasta": "BPO Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "fpa", "nome": "FP&A", "descricao": "Indicadores gerenciais e análise de desempenho.", "icone": "i-a-fpa", "pasta": "FP&A", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "planejamento", "nome": "Planejamento Financeiro", "descricao": "Orçamentos, fluxo de caixa e cenários.", "icone": "i-a-pla", "pasta": "Planejamento Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "processos", "nome": "Consultoria de Processos", "descricao": "Mapeamento e redesenho de processos.", "icone": "i-a-pro", "pasta": "Consultoria de Processos", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}], "itens": [{"area": "comercial", "sub": "estudo", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Definição de ICP", "ext": "docx", "descricao": "Perfil de cliente ideal da WL Expertise."}, {"area": "comercial", "sub": "estudo", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"area": "comercial", "sub": "estudo", "nome": "Mapa de Posicionamento", "ext": "docx", "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "descricao": "Levantamento das dores e metas da base de clientes."}, {"area": "comercial", "sub": "estudo", "nome": "Script de Vendas (Call)", "ext": "docx", "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"area": "comercial", "sub": "estudo", "nome": "Script Único", "ext": "docx", "descricao": "Script de abordagem comercial."}, {"area": "comercial", "sub": "prospeccao", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"area": "comercial", "sub": "prospeccao", "nome": "CRM para Consultorias", "ext": "xlsx", "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"area": "comercial", "sub": "prospeccao", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"area": "comercial", "sub": "estudo", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"area": "comercial", "sub": "estudo", "nome": "Programa de Indicação", "ext": "pdf", "descricao": "Como estruturar um programa de indicação de clientes."}, {"area": "comercial", "sub": "propostas", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "descricao": "Termo para parceiros que indicam clientes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "descricao": "Proposta de valor para negócios de estética."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "descricao": "Proposta de valor para locadoras de equipamentos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "descricao": "Proposta de valor para criadores de conteúdo."}, {"area": "comercial", "sub": "propostas", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"area": "comercial", "sub": "propostas", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "descricao": "Planos e regras de negociação para o segmento Rental."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "descricao": "Modelo de proposta comercial."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "descricao": "Modelo de contrato de prestação de serviços."}, {"area": "processos", "sub": "diagnostico", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"area": "fpa", "sub": "diagnostico", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"area": "bpo", "sub": "diagnostico", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "descricao": "Questionário preliminar das rotinas financeiras."}, {"area": "bpo", "sub": "execucao", "nome": "Mapa Quente da Operação", "ext": "xlsx", "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"area": "processos", "sub": "diagnostico", "nome": "Ata e Briefing de Reunião", "ext": "docx", "descricao": "Modelo para registrar reuniões e briefings."}, {"area": "bpo", "sub": "onboarding", "nome": "Questionário de Kick-off", "ext": "xlsx", "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"area": "processos", "sub": "onboarding", "nome": "Formulário de Onboarding", "ext": "docx", "descricao": "Coleta de informações para iniciar o projeto."}, {"area": "bpo", "sub": "onboarding", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "descricao": "Plano de ativação, relação de clientes e timeline."}, {"area": "bpo", "sub": "onboarding", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"area": "bpo", "sub": "onboarding", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"area": "processos", "sub": "execucao", "nome": "Cronograma da Consultoria", "ext": "xlsx", "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"area": "processos", "sub": "execucao", "nome": "Plano de Ação Personalizado", "ext": "docx", "descricao": "Plano de ação do cliente após o diagnóstico."}, {"area": "processos", "sub": "execucao", "nome": "Materiais de Entrega", "ext": "xlsx", "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"area": "bpo", "sub": "execucao", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "descricao": "Gestão da operação por operador, plano de ação e timeline."}], "legado": {"01 - Estratégia e Posicionamento": "comercial/estudo", "02 - Prospecção e Vendas": "comercial/prospeccao", "03 - Apresentações Comerciais": "comercial/apresentacoes", "04 - Propostas, Preços e Contratos": "comercial/propostas", "05 - Diagnóstico": "bpo/diagnostico", "06 - Onboarding e Implantação": "bpo/onboarding", "07 - Execução e Entregas": "bpo/execucao"}};
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
-const VERSAO = "v27";
+const VERSAO = "v28";
 document.querySelectorAll(".versao-sis").forEach(x => x.textContent = VERSAO);
 const MODULOS = [
   { id: "inicio", nome: "Início", icone: "i-home" },
@@ -6612,18 +6627,19 @@ async function abrirCliente(id, aba) {
   const c = cliPorId(id);
   if (!c) { $("cliConteudo").innerHTML = `<div class="aviso-erro">Cliente não encontrado.</div>`; return; }
   if (!crm.carregado) await carregarCRM(true);
-  if (!["geral", "tarefas", "arquivos", "atividades"].includes(aba)) aba = "geral";
+  if (!["geral", "tarefas", "notas", "arquivos", "atividades"].includes(aba)) aba = "geral";
   $("cliEyebrow").textContent = `Cliente · ${c.id}${c.status === "inativo" ? " · inativo" : ""}`; $("cliTitulo").textContent = nomeCli(c);
   $("cliDesc").textContent = `${c.razao || ""}${c.cnpj ? " · CNPJ " + c.cnpj : ""}`;
   $("cliBotoes").innerHTML = `<button class="btn-s" data-link="#clientes">Todos os clientes</button>`;
   const pend = tarefas().filter(t => t.clienteId === id && t.status !== "concluida"), atr = pend.filter(t => stTarefa(t) === "atraso").length;
-  const nav = `<div class="barra-crm"><nav class="abas">${[["geral", "Visão geral"], ["tarefas", `Tarefas <span class="bolinha ${atr ? "" : "neutra"}">${pend.length}</span>`], ["arquivos", "Arquivos"], ["atividades", "Atividades"]]
+  const nav = `<div class="barra-crm"><nav class="abas">${[["geral", "Visão geral"], ["tarefas", `Tarefas <span class="bolinha ${atr ? "" : "neutra"}">${pend.length}</span>`], ["notas", "Notas fiscais"], ["arquivos", "Arquivos"], ["atividades", "Atividades"]]
     .map(([k, n]) => `<button data-link="#clientes/${id}/${k}" class="${aba === k ? "ativo" : ""}">${n}</button>`).join("")}</nav></div>`;
   $("cliConteudo").innerHTML = nav + `<div id="cliAba"></div>`;
   if (aba === "geral") abaGeralCli(c);
   if (aba === "tarefas") abaTarefasCli(c);
   if (aba === "arquivos") abaArquivosCli(c);
   if (aba === "atividades") abaAtividadesCli(c);
+  if (aba === "notas") abaNotasCli(c);
 }
 function abaGeralCli(c) {
   const l = c.leadId ? leadPorId(c.leadId) : null;
@@ -6931,6 +6947,177 @@ async function enviarArquivosCli(c, rel, arquivos) {
 }
 
 /* ---- Atividades (log) ---- */
+/* ---- Notas fiscais emitidas contra o cliente (dados/clientes/notas.json + PDF/XML na pasta do cliente) ---- */
+const nfStore = criarStore("dados/clientes/notas.json", { versao: 1, seq: 0, notas: [] });
+const notasCli = id => (nfStore.dados?.notas || []).filter(n => n.clienteId === id);
+const cl_nf = { ano: "" };
+/* Lê o XML da nota: NFS-e Nacional, NFS-e ABRASF (BH, Contagem e outras), NF-e e NFC-e */
+function lerXmlNota(texto) {
+  const doc = new DOMParser().parseFromString(texto, "application/xml");
+  if (doc.getElementsByTagName("parsererror").length) throw new Error("arquivo XML inválido");
+  const todos = [...doc.getElementsByTagName("*")];
+  const tag = (nomes, raiz) => { for (const n of nomes) { const el = (raiz ? [...raiz.getElementsByTagName("*")] : todos).find(e => e.localName === n && e.textContent.trim()); if (el) return el.textContent.trim(); } return ""; };
+  const no = nomes => { for (const n of nomes) { const el = todos.find(e => e.localName === n); if (el) return el; } return null; };
+  const infNfse = no(["infNFSe", "InfNfse"]);
+  let numero = infNfse ? tag(["nNFSe", "Numero"], infNfse) : "";
+  if (!numero) numero = tag(["nNFSe", "nNF", "NumeroNfse", "Numero"]);
+  const dataBruta = tag(["dhEmi", "DataEmissao", "dEmi", "dhProc", "DataEmissaoRps"]);
+  const dataISO = (dataBruta.match(/\d{4}-\d{2}-\d{2}/) || [])[0] || (dataBruta.match(/(\d{2})\/(\d{2})\/(\d{4})/) ? dataBruta.replace(/.*?(\d{2})\/(\d{2})\/(\d{4}).*/, "$3-$2-$1") : "");
+  const comp = tag(["dCompet", "Competencia"]);
+  const valor = Number(tag(["vServ", "ValorServicos", "vNF", "vLiq", "ValorLiquidoNfse", "vServPrest"]).replace(",", ".")) || 0;
+  const tomRaiz = no(["toma", "TomadorServico", "Tomador", "dest"]);
+  const tomCnpj = tomRaiz ? tag(["CNPJ", "Cnpj", "CPF", "Cpf"], tomRaiz) : "";
+  const tomNome = tomRaiz ? tag(["xNome", "RazaoSocial"], tomRaiz) : "";
+  const chaveEl = no(["infNFSe", "infNFe"]);
+  const chave = (chaveEl?.getAttribute("Id") || "").replace(/^\D+/, "") || tag(["chNFSe", "chNFe", "CodigoVerificacao"]);
+  const descricao = tag(["xDescServ", "Discriminacao", "xProd"]).slice(0, 300);
+  const cancelada = /cancel/i.test(tag(["cStat", "xMotivo", "SituacaoNfse"])) || !!no(["NfseCancelamento", "infCanc"]);
+  if (!numero && !dataISO) throw new Error("não parece ser o XML de uma nota fiscal");
+  return { numero: String(numero).replace(/^0+(?=\d)/, ""), data: dataISO, competencia: (comp.match(/\d{4}-\d{2}/) || [])[0] || (dataISO ? dataISO.slice(0, 7) : ""), valor, tomadorCnpj: tomCnpj, tomadorNome: tomNome, chave, descricao, cancelada };
+}
+const brlNf = v => (Number(v) || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const numBR = s => Number(String(s || "").replace(/[^\d,.-]/g, "").replace(/\.(?=\d{3}(\D|$))/g, "").replace(",", ".")) || 0;
+
+async function abaNotasCli(c) {
+  if (!nfStore.carregado) { $("cliAba").innerHTML = `<div class="esqueleto"></div>`; try { await carregarStore(nfStore); } catch (e) { $("cliAba").innerHTML = `<div class="aviso-erro">Não foi possível ler as notas: ${esc(e.message)}</div>`; return; } }
+  const todas = notasCli(c.id).sort((a, b) => (b.data || "").localeCompare(a.data || "") || (Number(b.numero) || 0) - (Number(a.numero) || 0));
+  const anos = [...new Set(todas.map(n => (n.data || "").slice(0, 4)).filter(Boolean))].sort().reverse();
+  if (cl_nf.ano && !anos.includes(cl_nf.ano)) cl_nf.ano = "";
+  const ls = todas.filter(n => !cl_nf.ano || (n.data || "").startsWith(cl_nf.ano));
+  const validas = ls.filter(n => n.status !== "cancelada"), total = validas.reduce((s, n) => s + (Number(n.valor) || 0), 0);
+  $("cliAba").innerHTML = `
+  <div class="barra-tf"><span>${validas.length} nota${validas.length === 1 ? "" : "s"}${cl_nf.ano ? " em " + cl_nf.ano : ""} · <b>${brlNf(total)}</b>${ls.length !== validas.length ? ` · ${ls.length - validas.length} cancelada${ls.length - validas.length === 1 ? "" : "s"}` : ""}</span>
+    <div class="dir">${anos.length > 1 ? `<select id="nfAno">${opcoes(anos.map(a => [a, a]), cl_nf.ano, "Todos os anos")}</select>` : ""}<button class="btn-p" data-nf="nova"><svg><use href="#i-mais"/></svg>Anexar notas fiscais</button></div></div>
+  ${ls.length ? `<section class="bloco"><table class="tabela tab-nf"><thead><tr><th>Número</th><th>Emissão</th><th>Competência</th><th>Valor</th><th>Arquivos</th><th></th></tr></thead><tbody>
+    ${ls.map(n => `<tr class="${n.status === "cancelada" ? "cancelada" : ""}"><td><b>${esc(n.numero || "—")}</b>${n.descricao ? `<small title="${esc(n.descricao)}">${esc(n.descricao.slice(0, 60))}${n.descricao.length > 60 ? "…" : ""}</small>` : ""}${n.status === "cancelada" ? `<small class="canc">cancelada</small>` : ""}</td>
+      <td>${n.data ? data(n.data + "T12:00") : "—"}</td><td>${n.competencia ? n.competencia.split("-").reverse().join("/") : "—"}</td><td>${n.valor ? brlNf(n.valor) : "—"}</td>
+      <td class="arqs-nf">${n.pdf ? `<a href="${esc(n.pdf.webUrl)}" target="_blank" rel="noopener" class="chip-arq nfpdf">PDF</a>` : `<span class="chip-arq falta">sem PDF</span>`}${n.xml ? `<a href="${esc(n.xml.webUrl)}" target="_blank" rel="noopener" class="chip-arq nfxml">XML</a>` : `<span class="chip-arq falta">sem XML</span>`}</td>
+      <td><button class="acao" data-nf-ed="${n.id}" data-dica="Editar"><svg><use href="#i-editar"/></svg></button></td></tr>`).join("")}</tbody></table>
+    <ul class="cards-leads cards-nf">${ls.map(n => `<li data-nf-ed="${n.id}" class="${n.status === "cancelada" ? "cancelada" : ""}"><div class="l1"><b>NF ${esc(n.numero || "—")}</b><b>${n.valor ? brlNf(n.valor) : ""}</b></div>
+      <small>${n.data ? "emitida " + data(n.data + "T12:00") : ""}${n.competencia ? " · competência " + n.competencia.split("-").reverse().join("/") : ""}${n.status === "cancelada" ? " · cancelada" : ""}</small>
+      <div class="l3">${n.pdf ? `<a href="${esc(n.pdf.webUrl)}" target="_blank" rel="noopener" class="chip-arq nfpdf">PDF</a>` : ""}${n.xml ? `<a href="${esc(n.xml.webUrl)}" target="_blank" rel="noopener" class="chip-arq nfxml">XML</a>` : ""}</div></li>`).join("")}</ul></section>`
+    : `<div class="vazio-bloco" style="background:#fff;border:1px solid var(--borda);border-radius:14px">Nenhuma nota fiscal anexada${cl_nf.ano ? " em " + cl_nf.ano : ""}.<br><br>Clique em <b>Anexar notas fiscais</b> e arraste o PDF e o XML: o sistema lê o XML e preenche número, data e valor sozinho. Dá para mandar várias notas de uma vez.</div>`}`;
+  if ($("nfAno")) $("nfAno").onchange = e => { cl_nf.ano = e.target.value; abaNotasCli(c); };
+}
+
+/* Agrupa os arquivos escolhidos em notas: cada XML vira uma nota e o PDF de mesmo nome (ou mesmo número) vai junto */
+async function montarNotas(arquivos) {
+  const xmls = arquivos.filter(f => /\.xml$/i.test(f.name)), pdfs = arquivos.filter(f => /\.pdf$/i.test(f.name));
+  const base = f => f.name.replace(/\.(xml|pdf)$/i, "").toLowerCase().replace(/[-_ ]*(nfs?e?|nota|xml|pdf)$/i, "");
+  const notas = [], usados = new Set();
+  for (const x of xmls) {
+    let d = {}, erro = "";
+    try { d = lerXmlNota(await x.text()); } catch (e) { erro = e.message; }
+    const p = pdfs.find(f => !usados.has(f) && base(f) === base(x)) || (d.numero && pdfs.find(f => !usados.has(f) && new RegExp(`(^|\\D)0*${d.numero}(\\D|$)`).test(f.name)));
+    if (p) usados.add(p);
+    notas.push({ ...d, xmlArq: x, pdfArq: p || null, erro });
+  }
+  for (const p of pdfs.filter(f => !usados.has(f))) {
+    const n = (p.name.match(/(\d{1,9})(?!.*\d)/) || [])[1] || "";
+    notas.push({ numero: n.replace(/^0+(?=\d)/, ""), data: "", competencia: "", valor: 0, pdfArq: p, xmlArq: null, semXml: true });
+  }
+  return notas;
+}
+function abrirAnexarNotas(c, editarId) {
+  const nota = editarId ? notasCli(c.id).find(n => n.id === editarId) : null;
+  let fila = nota ? [{ ...nota, existente: true }] : [];
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>${nota ? "Nota fiscal " + esc(nota.numero || "") : "Anexar notas fiscais"}</h3><small class="sub-modal">${esc(nomeCli(c))}${nota ? "" : " · arraste o PDF e o XML de uma ou várias notas"}</small></div>
+    <div class="modal-corpo dados-grid">
+      <label class="zona-arq zona-nf" id="zonaNf"><input type="file" id="nfInput" multiple accept=".pdf,.xml,application/pdf,text/xml,application/xml" hidden>
+        <b>${nota ? "Trocar ou incluir arquivos" : "Arraste aqui os PDFs e XMLs"}</b><span>ou clique para escolher · o XML é lido e preenche os dados</span></label>
+      <div id="nfFila"></div>
+    </div>
+    <div class="modal-rod tf-rod">${nota ? `<button class="perigo" data-m="excluir">Excluir</button><button class="btn-s" data-m="cancelar-nf">${nota.status === "cancelada" ? "Marcar como válida" : "Marcar como cancelada"}</button>` : ""}<span style="flex:1"></span>
+      <button class="btn-s" data-m="fechar">Fechar</button><button class="btn-p" data-m="salvar">Salvar</button></div>`);
+  m.classList.add("modal-largo");
+  veu.onclick = fecharModal;
+  const cnpjCli = soDigitos(c.cnpj);
+  const desenhar = () => {
+    $("nfFila").innerHTML = fila.length ? fila.map((n, k) => `<div class="nf-item ${n.erro ? "erro" : ""}" data-k="${k}">
+      <div class="nf-arqs">${n.pdfArq || n.pdf ? `<span class="chip-arq nfpdf">PDF</span><small>${esc(n.pdfArq?.name || n.pdf?.nome || "")}</small>` : `<span class="chip-arq falta">sem PDF</span>`}
+        ${n.xmlArq || n.xml ? `<span class="chip-arq nfxml">XML</span><small>${esc(n.xmlArq?.name || n.xml?.nome || "")}</small>` : `<span class="chip-arq falta">sem XML</span>`}
+        ${!n.existente ? `<button class="x-acao" data-nf-tirar="${k}" aria-label="Remover">×</button>` : ""}</div>
+      ${n.erro ? `<div class="aviso-erro">Não consegui ler o XML (${esc(n.erro)}). Preencha os dados à mão.</div>` : ""}
+      ${n.xmlArq && !n.erro ? `<div class="nf-lido">✓ Dados lidos do XML${n.tomadorNome ? ` · tomador: ${esc(n.tomadorNome)}` : ""}</div>` : ""}
+      ${n.tomadorCnpj && cnpjCli && soDigitos(n.tomadorCnpj) !== cnpjCli ? `<div class="aviso-erro">Atenção: o CNPJ do tomador nesta nota (${esc(fmtCPFouCNPJ(n.tomadorCnpj))}) é diferente do CNPJ do cliente (${esc(c.cnpj)}).</div>` : ""}
+      ${n.cancelada ? `<div class="aviso-erro">O XML indica que esta nota foi cancelada.</div>` : ""}
+      <div class="linha3"><div class="campo"><label>Número *</label><input data-f="numero" value="${esc(n.numero || "")}" inputmode="numeric" data-mascara="nenhuma"></div>
+        <div class="campo"><label>Data de emissão *</label><input type="date" data-f="data" value="${esc(n.data || "")}"></div>
+        <div class="campo"><label>Valor (R$)</label><input data-f="valor" inputmode="decimal" value="${n.valor ? String(Number(n.valor).toFixed(2)).replace(".", ",") : ""}" data-mascara="nenhuma"></div></div>
+      <div class="linha2"><div class="campo"><label>Competência</label><input type="month" data-f="competencia" value="${esc(n.competencia || "")}"></div>
+        <div class="campo"><label>Descrição / observação</label><input data-f="descricao" value="${esc(n.descricao || "")}" data-mascara="nenhuma"></div></div>
+    </div>`).join("") : `<div class="vazio-acoes">Nenhum arquivo ainda.</div>`;
+  };
+  const receber = async arquivos => {
+    arquivos = arquivos.filter(f => /\.(pdf|xml)$/i.test(f.name));
+    if (!arquivos.length) return toast("Envie arquivos PDF ou XML", "erro");
+    if (nota) {
+      const x = arquivos.find(f => /\.xml$/i.test(f.name)), p = arquivos.find(f => /\.pdf$/i.test(f.name)), n = fila[0];
+      if (x) { n.xmlArq = x; try { const d = lerXmlNota(await x.text()); for (const k of ["numero", "data", "competencia", "valor", "descricao", "tomadorCnpj", "tomadorNome", "chave", "cancelada"]) if (d[k]) n[k] = d[k]; n.erro = ""; } catch (e) { n.erro = e.message; } }
+      if (p) n.pdfArq = p;
+    } else fila.push(...await montarNotas(arquivos));
+    desenhar();
+  };
+  const z = $("zonaNf");
+  z.ondragover = e => { e.preventDefault(); z.classList.add("sobre"); };
+  z.ondragleave = () => z.classList.remove("sobre");
+  z.ondrop = e => { e.preventDefault(); z.classList.remove("sobre"); receber([...e.dataTransfer.files]); };
+  $("nfInput").onchange = e => { receber([...e.target.files]); e.target.value = ""; };
+  $("nfFila").oninput = e => { const it = e.target.closest(".nf-item"), f = e.target.dataset.f; if (it && f) fila[+it.dataset.k][f] = f === "valor" ? numBR(e.target.value) : e.target.value; };
+  $("nfFila").onclick = e => { const t = e.target.closest("[data-nf-tirar]"); if (t) { fila.splice(+t.dataset.nfTirar, 1); desenhar(); } };
+  desenhar();
+  m.querySelector("[data-m=fechar]").onclick = fecharModal;
+  if (nota) {
+    m.querySelector("[data-m=excluir]").onclick = async () => {
+      if (!confirmar(`Excluir a nota ${nota.numero}? Os arquivos PDF e XML também vão para a lixeira do OneDrive.`)) return;
+      fecharModal();
+      for (const a of [nota.pdf, nota.xml]) if (a?.id) try { await graph(`/me/drive/items/${a.id}`, { method: "DELETE" }); } catch {}
+      try { await salvarStore(nfStore, d => { d.notas = d.notas.filter(x => x.id !== nota.id); }); await salvarTar(d => logar(d, c.id, `Excluiu a nota fiscal ${nota.numero}`), "Nota excluída"); } catch (er) { toast(er.message, "erro"); }
+      abaNotasCli(c);
+    };
+    m.querySelector("[data-m=cancelar-nf]").onclick = async () => {
+      const novo = nota.status === "cancelada" ? "emitida" : "cancelada";
+      fecharModal();
+      await salvarStore(nfStore, d => { const x = d.notas.find(y => y.id === nota.id); if (x) x.status = novo; });
+      await salvarTar(d => logar(d, c.id, `Marcou a nota fiscal ${nota.numero} como ${novo === "cancelada" ? "cancelada" : "válida"}`), "Nota atualizada");
+      abaNotasCli(c);
+    };
+  }
+  m.querySelector("[data-m=salvar]").onclick = async ev => {
+    if (!fila.length) return toast("Anexe pelo menos um arquivo", "erro");
+    const faltam = fila.filter(n => !String(n.numero || "").trim() || !n.data);
+    if (faltam.length) return toast("Preencha número e data de emissão de todas as notas", "erro");
+    const dupl = fila.filter(n => !n.existente && notasCli(c.id).some(x => String(x.numero) === String(n.numero)));
+    if (dupl.length && !confirmar(`Já existe nota com o número ${dupl.map(n => n.numero).join(", ")} neste cliente. Salvar mesmo assim?`)) return;
+    const bt = ev.target; bt.disabled = true; bt.textContent = "Enviando…";
+    const subir = async (arq, n) => {
+      const rel = `${pastaCli(c)}/Notas fiscais/${n.data.slice(0, 4)}`;
+      await garantirCaminho(rel + "/x");
+      const ext = arq.name.match(/\.(pdf|xml)$/i)[1].toLowerCase();
+      const it = await enviarArquivo(`${rel}/NF ${limparNome(String(n.numero))} - ${n.data}.${ext}`, arq, "replace");
+      return { id: it.id, nome: it.name, webUrl: it.webUrl };
+    };
+    try {
+      const prontas = [];
+      for (const [k, n] of fila.entries()) {
+        bt.textContent = `Enviando ${k + 1} de ${fila.length}…`;
+        const pdf = n.pdfArq ? await subir(n.pdfArq, n) : n.pdf || null, xml = n.xmlArq ? await subir(n.xmlArq, n) : n.xml || null;
+        prontas.push({ ...n, pdf, xml });
+      }
+      await salvarStore(nfStore, d => {
+        for (const n of prontas) {
+          const dados = { numero: String(n.numero).trim(), data: n.data, competencia: n.competencia || n.data.slice(0, 7), valor: Number(n.valor) || 0, descricao: n.descricao || "", chave: n.chave || "", tomadorCnpj: n.tomadorCnpj || "", pdf: n.pdf, xml: n.xml };
+          if (n.existente) { const x = d.notas.find(y => y.id === n.id); if (x) Object.assign(x, dados, { alteradoEm: new Date().toISOString(), alteradoPor: meuNome() }); }
+          else { d.seq = (d.seq || d.notas.length) + 1; d.notas.push({ id: "NF-" + String(d.seq).padStart(5, "0"), clienteId: c.id, ...dados, status: n.cancelada ? "cancelada" : "emitida", criadoEm: new Date().toISOString(), criadoPor: meuNome() }); }
+        }
+      });
+      await salvarTar(d => logar(d, c.id, nota ? `Atualizou a nota fiscal ${prontas[0].numero}` : prontas.length === 1 ? `Anexou a nota fiscal ${prontas[0].numero} (${brlNf(prontas[0].valor)})` : `Anexou ${prontas.length} notas fiscais (${prontas.map(n => n.numero).join(", ")})`),
+        nota ? "Nota atualizada" : `${prontas.length} nota${prontas.length === 1 ? "" : "s"} anexada${prontas.length === 1 ? "" : "s"}`);
+      fecharModal(); abaNotasCli(c);
+    } catch (er) { bt.disabled = false; bt.textContent = "Salvar"; toast("Não foi possível salvar: " + er.message, "erro", 7000); }
+  };
+}
+
 function abaAtividadesCli(c) {
   const ls = (tarStore.dados?.log || []).filter(x => x.clienteId === c.id).slice(0, 400);
   const porDia = {};
@@ -7087,6 +7274,9 @@ $("cliConteudo").addEventListener("click", async e => {
   if (ok) { e.stopPropagation(); const t = tarPorId(ok.dataset.tfOk); return t?.status === "concluida" ? reabrirTarefa(t.id) : concluirTarefa(ok.dataset.tfOk); }
   const tf = e.target.closest("[data-tf]");
   if (tf) return abrirTarefa(tf.dataset.tf);
+  if (e.target.closest("[data-nf=nova]")) return abrirAnexarNotas(cliPorId(rota[0]));
+  const nfEd = e.target.closest("[data-nf-ed]");
+  if (nfEd && !e.target.closest("a")) return abrirAnexarNotas(cliPorId(rota[0]), nfEd.dataset.nfEd);
   const pasta = e.target.closest("[data-arq-pasta]");
   if (pasta) { cl.pastaSub = pasta.dataset.arqPasta; return abaArquivosCli(cliPorId(rota[0])); }
   const del = e.target.closest("[data-arq-del]");
