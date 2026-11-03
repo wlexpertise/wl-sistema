@@ -1052,6 +1052,71 @@
   .modal.modal-doc{width:min(820px,calc(100vw - 24px))}
   .prev-onb{overflow:auto} .prev-onb .od{zoom:.8}
   @media(max-width:640px){.onb-itens li{flex-wrap:wrap}.seg-onb{width:100%}.seg-onb button{flex:1}.prev-onb .od{zoom:.45}}
+
+  /* Agenda */
+  .ag-topo{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+  .ag-barra{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .ag-nav{display:flex;gap:6px;align-items:center}
+  .ag-seta{width:36px;height:36px;border-radius:10px;border:1px solid var(--borda);background:#fff;font-size:1.2rem;color:var(--teal)}
+  .ag-filtros{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:4px 0 12px;font-size:.8rem}
+  .ag-us,.ag-cam,.ag-part{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .ag-us .rot{color:var(--txt-2);font-weight:600;margin-right:2px}
+  .ag-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--borda);background:#fff;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--txt-2)}
+  .ag-chip input{display:none} .ag-chip i{width:10px;height:10px;border-radius:50%;border:2px solid var(--c)}
+  .ag-chip.on{border-color:var(--c);color:var(--txt)} .ag-chip.on i{background:var(--c)}
+  .ag-cam-i{display:inline-flex;gap:5px;align-items:center;color:var(--txt-2);font-weight:600}
+  .ag-grade{background:#fff;border:1px solid var(--borda);border-radius:14px;overflow:hidden}
+  .ag-cab,.ag-todo{display:grid;grid-template-columns:52px repeat(var(--cols),minmax(0,1fr));border-bottom:1px solid var(--borda)}
+  .ag-cab-d{display:flex;flex-direction:column;align-items:center;padding:8px 0;gap:2px;cursor:pointer;border-left:1px solid var(--borda)}
+  .ag-cab-d small{font-size:.66rem;text-transform:uppercase;color:var(--txt-2);font-weight:700}
+  .ag-cab-d b{font-size:1.1rem;color:var(--txt);width:32px;height:32px;display:grid;place-items:center;border-radius:50%}
+  .ag-cab-d.hoje b{background:var(--teal);color:#fff} .ag-cab-d .pt{width:10px;height:10px;border-radius:50%}
+  .ag-todo .rot{font-size:.62rem;color:var(--txt-2);padding:6px 4px;text-align:right}
+  .ag-todo-c{border-left:1px solid var(--borda);padding:3px;display:grid;gap:2px;min-height:26px;align-content:start;cursor:pointer}
+  .ag-corpo{position:relative;display:grid;grid-template-columns:52px repeat(var(--cols),minmax(0,1fr));height:min(66vh,620px);overflow-y:auto}
+  .ag-horas{position:relative;height:1104px}
+  .ag-horas span{position:absolute;right:6px;transform:translateY(-50%);font-size:.62rem;color:var(--txt-2)}
+  .ag-col{position:relative;border-left:1px solid var(--borda);height:1104px}
+  .ag-col.hoje{background:rgba(19,163,181,.03)}
+  .ag-slot{position:absolute;left:0;right:0;height:46px;border-top:1px solid #EEF3F3;cursor:pointer}
+  .ag-slot:hover{background:rgba(19,163,181,.06)}
+  .ag-pos{position:absolute;z-index:2;display:flex}
+  .ag-pos .ag-ev{flex:1;overflow:hidden}
+  .ag-agora{position:absolute;left:0;right:0;height:2px;background:var(--erro);z-index:3}
+  .ag-agora::before{content:"";position:absolute;left:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--erro)}
+  .ag-ev{background:var(--c);color:#fff;border-radius:6px;padding:3px 6px;font-size:.72rem;line-height:1.25;cursor:pointer;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .ag-ev b{display:block;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .ag-ev small{display:block;opacity:.85;font-size:.66rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ag-ev.tarefa,.ag-ev.lead,.ag-ev.parceiro{background:#fff;color:var(--txt);border:1px solid var(--borda);border-left:3px solid var(--c)}
+  .ag-ev.tarefa small,.ag-ev.lead small,.ag-ev.parceiro small{color:var(--txt-2)}
+  .ag-ev.feito{opacity:.5} .ag-ev.feito b{text-decoration:line-through} .ag-ev.atraso{border-left-color:var(--erro)}
+  .ag-ev.comp{padding:2px 6px}
+  .ag-mes{background:#fff;border:1px solid var(--borda);border-radius:14px;overflow:hidden}
+  .ag-mes-cab{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--borda)} .ag-mes-cab span{padding:8px;font-size:.68rem;font-weight:700;color:var(--txt-2);text-transform:uppercase;text-align:center}
+  .ag-mes-grade{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+  .ag-mes-d{min-height:104px;border-left:1px solid var(--borda);border-top:1px solid var(--borda);padding:4px;display:grid;gap:2px;align-content:start;cursor:pointer}
+  .ag-mes-d:nth-child(7n+1){border-left:0} .ag-mes-d.fora{background:#FAFCFC} .ag-mes-d.fora .n{color:#B5C2C2}
+  .ag-mes-d .n{justify-self:center;width:26px;height:26px;border-radius:50%;font-size:.78rem;font-weight:700;color:var(--txt)}
+  .ag-mes-d.hoje .n{background:var(--teal);color:#fff}
+  .ag-mes-d .mais{font-size:.68rem;font-weight:700;color:var(--turq);text-align:left;padding:0 4px}
+  .ag-lista{display:grid;gap:12px}
+  .ag-lista section{background:#fff;border:1px solid var(--borda);border-radius:14px;overflow:hidden}
+  .ag-lista h5{padding:10px 14px;font-size:.78rem;color:var(--teal);background:var(--bg);cursor:pointer}
+  .ag-li{display:flex;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--borda);cursor:pointer}
+  .ag-li:hover{background:var(--bg)} .ag-li .h{width:44px;font-size:.78rem;font-weight:700;color:var(--teal);flex:none;text-align:center} .ag-li .h small{font-weight:500;color:var(--txt-2)}
+  .ag-li>i{width:4px;align-self:stretch;border-radius:2px;flex:none} .ag-li .q{flex:1;min-width:0} .ag-li .q b{display:block;font-size:.86rem} .ag-li .q small{font-size:.72rem;color:var(--txt-2)}
+  .ag-disp{border:1px solid var(--borda);border-radius:10px;padding:10px 12px 8px;display:grid;gap:8px}
+  .disp-esc{position:relative;height:14px;margin-left:56px} .disp-esc span{position:absolute;transform:translateX(-50%);font-size:.6rem;color:var(--txt-2)}
+  .disp-lin{display:flex;align-items:center;gap:8px} .disp-lin .nm{width:48px;font-size:.74rem;font-weight:700;flex:none}
+  .disp-trilho{position:relative;flex:1;height:22px;background:repeating-linear-gradient(90deg,#F1F6F6 0,#F1F6F6 calc(100%/13 - 1px),#E3ECEC calc(100%/13 - 1px),#E3ECEC calc(100%/13));border-radius:6px}
+  .disp-trilho .ocup{position:absolute;top:3px;bottom:3px;background:#9AA9A9;border-radius:4px}
+  .disp-trilho .prop{position:absolute;top:0;bottom:0;border:2px solid var(--turq);background:rgba(19,163,181,.18);border-radius:5px}
+  .disp-conf{font-size:.76rem;color:var(--erro);font-weight:600} .disp-ok{font-size:.76rem;color:var(--verde);font-weight:600}
+  .entrar-reu{justify-content:center;text-decoration:none}
+  .lista-acoes .entrar{padding:6px 12px;font-size:.74rem;text-decoration:none}
+  .rodape-sis{margin-top:36px;padding-top:16px;border-top:1px solid var(--borda);text-align:center;font-size:.72rem;color:var(--txt-2)}
+  .versao-sis{font-weight:700}
+  @media(max-width:760px){.ag-barra{width:100%;justify-content:space-between}.ag-vistas button{padding:7px 10px}.ag-mes-d{min-height:64px}.ag-mes-d .ag-ev b{font-size:.62rem}.ag-corpo{height:62vh}
+    .ag-cab,.ag-todo,.ag-corpo{grid-template-columns:40px repeat(var(--cols),minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -1061,6 +1126,7 @@
   <symbol id="i-crm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></symbol>
   <symbol id="i-cli" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
   <symbol id="i-parc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 17h2"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/></symbol>
   <symbol id="i-sis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
   <symbol id="i-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
@@ -1103,7 +1169,7 @@
     <div class="erro-login oculto" id="loginErro"></div>
     <button class="btn-ms" id="btnEntrar" type="submit">Entrar</button>
   </form>
-  <div class="rodape-login">WL Expertise · Inteligência financeira e de processos</div>
+  <div class="rodape-login">Sistema desenvolvido por WL Expertise LTDA · Todos os direitos reservados · <span class="versao-sis"></span></div>
 </section>
 
 <section id="telaApp" class="oculto">
@@ -1128,6 +1194,13 @@
     <div data-view="inicio" class="oculto">
       <div class="cab-pagina"><div><div class="eyebrow" id="iniData"></div><h2 id="iniOla">Olá!</h2><p>Seus clientes, suas tarefas e o que precisa da sua atenção hoje.</p></div></div>
       <div id="iniConteudo"></div>
+    </div>
+
+    <!-- ============ AGENDA ============ -->
+    <div data-view="agenda" class="oculto">
+      <div class="cab-pagina ag-topo"><div><div class="eyebrow">Agenda da equipe</div><h2 id="agTitulo">Agenda</h2></div><div class="ag-barra" id="agBarra"></div></div>
+      <div class="ag-filtros" id="agFiltros"></div>
+      <div id="agConteudo"></div>
     </div>
 
     <!-- ============ BIBLIOTECA ============ -->
@@ -1255,6 +1328,7 @@
       </div>
       <div id="painelUsuarios" style="margin-top:16px"></div>
     </div>
+    <footer class="rodape-sis">Sistema desenvolvido por WL Expertise LTDA · Todos os direitos reservados · <span class="versao-sis"></span></footer>
   </main>
 
   <nav class="nav-base" id="navBase"></nav>
@@ -1281,14 +1355,16 @@ const GRAPH = CONFIG.api + "/graph";
 const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial", "descricao": "Estudo, prospecção, apresentações e fechamento.", "icone": "i-a-com", "pasta": "Comercial", "subs": [{"id": "estudo", "nome": "Materiais de Estudo", "descricao": "Posicionamento, ICP, scripts e guias de venda.", "pasta": "Materiais de Estudo"}, {"id": "prospeccao", "nome": "Ferramentas de Prospecção", "descricao": "Controle de prospecção, CRM e agenda de reuniões.", "pasta": "Ferramentas de Prospecção"}, {"id": "apresentacoes", "nome": "Apresentações Comerciais", "descricao": "Apresentação institucional e por segmento.", "pasta": "Apresentações Comerciais"}, {"id": "propostas", "nome": "Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos.", "pasta": "Propostas, Preços e Contratos"}]}, {"id": "bpo", "nome": "BPO Financeiro", "descricao": "Gestão das rotinas financeiras do cliente.", "icone": "i-a-bpo", "pasta": "BPO Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "fpa", "nome": "FP&A", "descricao": "Indicadores gerenciais e análise de desempenho.", "icone": "i-a-fpa", "pasta": "FP&A", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "planejamento", "nome": "Planejamento Financeiro", "descricao": "Orçamentos, fluxo de caixa e cenários.", "icone": "i-a-pla", "pasta": "Planejamento Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "processos", "nome": "Consultoria de Processos", "descricao": "Mapeamento e redesenho de processos.", "icone": "i-a-pro", "pasta": "Consultoria de Processos", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}], "itens": [{"area": "comercial", "sub": "estudo", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Definição de ICP", "ext": "docx", "descricao": "Perfil de cliente ideal da WL Expertise."}, {"area": "comercial", "sub": "estudo", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"area": "comercial", "sub": "estudo", "nome": "Mapa de Posicionamento", "ext": "docx", "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "descricao": "Levantamento das dores e metas da base de clientes."}, {"area": "comercial", "sub": "estudo", "nome": "Script de Vendas (Call)", "ext": "docx", "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"area": "comercial", "sub": "estudo", "nome": "Script Único", "ext": "docx", "descricao": "Script de abordagem comercial."}, {"area": "comercial", "sub": "prospeccao", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"area": "comercial", "sub": "prospeccao", "nome": "CRM para Consultorias", "ext": "xlsx", "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"area": "comercial", "sub": "prospeccao", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"area": "comercial", "sub": "estudo", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"area": "comercial", "sub": "estudo", "nome": "Programa de Indicação", "ext": "pdf", "descricao": "Como estruturar um programa de indicação de clientes."}, {"area": "comercial", "sub": "propostas", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "descricao": "Termo para parceiros que indicam clientes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "descricao": "Proposta de valor para negócios de estética."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "descricao": "Proposta de valor para locadoras de equipamentos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "descricao": "Proposta de valor para criadores de conteúdo."}, {"area": "comercial", "sub": "propostas", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"area": "comercial", "sub": "propostas", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "descricao": "Planos e regras de negociação para o segmento Rental."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "descricao": "Modelo de proposta comercial."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "descricao": "Modelo de contrato de prestação de serviços."}, {"area": "processos", "sub": "diagnostico", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"area": "fpa", "sub": "diagnostico", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"area": "bpo", "sub": "diagnostico", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "descricao": "Questionário preliminar das rotinas financeiras."}, {"area": "bpo", "sub": "execucao", "nome": "Mapa Quente da Operação", "ext": "xlsx", "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"area": "processos", "sub": "diagnostico", "nome": "Ata e Briefing de Reunião", "ext": "docx", "descricao": "Modelo para registrar reuniões e briefings."}, {"area": "bpo", "sub": "onboarding", "nome": "Questionário de Kick-off", "ext": "xlsx", "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"area": "processos", "sub": "onboarding", "nome": "Formulário de Onboarding", "ext": "docx", "descricao": "Coleta de informações para iniciar o projeto."}, {"area": "bpo", "sub": "onboarding", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "descricao": "Plano de ativação, relação de clientes e timeline."}, {"area": "bpo", "sub": "onboarding", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"area": "bpo", "sub": "onboarding", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"area": "processos", "sub": "execucao", "nome": "Cronograma da Consultoria", "ext": "xlsx", "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"area": "processos", "sub": "execucao", "nome": "Plano de Ação Personalizado", "ext": "docx", "descricao": "Plano de ação do cliente após o diagnóstico."}, {"area": "processos", "sub": "execucao", "nome": "Materiais de Entrega", "ext": "xlsx", "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"area": "bpo", "sub": "execucao", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "descricao": "Gestão da operação por operador, plano de ação e timeline."}], "legado": {"01 - Estratégia e Posicionamento": "comercial/estudo", "02 - Prospecção e Vendas": "comercial/prospeccao", "03 - Apresentações Comerciais": "comercial/apresentacoes", "04 - Propostas, Preços e Contratos": "comercial/propostas", "05 - Diagnóstico": "bpo/diagnostico", "06 - Onboarding e Implantação": "bpo/onboarding", "07 - Execução e Entregas": "bpo/execucao"}};
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
+const VERSAO = "v26";
+document.querySelectorAll(".versao-sis").forEach(x => x.textContent = VERSAO);
 const MODULOS = [
   { id: "inicio", nome: "Início", icone: "i-home" },
+  { id: "agenda", nome: "Agenda", icone: "i-cal" },
   { id: "biblioteca", nome: "Biblioteca", curto: "Acervo", icone: "i-bib", menu: true },
   { id: "crm", nome: "CRM", icone: "i-crm" },
   { id: "parceiros", nome: "Parceiros", icone: "i-parc" },
   { id: "clientes", nome: "Clientes", icone: "i-cli" },
   { id: "atendimento", nome: "Atendimento", curto: "Atender", icone: "i-atd", menu: true },
-  { id: "meus", nome: "Meus documentos", curto: "Meus docs", topo: "Meus docs", icone: "i-pasta" },
   { id: "sistema", nome: "Sistema", icone: "i-sis" }
 ];
 
@@ -1534,7 +1610,8 @@ function irPara(hash) {
   if (id === "meus") { renderMeus(); carregarMeus(); }
   if (id === "clientes") renderClientes();
   if (id === "inicio") renderHome();
-  document.querySelector("main").classList.toggle("largo", id === "crm" || id === "atendimento" || id === "parceiros" || id === "inicio");
+  if (id === "agenda") renderAgenda();
+  document.querySelector("main").classList.toggle("largo", id === "crm" || id === "atendimento" || id === "parceiros" || id === "inicio" || id === "agenda");
   if (id === "atendimento") renderAtendimento();
   if (id === "parceiros") { renderParceiros(); if (paStore.carregado) carregarParceiros(true).then(renderParceiros).catch(() => {}); }
   if (id === "crm") { renderCRM(); if (!crm.carregado) carregarCRM(); else verificarCRM(); }
@@ -2699,6 +2776,7 @@ function ligarFicha(l) {
       if (sel.pedeData) novaAcao(x, prox || "Reunião de diagnóstico", dReun);
       else if (prox || proxData) novaAcao(x, prox || "Ação", proxData);
     }, `Registrado: ${sel.nome}`);
+    if (sel.pedeData && dReun) criarEventoAuto({ titulo: `${prox || "Reunião de diagnóstico"} · ${l.empresa}`, inicio: dReun, leadId: l.id, obs: texto });
   };
   $("formAcao").onsubmit = e => {
     e.preventDefault();
@@ -4339,6 +4417,7 @@ function ligarFichaPA(p) {
       if (sel.pedeData) novaAcao(x, prox || "Reunião com o parceiro", dReun);
       else if (prox || proxData) novaAcao(x, prox || "Ação", proxData);
     }, `Registrado: ${sel.nome}`);
+    if (sel.pedeData && dReun) criarEventoAuto({ titulo: `${prox || "Reunião com o parceiro"} · ${p.empresa}`, inicio: dReun, parceiroId: p.id, obs: texto });
   };
   $("formAcaoPA").onsubmit = e => {
     e.preventDefault();
@@ -7511,6 +7590,330 @@ async function enviarOnbWhats(o) {
   } catch (er) { janela?.close(); toast("Não foi possível preparar o envio: " + er.message, "erro", 7000); }
 }
 
+/* ================== AGENDA ==================
+   Agenda da equipe no estilo Google Agenda: reuniões (dados/agenda/eventos.json), tarefas dos clientes
+   e ações do CRM/Parceiros. Cada usuário vê a própria agenda e pode sobrepor a dos colegas. */
+const agStore = criarStore("dados/agenda/eventos.json", { versao: 1, seq: 0, eventos: [] });
+const eventos = () => agStore.dados?.eventos || [];
+const evPorId = id => eventos().find(e => e.id === id);
+const AG_H = 46; // altura de 1 hora (px)
+const CORES_AG = ["#0B5A60", "#13A3B5", "#D99A1E", "#8E44AD", "#C8463D", "#28B260", "#2E6FD8", "#B5651D"];
+const LEMBRETES_AG = [["", "Sem lembrete"], ["10", "10 minutos antes"], ["15", "15 minutos antes"], ["30", "30 minutos antes"], ["60", "1 hora antes"], ["1440", "1 dia antes"]];
+const ag = (() => {
+  let s = {};
+  try { s = JSON.parse(localStorage.getItem("wl.agenda") || "{}"); } catch {}
+  return { vista: s.vista || (innerWidth < 760 ? "dia" : "semana"), data: hojeISO(), usuarios: s.usuarios || null, camadas: { reuniao: true, tarefa: true, comercial: true, ...(s.camadas || {}) } };
+})();
+const guardarAg = () => { try { localStorage.setItem("wl.agenda", JSON.stringify({ vista: ag.vista, usuarios: ag.usuarios, camadas: ag.camadas })); } catch {} };
+const equipeAg = () => EQUIPE.length ? EQUIPE.filter((u, k, a) => a.findIndex(x => x.email === u.email) === k) : [{ email: meuEmail(), primeiro: meuNome(), nome: conta?.name || meuNome(), papel: "" }];
+const corUsuario = email => { const ls = [...equipeAg()].sort((a, b) => a.email.localeCompare(b.email)); const k = ls.findIndex(u => u.email === email); return CORES_AG[(k < 0 ? 0 : k) % CORES_AG.length]; };
+const primeiroDe = email => (equipeAg().find(u => u.email === email) || {}).primeiro || (email === meuEmail() ? meuNome() : email.split("@")[0]);
+const minAg = h => { const [a, b] = String(h || "0:0").split(":").map(Number); return a * 60 + (b || 0); };
+const hhmm = m => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+const somaDias = (iso, n) => { const d = new Date(iso + "T12:00"); d.setDate(d.getDate() + n); return isoD(d); };
+const inicioSemana = iso => { const d = new Date(iso + "T12:00"); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return isoD(d); };
+const nomeDiaCurto = iso => new Date(iso + "T12:00").toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", "");
+
+async function garantirAgenda() {
+  await Promise.all([agStore, tarStore, cliStore].filter(s => !s.carregado).map(s => carregarStore(s)));
+  if (!crm.carregado) await carregarCRM(true);
+  if (!paStore.carregado) await carregarStore(paStore).catch(() => {});
+}
+
+/* ---- Itens da agenda de um usuário entre duas datas ---- */
+function itensAgenda(email, de, ate) {
+  const pri = primeiroDe(email), out = [], dentro = d => d && d >= de && d <= ate;
+  if (ag.camadas.reuniao) for (const e of eventos()) {
+    const dia = e.inicio?.slice(0, 10);
+    if (!dentro(dia) || !((e.participantes || []).includes(email) || e.organizador === email)) continue;
+    out.push({ id: "r" + e.id, tipo: "reuniao", ref: e.id, titulo: e.titulo, dia, ini: e.diaTodo ? null : e.inicio.slice(11, 16), fim: e.diaTodo ? null : (e.fim || "").slice(11, 16), usuario: email, sub: e.link ? "com link" : e.local || "" });
+  }
+  if (ag.camadas.tarefa) for (const t of tarefas()) {
+    if (!dentro(t.venc) || !cliPorId(t.clienteId)) continue;
+    const dele = t.respEmail ? t.respEmail === email : t.responsavel === pri;
+    if (!dele) continue;
+    out.push({ id: "t" + t.id, tipo: "tarefa", ref: t.id, titulo: t.titulo, dia: t.venc, ini: t.hora || null, fim: t.hora ? hhmm(Math.min(minAg(t.hora) + 30, 1439)) : null, usuario: email, sub: nomeCli(cliPorId(t.clienteId)), feito: t.status === "concluida", atraso: t.status !== "concluida" && stTarefa(t) === "atraso" });
+  }
+  if (ag.camadas.comercial) {
+    const comEvento = new Set(eventos().map(e => (e.leadId || e.parceiroId || "") + "|" + (e.inicio || "")));
+    for (const l of leads()) {
+      if (l.semInteresse || ["ganho", "perdido"].includes(l.etapa) || (l.responsavel || "") !== pri) continue;
+      for (const a of pendentes(l)) { const dia = a.data?.slice(0, 10); if (!dentro(dia) || comEvento.has(l.id + "|" + a.data)) continue;
+        out.push({ id: "l" + a.id, tipo: "lead", ref: l.id, titulo: a.texto || "Ação", dia, ini: a.data.length > 10 ? a.data.slice(11, 16) : null, fim: a.data.length > 10 ? hhmm(Math.min(minAg(a.data.slice(11, 16)) + 30, 1439)) : null, usuario: email, sub: l.empresa }); }
+    }
+    for (const p of parceiros()) {
+      if (p.etapa === "encerrado" || (p.responsavel || "") !== pri) continue;
+      for (const a of pendentes(p)) { const dia = a.data?.slice(0, 10); if (!dentro(dia) || comEvento.has(p.id + "|" + a.data)) continue;
+        out.push({ id: "p" + a.id, tipo: "parceiro", ref: p.id, titulo: a.texto || "Ação", dia, ini: a.data.length > 10 ? a.data.slice(11, 16) : null, fim: a.data.length > 10 ? hhmm(Math.min(minAg(a.data.slice(11, 16)) + 30, 1439)) : null, usuario: email, sub: p.empresa }); }
+    }
+  }
+  return out;
+}
+function usuariosVisiveis() {
+  const eq = equipeAg().map(u => u.email);
+  let us = (ag.usuarios || [meuEmail()]).filter(e => eq.includes(e));
+  if (!us.length) us = [eq.includes(meuEmail()) ? meuEmail() : eq[0]];
+  return us;
+}
+function itensPeriodo(de, ate) {
+  const us = usuariosVisiveis(), vistos = new Set(), out = [];
+  for (const u of us) for (const it of itensAgenda(u, de, ate)) {
+    const chave = it.tipo === "reuniao" ? it.id : it.id + u;
+    if (it.tipo === "reuniao" && vistos.has(it.id)) { out.find(x => x.id === it.id).outros.push(u); continue; }
+    vistos.add(chave); out.push({ ...it, outros: [] });
+  }
+  return out;
+}
+
+/* ---- Tela ---- */
+async function renderAgenda() {
+  if (viewAtual !== "agenda") return;
+  if (!agStore.carregado) $("agConteudo").innerHTML = `<div class="esqueleto"></div>`;
+  try { await garantirAgenda(); } catch (e) { $("agConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler a agenda.</b><br>${esc(e.message)}</div>`; return; }
+  if (viewAtual !== "agenda") return;
+  if (rota[0] && /^\d{4}-\d{2}-\d{2}$/.test(rota[0])) ag.data = rota[0];
+  const us = usuariosVisiveis();
+  const titulo = ag.vista === "mes" ? (t => t.charAt(0).toUpperCase() + t.slice(1))(new Date(ag.data + "T12:00").toLocaleDateString("pt-BR", { month: "long", year: "numeric" }))
+    : ag.vista === "semana" ? (() => { const i = inicioSemana(ag.data), f = somaDias(i, 6); return `${new Date(i + "T12:00").toLocaleDateString("pt-BR", { day: "2-digit", month: "short" })} – ${new Date(f + "T12:00").toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" })}`.replace(/\./g, ""); })()
+    : ag.vista === "lista" ? "Próximos 30 dias" : (t => t.charAt(0).toUpperCase() + t.slice(1))(new Date(ag.data + "T12:00").toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric" }));
+  $("agTitulo").textContent = titulo;
+  $("agBarra").innerHTML = `
+    <div class="ag-nav"><button class="btn-s" data-ag="hoje">Hoje</button><button class="ag-seta" data-ag="ant" aria-label="Anterior">‹</button><button class="ag-seta" data-ag="prox" aria-label="Próximo">›</button></div>
+    <nav class="abas ag-vistas">${[["dia", "Dia"], ["semana", "Semana"], ["mes", "Mês"], ["lista", "Lista"]].map(([k, n]) => `<button data-ag-vista="${k}" class="${ag.vista === k ? "ativo" : ""}">${n}</button>`).join("")}</nav>
+    <button class="btn-p" data-ag="nova"><svg><use href="#i-mais"/></svg>Nova reunião</button>`;
+  $("agFiltros").innerHTML = `
+    <div class="ag-us"><span class="rot">Agendas:</span>${equipeAg().map(u => `<label class="ag-chip ${us.includes(u.email) ? "on" : ""}" style="--c:${corUsuario(u.email)}"><input type="checkbox" data-ag-us="${esc(u.email)}" ${us.includes(u.email) ? "checked" : ""}><i></i>${esc(u.email === meuEmail() ? "Minha agenda" : u.primeiro)}</label>`).join("")}</div>
+    <div class="ag-cam">${[["reuniao", "Reuniões"], ["tarefa", "Tarefas"], ["comercial", "CRM e parcerias"]].map(([k, n]) => `<label class="ag-cam-i ${k}"><input type="checkbox" data-ag-cam="${k}" ${ag.camadas[k] ? "checked" : ""}> ${n}</label>`).join("")}</div>`;
+  if (ag.vista === "semana") desenharGrade([...Array(7)].map((_, k) => somaDias(inicioSemana(ag.data), k)), null);
+  else if (ag.vista === "dia") desenharGrade([ag.data], us.length > 1 ? us : null);
+  else if (ag.vista === "mes") desenharMes();
+  else desenharLista();
+}
+function blocoItem(it, compacto) {
+  const c = it.tipo === "reuniao" ? corUsuario(it.usuario) : it.tipo === "tarefa" ? "#D99A1E" : "#7B8F8F";
+  const ico = { reuniao: "", tarefa: it.feito ? "✓ " : "☐ ", lead: "◆ ", parceiro: "◆ " }[it.tipo];
+  return `<div class="ag-ev ${it.tipo} ${it.feito ? "feito" : ""} ${it.atraso ? "atraso" : ""} ${compacto ? "comp" : ""}" data-ag-item="${it.tipo}|${it.ref}" style="--c:${c}" title="${esc(it.titulo + (it.sub ? " · " + it.sub : ""))}">
+    <b>${ico}${esc(it.titulo)}</b>${compacto ? "" : `<small>${[it.ini ? it.ini + (it.fim && it.tipo === "reuniao" ? "–" + it.fim : "") : "", esc(it.sub || ""), it.outros?.length ? "+" + it.outros.length + " agenda" + (it.outros.length > 1 ? "s" : "") : ""].filter(Boolean).join(" · ")}</small>`}</div>`;
+}
+/* Distribui eventos sobrepostos em colunas lado a lado */
+function posicionar(ls) {
+  const ord = [...ls].sort((a, b) => minAg(a.ini) - minAg(b.ini) || minAg(b.fim) - minAg(a.fim));
+  const grupos = []; let g = null, fimG = -1;
+  for (const it of ord) {
+    const ini = minAg(it.ini), fim = Math.max(minAg(it.fim), ini + 25);
+    if (!g || ini >= fimG) { g = []; grupos.push(g); fimG = fim; } else fimG = Math.max(fimG, fim);
+    let lane = 0; while (g.some(x => x.lane === lane && minAg(x.ini) < fim && Math.max(minAg(x.fim), minAg(x.ini) + 25) > ini)) lane++;
+    g.push({ ...it, lane });
+  }
+  return grupos.flatMap(gr => { const n = Math.max(...gr.map(x => x.lane)) + 1; return gr.map(x => ({ ...x, n })); });
+}
+function desenharGrade(dias, porUsuario) {
+  const de = dias[0], ate = dias[dias.length - 1], hoje = hojeISO();
+  const cols = porUsuario ? porUsuario.map(u => ({ dia: dias[0], usuario: u })) : dias.map(d => ({ dia: d, usuario: null }));
+  const todos = porUsuario ? null : itensPeriodo(de, ate);
+  const itensCol = col => col.usuario ? itensAgenda(col.usuario, col.dia, col.dia).map(i => ({ ...i, outros: [] })) : todos.filter(i => i.dia === col.dia);
+  const agora = new Date(), minAgora = agora.getHours() * 60 + agora.getMinutes();
+  $("agConteudo").innerHTML = `<div class="ag-grade" style="--cols:${cols.length}">
+    <div class="ag-cab"><span></span>${cols.map(c => c.usuario ? `<div class="ag-cab-d"><i class="pt" style="background:${corUsuario(c.usuario)}"></i><b>${esc(c.usuario === meuEmail() ? "Eu" : primeiroDe(c.usuario))}</b></div>`
+      : `<div class="ag-cab-d ${c.dia === hoje ? "hoje" : ""}" data-ag-dia="${c.dia}"><small>${nomeDiaCurto(c.dia)}</small><b>${Number(c.dia.slice(8))}</b></div>`).join("")}</div>
+    <div class="ag-todo"><span class="rot">dia todo</span>${cols.map(c => `<div class="ag-todo-c" data-ag-slot="${c.dia}|">${itensCol(c).filter(i => !i.ini).map(i => blocoItem(i, true)).join("")}</div>`).join("")}</div>
+    <div class="ag-corpo" id="agCorpo"><div class="ag-horas">${[...Array(24)].map((_, h) => `<span style="top:${h * AG_H}px">${h ? String(h).padStart(2, "0") + ":00" : ""}</span>`).join("")}</div>
+      ${cols.map(c => `<div class="ag-col ${c.dia === hoje && !c.usuario ? "hoje" : ""}" data-ag-col="${c.dia}">
+        ${[...Array(24)].map((_, h) => `<div class="ag-slot" data-ag-slot="${c.dia}|${String(h).padStart(2, "0")}:00" style="top:${h * AG_H}px"></div>`).join("")}
+        ${posicionar(itensCol(c).filter(i => i.ini)).map(i => { const ini = minAg(i.ini), fim = Math.max(minAg(i.fim), ini + 25);
+          return `<div class="ag-pos" style="top:${ini / 60 * AG_H}px;height:${(fim - ini) / 60 * AG_H - 2}px;left:calc(${i.lane / i.n * 100}% + 2px);width:calc(${100 / i.n}% - 4px)">${blocoItem(i, fim - ini < 40)}</div>`; }).join("")}
+        ${c.dia === hoje ? `<i class="ag-agora" style="top:${minAgora / 60 * AG_H}px"></i>` : ""}</div>`).join("")}</div></div>`;
+  const corpo = $("agCorpo");
+  corpo.scrollTop = Math.max(0, (Math.min(minAgora / 60, 18) - 1.5) * AG_H) * (dias.includes(hoje) ? 1 : 0) || 7 * AG_H;
+}
+function desenharMes() {
+  const [a, m] = ag.data.split("-").map(Number), prim = `${a}-${String(m).padStart(2, "0")}-01`, ini = inicioSemana(prim), hoje = hojeISO();
+  const dias = [...Array(42)].map((_, k) => somaDias(ini, k)), its = itensPeriodo(dias[0], dias[41]);
+  $("agConteudo").innerHTML = `<div class="ag-mes"><div class="ag-mes-cab">${["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].map(d => `<span>${d}</span>`).join("")}</div>
+    <div class="ag-mes-grade">${dias.map(d => { const ls = its.filter(i => i.dia === d).sort((x, y) => (x.ini || "00").localeCompare(y.ini || "00"));
+      return `<div class="ag-mes-d ${d.slice(5, 7) !== String(m).padStart(2, "0") ? "fora" : ""} ${d === hoje ? "hoje" : ""}" data-ag-slot="${d}|"><button class="n" data-ag-dia="${d}">${Number(d.slice(8))}</button>
+        ${ls.slice(0, 3).map(i => blocoItem(i, true)).join("")}${ls.length > 3 ? `<button class="mais" data-ag-dia="${d}">+${ls.length - 3} mais</button>` : ""}</div>`; }).join("")}</div></div>`;
+}
+function desenharLista() {
+  const de = hojeISO(), ate = somaDias(de, 30), its = itensPeriodo(de, ate).filter(i => !i.feito).sort((x, y) => x.dia.localeCompare(y.dia) || (x.ini || "00").localeCompare(y.ini || "00"));
+  const porDia = {}; for (const i of its) (porDia[i.dia] ||= []).push(i);
+  $("agConteudo").innerHTML = its.length ? `<div class="ag-lista">${Object.entries(porDia).map(([d, ls]) => `<section><h5 data-ag-dia="${d}">${(t => t.charAt(0).toUpperCase() + t.slice(1))(new Date(d + "T12:00").toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" }))}${d === hojeISO() ? " · hoje" : ""}</h5>
+    ${ls.map(i => `<div class="ag-li" data-ag-item="${i.tipo}|${i.ref}"><span class="h">${i.ini ? i.ini + (i.fim && i.tipo === "reuniao" ? "<br><small>" + i.fim + "</small>" : "") : "—"}</span><i style="background:${i.tipo === "reuniao" ? corUsuario(i.usuario) : i.tipo === "tarefa" ? "#D99A1E" : "#7B8F8F"}"></i>
+      <div class="q"><b>${esc(i.titulo)}</b><small>${[{ reuniao: "Reunião", tarefa: "Tarefa", lead: "CRM", parceiro: "Parceria" }[i.tipo], esc(i.sub || ""), usuariosVisiveis().length > 1 ? esc(primeiroDe(i.usuario)) + (i.outros?.length ? " +" + i.outros.length : "") : ""].filter(Boolean).join(" · ")}</small></div>${i.atraso ? `<span class="quando atraso">atrasada</span>` : ""}</div>`).join("")}</section>`).join("")}</div>`
+    : `<div class="vazio-bloco" style="background:#fff;border:1px solid var(--borda);border-radius:14px">Nada agendado nos próximos 30 dias.</div>`;
+}
+
+/* ---- Reunião: criar, ver, editar ---- */
+function ocupacao(email, dia, ignorarId) {
+  const salvo = ag.camadas; ag.camadas = { reuniao: true, tarefa: true, comercial: true };
+  const ls = itensAgenda(email, dia, dia).filter(i => i.ini && !(i.tipo === "reuniao" && i.ref === ignorarId) && !i.feito);
+  ag.camadas = salvo; return ls;
+}
+function abrirReuniao(id, pre = {}) {
+  const e0 = id ? evPorId(id) : null;
+  if (id && !e0) return toast("Reunião não encontrada", "erro");
+  const ini = pre.inicio || (e0?.inicio) || `${ag.data}T${hhmm(Math.min(Math.ceil((new Date().getHours() * 60 + new Date().getMinutes() + 1) / 30) * 30, 22 * 60))}`;
+  const e = e0 ? structuredClone(e0) : { titulo: pre.titulo || "", inicio: ini, fim: `${ini.slice(0, 10)}T${hhmm(Math.min(minAg(ini.slice(11, 16)) + 60, 23 * 60 + 59))}`, participantes: [meuEmail(), ...(pre.participantes || [])].filter((x, k, a) => a.indexOf(x) === k),
+    link: "", local: "", obs: pre.obs || "", clienteId: pre.clienteId || "", leadId: pre.leadId || "", parceiroId: pre.parceiroId || "", lembrete: "15" };
+  const podeEditar = !e0 || e0.organizador === meuEmail() || (e0.participantes || []).includes(meuEmail()) || ehAdmin();
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>${e0 ? "Reunião" : "Nova reunião"}</h3>${e0 ? `<small class="sub-modal">Marcada por ${esc(primeiroDe(e0.organizador))} em ${data(e0.criadoEm)}</small>` : ""}</div>
+    <form class="modal-corpo dados-grid" id="formAg">
+      ${e0?.link ? `<a class="btn-p entrar-reu" href="${esc(/^https?:/.test(e0.link) ? e0.link : "https://" + e0.link)}" target="_blank" rel="noopener"><svg><use href="#i-abrir"/></svg>Entrar na reunião</a>` : ""}
+      <div class="campo"><label>Assunto *</label><input name="titulo" value="${esc(e.titulo)}" placeholder="Ex.: Kickoff com a Alfa Locações" data-mascara="nenhuma"></div>
+      <div class="linha3"><div class="campo"><label>Data</label><input type="date" name="dia" value="${e.inicio.slice(0, 10)}"></div>
+        <div class="campo"><label>Início</label><input type="time" name="ini" value="${e.inicio.slice(11, 16)}"></div>
+        <div class="campo"><label>Fim</label><input type="time" name="fim" value="${(e.fim || "").slice(11, 16)}"></div></div>
+      <div class="campo"><label>Participantes</label><div class="ag-part">${equipeAg().map(u => `<label class="ag-chip ${e.participantes.includes(u.email) ? "on" : ""}" style="--c:${corUsuario(u.email)}"><input type="checkbox" name="part" value="${esc(u.email)}" ${e.participantes.includes(u.email) ? "checked" : ""}><i></i>${esc(u.email === meuEmail() ? "Eu" : u.primeiro)}</label>`).join("")}</div></div>
+      <div class="campo"><label>Agenda dos participantes neste dia</label><div id="agDisp" class="ag-disp"></div></div>
+      <div class="campo"><label>Link da reunião</label><input name="link" value="${esc(e.link || "")}" placeholder="https://meet.google.com/… ou Teams / Zoom" data-mascara="nenhuma"></div>
+      <div class="linha2"><div class="campo"><label>Local (se presencial)</label><input name="local" value="${esc(e.local || "")}" data-mascara="nenhuma"></div>
+        <div class="campo"><label>Cliente (opcional)</label><select name="clienteId">${opcoes(clis().filter(c => c.status !== "inativo" || c.id === e.clienteId).map(c => [c.id, nomeCli(c)]).sort((a, b) => a[1].localeCompare(b[1])), e.clienteId || "", "—")}</select></div></div>
+      ${e.leadId && leadPorId(e.leadId) ? `<small class="txt-prog">Ligada ao lead <b>${esc(leadPorId(e.leadId).empresa)}</b> do CRM.</small>` : ""}${e.parceiroId && parceiroPorId(e.parceiroId) ? `<small class="txt-prog">Ligada ao parceiro <b>${esc(parceiroPorId(e.parceiroId).empresa)}</b>.</small>` : ""}
+      <div class="campo"><label>Observações</label><textarea name="obs" rows="3" placeholder="Pauta, documentos a levar, quem do cliente participa…">${esc(e.obs || "")}</textarea></div>
+      <div class="campo"><label>Lembrete</label><select name="lembrete">${LEMBRETES_AG.map(([v, n]) => `<option value="${v}" ${String(e.lembrete ?? "") === v ? "selected" : ""}>${n}</option>`).join("")}</select></div>
+      <div class="modal-rod tf-rod" style="padding:0">${e0 && podeEditar ? `<button type="button" class="perigo" data-m="excluir">Cancelar reunião</button>` : ""}<span style="flex:1"></span>
+        <button type="button" class="btn-s" data-m="fechar">Fechar</button>${podeEditar ? `<button class="btn-p" type="submit">${e0 ? "Salvar" : "Agendar"}</button>` : ""}</div>
+    </form>`);
+  m.classList.add("modal-largo");
+  veu.onclick = fecharModal; m.querySelector("[data-m=fechar]").onclick = fecharModal;
+  const f = $("formAg");
+  const ler = () => { const d = Object.fromEntries(new FormData(f)); return { ...d, part: [...f.querySelectorAll("[name=part]:checked")].map(x => x.value) }; };
+  const disp = () => {
+    const v = ler(), ini = minAg(v.ini), fim = Math.max(minAg(v.fim), ini + 15), h0 = Math.min(7, Math.floor(ini / 60)), h1 = Math.max(20, Math.ceil(fim / 60));
+    const esc2 = mm => (mm / 60 - h0) / (h1 - h0) * 100;
+    const conflitos = [];
+    $("agDisp").innerHTML = `<div class="disp-esc">${[...Array(h1 - h0 + 1)].map((_, k) => `<span style="left:${k / (h1 - h0) * 100}%">${h0 + k}h</span>`).join("")}</div>` + (v.part.length ? v.part : [meuEmail()]).map(u => {
+      const oc = ocupacao(u, v.dia, id);
+      for (const o of oc) if (minAg(o.ini) < fim && Math.max(minAg(o.fim), minAg(o.ini) + 15) > ini) conflitos.push(`${primeiroDe(u)}: ${o.titulo} (${o.ini}${o.fim ? "–" + o.fim : ""})`);
+      return `<div class="disp-lin"><span class="nm" style="color:${corUsuario(u)}">${esc(u === meuEmail() ? "Eu" : primeiroDe(u))}</span><div class="disp-trilho">
+        ${oc.map(o => `<i class="ocup" style="left:${esc2(minAg(o.ini))}%;width:${Math.max(1.5, esc2(Math.max(minAg(o.fim), minAg(o.ini) + 15)) - esc2(minAg(o.ini)))}%" title="${esc(o.titulo)} ${o.ini}"></i>`).join("")}
+        <i class="prop" style="left:${esc2(ini)}%;width:${esc2(fim) - esc2(ini)}%"></i></div></div>`;
+    }).join("") + (conflitos.length ? `<div class="disp-conf">⚠ Conflito de horário: ${conflitos.map(esc).join("; ")}</div>` : `<div class="disp-ok">✓ Horário livre para todos</div>`);
+  };
+  f.oninput = f.onchange = ev => {
+    if (ev.target.name === "ini" && ev.type === "change") { const dur = minAg(e.fim?.slice(11, 16) || "00:00") - minAg(e.inicio.slice(11, 16)); f.fim.value = hhmm(Math.min(minAg(f.ini.value) + (dur > 0 ? dur : 60), 1439)); e.inicio = `${f.dia.value}T${f.ini.value}`; e.fim = `${f.dia.value}T${f.fim.value}`; }
+    if (ev.target.name === "part") ev.target.closest(".ag-chip").classList.toggle("on", ev.target.checked);
+    disp();
+  };
+  disp();
+  if (e0 && m.querySelector("[data-m=excluir]")) m.querySelector("[data-m=excluir]").onclick = async () => {
+    if (!confirmar(`Cancelar a reunião "${e0.titulo}"? Os participantes serão avisados.`)) return;
+    fecharModal();
+    try { await salvarStore(agStore, d => { d.eventos = d.eventos.filter(x => x.id !== id); }); } catch (er) { return toast(er.message, "erro"); }
+    toast("Reunião cancelada");
+    avisarReuniao(e0, "cancelou");
+    if (e0.clienteId) salvarTar(d => logar(d, e0.clienteId, `Cancelou a reunião "${e0.titulo}" de ${dataHora(e0.inicio)}`));
+    renderAgendaSeAberta();
+  };
+  f.onsubmit = async ev => {
+    ev.preventDefault();
+    const v = ler();
+    if (!v.titulo.trim()) return toast("Informe o assunto", "erro");
+    if (!v.dia || !v.ini) return toast("Informe data e hora", "erro");
+    if (v.fim && minAg(v.fim) <= minAg(v.ini)) return toast("O fim precisa ser depois do início", "erro");
+    const novo = { titulo: v.titulo.trim(), inicio: `${v.dia}T${v.ini}`, fim: `${v.dia}T${v.fim || hhmm(Math.min(minAg(v.ini) + 60, 1439))}`, participantes: v.part.length ? v.part : [meuEmail()],
+      link: v.link.trim(), local: v.local.trim(), obs: v.obs, clienteId: v.clienteId, lembrete: v.lembrete };
+    fecharModal();
+    let salvo;
+    try {
+      await salvarStore(agStore, d => {
+        if (id) { const x = d.eventos.find(y => y.id === id); if (x) { Object.assign(x, novo, { alteradoEm: new Date().toISOString(), alteradoPor: meuEmail() }); salvo = { ...x }; } }
+        else { d.seq = (d.seq || d.eventos.length) + 1; salvo = { id: "EV-" + String(d.seq).padStart(5, "0"), ...novo, leadId: e.leadId || "", parceiroId: e.parceiroId || "", organizador: meuEmail(), criadoEm: new Date().toISOString() }; d.eventos.push(salvo); }
+      });
+    } catch (er) { return toast("Não foi possível salvar: " + er.message, "erro", 6000); }
+    toast(id ? "Reunião atualizada" : "Reunião agendada");
+    if (!id) avisarReuniao(salvo, "convidou");
+    else {
+      const novos = salvo.participantes.filter(p => !(e0.participantes || []).includes(p)), mudou = e0.inicio !== salvo.inicio || e0.fim !== salvo.fim || e0.link !== salvo.link;
+      if (novos.length) avisarReuniao(salvo, "convidou", novos);
+      if (mudou) avisarReuniao(salvo, "alterou", salvo.participantes.filter(p => !novos.includes(p)));
+    }
+    if (salvo.clienteId) salvarTar(d => logar(d, salvo.clienteId, `${id ? "Alterou" : "Agendou"} a reunião "${salvo.titulo}" para ${dataHora(salvo.inicio)}`));
+    renderAgendaSeAberta();
+  };
+}
+function renderAgendaSeAberta() { if (viewAtual === "agenda") renderAgenda(); if (viewAtual === "inicio") renderHome(); }
+function avisarReuniao(e, acao, so) {
+  const quando = `${new Date(e.inicio).toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "2-digit" })} às ${e.inicio.slice(11, 16)}${e.fim ? "–" + e.fim.slice(11, 16) : ""}`;
+  const alvo = (so || e.participantes || []).filter(p => p !== meuEmail());
+  notificar(alvo.map(p => ({ para: p, link: `#agenda/${e.inicio.slice(0, 10)}`,
+    texto: acao === "convidou" ? `convidou você para "${e.titulo}" · ${quando}` : acao === "alterou" ? `alterou a reunião "${e.titulo}" para ${quando}` : `cancelou a reunião "${e.titulo}" de ${quando}`,
+    email: { assunto: `${acao === "convidou" ? "Convite" : acao === "alterou" ? "Reunião alterada" : "Reunião cancelada"}: ${e.titulo} · ${quando}`, titulo: acao === "convidou" ? "Nova reunião na sua agenda" : acao === "alterou" ? "Reunião alterada" : "Reunião cancelada",
+      corpo: `<p>${esc(meuNome())} ${acao === "convidou" ? "marcou uma reunião com você" : acao === "alterou" ? "alterou uma reunião sua" : "cancelou a reunião"}:</p><p><b>${esc(e.titulo)}</b><br>${esc(quando)}${e.local ? "<br>Local: " + esc(e.local) : ""}${e.link && acao !== "cancelou" ? "<br>Link: " + esc(e.link) : ""}</p>${e.obs && acao !== "cancelou" ? `<p>${esc(e.obs)}</p>` : ""}`,
+      botao: "Abrir a agenda" } })));
+}
+/* Reuniões marcadas pelo CRM / Parceiros entram sozinhas na agenda */
+async function criarEventoAuto(base) {
+  try {
+    if (!agStore.carregado) await carregarStore(agStore);
+    if (eventos().some(e => (base.leadId && e.leadId === base.leadId || base.parceiroId && e.parceiroId === base.parceiroId) && e.inicio === base.inicio)) return;
+    await salvarStore(agStore, d => {
+      d.seq = (d.seq || d.eventos.length) + 1;
+      d.eventos.push({ id: "EV-" + String(d.seq).padStart(5, "0"), titulo: base.titulo, inicio: base.inicio, fim: `${base.inicio.slice(0, 10)}T${hhmm(Math.min(minAg(base.inicio.slice(11, 16)) + 60, 1439))}`,
+        participantes: [meuEmail()], link: "", local: "", obs: base.obs || "", clienteId: "", leadId: base.leadId || "", parceiroId: base.parceiroId || "", lembrete: "15", organizador: meuEmail(), criadoEm: new Date().toISOString() });
+    });
+    toast("Reunião incluída na sua agenda");
+  } catch {}
+}
+
+/* ---- Lembretes de reunião (a cada minuto, com o sistema aberto) ---- */
+async function lembretesReuniao() {
+  if (!agStore.carregado) { try { await carregarStore(agStore); } catch { return; } }
+  let vistos = {}; try { vistos = JSON.parse(localStorage.getItem("wl.lembAg") || "{}"); } catch {}
+  const agora = Date.now();
+  for (const e of eventos()) {
+    if (!e.lembrete || !(e.participantes || []).includes(meuEmail())) continue;
+    const t = new Date(e.inicio).getTime(), aviso = t - Number(e.lembrete) * 60000;
+    if (agora >= aviso && agora < t + 5 * 60000 && !vistos[e.id + e.inicio]) {
+      vistos[e.id + e.inicio] = 1;
+      const txt = `${e.titulo} · ${e.inicio.slice(11, 16)}${e.link ? " · link na agenda" : ""}`;
+      toast("Lembrete de reunião: " + txt, "", 10000);
+      if ("Notification" in window && Notification.permission === "granted") try { new Notification("Reunião · " + e.titulo, { body: `Começa às ${e.inicio.slice(11, 16)}${e.local ? " · " + e.local : ""}`, icon: "icon-192.png", tag: e.id }); } catch {}
+    }
+  }
+  try { localStorage.setItem("wl.lembAg", JSON.stringify(Object.fromEntries(Object.entries(vistos).slice(-300)))); } catch {}
+}
+function iniciarAgenda() {
+  setTimeout(lembretesReuniao, 4000);
+  setInterval(() => { if (document.visibilityState === "visible") lembretesReuniao(); }, 60000);
+  setInterval(() => { if (document.visibilityState === "visible" && viewAtual === "agenda" && !$("modal")) carregarStore(agStore).then(renderAgenda).catch(() => {}); }, 3 * 60000);
+}
+
+/* ---- Cliques ---- */
+$("agBarra").onclick = e => {
+  const v = e.target.closest("[data-ag-vista]"); if (v) { ag.vista = v.dataset.agVista; guardarAg(); return renderAgenda(); }
+  const b = e.target.closest("[data-ag]"); if (!b) return;
+  const a = b.dataset.ag;
+  if (a === "nova") return abrirReuniao(null);
+  if (a === "hoje") ag.data = hojeISO();
+  const passo = ag.vista === "mes" ? 0 : ag.vista === "semana" ? 7 : 1;
+  if (a === "ant" || a === "prox") {
+    if (ag.vista === "mes") { const d = new Date(ag.data + "T12:00"); d.setDate(1); d.setMonth(d.getMonth() + (a === "prox" ? 1 : -1)); ag.data = isoD(d); }
+    else ag.data = somaDias(ag.data, a === "prox" ? passo : -passo);
+  }
+  if (rota[0]) { history.replaceState(null, "", "#agenda"); rota = []; }
+  renderAgenda();
+};
+$("agFiltros").onchange = e => {
+  const u = e.target.dataset.agUs, c = e.target.dataset.agCam;
+  if (u) { let us = usuariosVisiveis(); us = e.target.checked ? [...new Set([...us, u])] : us.filter(x => x !== u); ag.usuarios = us.length ? us : [meuEmail()]; }
+  if (c) ag.camadas[c] = e.target.checked;
+  guardarAg(); renderAgenda();
+};
+$("agConteudo").onclick = e => {
+  const it = e.target.closest("[data-ag-item]");
+  if (it) {
+    const [tipo, ref] = it.dataset.agItem.split("|");
+    if (tipo === "reuniao") return abrirReuniao(ref);
+    if (tipo === "tarefa") return abrirTarefa(ref);
+    if (tipo === "lead") { location.hash = "crm/funil"; setTimeout(() => abrirLead(ref), 400); return; }
+    if (tipo === "parceiro") { location.hash = "parceiros/painel"; setTimeout(() => abrirParceiro(ref), 400); return; }
+  }
+  const d = e.target.closest("[data-ag-dia]"); if (d) { ag.data = d.dataset.agDia; ag.vista = "dia"; guardarAg(); if (rota[0]) { history.replaceState(null, "", "#agenda"); rota = []; } return renderAgenda(); }
+  const s = e.target.closest("[data-ag-slot]");
+  if (s) { const [dia, h] = s.dataset.agSlot.split("|"); return abrirReuniao(null, { inicio: `${dia}T${h || "09:00"}` }); }
+};
+
 /* ================== EQUIPE, NOTIFICAÇÕES E INÍCIO ================== */
 const meuEmail = () => String(conta?.username || "").trim().toLowerCase();
 /* Nome (primeiro nome, como aparece nos campos "Responsável") → e-mail do usuário. Com nomes repetidos, prefere você e depois quem não é a conta administradora. */
@@ -7597,7 +8000,7 @@ async function renderHome() {
   $("iniData").textContent = (t => t.charAt(0).toUpperCase() + t.slice(1))(agora.toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long", year: "numeric" }));
   if (!tarStore.carregado || !cliStore.carregado) $("iniConteudo").innerHTML = `<div class="esqueleto"></div>`;
   try {
-    await Promise.all([garantirCli(), crm.carregado ? null : carregarCRM(true), paStore.carregado ? null : carregarStore(paStore).catch(() => {}), notStore.carregado ? null : carregarStore(notStore).catch(() => {}), garantirStoresCtr().catch(() => {})]);
+    await Promise.all([garantirCli(), crm.carregado ? null : carregarCRM(true), paStore.carregado ? null : carregarStore(paStore).catch(() => {}), notStore.carregado ? null : carregarStore(notStore).catch(() => {}), agStore.carregado ? null : carregarStore(agStore).catch(() => {}), garantirStoresCtr().catch(() => {})]);
   } catch (e) { $("iniConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível carregar os seus dados.</b><br>${esc(e.message)}</div>`; return; }
   if (viewAtual !== "inicio") return;
   const eu = meuNome(), semana = isoD(new Date(Date.now() + 7 * 864e5));
@@ -7628,6 +8031,10 @@ async function renderHome() {
         ${agenda.length ? `<ul class="lista-acoes">${agenda.slice(0, 12).map((a, k) => `<li data-ini-ag="${k}"><span class="chip-p">${a.tipo}</span><div class="q"><b>${esc(a.nome)}</b><span>${esc(a.txt || "Ação")}</span></div><span class="quando ${statusData(a.data)}">${statusData(a.data) === "atraso" ? "Atrasada · " : ""}${rotuloData(a.data)}</span></li>`).join("")}</ul>` : `<div class="vazio-bloco">Nenhuma ação comercial pendente para hoje.</div>`}</section>
     </div>
     <div class="col-ini">
+      <section class="bloco"><div class="bloco-cab"><div><h3>Minha agenda de hoje</h3><small>Reuniões marcadas para hoje</small></div><a href="#agenda">Abrir agenda</a></div>
+        ${(() => { const hj = hojeISO(), ls = (agStore.dados?.eventos || []).filter(e => e.inicio?.slice(0, 10) === hj && (e.participantes || []).includes(meuEmail())).sort((a, b) => a.inicio.localeCompare(b.inicio));
+          return ls.length ? `<ul class="lista-acoes">${ls.map(e => `<li data-ini-reu="${e.id}"><span class="chip-p">${e.inicio.slice(11, 16)}</span><div class="q"><b>${esc(e.titulo)}</b><span>${e.fim ? "até " + e.fim.slice(11, 16) : ""}${e.local ? " · " + esc(e.local) : ""}${(e.participantes || []).length > 1 ? " · com " + e.participantes.filter(p => p !== meuEmail()).map(primeiroDe).join(", ") : ""}</span></div>${e.link ? `<a class="btn-s entrar" href="${esc(/^https?:/.test(e.link) ? e.link : "https://" + e.link)}" target="_blank" rel="noopener">Entrar</a>` : ""}</li>`).join("")}</ul>`
+            : `<div class="vazio-bloco">Nenhuma reunião hoje. <a href="#agenda">Agendar</a></div>`; })()}</section>
       <section class="bloco"><div class="bloco-cab"><div><h3>Notificações</h3></div>${minhasNot().some(n => !n.lida) ? `<a data-ini="lidas">Marcar como lidas</a>` : ""}</div><div id="iniNot"></div></section>
       <section class="bloco"><div class="bloco-cab"><div><h3>Meus clientes</h3><small>Sob sua responsabilidade ou com tarefas suas</small></div><a href="#clientes">Todos</a></div>
         ${meusCli.length ? `<ul class="lista-acoes">${meusCli.map(c => { const p = tarefas().filter(t => t.clienteId === c.id && t.status !== "concluida"), a = p.filter(t => stTarefa(t) === "atraso").length;
@@ -7654,7 +8061,8 @@ $("iniConteudo").addEventListener("click", async e => {
   const ok = e.target.closest("[data-tf-ok]");
   if (ok) { e.stopPropagation(); const t = tarPorId(ok.dataset.tfOk); return t?.status === "concluida" ? reabrirTarefa(t.id) : concluirTarefa(ok.dataset.tfOk); }
   const tf = e.target.closest("[data-tf]"); if (tf) return abrirTarefa(tf.dataset.tf);
-  const ag = e.target.closest("[data-ini-ag]"); if (ag) return ini.agenda[+ag.dataset.iniAg]?.link();
+  const agI = e.target.closest("[data-ini-ag]"); if (agI) return ini.agenda[+agI.dataset.iniAg]?.link();
+  const reu = e.target.closest("[data-ini-reu]"); if (reu && !e.target.closest("a")) return abrirReuniao(reu.dataset.iniReu);
   const nt = e.target.closest("[data-not-ini]");
   if (nt) { const n = minhasNot().find(x => x.id === nt.dataset.notIni); if (n && !n.lida) marcarLidas([n.id]); if (n?.link) location.hash = n.link.replace(/^#/, ""); if (n?.tarefaId) setTimeout(() => tarPorId(n.tarefaId) && abrirTarefa(n.tarefaId), 900); return; }
   const b = e.target.closest("[data-ini]"); if (!b) return;
@@ -7869,8 +8277,8 @@ function escolherSalvamento() {
   const admin = ehAdmin();
   const opcoes = ed.origem === "biblioteca"
     ? (admin ? [["substituir", "Substituir o original na Biblioteca", "Todos passam a ver esta versão. A versão anterior fica no histórico de versões do OneDrive."],
-                ["nova", "Salvar como nova versão", "Cria uma cópia em Meus documentos. O original não muda."]]
-             : [["nova", "Salvar em Meus documentos", "Cria a sua versão do documento. O original da Biblioteca não muda."]])
+                ["nova", "Salvar como nova versão", "Baixa a sua versão no computador (uma cópia fica guardada no OneDrive). O original não muda."]]
+             : [["nova", "Salvar e baixar", "Baixa a sua versão do documento no computador (uma cópia fica guardada no OneDrive). O original da Biblioteca não muda."]])
     : [["sobrescrever", "Salvar alterações", "Atualiza este documento em Meus documentos."], ["nova", "Salvar como nova versão", "Cria outra cópia em Meus documentos."]];
   const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Salvar documento</h3></div>
     <div class="modal-corpo">
@@ -7913,7 +8321,8 @@ async function salvarDocumento(modo, nome) {
       const item = await enviarArquivo(`${pastaMinha()}/${nome}.docx`, arq, "rename");
       const base = ed.origem === "biblioteca" ? ed.arquivo : (prefs.dados?.documentos?.[ed.arquivo.id]?.base || null);
       await salvarPrefs(p => { p.documentos[item.id] = { base: base ? { id: base.id, nome: semExt(base.name) } : null, criadoEm: new Date().toISOString() }; });
-      toast(`Salvo em Meus documentos como "${semExt(item.name)}"`);
+      baixarBlob(blob, item.name || nome + ".docx");
+      toast(`Documento "${semExt(item.name)}" baixado`);
     }
     if (viewAtual === "meus") renderMeus();
     return true;
@@ -7981,7 +8390,7 @@ function formUsuario(u) {
         ${novo ? "" : `<div class="campo"><label>Situação</label><select name="ativo" ${protegido || u.email === conta.username ? "disabled" : ""}><option value="1" ${u.ativo ? "selected" : ""}>Ativo</option><option value="0" ${u.ativo ? "" : "selected"}>Desativado</option></select></div>`}</div>
       ${novo ? `<div class="campo"><label>Senha provisória *</label><input name="senha" type="text" required minlength="8" autocomplete="off"></div>
         <p style="font-size:.74rem;color:var(--txt-2)">No primeiro acesso, o usuário será obrigado a criar a própria senha.</p>` : ""}
-      <p style="font-size:.74rem;color:var(--txt-2)"><b>Usuário:</b> vê e baixa a Biblioteca, salva versões em Meus documentos, usa CRM e Atendimento. <b>Administrador:</b> também altera a Biblioteca e gerencia usuários.</p>
+      <p style="font-size:.74rem;color:var(--txt-2)"><b>Usuário:</b> vê e baixa a Biblioteca, edita e baixa as próprias versões dos modelos, usa Agenda, CRM, Clientes e Atendimento. <b>Administrador:</b> também altera a Biblioteca e gerencia usuários.</p>
       <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">${novo ? "Criar usuário" : "Salvar"}</button></div>
     </form>`);
   veu.onclick = fecharModal;
@@ -8268,6 +8677,7 @@ async function abrirApp() {
   carregarEquipe();
   iniciarLembretes();
   iniciarNotificacoes();
+  iniciarAgenda();
   if (conta.trocarSenha) trocarMinhaSenha(true);
   setInterval(sincronizarVisivel, CONFIG.intervaloSync * 2);
   setTimeout(verificarAssinaturas, 4000);
