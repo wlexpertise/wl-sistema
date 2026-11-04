@@ -1143,6 +1143,38 @@
   .aviso-fisc{background:rgba(217,154,30,.1);border:1px solid rgba(217,154,30,.4);border-radius:10px;padding:9px 12px;font-size:.78rem;color:#7a5409}
   .aviso-fisc ul{margin:4px 0 4px 18px} .aviso-fisc small{color:#7a5409}
   .aviso-fisc.neutro{background:var(--bg);border-color:var(--borda);color:var(--txt-2)}
+
+  /* Planos */
+  .grade-pl{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  .card-pl{text-align:left;background:#fff;border:1px solid var(--borda);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+  .card-pl:hover{border-color:var(--turq);box-shadow:0 4px 14px rgba(0,60,70,.07)}
+  .card-pl.inat{opacity:.6}
+  .pl-topo{display:flex;justify-content:space-between;gap:8px;align-items:center}.pl-topo b{font-size:1rem;color:var(--teal)}
+  .pl-preco b{font-size:1.25rem;font-weight:700;color:var(--txt)}.pl-preco span{font-size:.74rem;color:var(--txt-2);margin-left:6px}
+  .pl-desc{font-size:.78rem;color:var(--txt-2);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pl-rod{display:flex;justify-content:space-between;font-size:.74rem;color:var(--txt-2);border-top:1px solid var(--borda);padding-top:9px}
+  .pl-rod i{font-style:normal;font-weight:700;margin-right:3px}.pl-rod i.ok{color:var(--verde)}
+  h5.sub-form{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin-top:6px;padding-top:12px;border-top:1px solid var(--borda)}
+  .chips-serv{flex-wrap:wrap}
+  .campos-plano{display:grid;gap:10px}
+  .ln-planos{display:grid;gap:10px}.ln-plano{position:relative;border:1px solid var(--borda);border-radius:12px;padding:12px 12px 12px;background:var(--bg)}
+  .ln-plano .x-ln{position:absolute;top:6px;right:8px;font-size:1.1rem;color:var(--txt-2);z-index:1}
+  .ln-plano .campos-plano>.linha2:first-child{padding-right:18px}
+  .opc-mud{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .opc-mud label{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--borda);border-radius:12px;padding:10px;cursor:pointer;font-size:.8rem}
+  .opc-mud label:has(input:checked){border-color:var(--turq);background:rgba(23,162,184,.06)}
+  .opc-mud input{margin-top:3px;accent-color:var(--turq)}.opc-mud b{display:block;color:var(--teal)}.opc-mud small{color:var(--txt-2);font-size:.72rem;line-height:1.35}
+  @media(max-width:640px){.opc-mud{grid-template-columns:1fr}}
+  .pl-acoes{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;justify-content:flex-start}.pl-acoes .lnk{font-size:.72rem;margin:0;text-align:left;width:auto}
+  @media(max-width:760px){.nav-base button{font-size:.58rem;letter-spacing:-.01em;min-width:0;overflow:hidden}.nav-base button span{max-width:100%;overflow:hidden;text-overflow:clip;white-space:nowrap}}.perigo-lnk{color:var(--erro)!important}
+  .reaj-atual{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:10px;padding:10px 12px;font-size:.84rem}.reaj-atual b{font-size:1.05rem}
+  .hist-pl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+  .hist-pl li{display:grid;grid-template-columns:26px 1fr;gap:10px;position:relative;padding-bottom:14px}
+  .hist-pl li:not(:last-child)::before{content:"";position:absolute;left:12px;top:26px;bottom:0;width:2px;background:var(--borda)}
+  .hp-ico{width:26px;height:26px;border-radius:50%;background:var(--cor);color:#fff;display:grid;place-items:center;font-size:.8rem;font-weight:700}
+  .hist-pl p{font-size:.8rem;line-height:1.4;margin:1px 0}.hist-pl .pct{font-weight:700;color:var(--cor)}
+  .hp-data{font-size:.7rem;font-weight:700;color:var(--cor);text-transform:uppercase;letter-spacing:.03em}
+  .hp-obs,.hp-por{display:block;font-size:.72rem;color:var(--txt-2)}.hp-obs{font-style:italic}
 </style>
 </head>
 <body>
@@ -1151,6 +1183,7 @@
   <symbol id="i-bib" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6.5A2.5 2.5 0 0 0 4 21.5v-2z"/><path d="M8 7h7M8 11h5"/></symbol>
   <symbol id="i-crm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></symbol>
   <symbol id="i-cli" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-plano" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r=".8" fill="currentColor"/></symbol>
   <symbol id="i-parc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 17h2"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/></symbol>
@@ -1316,6 +1349,15 @@
       <div id="cliConteudo"></div>
     </div>
 
+    <!-- ============ PLANOS ============ -->
+    <div data-view="planos" class="oculto">
+      <div class="cab-atd"><div><div class="eyebrow">Catálogo</div>
+        <h2 style="font-size:1.5rem;font-weight:700;margin-top:4px;color:var(--teal)">Planos</h2>
+        <p style="font-size:.86rem;color:var(--txt-2);margin-top:4px">Planos da WL com preço-base, serviços incluídos e cadastro fiscal. O preço é a referência e pode ser ajustado em cada cliente.</p></div>
+        <div class="dir" id="plBotoes"></div></div>
+      <div id="plConteudo"></div>
+    </div>
+
     <!-- ============ MEUS DOCUMENTOS ============ -->
     <div data-view="meus" class="oculto">
       <div class="cab-pagina"><div><div class="eyebrow">Pessoal</div><h2>Meus documentos</h2><p>Suas versões editadas e seus favoritos da Biblioteca. Só você vê esta área.</p></div></div>
@@ -1381,7 +1423,7 @@ const GRAPH = CONFIG.api + "/graph";
 const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial", "descricao": "Estudo, prospecção, apresentações e fechamento.", "icone": "i-a-com", "pasta": "Comercial", "subs": [{"id": "estudo", "nome": "Materiais de Estudo", "descricao": "Posicionamento, ICP, scripts e guias de venda.", "pasta": "Materiais de Estudo"}, {"id": "prospeccao", "nome": "Ferramentas de Prospecção", "descricao": "Controle de prospecção, CRM e agenda de reuniões.", "pasta": "Ferramentas de Prospecção"}, {"id": "apresentacoes", "nome": "Apresentações Comerciais", "descricao": "Apresentação institucional e por segmento.", "pasta": "Apresentações Comerciais"}, {"id": "propostas", "nome": "Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos.", "pasta": "Propostas, Preços e Contratos"}]}, {"id": "bpo", "nome": "BPO Financeiro", "descricao": "Gestão das rotinas financeiras do cliente.", "icone": "i-a-bpo", "pasta": "BPO Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "fpa", "nome": "FP&A", "descricao": "Indicadores gerenciais e análise de desempenho.", "icone": "i-a-fpa", "pasta": "FP&A", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "planejamento", "nome": "Planejamento Financeiro", "descricao": "Orçamentos, fluxo de caixa e cenários.", "icone": "i-a-pla", "pasta": "Planejamento Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "processos", "nome": "Consultoria de Processos", "descricao": "Mapeamento e redesenho de processos.", "icone": "i-a-pro", "pasta": "Consultoria de Processos", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}], "itens": [{"area": "comercial", "sub": "estudo", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Definição de ICP", "ext": "docx", "descricao": "Perfil de cliente ideal da WL Expertise."}, {"area": "comercial", "sub": "estudo", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"area": "comercial", "sub": "estudo", "nome": "Mapa de Posicionamento", "ext": "docx", "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "descricao": "Levantamento das dores e metas da base de clientes."}, {"area": "comercial", "sub": "estudo", "nome": "Script de Vendas (Call)", "ext": "docx", "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"area": "comercial", "sub": "estudo", "nome": "Script Único", "ext": "docx", "descricao": "Script de abordagem comercial."}, {"area": "comercial", "sub": "prospeccao", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"area": "comercial", "sub": "prospeccao", "nome": "CRM para Consultorias", "ext": "xlsx", "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"area": "comercial", "sub": "prospeccao", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"area": "comercial", "sub": "estudo", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"area": "comercial", "sub": "estudo", "nome": "Programa de Indicação", "ext": "pdf", "descricao": "Como estruturar um programa de indicação de clientes."}, {"area": "comercial", "sub": "propostas", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "descricao": "Termo para parceiros que indicam clientes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "descricao": "Proposta de valor para negócios de estética."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "descricao": "Proposta de valor para locadoras de equipamentos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "descricao": "Proposta de valor para criadores de conteúdo."}, {"area": "comercial", "sub": "propostas", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"area": "comercial", "sub": "propostas", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "descricao": "Planos e regras de negociação para o segmento Rental."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "descricao": "Modelo de proposta comercial."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "descricao": "Modelo de contrato de prestação de serviços."}, {"area": "processos", "sub": "diagnostico", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"area": "fpa", "sub": "diagnostico", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"area": "bpo", "sub": "diagnostico", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "descricao": "Questionário preliminar das rotinas financeiras."}, {"area": "bpo", "sub": "execucao", "nome": "Mapa Quente da Operação", "ext": "xlsx", "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"area": "processos", "sub": "diagnostico", "nome": "Ata e Briefing de Reunião", "ext": "docx", "descricao": "Modelo para registrar reuniões e briefings."}, {"area": "bpo", "sub": "onboarding", "nome": "Questionário de Kick-off", "ext": "xlsx", "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"area": "processos", "sub": "onboarding", "nome": "Formulário de Onboarding", "ext": "docx", "descricao": "Coleta de informações para iniciar o projeto."}, {"area": "bpo", "sub": "onboarding", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "descricao": "Plano de ativação, relação de clientes e timeline."}, {"area": "bpo", "sub": "onboarding", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"area": "bpo", "sub": "onboarding", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"area": "processos", "sub": "execucao", "nome": "Cronograma da Consultoria", "ext": "xlsx", "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"area": "processos", "sub": "execucao", "nome": "Plano de Ação Personalizado", "ext": "docx", "descricao": "Plano de ação do cliente após o diagnóstico."}, {"area": "processos", "sub": "execucao", "nome": "Materiais de Entrega", "ext": "xlsx", "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"area": "bpo", "sub": "execucao", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "descricao": "Gestão da operação por operador, plano de ação e timeline."}], "legado": {"01 - Estratégia e Posicionamento": "comercial/estudo", "02 - Prospecção e Vendas": "comercial/prospeccao", "03 - Apresentações Comerciais": "comercial/apresentacoes", "04 - Propostas, Preços e Contratos": "comercial/propostas", "05 - Diagnóstico": "bpo/diagnostico", "06 - Onboarding e Implantação": "bpo/onboarding", "07 - Execução e Entregas": "bpo/execucao"}};
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
-const VERSAO = "v29";
+const VERSAO = "v30";
 document.querySelectorAll(".versao-sis").forEach(x => x.textContent = VERSAO);
 const MODULOS = [
   { id: "inicio", nome: "Início", icone: "i-home" },
@@ -1390,6 +1432,7 @@ const MODULOS = [
   { id: "crm", nome: "CRM", icone: "i-crm" },
   { id: "parceiros", nome: "Parceiros", icone: "i-parc" },
   { id: "clientes", nome: "Clientes", icone: "i-cli" },
+  { id: "planos", nome: "Planos", icone: "i-plano" },
   { id: "atendimento", nome: "Atendimento", curto: "Atender", icone: "i-atd", menu: true },
   { id: "sistema", nome: "Sistema", icone: "i-sis" }
 ];
@@ -1635,6 +1678,7 @@ function irPara(hash) {
   if (id === "sistema") { abrirSistema(); renderUsuarios(); }
   if (id === "meus") { renderMeus(); carregarMeus(); }
   if (id === "clientes") renderClientes();
+  if (id === "planos") renderPlanos();
   if (id === "inicio") renderHome();
   if (id === "agenda") renderAgenda();
   document.querySelector("main").classList.toggle("largo", id === "crm" || id === "atendimento" || id === "parceiros" || id === "inicio" || id === "agenda");
@@ -2431,7 +2475,7 @@ function cardLead(l) {
   return `<article class="card-lead" draggable="true" data-lead="${l.id}">
     <b>${esc(l.empresa)}</b><small>${esc(l.segmento || "")}${l.cidade ? " · " + esc(l.cidade) : ""}</small>
     <div class="rodape"><span class="chip-fit fit-${esc(l.fit || "")}">${esc(l.fit || "–")}</span>${l.prioridade ? `<span class="chip-p">${esc(l.prioridade.split(" ")[0])}</span>` : ""}
-      ${l.valor ? `<span class="chip-p">${moeda(l.valor)}</span>` : ""}
+      ${l.plano ? `<span class="chip-p">${esc(l.plano)}</span>` : ""}${l.valor ? `<span class="chip-p">${moeda(l.valor)}</span>` : ""}
       ${tentativasDe(l).length && l.etapa === "tentativa" ? `<span class="chip-p" title="Tentativas de contato">${tentativasDe(l).length}× tent.</span>` : ""}
       ${proxAcao(l)?.data ? `<span class="acao-prox ${st === "atraso" ? "atraso" : ""}">${rotuloData(proxAcao(l).data)}</span>` : ""}</div>
   </article>`;
@@ -2556,7 +2600,7 @@ function linkWhats(tel) {
   return "https://wa.me/" + d;
 }
 function renderFicha(id) {
-  for (const st of [diagStore, diagFpaStore, diagPlaStore, diagRentalStore, propStore]) if (!st.carregado && !st.carregando) {
+  for (const st of [diagStore, diagFpaStore, diagPlaStore, diagRentalStore, propStore, planStore]) if (!st.carregado && !st.carregando) {
     st.carregando = true;
     carregarStore(st).then(() => { if (abertoId) renderFicha(abertoId); }).catch(() => {}).finally(() => { st.carregando = false; });
   }
@@ -2645,8 +2689,9 @@ function renderFicha(id) {
 
     <section class="g-sec"><h4>Negócio</h4>
       <form class="dados-grid" id="formNegocio">
-        <div class="linha2"><div class="campo"><label>Responsável</label><select id="negResp">${opcoes(RESPONSAVEIS.map(r => [r, r]), l.responsavel || "", "—")}</select></div>
-          <div class="campo"><label>Valor estimado (R$/mês ou projeto)</label><input id="negValor" inputmode="numeric" value="${l.valor ? l.valor : ""}" placeholder="Ex.: 3500"></div></div>
+        <div class="linha2"><div class="campo"><label>Plano de interesse</label><select id="negPlano">${opcoesPlano(l.planoId, "—")}</select></div>
+          <div class="campo"><label>Valor estimado (R$/mês ou projeto) <span class="dica-campo" id="negBase">${l.planoId && planoPorId(l.planoId) ? "base " + brl(planoPorId(l.planoId).valor) : ""}</span></label><input id="negValor" inputmode="decimal" value="${l.valor ? fmtValor(l.valor) : ""}" placeholder="Ex.: 3.500,00" data-mascara="nenhuma"></div></div>
+        <div class="campo"><label>Responsável</label><select id="negResp">${opcoes(RESPONSAVEIS.map(r => [r, r]), l.responsavel || "", "—")}</select></div>
         <div class="campo"><label>Frentes de interesse</label><div class="etapas-sel">${FRENTES_CRM.map(f => `<button type="button" data-g-frente="${esc(f)}" style="--cor:var(--turq)" class="${(l.frentes || []).includes(f) ? "ativo" : ""}">${esc(f)}</button>`).join("")}</div></div>
         <button class="btn-s" type="submit" style="justify-self:end">Salvar negócio</button>
       </form></section>
@@ -2812,11 +2857,19 @@ function ligarFicha(l) {
     alterarLead(l.id, x => novaAcao(x, texto, dt ? (hr ? `${dt}T${hr}` : dt) : ""), "Ação adicionada");
   };
   desenharAgenda(l);
+  const FRENTE_SERV = { bpo: "BPO Financeiro", fpa: "FP&A", pla: "Planejamento Financeiro", rt: "Consultoria de Processos" };
+  $("negPlano").onchange = e => {
+    const p = planoPorId(e.target.value);
+    $("negBase").textContent = p ? "base " + brl(p.valor) : "";
+    if (!p) return;
+    $("negValor").value = fmtValor(p.valor);
+    g.querySelectorAll("[data-g-frente]").forEach(b => b.classList.toggle("ativo", (p.servs || []).some(s => FRENTE_SERV[s] === b.dataset.gFrente)));
+  };
   $("formNegocio").onsubmit = e => {
     e.preventDefault();
-    const valor = Number(soDigitos($("negValor").value)) || null, resp = $("negResp").value;
+    const valor = numBR($("negValor").value) || null, resp = $("negResp").value, planoId = $("negPlano").value;
     const frentes = [...g.querySelectorAll("[data-g-frente].ativo")].map(b => b.dataset.gFrente);
-    alterarLead(l.id, x => { x.valor = valor; x.responsavel = resp; x.frentes = frentes; }, "Negócio atualizado");
+    alterarLead(l.id, x => { x.valor = valor; x.responsavel = resp; x.frentes = frentes; x.planoId = planoId; x.plano = planoPorId(planoId)?.nome || ""; }, "Negócio atualizado");
   };
   $("formDados").onsubmit = e => {
     e.preventDefault();
@@ -6435,6 +6488,7 @@ const ROTINAS = {
 function servsDoCliente(c) {
   const s = new Set();
   for (const x of c.servicos || []) {
+    if (x.servs?.length) { x.servs.forEach(v => s.add(v)); continue; }
     const id = x.serv, n = norm(x.nome + " " + (x.plano || ""));
     if (id === "int" || /integrad/.test(n)) { s.add("bpo"); s.add("fpa"); continue; }
     if (id && id !== "int") { s.add(id === "rt" ? "rt" : id); continue; }
@@ -6513,20 +6567,21 @@ function novaTarefaObj(d, base) {
 
 /* ---- Carregamento ---- */
 async function garantirCli() {
-  await Promise.all([cliStore, tarStore].filter(s => !s.carregado).map(s => carregarStore(s)));
+  await Promise.all([cliStore, tarStore, planStore].filter(s => !s.carregado).map(s => carregarStore(s)));
 }
 
 /* ---- Cliente vindo do contrato assinado ---- */
 async function criarClienteDoContrato(c, env, final) {
   const k = c.contratante, pp = propDoContrato(c), t = pp ? totaisProp(pp) : { mensal: c.cond.valorMensal, unico: 0 };
   let id, novo = false;
+  try { await garantirPlanos(); } catch {}
   await salvarStore(cliStore, d => {
     const ex = d.clientes.find(x => (c.leadId && x.leadId === c.leadId) || soDigitos(x.cnpj) === soDigitos(k.cnpj));
     const docs = [{ tipo: "Contrato assinado", nome: final.nome, id: final.id, webUrl: final.webUrl, em: final.em }];
     if (pp?.pdf) docs.push({ tipo: "Proposta", nome: pp.pdf.nome, id: pp.pdf.id, webUrl: pp.pdf.webUrl, em: pp.pdf.em });
     const base = { leadId: c.leadId, razao: k.razao, fantasia: k.fantasia, cnpj: k.cnpj, regime: k.regime, socios: k.socios, telefone: k.telefone, email: k.email,
       cep: k.cep, logradouro: k.logradouro, numero: k.numero, complemento: k.complemento, bairro: k.bairro, cidade: k.cidade, uf: k.uf,
-      contato: (k.socios || [])[0]?.nome || "", servicos: (pp?.itens || []).map(i => ({ serv: i.serv, nome: i.nome || SERVICOS[i.serv].nome, plano: i.plano, cobranca: ehProjeto(i) ? "unico" : "mensal", valor: Number(i.valor) || 0, licenca: Number(i.licenca) || 0 })),
+      contato: (k.socios || [])[0]?.nome || "", servicos: (pp?.itens || []).map(i => ({ id: crypto.randomUUID(), serv: i.serv, servs: i.serv === "int" ? ["bpo", "fpa"] : [i.serv], planoId: planoIdPorNome(i.plano), nome: i.nome || SERVICOS[i.serv].nome, plano: i.plano, cobranca: ehProjeto(i) ? "unico" : "mensal", valor: Number(i.valor) || 0, licenca: Number(i.licenca) || 0, desde: (env.concluidoEm || new Date().toISOString()).slice(0, 10) })),
       mensal: t.mensal, unico: t.unico, pasta: `clientes/${c.docAssinatura?.empresa || limparNome(k.razao)}` };
     if (ex) {
       Object.assign(ex, base); id = ex.id;
@@ -6535,6 +6590,7 @@ async function criarClienteDoContrato(c, env, final) {
     } else {
       novo = true;
       d.seq = (d.seq || d.clientes.length) + 1; id = "CL-" + String(d.seq).padStart(4, "0");
+      base.histPlanos = base.servicos.map(x => ({ id: crypto.randomUUID(), em: new Date().toISOString(), por: meuNome(), linhaId: x.id, tipo: "contratacao", data: x.desde, plano: x.plano, valor: x.valor, cobranca: x.cobranca, servs: x.servs, obs: `Contrato ${c.id}` }));
       d.clientes.push({ id, ...base, status: "ativo", origem: "contrato", desde: (env.concluidoEm || new Date().toISOString()).slice(0, 10), contratos: [c.id], propostas: [c.propostaId].filter(Boolean), documentos: docs, criadoEm: new Date().toISOString() });
     }
   });
@@ -6676,9 +6732,7 @@ function abaGeralCli(c) {
       </section>
     </div>
     <aside class="diag-lado">
-      <section class="g-sec"><h4>Serviços contratados <button class="lnk" data-clia="servicos">editar ›</button></h4>
-        ${(c.servicos || []).map(s => `<div class="rs-item"><div class="rs-nome"><b>${esc(s.nome)}</b><small>${esc(s.plano || "")}</small></div><div class="rs-linha"><span>${s.cobranca === "mensal" ? "Mensal" : "Projeto"}</span><b>${brl(s.valor)}${s.cobranca === "mensal" ? "/mês" : ""}</b></div>${s.licenca ? `<div class="rs-linha"><span>Licença ContaAzul</span><b>${brl(s.licenca)}/mês</b></div>` : ""}</div>`).join("") || `<p class="txt-prog">Nenhum serviço cadastrado.</p>`}
-        <div class="rs-total">${c.mensal ? `<div><span>Total mensal</span><b>${brl(c.mensal)}</b></div>` : ""}${c.unico ? `<div><span>Projeto</span><b>${brl(c.unico)}</b></div>` : ""}</div></section>
+      ${htmlPlanosCli(c)}
       <section class="g-sec"><h4>Onboarding</h4>${(() => { const o = (onbStore.dados?.onboardings || []).filter(x => x.clienteId === c.id).sort((a, b) => (b.criadoEm || "").localeCompare(a.criadoEm || ""))[0];
         if (!o) return `<p class="txt-prog">Ainda não iniciado.</p><button class="btn-s" data-clia="onboarding" style="margin-top:8px;width:100%;justify-content:center">Iniciar onboarding</button>`;
         const p = progOnb(o), st = ST_ONB[o.status] || ST_ONB.rascunho;
@@ -6999,7 +7053,7 @@ const soCod = v => String(v || "").replace(/[^0-9A-Za-z]/g, "").toUpperCase();
 /* "17.01" (item da LC 116) e "170101" (código nacional) são considerados o mesmo código */
 const mesmoCod = (a, b) => { a = soCod(a); b = soCod(b); return a === b || (a.length >= 4 && b.startsWith(a)) || (b.length >= 4 && a.startsWith(b)); };
 function conferirFiscal(c, f) {
-  const p = c.fiscal || {}, out = [];
+  const p = fiscalCli(c).p, out = [];
   if (!f) return out;
   const cod = (rot, esp, enc) => { if (!esp) return; if (!enc) out.push(`${rot}: esperado ${esp}, não encontrado no XML`); else if (!mesmoCod(esp, enc)) out.push(`${rot}: esperado ${esp}, na nota ${enc}`); };
   cod("Código de tributação", p.codTrib, f.codTrib);
@@ -7010,7 +7064,7 @@ function conferirFiscal(c, f) {
   sn("Tratamento tributário", p.tratamento, f.tratamento, f.detTrat);
   return out;
 }
-const temParamFiscal = c => { const p = c.fiscal || {}; return !!(p.codTrib || p.codMun || p.nbs || p.retencoes || p.tratamento); };
+const temParamFiscal = c => temFisc(fiscalCli(c).p);
 const brlNf = v => (Number(v) || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const numBR = s => Number(String(s || "").replace(/[^\d,.-]/g, "").replace(/\.(?=\d{3}(\D|$))/g, "").replace(",", ".")) || 0;
 
@@ -7021,7 +7075,7 @@ async function abaNotasCli(c) {
   if (cl_nf.ano && !anos.includes(cl_nf.ano)) cl_nf.ano = "";
   const ls = todas.filter(n => !cl_nf.ano || (n.data || "").startsWith(cl_nf.ano));
   const validas = ls.filter(n => n.status !== "cancelada"), total = validas.reduce((s, n) => s + (Number(n.valor) || 0), 0);
-  const pf = c.fiscal || {}, divTot = validas.filter(n => n.fiscal && conferirFiscal(c, n.fiscal).length).length;
+  const fc = fiscalCli(c), pf = fc.p, divTot = validas.filter(n => n.fiscal && conferirFiscal(c, n.fiscal).length).length;
   const snSel = (k, v) => `<select data-fisc="${k}"><option value="">—</option><option value="sim" ${v === "sim" ? "selected" : ""}>SIM</option><option value="nao" ${v === "nao" ? "selected" : ""}>NÃO</option></select>`;
   $("cliAba").innerHTML = `
   <details class="bloco fisc-cli" ${temParamFiscal(c) ? "" : "open"}><summary><b>Parâmetros fiscais do cliente</b><span>${temParamFiscal(c) ? (divTot ? `<span class="quando atraso">${divTot} nota${divTot === 1 ? "" : "s"} com divergência</span>` : `<span class="quando ok">notas conferidas</span>`) : "preencha para o sistema conferir cada XML"}</span></summary>
@@ -7032,6 +7086,7 @@ async function abaNotasCli(c) {
       <div class="linha3"><div class="campo"><label>Existência de retenções</label>${snSel("retencoes", pf.retencoes)}</div>
         <div class="campo"><label>Tratamento tributário <span class="dica-campo">imunidade, exportação ou não incidência</span></label>${snSel("tratamento", pf.tratamento)}</div>
         <div class="campo" style="align-self:end"><button class="btn-p" type="submit" style="width:100%;justify-content:center">Salvar parâmetros</button></div></div>
+      ${fc.origem ? `<div class="aviso-fisc neutro">Valores herdados do plano <b>${esc(fc.origem)}</b>. Para usar parâmetros próprios deste cliente, ajuste e clique em Salvar parâmetros.</div>` : ""}
       <small class="txt-prog">Ao anexar uma nota, o sistema compara o XML com estes dados e avisa se algo estiver diferente. A nota é salva mesmo com divergência.</small>
     </form></details>
   <div class="barra-tf"><span>${validas.length} nota${validas.length === 1 ? "" : "s"}${cl_nf.ano ? " em " + cl_nf.ano : ""} · <b>${brlNf(total)}</b>${ls.length !== validas.length ? ` · ${ls.length - validas.length} cancelada${ls.length - validas.length === 1 ? "" : "s"}` : ""}</span>
@@ -7192,6 +7247,353 @@ function abaAtividadesCli(c) {
       : `<div class="vazio-bloco">Nenhuma atividade registrada ainda.</div>`}</section>`;
 }
 
+/* ================== PLANOS ==================
+   Catálogo de planos com preço-base, serviços incluídos e cadastro fiscal.
+   O preço do plano é só a referência: no cliente e no CRM o valor pode ser ajustado livremente.
+   No cliente, cada plano contratado guarda o histórico de contratação, upgrade, downgrade, reajuste e encerramento. */
+const planStore = criarStore("dados/config/planos.json", { versao: 1, seq: 0, planos: [] });
+const planosCat = () => planStore.dados?.planos || [];
+const planoPorId = id => planosCat().find(p => p.id === id);
+const SERV_PLANO = [["bpo", "BPO Financeiro"], ["fpa", "FP&A"], ["pla", "Planejamento Financeiro"], ["rt", "Consultoria de Processos"]];
+const nomesServs = ss => (ss || []).map(s => (SERV_PLANO.find(x => x[0] === s) || [, nomeServ(s) || s])[1]).join(" + ");
+const temFisc = p => !!(p && (p.codTrib || p.codMun || p.nbs || p.retencoes || p.tratamento));
+const fmtValor = v => Number(v) ? Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "";
+const sufCob = cob => cob === "unico" ? "" : "/mês";
+const pl = { busca: "", situacao: "ativos" };
+async function garantirPlanos() { if (!planStore.carregado) await carregarStore(planStore); }
+
+/* Parâmetros fiscais que valem para o cliente: os dele (aba Notas fiscais) ou, se vazios, os do plano contratado */
+function fiscalCli(c) {
+  if (temFisc(c.fiscal)) return { p: c.fiscal, origem: "" };
+  for (const s of c.servicos || []) { const p = s.planoId && planoPorId(s.planoId); if (p && temFisc(p.fiscal)) return { p: p.fiscal, origem: p.nome }; }
+  return { p: {}, origem: "" };
+}
+/* Linhas de plano do cliente: contratos antigos não têm id, recebem um id estável pela posição */
+const linhasCli = c => (c.servicos || []).map((s, i) => { if (!s.id) s.id = "ln" + i; return s; });
+const servsLinha = s => s.servs?.length ? s.servs : servsDoCliente({ servicos: [{ ...s, servs: undefined }] });
+const planoIdPorNome = nome => planosCat().find(p => norm(p.nome) === norm(nome || ""))?.id || "";
+
+/* Planos iniciais a partir da tabela de preços das propostas */
+const SERVS_TABELA = k => /^Integrado/.test(k) ? ["bpo", "fpa"] : /^BPO/.test(k) ? ["bpo"] : /^FP&A/.test(k) ? ["fpa"] : /^Planejamento/.test(k) ? ["pla"] : ["rt"];
+
+async function renderPlanos() {
+  $("plConteudo").innerHTML = `<div class="esqueleto"></div>`;
+  try { await Promise.all([garantirPlanos(), garantirCli(), cfgStore.carregado ? null : carregarStore(cfgStore)]); }
+  catch (e) { $("plConteudo").innerHTML = `<div class="aviso-erro"><b>Não foi possível ler os planos.</b><br>${esc(e.message)}</div>`; return; }
+  if (viewAtual !== "planos") return;
+  const usos = id => clis().filter(c => c.status !== "inativo" && (c.servicos || []).some(s => s.planoId === id)).length;
+  const termos = norm(pl.busca).split(" ").filter(Boolean);
+  const ls = planosCat().filter(p => (pl.situacao === "todos" || (pl.situacao === "ativos" ? p.ativo !== false : p.ativo === false))
+    && (!termos.length || termos.every(t => norm(p.nome + " " + nomesServs(p.servs) + " " + (p.descricao || "")).includes(t))))
+    .sort((a, b) => (a.ordem ?? 999) - (b.ordem ?? 999) || a.nome.localeCompare(b.nome));
+  $("plBotoes").innerHTML = `<button class="btn-p" data-pl="novo"><svg><use href="#i-mais"/></svg>Novo plano</button>`;
+  $("plConteudo").innerHTML = planosCat().length ? `
+    <div class="filtros-crm">
+      <input class="fbusca" id="plBusca" type="search" placeholder="Buscar plano ou serviço…" value="${esc(pl.busca)}">
+      <select id="plSit">${opcoes([["ativos", "Ativos"], ["inativos", "Inativos"], ["todos", "Todos"]], pl.situacao)}</select>
+    </div>
+    ${ls.length ? `<div class="grade-pl">${ls.map(p => { const n = usos(p.id), f = p.fiscal || {};
+      return `<button class="card-pl ${p.ativo === false ? "inat" : ""}" data-pl-ed="${p.id}">
+        <div class="pl-topo"><b>${esc(p.nome)}</b>${p.ativo === false ? `<span class="chip-p">Inativo</span>` : ""}</div>
+        <div class="pl-preco"><b>${brl(p.valor)}</b><span>${p.cobranca === "unico" ? "valor do projeto" : "por mês"}</span></div>
+        <div class="chips-cli">${(p.servs || []).map(s => `<span>${esc(nomesServs([s]))}</span>`).join("")}</div>
+        ${p.descricao ? `<p class="pl-desc">${esc(p.descricao)}</p>` : ""}
+        <div class="pl-rod"><span>${temFisc(f) ? `<i class="ok">✓</i> Cadastro fiscal` : `<i>—</i> Sem cadastro fiscal`}</span><span>${n} cliente${n === 1 ? "" : "s"}</span></div></button>`; }).join("")}</div>`
+      : `<div class="vazio-bloco">Nenhum plano com esses filtros.</div>`}
+    <p class="txt-prog" style="margin-top:14px">O preço do plano é a base: ao escolher o plano no cliente ou no CRM, o valor vem preenchido e pode ser ajustado. Mudar o preço aqui não altera o que os clientes já pagam.</p>`
+    : `<div class="vazio-etapa"><b>Nenhum plano cadastrado</b>Cadastre os planos da WL com o preço-base, os serviços que cada um inclui e o cadastro fiscal.
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px"><button class="btn-s" data-pl="importar">Começar pela tabela padrão (${Object.keys(TABELA_PADRAO).length} planos)</button><button class="btn-p" data-pl="novo">Novo plano</button></div></div>`;
+  let tm;
+  if ($("plBusca")) $("plBusca").oninput = e => { clearTimeout(tm); tm = setTimeout(() => { pl.busca = e.target.value; renderPlanos().then(() => { const i = $("plBusca"); i?.focus(); i?.setSelectionRange(i.value.length, i.value.length); }); }, 250); };
+  if ($("plSit")) $("plSit").onchange = e => { pl.situacao = e.target.value; renderPlanos(); };
+}
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-pl],[data-pl-ed]");
+  if (!b || !b.closest('[data-view="planos"]')) return;
+  if (b.dataset.plEd) return abrirPlano(b.dataset.plEd);
+  if (b.dataset.pl === "novo") return abrirPlano();
+  if (b.dataset.pl === "importar") {
+    try {
+      await salvarStore(planStore, d => {
+        if (d.planos.length) return;
+        Object.keys(TABELA_PADRAO).forEach((k, i) => { d.seq = (d.seq || 0) + 1;
+          d.planos.push({ id: "PL-" + String(d.seq).padStart(3, "0"), nome: k, servs: SERVS_TABELA(k), cobranca: /^(Planejamento|Consultoria)/.test(k) ? "unico" : "mensal", valor: tabelaPlano(k),
+            descricao: (ENTREGAS[k] || []).slice(0, 4).join(", "), ativo: true, fiscal: {}, ordem: i, criadoEm: new Date().toISOString(), criadoPor: meuNome() }); });
+      });
+      toast("Planos criados a partir da tabela padrão"); renderPlanos();
+    } catch (er) { toast("Não foi possível criar: " + er.message, "erro"); }
+  }
+});
+
+const snSelect = (k, v, attr = "data-fisc") => `<select ${attr}="${k}"><option value="">—</option><option value="sim" ${v === "sim" ? "selected" : ""}>SIM</option><option value="nao" ${v === "nao" ? "selected" : ""}>NÃO</option></select>`;
+const chipsServ = (sel, attr = "data-ps") => `<div class="etapas-sel chips-serv">${SERV_PLANO.map(([s, n]) => `<button type="button" ${attr}="${s}" style="--cor:var(--turq)" class="${(sel || []).includes(s) ? "ativo" : ""}">${n}</button>`).join("")}</div>`;
+
+function abrirPlano(id) {
+  const p = id ? planoPorId(id) : { nome: "", servs: [], cobranca: "mensal", valor: 0, descricao: "", ativo: true, fiscal: {} };
+  if (!p) return;
+  const f = p.fiscal || {}, n = id ? clis().filter(c => (c.servicos || []).some(s => s.planoId === id)).length : 0;
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>${id ? "Editar plano" : "Novo plano"}</h3>${id ? `<small class="sub-modal">${esc(p.id)} · ${n} cliente${n === 1 ? "" : "s"} com este plano</small>` : ""}</div>
+    <form class="modal-corpo dados-grid" id="formPlano">
+      <div class="linha2"><div class="campo"><label>Nome do plano *</label><input name="nome" value="${esc(p.nome)}" placeholder="Ex.: BPO Performance" data-mascara="nenhuma"></div>
+        <div class="campo"><label>Preço-base (R$)</label><input name="valor" inputmode="decimal" value="${fmtValor(p.valor)}" placeholder="Ex.: 3.000,00" data-mascara="nenhuma"></div></div>
+      <div class="campo"><label>Serviços incluídos <span class="dica-campo">escolha um ou mais</span></label>${chipsServ(p.servs)}</div>
+      <div class="linha2"><div class="campo"><label>Cobrança</label><select name="cobranca"><option value="mensal" ${p.cobranca !== "unico" ? "selected" : ""}>Mensal (recorrente)</option><option value="unico" ${p.cobranca === "unico" ? "selected" : ""}>Projeto (valor único)</option></select></div>
+        <div class="campo"><label>Situação</label><select name="ativo"><option value="1" ${p.ativo !== false ? "selected" : ""}>Ativo</option><option value="0" ${p.ativo === false ? "selected" : ""}>Inativo (não aparece para novos clientes)</option></select></div></div>
+      <div class="campo"><label>Descrição / o que inclui</label><textarea name="descricao" rows="2">${esc(p.descricao || "")}</textarea></div>
+      <h5 class="sub-form">Cadastro fiscal</h5>
+      <div class="linha3"><div class="campo"><label>Código de tributação</label><input name="codTrib" value="${esc(f.codTrib || "")}" placeholder="Ex.: 17.01 ou 170101" data-mascara="nenhuma"></div>
+        <div class="campo"><label>Código complementar municipal</label><input name="codMun" value="${esc(f.codMun || "")}" data-mascara="nenhuma"></div>
+        <div class="campo"><label>Item da NBS</label><input name="nbs" value="${esc(f.nbs || "")}" placeholder="Ex.: 1.1302.11.00" data-mascara="nenhuma"></div></div>
+      <div class="linha2"><div class="campo"><label>Existência de retenções</label>${snSelect("retencoes", f.retencoes)}</div>
+        <div class="campo"><label>Tratamento tributário <span class="dica-campo">imunidade, exportação ou não incidência</span></label>${snSelect("tratamento", f.tratamento)}</div></div>
+      <small class="txt-prog">O cadastro fiscal do plano vira o padrão da conferência das notas fiscais dos clientes com este plano. Se o cliente tiver parâmetros próprios na aba Notas fiscais, valem os dele.</small>
+      <div class="modal-rod" style="padding:0">${id ? `<button type="button" class="perigo" data-m="excluir" style="margin-right:auto">Excluir</button>` : ""}<button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Salvar plano</button></div>
+    </form>`);
+  m.classList.add("modal-largo");
+  veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  m.querySelector(".chips-serv").onclick = e => { const b = e.target.closest("[data-ps]"); if (b) b.classList.toggle("ativo"); };
+  if (id) m.querySelector("[data-m=excluir]").onclick = async () => {
+    if (n) return toast(`${n} cliente${n === 1 ? " usa" : "s usam"} este plano. Marque como inativo em vez de excluir.`, "erro", 6000);
+    if (!confirmar(`Excluir o plano ${p.nome}?`)) return;
+    try { await salvarStore(planStore, d => { d.planos = d.planos.filter(x => x.id !== id); }); fecharModal(); toast("Plano excluído"); renderPlanos(); } catch (er) { toast(er.message, "erro"); }
+  };
+  $("formPlano").onsubmit = async e => {
+    e.preventDefault();
+    const fd = new FormData(e.target), nome = fd.get("nome").trim(), servs = [...m.querySelectorAll(".chips-serv .ativo")].map(b => b.dataset.ps);
+    if (!nome) return toast("Informe o nome do plano", "erro");
+    if (!servs.length) return toast("Escolha pelo menos um serviço", "erro");
+    if (planosCat().some(x => x.id !== id && norm(x.nome) === norm(nome))) return toast("Já existe um plano com esse nome", "erro");
+    const dados = { nome, servs, cobranca: fd.get("cobranca"), valor: numBR(fd.get("valor")), descricao: fd.get("descricao").trim(), ativo: fd.get("ativo") === "1",
+      fiscal: { codTrib: fd.get("codTrib").trim(), codMun: fd.get("codMun").trim(), nbs: fd.get("nbs").trim(), retencoes: m.querySelector("[data-fisc=retencoes]").value, tratamento: m.querySelector("[data-fisc=tratamento]").value } };
+    try {
+      await salvarStore(planStore, d => {
+        const x = id && d.planos.find(y => y.id === id);
+        if (x) Object.assign(x, dados, { atualizadoEm: new Date().toISOString(), atualizadoPor: meuNome() });
+        else { d.seq = (d.seq || d.planos.length) + 1; d.planos.push({ id: "PL-" + String(d.seq).padStart(3, "0"), ...dados, criadoEm: new Date().toISOString(), criadoPor: meuNome() }); }
+      });
+      fecharModal(); toast(id ? "Plano atualizado" : "Plano cadastrado");
+      if (viewAtual === "planos") renderPlanos();
+    } catch (er) { toast("Não foi possível salvar: " + er.message, "erro", 6000); }
+  };
+}
+
+/* ---- Escolha de plano (cliente e CRM): o plano preenche serviços, cobrança e valor, que continuam editáveis ---- */
+const opcoesPlano = (atual, vazio = "Personalizado (sem plano do catálogo)") => `<option value="">${vazio}</option>` + planosCat().filter(p => p.ativo !== false || p.id === atual)
+  .map(p => `<option value="${p.id}" ${p.id === atual ? "selected" : ""}>${esc(p.nome)} · base ${brl(p.valor)}${sufCob(p.cobranca)}</option>`).join("");
+function camposPlano(x = {}) {
+  return `<div class="campos-plano">
+    <div class="linha2"><div class="campo"><label>Plano</label><select data-lp="planoId">${opcoesPlano(x.planoId)}</select></div>
+      <div class="campo"><label>Nome exibido</label><input data-lp="plano" value="${esc(x.plano || "")}" placeholder="Ex.: BPO Start" data-mascara="nenhuma"></div></div>
+    <div class="campo"><label>Serviços</label>${chipsServ(x.servs || (x.serv ? servsLinha(x) : []), "data-lps")}</div>
+    <div class="linha2"><div class="campo"><label>Cobrança</label><select data-lp="cobranca"><option value="mensal" ${x.cobranca !== "unico" ? "selected" : ""}>Mensal</option><option value="unico" ${x.cobranca === "unico" ? "selected" : ""}>Projeto (valor único)</option></select></div>
+      <div class="campo"><label>Valor (R$) <span class="dica-campo" data-lp-base>${x.planoId && planoPorId(x.planoId) ? "base " + brl(planoPorId(x.planoId).valor) : ""}</span></label><input data-lp="valor" inputmode="decimal" value="${fmtValor(x.valor)}" placeholder="0,00" data-mascara="nenhuma"></div></div></div>`;
+}
+function ligarCamposPlano(raiz) {
+  raiz.addEventListener("click", e => { const b = e.target.closest("[data-lps]"); if (b) b.classList.toggle("ativo"); });
+  raiz.addEventListener("change", e => {
+    if (e.target.dataset.lp !== "planoId") return;
+    const bx = e.target.closest(".campos-plano"), p = planoPorId(e.target.value), q = k => bx.querySelector(`[data-lp=${k}]`);
+    bx.querySelector("[data-lp-base]").textContent = p ? "base " + brl(p.valor) : "";
+    if (!p) return;
+    q("plano").value = p.nome; q("cobranca").value = p.cobranca || "mensal"; q("valor").value = fmtValor(p.valor);
+    bx.querySelectorAll("[data-lps]").forEach(b => b.classList.toggle("ativo", (p.servs || []).includes(b.dataset.lps)));
+  });
+}
+function lerCamposPlano(bx) {
+  const q = k => bx.querySelector(`[data-lp=${k}]`), servs = [...bx.querySelectorAll("[data-lps].ativo")].map(b => b.dataset.lps);
+  const planoId = q("planoId").value, plano = q("plano").value.trim() || planoPorId(planoId)?.nome || nomesServs(servs);
+  return { planoId, plano, servs, serv: servs.length > 1 && servs.every(s => ["bpo", "fpa"].includes(s)) ? "int" : servs[0] || "outro", nome: nomesServs(servs), cobranca: q("cobranca").value, valor: numBR(q("valor").value) };
+}
+const validarLinha = x => !x.servs.length ? "Escolha pelo menos um serviço" : !x.plano ? "Informe o plano" : "";
+
+/* ---- Histórico de planos e preços do cliente (ordem cronológica) ---- */
+const TIPOS_HIST = { contratacao: ["Contratação", "var(--verde)", "+"], alteracao: ["Alteração", "var(--txt-2)", "✎"], upgrade: ["Upgrade", "var(--turq)", "↑"], downgrade: ["Downgrade", "var(--alerta)", "↓"], reajuste: ["Reajuste", "var(--teal)", "%"], encerramento: ["Encerramento", "var(--erro)", "×"] };
+const histCli = c => [...(c.histPlanos || [])].sort((a, b) => (a.data || "").localeCompare(b.data || "") || (a.em || "").localeCompare(b.em || ""));
+const pctTxt = v => (v > 0 ? "+" : "") + v.toLocaleString("pt-BR", { maximumFractionDigits: 2 }) + "%";
+function textoHist(h) {
+  const v = (x, cob) => `${brl(x)}${sufCob(cob)}`;
+  if (h.tipo === "contratacao") return `Contratou <b>${esc(h.plano)}</b> por ${v(h.valor, h.cobranca)}`;
+  if (h.tipo === "encerramento") return `Encerrou <b>${esc(h.planoAnt || h.plano)}</b> (${v(h.valorAnt, h.cobranca)})`;
+  if (h.tipo === "reajuste") return `<b>${esc(h.plano)}</b>: ${v(h.valorAnt, h.cobranca)} → ${v(h.valor, h.cobranca)} <span class="pct">${pctTxt(h.pct)}</span>`;
+  return `<b>${esc(h.planoAnt)}</b> ${v(h.valorAnt, h.cobranca)} → <b>${esc(h.plano)}</b> ${v(h.valor, h.cobranca)}${h.valorAnt ? ` <span class="pct">${pctTxt(Math.round((h.valor / h.valorAnt - 1) * 10000) / 100)}</span>` : ""}`;
+}
+function htmlHistPlanos(c) {
+  const hs = histCli(c), linhas = linhasCli(c);
+  // linhas sem histórico (clientes antigos) aparecem com a contratação na data de início
+  const sint = linhas.filter(s => !hs.some(h => h.linhaId === s.id)).map(s => ({ tipo: "contratacao", data: s.desde || c.desde || "", plano: s.plano || s.nome, valor: s.valor, cobranca: s.cobranca, sint: true }));
+  const todas = [...sint, ...hs].sort((a, b) => (a.data || "").localeCompare(b.data || "") || (a.em || "").localeCompare(b.em || ""));
+  if (!todas.length) return `<p class="txt-prog">Nenhum plano registrado.</p>`;
+  return `<ul class="hist-pl">${todas.map(h => { const t = TIPOS_HIST[h.tipo] || TIPOS_HIST.alteracao;
+    return `<li style="--cor:${t[1]}"><span class="hp-ico">${t[2]}</span><div><small class="hp-data">${h.data ? data(h.data + "T12:00") : "sem data"} · ${t[0]}</small><p>${textoHist(h)}</p>
+      ${h.obs ? `<small class="hp-obs">${esc(h.obs)}</small>` : ""}${h.por ? `<small class="hp-por">registrado por ${esc(h.por)} em ${data(h.em)}</small>` : ""}</div></li>`; }).join("")}</ul>`;
+}
+
+/* Grava a mudança no cliente: recalcula os totais, registra o histórico e a atividade */
+async function mudarPlanoCli(c, fn, logTxt, msg) {
+  await salvarStore(cliStore, d => {
+    const x = d.clientes.find(y => y.id === c.id); if (!x) return;
+    x.servicos = (x.servicos || []).map((s, i) => ({ ...s, id: s.id || "ln" + i }));
+    x.histPlanos ||= [];
+    fn(x);
+    const t = totaisServ(x.servicos); x.mensal = t.mensal; x.unico = t.unico;
+  });
+  Object.assign(c, cliPorId(c.id));
+  await salvarTar(d => logar(d, c.id, logTxt), msg);
+  reRenderCli();
+}
+const regHist = (x, h) => x.histPlanos.push({ id: crypto.randomUUID(), em: new Date().toISOString(), por: meuNome(), ...h });
+/* Antes da primeira mudança de um contrato antigo, guarda a situação original como contratação */
+function garantirInicio(x, s) {
+  if (x.histPlanos.some(h => h.linhaId === s.id)) return;
+  regHist(x, { linhaId: s.id, tipo: "contratacao", data: s.desde || x.desde || "", plano: s.plano || s.nome, valor: s.valor, cobranca: s.cobranca, servs: servsLinha(s), auto: true });
+}
+
+function abrirAddPlanoCli(c) {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Adicionar plano</h3><small class="sub-modal">${esc(nomeCli(c))}</small></div>
+    <form class="modal-corpo dados-grid" id="formAddPl">${camposPlano({ cobranca: "mensal" })}
+      <div class="linha2"><div class="campo"><label>Contratado a partir de</label><input type="date" name="data" value="${hojeISO()}"></div><div class="campo"><label>Observação</label><input name="obs" data-mascara="nenhuma"></div></div>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Adicionar</button></div></form>`);
+  m.classList.add("modal-largo"); veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  ligarCamposPlano(m);
+  $("formAddPl").onsubmit = async e => {
+    e.preventDefault();
+    const n = lerCamposPlano(m.querySelector(".campos-plano")), erro = validarLinha(n), dt = e.target.data.value, obs = e.target.obs.value.trim();
+    if (erro) return toast(erro, "erro");
+    fecharModal();
+    try {
+      await mudarPlanoCli(c, x => { const id = crypto.randomUUID(); x.servicos.push({ id, ...n, desde: dt });
+        regHist(x, { linhaId: id, tipo: "contratacao", data: dt, plano: n.plano, valor: n.valor, cobranca: n.cobranca, servs: n.servs, obs }); },
+        `Adicionou o plano ${n.plano} (${brl(n.valor)}${sufCob(n.cobranca)})`, "Plano adicionado");
+    } catch (er) { toast(er.message, "erro"); }
+  };
+}
+
+function abrirMudarPlanoCli(c, linhaId) {
+  const s = linhasCli(c).find(x => x.id === linhaId); if (!s) return;
+  const atual = { ...s, servs: servsLinha(s) };
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Alterar plano</h3><small class="sub-modal">${esc(nomeCli(c))} · atual: ${esc(s.plano || s.nome)} · ${brl(s.valor)}${sufCob(s.cobranca)}</small></div>
+    <form class="modal-corpo dados-grid" id="formMudPl">
+      <div class="campo"><label>O que deseja fazer?</label><div class="opc-mud">
+        <label><input type="radio" name="tipo" value="alteracao"><span><b>Alterar</b><small>Corrige o plano atual. Não gera histórico.</small></span></label>
+        <label><input type="radio" name="tipo" value="upgrade"><span><b>Upgrade</b><small>Sobe de plano. Guarda o plano e o preço anteriores.</small></span></label>
+        <label><input type="radio" name="tipo" value="downgrade"><span><b>Downgrade</b><small>Desce de plano. Guarda o plano e o preço anteriores.</small></span></label></div></div>
+      ${camposPlano(atual)}
+      <div class="linha2 so-hist oculto"><div class="campo"><label>A partir de</label><input type="date" name="data" value="${hojeISO()}"></div><div class="campo"><label>Observação</label><input name="obs" data-mascara="nenhuma" placeholder="Motivo da mudança"></div></div>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Salvar</button></div></form>`);
+  m.classList.add("modal-largo"); veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  ligarCamposPlano(m);
+  m.querySelector(".opc-mud").onchange = e => m.querySelector(".so-hist").classList.toggle("oculto", e.target.value === "alteracao");
+  $("formMudPl").onsubmit = async e => {
+    e.preventDefault();
+    const tipo = e.target.tipo.value;
+    if (!tipo) return toast("Escolha: alterar, upgrade ou downgrade", "erro");
+    const n = lerCamposPlano(m.querySelector(".campos-plano")), erro = validarLinha(n), dt = e.target.data.value, obs = e.target.obs.value.trim();
+    if (erro) return toast(erro, "erro");
+    if (tipo !== "alteracao" && !dt) return toast("Informe a data a partir da qual vale a mudança", "erro");
+    fecharModal();
+    try {
+      await mudarPlanoCli(c, x => {
+        const y = x.servicos.find(z => z.id === linhaId); if (!y) return;
+        if (tipo === "alteracao") {
+          // corrige a situação atual: o último registro do histórico deste plano passa a refletir a correção
+          const ult = x.histPlanos.filter(h => h.linhaId === linhaId).sort((a, b) => (a.data || "").localeCompare(b.data || "") || (a.em || "").localeCompare(b.em || "")).pop();
+          if (ult && ult.tipo !== "encerramento") Object.assign(ult, { plano: n.plano, valor: n.valor, cobranca: n.cobranca, servs: n.servs });
+          if (ult?.tipo === "reajuste" && ult.valorAnt) ult.pct = Math.round((n.valor / ult.valorAnt - 1) * 10000) / 100;
+          Object.assign(y, n);
+        } else {
+          garantirInicio(x, y);
+          regHist(x, { linhaId, tipo, data: dt, planoAnt: y.plano || y.nome, valorAnt: y.valor, plano: n.plano, valor: n.valor, cobranca: n.cobranca, servs: n.servs, servsAnt: servsLinha(y), obs });
+          Object.assign(y, n);
+        }
+      }, tipo === "alteracao" ? `Alterou o plano para ${n.plano} (${brl(n.valor)}${sufCob(n.cobranca)})` : `${TIPOS_HIST[tipo][0]} de ${s.plano || s.nome} (${brl(s.valor)}) para ${n.plano} (${brl(n.valor)}) a partir de ${data(dt + "T12:00")}`,
+        tipo === "alteracao" ? "Plano alterado" : TIPOS_HIST[tipo][0] + " registrado");
+    } catch (er) { toast(er.message, "erro"); }
+  };
+}
+
+function abrirReajusteCli(c, linhaId) {
+  const s = linhasCli(c).find(x => x.id === linhaId); if (!s) return;
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Reajuste de preço</h3><small class="sub-modal">${esc(nomeCli(c))} · ${esc(s.plano || s.nome)}</small></div>
+    <form class="modal-corpo dados-grid" id="formReaj">
+      <div class="reaj-atual"><span>Valor atual</span><b>${brl(s.valor)}${sufCob(s.cobranca)}</b></div>
+      <div class="linha3"><div class="campo"><label>A partir de *</label><input type="date" name="data" value="${hojeISO()}"></div>
+        <div class="campo"><label>Reajuste (%)</label><input name="pct" inputmode="decimal" placeholder="Ex.: 10" data-mascara="nenhuma"></div>
+        <div class="campo"><label>Novo valor (R$)</label><input name="novo" inputmode="decimal" placeholder="${fmtValor(s.valor)}" data-mascara="nenhuma"></div></div>
+      <div class="campo"><label>Observação</label><input name="obs" data-mascara="nenhuma" placeholder="Ex.: reajuste anual pelo IPCA"></div>
+      <small class="txt-prog">Preencha o percentual ou o novo valor: o outro é calculado. O valor anterior fica guardado no histórico.</small>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Registrar reajuste</button></div></form>`);
+  veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  const f = $("formReaj"), base = Number(s.valor) || 0;
+  f.pct.oninput = () => { const p = numBR(f.pct.value); f.novo.value = f.pct.value.trim() ? fmtValor(Math.round(base * (1 + p / 100) * 100) / 100) : ""; };
+  f.novo.oninput = () => { const v = numBR(f.novo.value); f.pct.value = v && base ? String(Math.round((v / base - 1) * 10000) / 100).replace(".", ",") : ""; };
+  f.onsubmit = async e => {
+    e.preventDefault();
+    const novo = numBR(f.novo.value), dt = f.data.value, obs = f.obs.value.trim();
+    if (!dt) return toast("Informe a data do reajuste", "erro");
+    if (!novo || novo === base) return toast("Informe o percentual ou o novo valor", "erro");
+    const pct = base ? Math.round((novo / base - 1) * 10000) / 100 : 0;
+    fecharModal();
+    try {
+      await mudarPlanoCli(c, x => {
+        const y = x.servicos.find(z => z.id === linhaId); if (!y) return;
+        garantirInicio(x, y);
+        regHist(x, { linhaId, tipo: "reajuste", data: dt, plano: y.plano || y.nome, valorAnt: y.valor, valor: novo, pct, cobranca: y.cobranca, obs });
+        y.valor = novo;
+      }, `Reajuste de ${pctTxt(pct)} em ${s.plano || s.nome}: ${brl(base)} → ${brl(novo)} a partir de ${data(dt + "T12:00")}`, "Reajuste registrado");
+    } catch (er) { toast(er.message, "erro"); }
+  };
+}
+
+function abrirEncerrarPlanoCli(c, linhaId) {
+  const s = linhasCli(c).find(x => x.id === linhaId); if (!s) return;
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Encerrar plano</h3><small class="sub-modal">${esc(nomeCli(c))} · ${esc(s.plano || s.nome)} · ${brl(s.valor)}${sufCob(s.cobranca)}</small></div>
+    <form class="modal-corpo dados-grid" id="formEnc">
+      <div class="linha2"><div class="campo"><label>Encerrado em</label><input type="date" name="data" value="${hojeISO()}"></div><div class="campo"><label>Motivo</label><input name="obs" data-mascara="nenhuma"></div></div>
+      <small class="txt-prog">O plano sai dos serviços ativos do cliente, mas continua no histórico.</small>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="perigo" type="submit">Encerrar plano</button></div></form>`);
+  veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  $("formEnc").onsubmit = async e => {
+    e.preventDefault();
+    const dt = e.target.data.value, obs = e.target.obs.value.trim();
+    fecharModal();
+    try {
+      await mudarPlanoCli(c, x => {
+        const y = x.servicos.find(z => z.id === linhaId); if (!y) return;
+        garantirInicio(x, y);
+        regHist(x, { linhaId, tipo: "encerramento", data: dt, planoAnt: y.plano || y.nome, plano: y.plano || y.nome, valorAnt: y.valor, valor: 0, cobranca: y.cobranca, obs });
+        x.servicos = x.servicos.filter(z => z.id !== linhaId);
+      }, `Encerrou o plano ${s.plano || s.nome}`, "Plano encerrado");
+    } catch (er) { toast(er.message, "erro"); }
+  };
+}
+
+/* Bloco "Planos contratados" da visão geral do cliente */
+function htmlPlanosCli(c) {
+  const ls = linhasCli(c);
+  return `<section class="g-sec"><h4>Planos contratados <button class="lnk" data-clia="addPlano">+ adicionar</button></h4>
+    ${ls.length ? ls.map(s => `<div class="rs-item pl-cli"><div class="rs-nome"><b>${esc(s.plano || s.nome)}</b><small>${esc(nomesServs(servsLinha(s)) || s.nome || "")}</small></div>
+      <div class="rs-linha"><span>${s.cobranca === "mensal" ? "Mensal" : "Projeto"}${s.planoId && planoPorId(s.planoId) && Number(planoPorId(s.planoId).valor) !== Number(s.valor) ? ` · base ${brl(planoPorId(s.planoId).valor)}` : ""}</span><b>${brl(s.valor)}${sufCob(s.cobranca)}</b></div>
+      ${s.licenca ? `<div class="rs-linha"><span>Licença ContaAzul</span><b>${brl(s.licenca)}/mês</b></div>` : ""}
+      <div class="pl-acoes"><button class="lnk" data-pl-mudar="${s.id}">Alterar plano</button><button class="lnk" data-pl-reaj="${s.id}">Reajuste</button><button class="lnk perigo-lnk" data-pl-enc="${s.id}">Encerrar</button></div></div>`).join("")
+      : `<p class="txt-prog">Nenhum plano ativo.</p>`}
+    <div class="rs-total">${c.mensal ? `<div><span>Total mensal</span><b>${brl(c.mensal)}</b></div>` : ""}${c.unico ? `<div><span>Projeto</span><b>${brl(c.unico)}</b></div>` : ""}</div></section>
+    <section class="g-sec"><h4>Histórico de planos e preços</h4>${htmlHistPlanos(c)}</section>`;
+}
+
+/* Formulário de novo cliente: lista de planos */
+function formLinhasPlano() {
+  return `<div id="lnPlanos" class="ln-planos"></div><button type="button" class="btn-s" data-m="addLinha" style="justify-self:start"><svg><use href="#i-mais"/></svg>Adicionar plano</button>`;
+}
+function ligarLinhasPlano(m) {
+  const box = m.querySelector("#lnPlanos");
+  const add = () => { const d = document.createElement("div"); d.className = "ln-plano"; d.innerHTML = `<button type="button" class="x-ln" aria-label="Remover">×</button>` + camposPlano({ cobranca: "mensal" }); box.append(d); };
+  m.querySelector("[data-m=addLinha]").onclick = add;
+  box.addEventListener("click", e => { if (e.target.closest(".x-ln")) e.target.closest(".ln-plano").remove(); });
+  ligarCamposPlano(box);
+  add();
+}
+const lerLinhasPlano = m => [...m.querySelectorAll("#lnPlanos .campos-plano")].map(lerCamposPlano).filter(x => x.servs.length || x.planoId || x.valor);
+
 /* ---- Novo cliente / serviços ---- */
 function formServicos(lista) {
   return `<div class="serv-ed" id="servEd">${SERV_CLI.slice(0, 4).map(([s, n]) => { const x = (lista || []).find(i => (i.serv === s) || (!i.serv && servsDoCliente({ servicos: [i] }).includes(s))) || null;
@@ -7215,7 +7617,7 @@ function abrirNovoCliente() {
       <div class="linha3">${campoTxt("cep", "CEP", "")}${campoTxt("cidade", "Cidade", "")}${campoTxt("uf", "UF", "")}</div>
       <div class="linha2"><div class="campo"><label>Cliente desde</label><input type="date" name="desde" value="${hojeISO()}"></div>
         <div class="campo"><label>Responsável WL</label><select name="responsavel">${opcoes(RESPONSAVEIS.map(r => [r, r]), RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", "—")}</select></div></div>
-      <div class="campo"><label>Serviços contratados</label>${formServicos([])}</div>
+      <div class="campo"><label>Planos contratados</label>${formLinhasPlano()}</div>
       <label class="chk"><input type="checkbox" name="rotina" checked> Criar as tarefas da rotina padrão dos serviços marcados</label>
       <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Cadastrar cliente</button></div>
     </form>`);
@@ -7224,7 +7626,7 @@ function abrirNovoCliente() {
   m.querySelector("[data-m=cancelar]").onclick = fecharModal;
   const form = $("formCli");
   form._extra = {};
-  $("servEd").onchange = e => { const l = e.target.closest(".serv-lin"); if (l && e.target.type === "checkbox") l.classList.toggle("on", e.target.checked); };
+  ligarLinhasPlano(m);
   m.querySelector("[data-m=cnpj]").onclick = async () => {
     const d = soDigitos(form.cnpj.value);
     if (d.length !== 14) return toast("Digite os 14 caracteres do CNPJ", "erro");
@@ -7248,21 +7650,24 @@ function abrirNovoCliente() {
     if (!f.razao.trim()) return toast("Informe a razão social", "erro");
     const dc = soDigitos(f.cnpj), dup = dc.length === 14 && clis().find(x => soDigitos(x.cnpj) === dc);
     if (dup) { fecharModal(); toast(`Esse CNPJ já é o cliente ${nomeCli(dup)}`); location.hash = "clientes/" + dup.id; return; }
-    const servicos = lerServicos(form), tot = totaisServ(servicos);
+    const linhas = lerLinhasPlano(m), errLn = linhas.map(validarLinha).find(Boolean);
+    if (errLn) return toast(errLn, "erro");
+    const servicos = linhas.map(x => ({ id: crypto.randomUUID(), ...x, desde: f.desde })), tot = totaisServ(servicos);
+    const histPlanos = servicos.map(x => ({ id: crypto.randomUUID(), em: new Date().toISOString(), por: meuNome(), linhaId: x.id, tipo: "contratacao", data: f.desde, plano: x.plano, valor: x.valor, cobranca: x.cobranca, servs: x.servs }));
     let id;
     try {
       await salvarStore(cliStore, d => {
         d.seq = (d.seq || d.clientes.length) + 1; id = "CL-" + String(d.seq).padStart(4, "0");
         d.clientes.push({ id, razao: f.razao.trim(), fantasia: f.fantasia.trim(), cnpj: f.cnpj.trim(), regime: f.regime, contato: f.contato.trim(), telefone: f.telefone.trim(), email: f.email.trim(),
           cep: f.cep.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(), ...form._extra, responsavel: f.responsavel, desde: f.desde, status: "ativo", origem: "manual",
-          servicos, mensal: tot.mensal, unico: tot.unico, documentos: [], contratos: [], propostas: [], criadoEm: new Date().toISOString(), criadoPor: meuNome() });
+          servicos, histPlanos, mensal: tot.mensal, unico: tot.unico, documentos: [], contratos: [], propostas: [], criadoEm: new Date().toISOString(), criadoPor: meuNome() });
       });
     } catch (er) { return toast("Não foi possível cadastrar: " + er.message, "erro", 6000); }
     const c = cliPorId(id);
     let n = 0;
     await salvarTar(d => {
       logar(d, id, "Cadastrou o cliente");
-      if (f.rotina) for (const s of servicos.map(x => x.serv)) for (const r of ROTINAS[s] || []) {
+      if (f.rotina) for (const s of [...new Set(servicos.flatMap(x => x.servs))]) for (const r of ROTINAS[s] || []) {
         const rec = r.rec ? { tipo: r.rec, ...(r.dias ? { dias: r.dias } : {}), ...(r.dia ? { dia: r.dia } : {}) } : null;
         d.tarefas.push(novaTarefaObj(d, { clienteId: id, titulo: r.t, servico: s, responsavel: f.responsavel, prioridade: r.prio || "media", venc: primeiraData(rec, r.prazo), rec, lembrete: r.lembrete || "", checklist: r.checklist || [] })); n++;
       }
@@ -7351,8 +7756,11 @@ $("cliConteudo").addEventListener("click", async e => {
     catch (er) { toast("Não foi possível excluir: " + er.message, "erro"); }
     return abaArquivosCli(c);
   }
+  const plb = e.target.closest("[data-pl-mudar],[data-pl-reaj],[data-pl-enc]");
+  if (plb) { const c = cliPorId(rota[0]), d = plb.dataset; return d.plMudar ? abrirMudarPlanoCli(c, d.plMudar) : d.plReaj ? abrirReajusteCli(c, d.plReaj) : abrirEncerrarPlanoCli(c, d.plEnc); }
   const b = e.target.closest("[data-clia]"); if (!b) return;
   const a = b.dataset.clia, c = cliPorId(rota[0]);
+  if (a === "addPlano") return abrirAddPlanoCli(c);
   if (a === "novo") return abrirNovoCliente();
   if (a === "onboarding") return novoOnboarding({ clienteId: c.id });
   if (a === "novaTarefa") return abrirTarefa(null, c?.id);
