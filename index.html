@@ -996,6 +996,17 @@
   .zona-arq.sobre{border-color:var(--turq);background:rgba(19,163,181,.06)}
   .prog-arq{display:grid;gap:4px;font-size:.76rem;margin-bottom:10px}
   .prog-arq i{height:6px;border-radius:3px;background:var(--borda);overflow:hidden} .prog-arq b{display:block;height:100%;background:var(--turq);transition:width .2s}
+  .rel-cli .bloco-cab .dir{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .rel-cli #relProg{padding:0 16px}
+  .rel-mes{padding:4px 16px 14px}.rel-mes h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--turq);margin:8px 0}
+  .lista-rel{list-style:none;margin:0;padding:0;border:1px solid var(--borda);border-radius:12px;overflow:hidden}
+  .lista-rel li{display:flex;align-items:center;gap:12px;padding:12px;border-top:1px solid var(--borda)}.lista-rel li:first-child{border-top:0}
+  .rel-ico{width:38px;height:38px;border-radius:10px;background:rgba(19,163,181,.12);color:var(--teal);display:grid;place-items:center;flex:none}.rel-ico svg{width:20px;height:20px}
+  .lista-rel .q{flex:1;min-width:0}.lista-rel .q b{display:block;font-size:.9rem;color:var(--txt)}.lista-rel .q small{display:block;font-size:.74rem;color:var(--txt-2);overflow-wrap:anywhere}.lista-rel .q p{margin:4px 0 0;font-size:.78rem;color:var(--txt-2)}
+  .rel-acoes{display:flex;align-items:center;gap:6px;flex:none}
+  .btn-mini{padding:7px 12px;font-size:.78rem;min-height:0}.btn-mini svg{width:15px;height:15px}
+  .rel-sel{display:flex;flex-wrap:wrap;gap:6px}.rel-sel span{font-size:.74rem;background:var(--bg);border:1px solid var(--borda);border-radius:8px;padding:4px 8px}
+  @media(max-width:640px){.lista-rel li{flex-wrap:wrap}.rel-acoes{width:100%;flex-wrap:wrap}.rel-acoes .btn-mini{flex:1;justify-content:center}}
   .lista-arq{list-style:none;border:1px solid var(--borda);border-radius:12px;overflow:hidden}
   .lista-arq li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid var(--borda)}
   .lista-arq li:first-child{border-top:0}
@@ -1215,6 +1226,7 @@
   <symbol id="i-editar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
   <symbol id="i-atd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></symbol>
   <symbol id="i-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 18h4"/></symbol>
+  <symbol id="i-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 16v-3M12 16V8M17 16v-6"/></symbol>
   <symbol id="i-lixo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></symbol>
   <symbol id="i-estrela" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
   <symbol id="i-estrela-cheia" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
@@ -1441,7 +1453,7 @@ const GRAPH = CONFIG.api + "/graph";
 const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial", "descricao": "Estudo, prospecção, apresentações e fechamento.", "icone": "i-a-com", "pasta": "Comercial", "subs": [{"id": "estudo", "nome": "Materiais de Estudo", "descricao": "Posicionamento, ICP, scripts e guias de venda.", "pasta": "Materiais de Estudo"}, {"id": "prospeccao", "nome": "Ferramentas de Prospecção", "descricao": "Controle de prospecção, CRM e agenda de reuniões.", "pasta": "Ferramentas de Prospecção"}, {"id": "apresentacoes", "nome": "Apresentações Comerciais", "descricao": "Apresentação institucional e por segmento.", "pasta": "Apresentações Comerciais"}, {"id": "propostas", "nome": "Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos.", "pasta": "Propostas, Preços e Contratos"}]}, {"id": "bpo", "nome": "BPO Financeiro", "descricao": "Gestão das rotinas financeiras do cliente.", "icone": "i-a-bpo", "pasta": "BPO Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "fpa", "nome": "FP&A", "descricao": "Indicadores gerenciais e análise de desempenho.", "icone": "i-a-fpa", "pasta": "FP&A", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "planejamento", "nome": "Planejamento Financeiro", "descricao": "Orçamentos, fluxo de caixa e cenários.", "icone": "i-a-pla", "pasta": "Planejamento Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "processos", "nome": "Consultoria de Processos", "descricao": "Mapeamento e redesenho de processos.", "icone": "i-a-pro", "pasta": "Consultoria de Processos", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}], "itens": [{"area": "comercial", "sub": "estudo", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Definição de ICP", "ext": "docx", "descricao": "Perfil de cliente ideal da WL Expertise."}, {"area": "comercial", "sub": "estudo", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"area": "comercial", "sub": "estudo", "nome": "Mapa de Posicionamento", "ext": "docx", "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "descricao": "Levantamento das dores e metas da base de clientes."}, {"area": "comercial", "sub": "estudo", "nome": "Script de Vendas (Call)", "ext": "docx", "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"area": "comercial", "sub": "estudo", "nome": "Script Único", "ext": "docx", "descricao": "Script de abordagem comercial."}, {"area": "comercial", "sub": "prospeccao", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"area": "comercial", "sub": "prospeccao", "nome": "CRM para Consultorias", "ext": "xlsx", "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"area": "comercial", "sub": "prospeccao", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"area": "comercial", "sub": "estudo", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"area": "comercial", "sub": "estudo", "nome": "Programa de Indicação", "ext": "pdf", "descricao": "Como estruturar um programa de indicação de clientes."}, {"area": "comercial", "sub": "propostas", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "descricao": "Termo para parceiros que indicam clientes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "descricao": "Proposta de valor para negócios de estética."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "descricao": "Proposta de valor para locadoras de equipamentos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "descricao": "Proposta de valor para criadores de conteúdo."}, {"area": "comercial", "sub": "propostas", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"area": "comercial", "sub": "propostas", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "descricao": "Planos e regras de negociação para o segmento Rental."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "descricao": "Modelo de proposta comercial."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "descricao": "Modelo de contrato de prestação de serviços."}, {"area": "processos", "sub": "diagnostico", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"area": "fpa", "sub": "diagnostico", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"area": "bpo", "sub": "diagnostico", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "descricao": "Questionário preliminar das rotinas financeiras."}, {"area": "bpo", "sub": "execucao", "nome": "Mapa Quente da Operação", "ext": "xlsx", "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"area": "processos", "sub": "diagnostico", "nome": "Ata e Briefing de Reunião", "ext": "docx", "descricao": "Modelo para registrar reuniões e briefings."}, {"area": "bpo", "sub": "onboarding", "nome": "Questionário de Kick-off", "ext": "xlsx", "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"area": "processos", "sub": "onboarding", "nome": "Formulário de Onboarding", "ext": "docx", "descricao": "Coleta de informações para iniciar o projeto."}, {"area": "bpo", "sub": "onboarding", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "descricao": "Plano de ativação, relação de clientes e timeline."}, {"area": "bpo", "sub": "onboarding", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"area": "bpo", "sub": "onboarding", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"area": "processos", "sub": "execucao", "nome": "Cronograma da Consultoria", "ext": "xlsx", "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"area": "processos", "sub": "execucao", "nome": "Plano de Ação Personalizado", "ext": "docx", "descricao": "Plano de ação do cliente após o diagnóstico."}, {"area": "processos", "sub": "execucao", "nome": "Materiais de Entrega", "ext": "xlsx", "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"area": "bpo", "sub": "execucao", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "descricao": "Gestão da operação por operador, plano de ação e timeline."}], "legado": {"01 - Estratégia e Posicionamento": "comercial/estudo", "02 - Prospecção e Vendas": "comercial/prospeccao", "03 - Apresentações Comerciais": "comercial/apresentacoes", "04 - Propostas, Preços e Contratos": "comercial/propostas", "05 - Diagnóstico": "bpo/diagnostico", "06 - Onboarding e Implantação": "bpo/onboarding", "07 - Execução e Entregas": "bpo/execucao"}};
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
-const VERSAO = "v33";
+const VERSAO = "v34";
 document.querySelectorAll(".versao-sis").forEach(x => x.textContent = VERSAO);
 const MODULOS = [
   { id: "inicio", nome: "Início", icone: "i-home" },
@@ -7133,12 +7145,12 @@ async function abrirCliente(id, aba) {
   const c = cliPorId(id);
   if (!c) { $("cliConteudo").innerHTML = `<div class="aviso-erro">Cliente não encontrado.</div>`; return; }
   if (!crm.carregado) await carregarCRM(true);
-  if (!["geral", "tarefas", "notas", "arquivos", "atividades"].includes(aba)) aba = "geral";
+  if (!["geral", "tarefas", "notas", "relatorios", "arquivos", "atividades"].includes(aba)) aba = "geral";
   $("cliEyebrow").textContent = `Cliente · ${c.id}${c.status === "inativo" ? " · inativo" : ""}`; $("cliTitulo").textContent = nomeCli(c);
   $("cliDesc").textContent = `${c.razao || ""}${c.cnpj ? " · CNPJ " + c.cnpj : ""}`;
   $("cliBotoes").innerHTML = `<button class="btn-s" data-link="#clientes">Todos os clientes</button>`;
   const pend = tarefas().filter(t => t.clienteId === id && t.status !== "concluida"), atr = pend.filter(t => stTarefa(t) === "atraso").length;
-  const nav = `<div class="barra-crm"><nav class="abas">${[["geral", "Visão geral"], ["tarefas", `Tarefas <span class="bolinha ${atr ? "" : "neutra"}">${pend.length}</span>`], ["notas", "Notas fiscais"], ["arquivos", "Arquivos"], ["atividades", "Atividades"]]
+  const nav = `<div class="barra-crm"><nav class="abas">${[["geral", "Visão geral"], ["tarefas", `Tarefas <span class="bolinha ${atr ? "" : "neutra"}">${pend.length}</span>`], ["notas", "Notas fiscais"], ["relatorios", "Relatórios"], ["arquivos", "Arquivos"], ["atividades", "Atividades"]]
     .map(([k, n]) => `<button data-link="#clientes/${id}/${k}" class="${aba === k ? "ativo" : ""}">${n}</button>`).join("")}</nav></div>`;
   $("cliConteudo").innerHTML = nav + `<div id="cliAba"></div>`;
   if (aba === "geral") abaGeralCli(c);
@@ -7146,6 +7158,7 @@ async function abrirCliente(id, aba) {
   if (aba === "arquivos") abaArquivosCli(c);
   if (aba === "atividades") abaAtividadesCli(c);
   if (aba === "notas") abaNotasCli(c);
+  if (aba === "relatorios") abaRelatoriosCli(c);
 }
 function abaGeralCli(c) {
   const l = c.leadId ? leadPorId(c.leadId) : null;
@@ -7448,6 +7461,155 @@ async function enviarArquivosCli(c, rel, arquivos) {
     await salvarTar(d => logar(d, c.id, `Enviou ${ok === 1 ? `o arquivo "${arquivos[0].name}"` : ok + " arquivos"}${rel !== pastaCli(c) ? ` para ${rel.slice(pastaCli(c).length + 1)}` : ""}`), `${ok} arquivo${ok === 1 ? "" : "s"} enviado${ok === 1 ? "" : "s"}`);
   }
   if (viewAtual === "clientes" && rota[0] === c.id) abaArquivosCli(c);
+}
+
+/* ---- Relatórios do cliente (dashboards HTML mensais) ----
+   Arquivos na pasta do cliente no OneDrive (subpasta "Relatórios"); a lista fica em dados/clientes/relatorios.json.
+   "Abrir" baixa o HTML e mostra como página comum em outra aba, sem passar pelo visualizador do OneDrive. */
+const relStore = criarStore("dados/clientes/relatorios.json", { versao: 1, seq: 0, relatorios: [] });
+const relatoriosCli = id => (relStore.dados?.relatorios || []).filter(r => r.clienteId === id);
+const MESES_PT = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+const nomeComp = c => c ? `${MESES_PT[+c.slice(5, 7) - 1]}/${c.slice(0, 4)}` : "Sem competência";
+const tamTxt = n => n > 1048576 ? (n / 1048576).toFixed(1).replace(".", ",") + " MB" : Math.max(1, Math.round((n || 0) / 1024)) + " KB";
+const mesAnterior = () => { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - 1); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`; };
+const cl_rel = { ano: "" };
+
+async function abaRelatoriosCli(c) {
+  if (!relStore.carregado) {
+    $("cliAba").innerHTML = `<div class="esqueleto"></div>`;
+    try { await carregarStore(relStore); } catch (e) { $("cliAba").innerHTML = `<div class="aviso-erro">Não foi possível ler os relatórios: ${esc(e.message)}</div>`; return; }
+    if (!(viewAtual === "clientes" && rota[0] === c.id && rota[1] === "relatorios")) return;
+  }
+  const todos = relatoriosCli(c.id).sort((a, b) => (b.competencia || "").localeCompare(a.competencia || "") || (b.enviadoEm || "").localeCompare(a.enviadoEm || ""));
+  const anos = [...new Set(todos.map(r => (r.competencia || "").slice(0, 4)).filter(Boolean))].sort().reverse();
+  if (cl_rel.ano && !anos.includes(cl_rel.ano)) cl_rel.ano = "";
+  const ls = todos.filter(r => !cl_rel.ano || (r.competencia || "").startsWith(cl_rel.ano));
+  const grupos = [];
+  for (const r of ls) { const g = grupos.find(x => x.comp === r.competencia); g ? g.itens.push(r) : grupos.push({ comp: r.competencia, itens: [r] }); }
+  $("cliAba").innerHTML = `
+  <section class="bloco rel-cli">
+    <div class="bloco-cab"><div><h3>Relatórios</h3><small>Dashboards e relatórios mensais em HTML. "Abrir" mostra como página comum, em outra aba.</small></div>
+      <div class="dir">${anos.length > 1 ? `<select id="relAno"><option value="">Todos os anos</option>${anos.map(a => `<option ${a === cl_rel.ano ? "selected" : ""}>${a}</option>`).join("")}</select>` : ""}
+        <button class="btn-p" data-rel="novo"><svg><use href="#i-enviar"/></svg>Enviar relatório</button></div></div>
+    <div id="relProg"></div>
+    ${grupos.length ? grupos.map(g => `<div class="rel-mes"><h4>${esc(nomeComp(g.comp))}</h4><ul class="lista-rel">${g.itens.map(r => `<li>
+        <span class="rel-ico"><svg><use href="#i-dash"/></svg></span>
+        <div class="q"><b>${esc(r.titulo || r.nome)}</b><small>${esc(r.nome)} · ${tamTxt(r.tamanho)} · enviado ${dataHora(r.enviadoEm)}${r.por ? " por " + esc(r.por) : ""}</small>${r.obs ? `<p>${esc(r.obs)}</p>` : ""}</div>
+        <div class="rel-acoes"><button class="btn-p btn-mini" data-rel="abrir" data-id="${esc(r.id)}"><svg><use href="#i-abrir"/></svg>Abrir</button>
+          <button class="btn-s btn-mini" data-rel="baixar" data-id="${esc(r.id)}"><svg><use href="#i-baixar"/></svg>Baixar</button>
+          <button class="acao" data-rel="editar" data-id="${esc(r.id)}" data-dica="Editar"><svg><use href="#i-editar"/></svg></button>
+          <button class="acao perigo-ico" data-rel="excluir" data-id="${esc(r.id)}" data-dica="Excluir"><svg><use href="#i-lixo"/></svg></button></div></li>`).join("")}</ul></div>`).join("")
+      : `<div class="vazio-bloco">Nenhum relatório ainda. Envie o dashboard do mês (arquivo .html) e escolha a competência. Você pode enviar quantos quiser por mês.</div>`}
+  </section>`;
+  if ($("relAno")) $("relAno").onchange = e => { cl_rel.ano = e.target.value; abaRelatoriosCli(c); };
+  $("cliAba").onclick = e => {
+    const b = e.target.closest("[data-rel]"); if (!b) return;
+    const r = relStore.dados.relatorios.find(x => x.id === b.dataset.id);
+    if (b.dataset.rel === "novo") return abrirEnvioRelatorio(c);
+    if (!r) return;
+    if (b.dataset.rel === "abrir") return abrirRelatorio(r);
+    if (b.dataset.rel === "baixar") return baixarRelatorio(r);
+    if (b.dataset.rel === "editar") return abrirEnvioRelatorio(c, r);
+    if (b.dataset.rel === "excluir") return excluirRelatorio(c, r);
+  };
+}
+async function conteudoRelatorio(r) {
+  try { return await (await graph(`/me/drive/items/${r.itemId}/content`)).blob(); }
+  catch (e) {
+    if (e.status !== 404 || !r.caminho) throw e;
+    return await (await graph(caminho(r.caminho) + ":/content")).blob();
+  }
+}
+async function abrirRelatorio(r) {
+  // a aba precisa ser aberta já no clique (senão o navegador bloqueia como pop-up)
+  const w = window.open("", "_blank");
+  if (w) try { w.document.write(`<!doctype html><meta charset="utf-8"><title>Abrindo relatório…</title><body style="font:15px system-ui;color:#0B4A50;display:grid;place-items:center;height:90vh;margin:0">Abrindo ${esc(r.titulo || r.nome)}…</body>`); } catch {}
+  try {
+    const blob = await conteudoRelatorio(r);
+    const url = URL.createObjectURL(new Blob([await blob.arrayBuffer()], { type: "text/html;charset=utf-8" }));
+    if (w && !w.closed) w.location.href = url; else location.assign(url);
+    setTimeout(() => URL.revokeObjectURL(url), 5 * 60000);
+  } catch (e) {
+    if (w && !w.closed) w.close();
+    toast("Não foi possível abrir o relatório: " + e.message, "erro", 6000);
+  }
+}
+async function baixarRelatorio(r) {
+  try { toast("Baixando…"); baixarBlob(await conteudoRelatorio(r), r.nome); }
+  catch (e) { toast("Não foi possível baixar: " + e.message, "erro", 6000); }
+}
+async function tituloDoHtml(arquivo) {
+  try { const t = await arquivo.slice(0, 200000).text(); const m = t.match(/<title[^>]*>([^<]{1,160})<\/title>/i); return m ? m[1].replace(/\s+/g, " ").trim() : ""; } catch { return ""; }
+}
+function abrirEnvioRelatorio(c, r) {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>${r ? "Editar relatório" : "Enviar relatório"}</h3><small class="sub-modal">${esc(nomeCli(c))}</small></div>
+    <form class="modal-corpo dados-grid" id="formRel">
+      ${r ? "" : `<div class="zona-arq" id="relZona"><b>Escolher arquivo(s) .html</b>ou arraste aqui · pode enviar mais de um</div><div id="relSel" class="rel-sel"></div>`}
+      <div class="linha2"><div class="campo"><label>Competência (mês de referência)</label><input type="month" name="competencia" value="${esc(r?.competencia || mesAnterior())}" required></div>
+        <div class="campo"><label>Título ${r ? "" : "<small>(se vazio, usa o título do próprio arquivo)</small>"}</label><input name="titulo" value="${esc(r?.titulo || "")}" placeholder="Ex.: Dashboard financeiro" data-mascara="nenhuma"></div></div>
+      <div class="campo"><label>Observação</label><input name="obs" value="${esc(r?.obs || "")}" placeholder="Ex.: versão revisada após reunião" data-mascara="nenhuma"></div>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">${r ? "Salvar" : "Enviar"}</button></div>
+    </form>`);
+  veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  let arquivos = [];
+  const mostrar = () => { $("relSel").innerHTML = arquivos.map(a => `<span>${esc(a.name)} · ${tamTxt(a.size)}</span>`).join(""); };
+  const pegar = lista => {
+    const ok = [...lista].filter(a => /\.html?$/i.test(a.name)), fora = lista.length - ok.length;
+    if (fora) toast(`${fora} arquivo(s) ignorado(s): só arquivos .html`, "erro");
+    arquivos = arquivos.concat(ok); mostrar();
+  };
+  if (!r) {
+    const z = $("relZona");
+    z.onclick = () => { const i = document.createElement("input"); i.type = "file"; i.multiple = true; i.accept = ".html,.htm,text/html"; i.onchange = () => pegar(i.files); i.click(); };
+    z.ondragover = e => { e.preventDefault(); z.classList.add("sobre"); };
+    z.ondragleave = () => z.classList.remove("sobre");
+    z.ondrop = e => { e.preventDefault(); z.classList.remove("sobre"); pegar(e.dataTransfer.files); };
+  }
+  $("formRel").onsubmit = async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    if (!f.competencia) return toast("Informe a competência", "erro");
+    if (r) {
+      fecharModal();
+      try { await salvarStore(relStore, d => { const x = d.relatorios.find(y => y.id === r.id); if (x) Object.assign(x, { competencia: f.competencia, titulo: f.titulo.trim(), obs: f.obs.trim() }); }); toast("Relatório atualizado"); }
+      catch (er) { toast(er.message, "erro"); }
+      return abaRelatoriosCli(c);
+    }
+    if (!arquivos.length) return toast("Escolha o arquivo do relatório", "erro");
+    fecharModal();
+    await enviarRelatorios(c, arquivos, f);
+  };
+}
+async function enviarRelatorios(c, arquivos, f) {
+  const pasta = pastaCli(c) + "/Relatórios", prog = $("relProg"), novos = [];
+  try { await garantirCaminho(pasta + "/x"); await criarPasta(pastaCli(c), "Relatórios"); } catch {}
+  for (const [k, a] of arquivos.entries()) {
+    if (prog) prog.innerHTML = `<div class="prog-arq"><span>Enviando ${k + 1} de ${arquivos.length}: ${esc(a.name)}</span><i><b id="relBarra" style="width:0%"></b></i></div>`;
+    try {
+      const nome = limparNome(`${f.competencia} - ${a.name}`);
+      const item = await enviarArquivo(pasta + "/" + nome, a, "rename", p => { const b = $("relBarra"); if (b) b.style.width = Math.round(p * 100) + "%"; });
+      const titulo = arquivos.length === 1 && f.titulo.trim() ? f.titulo.trim() : (await tituloDoHtml(a)) || f.titulo.trim() || a.name.replace(/\.html?$/i, "");
+      novos.push({ id: crypto.randomUUID(), clienteId: c.id, competencia: f.competencia, titulo, obs: f.obs.trim(), nome: item.name || nome, itemId: item.id, caminho: pasta + "/" + (item.name || nome),
+        tamanho: a.size, enviadoEm: new Date().toISOString(), por: meuNome() });
+    } catch (er) { toast(`Falha ao enviar ${a.name}: ${er.message}`, "erro", 6000); }
+  }
+  if (prog) prog.innerHTML = "";
+  if (novos.length) {
+    try {
+      await salvarStore(relStore, d => { d.relatorios.push(...novos); });
+      await salvarTar(d => logar(d, c.id, `Enviou ${novos.length === 1 ? `o relatório "${novos[0].titulo}"` : novos.length + " relatórios"} de ${nomeComp(f.competencia)}`), novos.length === 1 ? "Relatório enviado" : `${novos.length} relatórios enviados`);
+    } catch (er) { toast(er.message, "erro"); }
+  }
+  if (viewAtual === "clientes" && rota[0] === c.id) abaRelatoriosCli(c);
+}
+async function excluirRelatorio(c, r) {
+  if (!confirmar(`Excluir o relatório "${r.titulo || r.nome}" (${nomeComp(r.competencia)})? O arquivo vai para a lixeira do OneDrive.`)) return;
+  try {
+    try { await graph(`/me/drive/items/${r.itemId}`, { method: "DELETE" }); } catch (e) { if (e.status !== 404) throw e; }
+    await salvarStore(relStore, d => { d.relatorios = d.relatorios.filter(x => x.id !== r.id); });
+    await salvarTar(d => logar(d, c.id, `Excluiu o relatório "${r.titulo || r.nome}" de ${nomeComp(r.competencia)}`), "Relatório excluído");
+  } catch (e) { toast("Não foi possível excluir: " + e.message, "erro"); }
+  abaRelatoriosCli(c);
 }
 
 /* ---- Atividades (log) ---- */
