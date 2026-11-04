@@ -628,6 +628,11 @@
   .card-cli b{font-size:1rem;color:var(--teal)} .card-cli small{font-size:.74rem;color:var(--txt-2)}
   .chips-cli{display:flex;flex-wrap:wrap;gap:4px} .chips-cli span{font-size:.66rem;font-weight:700;background:rgba(19,163,181,.12);color:var(--teal);border-radius:999px;padding:3px 8px}
   .rod-cli{display:flex;justify-content:space-between;font-size:.74rem;color:var(--txt-2);margin-top:4px} .rod-cli span:first-child{font-weight:800;color:var(--txt)}
+  .lista-cp{margin:0 0 4px 18px;padding:0;font-size:.84rem;display:grid;gap:4px}
+  .cp-prog{display:grid;gap:6px}.cp-prog i{display:block;height:8px;border-radius:99px;background:var(--borda);overflow:hidden}.cp-prog i b{display:block;height:100%;background:var(--turq);transition:width .3s}
+  .cp-prog span{font-size:.78rem;color:var(--txt-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cp-rev{border:1px solid var(--borda);border-radius:10px;padding:8px 12px}.cp-rev summary{cursor:pointer;font-weight:700;font-size:.82rem}
+  .cp-rev ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px;max-height:240px;overflow:auto}.cp-rev li{font-size:.8rem}.cp-rev small{display:block;color:var(--txt-2);font-size:.72rem}
   .hist-cli{list-style:none;display:grid;gap:0}
   .hist-cli li{display:grid;gap:2px;padding:9px 0;border-bottom:1px solid var(--borda);font-size:.82rem}
   .hist-cli small{font-size:.7rem;color:var(--txt-2)} .hist-cli span{color:var(--txt-2)} .hist-cli a{font-size:.74rem;color:var(--turq);font-weight:700}
@@ -1307,6 +1312,7 @@
         </nav>
         <div class="dir">
           <button class="btn-s" id="btnBuscaEmp"><svg><use href="#i-busca"/></svg>Buscar empresas</button>
+          <button class="btn-s" id="btnCompletar"><svg><use href="#i-atual"/></svg>Completar planilha</button>
           <button class="btn-s" id="btnImportar"><svg><use href="#i-enviar"/></svg>Importar planilha</button>
           <button class="btn-p" id="btnNovoLead"><svg><use href="#i-mais"/></svg>Novo lead</button>
         </div>
@@ -1435,7 +1441,7 @@ const GRAPH = CONFIG.api + "/graph";
 const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial", "descricao": "Estudo, prospecção, apresentações e fechamento.", "icone": "i-a-com", "pasta": "Comercial", "subs": [{"id": "estudo", "nome": "Materiais de Estudo", "descricao": "Posicionamento, ICP, scripts e guias de venda.", "pasta": "Materiais de Estudo"}, {"id": "prospeccao", "nome": "Ferramentas de Prospecção", "descricao": "Controle de prospecção, CRM e agenda de reuniões.", "pasta": "Ferramentas de Prospecção"}, {"id": "apresentacoes", "nome": "Apresentações Comerciais", "descricao": "Apresentação institucional e por segmento.", "pasta": "Apresentações Comerciais"}, {"id": "propostas", "nome": "Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos.", "pasta": "Propostas, Preços e Contratos"}]}, {"id": "bpo", "nome": "BPO Financeiro", "descricao": "Gestão das rotinas financeiras do cliente.", "icone": "i-a-bpo", "pasta": "BPO Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "fpa", "nome": "FP&A", "descricao": "Indicadores gerenciais e análise de desempenho.", "icone": "i-a-fpa", "pasta": "FP&A", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "planejamento", "nome": "Planejamento Financeiro", "descricao": "Orçamentos, fluxo de caixa e cenários.", "icone": "i-a-pla", "pasta": "Planejamento Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "processos", "nome": "Consultoria de Processos", "descricao": "Mapeamento e redesenho de processos.", "icone": "i-a-pro", "pasta": "Consultoria de Processos", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}], "itens": [{"area": "comercial", "sub": "estudo", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Definição de ICP", "ext": "docx", "descricao": "Perfil de cliente ideal da WL Expertise."}, {"area": "comercial", "sub": "estudo", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"area": "comercial", "sub": "estudo", "nome": "Mapa de Posicionamento", "ext": "docx", "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "descricao": "Levantamento das dores e metas da base de clientes."}, {"area": "comercial", "sub": "estudo", "nome": "Script de Vendas (Call)", "ext": "docx", "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"area": "comercial", "sub": "estudo", "nome": "Script Único", "ext": "docx", "descricao": "Script de abordagem comercial."}, {"area": "comercial", "sub": "prospeccao", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"area": "comercial", "sub": "prospeccao", "nome": "CRM para Consultorias", "ext": "xlsx", "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"area": "comercial", "sub": "prospeccao", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"area": "comercial", "sub": "estudo", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"area": "comercial", "sub": "estudo", "nome": "Programa de Indicação", "ext": "pdf", "descricao": "Como estruturar um programa de indicação de clientes."}, {"area": "comercial", "sub": "propostas", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "descricao": "Termo para parceiros que indicam clientes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "descricao": "Proposta de valor para negócios de estética."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "descricao": "Proposta de valor para locadoras de equipamentos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "descricao": "Proposta de valor para criadores de conteúdo."}, {"area": "comercial", "sub": "propostas", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"area": "comercial", "sub": "propostas", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "descricao": "Planos e regras de negociação para o segmento Rental."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "descricao": "Modelo de proposta comercial."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "descricao": "Modelo de contrato de prestação de serviços."}, {"area": "processos", "sub": "diagnostico", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"area": "fpa", "sub": "diagnostico", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"area": "bpo", "sub": "diagnostico", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "descricao": "Questionário preliminar das rotinas financeiras."}, {"area": "bpo", "sub": "execucao", "nome": "Mapa Quente da Operação", "ext": "xlsx", "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"area": "processos", "sub": "diagnostico", "nome": "Ata e Briefing de Reunião", "ext": "docx", "descricao": "Modelo para registrar reuniões e briefings."}, {"area": "bpo", "sub": "onboarding", "nome": "Questionário de Kick-off", "ext": "xlsx", "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"area": "processos", "sub": "onboarding", "nome": "Formulário de Onboarding", "ext": "docx", "descricao": "Coleta de informações para iniciar o projeto."}, {"area": "bpo", "sub": "onboarding", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "descricao": "Plano de ativação, relação de clientes e timeline."}, {"area": "bpo", "sub": "onboarding", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"area": "bpo", "sub": "onboarding", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"area": "processos", "sub": "execucao", "nome": "Cronograma da Consultoria", "ext": "xlsx", "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"area": "processos", "sub": "execucao", "nome": "Plano de Ação Personalizado", "ext": "docx", "descricao": "Plano de ação do cliente após o diagnóstico."}, {"area": "processos", "sub": "execucao", "nome": "Materiais de Entrega", "ext": "xlsx", "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"area": "bpo", "sub": "execucao", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "descricao": "Gestão da operação por operador, plano de ação e timeline."}], "legado": {"01 - Estratégia e Posicionamento": "comercial/estudo", "02 - Prospecção e Vendas": "comercial/prospeccao", "03 - Apresentações Comerciais": "comercial/apresentacoes", "04 - Propostas, Preços e Contratos": "comercial/propostas", "05 - Diagnóstico": "bpo/diagnostico", "06 - Onboarding e Implantação": "bpo/onboarding", "07 - Execução e Entregas": "bpo/execucao"}};
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
-const VERSAO = "v31";
+const VERSAO = "v32";
 document.querySelectorAll(".versao-sis").forEach(x => x.textContent = VERSAO);
 const MODULOS = [
   { id: "inicio", nome: "Início", icone: "i-home" },
@@ -2354,7 +2360,7 @@ const tentativasDe = l => (l.historico || []).filter(h => interacaoDe(h.tipo)?.t
 function novoId(d) { d.seq = (d.seq || d.leads.length) + 1; return "L-" + String(d.seq).padStart(4, "0"); }
 
 /* ---- Indicadores ---- */
-function ultimaInteracao(l) { return (l.historico || []).find(h => h.tipo !== "etapa"); }
+function ultimaInteracao(l) { return (l.historico || []).find(h => !["etapa", "receita", "responsavel"].includes(h.tipo)); }
 function statusData(d) {
   if (!d) return "";
   const dia = d.slice(0, 10), hoje = hojeISO();
@@ -2602,6 +2608,7 @@ $("crmConteudo").onclick = e => {
 };
 $("btnNovoLead").onclick = () => abrirNovoLead();
 $("btnImportar").onclick = () => abrirImportacao();
+$("btnCompletar").onclick = () => abrirCompletar();
 
 /* ---- Ficha do lead ---- */
 function fecharFicha() { abertoId = null; document.querySelectorAll("#gaveta,#veuG").forEach(x => x.remove()); }
@@ -2733,7 +2740,7 @@ function renderFicha(id) {
     <section class="g-sec"><h4>Histórico</h4>
       ${(l.historico || []).length ? `<ul class="timeline">${l.historico.map(h => {
         const i = interacaoDe(h.tipo);
-        const tit = h.tipo === "etapa" ? `Etapa: ${etapaDe(h.de).nome} → ${etapaDe(h.para).nome}` : h.tipo === "acao" ? "Próxima ação concluída" : h.tipo === "criado" ? "Lead cadastrado" : h.tipo === "sem_interesse" ? "Marcado como sem interesse" : h.tipo === "documento" ? "Documento gerado" : h.tipo === "reativado" ? "Lead reativado" : h.tipo === "responsavel" ? "Responsável adicionado" : (i?.nome || h.tipo);
+        const tit = h.tipo === "etapa" ? `Etapa: ${etapaDe(h.de).nome} → ${etapaDe(h.para).nome}` : h.tipo === "acao" ? "Próxima ação concluída" : h.tipo === "criado" ? "Lead cadastrado" : h.tipo === "sem_interesse" ? "Marcado como sem interesse" : h.tipo === "documento" ? "Documento gerado" : h.tipo === "reativado" ? "Lead reativado" : h.tipo === "responsavel" ? "Responsável adicionado" : h.tipo === "receita" ? "Dados da Receita" : (i?.nome || h.tipo);
         return `<li><span class="tl-ico ${i ? "" : "sis"}">${i ? i.sigla : "•"}</span><div class="t"><b>${esc(tit)}</b>${h.texto ? `<p>${esc(h.texto)}</p>` : ""}${h.link ? `<a href="${esc(h.link)}" target="_blank" rel="noopener" style="font-size:.74rem;color:var(--turq);font-weight:600">Abrir documento</a>` : ""}<small>${esc(h.por || "")} · ${dataHora(h.em)}</small></div></li>`;
       }).join("")}</ul>` : `<div style="font-size:.8rem;color:var(--txt-2)">Nenhuma interação registrada ainda.</div>`}
     </section>
@@ -3074,6 +3081,7 @@ function abrirNovoLead(pre = {}, depois) {
 /* ---- Importação de planilha (.xlsx / .csv) ---- */
 const MAPA_COLUNAS = {
   empresa: ["empresa", "nome da empresa", "razao social", "nome fantasia", "lead", "cliente", "nome"],
+  cnpj: ["cnpj"],
   segmento: ["segmento", "nicho", "atividade", "ramo", "setor"],
   cidade: ["cidade", "municipio"],
   uf: ["uf", "estado"],
@@ -3156,7 +3164,7 @@ async function lerPlanilha(arquivo) {
       const v = c => idx[c] === undefined ? "" : limpo(r[idx[c]]);
       const fitBruto = v("fit").toUpperCase().match(/\b[ABC]\b/);
       const l = {
-        empresa: String(r[idx.empresa]).trim(), segmento: v("segmento"), cidade: v("cidade"), uf: v("uf").toUpperCase().slice(0, 2), prioridade: v("prioridade"),
+        empresa: String(r[idx.empresa]).trim(), cnpj: v("cnpj"), segmento: v("segmento"), cidade: v("cidade"), uf: v("uf").toUpperCase().slice(0, 2), prioridade: v("prioridade"),
         telefones: v("telefones").split(/\s*[\/;|]\s*/).map(t => t.trim()).filter(t => soDigitos(t).length >= 8), endereco: v("endereco"),
         instagram: v("instagram"), instagramUrl: v("instagramUrl"), email: v("email"), contato: v("contato"), receitaEstimada: v("receitaEstimada"),
         confianca: v("confianca"), fit: fitBruto ? fitBruto[0] : "", porqueEncaixa: v("porqueEncaixa"), fontes: v("fontes"), observacoes: v("observacoes")
@@ -3194,6 +3202,280 @@ async function lerPlanilha(arquivo) {
     $("zonaArq").onclick = () => { fecharModal(); abrirImportacao(); };
   }
 }
+/* ================== COMPLETAR PLANILHA COM A RECEITA ==================
+   Lê uma planilha de leads e, para cada linha, procura a empresa na base pública da Receita
+   (robô wl-cnpj) e na BrasilAPI (quadro de sócios e situação cadastral). Devolve uma nova versão
+   da planilha com CNPJ, razão social, sócios, telefones e e-mail, e pode atualizar os leads do CRM. */
+const GENERICOS_NOME = new Set(("ltda me epp eireli sa ss cia s a clinica clinicas consultorio consultorios odontologia odontologica odontologico odontologicos odonto " +
+  "medica medico medicos medicina centro instituto servicos servico de da do das dos e em a o locacao locacoes locadora locadoras equipamento equipamentos " +
+  "maquina maquinas comercio saude unidade filial matriz grupo rede the").split(" "));
+const SEG_TEXTO = s => /locad|rental|equipament|maquin|andaime|container|guindaste|munck|empilhadeira|plataforma/.test(norm(s || "")) ? ["rental", "clinicas"] : ["clinicas", "rental"];
+
+function cnpjValido(c) {
+  const d = soDigitos(c); if (d.length !== 14 || /^(\d)\1+$/.test(d)) return false;
+  const dv = n => { let s = 0, p = n - 7; for (let i = 0; i < n; i++) { s += +d[i] * p--; if (p < 2) p = 9; } const r = s % 11; return r < 2 ? 0 : 11 - r; };
+  return dv(12) === +d[12] && dv(13) === +d[13];
+}
+function cnpjDaLinha(cels) {
+  for (const m of cels.join(" ").matchAll(/\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2}/g)) if (cnpjValido(m[0])) return soDigitos(m[0]);
+  return "";
+}
+function tokensNome(s, extra) { return norm(s || "").split(" ").filter(t => t.length > 1 && !GENERICOS_NOME.has(t) && !extra.has(t)); }
+function simNome(a, b, extra) {
+  const A = tokensNome(a, extra), B = tokensNome(b, extra);
+  if (!A.length || !B.length) return 0;
+  const ja = A.join(""), jb = B.join("");
+  if (ja === jb) return 1;
+  let i = 0;
+  for (const t of A) { if (B.includes(t)) i++; else if (t.length > 3 && B.some(x => x.length > 3 && (x.startsWith(t) || t.startsWith(x)))) i += .8; else if (t.length > 4 && jb.includes(t)) i += .7; }
+  let s = i / A.length;
+  if (ja.length > 4 && jb.includes(ja)) s = Math.max(s, .9);
+  return s * (.85 + .15 * Math.min(1, i / B.length));
+}
+const fins8 = arr => new Set(arr.map(t => soDigitos(t)).filter(t => t.length >= 8).map(t => t.slice(-8)));
+function enderecoConfere(planilha, base) {
+  const p = norm(planilha || ""), b = norm(base || "");
+  if (!p || !b) return false;
+  const nb = (b.match(/\b\d{1,5}\b/) || [])[0];
+  const ruas = b.split(" ").filter(t => t.length > 3 && !/^(rua|avenida|av|praca|alameda|rodovia|travessa|estrada)$/.test(t)).slice(0, 4);
+  return !!nb && new RegExp("\\b" + nb + "\\b").test(p) && ruas.some(t => p.includes(t));
+}
+const QUALIF = q => tituloBR(String(q || "").replace(/^\d+-/, "").trim());
+async function consultarCNPJComFila(cnpj) {
+  for (let t = 0; t < 3; t++) {
+    try {
+      const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 9000);
+      const r = await fetch("https://brasilapi.com.br/api/cnpj/v1/" + cnpj, { signal: ctl.signal });
+      clearTimeout(tm);
+      if (r.ok) return await r.json();
+      if (r.status === 404) return { naoExiste: true };
+      if (r.status === 429 || r.status >= 500) { await new Promise(ok => setTimeout(ok, 2500 * (t + 1))); continue; }
+      return null;
+    } catch { await new Promise(ok => setTimeout(ok, 1200)); }
+  }
+  return null;
+}
+
+const comp = { res: null, wb: null, aba: "", arquivo: "", cab: [], linhas: [], iCab: 0, idx: {}, parar: false, baseOk: true };
+function abrirCompletar() {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Completar planilha com a Receita</h3><small class="sub-modal">CNPJ, razão social, sócios, telefones e e-mail, linha a linha</small></div>
+    <div class="modal-corpo" id="cpCorpo">
+      <p>Envie a planilha de leads (.xlsx ou .csv) com as colunas <b>Empresa</b>, <b>Cidade</b> e <b>UF</b>. Para cada empresa, o sistema:</p>
+      <ul class="lista-cp"><li>usa o CNPJ quando ele já aparece em alguma coluna;</li>
+        <li>se não tiver, procura pelo nome na base pública da Receita (empresas ativas da cidade) e confere telefone e endereço;</li>
+        <li>consulta o quadro de sócios e a situação cadastral na BrasilAPI.</li></ul>
+      <p style="font-size:.8rem;color:var(--txt-2)">Você recebe uma nova versão da planilha com as colunas novas no final e uma coluna dizendo o grau de certeza de cada cruzamento. A planilha original não é alterada.</p>
+      <div class="zona-arq" id="cpZona"><b>Escolher planilha</b>Excel ou CSV</div>
+    </div>
+    <div class="modal-rod"><button class="btn-s" data-m="cancelar">Cancelar</button></div>`);
+  m.classList.add("modal-largo");
+  const fechar = () => { comp.parar = true; fecharModal(); };
+  veu.onclick = fechar; m.querySelector("[data-m=cancelar]").onclick = fechar;
+  $("cpZona").onclick = () => {
+    const inp = document.createElement("input");
+    inp.type = "file"; inp.accept = ".xlsx,.xls,.csv";
+    inp.onchange = () => inp.files[0] && completarPlanilha(inp.files[0]);
+    inp.click();
+  };
+}
+async function completarPlanilha(arquivo) {
+  const corpo = $("cpCorpo");
+  corpo.innerHTML = `<p>Lendo <b>${esc(arquivo.name)}</b>…</p>`;
+  try {
+    await carregarXLSX();
+    const wb = XLSX.read(await arquivo.arrayBuffer(), { type: "array" });
+    let melhor = null;
+    for (const nomeAba of wb.SheetNames) {
+      const linhas = XLSX.utils.sheet_to_json(wb.Sheets[nomeAba], { header: 1, defval: "", raw: true });
+      for (let k = 0; k < Math.min(10, linhas.length); k++) {
+        const cab = linhas[k].map(c => norm(String(c)));
+        const iEmp = cab.findIndex(c => MAPA_COLUNAS.empresa.includes(c));
+        if (iEmp >= 0) { const n = linhas.slice(k + 1).filter(r => String(r[iEmp] || "").trim()).length; if (!melhor || n > melhor.n) melhor = { nomeAba, k, cab, linhas, n }; break; }
+      }
+    }
+    if (!melhor) throw new Error("Não encontrei uma coluna \"Empresa\" na planilha.");
+    const idx = {};
+    for (const [campo, nomes] of Object.entries(MAPA_COLUNAS)) for (const n of nomes) { const i = melhor.cab.indexOf(n); if (i >= 0 && !Object.values(idx).includes(i)) { idx[campo] = i; break; } }
+    if (idx.cidade === undefined || idx.uf === undefined) throw new Error("A planilha precisa das colunas Cidade e UF para procurar na base da Receita.");
+    Object.assign(comp, { wb, aba: melhor.nomeAba, arquivo: arquivo.name, iCab: melhor.k, cab: melhor.linhas[melhor.k], linhas: melhor.linhas, idx, parar: false, baseOk: true });
+    await processarCompletar();
+  } catch (e) {
+    corpo.innerHTML = `<div class="aviso-erro"><b>Não foi possível ler a planilha.</b><br>${esc(e.message)}</div><div class="zona-arq" id="cpZona"><b>Tentar outro arquivo</b></div>`;
+    $("cpZona").onclick = () => { fecharModal(); abrirCompletar(); };
+  }
+}
+async function baseMunicipio(seg, uf, cidade) {
+  try {
+    const ind = await jsonBE(`${seg}/${uf}/index.json`);
+    const m = ind.find(x => norm(x[1]) === norm(cidade));
+    return m ? await jsonBE(`${seg}/${uf}/${m[0]}.json`) : [];
+  } catch { return []; }
+}
+async function processarCompletar() {
+  const { idx, linhas, iCab } = comp, corpo = $("cpCorpo");
+  const dados = linhas.slice(iCab + 1).map((r, k) => ({ r, k })).filter(x => String(x.r[idx.empresa] || "").trim());
+  try { await jsonBE("meta.json"); } catch { comp.baseOk = false; }
+  corpo.innerHTML = `${comp.baseOk ? "" : `<div class="aviso-erro">A base da Receita (robô <b>wl-cnpj</b>) ainda não está disponível. Só as linhas que já trazem o CNPJ serão completadas.</div>`}
+    <p>Planilha <b>${esc(comp.arquivo)}</b> · aba <b>${esc(comp.aba)}</b> · ${dados.length} empresas</p>
+    <div class="cp-prog"><i><b id="cpBarra" style="width:0%"></b></i><span id="cpTxt">Preparando…</span></div>
+    <div class="resumo-imp" id="cpResumo"></div>`;
+  $("modal").querySelector(".modal-rod").innerHTML = `<button class="btn-s" data-m="parar">Parar</button>`;
+  $("modal").querySelector("[data-m=parar]").onclick = () => { comp.parar = true; };
+  const res = [];
+  const cont = () => {
+    const c = k => res.filter(x => x.nivel === k).length;
+    $("cpResumo").innerHTML = [["alta", "Alta certeza", "var(--verde)"], ["provavel", "Provável", "var(--turq)"], ["revisar", "Revisar", "var(--alerta)"], ["nao", "Não encontrada", "var(--txt-2)"]]
+      .map(([k, n, cor]) => `<div><b style="color:${cor}">${c(k)}</b><span>${n}</span></div>`).join("");
+  };
+  for (let i = 0; i < dados.length && !comp.parar; i++) {
+    const { r, k } = dados[i];
+    const emp = String(r[idx.empresa]).trim(), cidade = String(r[idx.cidade] || "").trim(), uf = String(r[idx.uf] || "").trim().toUpperCase().slice(0, 2);
+    $("cpTxt").textContent = `${i + 1} de ${dados.length} · ${emp}`;
+    $("cpBarra").style.width = Math.round(i / dados.length * 100) + "%";
+    const x = { k, emp, cidade, uf, nivel: "nao", como: "", cand: [] };
+    const cels = r.map(v => String(v ?? ""));
+    const cnpjPl = cnpjDaLinha(cels);
+    const telsPl = fins8(String(idx.telefones !== undefined ? r[idx.telefones] : "").split(/[\/;|,]/));
+    const segs = SEG_TEXTO(idx.segmento !== undefined ? r[idx.segmento] : "");
+    let rowsBase = [];
+    if (comp.baseOk && cidade && uf) for (const sg of segs) rowsBase = rowsBase.concat(await baseMunicipio(sg, uf, cidade));
+    let achado = null;
+    if (cnpjPl) {
+      achado = rowsBase.find(b => b[R.cnpj] === cnpjPl) || [cnpjPl];
+      x.nivel = "alta"; x.como = "CNPJ já informado na planilha";
+    } else if (rowsBase.length) {
+      const extra = new Set(norm(cidade).split(" "));
+      const cands = rowsBase.map(b => {
+        const nome = Math.max(simNome(emp, b[R.fant], extra), simNome(emp, b[R.razao], extra) * .97);
+        const tel = telsPl.size && [...fins8([b[R.t1], b[R.t2]])].some(t => telsPl.has(t));
+        const end = idx.endereco !== undefined && enderecoConfere(r[idx.endereco], b[R.end]);
+        return { b, nome, tel, end, nota: nome + (tel ? 1 : 0) + (end ? .35 : 0) };
+      }).filter(c => c.nome >= .45 || c.tel).sort((a, b) => b.nota - a.nota);
+      const [c1, c2] = cands;
+      if (c1) {
+        achado = c1.b;
+        const empate = c2 && !c1.tel && c1.nota - c2.nota < .1;
+        x.nivel = c1.tel || (c1.nome >= .95 && c1.end) ? "alta" : empate ? "revisar" : c1.nome >= .75 || c1.end ? "provavel" : "revisar";
+        x.como = [c1.tel ? "telefone confere" : "", c1.end ? "endereço confere" : "", `nome ${Math.round(Math.min(1, c1.nome) * 100)}% parecido`].filter(Boolean).join(" · ");
+        if (empate) x.como += " · há outras empresas parecidas";
+        x.cand = cands.slice(1, 4).map(c => `${tituloBR(c.b[R.fant] || c.b[R.razao])} (${fmtCNPJ(c.b[R.cnpj])})`);
+      }
+    }
+    if (achado) {
+      const b = achado;
+      Object.assign(x, { cnpj: b[R.cnpj], razao: b[R.razao] || "", fant: b[R.fant] || "", tels: [b[R.t1], b[R.t2]].filter(Boolean).map(fmtTelefone), email: (b[R.email] || "").toLowerCase(),
+        end: b[R.end] ? [b[R.end], b[R.bairro]].filter(Boolean).join(" - ") : "", socios: b[R.contato] ? [{ nome: tituloBR(b[R.contato]), q: "Sócio-administrador" }] : [], situacao: b.length > 1 ? "ATIVA" : "" });
+      const api = await consultarCNPJComFila(x.cnpj);
+      if (api?.naoExiste) { x.situacao = "CNPJ não encontrado na Receita"; x.nivel = "revisar"; }
+      else if (api) {
+        x.razao = api.razao_social || x.razao; x.fant = api.nome_fantasia || x.fant;
+        x.situacao = api.descricao_situacao_cadastral || x.situacao;
+        if (api.data_situacao_cadastral && x.situacao !== "ATIVA") x.situacao += " desde " + api.data_situacao_cadastral.split("-").reverse().join("/");
+        const tels = [api.ddd_telefone_1, api.ddd_telefone_2].map(soDigitos).filter(t => t.length >= 10).map(fmtTelefone);
+        x.tels = [...new Set([...x.tels, ...tels])];
+        if (api.email) x.email = String(api.email).toLowerCase();
+        if (api.logradouro) x.end = [`${api.descricao_tipo_de_logradouro || ""} ${api.logradouro}, ${api.numero || "s/n"}`.trim(), api.complemento, api.bairro, tituloBR(api.municipio || "") + (api.uf ? "/" + api.uf : "")].filter(Boolean).join(" - ");
+        if ((api.qsa || []).length) x.socios = api.qsa.map(s => ({ nome: tituloBR(s.nome_socio || ""), q: QUALIF(s.qualificacao_socio) }));
+        if (x.situacao && x.situacao !== "ATIVA" && x.nivel === "alta") x.nivel = "revisar";
+      } else x.semApi = true;
+      await new Promise(ok => setTimeout(ok, 350));
+    }
+    res.push(x); cont();
+  }
+  comp.res = res;
+  $("cpBarra").style.width = "100%";
+  fimCompletar(dados.length);
+}
+const NIVEL_CP = { alta: "Alta certeza", provavel: "Provável", revisar: "Revisar", nao: "Não encontrada" };
+function fimCompletar(total) {
+  const res = comp.res, achados = res.filter(x => x.cnpj);
+  const noCrm = achados.filter(x => ["alta", "provavel"].includes(x.nivel) && leadDoComp(x));
+  $("cpTxt").textContent = comp.parar ? `Interrompido em ${res.length} de ${total}` : `Concluído: ${achados.length} de ${total} empresas com CNPJ`;
+  const rev = res.filter(x => x.nivel === "revisar" || x.nivel === "nao");
+  $("cpCorpo").insertAdjacentHTML("beforeend", `
+    ${res.some(x => x.semApi) ? `<p class="aviso-fisc neutro">A BrasilAPI não respondeu para ${res.filter(x => x.semApi).length} empresa(s). Nelas, os sócios vêm só da base mensal (sócio administrador).</p>` : ""}
+    ${rev.length ? `<details class="cp-rev"><summary>${rev.length} linha(s) para conferir</summary><ul>${rev.map(x => `<li><b>${esc(x.emp)}</b> · ${esc(x.cidade)}/${esc(x.uf)}<small>${x.cnpj ? `${esc(fmtCNPJ(x.cnpj))} · ${esc(tituloBR(x.fant || x.razao))} · ${esc(x.situacao || "")} · ${esc(x.como)}` : "Nenhuma empresa ativa parecida na base desta cidade"}</small></li>`).join("")}</ul></details>` : ""}`);
+  $("modal").querySelector(".modal-rod").innerHTML = `<button class="btn-s" data-m="fechar">Fechar</button>
+    ${noCrm.length ? `<button class="btn-s" data-m="crm">Atualizar ${noCrm.length} lead(s) no CRM</button>` : ""}
+    <button class="btn-p" data-m="baixar"><svg><use href="#i-baixar"/></svg>Baixar nova versão</button>`;
+  const rod = $("modal").querySelector(".modal-rod");
+  rod.querySelector("[data-m=fechar]").onclick = fecharModal;
+  rod.querySelector("[data-m=baixar]").onclick = baixarCompletar;
+  if (noCrm.length) rod.querySelector("[data-m=crm]").onclick = async ev => { ev.target.disabled = true; await atualizarLeadsComp(noCrm); ev.target.textContent = "Leads atualizados"; };
+}
+const SOCIOS_TXT = x => (x.socios || []).map(s => s.nome + (s.q ? ` (${s.q})` : "")).join("; ");
+function baixarCompletar() {
+  const { wb, aba, linhas, iCab, idx, res, cab } = comp;
+  const novas = ["CNPJ", "Razão social (Receita)", "Nome fantasia (Receita)", "Situação cadastral", "Sócios (Receita)", "Telefones (Receita)", "E-mail (Receita)", "Endereço (Receita)", "Cruzamento com a Receita", "Outras empresas parecidas"];
+  const largura = cab.length;
+  const porK = new Map(res.map(x => [x.k, x]));
+  const saida = linhas.slice(0, iCab).map(r => [...r]);
+  saida.push([...cab, ...Array(Math.max(0, largura - cab.length)).fill(""), ...novas]);
+  linhas.slice(iCab + 1).forEach((r0, k) => {
+    const r = [...r0]; while (r.length < largura) r.push("");
+    const x = porK.get(k);
+    if (x?.cnpj && ["alta", "provavel"].includes(x.nivel)) {
+      const adm = (x.socios || []).find(s => /administrador|titular|presidente|diretor/i.test(s.q)) || (x.socios || [])[0];
+      if (idx.contato !== undefined && adm && !limpo(r[idx.contato])) r[idx.contato] = adm.nome + (adm.q ? ` (${adm.q})` : "");
+      if (idx.telefones !== undefined && x.tels?.length && !limpo(r[idx.telefones])) r[idx.telefones] = x.tels.join(" / ");
+      if (idx.email !== undefined && x.email && !limpo(r[idx.email])) r[idx.email] = x.email;
+    }
+    const extra = x ? [x.cnpj ? fmtCNPJ(x.cnpj) : "", x.razao || "", x.fant || "", x.situacao || "", SOCIOS_TXT(x), (x.tels || []).join(" / "), x.email || "", x.end || "",
+      NIVEL_CP[x.nivel] + (x.como ? " · " + x.como : ""), (x.cand || []).join("; ")] : novas.map(() => "");
+    saida.push([...r, ...extra]);
+  });
+  const ws = XLSX.utils.aoa_to_sheet(saida);
+  ws["!cols"] = saida[iCab].map((c, j) => ({ wch: j >= largura ? [20, 34, 26, 18, 48, 30, 28, 44, 40, 40][j - largura] : Math.min(40, Math.max(8, String(c).length + 2)) }));
+  ws["!autofilter"] = { ref: XLSX.utils.encode_range({ s: { r: iCab, c: 0 }, e: { r: saida.length - 1, c: saida[iCab].length - 1 } }) };
+  wb.Sheets[aba] = ws;
+  const c = k => res.filter(x => x.nivel === k).length;
+  const resumo = [["Complemento com dados da Receita Federal"], [`Gerado pelo WL Sistema em ${new Date().toLocaleString("pt-BR")} a partir de "${comp.arquivo}"`], [],
+    ["Empresas processadas", res.length], ["Com CNPJ encontrado", res.filter(x => x.cnpj).length], ["Alta certeza", c("alta")], ["Provável", c("provavel")], ["Revisar", c("revisar")], ["Não encontrada", c("nao")], [],
+    ["Como ler a coluna \"Cruzamento com a Receita\""],
+    ["Alta certeza", "CNPJ já estava na planilha, ou o telefone confere com o da Receita, ou nome e endereço conferem."],
+    ["Provável", "Nome muito parecido (ou endereço confere). Vale uma olhada rápida."],
+    ["Revisar", "Nome só parcialmente parecido, mais de uma empresa parecida, ou CNPJ não está ativo. Confira antes de usar."],
+    ["Não encontrada", "Nenhuma empresa ativa parecida nos segmentos de clínicas e locadoras da cidade."],
+    [], ["Fontes", "Base pública de CNPJ da Receita Federal (robô wl-cnpj, atualização mensal) e BrasilAPI (quadro de sócios e situação cadastral)."],
+    ["Colunas originais", "Responsável, Telefone e E-mail só foram preenchidos quando estavam vazios e o cruzamento era de alta certeza ou provável."]];
+  const wr = XLSX.utils.aoa_to_sheet(resumo); wr["!cols"] = [{ wch: 34 }, { wch: 100 }];
+  const nomeAbaR = "Complemento Receita";
+  if (wb.SheetNames.includes(nomeAbaR)) wb.Sheets[nomeAbaR] = wr; else { wb.SheetNames.splice(1, 0, nomeAbaR); wb.Sheets[nomeAbaR] = wr; }
+  const nome = comp.arquivo.replace(/\.(xlsx|xls|csv)$/i, "") + " - completa Receita.xlsx";
+  XLSX.writeFile(wb, nome);
+  toast("Nova versão baixada: " + nome);
+}
+function leadDoComp(x) {
+  const c = norm(x.emp) + "|" + norm(x.cidade || "");
+  return leads().find(l => (x.cnpj && soDigitos(l.cnpj) === x.cnpj) || norm(l.empresa) + "|" + norm(l.cidade || "") === c);
+}
+async function atualizarLeadsComp(lista) {
+  let n = 0;
+  await salvarCRM(d => {
+    for (const x of lista) {
+      const l0 = leadDoComp(x); if (!l0) continue;
+      const l = d.leads.find(y => y.id === l0.id); if (!l) continue;
+      const feito = [];
+      if (!soDigitos(l.cnpj)) { l.cnpj = fmtCNPJ(x.cnpj); feito.push("CNPJ"); }
+      if (!l.razaoSocial && x.razao) l.razaoSocial = x.razao;
+      const tels = (x.tels || []).filter(t => !(l.telefones || []).some(u => soDigitos(u).slice(-8) === soDigitos(t).slice(-8)));
+      if (tels.length) { l.telefones = [...(l.telefones || []), ...tels]; feito.push("telefone"); }
+      if (!l.email && x.email) { l.email = x.email; feito.push("e-mail"); }
+      const ps = pessoasEditaveis(l), nn = (x.socios || []).map(s => norm(s.nome)).filter(Boolean);
+      // texto descritivo antigo ("Fulano (sócio) e Beltrano - QSA público") vira os sócios da Receita
+      for (let i = ps.length - 1; i >= 0; i--) { const pn = norm(ps[i].nome); if (nn.some(n => pn.includes(n)) && !nn.includes(pn) && !ps[i].telefone && !ps[i].email) ps.splice(i, 1); }
+      const novos = (x.socios || []).filter(s => s.nome && !ps.some(p => norm(p.nome) === norm(s.nome)));
+      for (const s of novos) ps.push({ id: crypto.randomUUID(), nome: s.nome, cargo: s.q || "Sócio", telefone: "", email: "", decisor: /administrador|titular/i.test(s.q), principal: false, obs: "Quadro de sócios da Receita" });
+      if (novos.length) feito.push(novos.length === 1 ? "sócio" : novos.length + " sócios");
+      if (ps.length && !ps.some(p => p.principal)) { (ps.find(p => p.decisor) || ps[0]).principal = true; }
+      sincPrincipal(l);
+      if (x.situacao && x.situacao !== "ATIVA") l.observacoes = [l.observacoes, `Receita: situação ${x.situacao}`].filter(Boolean).join(" · ");
+      if (feito.length) { registrar(l, "receita", `Completado com a Receita (${fmtCNPJ(x.cnpj)}): ${feito.join(", ")}`); l.atualizadoEm = new Date().toISOString(); n++; }
+    }
+  }, "Leads atualizados com a Receita");
+  toast(n ? `${n} lead(s) atualizados com dados da Receita` : "Os leads já estavam com esses dados");
+}
+
 document.addEventListener("keydown", e => { if (e.key === "Escape") { if ($("modal")) fecharModal(); else if ($("gaveta")) fecharFicha(); } });
 
 /* ================== ATENDIMENTO ================== */
