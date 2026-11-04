@@ -372,6 +372,18 @@
   .g-fechar{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.12);color:#fff;font-size:1.2rem;flex:none}
   .g-sub{font-size:.8rem;color:rgba(255,255,255,.75);margin-top:4px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .g-sub .chip-p{background:rgba(255,255,255,.15);color:#fff}
+  .lnk-add{margin-left:auto;background:none;border:0;color:var(--turq);font-weight:700;font-size:.72rem;cursor:pointer;text-transform:none;letter-spacing:0}
+  .lista-pes{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .lista-pes li{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;padding:10px;border:1px solid var(--borda);border-radius:10px;background:var(--card)}
+  .lista-pes li.principal{border-color:var(--turq);box-shadow:inset 3px 0 0 var(--turq)}
+  .pes-av{width:36px;height:36px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.78rem}
+  .pes-q b{display:block;font-size:.88rem}.pes-q small{display:flex;gap:6px;flex-wrap:wrap;align-items:center;color:var(--txt-2);font-size:.74rem;margin-top:2px}
+  .tag-pes{font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 6px;border-radius:6px;background:rgba(0,150,160,.12);color:var(--turq)}
+  .tag-pes.dec{background:rgba(217,154,30,.15);color:#A66F00}
+  .pes-cont{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.pes-cont a{font-size:.76rem;font-weight:600;color:var(--turq);text-decoration:none;word-break:break-all}
+  .pes-obs{margin:6px 0 0;font-size:.76rem;color:var(--txt-2)}
+  .pes-acoes{grid-column:2;display:flex;gap:14px;flex-wrap:wrap}.pes-acoes .lnk{margin:0;width:auto;font-size:.74rem}
+  .g-sec h4:has(.lnk-add){display:flex;align-items:center}
   .g-contatos{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
   .g-contatos a{display:flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;color:#fff;background:rgba(255,255,255,.14);padding:7px 10px;border-radius:8px;text-decoration:none}
   .g-contatos a:hover{background:rgba(255,255,255,.22)}
@@ -1423,7 +1435,7 @@ const GRAPH = CONFIG.api + "/graph";
 const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial", "descricao": "Estudo, prospecção, apresentações e fechamento.", "icone": "i-a-com", "pasta": "Comercial", "subs": [{"id": "estudo", "nome": "Materiais de Estudo", "descricao": "Posicionamento, ICP, scripts e guias de venda.", "pasta": "Materiais de Estudo"}, {"id": "prospeccao", "nome": "Ferramentas de Prospecção", "descricao": "Controle de prospecção, CRM e agenda de reuniões.", "pasta": "Ferramentas de Prospecção"}, {"id": "apresentacoes", "nome": "Apresentações Comerciais", "descricao": "Apresentação institucional e por segmento.", "pasta": "Apresentações Comerciais"}, {"id": "propostas", "nome": "Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos.", "pasta": "Propostas, Preços e Contratos"}]}, {"id": "bpo", "nome": "BPO Financeiro", "descricao": "Gestão das rotinas financeiras do cliente.", "icone": "i-a-bpo", "pasta": "BPO Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "fpa", "nome": "FP&A", "descricao": "Indicadores gerenciais e análise de desempenho.", "icone": "i-a-fpa", "pasta": "FP&A", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "planejamento", "nome": "Planejamento Financeiro", "descricao": "Orçamentos, fluxo de caixa e cenários.", "icone": "i-a-pla", "pasta": "Planejamento Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "processos", "nome": "Consultoria de Processos", "descricao": "Mapeamento e redesenho de processos.", "icone": "i-a-pro", "pasta": "Consultoria de Processos", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}], "itens": [{"area": "comercial", "sub": "estudo", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Definição de ICP", "ext": "docx", "descricao": "Perfil de cliente ideal da WL Expertise."}, {"area": "comercial", "sub": "estudo", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"area": "comercial", "sub": "estudo", "nome": "Mapa de Posicionamento", "ext": "docx", "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "descricao": "Levantamento das dores e metas da base de clientes."}, {"area": "comercial", "sub": "estudo", "nome": "Script de Vendas (Call)", "ext": "docx", "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"area": "comercial", "sub": "estudo", "nome": "Script Único", "ext": "docx", "descricao": "Script de abordagem comercial."}, {"area": "comercial", "sub": "prospeccao", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"area": "comercial", "sub": "prospeccao", "nome": "CRM para Consultorias", "ext": "xlsx", "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"area": "comercial", "sub": "prospeccao", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"area": "comercial", "sub": "estudo", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"area": "comercial", "sub": "estudo", "nome": "Programa de Indicação", "ext": "pdf", "descricao": "Como estruturar um programa de indicação de clientes."}, {"area": "comercial", "sub": "propostas", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "descricao": "Termo para parceiros que indicam clientes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "descricao": "Proposta de valor para negócios de estética."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "descricao": "Proposta de valor para locadoras de equipamentos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "descricao": "Proposta de valor para criadores de conteúdo."}, {"area": "comercial", "sub": "propostas", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"area": "comercial", "sub": "propostas", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "descricao": "Planos e regras de negociação para o segmento Rental."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "descricao": "Modelo de proposta comercial."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "descricao": "Modelo de contrato de prestação de serviços."}, {"area": "processos", "sub": "diagnostico", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"area": "fpa", "sub": "diagnostico", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"area": "bpo", "sub": "diagnostico", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "descricao": "Questionário preliminar das rotinas financeiras."}, {"area": "bpo", "sub": "execucao", "nome": "Mapa Quente da Operação", "ext": "xlsx", "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"area": "processos", "sub": "diagnostico", "nome": "Ata e Briefing de Reunião", "ext": "docx", "descricao": "Modelo para registrar reuniões e briefings."}, {"area": "bpo", "sub": "onboarding", "nome": "Questionário de Kick-off", "ext": "xlsx", "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"area": "processos", "sub": "onboarding", "nome": "Formulário de Onboarding", "ext": "docx", "descricao": "Coleta de informações para iniciar o projeto."}, {"area": "bpo", "sub": "onboarding", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "descricao": "Plano de ativação, relação de clientes e timeline."}, {"area": "bpo", "sub": "onboarding", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"area": "bpo", "sub": "onboarding", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"area": "processos", "sub": "execucao", "nome": "Cronograma da Consultoria", "ext": "xlsx", "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"area": "processos", "sub": "execucao", "nome": "Plano de Ação Personalizado", "ext": "docx", "descricao": "Plano de ação do cliente após o diagnóstico."}, {"area": "processos", "sub": "execucao", "nome": "Materiais de Entrega", "ext": "xlsx", "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"area": "bpo", "sub": "execucao", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "descricao": "Gestão da operação por operador, plano de ação e timeline."}], "legado": {"01 - Estratégia e Posicionamento": "comercial/estudo", "02 - Prospecção e Vendas": "comercial/prospeccao", "03 - Apresentações Comerciais": "comercial/apresentacoes", "04 - Propostas, Preços e Contratos": "comercial/propostas", "05 - Diagnóstico": "bpo/diagnostico", "06 - Onboarding e Implantação": "bpo/onboarding", "07 - Execução e Entregas": "bpo/execucao"}};
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
-const VERSAO = "v30";
+const VERSAO = "v31";
 document.querySelectorAll(".versao-sis").forEach(x => x.textContent = VERSAO);
 const MODULOS = [
   { id: "inicio", nome: "Início", icone: "i-home" },
@@ -2513,7 +2525,7 @@ function leadsFiltrados() {
   let ls = base.filter(l =>
     (!f.etapa || l.etapa === f.etapa) && (!f.fit || l.fit === f.fit) && (!f.prioridade || (l.prioridade || "").startsWith(f.prioridade)) &&
     (!f.uf || l.uf === f.uf) && (!f.segmento || norm(l.segmento || "").includes(norm(f.segmento))) &&
-    (!termos.length || termos.every(t => norm([l.empresa, l.segmento, l.cidade, l.uf, l.contato, l.observacoes, (l.telefones || []).join(" ")].join(" ")).includes(t))));
+    (!termos.length || termos.every(t => norm([l.empresa, l.segmento, l.cidade, l.uf, l.contato, l.observacoes, (l.telefones || []).join(" "), (l.pessoas || []).map(p => [p.nome, p.cargo, p.telefone, p.email].join(" ")).join(" ")].join(" ")).includes(t))));
   const { campo, asc } = crm.ordem;
   const val = l => campo === "empresa" ? l.empresa : campo === "cidade" ? (l.cidade || "") + l.uf : campo === "etapa" ? String(ORDEM_ETAPA[l.etapa]).padStart(2, "0")
     : campo === "acao" ? (proxAcao(l)?.data || "9999") : campo === "fit" ? (l.fit || "Z") + (l.prioridade || "") : (l.prioridade || "P9") + (l.fit || "Z");
@@ -2534,7 +2546,7 @@ function renderLeads() {
   const pag = ls.slice(0, crm.limite);
   $("crmConteudo").innerHTML = `
   <div class="filtros-crm">
-    <input class="fbusca" id="fBusca" type="search" placeholder="Buscar empresa, cidade, contato, telefone…" value="${esc(f.busca)}">
+    <input class="fbusca" id="fBusca" type="search" placeholder="Buscar empresa, cidade, responsável, telefone…" value="${esc(f.busca)}">
     <select data-f="etapa">${opcoes(ETAPAS.map(e => [e.id, e.nome]), f.etapa, "Todas as etapas")}</select>
     <select data-f="fit">${opcoes([["A", "Fit A"], ["B", "Fit B"], ["C", "Fit C"]], f.fit, "Todos os fits")}</select>
     <select data-f="prioridade">${opcoes([["P1", "P1"], ["P2", "P2"], ["P3", "P3"]], f.prioridade, "Prioridade")}</select>
@@ -2620,13 +2632,13 @@ function renderFicha(id) {
   <div class="g-cab">
     <div class="g-topo"><h2>${esc(l.empresa)}</h2><button class="g-fechar" data-g="fechar" aria-label="Fechar">×</button></div>
     <div class="g-sub"><span>${esc(l.segmento || "")}${l.cidade ? " · " + esc(l.cidade) + (l.uf ? "/" + esc(l.uf) : "") : ""}</span>
-      ${l.fit ? `<span class="chip-fit fit-${esc(l.fit)}">Fit ${esc(l.fit)}</span>` : ""}${l.prioridade ? `<span class="chip-p">${esc(l.prioridade)}</span>` : ""}<span class="chip-p">${esc(l.id)}</span></div>
+      ${l.fit ? `<span class="chip-fit fit-${esc(l.fit)}">Fit ${esc(l.fit)}</span>` : ""}${l.prioridade ? `<span class="chip-p">${esc(l.prioridade)}</span>` : ""}${principalLead(l) ? `<span class="chip-p">${esc(principalLead(l).nome)}${principalLead(l).cargo ? " · " + esc(principalLead(l).cargo) : ""}</span>` : ""}<span class="chip-p">${esc(l.id)}</span></div>
     <div class="g-contatos">
       ${tels.map(t => `<a href="tel:${soDigitos(t)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>${esc(t)}</a>
         ${linkWhats(t) ? `<a href="${linkWhats(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}`).join("")}
       ${l.email ? `<a href="mailto:${esc(l.email)}">${esc(l.email)}</a>` : ""}
       ${ig ? `<a href="${esc(ig)}" target="_blank" rel="noopener">Instagram</a>` : ""}
-      ${!tels.length && !l.email && !ig ? `<span style="font-size:.76rem;opacity:.7">Sem contato cadastrado</span>` : ""}
+      ${!tels.length && !l.email && !ig && !pessoasLead(l).some(p => p.telefone || p.email) ? `<span style="font-size:.76rem;opacity:.7">Sem contato cadastrado</span>` : ""}
     </div>
   </div>
   <div class="g-corpo">
@@ -2636,6 +2648,8 @@ function renderFicha(id) {
       <button class="btn-p" data-g="reativar">Reativar lead</button></section>` : ""}
     <section class="g-sec"><h4>Etapa do funil ${l.etapa === "perdido" && l.motivoPerda ? `<span style="text-transform:none;letter-spacing:0;color:var(--erro)">${esc(l.motivoPerda)}</span>` : ""}</h4>
       <div class="etapas-sel">${ETAPAS.map(x => `<button data-g-etapa="${x.id}" style="--cor:${x.cor}" class="${x.id === l.etapa ? "ativo" : ""}">${x.nome}</button>`).join("")}</div></section>
+
+    ${htmlPessoasLead(l)}
 
     <section class="g-sec"><h4>Registrar interação</h4>
       <div class="botoes-int">${INTERACOES.map(i => `<button data-g-int="${i.id}"><i>${i.sigla}</i>${i.nome}</button>`).join("")}</div>
@@ -2699,8 +2713,7 @@ function renderFicha(id) {
     <details class="g-sec" ${l.criadoManual ? "open" : ""}><summary>Dados da empresa <span>editar ▾</span></summary>
       <form class="dados-grid" id="formDados">
         <div class="linha2">${campoTxt("empresa", "Empresa", l.empresa)}${campoTxt("cnpj", "CNPJ", l.cnpj)}</div>
-        <div class="linha2">${campoTxt("segmento", "Segmento", l.segmento)}${campoTxt("contato", "Contato / responsável", l.contato)}</div>
-        <div class="linha2">${campoTxt("cidade", "Cidade", l.cidade)}${campoTxt("uf", "UF", l.uf)}</div>
+        <div class="linha3">${campoTxt("segmento", "Segmento", l.segmento)}${campoTxt("cidade", "Cidade", l.cidade)}${campoTxt("uf", "UF", l.uf)}</div>
         <div class="linha2">${campoTxt("telefones", "Telefones (separe com /)", (l.telefones || []).join(" / "))}${campoTxt("email", "E-mail", l.email)}</div>
         <div class="linha2">${campoTxt("instagram", "Instagram (@)", l.instagram)}${campoTxt("endereco", "Endereço", l.endereco)}</div>
         <div class="linha2"><div class="campo"><label>Fit WL</label><select name="fit">${opcoes([["A", "A"], ["B", "B"], ["C", "C"]], l.fit || "", "—")}</select></div>
@@ -2720,7 +2733,7 @@ function renderFicha(id) {
     <section class="g-sec"><h4>Histórico</h4>
       ${(l.historico || []).length ? `<ul class="timeline">${l.historico.map(h => {
         const i = interacaoDe(h.tipo);
-        const tit = h.tipo === "etapa" ? `Etapa: ${etapaDe(h.de).nome} → ${etapaDe(h.para).nome}` : h.tipo === "acao" ? "Próxima ação concluída" : h.tipo === "criado" ? "Lead cadastrado" : h.tipo === "sem_interesse" ? "Marcado como sem interesse" : h.tipo === "documento" ? "Documento gerado" : h.tipo === "reativado" ? "Lead reativado" : (i?.nome || h.tipo);
+        const tit = h.tipo === "etapa" ? `Etapa: ${etapaDe(h.de).nome} → ${etapaDe(h.para).nome}` : h.tipo === "acao" ? "Próxima ação concluída" : h.tipo === "criado" ? "Lead cadastrado" : h.tipo === "sem_interesse" ? "Marcado como sem interesse" : h.tipo === "documento" ? "Documento gerado" : h.tipo === "reativado" ? "Lead reativado" : h.tipo === "responsavel" ? "Responsável adicionado" : (i?.nome || h.tipo);
         return `<li><span class="tl-ico ${i ? "" : "sis"}">${i ? i.sigla : "•"}</span><div class="t"><b>${esc(tit)}</b>${h.texto ? `<p>${esc(h.texto)}</p>` : ""}${h.link ? `<a href="${esc(h.link)}" target="_blank" rel="noopener" style="font-size:.74rem;color:var(--turq);font-weight:600">Abrir documento</a>` : ""}<small>${esc(h.por || "")} · ${dataHora(h.em)}</small></div></li>`;
       }).join("")}</ul>` : `<div style="font-size:.8rem;color:var(--txt-2)">Nenhuma interação registrada ainda.</div>`}
     </section>
@@ -2782,16 +2795,93 @@ function desenharAgenda(l, fnEventos = eventosLead) {
       ${lista.length ? lista.map(e => `<div class="cal-ev ev-${e.tipo}"><span>${e.hora && e.hora !== "00:00" ? e.hora : "—"}</span><p>${esc(e.txt)}</p></div>`).join("") : `<div class="vazio-acoes">Nada neste dia.</div>`}</div>`
       : `<div class="vazio-acoes" style="padding-top:8px">Toque em um dia para ver os detalhes.</div>`}`;
 }
+
+/* ---- Responsáveis pela empresa (pessoas de contato do lead) ---- */
+const CARGOS_RESP = ["Sócio / proprietário", "Diretor(a)", "Gerente financeiro", "Gerente administrativo", "Financeiro", "Administrativo", "Contador(a)", "Comercial", "Outro"];
+function pessoasLead(l) {
+  if (l.pessoas?.length) return l.pessoas;
+  return l.contato ? [{ id: "p0", nome: l.contato, cargo: l.cargo || "", telefone: "", email: "", decisor: false, principal: true, obs: "", legado: true }] : [];
+}
+function principalLead(l) { const ps = pessoasLead(l); return ps.find(p => p.principal) || ps[0] || null; }
+function sincPrincipal(x) {
+  const ps = x.pessoas || [];
+  if (ps.length && !ps.some(p => p.principal)) ps[0].principal = true;
+  const p = ps.find(p => p.principal);
+  x.contato = p?.nome || ""; x.cargo = p?.cargo || "";
+}
+function pessoasEditaveis(x) {
+  if (!x.pessoas?.length) x.pessoas = pessoasLead(x).map(p => { const q = { ...p, id: crypto.randomUUID() }; delete q.legado; return q; });
+  return x.pessoas;
+}
+function htmlPessoasLead(l) {
+  const ps = pessoasLead(l).slice().sort((a, b) => (b.principal ? 1 : 0) - (a.principal ? 1 : 0));
+  return `<section class="g-sec"><h4>Responsável pela empresa <button class="lnk-add" data-g-pes="novo">+ adicionar</button></h4>
+    ${ps.length ? `<ul class="lista-pes">${ps.map(p => {
+      const w = p.telefone ? linkWhats(p.telefone) : null;
+      return `<li class="${p.principal ? "principal" : ""}">
+        <span class="pes-av">${esc((p.nome || "?").trim().split(/\s+/).slice(0, 2).map(x => x[0]).join("").toUpperCase())}</span>
+        <div class="pes-q"><b>${esc(p.nome)}</b>
+          <small>${[p.cargo ? esc(p.cargo) : "", p.principal ? `<span class="tag-pes">Principal</span>` : "", p.decisor ? `<span class="tag-pes dec">Decide</span>` : ""].filter(Boolean).join(" ")}</small>
+          <div class="pes-cont">${p.telefone ? `<a href="tel:${soDigitos(p.telefone)}">${esc(p.telefone)}</a>` : ""}${w ? `<a href="${w}" target="_blank" rel="noopener">WhatsApp</a>` : ""}${p.email ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ""}</div>
+          ${p.obs ? `<p class="pes-obs">${esc(p.obs)}</p>` : ""}</div>
+        <div class="pes-acoes"><button class="lnk" data-g-pes="editar" data-pid="${esc(p.id)}">Editar</button>${p.principal ? "" : `<button class="lnk" data-g-pes="principal" data-pid="${esc(p.id)}">Tornar principal</button>`}<button class="lnk perigo-lnk" data-g-pes="remover" data-pid="${esc(p.id)}">Remover</button></div>
+      </li>`; }).join("")}</ul>` : `<div class="vazio-acoes">Nenhum responsável cadastrado. Adicione o sócio, o decisor ou a pessoa do financeiro com quem você fala.</div>`}
+  </section>`;
+}
+function abrirPessoaLead(l, pid) {
+  const p = pid ? pessoasLead(l).find(x => x.id === pid) : null;
+  const primeiro = !pessoasLead(l).length;
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>${p ? "Editar responsável" : "Novo responsável"}</h3><small class="sub-modal">${esc(l.empresa)}</small></div>
+    <form class="modal-corpo" id="formPes">
+      <div class="linha2">${campoTxt("nome", "Nome *", p?.nome)}<div class="campo"><label>Cargo / função</label><input name="cargo" list="dlCargos" value="${esc(p?.cargo || "")}" placeholder="Ex.: Sócio / proprietário"><datalist id="dlCargos">${CARGOS_RESP.map(c => `<option value="${esc(c)}">`).join("")}</datalist></div></div>
+      <div class="linha2">${campoTxt("telefone", "Telefone / WhatsApp", p?.telefone)}${campoTxt("email", "E-mail", p?.email)}</div>
+      <label class="chk"><input type="checkbox" name="decisor" ${p?.decisor ? "checked" : ""}> É quem toma a decisão de contratar</label>
+      <label class="chk"><input type="checkbox" name="principal" ${p?.principal || primeiro ? "checked" : ""}> Contato principal da empresa</label>
+      <div class="campo"><label>Observação</label><textarea name="obs" placeholder="Ex.: prefere WhatsApp à tarde; quem cuida dos pagamentos">${esc(p?.obs || "")}</textarea></div>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p" type="submit">Salvar</button></div>
+    </form>`);
+  veu.onclick = fecharModal;
+  m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  m.querySelector("[name=nome]").focus();
+  $("formPes").onsubmit = e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    if (!f.nome.trim()) return toast("Informe o nome do responsável", "erro");
+    const dados = { nome: f.nome.trim(), cargo: f.cargo.trim(), telefone: f.telefone.trim(), email: f.email.trim(), decisor: !!f.decisor, obs: f.obs.trim() };
+    fecharModal();
+    alterarLead(l.id, x => {
+      const ps = pessoasEditaveis(x);
+      let alvo = pid ? ps.find(q => q.id === pid || (pid === "p0" && q.nome === p?.nome)) : null;
+      if (alvo) Object.assign(alvo, dados);
+      else { alvo = { id: crypto.randomUUID(), ...dados, principal: false }; ps.push(alvo); registrar(x, "responsavel", `${alvo.nome}${alvo.cargo ? " · " + alvo.cargo : ""}`); }
+      if (f.principal) ps.forEach(q => q.principal = q === alvo); else if (alvo.principal && ps.length > 1) { alvo.principal = false; }
+      sincPrincipal(x);
+    }, p ? "Responsável atualizado" : "Responsável adicionado");
+  };
+}
+function acaoPessoaLead(l, acao, pid) {
+  if (acao === "novo") return abrirPessoaLead(l);
+  if (acao === "editar") return abrirPessoaLead(l, pid);
+  const p = pessoasLead(l).find(x => x.id === pid);
+  if (!p) return;
+  if (acao === "principal") return alterarLead(l.id, x => { const ps = pessoasEditaveis(x), alvo = ps.find(q => q.nome === p.nome && (q.id === pid || pid === "p0")) || ps.find(q => q.id === pid); ps.forEach(q => q.principal = q === alvo); sincPrincipal(x); }, `${p.nome} agora é o contato principal`);
+  if (acao === "remover") {
+    if (!confirmar(`Remover ${p.nome} dos responsáveis da empresa?`)) return;
+    return alterarLead(l.id, x => { const ps = pessoasEditaveis(x); const i = ps.findIndex(q => q.id === pid || (pid === "p0" && q.nome === p.nome)); if (i >= 0) ps.splice(i, 1); sincPrincipal(x); }, "Responsável removido");
+  }
+}
+
 function campoTxt(nome, rot, val) { return `<div class="campo"><label>${rot}</label><input name="${nome}" value="${esc(val || "")}"></div>`; }
 
 function ligarFicha(l) {
   const g = $("gaveta");
   let intSel = null;
   g.onclick = async e => {
-    const el = e.target.closest("[data-g],[data-g-etapa],[data-g-int],[data-g-frente],[data-g-diag],[data-g-concluir],[data-g-excluir-acao],[data-cal-mes],[data-cal-dia]");
+    const el = e.target.closest("[data-g],[data-g-pes],[data-g-etapa],[data-g-int],[data-g-frente],[data-g-diag],[data-g-concluir],[data-g-excluir-acao],[data-cal-mes],[data-cal-dia]");
     if (!el) return;
     const d = el.dataset;
     if (d.g === "fechar") return fecharFicha();
+    if (d.gPes) return acaoPessoaLead(l, d.gPes, d.pid);
     if (d.gEtapa) return pedirMudancaEtapa(l.id, d.gEtapa);
     if (d.gFrente) return el.classList.toggle("ativo");
     if (d.gInt) {
@@ -2876,7 +2966,7 @@ function ligarFicha(l) {
     const f = Object.fromEntries(new FormData(e.target));
     if (!f.empresa.trim()) return toast("Informe o nome da empresa", "erro");
     alterarLead(l.id, x => {
-      Object.assign(x, { empresa: f.empresa.trim(), cnpj: f.cnpj.trim(), segmento: f.segmento.trim(), contato: f.contato.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(),
+      Object.assign(x, { empresa: f.empresa.trim(), cnpj: f.cnpj.trim(), segmento: f.segmento.trim(), cidade: f.cidade.trim(), uf: f.uf.trim().toUpperCase(),
         email: f.email.trim(), instagram: f.instagram.trim(), endereco: f.endereco.trim(), fit: f.fit, prioridade: f.prioridade.trim(), observacoes: f.observacoes,
         telefones: f.telefones.split("/").map(t => t.trim()).filter(Boolean) });
       delete x.criadoManual;
@@ -2955,8 +3045,8 @@ function abrirNovoLead(pre = {}, depois) {
     <form class="modal-corpo" id="formNovo">
       ${pre.situacao ? `<div class="aviso-erro">Situação cadastral na Receita: <b>${esc(pre.situacao)}</b></div>` : ""}
       <div class="linha2">${campoTxt("empresa", "Empresa *", pre.empresa)}<div class="campo"><label>CNPJ <button type="button" class="lnk" data-m="cnpj">buscar dados ›</button></label><input name="cnpj" value="${v("cnpj")}"></div></div>
-      <div class="linha2">${campoTxt("segmento", "Segmento", pre.segmento)}${campoTxt("contato", "Contato / responsável", pre.contato)}</div>
-      <div class="linha2">${campoTxt("cidade", "Cidade", pre.cidade)}${campoTxt("uf", "UF", pre.uf)}</div>
+      <div class="linha2">${campoTxt("contato", "Responsável pela empresa", pre.contato)}<div class="campo"><label>Cargo do responsável</label><input name="cargo" list="dlCargosN" value="${esc(pre.cargo || (pre.contato && pre.origemBase ? "Sócio / proprietário" : ""))}"><datalist id="dlCargosN">${CARGOS_RESP.map(c => `<option value="${esc(c)}">`).join("")}</datalist></div></div>
+      <div class="linha3">${campoTxt("segmento", "Segmento", pre.segmento)}${campoTxt("cidade", "Cidade", pre.cidade)}${campoTxt("uf", "UF", pre.uf)}</div>
       <div class="linha2">${campoTxt("telefones", "Telefone(s)", (pre.telefones || []).join(" / "))}${campoTxt("email", "E-mail", pre.email)}</div>
       ${pre.endereco ? campoTxt("endereco", "Endereço", pre.endereco) : ""}
       <div class="linha2"><div class="campo"><label>Fit WL</label><select name="fit">${opcoes([["A", "A"], ["B", "B"], ["C", "C"]], "", "—")}</select></div>
@@ -3652,7 +3742,7 @@ async function criarDiag({ leadId, cliente, escopo }) {
       d.seq = (d.seq || d.diagnosticos.length) + 1;
       id = TD.prefixo + "-" + String(d.seq).padStart(4, "0");
       d.diagnosticos.push({ id, frente: TD.frente, tipo: TD.tipo, ...(TD.frente === "bpo" ? { escopo: escopo || "bpo" } : {}), status: "rascunho", leadId: l?.id || null, cliente: l ? clienteDoLead(l) : cliente,
-        entrevistado: l?.contato || cliente?.contato || "", cargo: "", dataReuniao: hojeISO(), responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "",
+        entrevistado: l?.contato || cliente?.contato || "", cargo: l?.cargo || "", dataReuniao: hojeISO(), responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "",
         respostas: {}, parecer: "", plano: "", proximosPassos: "", criadoEm: new Date().toISOString(), criadoPor: meuNome(), atualizadoEm: new Date().toISOString(), atualizadoPor: meuNome() });
     });
     chip("", "Sincronizado");
@@ -4843,6 +4933,7 @@ function novoLeadDe(d, f) {
     cidade: (f.cidade || "").trim(), uf: (f.uf || "").trim().toUpperCase(), telefones: Array.isArray(f.telefones) ? f.telefones : String(f.telefones || "").split("/").map(t => t.trim()).filter(Boolean),
     email: (f.email || "").trim(), endereco: f.endereco || "", porte: f.porte || "", abertura: f.abertura || "", fit: f.fit || "", origem: f.origem || "Prospecção ativa",
     observacoes: f.observacoes || "", etapa: "abordar", criadoEm: new Date().toISOString(), criadoPor: meuNome(), responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", historico: [], acoes: [] };
+  if (l.contato) { l.cargo = (f.cargo || "").trim(); l.pessoas = [{ id: crypto.randomUUID(), nome: l.contato, cargo: l.cargo, telefone: "", email: "", decisor: false, principal: true, obs: "" }]; }
   registrar(l, "criado", [f.origem ? `Origem: ${f.origem}` : "", f.origemBase ? "dados da base pública da Receita" : ""].filter(Boolean).join(" · "));
   return l;
 }
@@ -5394,7 +5485,7 @@ function novaProposta() {
     if (b.dataset.npLead) {
       const l = leadPorId(b.dataset.npLead); fecharModal();
       const nova = { tipo: tipoSel, status: "rascunho", diagId: null, diagFrente: null, leadId: l.id,
-        cliente: { empresa: l.empresa, cnpj: l.cnpj || "", contato: l.contato || "", cargo: "", email: l.email || "", telefone: (l.telefones || [])[0] || "", cidade: l.cidade || "", uf: l.uf || "" },
+        cliente: { empresa: l.empresa, cnpj: l.cnpj || "", contato: l.contato || "", cargo: l.cargo || "", email: principalLead(l)?.email || l.email || "", telefone: principalLead(l)?.telefone || (l.telefones || [])[0] || "", cidade: l.cidade || "", uf: l.uf || "" },
         data: hojeISO(), validade: 15, responsavel: l.responsavel || (RESPONSAVEIS.includes(meuNome()) ? meuNome() : ""), consultorEmail: conta?.username || "",
         apresentacao: `${l.contato ? l.contato.split(" ")[0] + ", obrigado" : "Obrigado"} pelo tempo da nossa conversa. Preparamos esta proposta com o caminho que enxergamos para a ${l.empresa} e a forma como a WL Expertise vai conduzir esse trabalho ao seu lado.`,
         desafio: "", pontos: "", objetivos: ({ bpo: OBJ_PADRAO.bpo, cfo: OBJ_PADRAO.fpa, "bpo+cfo": [...OBJ_PADRAO.bpo.slice(0, 2), ...OBJ_PADRAO.fpa.slice(0, 2)], planejamento: OBJ_PADRAO.pla, gestao: [...OBJ_PADRAO.bpo.slice(0, 2), ...OBJ_PADRAO.fpa.slice(0, 2), ...OBJ_PADRAO.pla.slice(0, 2)], consultoria: OBJ_PADRAO.rt })[tipoSel].join("\n"),
