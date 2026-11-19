@@ -1328,6 +1328,7 @@
         <div class="dir">
           <button class="btn-s" id="btnBuscaEmp"><svg><use href="#i-busca"/></svg>Buscar empresas</button>
           <button class="btn-s" id="btnCompletar"><svg><use href="#i-atual"/></svg>Completar planilha</button>
+          <button class="btn-s" id="btnModeloPlan"><svg><use href="#i-baixar"/></svg>Planilha modelo</button>
           <button class="btn-s" id="btnImportar"><svg><use href="#i-enviar"/></svg>Importar planilha</button>
           <button class="btn-p" id="btnNovoLead"><svg><use href="#i-mais"/></svg>Novo lead</button>
         </div>
@@ -1456,7 +1457,7 @@ const GRAPH = CONFIG.api + "/graph";
 const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial", "descricao": "Estudo, prospecção, apresentações e fechamento.", "icone": "i-a-com", "pasta": "Comercial", "subs": [{"id": "estudo", "nome": "Materiais de Estudo", "descricao": "Posicionamento, ICP, scripts e guias de venda.", "pasta": "Materiais de Estudo"}, {"id": "prospeccao", "nome": "Ferramentas de Prospecção", "descricao": "Controle de prospecção, CRM e agenda de reuniões.", "pasta": "Ferramentas de Prospecção"}, {"id": "apresentacoes", "nome": "Apresentações Comerciais", "descricao": "Apresentação institucional e por segmento.", "pasta": "Apresentações Comerciais"}, {"id": "propostas", "nome": "Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos.", "pasta": "Propostas, Preços e Contratos"}]}, {"id": "bpo", "nome": "BPO Financeiro", "descricao": "Gestão das rotinas financeiras do cliente.", "icone": "i-a-bpo", "pasta": "BPO Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "fpa", "nome": "FP&A", "descricao": "Indicadores gerenciais e análise de desempenho.", "icone": "i-a-fpa", "pasta": "FP&A", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "planejamento", "nome": "Planejamento Financeiro", "descricao": "Orçamentos, fluxo de caixa e cenários.", "icone": "i-a-pla", "pasta": "Planejamento Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "processos", "nome": "Consultoria de Processos", "descricao": "Mapeamento e redesenho de processos.", "icone": "i-a-pro", "pasta": "Consultoria de Processos", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}], "itens": [{"area": "comercial", "sub": "estudo", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Definição de ICP", "ext": "docx", "descricao": "Perfil de cliente ideal da WL Expertise."}, {"area": "comercial", "sub": "estudo", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"area": "comercial", "sub": "estudo", "nome": "Mapa de Posicionamento", "ext": "docx", "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "descricao": "Levantamento das dores e metas da base de clientes."}, {"area": "comercial", "sub": "estudo", "nome": "Script de Vendas (Call)", "ext": "docx", "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"area": "comercial", "sub": "estudo", "nome": "Script Único", "ext": "docx", "descricao": "Script de abordagem comercial."}, {"area": "comercial", "sub": "prospeccao", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"area": "comercial", "sub": "prospeccao", "nome": "CRM para Consultorias", "ext": "xlsx", "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"area": "comercial", "sub": "prospeccao", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"area": "comercial", "sub": "estudo", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"area": "comercial", "sub": "estudo", "nome": "Programa de Indicação", "ext": "pdf", "descricao": "Como estruturar um programa de indicação de clientes."}, {"area": "comercial", "sub": "propostas", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "descricao": "Termo para parceiros que indicam clientes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "descricao": "Proposta de valor para negócios de estética."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "descricao": "Proposta de valor para locadoras de equipamentos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "descricao": "Proposta de valor para criadores de conteúdo."}, {"area": "comercial", "sub": "propostas", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"area": "comercial", "sub": "propostas", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "descricao": "Planos e regras de negociação para o segmento Rental."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "descricao": "Modelo de proposta comercial."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "descricao": "Modelo de contrato de prestação de serviços."}, {"area": "processos", "sub": "diagnostico", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"area": "fpa", "sub": "diagnostico", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"area": "bpo", "sub": "diagnostico", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "descricao": "Questionário preliminar das rotinas financeiras."}, {"area": "bpo", "sub": "execucao", "nome": "Mapa Quente da Operação", "ext": "xlsx", "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"area": "processos", "sub": "diagnostico", "nome": "Ata e Briefing de Reunião", "ext": "docx", "descricao": "Modelo para registrar reuniões e briefings."}, {"area": "bpo", "sub": "onboarding", "nome": "Questionário de Kick-off", "ext": "xlsx", "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"area": "processos", "sub": "onboarding", "nome": "Formulário de Onboarding", "ext": "docx", "descricao": "Coleta de informações para iniciar o projeto."}, {"area": "bpo", "sub": "onboarding", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "descricao": "Plano de ativação, relação de clientes e timeline."}, {"area": "bpo", "sub": "onboarding", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"area": "bpo", "sub": "onboarding", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"area": "processos", "sub": "execucao", "nome": "Cronograma da Consultoria", "ext": "xlsx", "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"area": "processos", "sub": "execucao", "nome": "Plano de Ação Personalizado", "ext": "docx", "descricao": "Plano de ação do cliente após o diagnóstico."}, {"area": "processos", "sub": "execucao", "nome": "Materiais de Entrega", "ext": "xlsx", "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"area": "bpo", "sub": "execucao", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "descricao": "Gestão da operação por operador, plano de ação e timeline."}], "legado": {"01 - Estratégia e Posicionamento": "comercial/estudo", "02 - Prospecção e Vendas": "comercial/prospeccao", "03 - Apresentações Comerciais": "comercial/apresentacoes", "04 - Propostas, Preços e Contratos": "comercial/propostas", "05 - Diagnóstico": "bpo/diagnostico", "06 - Onboarding e Implantação": "bpo/onboarding", "07 - Execução e Entregas": "bpo/execucao"}};
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
-const VERSAO = "v35";
+const VERSAO = "v36";
 document.querySelectorAll(".versao-sis").forEach(x => x.textContent = VERSAO);
 const MODULOS = [
   { id: "inicio", nome: "Início", icone: "i-home" },
@@ -2627,6 +2628,7 @@ $("crmConteudo").onclick = e => {
 };
 $("btnNovoLead").onclick = () => abrirNovoLead();
 $("btnImportar").onclick = () => abrirImportacao();
+$("btnModeloPlan").onclick = () => baixarModeloLeads();
 $("btnCompletar").onclick = () => abrirCompletar();
 
 /* ---- Ficha do lead ---- */
@@ -3110,10 +3112,11 @@ const MAPA_COLUNAS = {
   instagram: ["instagram", "instagram @", "perfil instagram"],
   instagramUrl: ["link instagram"],
   email: ["email", "e mail"],
+  cargo: ["cargo", "cargo do responsavel", "cargo do contato"],
   contato: ["responsavel socio se publico", "responsavel", "socio", "socios", "contato", "nome do contato", "decisor", "contato decisor cargo"],
   receitaEstimada: ["receita estimada evidencia", "receita estimada", "faturamento", "receita"],
   confianca: ["confianca do dado", "confianca"],
-  fit: ["fit wl a b c", "fit wl", "fit", "classe", "classificacao"],
+  fit: ["fit wl a b c", "fit a b c", "fit wl", "fit", "classe", "classificacao"],
   acao: ["proxima acao", "proximo passo", "acao"],
   porqueEncaixa: ["por que encaixa", "motivo", "justificativa"],
   fontes: ["fonte s", "fontes", "fonte"],
@@ -3178,11 +3181,13 @@ function abrirImportacao() {
   const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Importar planilha de leads</h3></div>
     <div class="modal-corpo" id="impCorpo">
       <p>Envie um arquivo <b>.xlsx</b> ou <b>.csv</b>. O sistema reconhece as colunas pelo nome (Empresa, Segmento, Cidade, UF, Telefone, Fit…) e ignora empresas que já estão no CRM.</p>
+      <p style="font-size:.82rem">Não tem uma planilha pronta? <a href="#" id="impModelo">Baixe a planilha modelo</a>, preencha uma empresa por linha e envie aqui.</p>
       <div class="zona-arq" id="zonaArq"><b>Escolher arquivo</b>Excel ou CSV</div>
     </div>
     <div class="modal-rod"><button class="btn-s" data-m="cancelar">Cancelar</button></div>`);
   veu.onclick = fecharModal;
   m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  $("impModelo").onclick = e => { e.preventDefault(); baixarModeloLeads(); };
   $("zonaArq").onclick = async () => {
     const inp = document.createElement("input");
     inp.type = "file"; inp.accept = ".xlsx,.xls,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv";
@@ -3197,7 +3202,7 @@ async function lerPlanilha(arquivo) {
     const wb = XLSX.read(await arquivo.arrayBuffer(), { type: "array" });
     // Escolhe a aba com mais linhas que tenha uma coluna de empresa
     let melhor = null;
-    for (const nomeAba of wb.SheetNames) {
+    for (const nomeAba of wb.SheetNames.filter(n => !abaInstrucoes(n))) {
       const linhas = XLSX.utils.sheet_to_json(wb.Sheets[nomeAba], { header: 1, defval: "", raw: false });
       for (let k = 0; k < Math.min(10, linhas.length); k++) {
         const cab = linhas[k].map(c => norm(String(c)));
@@ -3226,10 +3231,10 @@ async function lerPlanilha(arquivo) {
         empresa: String(r[idx.empresa]).trim(), cnpj: v("cnpj"), segmento: v("segmento"), cidade: cd.cidade, uf: v("uf").toUpperCase().slice(0, 2), prioridade: v("prioridade"),
         telefones: telefonesDe(idx.telefones === undefined ? "" : r[idx.telefones]), endereco: v("endereco") || (cd.bairro ? "Bairro/região: " + cd.bairro : ""),
         instagram: /^@|^[a-z0-9._]+$/i.test(v("instagram")) ? v("instagram") : "", instagramUrl: v("instagramUrl") || (/^https?:/.test(v("instagram")) ? v("instagram") : ""), email: /@.+\./.test(v("email")) ? v("email") : "",
-        contato: ps[0]?.nome || "", cargo: ps[0]?.cargo || "", receitaEstimada: v("receitaEstimada"),
+        contato: ps[0]?.nome || "", cargo: ps[0]?.cargo || v("cargo"), receitaEstimada: v("receitaEstimada"),
         confianca: v("confianca"), fit: fitBruto ? fitBruto[0] : "", porqueEncaixa: v("porqueEncaixa"), fontes: v("fontes"), observacoes: [v("observacoes"), ...obsExtra].filter(Boolean).join(" · "), _acao: v("acao")
       };
-      if (ps.length) l.pessoas = ps.map((p, n) => ({ id: crypto.randomUUID(), nome: p.nome, cargo: p.cargo, telefone: "", email: "", decisor: /socio|propriet|dono|diretor|ceo|fundador|titular|adm/.test(norm(p.cargo)), principal: n === 0, obs: "" }));
+      if (ps.length) l.pessoas = ps.map((p, n) => ({ id: crypto.randomUUID(), nome: p.nome, cargo: p.cargo || (n === 0 ? v("cargo") : ""), telefone: "", email: "", decisor: /socio|propriet|dono|diretor|ceo|fundador|titular|adm/.test(norm(p.cargo || (n === 0 ? v("cargo") : ""))), principal: n === 0, obs: "" }));
       (existentes.has(chave(l)) ? duplicados : novos).push(l);
       existentes.add(chave(l));
     }
@@ -3265,6 +3270,55 @@ async function lerPlanilha(arquivo) {
       <div class="zona-arq" id="zonaArq"><b>Tentar outro arquivo</b></div>`;
     $("zonaArq").onclick = () => { fecharModal(); abrirImportacao(); };
   }
+}
+/* ---- Planilha modelo para cadastro de leads em massa ---- */
+const abaInstrucoes = n => /^(instruc|leia|como preencher|orienta)/.test(norm(n));
+const MODELO_LEADS = [
+  // [coluna, obrigatório, como preencher, exemplo 1, exemplo 2, largura]
+  ["Empresa", "Sim", "Nome da empresa (fantasia ou razão social). Uma empresa por linha.", "Clínica Sorriso Pleno", "Locadora Exemplo Equipamentos", 30],
+  ["CNPJ", "Não", "Com ou sem pontuação. Ajuda a evitar duplicidade e a usar \"Completar planilha\".", "12.345.678/0001-90", "", 20],
+  ["Segmento", "Não", "Ramo de atuação (ex.: Clínica odontológica, Locação de equipamentos, Estética, Engenharia).", "Clínica odontológica", "Locação de equipamentos", 24],
+  ["Cidade", "Não", "Cidade da empresa. Aceita \"BH\" e \"BH – Savassi\" (o bairro vai para o endereço).", "Belo Horizonte", "Esmeraldas", 18],
+  ["UF", "Não", "Sigla do estado. Se a coluna ficar vazia, o sistema pergunta o estado na importação.", "MG", "MG", 6],
+  ["Telefone", "Não", "Um ou mais números, separados por \" / \". Com DDD.", "(31) 99999-0000 / (31) 3333-0000", "(31) 98888-1111", 30],
+  ["E-mail", "Não", "E-mail de contato da empresa.", "contato@sorrisopleno.com.br", "", 28],
+  ["Instagram", "Não", "Perfil com @ ou link completo.", "@sorrisopleno", "", 18],
+  ["Responsável", "Não", "Nome do responsável/decisor. Vários: separe com \" / \" (ex.: Ana – Sócia / João – Gerente).", "Ana Souza", "João Lima – Sócio / Carla Lima – Financeiro", 34],
+  ["Cargo", "Não", "Cargo do primeiro responsável (opcional se já estiver junto do nome).", "Sócia-proprietária", "", 18],
+  ["Endereço", "Não", "Endereço completo.", "Rua Exemplo, 100 – Centro", "", 30],
+  ["Fit (A/B/C)", "Não", "Aderência ao perfil de cliente ideal: A (alta), B (média) ou C (baixa).", "A", "B", 11],
+  ["Prioridade", "Não", "P1 (mais urgente), P2 ou P3.", "P1", "P2", 11],
+  ["Receita estimada", "Não", "Faturamento estimado ou porte, em texto livre.", "R$ 80 mil/mês", "", 18],
+  ["Próxima ação", "Não", "Vira uma ação pendente no lead.", "Ligar para agendar diagnóstico", "Enviar apresentação pelo WhatsApp", 32],
+  ["Observações", "Não", "Qualquer informação adicional.", "Indicação do parceiro X", "", 34]
+];
+async function baixarModeloLeads() {
+  try {
+    await carregarXLSX();
+    const wb = XLSX.utils.book_new();
+    const dados = [MODELO_LEADS.map(c => c[0]), MODELO_LEADS.map(c => c[3]), MODELO_LEADS.map(c => c[4])];
+    const ws = XLSX.utils.aoa_to_sheet(dados);
+    ws["!cols"] = MODELO_LEADS.map(c => ({ wch: c[5] }));
+    ws["!autofilter"] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: 0, c: MODELO_LEADS.length - 1 } }) };
+    XLSX.utils.book_append_sheet(wb, ws, "Leads");
+    const inst = [
+      ["Planilha modelo de leads · WL Expertise"],
+      [""],
+      ["1. Preencha a aba \"Leads\": uma empresa por linha. Apague as 2 linhas de exemplo antes de importar."],
+      ["2. Só a coluna Empresa é obrigatória. Deixe em branco o que não souber."],
+      ["3. Não renomeie os títulos das colunas. Você pode apagar colunas que não for usar."],
+      ["4. No CRM, clique em \"Importar planilha\" e envie este arquivo. Empresas que já estão no CRM são ignoradas."],
+      ["5. Todos os leads entram na etapa \"A abordar\". Com CNPJ ou Cidade, você também pode usar \"Completar planilha\" para buscar sócios e telefones na Receita."],
+      [""],
+      ["Coluna", "Obrigatória", "Como preencher", "Exemplo"],
+      ...MODELO_LEADS.map(c => [c[0], c[1], c[2], c[3]])
+    ];
+    const wi = XLSX.utils.aoa_to_sheet(inst);
+    wi["!cols"] = [{ wch: 20 }, { wch: 12 }, { wch: 90 }, { wch: 32 }];
+    XLSX.utils.book_append_sheet(wb, wi, "Instruções");
+    XLSX.writeFile(wb, "Modelo - Importação de Leads WL.xlsx");
+    toast("Planilha modelo baixada");
+  } catch (e) { toast(e.message || "Não foi possível gerar a planilha", "erro"); }
 }
 /* ================== COMPLETAR PLANILHA COM A RECEITA ==================
    Lê uma planilha de leads e, para cada linha, procura a empresa na base pública da Receita
@@ -3360,7 +3414,7 @@ async function completarPlanilha(arquivo) {
     await carregarXLSX();
     const wb = XLSX.read(await arquivo.arrayBuffer(), { type: "array" });
     let melhor = null;
-    for (const nomeAba of wb.SheetNames) {
+    for (const nomeAba of wb.SheetNames.filter(n => !abaInstrucoes(n))) {
       const linhas = XLSX.utils.sheet_to_json(wb.Sheets[nomeAba], { header: 1, defval: "", raw: true });
       for (let k = 0; k < Math.min(10, linhas.length); k++) {
         const cab = linhas[k].map(c => norm(String(c)));
