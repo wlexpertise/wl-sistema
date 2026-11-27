@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Minhas tarefas · WL Expertise</title>
+<meta name="theme-color" content="#0B5A60">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--teal:#0B5A60;--turq:#13A3B5;--verde:#28B260;--txt:#1A2E2E;--txt-2:#5B6B6B;--borda:#E3ECEC;--bg:#F1F5F5;--erro:#C8463D;--alerta:#D99A1E}
+  *{box-sizing:border-box;margin:0}
+  body{font-family:Montserrat,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+  header{background:var(--teal);padding:14px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+  header img{height:22px}
+  .wrap{max-width:760px;margin:0 auto;padding:18px 16px 40px}
+  .ola{margin:6px 2px 18px}
+  .eyebrow{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--turq);margin-bottom:4px}
+  h1{font-size:1.3rem;color:var(--teal);line-height:1.3}
+  .ola p{font-size:.88rem;color:var(--txt-2);margin-top:6px;line-height:1.5}
+  h2{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--txt-2);margin:22px 2px 10px}
+  .tf{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:16px 18px;margin-bottom:12px;border-left:4px solid var(--turq)}
+  .tf.atraso{border-left-color:var(--erro)}
+  .tf.feita{border-left-color:var(--verde);opacity:.85}
+  .tf h3{font-size:1rem;color:var(--txt);line-height:1.35}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{font-size:.7rem;font-weight:700;padding:4px 9px;border-radius:999px;background:var(--bg);color:var(--teal)}
+  .chip.atraso{background:rgba(200,70,61,.1);color:var(--erro)}
+  .chip.hoje{background:rgba(217,154,30,.14);color:#8A5E0A}
+  .chip.ok{background:rgba(40,178,96,.12);color:#1D7F45}
+  .desc{font-size:.88rem;line-height:1.55;margin-top:10px;white-space:pre-line;color:var(--txt)}
+  .desc a{color:var(--turq);word-break:break-all}
+  .ck{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:6px}
+  .ck label{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;line-height:1.4;cursor:pointer;padding:8px 10px;border-radius:10px;background:var(--bg)}
+  .ck input{width:18px;height:18px;margin-top:1px;accent-color:var(--verde);flex:none}
+  .ck .feito span{text-decoration:line-through;color:var(--txt-2)}
+  .acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
+  button{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:12px;padding:12px 18px;cursor:pointer;background:var(--verde);color:#fff;display:inline-flex;align-items:center;gap:8px}
+  button.sec{background:#fff;color:var(--teal);border:1.5px solid var(--borda)}
+  button.lnk{background:none;color:var(--turq);padding:6px 2px;font-size:.82rem}
+  button:disabled{opacity:.55;cursor:default}
+  textarea{width:100%;border:1.5px solid var(--borda);border-radius:12px;padding:11px 12px;font:inherit;font-size:.9rem;resize:vertical;min-height:76px;outline:none;margin-top:12px}
+  textarea:focus{border-color:var(--turq)}
+  .coment{margin-top:10px;font-size:.82rem;color:var(--txt-2);border-left:3px solid var(--turq);padding:4px 10px;white-space:pre-line}
+  .vazio,.centro{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:28px 20px;text-align:center;color:var(--txt-2);font-size:.9rem;line-height:1.55}
+  .centro h1{margin-bottom:8px}
+  .rod{font-size:.72rem;color:var(--txt-2);text-align:center;margin-top:26px;line-height:1.6}
+  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--teal);color:#fff;font-size:.86rem;font-weight:600;padding:12px 18px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:20;max-width:calc(100vw - 32px)}
+  .toast.erro{background:var(--erro)}
+</style>
+</head>
+<body>
+<header><img src="logo-branca.png" alt="WL Expertise"></header>
+<div class="wrap" id="app"><div class="centro">Carregando suas tarefas…</div></div>
+<script>
+const API = "https://wl-sistema-api.wlexpertise.workers.dev";
+const T = new URLSearchParams(location.search).get("t") || "";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const linkify = s => esc(s).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+const dataBR = d => d ? `${d.slice(8, 10)}/${d.slice(5, 7)}/${d.slice(0, 4)}` : "";
+const dataHoraBR = iso => new Date(iso).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
+let D = null;
+const abertos = new Set();
+
+async function chamar(p, opt = {}) {
+  const r = await fetch(API + p + "?t=" + encodeURIComponent(T), { ...opt, headers: { "Content-Type": "application/json" } });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw Object.assign(new Error(j.erro || "Não foi possível conectar. Tente novamente."), { status: r.status });
+  return j;
+}
+function toast(msg, erro) {
+  document.querySelector(".toast")?.remove();
+  const el = document.createElement("div"); el.className = "toast" + (erro ? " erro" : ""); el.textContent = msg;
+  document.body.appendChild(el); setTimeout(() => el.remove(), 4500);
+}
+function situacao(t) {
+  if (t.status === "concluida") return ["ok", "Concluída"];
+  if (!t.venc) return ["", "Sem prazo"];
+  if (t.venc < D.hoje) return ["atraso", "Atrasada · prazo " + dataBR(t.venc)];
+  if (t.venc === D.hoje) return ["hoje", "Para hoje" + (t.hora ? " · " + t.hora : "")];
+  return ["", "Prazo " + dataBR(t.venc) + (t.hora ? " · " + t.hora : "")];
+}
+function cartao(t) {
+  const [cls, txt] = situacao(t), feita = t.status === "concluida";
+  return `<article class="tf ${feita ? "feita" : cls}" data-id="${esc(t.id)}">
+    <h3>${esc(t.titulo)}</h3>
+    <div class="meta"><span class="chip ${cls}">${feita ? "✓ Concluída em " + dataHoraBR(t.concluidaEm) : esc(txt)}</span>${t.recorrente && !feita ? `<span class="chip">Tarefa recorrente</span>` : ""}</div>
+    ${t.descricao ? `<p class="desc">${linkify(t.descricao)}</p>` : ""}
+    ${t.checklist.length ? `<ul class="ck">${t.checklist.map(i => `<li><label class="${i.feito ? "feito" : ""}"><input type="checkbox" data-item="${esc(i.id)}" ${i.feito ? "checked" : ""} ${feita ? "disabled" : ""}><span>${esc(i.txt)}</span></label></li>`).join("")}</ul>` : ""}
+    ${t.comentarios.map(k => `<p class="coment">${esc(k.txt)}<br><small>${esc(k.por)} · ${dataHoraBR(k.em)}</small></p>`).join("")}
+    ${feita ? "" : `${abertos.has(t.id) ? `<textarea data-coment placeholder="Comentário para a equipe da WL (opcional). Ex.: extratos enviados por e-mail."></textarea>` : ""}
+      <div class="acoes"><button data-concluir>✓ Marcar como feita</button>${abertos.has(t.id) ? "" : `<button class="lnk" data-abrir-coment>Adicionar comentário</button>`}</div>`}
+  </article>`;
+}
+function render() {
+  const pend = D.tarefas.filter(t => t.status !== "concluida").sort((a, b) => (a.venc || "9999").localeCompare(b.venc || "9999"));
+  const feitas = D.tarefas.filter(t => t.status === "concluida").sort((a, b) => (b.concluidaEm || "").localeCompare(a.concluidaEm || ""));
+  const atr = pend.filter(t => t.venc && t.venc < D.hoje).length;
+  document.title = `Tarefas de ${D.nome.split(" ")[0]} · WL Expertise`;
+  document.getElementById("app").innerHTML = `
+    <div class="ola"><div class="eyebrow">${esc(D.empresa)}</div><h1>Olá, ${esc(D.nome.split(" ")[0])}!</h1>
+      <p>${pend.length ? `Você tem <b>${pend.length}</b> tarefa${pend.length === 1 ? "" : "s"} pendente${pend.length === 1 ? "" : "s"}${atr ? `, ${atr} atrasada${atr === 1 ? "" : "s"}` : ""}. Quando concluir, clique em <b>Marcar como feita</b>. A equipe da WL Expertise é avisada na hora.` : "Tudo em dia por aqui. Obrigado!"}</p></div>
+    ${pend.length ? `<h2>Pendentes</h2>${pend.map(cartao).join("")}` : `<div class="vazio">Nenhuma tarefa pendente. 🎉</div>`}
+    ${feitas.length ? `<h2>Concluídas recentemente</h2>${feitas.map(cartao).join("")}` : ""}
+    <p class="rod">Esta página é pessoal: não encaminhe o link.<br>Dúvidas? Fale com a WL Expertise · (31) 99736-1414</p>`;
+}
+async function carregar() {
+  if (!T) return erroTela("Link incompleto", "Abra a página pelo botão do e-mail que você recebeu.");
+  try { D = await chamar("/pub/tc"); render(); }
+  catch (e) { erroTela(e.status === 410 || e.status === 404 ? "Link desativado" : "Não foi possível abrir", e.message); }
+}
+function erroTela(tit, msg) { document.getElementById("app").innerHTML = `<div class="centro"><h1>${esc(tit)}</h1><p>${esc(msg)}</p></div>`; }
+function trocar(nova) { const i = D.tarefas.findIndex(x => x.id === nova.id); if (i >= 0) D.tarefas[i] = nova; }
+
+document.getElementById("app").addEventListener("click", async e => {
+  const card = e.target.closest("[data-id]"); if (!card) return;
+  const id = card.dataset.id;
+  if (e.target.closest("[data-abrir-coment]")) { abertos.add(id); render(); document.querySelector(`[data-id="${CSS.escape(id)}"] textarea`)?.focus(); return; }
+  const b = e.target.closest("[data-concluir]"); if (!b) return;
+  const t = D.tarefas.find(x => x.id === id);
+  const faltam = t.checklist.filter(i => !i.feito).length;
+  if (faltam && !confirm(`Ainda há ${faltam} item(ns) sem marcar. Marcar a tarefa inteira como feita?`)) return;
+  b.disabled = true; b.textContent = "Enviando…";
+  try {
+    const r = await chamar("/pub/tc/concluir", { method: "POST", body: JSON.stringify({ id, comentario: card.querySelector("textarea")?.value || "" }) });
+    abertos.delete(id);
+    await carregar();
+    toast(r.ja ? "Esta tarefa já estava concluída." : "Tarefa concluída. Obrigado! A equipe da WL foi avisada.");
+  } catch (er) { toast(er.message, true); b.disabled = false; b.textContent = "✓ Marcar como feita"; }
+});
+document.getElementById("app").addEventListener("change", async e => {
+  const cx = e.target.closest("[data-item]"); if (!cx) return;
+  const id = cx.closest("[data-id]").dataset.id, txt = document.querySelector(`[data-id="${CSS.escape(id)}"] textarea`)?.value;
+  cx.disabled = true;
+  try { trocar(await chamar("/pub/tc/item", { method: "POST", body: JSON.stringify({ id, item: cx.dataset.item, feito: cx.checked }) })); render();
+    if (txt) { const ta = document.querySelector(`[data-id="${CSS.escape(id)}"] textarea`); if (ta) ta.value = txt; } }
+  catch (er) { cx.checked = !cx.checked; cx.disabled = false; toast(er.message, true); }
+});
+carregar();
+</script>
+</body>
+</html>

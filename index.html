@@ -952,6 +952,20 @@
   .lista-tf .tf.feita .q b{text-decoration:line-through;color:var(--txt-2)}
   .lista-tf .feito-por{color:var(--verde)!important}
   .lista-tf .chip-p.sem{opacity:.6}
+  .chip-p.ext{background:rgba(217,154,30,.15);color:#8A5E0A}
+  .ext-tf{border:1px dashed var(--borda);border-radius:12px;padding:12px 14px;background:var(--bg);display:grid;gap:10px}
+  .ext-tf .chk-linha{display:flex;gap:8px;align-items:flex-start;font-size:.82rem;line-height:1.4}
+  .ext-tf .chk-linha input{margin-top:2px}
+  .ext-tf .ext-info{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.8rem;color:var(--txt-2)}
+  .ext-tf .ext-info b{color:var(--txt)}
+  .ext-tf .ext-info span{flex:1;min-width:180px}
+  .ext-lista{list-style:none;padding:0;margin:6px 0 0;display:grid;gap:6px}
+  .ext-lista li{display:flex;align-items:center;gap:6px;border:1px solid var(--borda);border-radius:10px;padding:8px 10px;background:#fff}
+  .ext-lista li span{flex:1;min-width:0;display:flex;flex-direction:column}
+  .ext-lista li b{font-size:.84rem}
+  .ext-lista li small{font-size:.72rem;color:var(--txt-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ext-lista button{font:inherit;font-size:.72rem;font-weight:700;color:var(--teal);background:var(--bg);border:0;border-radius:8px;padding:6px 8px;cursor:pointer}
+  .ext-lista button.del{color:var(--erro)}
   .lista-tf.curta .tf{padding:9px 6px}
   .chk-acao.feito{background:var(--verde);border-color:var(--verde)}
   .concl-tf summary{padding:14px 16px;font-weight:700;font-size:.86rem;cursor:pointer;color:var(--teal)}
@@ -1460,7 +1474,7 @@ const GRAPH = CONFIG.api + "/graph";
 const CATALOGO = {"versao": 2, "areas": [{"id": "comercial", "nome": "Comercial", "descricao": "Estudo, prospecção, apresentações e fechamento.", "icone": "i-a-com", "pasta": "Comercial", "subs": [{"id": "estudo", "nome": "Materiais de Estudo", "descricao": "Posicionamento, ICP, scripts e guias de venda.", "pasta": "Materiais de Estudo"}, {"id": "prospeccao", "nome": "Ferramentas de Prospecção", "descricao": "Controle de prospecção, CRM e agenda de reuniões.", "pasta": "Ferramentas de Prospecção"}, {"id": "apresentacoes", "nome": "Apresentações Comerciais", "descricao": "Apresentação institucional e por segmento.", "pasta": "Apresentações Comerciais"}, {"id": "propostas", "nome": "Propostas, Preços e Contratos", "descricao": "Precificação, planos, propostas e contratos.", "pasta": "Propostas, Preços e Contratos"}]}, {"id": "bpo", "nome": "BPO Financeiro", "descricao": "Gestão das rotinas financeiras do cliente.", "icone": "i-a-bpo", "pasta": "BPO Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "fpa", "nome": "FP&A", "descricao": "Indicadores gerenciais e análise de desempenho.", "icone": "i-a-fpa", "pasta": "FP&A", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "planejamento", "nome": "Planejamento Financeiro", "descricao": "Orçamentos, fluxo de caixa e cenários.", "icone": "i-a-pla", "pasta": "Planejamento Financeiro", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}, {"id": "processos", "nome": "Consultoria de Processos", "descricao": "Mapeamento e redesenho de processos.", "icone": "i-a-pro", "pasta": "Consultoria de Processos", "subs": [{"id": "diagnostico", "nome": "Diagnóstico", "descricao": "Levantamento da situação do cliente.", "pasta": "Diagnóstico"}, {"id": "onboarding", "nome": "Onboarding e Implantação", "descricao": "Kick-off, acessos e ativação do cliente.", "pasta": "Onboarding e Implantação"}, {"id": "execucao", "nome": "Execução e Entregas", "descricao": "Rotina, acompanhamento e entregáveis.", "pasta": "Execução e Entregas"}]}], "itens": [{"area": "comercial", "sub": "estudo", "nome": "Plano de Ação WL Expertise", "ext": "pdf", "descricao": "Posicionamento ABC da WL: quem atende, resultado que entrega e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Definição de ICP", "ext": "docx", "descricao": "Perfil de cliente ideal da WL Expertise."}, {"area": "comercial", "sub": "estudo", "nome": "Lógica Comercial da WL (ICP)", "ext": "docx", "descricao": "Lógica comercial e critérios de qualificação por ICP."}, {"area": "comercial", "sub": "estudo", "nome": "Mapa de Posicionamento", "ext": "docx", "descricao": "Roteiro para definir nicho, problema, resultado, mecanismo e diferencial."}, {"area": "comercial", "sub": "estudo", "nome": "Pesquisa de Dores e Metas com Clientes", "ext": "docx", "descricao": "Levantamento das dores e metas da base de clientes."}, {"area": "comercial", "sub": "estudo", "nome": "Script de Vendas (Call)", "ext": "docx", "descricao": "Roteiro da reunião de vendas, da abertura ao fechamento."}, {"area": "comercial", "sub": "estudo", "nome": "Script Único", "ext": "docx", "descricao": "Script de abordagem comercial."}, {"area": "comercial", "sub": "prospeccao", "nome": "Tabela de Trabalho – Controle Diário de Prospecção", "ext": "pdf", "descricao": "Folha diária de ligações, agendamentos, entrevistas e fechamentos."}, {"area": "comercial", "sub": "prospeccao", "nome": "CRM para Consultorias", "ext": "xlsx", "descricao": "Painel de leads, oportunidades, clientes e atividades."}, {"area": "comercial", "sub": "prospeccao", "nome": "Reuniões Agendadas – Base de Clientes", "ext": "xlsx", "descricao": "Gestão de visitas comerciais e tentativas de contato."}, {"area": "comercial", "sub": "estudo", "nome": "E-book Acelerador de Vendas de BPO Financeiro", "ext": "pdf", "descricao": "Guia de vendas para serviços de BPO Financeiro."}, {"area": "comercial", "sub": "estudo", "nome": "Programa de Indicação", "ext": "pdf", "descricao": "Como estruturar um programa de indicação de clientes."}, {"area": "comercial", "sub": "propostas", "nome": "Termo de Parceria – Indicação de Cliente", "ext": "docx", "descricao": "Termo para parceiros que indicam clientes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Institucional WL Expertise", "ext": "pdf", "descricao": "Apresentação oficial da WL e das quatro frentes."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Modelo de Apresentação da Consultoria", "ext": "pptx", "descricao": "Modelo de slides para apresentar a consultoria ao cliente."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Clínicas", "ext": "pdf", "descricao": "Proposta de valor para clínicas e grupos médicos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Estética", "ext": "pdf", "descricao": "Proposta de valor para negócios de estética."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Rental", "ext": "pdf", "descricao": "Proposta de valor para locadoras de equipamentos."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Engenharia e Arquitetura", "ext": "pdf", "descricao": "Proposta de valor para escritórios de engenharia e arquitetura."}, {"area": "comercial", "sub": "apresentacoes", "nome": "Apresentação Comercial – Criadores de Conteúdo", "ext": "pdf", "descricao": "Proposta de valor para criadores de conteúdo."}, {"area": "comercial", "sub": "propostas", "nome": "Calculadora de Preço da Consultoria", "ext": "xlsx", "descricao": "Precificação por escopo, urgência e complexidade, com simulador de pacotes."}, {"area": "comercial", "sub": "propostas", "nome": "Tabela de Planos do BPO Financeiro", "ext": "xlsx", "descricao": "Planos básico, intermediário e avançado, mais tabela de adicionais."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – 9 Planos BPO + FP&A", "ext": "docx", "descricao": "Estrutura comercial integrada de BPO e FP&A em 9 planos."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo Comercial – Rental (Planos e Negociação)", "ext": "docx", "descricao": "Planos e regras de negociação para o segmento Rental."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Proposta de Consultoria", "ext": "docx", "descricao": "Modelo de proposta comercial."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Oferta acima de R$ 5 mil", "ext": "docx", "descricao": "Estrutura de oferta para tickets acima de R$ 5 mil."}, {"area": "comercial", "sub": "propostas", "nome": "Modelo de Contrato de Consultoria", "ext": "docx", "descricao": "Modelo de contrato de prestação de serviços."}, {"area": "processos", "sub": "diagnostico", "nome": "Formulário de Diagnóstico do Cliente", "ext": "docx", "descricao": "Perguntas para o diagnóstico inicial do cliente."}, {"area": "fpa", "sub": "diagnostico", "nome": "Diagnóstico Financeiro v2", "ext": "xlsx", "descricao": "Escala de maturidade financeira e índice de competitividade."}, {"area": "bpo", "sub": "diagnostico", "nome": "BPO Financeiro – Diagnóstico Preliminar", "ext": "xlsx", "descricao": "Questionário preliminar das rotinas financeiras."}, {"area": "bpo", "sub": "execucao", "nome": "Mapa Quente da Operação", "ext": "xlsx", "descricao": "Classificação da carteira por nicho, assessora e criticidade."}, {"area": "processos", "sub": "diagnostico", "nome": "Ata e Briefing de Reunião", "ext": "docx", "descricao": "Modelo para registrar reuniões e briefings."}, {"area": "bpo", "sub": "onboarding", "nome": "Questionário de Kick-off", "ext": "xlsx", "descricao": "Roteiro da reunião de kick-off: fluxos de entrada e saída."}, {"area": "processos", "sub": "onboarding", "nome": "Formulário de Onboarding", "ext": "docx", "descricao": "Coleta de informações para iniciar o projeto."}, {"area": "bpo", "sub": "onboarding", "nome": "Planilha de Onboarding do Cliente", "ext": "xlsx", "descricao": "Plano de ativação, relação de clientes e timeline."}, {"area": "bpo", "sub": "onboarding", "nome": "Criação de Acesso Secundário nos Bancos", "ext": "pdf", "descricao": "Passo a passo de acesso secundário por banco (Cora, Inter e outros)."}, {"area": "bpo", "sub": "onboarding", "nome": "SLA – Treinamento e Ativação", "ext": "pptx", "descricao": "Acordo de nível de serviço da fase de treinamento e ativação."}, {"area": "processos", "sub": "execucao", "nome": "Cronograma da Consultoria", "ext": "xlsx", "descricao": "Cronograma por fase, status, prioridade e responsável."}, {"area": "processos", "sub": "execucao", "nome": "Plano de Ação Personalizado", "ext": "docx", "descricao": "Plano de ação do cliente após o diagnóstico."}, {"area": "processos", "sub": "execucao", "nome": "Materiais de Entrega", "ext": "xlsx", "descricao": "Checklist e resumo de tudo que precisa ser entregue."}, {"area": "bpo", "sub": "execucao", "nome": "Planilha de Gestão de Processos do Cliente", "ext": "xlsx", "descricao": "Gestão da operação por operador, plano de ação e timeline."}], "legado": {"01 - Estratégia e Posicionamento": "comercial/estudo", "02 - Prospecção e Vendas": "comercial/prospeccao", "03 - Apresentações Comerciais": "comercial/apresentacoes", "04 - Propostas, Preços e Contratos": "comercial/propostas", "05 - Diagnóstico": "bpo/diagnostico", "06 - Onboarding e Implantação": "bpo/onboarding", "07 - Execução e Entregas": "bpo/execucao"}};
 
 /* Módulos do sistema (os marcados "breve" entram nas próximas fases) */
-const VERSAO = "v38";
+const VERSAO = "v39";
 document.querySelectorAll(".versao-sis").forEach(x => x.textContent = VERSAO);
 const MODULOS = [
   { id: "inicio", nome: "Início", icone: "i-home" },
@@ -7258,7 +7272,7 @@ function renderPainelTarefas() {
   $("cliDesc").textContent = "O que precisa ser feito em todos os clientes: atrasadas, de hoje e da semana.";
   $("cliBotoes").innerHTML = `<button class="btn-p" data-clia="novaTarefa"><svg><use href="#i-mais"/></svg>Nova tarefa</button>`;
   const f = cl.filtroT, eu = meuNome();
-  const base = tarefas().filter(t => cliPorId(t.clienteId) && (f.resp === "" || (f.resp === "eu" ? ehMinha(t) : f.resp === "_sem" ? !t.responsavel : t.responsavel === f.resp))
+  const base = tarefas().filter(t => cliPorId(t.clienteId) && (f.resp === "" || (f.resp === "eu" ? ehMinha(t) : f.resp === "_sem" ? !t.responsavel && !t.externo : f.resp === "_cli" ? !!t.externo : t.responsavel === f.resp))
     && (!f.cliente || t.clienteId === f.cliente) && (!f.serv || t.servico === f.serv) && (!f.busca || norm(t.titulo + " " + nomeCli(cliPorId(t.clienteId))).includes(norm(f.busca))));
   const abertas = base.filter(t => t.status !== "concluida");
   const semana = isoD(new Date(Date.now() + 7 * 864e5));
@@ -7271,7 +7285,7 @@ function renderPainelTarefas() {
     .map(([n, v, c]) => `<div class="tile ${c}"><i>&nbsp;</i><b>${v}</b><span>${n}</span></div>`).join("")}</div></section>
   <div class="filtros-crm">
     <input class="fbusca" id="tfBusca" type="search" placeholder="Buscar tarefa ou cliente…" value="${esc(f.busca)}">
-    <select data-tff="resp"><option value="eu" ${f.resp === "eu" ? "selected" : ""}>Minhas tarefas</option><option value="" ${f.resp === "" ? "selected" : ""}>Toda a equipe</option>${RESPONSAVEIS.filter(r => r !== eu).map(r => `<option value="${esc(r)}" ${f.resp === r ? "selected" : ""}>${esc(r)}</option>`).join("")}<option value="_sem" ${f.resp === "_sem" ? "selected" : ""}>Sem responsável</option></select>
+    <select data-tff="resp"><option value="eu" ${f.resp === "eu" ? "selected" : ""}>Minhas tarefas</option><option value="" ${f.resp === "" ? "selected" : ""}>Toda a equipe</option>${RESPONSAVEIS.filter(r => r !== eu).map(r => `<option value="${esc(r)}" ${f.resp === r ? "selected" : ""}>${esc(r)}</option>`).join("")}<option value="_cli" ${f.resp === "_cli" ? "selected" : ""}>Responsável do cliente</option><option value="_sem" ${f.resp === "_sem" ? "selected" : ""}>Sem responsável</option></select>
     <select data-tff="cliente">${opcoes(clis().filter(c => c.status !== "inativo").map(c => [c.id, nomeCli(c)]).sort((a, b) => a[1].localeCompare(b[1])), f.cliente, "Todos os clientes")}</select>
     <select data-tff="serv">${opcoes(SERV_CLI, f.serv, "Todos os serviços")}</select>
   </div>
@@ -7290,7 +7304,7 @@ function linhaTarefa(t, comCliente) {
   return `<li class="tf ${st}" data-tf="${t.id}" style="--prio:${pr[2]}">
     <button class="chk-acao ${t.status === "concluida" ? "feito" : ""}" data-tf-ok="${t.id}" aria-label="${t.status === "concluida" ? "Reabrir" : "Concluir"}">${t.status === "concluida" ? "✓" : ""}</button>
     <div class="q"><b>${esc(t.titulo)}</b>${meta ? `<small>${meta}</small>` : ""}${t.status === "concluida" ? `<small class="feito-por">Concluída por ${esc(t.concluidaPor || "—")} em ${dataHora(t.concluidaEm)}</small>` : ""}</div>
-    ${t.responsavel ? `<span class="chip-p">${esc(t.responsavel)}</span>` : `<span class="chip-p sem">sem resp.</span>`}
+    ${t.externo ? `<span class="chip-p ext" title="${esc(t.externo.nome)} · ${esc(t.externo.email)}">${esc(String(t.externo.nome).split(" ")[0])} · cliente</span>` : t.responsavel ? `<span class="chip-p">${esc(t.responsavel)}</span>` : `<span class="chip-p sem">sem resp.</span>`}
     ${t.status !== "concluida" ? `<span class="quando ${st}">${t.venc ? (st === "atraso" ? "Atrasada · " : "") + rotuloData(venceTxt(t)) : "Sem data"}</span>` : ""}</li>`;
 }
 
@@ -7347,6 +7361,10 @@ function abaGeralCli(c) {
         return `<div class="rs-linha"><span class="chip-etapa" style="--cor:${st[1]}"><i></i>${st[0]}</span><b>${p.ok}/${p.tot} itens</b></div><i class="barra-onb" style="margin:8px 0"><b style="width:${p.pct}%"></b></i><button class="btn-s" data-link="#atendimento/onboarding/${o.id}" style="width:100%;justify-content:center">Abrir onboarding ${esc(o.id)}</button>`; })()}</section>
       <section class="g-sec"><h4>Próximas tarefas <button class="lnk" data-link="#clientes/${c.id}/tarefas">ver todas ›</button></h4>
         ${(() => { const ls = ordenarTf(tarefas().filter(t => t.clienteId === c.id && t.status !== "concluida")).slice(0, 5); return ls.length ? `<ul class="lista-tf curta">${ls.map(t => linhaTarefa(t, false)).join("")}</ul>` : `<p class="txt-prog">Nenhuma tarefa pendente. <a href="#clientes/${c.id}/tarefas">Criar tarefas</a></p>`; })()}</section>
+      <section class="g-sec"><h4>Responsáveis do cliente <button class="lnk" data-clia="extNovo">+ cadastrar</button></h4>
+        ${respExt(c).length ? `<ul class="ext-lista">${respExt(c).map(p => { const n = tarefas().filter(t => t.clienteId === c.id && t.status !== "concluida" && t.externo?.email === p.email).length;
+          return `<li><span><b>${esc(p.nome)}</b><small>${esc(p.email)} · ${n} pendente${n === 1 ? "" : "s"}</small></span><button data-clia="extLink" data-ext="${esc(p.id)}" title="Copiar o link da página de tarefas">Link</button><button class="del" data-clia="extDel" data-ext="${esc(p.id)}" title="Remover e desativar o link">×</button></li>`; }).join("")}</ul>`
+          : `<p class="txt-prog">Pessoas do cliente que recebem tarefas por e-mail e marcam como feitas por um link, sem login.</p>`}</section>
       ${(c.documentos || []).length ? `<section class="g-sec"><h4>Documentos do contrato</h4>
         <ul class="docs-cli">${(c.documentos || []).map(d => `<li><a href="${esc(d.webUrl)}" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg><span><b>${esc(d.tipo)}</b><small>${esc(d.nome)}</small></span></a></li>`).join("")}</ul></section>` : ""}
       <section class="g-sec acoes-diag">
@@ -7392,6 +7410,61 @@ function abaTarefasCli(c) {
       ${feitas.length > 15 && !cl.verConcluidas ? `<button class="btn-s be-mais" data-clia="verTodas" style="margin:10px auto;display:flex">Ver todas as ${feitas.length}</button>` : ""}` : `<div class="vazio-bloco">Nada executado ainda.</div>`}</section>`;
 }
 
+/* ---- Responsáveis do cliente: pessoas do cliente que recebem tarefas por e-mail e marcam como feitas por um link ---- */
+const respExt = c => c?.respExternos || [];
+const emailValido = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || "").trim());
+function opcoesResp(c, sel, atualExt) {
+  const ext = [...respExt(c)];
+  if (atualExt && !ext.some(p => p.id === atualExt.id)) ext.push(atualExt);
+  return `<option value="">Sem responsável</option>${RESPONSAVEIS.map(r => `<option value="${esc(r)}" ${sel === r ? "selected" : ""}>${esc(r)}</option>`).join("")}`
+    + (c ? `<optgroup label="Do cliente">${ext.map(p => `<option value="ext:${esc(p.id)}" ${sel === "ext:" + p.id ? "selected" : ""}>${esc(p.nome)} (cliente)</option>`).join("")}<option value="__novo">+ Cadastrar responsável</option></optgroup>` : "");
+}
+async function cadastrarExterno(cid, nome, email) {
+  email = email.trim().toLowerCase(); nome = nome.trim();
+  let p = respExt(cliPorId(cid)).find(x => x.email === email);
+  if (p) return p;
+  p = { id: crypto.randomUUID().slice(0, 8), nome, email, criadoEm: new Date().toISOString(), criadoPor: meuNome() };
+  await salvarStore(cliStore, d => { const x = d.clientes.find(y => y.id === cid); if (!x) return; x.respExternos = x.respExternos || []; if (!x.respExternos.some(y => y.email === email)) x.respExternos.push(p); });
+  await salvarTar(d => logar(d, cid, `Cadastrou ${nome} (${email}) como responsável do cliente`));
+  return respExt(cliPorId(cid)).find(x => x.email === email) || p;
+}
+async function copiarTexto(txt) {
+  try { await navigator.clipboard.writeText(txt); return true; }
+  catch { prompt("Copie o link:", txt); return false; }
+}
+async function copiarLinkExterno(cid, email) {
+  try {
+    const r = await api("/tarefas-cliente/link", { method: "POST", body: JSON.stringify({ clienteId: cid, email, site: location.href.split("#")[0] }) });
+    if (await copiarTexto(r.link)) toast("Link copiado. Cole no WhatsApp ou e-mail do responsável.");
+  } catch (e) { toast("Não foi possível gerar o link: " + e.message, "erro", 6000); }
+}
+async function enviarTarefaExterno(t, lembrete) {
+  try {
+    await api("/tarefas-cliente/enviar", { method: "POST", body: JSON.stringify({ tarefaId: t.id, site: location.href.split("#")[0], lembrete: !!lembrete }) });
+    toast(`E-mail ${lembrete ? "de lembrete " : ""}enviado para ${t.externo.email}`);
+    await salvarTar(d => { const x = d.tarefas.find(y => y.id === t.id); if (x) x.emailExtEm = new Date().toISOString(); logar(d, t.clienteId, `Enviou ${lembrete ? "lembrete da" : "a"} tarefa "${t.titulo}" por e-mail para ${t.externo.nome} (${t.externo.email})`, { tarefaId: t.id }); });
+    return true;
+  } catch (e) { toast("A tarefa está salva, mas o e-mail não saiu: " + e.message, "erro", 8000); return false; }
+}
+function abrirNovoExterno(c, depois) {
+  const { m, veu } = abrirModal(`<div class="modal-cab"><h3>Cadastrar responsável</h3><small class="sub-modal">${esc(nomeCli(c))}</small></div>
+    <form class="modal-corpo dados-grid" id="formExt">
+      <p style="font-size:.84rem;color:var(--txt-2)">Pessoa do cliente que vai receber tarefas por e-mail. Ela abre um link (sem login), vê só as tarefas dela e marca como feitas.</p>
+      <div class="campo"><label>Nome *</label><input name="nome" required data-mascara="nenhuma" placeholder="Ex.: Maria Souza"></div>
+      <div class="campo"><label>E-mail *</label><input name="email" type="email" required data-mascara="nenhuma" placeholder="maria@empresa.com.br"></div>
+      <div class="modal-rod" style="padding:0"><button type="button" class="btn-s" data-m="cancelar">Cancelar</button><button class="btn-p">Cadastrar</button></div>
+    </form>`);
+  veu.onclick = fecharModal; m.querySelector("[data-m=cancelar]").onclick = fecharModal;
+  $("formExt").onsubmit = async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    if (!f.nome.trim() || !emailValido(f.email)) return toast("Informe nome e um e-mail válido", "erro");
+    fecharModal();
+    try { await cadastrarExterno(c.id, f.nome, f.email); toast("Responsável cadastrado"); } catch (er) { return toast(er.message, "erro"); }
+    depois ? depois() : reRenderCli();
+  };
+}
+
 /* ---- Editor de tarefa ---- */
 function abrirTarefa(id, novaPara) {
   const t = id ? structuredClone(tarPorId(id)) : { clienteId: novaPara || "", titulo: "", descricao: "", servico: "", responsavel: RESPONSAVEIS.includes(meuNome()) ? meuNome() : "", prioridade: "media", venc: hojeISO(), hora: "", rec: null, lembrete: "", checklist: [], comentarios: [], status: "pendente" };
@@ -7405,9 +7478,16 @@ function abrirTarefa(id, novaPara) {
       ${!novaPara && !id ? `<div class="campo"><label>Cliente *</label><select name="clienteId" required>${opcoes(clis().filter(x => x.status !== "inativo").map(x => [x.id, nomeCli(x)]).sort((a, b) => a[1].localeCompare(b[1])), "", "Escolha o cliente")}</select></div>` : ""}
       <div class="campo"><label>Tarefa *</label><input name="titulo" value="${esc(t.titulo)}" placeholder="Ex.: Conciliação bancária" data-mascara="nenhuma"></div>
       <div class="campo"><label>Descrição</label><textarea name="descricao" rows="2" placeholder="Detalhes, passo a passo, links…">${esc(t.descricao || "")}</textarea></div>
-      <div class="linha3"><div class="campo"><label>Responsável</label><select name="responsavel">${opcoes(RESPONSAVEIS.map(r => [r, r]), t.responsavel || "", "Sem responsável")}</select></div>
+      <div class="linha3"><div class="campo"><label>Responsável</label><select name="responsavel">${opcoesResp(c, t.externo ? "ext:" + t.externo.id : t.responsavel || "", t.externo)}</select></div>
         <div class="campo"><label>Serviço</label><select name="servico">${opcoes(SERV_CLI, t.servico || "", "—")}</select></div>
         <div class="campo"><label>Prioridade</label><select name="prioridade">${PRIORIDADES.map(p => `<option value="${p[0]}" ${t.prioridade === p[0] ? "selected" : ""}>${p[1]}</option>`).join("")}</select></div></div>
+      <div class="ext-tf oculto" id="tfExt">
+        <div class="linha2 oculto" id="tfExtNovo"><div class="campo"><label>Nome do responsável *</label><input id="tfExtNome" data-mascara="nenhuma" placeholder="Ex.: Maria Souza"></div>
+          <div class="campo"><label>E-mail *</label><input id="tfExtEmail" type="email" data-mascara="nenhuma" placeholder="maria@empresa.com.br"></div></div>
+        ${id && t.externo ? `<div class="ext-info"><span>Responsável do cliente: <b>${esc(t.externo.nome)}</b> · ${esc(t.externo.email)}${t.emailExtEm ? `<br>Último e-mail: ${dataHora(t.emailExtEm)}` : ""}</span>
+          ${!feita ? `<button type="button" class="btn-s" data-tfa="extReenviar">Reenviar e-mail</button>` : ""}<button type="button" class="btn-s" data-tfa="extLink">Copiar link</button></div>` : ""}
+        <label class="chk-linha" id="tfExtEnviarL"><input type="checkbox" id="tfExtEnviar" checked><span>Enviar e-mail para o responsável com a tarefa e o link para marcar como feita</span></label>
+      </div>
       <div class="linha3"><div class="campo"><label>Vencimento</label><input type="date" name="venc" value="${esc(t.venc || "")}"></div>
         <div class="campo"><label>Hora (opcional)</label><input type="time" name="hora" value="${esc(t.hora || "")}"></div>
         <div class="campo"><label>Lembrete</label><select name="lembrete">${LEMBRETES.map(([v, n]) => `<option value="${v}" ${String(t.lembrete ?? "") === v ? "selected" : ""}>${n}</option>`).join("")}</select></div></div>
@@ -7431,6 +7511,18 @@ function abrirTarefa(id, novaPara) {
   const ck = structuredClone(t.checklist || []);
   const desenharCk = () => { $("tfCk").innerHTML = ck.map(itemCk).join(""); };
   const form = $("formTf");
+  const extAntes = t.externo ? "ext:" + t.externo.id : "";
+  const updExt = () => {
+    const v = form.responsavel.value, ext = v.startsWith("ext:") || v === "__novo";
+    $("tfExt").classList.toggle("oculto", !ext);
+    $("tfExtNovo").classList.toggle("oculto", v !== "__novo");
+    const mesmo = !!id && v === extAntes;
+    $("tfExtEnviarL").classList.toggle("oculto", mesmo || feita);
+    $("tfExtEnviar").checked = !mesmo && !feita;
+    if (v === "__novo") setTimeout(() => $("tfExtNome").focus(), 30);
+  };
+  form.responsavel.onchange = updExt; updExt();
+  if (form.clienteId) form.clienteId.onchange = () => { form.responsavel.innerHTML = opcoesResp(cliPorId(form.clienteId.value), form.responsavel.value.startsWith("ext:") ? "" : form.responsavel.value); updExt(); };
   form.rec.onchange = () => { const v = form.rec.value; $("tfDias").classList.toggle("oculto", v !== "semanal"); $("tfDiaMes").classList.toggle("oculto", !["mensal", "trimestral", "anual"].includes(v)); if (!form.dia.value && form.venc.value) form.dia.value = Number(form.venc.value.slice(8)); };
   const addCk = () => { const v = $("tfCkNovo").value.trim(); if (!v) return; ck.push({ id: crypto.randomUUID(), txt: v, feito: false }); $("tfCkNovo").value = ""; desenharCk(); $("tfCkNovo").focus(); };
   $("tfCkNovo").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); addCk(); } };
@@ -7438,7 +7530,11 @@ function abrirTarefa(id, novaPara) {
   const ler = () => {
     const f = Object.fromEntries(new FormData(form));
     const tipo = f.rec || "", dias = [...$("tfDias").querySelectorAll("input:checked")].map(x => Number(x.value));
-    return { clienteId: f.clienteId || t.clienteId, titulo: f.titulo.trim(), descricao: f.descricao, responsavel: f.responsavel, servico: f.servico, prioridade: f.prioridade,
+    const cid = f.clienteId || t.clienteId;
+    let responsavel = f.responsavel, externo = null;
+    if (responsavel === "__novo") { responsavel = t.externo ? "" : t.responsavel || ""; externo = t.externo || null; }
+    else if (responsavel.startsWith("ext:")) { const pe = [...respExt(cliPorId(cid)), ...(t.externo ? [t.externo] : [])].find(p => "ext:" + p.id === responsavel); externo = pe ? { id: pe.id, nome: pe.nome, email: pe.email } : null; responsavel = ""; }
+    return { clienteId: cid, titulo: f.titulo.trim(), descricao: f.descricao, responsavel, externo, servico: f.servico, prioridade: f.prioridade,
       venc: f.venc, hora: f.hora, lembrete: f.lembrete, rec: tipo ? { tipo, ...(tipo === "semanal" && dias.length ? { dias } : {}), ...(["mensal", "trimestral", "anual"].includes(tipo) && f.dia ? { dia: Math.min(31, Math.max(1, Number(f.dia))) } : {}) } : null, checklist: ck };
   };
   m.onclick = async e => {
@@ -7451,6 +7547,8 @@ function abrirTarefa(id, novaPara) {
     const b = e.target.closest("[data-tfa]"); if (!b) return;
     const a = b.dataset.tfa;
     if (a === "addCk") return addCk();
+    if (a === "extLink") return copiarLinkExterno(t.clienteId, t.externo.email);
+    if (a === "extReenviar") { b.disabled = true; await enviarTarefaExterno(tarPorId(id) || t, true); b.disabled = false; return; }
     if (a === "comentar") {
       const txt = $("tfComent").value.trim(); if (!txt) return;
       await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; (x.comentarios = x.comentarios || []).push({ em: new Date().toISOString(), por: meuNome(), porEmail: meuEmail(), txt }); logar(d, x.clienteId, `Comentou em "${x.titulo}": ${txt.slice(0, 120)}`, { tarefaId: id }); });
@@ -7479,11 +7577,21 @@ function abrirTarefa(id, novaPara) {
     if (!v.titulo) return toast("Dê um nome à tarefa", "erro");
     if (!v.clienteId) return toast("Escolha o cliente", "erro");
     if (v.rec && !v.venc) return toast("Tarefas que se repetem precisam de uma data de vencimento", "erro");
+    if (form.responsavel.value === "__novo") {
+      const nome = $("tfExtNome").value.trim(), email = $("tfExtEmail").value.trim().toLowerCase();
+      if (!nome) { $("tfExtNome").focus(); return toast("Informe o nome do responsável", "erro"); }
+      if (!emailValido(email)) { $("tfExtEmail").focus(); return toast("Informe um e-mail válido para o responsável", "erro"); }
+      try { const pe = await cadastrarExterno(v.clienteId, nome, email); v.externo = { id: pe.id, nome: pe.nome, email: pe.email }; v.responsavel = ""; }
+      catch (er) { return toast("Não foi possível cadastrar o responsável: " + er.message, "erro"); }
+    }
+    const enviarExt = !!v.externo && !$("tfExtEnviarL").classList.contains("oculto") && $("tfExtEnviar").checked;
     fecharModal();
-    let alvo = null;
-    if (id) await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; const antes = x.responsavel; Object.assign(x, v, { clienteId: x.clienteId, respEmail: v.responsavel ? emailDe(v.responsavel) : "" }); x.alteradaEm = new Date().toISOString(); x.alteradaPor = meuNome(); logar(d, x.clienteId, `Editou a tarefa "${x.titulo}"${antes !== x.responsavel ? ` (responsável: ${x.responsavel || "ninguém"})` : ""}`, { tarefaId: id }); if (antes !== x.responsavel && x.responsavel) alvo = x; }, "Tarefa salva");
-    else await salvarTar(d => { const x = novaTarefaObj(d, v); x.checklist = v.checklist.map(i => ({ ...i, feito: false })); d.tarefas.push(x); logar(d, x.clienteId, `Criou a tarefa "${x.titulo}"${x.rec ? " (" + textoRec(x.rec).toLowerCase() + ")" : ""}${x.responsavel ? " para " + x.responsavel : ""}`, { tarefaId: x.id }); if (x.responsavel) alvo = x; }, "Tarefa criada");
+    let alvo = null, salva = null;
+    const nomeResp = x => x.externo ? `${x.externo.nome} (cliente)` : x.responsavel || "ninguém";
+    if (id) await salvarTar(d => { const x = d.tarefas.find(y => y.id === id); if (!x) return; const antes = nomeResp(x), antesResp = x.responsavel; Object.assign(x, v, { clienteId: x.clienteId, respEmail: v.responsavel ? emailDe(v.responsavel) : "" }); x.alteradaEm = new Date().toISOString(); x.alteradaPor = meuNome(); logar(d, x.clienteId, `Editou a tarefa "${x.titulo}"${antes !== nomeResp(x) ? ` (responsável: ${nomeResp(x)})` : ""}`, { tarefaId: id }); if (antesResp !== x.responsavel && x.responsavel) alvo = x; salva = x; }, "Tarefa salva");
+    else await salvarTar(d => { const x = novaTarefaObj(d, v); x.externo = v.externo || null; x.checklist = v.checklist.map(i => ({ ...i, feito: false })); d.tarefas.push(x); logar(d, x.clienteId, `Criou a tarefa "${x.titulo}"${x.rec ? " (" + textoRec(x.rec).toLowerCase() + ")" : ""}${x.responsavel || x.externo ? " para " + nomeResp(x) : ""}`, { tarefaId: x.id }); if (x.responsavel) alvo = x; salva = x; }, "Tarefa criada");
     if (alvo) avisarAtribuicao([alvo]);
+    if (enviarExt && salva) await enviarTarefaExterno(salva, false);
     reRenderCli();
   };
 }
@@ -8521,6 +8629,19 @@ $("cliConteudo").addEventListener("click", async e => {
   if (a === "novo") return abrirNovoCliente();
   if (a === "onboarding") return novoOnboarding({ clienteId: c.id });
   if (a === "novaTarefa") return abrirTarefa(null, c?.id);
+  if (a === "extNovo") return abrirNovoExterno(c);
+  if (a === "extLink" || a === "extDel") {
+    const pe = respExt(c).find(x => x.id === b.dataset.ext); if (!pe) return;
+    if (a === "extLink") return copiarLinkExterno(c.id, pe.email);
+    const n = tarefas().filter(t => t.clienteId === c.id && t.status !== "concluida" && t.externo?.email === pe.email).length;
+    if (!confirmar(`Remover ${pe.nome} dos responsáveis de ${nomeCli(c)}? O link dele(a) deixa de funcionar.${n ? ` As ${n} tarefa(s) pendente(s) dele(a) continuam no sistema; troque o responsável delas se precisar.` : ""}`)) return;
+    try {
+      await api("/tarefas-cliente/revogar", { method: "POST", body: JSON.stringify({ clienteId: c.id, email: pe.email }) }).catch(() => {});
+      await salvarStore(cliStore, d => { const x = d.clientes.find(y => y.id === c.id); if (x) x.respExternos = (x.respExternos || []).filter(y => y.id !== pe.id); });
+      await salvarTar(d => logar(d, c.id, `Removeu ${pe.nome} (${pe.email}) dos responsáveis do cliente`), "Responsável removido");
+    } catch (er) { toast(er.message, "erro"); }
+    return reRenderCli();
+  }
   if (a === "rotina") return abrirRotina(c);
   if (a === "servicos") return editarServicos(c);
   if (a === "verTodas") { cl.verConcluidas = true; return abaTarefasCli(c); }
@@ -9440,7 +9561,7 @@ async function renderHome() {
   const eu = meuNome(), semana = isoD(new Date(Date.now() + 7 * 864e5));
   const minhas = tarefas().filter(t => t.status !== "concluida" && ehMinha(t) && cliPorId(t.clienteId));
   const atr = minhas.filter(t => stTarefa(t) === "atraso"), hj = minhas.filter(t => stTarefa(t) === "hoje"), prox = minhas.filter(t => stTarefa(t) === "futuro" && t.venc <= semana);
-  const semResp = tarefas().filter(t => t.status !== "concluida" && !t.responsavel && cliPorId(t.clienteId) && ["atraso", "hoje"].includes(stTarefa(t)));
+  const semResp = tarefas().filter(t => t.status !== "concluida" && !t.responsavel && !t.externo && cliPorId(t.clienteId) && ["atraso", "hoje"].includes(stTarefa(t)));
   const meusCli = clis().filter(c => c.status !== "inativo" && (c.responsavel === eu || tarefas().some(t => t.clienteId === c.id && t.status !== "concluida" && ehMinha(t))))
     .sort((a, b) => nomeCli(a).localeCompare(nomeCli(b)));
   const acoesCRM = leads().filter(l => !l.semInteresse && !["ganho", "perdido"].includes(l.etapa) && (!l.responsavel || l.responsavel === eu))
